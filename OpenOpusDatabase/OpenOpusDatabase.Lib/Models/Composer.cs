@@ -1,0 +1,135 @@
+﻿using OpenOpusDatabase.Lib.Converters;
+using SQLite;
+using System.Text;
+using System.Text.Json.Serialization;
+
+namespace OpenOpusDatabase.Lib.Models
+{
+    [Table("Composers")]
+    public class Composer : IEquatable<Composer>, IIdentifiable
+    {
+        private int _id;
+        private string _name;
+        private string _completeName;
+        private DateTime _birthDate;
+        private DateTime? _deathDate;
+        private string _era;
+        private string _portraitLink;
+
+        [PrimaryKey, JsonPropertyName("id"), JsonConverter(typeof(StringToIntConverter))]
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+            }
+        }
+
+        [JsonPropertyName("name")]
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+            }
+        }
+
+        [JsonPropertyName("complete_name")]
+        public string CompleteName
+        {
+            get
+            {
+                return _completeName;
+            }
+            set
+            {
+                _completeName = value;
+            }
+        }
+
+        [JsonPropertyName("birth"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime BirthDate
+        {
+            get
+            {
+                return _birthDate;
+            }
+            set
+            {
+                _birthDate = value;
+            }
+        }
+
+        [JsonPropertyName("death"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime? DeathDate
+        {
+            get
+            {
+                return _deathDate;
+            }
+            set
+            {
+                _deathDate = value;
+            }
+        }
+
+        [JsonPropertyName("epoch")]
+        public string Era
+        {
+            get
+            {
+                return _era;
+            }
+            set
+            {
+                _era = value;
+            }
+        }
+
+        [JsonPropertyName("portrait")]
+        public string PortraitLink
+        {
+            get
+            {
+                return _portraitLink;
+            }
+            set
+            {
+                _portraitLink = FormatLink(value);
+            }
+        }
+
+        private static string FormatLink(string value)
+        {
+            StringBuilder link = new();
+            foreach (char c in value)
+            {
+                if (c != '\\')
+                {
+                    link.Append(c);
+                }
+            }
+            return link.ToString();
+        }
+
+        public bool Equals(Composer? other)
+        {
+            return other != null
+                && _id == other._id
+                && _name == other._name
+                && _completeName == other._completeName
+                && _birthDate == other._birthDate
+                && _deathDate == other._deathDate
+                && _era == other._era
+                && _portraitLink == other._portraitLink;
+        }
+    }
+}
