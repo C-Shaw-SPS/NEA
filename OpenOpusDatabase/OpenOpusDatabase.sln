@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenOpusDatabase.App", "OpenOpusDatabase.App\OpenOpusDatabase.App.csproj", "{9713B3B5-8363-4050-843C-2958BDB0FD8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenOpusDatabase.Lib", "OpenOpusDatabase.Lib\OpenOpusDatabase.Lib.csproj", "{AF50D7C7-1378-4703-8A4F-AD2A51C82D5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenOpusDatabase.Tests", "OpenOpusDatabase.Tests\OpenOpusDatabase.Tests.csproj", "{727FD50F-68AC-450E-B499-BA73D1028183}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9713B3B5-8363-4050-843C-2958BDB0FD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9713B3B5-8363-4050-843C-2958BDB0FD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9713B3B5-8363-4050-843C-2958BDB0FD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9713B3B5-8363-4050-843C-2958BDB0FD8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF50D7C7-1378-4703-8A4F-AD2A51C82D5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF50D7C7-1378-4703-8A4F-AD2A51C82D5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF50D7C7-1378-4703-8A4F-AD2A51C82D5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF50D7C7-1378-4703-8A4F-AD2A51C82D5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{727FD50F-68AC-450E-B499-BA73D1028183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{727FD50F-68AC-450E-B499-BA73D1028183}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{727FD50F-68AC-450E-B499-BA73D1028183}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{727FD50F-68AC-450E-B499-BA73D1028183}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {113433EC-4380-491B-BA64-548C1979E278}
+	EndGlobalSection
+EndGlobal
