@@ -23,4 +23,17 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OpenOpusDatabase.Lib\OpenOpusDatabase.Lib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="composerTestData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="workTestData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
