@@ -11,7 +11,7 @@ namespace OpenOpusDatabase.Lib.Responses
 {
     public class WorkResponse : IResponse<Work>
     {
-        private List<Work> _data;
+        private List<Work> _data = new();
 
         [JsonPropertyName("works"), JsonConverter(typeof(DictionaryToListConverter<string, Work>))]
         public List<Work> Values
