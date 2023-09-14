@@ -9,12 +9,12 @@ namespace OpenOpusDatabase.Lib.Models
     public class Composer : IEquatable<Composer>, IIdentifiable
     {
         private int _id;
-        private string _name;
-        private string _completeName;
+        private string _name = string.Empty;
+        private string _completeName = string.Empty;
         private DateTime _birthDate;
         private DateTime? _deathDate;
-        private string _era;
-        private string _portraitLink;
+        private string _era = string.Empty;
+        private string? _portraitLink;
 
         [PrimaryKey, JsonPropertyName("id"), JsonConverter(typeof(StringToIntConverter))]
         public int Id
@@ -95,7 +95,7 @@ namespace OpenOpusDatabase.Lib.Models
         }
 
         [JsonPropertyName("portrait")]
-        public string PortraitLink
+        public string? PortraitLink
         {
             get
             {
@@ -107,8 +107,13 @@ namespace OpenOpusDatabase.Lib.Models
             }
         }
 
-        private static string FormatLink(string value)
+        private static string? FormatLink(string? value)
         {
+            if (value == null)
+            {
+                return null;
+            }
+
             StringBuilder link = new();
             foreach (char c in value)
             {
