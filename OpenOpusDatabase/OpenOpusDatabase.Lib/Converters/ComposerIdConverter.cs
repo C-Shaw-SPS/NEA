@@ -31,15 +31,15 @@ namespace OpenOpusDatabase.Lib.Converters
 
             while (reader.Read())
             {
+                if (reader.TokenType == JsonTokenType.EndObject)
+                {
+                    return GetIfNotNull(id);
+                }
+
                 string? propertyName = reader.GetString();
                 if (propertyName == "id")
                 {
                     id = ParseJsonIdProperty(ref reader);
-                }
-
-                if (reader.TokenType == JsonTokenType.EndObject)
-                {
-                    return GetIfNotNull(id);
                 }
             }
             throw new JsonException();
