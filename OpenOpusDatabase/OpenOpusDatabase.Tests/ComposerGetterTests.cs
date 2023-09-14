@@ -5,7 +5,7 @@ namespace OpenOpusDatabase.Tests
 {
     public class ComposerGetterTests
     {
-        const string FILE_PATH = "composerTestData.json";
+        const string FILE_PATH = "composerResponse.json";
 
         readonly List<Composer> expectedComposers = new()
         {
