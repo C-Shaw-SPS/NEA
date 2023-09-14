@@ -13,31 +13,45 @@ namespace OpenOpusDatabase.Lib.Converters
     {
         public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (typeToConvert == typeof(int))
-            {
-                return GetId(reader, options);
-            }
-            else
-            {
-                throw new NotSupportedException();
-            }
-        }
 
-        private static int GetId(Utf8JsonReader reader, JsonSerializerOptions options)
-        {
-            Composer? composer;
-            using (JsonDocument jsonDocument = JsonDocument.ParseValue(ref reader))
+            if (reader.TokenType != JsonTokenType.StartObject)
             {
-                composer = JsonSerializer.Deserialize<Composer>(jsonDocument, options);
+                throw new JsonException();
             }
-            if (composer != null)
+
+            int? id = null;
+
+            while (reader.Read())
             {
-                return composer.Id;
+                if (reader.TokenType == JsonTokenType.EndObject)
+                {
+                    if (id != null)
+                    {
+                        return (int)id;
+                    }
+                    else
+                    {
+                        throw new JsonException();
+                    }
+                }
+
+                string? propertyName = reader.GetString();
+                if (propertyName == "id")
+                {
+                    reader.Read();
+                    string? idString = reader.GetString();
+                    if (idString != null)
+                    {
+                        id = int.Parse(idString);
+                    }
+                    else
+                    {
+                        throw new JsonException();
+                    }
+                }
             }
-            else
-            {
-                throw new ArgumentNullException();
-            }
+
+            throw new JsonException();
         }
 
         public override void Write(Utf8JsonWriter writer, int value, JsonSerializerOptions options)
