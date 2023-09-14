@@ -12,7 +12,38 @@ namespace OpenOpusDatabase.Lib.Converters
     {
         public override List<TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            if (reader.TokenType != JsonTokenType.StartObject)
+            {
+                throw new JsonException();
+            }
+
+            List<TValue> values = new List<TValue>();
+
+            while (reader.Read())
+            {
+                if (reader.TokenType == JsonTokenType.EndObject)
+                {
+                    return values;
+                }
+
+                if (reader.TokenType != JsonTokenType.PropertyName)
+                {
+                    throw new JsonException();
+                }
+                
+                using (JsonDocument document = JsonDocument.ParseValue(ref reader))
+                {
+                    TValue? value = JsonSerializer.Deserialize<TValue>(document);
+
+                    if (value != null)
+                    {
+                        values.Add(value);
+                    }
+                }
+
+            }
+
+            throw new JsonException();
         }
 
         public override void Write(Utf8JsonWriter writer, List<TValue> value, JsonSerializerOptions options)
