@@ -17,7 +17,7 @@ namespace OpenOpusDatabase.Lib.Converters
                 throw new JsonException();
             }
 
-            List<TValue> values = new List<TValue>();
+            List<TValue> values = new();
 
             while (reader.Read())
             {
