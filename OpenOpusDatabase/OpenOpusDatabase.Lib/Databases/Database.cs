@@ -55,10 +55,9 @@ namespace OpenOpusDatabase.Lib.Databases
             await _connection.InsertAllAsync(values);
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(T value)
         {
             await InitAsync();
-            T value = new() { Id = id };
             await _connection.DeleteAsync(value);
         }
 
@@ -81,7 +80,7 @@ namespace OpenOpusDatabase.Lib.Databases
             return result;
         }
 
-        public async Task DeleteAllAsync()
+        public async Task ClearAsync()
         {
             await InitAsync();
             await _connection.DeleteAllAsync<T>();
