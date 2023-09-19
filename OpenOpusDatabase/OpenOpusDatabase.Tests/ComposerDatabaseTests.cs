@@ -1,14 +1,9 @@
 ﻿using OpenOpusDatabase.Lib.Databases;
 using OpenOpusDatabase.Lib.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenOpusDatabase.Tests
 {
-    public class DatabaseTests
+    public class ComposerDatabaseTests
     {
         [Fact]
         public async void TestInsertAsync()
