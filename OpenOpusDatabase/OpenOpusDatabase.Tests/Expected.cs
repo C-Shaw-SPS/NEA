@@ -1,9 +1,4 @@
 ﻿using OpenOpusDatabase.Lib.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenOpusDatabase.Tests
 {
@@ -50,6 +45,26 @@ namespace OpenOpusDatabase.Tests
                 DeathDate = DateTime.Parse("1791-01-01"),
                 Era = "Classical",
                 PortraitLink = "https://assets.openopus.org/portraits/21459195-1568084925.jpg"
+            }
+        };
+
+        public static readonly List<Work> Works = new()
+        {
+            new Work
+            {
+                Id = 1,
+                ComposerId = 176,
+                Title = "3 Movements",
+                Subtitle = "",
+                Genre = "Orchestral"
+            },
+            new Work
+            {
+                Id = 2,
+                ComposerId = 202,
+                Title = "3 Mouvements perp\u00e9tuels, FP14",
+                Subtitle = "",
+                Genre = "Keyboard"
             }
         };
     }

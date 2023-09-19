@@ -7,36 +7,16 @@ namespace OpenOpusDatabase.Tests
     {
         const string FILE_PATH = "workResponse.json";
 
-        readonly List<Work> expectedWorks = new()
-        {
-            new Work
-            {
-                Id = 1,
-                ComposerId = 176,
-                Title = "3 Movements",
-                Subtitle = "",
-                Genre = "Orchestral"
-            },
-            new Work
-            {
-                Id = 2,
-                ComposerId = 202,
-                Title = "3 Mouvements perp\u00e9tuels, FP14",
-                Subtitle = "",
-                Genre = "Keyboard"
-            }
-        };
-
         [Fact]
         public void TestGetFromFile()
         {
             List<Work> actualWorks = WorkGetter.GetFromFile(FILE_PATH);
 
-            Assert.Equal(expectedWorks.Count, actualWorks.Count);
+            Assert.Equal(Expected.Works.Count, actualWorks.Count);
 
-            for (int i = 0; i < expectedWorks.Count; i++)
+            for (int i = 0; i < Expected.Works.Count; i++)
             {
-                Assert.Equal(expectedWorks[i], actualWorks[i]);
+                Assert.Equal(Expected.Works[i], actualWorks[i]);
             }
         }
     }
