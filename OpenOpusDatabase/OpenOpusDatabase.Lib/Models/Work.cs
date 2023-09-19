@@ -13,7 +13,7 @@ namespace OpenOpusDatabase.Lib.Models
         private string _subtitle = string.Empty;
         private string _genre = string.Empty;
 
-        [PrimaryKey, AutoIncrement, JsonPropertyName("id"), JsonConverter(typeof(StringToIntConverter))]
+        [PrimaryKey, JsonPropertyName("id"), JsonConverter(typeof(StringToIntConverter))]
         public int Id
         {
             get
