@@ -13,30 +13,61 @@ namespace OpenOpusDatabase.Lib.Converters
     {
         public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (typeToConvert == typeof(int))
+            CheckStartObject(ref reader);
+            return GetComposerId(ref reader);
+        }
+
+        private static void CheckStartObject(ref Utf8JsonReader reader)
+        {
+            if (reader.TokenType != JsonTokenType.StartObject)
             {
-                return GetId(reader, options);
-            }
-            else
-            {
-                throw new NotSupportedException();
+                throw new JsonException();
             }
         }
 
-        private static int GetId(Utf8JsonReader reader, JsonSerializerOptions options)
+        private static int GetComposerId(ref Utf8JsonReader reader)
         {
-            Composer? composer;
-            using (JsonDocument jsonDocument = JsonDocument.ParseValue(ref reader))
+            int? id = null;
+
+            while (reader.Read())
             {
-                composer = JsonSerializer.Deserialize<Composer>(jsonDocument, options);
+                if (reader.TokenType == JsonTokenType.EndObject)
+                {
+                    return GetIfNotNull(id);
+                }
+
+                string? propertyName = reader.GetString();
+                if (propertyName == "id")
+                {
+                    id = ParseJsonIdProperty(ref reader);
+                }
             }
-            if (composer != null)
+            throw new JsonException();
+        }
+
+        private static int GetIfNotNull(int? value)
+        {
+            if (value != null)
             {
-                return composer.Id;
+                return (int)value;
             }
             else
             {
-                throw new ArgumentNullException();
+                throw new Exception("value was null");
+            }
+        }
+
+        private static int ParseJsonIdProperty(ref Utf8JsonReader reader)
+        {
+            reader.Read();
+            string? idString = reader.GetString();
+            if (idString != null)
+            {
+                return int.Parse(idString);
+            }
+            else
+            {
+                throw new JsonException();
             }
         }
 
