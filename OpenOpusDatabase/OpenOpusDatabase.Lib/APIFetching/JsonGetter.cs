@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenOpusDatabase.Lib.APIFetching
 {
-    internal static class JsonGetter
+    public static class JsonGetter
     {
         public static List<T> GetValuesFromResponse<T, TResponse>(string json) where TResponse : IResponse<T>
         {
@@ -33,6 +33,12 @@ namespace OpenOpusDatabase.Lib.APIFetching
         {
             string json = WebReader.DownloadText(url);
             return GetValuesFromResponse<T, TResponse>(json);
+        }
+
+        public static T? GetFromFile<T>(string filePath)
+        {
+            string json = File.ReadAllText(filePath);
+            return JsonSerializer.Deserialize<T>(json);
         }
     }
 }
