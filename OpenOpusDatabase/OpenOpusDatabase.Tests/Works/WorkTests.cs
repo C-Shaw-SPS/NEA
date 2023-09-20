@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenOpusDatabase.Tests
+namespace OpenOpusDatabase.Tests.Works
 {
     public class WorkTests
     {
-        const string FILE_PATH = "work.json";
+        const string FILE_PATH = "Works/work.json";
 
         readonly Work expectedWork = new()
         {

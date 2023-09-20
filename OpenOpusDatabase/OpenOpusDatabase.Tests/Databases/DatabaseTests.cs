@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenOpusDatabase.Tests
+namespace OpenOpusDatabase.Tests.Databases
 {
     public class DatabaseTests
     {

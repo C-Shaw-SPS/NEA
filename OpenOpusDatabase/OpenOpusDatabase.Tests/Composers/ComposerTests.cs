@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenOpusDatabase.Tests
+namespace OpenOpusDatabase.Tests.Composers
 {
     public class ComposerTests
     {
-        const string FILE_PATH = "composer.json";
+        const string FILE_PATH = "Composers/composer.json";
 
         readonly Composer expectedComposer = new()
         {

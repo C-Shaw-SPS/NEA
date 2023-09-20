@@ -1,11 +1,11 @@
 using OpenOpusDatabase.Lib.APIFetching;
 using OpenOpusDatabase.Lib.Models;
 
-namespace OpenOpusDatabase.Tests
+namespace OpenOpusDatabase.Tests.Composers
 {
     public class ComposerGetterTests
     {
-        const string FILE_PATH = "composerResponse.json";
+        const string FILE_PATH = "Composers/composerResponse.json";
 
         [Fact]
         public void TestGetFromFile()

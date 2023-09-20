@@ -1,11 +1,11 @@
 ﻿using OpenOpusDatabase.Lib.APIFetching;
 using OpenOpusDatabase.Lib.Models;
 
-namespace OpenOpusDatabase.Tests
+namespace OpenOpusDatabase.Tests.Works
 {
     public class WorkGetterTests
     {
-        const string FILE_PATH = "workResponse.json";
+        const string FILE_PATH = "Works/workResponse.json";
 
         [Fact]
         public void TestGetFromFile()
