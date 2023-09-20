@@ -1,11 +1,5 @@
 ﻿using OpenOpusDatabase.Lib.Databases;
 using OpenOpusDatabase.Lib.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenOpusDatabase.Tests.Databases
 {
