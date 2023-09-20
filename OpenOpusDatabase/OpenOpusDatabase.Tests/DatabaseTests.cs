@@ -1,9 +1,14 @@
 ﻿using OpenOpusDatabase.Lib.Databases;
 using OpenOpusDatabase.Lib.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OpenOpusDatabase.Tests
 {
-    public class ComposerDatabaseTests
+    public class DatabaseTests
     {
         [Fact]
         public async void TestInsertAsync()
@@ -19,12 +24,12 @@ namespace OpenOpusDatabase.Tests
         [Fact]
         public async void TestClearAsync()
         {
-            Database<Composer> database = new(nameof(TestClearAsync));
+            Database<Work> database = new(nameof(TestClearAsync));
             await database.ClearAsync();
-            await database.InsertAllAsync(Expected.Composers);
+            await database.InsertAllAsync(Expected.Works);
             await database.ClearAsync();
 
-            List<Composer> actualComposers = await database.GetAllAsync();
+            List<Work> actualComposers = await database.GetAllAsync();
             Assert.Empty(actualComposers);
         }
 
@@ -46,11 +51,11 @@ namespace OpenOpusDatabase.Tests
         [Fact]
         public async void TestGetAsnyc()
         {
-            Database<Composer> database = new(nameof(TestGetAsnyc));
+            Database<Work> database = new(nameof(TestGetAsnyc));
             await database.ClearAsync();
-            await database.InsertAllAsync(Expected.Composers);
-            Composer actualComposer = await database.GetAsync(Expected.Composers[0].Id);
-            Assert.Equal(Expected.Composers[0], actualComposer);
+            await database.InsertAllAsync(Expected.Works);
+            Work actualWork = await database.GetAsync(Expected.Works[0].Id);
+            Assert.Equal(Expected.Works[0], actualWork);
         }
 
         [Fact]
@@ -72,26 +77,24 @@ namespace OpenOpusDatabase.Tests
         [Fact]
         public async void TestUpdateAsync()
         {
-            Database<Composer> database = new(nameof(TestUpdateAsync));
+            Database<Work> database = new(nameof(TestUpdateAsync));
             await database.ClearAsync();
-            await database.InsertAllAsync(Expected.Composers);
-            Composer updatedComposer = new()
+            await database.InsertAllAsync(Expected.Works);
+            Work updatedWork = new()
             {
-                Id = 36,
-                Name = "Not Vaughan Williams",
-                CompleteName = "Not Ralph Vaughan Williams",
-                BirthDate = DateTime.Parse("1872-01-01"),
-                DeathDate = DateTime.Parse("1958-01-01"),
-                Era = "Not Late Romantic",
-                PortraitLink = "https://assets.openopus.org/portraits/72161419-1568084957.jpg"
+                Id = 1,
+                ComposerId = 176,
+                Title = "Not 3 Movements",
+                Subtitle = "Not a subtitle",
+                Genre = "Not Orchestral"
             };
-            await database.UpdateAsync(updatedComposer);
-            List<Composer> actualComposers = await database.GetAllAsync();
-            Assert.Equal(updatedComposer, actualComposers[0]);
-            Assert.DoesNotContain(Expected.Composers[0], actualComposers);
-            for (int i = 1; i < Expected.Composers.Count; ++i)
+            await database.UpdateAsync(updatedWork);
+            List<Work> actualWorks = await database.GetAllAsync();
+            Assert.Equal(updatedWork, actualWorks[0]);
+            Assert.DoesNotContain(Expected.Works[0], actualWorks);
+            for (int i = 1; i < Expected.Works.Count; ++i)
             {
-                Assert.Contains(Expected.Composers[i], actualComposers);
+                Assert.Contains(Expected.Works[i], actualWorks);
             }
         }
     }
