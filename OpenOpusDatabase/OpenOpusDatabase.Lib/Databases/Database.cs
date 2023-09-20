@@ -59,9 +59,7 @@ namespace OpenOpusDatabase.Lib.Databases
         public async Task<List<T>> GetAllAsync()
         {
             await InitAsync();
-            List<T> result = await _connection
-                .Table<T>()
-                .ToListAsync();
+            List<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {TableName.GetTableName<T>()}");
             return result;
         }
 
