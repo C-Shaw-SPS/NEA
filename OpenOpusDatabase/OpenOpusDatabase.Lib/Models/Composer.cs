@@ -1,6 +1,7 @@
 ﻿using OpenOpusDatabase.Lib.Converters;
 using OpenOpusDatabase.Lib.Databases;
 using SQLite;
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -138,7 +139,31 @@ namespace OpenOpusDatabase.Lib.Models
 
         public string GetSqlValues()
         {
-            return $"({_id}, \"{_name}\", \"{_completeName}\", {_birthDate.Ticks}, {_deathDate?.Ticks}, \"{_era}\", \"{_portraitLink}\")";
+            return $"({_id}, \"{_name}\", \"{_completeName}\", {_birthDate.Ticks}, {GetDeathDateSql()}, \"{_era}\", \"{_portraitLink}\")";
+        }
+
+        private string GetDeathDateSql()
+        {
+            if (_deathDate is DateTime dateTime)
+            {
+                return dateTime.Ticks.ToString();
+            }
+            else
+            {
+                return "NULL";
+            }
+        }
+
+        private string GetPortraitLinkSql()
+        {
+            if (_portraitLink is string s)
+            {
+                return $"\"{s}\"";
+            }
+            else
+            {
+                return "NULL";
+            }
         }
     }
 }
