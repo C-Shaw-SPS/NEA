@@ -53,7 +53,7 @@ namespace OpenOpusDatabase.Tests
         {
             new Work
             {
-                Id = 1,
+                Id = 20086,
                 ComposerId = 176,
                 Title = "3 Movements",
                 Subtitle = "",
@@ -61,7 +61,7 @@ namespace OpenOpusDatabase.Tests
             },
             new Work
             {
-                Id = 2,
+                Id = 25115,
                 ComposerId = 202,
                 Title = "3 Mouvements perp\u00e9tuels, FP14",
                 Subtitle = "",
