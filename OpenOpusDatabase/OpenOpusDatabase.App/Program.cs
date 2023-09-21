@@ -1,4 +1,6 @@
-﻿namespace OpenOpusDatabase.App
+﻿using OpenOpusDatabase.Lib.Models;
+
+namespace OpenOpusDatabase.App
 {
     internal class Program
     {
