@@ -1,5 +1,4 @@
-﻿using OpenOpusDatabase.Lib.Models;
-using SQLite;
+﻿using SQLite;
 
 namespace OpenOpusDatabase.Lib.Databases
 {
@@ -12,10 +11,14 @@ namespace OpenOpusDatabase.Lib.Databases
         public Database(string path)
         {
             _path = FormatDatabasePath(path);
-            _tableName = TableName.Get<T>();
+            _tableName = TableNames.Get<T>();
         }
 
         protected SQLiteAsyncConnection Connection => _connection;
+
+        protected string Path => _path;
+
+        protected string TableName => _tableName;
 
         private static string FormatDatabasePath(string path)
         {
@@ -40,11 +43,7 @@ namespace OpenOpusDatabase.Lib.Databases
             await _connection.CreateTableAsync<T>();
         }
 
-        public async Task InsertAsync(T value)
-        {
-            await InitAsync();
-            await _connection.InsertAsync(value);
-        }
+        public abstract Task InsertAsync(T value);
 
         public async Task InsertAllAsync(IEnumerable<T> values)
         {
