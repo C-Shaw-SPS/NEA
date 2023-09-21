@@ -79,6 +79,8 @@ namespace OpenOpusDatabase.Lib.Models
             }
         }
 
+        public static string TableName => "Works";
+
         public bool Equals(Work? other)
         {
             return other != null
@@ -87,6 +89,11 @@ namespace OpenOpusDatabase.Lib.Models
                 && _title == other._title
                 && _subtitle == other._subtitle
                 && _genre == other._genre;
+        }
+
+        public string GetSqlColumnNames()
+        {
+            return $"({nameof(Id)}, {nameof(ComposerId)}, {nameof(Title)}, {nameof(Subtitle)}, {nameof(Genre)})";
         }
 
         public string GetSqlValues()
