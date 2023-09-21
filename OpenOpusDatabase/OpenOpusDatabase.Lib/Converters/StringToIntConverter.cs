@@ -26,7 +26,7 @@ namespace OpenOpusDatabase.Lib.Converters
             }
             else
             {
-                throw new ArgumentNullException();
+                throw new JsonException();
             }
         }
 

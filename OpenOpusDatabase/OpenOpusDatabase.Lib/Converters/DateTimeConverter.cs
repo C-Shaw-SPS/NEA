@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace OpenOpusDatabase.Lib.Converters
 {
@@ -14,7 +9,7 @@ namespace OpenOpusDatabase.Lib.Converters
         {
             if (typeToConvert == typeof(DateTime))
             {
-                return GetDateTime(reader);
+                return GetDateTime(ref reader);
             }
             else
             {
@@ -22,7 +17,7 @@ namespace OpenOpusDatabase.Lib.Converters
             }
         }
 
-        private DateTime GetDateTime(Utf8JsonReader reader)
+        private static DateTime GetDateTime(ref Utf8JsonReader reader)
         {
             string? s = reader.GetString();
             if (s != null)
@@ -31,7 +26,7 @@ namespace OpenOpusDatabase.Lib.Converters
             }
             else
             {
-                throw new ArgumentNullException();
+                throw new JsonException();
             }
         }
 
