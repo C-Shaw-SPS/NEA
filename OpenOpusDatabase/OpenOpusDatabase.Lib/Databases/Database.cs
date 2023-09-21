@@ -6,11 +6,13 @@ namespace OpenOpusDatabase.Lib.Databases
     public class Database<T> where T : class, IIdentifiable, new()
     {
         private SQLiteAsyncConnection _connection;
-        private string _path;
+        private readonly string _path;
+        private readonly string _tableName;
 
         public Database(string path)
         {
             _path = FormatDatabasePath(path);
+            _tableName = TableName.Get<T>();
         }
 
         protected SQLiteAsyncConnection Connection => _connection;
@@ -59,18 +61,17 @@ namespace OpenOpusDatabase.Lib.Databases
         public async Task<List<T>> GetAllAsync()
         {
             await InitAsync();
-            List<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {TableName.GetTableName<T>()}");
+            List<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {_tableName}");
             return result;
         }
 
         public async Task<T> GetAsync(int id)
         {
             await InitAsync();
-            T result = await _connection
-                .Table<T>()
-                .Where(value => value.Id == id)
-                .FirstOrDefaultAsync();
-            return result;
+            List<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {_tableName} WHERE {nameof(IIdentifiable.Id)} = {id}");
+            if (result.Count == 0)
+                throw new Exception($"No row in {_tableName} with {nameof(IIdentifiable.Id)} {id}");
+            return result[0];
         }
 
         public async Task ClearAsync()
@@ -87,10 +88,9 @@ namespace OpenOpusDatabase.Lib.Databases
 
         public async Task<List<int>> GetIdsAsync()
         {
-            List<int> ids = (await GetAllAsync())
-                .Select(property => property.Id)
-                .ToList();
-            return ids;
+            await InitAsync();
+            List<T> result = await _connection.QueryAsync<T>($"SELECT {nameof(IIdentifiable.Id)} FROM {_tableName}");
+            return result.Select(c => c.Id).ToList();
         }
     }
 }
