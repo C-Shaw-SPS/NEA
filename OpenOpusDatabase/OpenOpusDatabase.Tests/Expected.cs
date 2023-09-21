@@ -4,6 +4,17 @@ namespace OpenOpusDatabase.Tests
 {
     internal static class Expected
     {
+        public static readonly Composer NullPropertyComposer = new()
+        {
+            Id = 91,
+            Name = "Bunch",
+            CompleteName = "Kenji Bunch",
+            BirthDate = DateTime.Parse("1973-07-27"),
+            DeathDate = null,
+            Era = "21st Century",
+            PortraitLink = null
+        };
+
 
         public static readonly List<Composer> Composers = new()
         {
@@ -47,16 +58,7 @@ namespace OpenOpusDatabase.Tests
                 Era = "Classical",
                 PortraitLink = "https://assets.openopus.org/portraits/21459195-1568084925.jpg"
             },
-            new Composer
-            {
-                Id = 91,
-                Name = "Bunch",
-                CompleteName = "Kenji Bunch",
-                BirthDate = DateTime.Parse("1973-07-27"),
-                DeathDate = null,
-                Era = "21st Century",
-                PortraitLink = null
-            }
+            NullPropertyComposer
         };
 
         public static readonly List<Work> Works = new()
