@@ -28,16 +28,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="composer.json">
+    <None Update="Composers\composer.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="composerResponse.json">
+    <None Update="Composers\composerResponse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="work.json">
+    <None Update="Works\work.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="workResponse.json">
+    <None Update="Works\workResponse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
