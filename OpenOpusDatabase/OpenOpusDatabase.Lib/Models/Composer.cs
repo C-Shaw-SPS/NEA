@@ -112,6 +112,8 @@ namespace OpenOpusDatabase.Lib.Models
             }
         }
 
+        public static string TableName => "Composers";
+
         private static string FormatLink(string value)
         {
             StringBuilder link = new();
@@ -139,7 +141,7 @@ namespace OpenOpusDatabase.Lib.Models
 
         public string GetSqlValues()
         {
-            return $"({_id}, \"{_name}\", \"{_completeName}\", {_birthDate.Ticks}, {GetDeathDateSql()}, \"{_era}\", \"{_portraitLink}\")";
+            return $"({_id}, \"{_name}\", \"{_completeName}\", {_birthDate.Ticks}, {GetDeathDateSql()}, \"{_era}\", {GetPortraitLinkSql()})";
         }
 
         private string GetDeathDateSql()
@@ -164,6 +166,11 @@ namespace OpenOpusDatabase.Lib.Models
             {
                 return "NULL";
             }
+        }
+
+        public string GetSqlColumnNames()
+        {
+            return $"({nameof(Id)}, {nameof(Name)}, {nameof(CompleteName)}, {nameof(BirthDate)}, {nameof(DeathDate)}, {nameof(Era)}, {nameof(PortraitLink)})";
         }
     }
 }
