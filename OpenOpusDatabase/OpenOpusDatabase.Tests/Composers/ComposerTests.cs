@@ -1,16 +1,11 @@
 ﻿using OpenOpusDatabase.Lib.APIFetching;
 using OpenOpusDatabase.Lib.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OpenOpusDatabase.Tests
+namespace OpenOpusDatabase.Tests.Composers
 {
     public class ComposerTests
     {
-        const string FILE_PATH = "composer.json";
+        const string FILE_PATH = "Composers/composer.json";
 
         readonly Composer expectedComposer = new()
         {

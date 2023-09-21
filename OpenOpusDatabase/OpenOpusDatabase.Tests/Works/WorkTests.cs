@@ -1,7 +1,7 @@
 ﻿using OpenOpusDatabase.Lib.Models;
 using OpenOpusDatabase.Lib.APIFetching;
 
-namespace OpenOpusDatabase.Tests
+namespace OpenOpusDatabase.Tests.Works
 {
     public class WorkTests
     {
@@ -19,7 +19,7 @@ namespace OpenOpusDatabase.Tests
         [Fact]
         public void TestJsonDeserialiseWork()
         {
-            Work? actualWork = JsonGetter.GetFromFile<Work>(FILE_PATH); 
+            Work? actualWork = JsonGetter.GetFromFile<Work>(FILE_PATH);
             Assert.NotNull(actualWork);
             Assert.Equal(expectedWork, actualWork);
         }
