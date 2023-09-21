@@ -1,14 +1,9 @@
 ﻿using OpenOpusDatabase.Lib.Models;
 using OpenOpusDatabase.Lib.Responses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenOpusDatabase.Lib.APIFetching
 {
-    public class WorkGetter
+    public static class WorkGetter
     {
         private const string _URL = "https://api.openopus.org/work/list/ids/.json";
 

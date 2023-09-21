@@ -1,16 +1,11 @@
 ﻿using OpenOpusDatabase.Lib.Responses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace OpenOpusDatabase.Lib.APIFetching
 {
     public static class JsonGetter
     {
-        private static List<T> GetValuesFromResponse<T, TResponse>(string json) where TResponse : IResponse<T>
+        public static List<T> GetValuesFromResponse<T, TResponse>(string json) where TResponse : IResponse<T>
         {
             TResponse? response = JsonSerializer.Deserialize<TResponse>(json);
             if (response != null)
