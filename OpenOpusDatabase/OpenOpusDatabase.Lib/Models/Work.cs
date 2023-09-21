@@ -91,14 +91,28 @@ namespace OpenOpusDatabase.Lib.Models
                 && _genre == other._genre;
         }
 
-        public string GetSqlColumnNames()
+        public List<string> GetSqlValues()
         {
-            return $"({nameof(Id)}, {nameof(ComposerId)}, {nameof(Title)}, {nameof(Subtitle)}, {nameof(Genre)})";
+            return new List<string>
+            {
+                _id.ToString(),
+                _composerId.ToString(),
+                _title,
+                _subtitle,
+                _genre
+            };
         }
 
-        public string GetSqlValues()
+        public static List<string> GetSqlColumnNames()
         {
-            return $"({_id}, {_composerId}, \"{_title}\", \"{_subtitle}\", \"{_genre}\")";
+            return new List<string>
+            {
+                nameof(Id),
+                nameof(ComposerId),
+                nameof(Title),
+                nameof(Subtitle),
+                nameof(Genre)
+            };
         }
     }
 }

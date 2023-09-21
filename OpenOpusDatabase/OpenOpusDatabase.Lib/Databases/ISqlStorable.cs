@@ -6,8 +6,8 @@
 
         public abstract static string TableName { get; }
 
-        public string GetSqlValues();
+        public List<string> GetSqlValues();
 
-        public string GetSqlColumnNames();
+        public abstract static List<string> GetSqlColumnNames();
     }
 }

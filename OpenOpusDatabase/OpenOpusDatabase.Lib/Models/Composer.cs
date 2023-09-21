@@ -139,9 +139,18 @@ namespace OpenOpusDatabase.Lib.Models
                 && _portraitLink == other._portraitLink;
         }
 
-        public string GetSqlValues()
+        public List<string> GetSqlValues()
         {
-            return $"({_id}, \"{_name}\", \"{_completeName}\", {_birthDate.Ticks}, {GetDeathDateSql()}, \"{_era}\", {GetPortraitLinkSql()})";
+            return new List<string>
+            {
+                _id.ToString(),
+                _name,
+                _completeName,
+                _birthDate.Ticks.ToString(),
+                GetDeathDateSql(),
+                _era,
+                GetPortraitLinkSql()
+            };
         }
 
         private string GetDeathDateSql()
@@ -168,9 +177,18 @@ namespace OpenOpusDatabase.Lib.Models
             }
         }
 
-        public string GetSqlColumnNames()
+        public static List<string> GetSqlColumnNames()
         {
-            return $"({nameof(Id)}, {nameof(Name)}, {nameof(CompleteName)}, {nameof(BirthDate)}, {nameof(DeathDate)}, {nameof(Era)}, {nameof(PortraitLink)})";
+            return new List<string>
+            {
+                nameof(Id),
+                nameof(Name),
+                nameof(CompleteName),
+                nameof(BirthDate),
+                nameof(DeathDate),
+                nameof(Era),
+                nameof(PortraitLink)
+            };
         }
     }
 }
