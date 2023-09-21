@@ -48,18 +48,12 @@ namespace OpenOpusDatabase.Lib.Databases
         public async Task InsertAllAsync(List<T> values)
         {
             await InitAsync();
-            StringBuilder command = new();
-            command.AppendLine($"INSERT INTO {_tableName} VALUES");
-            for (int i = 0; i < values.Count; ++i)
+            List<Task> insertTasks = new();
+            foreach (T value in values)
             {
-                command.Append(values[i].GetSqlValues());
-                if (i < values.Count - 1)
-                {
-                    command.Append(',');
-                }
-                command.AppendLine();
+                insertTasks.Add(InsertAsync(value));
             }
-            await _connection.ExecuteAsync(command.ToString());
+            await Task.WhenAll(insertTasks);
         }
 
         public async Task DeleteAsync(T value)
