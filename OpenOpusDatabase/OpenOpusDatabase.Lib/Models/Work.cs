@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace OpenOpusDatabase.Lib.Models
 {
     [Table("Works")]
-    public class Work : IIdentifiable, IEquatable<Work>
+    public class Work : ISqlStorable, IEquatable<Work>
     {
         private int _id;
         private int _composerId;
@@ -87,6 +87,11 @@ namespace OpenOpusDatabase.Lib.Models
                 && _title == other._title
                 && _subtitle == other._subtitle
                 && _genre == other._genre;
+        }
+
+        public string GetSqlValues()
+        {
+            return $"({_id}, {_composerId}, \"{_title}\", \"{_subtitle}\", \"{_genre}\")";
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 namespace OpenOpusDatabase.Lib.Models
 {
     [Table("Composers")]
-    public class Composer : IEquatable<Composer>, IIdentifiable
+    public class Composer : IEquatable<Composer>, ISqlStorable
     {
         private int _id;
         private string _name = string.Empty;
@@ -134,6 +134,11 @@ namespace OpenOpusDatabase.Lib.Models
                 && _deathDate == other._deathDate
                 && _era == other._era
                 && _portraitLink == other._portraitLink;
+        }
+
+        public string GetSqlValues()
+        {
+            return $"({_id}, \"{_name}\", \"{_completeName}\", {_birthDate.Ticks}, {_deathDate?.Ticks}, \"{_era}\", \"{_portraitLink}\")";
         }
     }
 }
