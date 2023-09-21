@@ -4,6 +4,7 @@ namespace OpenOpusDatabase.Tests
 {
     internal static class Expected
     {
+
         public static readonly List<Composer> Composers = new()
         {
             new Composer

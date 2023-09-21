@@ -81,6 +81,7 @@ namespace OpenOpusDatabase.Lib.Models
         public bool Equals(Work? other)
         {
             return other != null
+                && _id == other._id
                 && _composerId == other._composerId
                 && _title == other._title
                 && _subtitle == other._subtitle
