@@ -2,8 +2,12 @@
 {
     public interface ISqlStorable
     {
-        public int Id { get; set; }
+        public abstract int Id { get; set; }
+
+        public abstract static string TableName { get; }
 
         public string GetSqlValues();
+
+        public string GetSqlColumnNames();
     }
 }
