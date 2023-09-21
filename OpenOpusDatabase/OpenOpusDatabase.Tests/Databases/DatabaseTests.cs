@@ -105,5 +105,16 @@ namespace OpenOpusDatabase.Tests.Databases
                 Assert.Contains(expectedComposer.Id, actualIds);
             }
         }
+
+        [Fact]
+        public async Task TestNullProperties()
+        {
+            Database<Composer> database = new(nameof(TestNullProperties));
+            await database.ClearAsync();
+            await database.InsertAsync(Expected.NullPropertyComposer);
+            List<Composer> actualComposers = await database.GetAllAsync();
+            Assert.Single(actualComposers);
+            Assert.Equal(Expected.NullPropertyComposer, actualComposers[0]);
+        }
     }
 }
