@@ -4,13 +4,14 @@ using System.Text.Json.Serialization;
 
 namespace OpenOpusDatabase.Lib.Models
 {
+    [Table("Works")]
     public class Work : IIdentifiable, IEquatable<Work>
     {
         private int _id;
         private int _composerId;
-        private string _title;
-        private string _subtitle;
-        private string _genre;
+        private string _title = string.Empty;
+        private string _subtitle = string.Empty;
+        private string _genre = string.Empty;
 
         [PrimaryKey, JsonPropertyName("id"), JsonConverter(typeof(StringToIntConverter))]
         public int Id

@@ -103,17 +103,15 @@ namespace OpenOpusDatabase.Lib.Models
             }
             set
             {
-                _portraitLink = FormatLink(value);
+                if (value != null)
+                {
+                    _portraitLink = FormatLink(value);
+                }
             }
         }
 
-        private static string? FormatLink(string? value)
+        private static string FormatLink(string value)
         {
-            if (value == null)
-            {
-                return null;
-            }
-
             StringBuilder link = new();
             foreach (char c in value)
             {
