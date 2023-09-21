@@ -1,11 +1,11 @@
-﻿using OpenOpusDatabase.Lib.Models;
-using OpenOpusDatabase.Lib.APIFetching;
+﻿using OpenOpusDatabase.Lib.APIFetching;
+using OpenOpusDatabase.Lib.Models;
 
 namespace OpenOpusDatabase.Tests.Works
 {
     public class WorkTests
     {
-        const string FILE_PATH = "work.json";
+        const string FILE_PATH = "Works/work.json";
 
         readonly Work expectedWork = new()
         {
