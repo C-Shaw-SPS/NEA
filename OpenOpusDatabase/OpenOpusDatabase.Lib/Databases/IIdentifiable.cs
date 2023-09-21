@@ -1,4 +1,4 @@
-﻿namespace OpenOpusDatabase.Lib.Models
+﻿namespace OpenOpusDatabase.Lib.Databases
 {
     public interface IIdentifiable
     {
