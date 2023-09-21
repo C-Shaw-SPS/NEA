@@ -3,7 +3,7 @@ using SQLite;
 
 namespace OpenOpusDatabase.Lib.Databases
 {
-    public class Database<T> where T : class, IIdentifiable, new()
+    public abstract class Database<T> where T : class, IIdentifiable, new()
     {
         private SQLiteAsyncConnection _connection;
         private readonly string _path;
