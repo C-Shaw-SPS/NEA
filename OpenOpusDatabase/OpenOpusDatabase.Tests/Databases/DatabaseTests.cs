@@ -77,11 +77,11 @@ namespace OpenOpusDatabase.Tests.Databases
             await database.InsertAllAsync(Expected.Works);
             Work updatedWork = new()
             {
-                Id = 1,
-                ComposerId = 176,
-                Title = "Not 3 Movements",
-                Subtitle = "Not a subtitle",
-                Genre = "Not Orchestral"
+                Id = Expected.Works[0].Id,
+                ComposerId = Expected.Works[0].ComposerId,
+                Title = "Something different",
+                Subtitle = "New subtitle",
+                Genre = "Different genre"
             };
             await database.UpdateAsync(updatedWork);
             List<Work> actualWorks = await database.GetAllAsync();
