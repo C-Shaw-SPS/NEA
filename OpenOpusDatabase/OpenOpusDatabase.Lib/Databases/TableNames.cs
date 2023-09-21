@@ -2,7 +2,7 @@
 
 namespace OpenOpusDatabase.Lib.Databases
 {
-    internal static class TableName
+    internal static class TableNames
     {
         /// <summary>
         /// Returns the table name of the specified type, returning the name of the type if the type does not have the TableAttribute attribute
