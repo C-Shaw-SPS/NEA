@@ -6,7 +6,7 @@ namespace OpenOpusDatabase.Tests.Databases
     public class DatabaseTests
     {
         [Fact]
-        public async void TestInsertAsync()
+        public async Task TestInsertAsync()
         {
             Database<Composer> database = new(nameof(TestInsertAsync));
             await database.ClearAsync();
@@ -17,7 +17,7 @@ namespace OpenOpusDatabase.Tests.Databases
         }
 
         [Fact]
-        public async void TestClearAsync()
+        public async Task TestClearAsync()
         {
             Database<Work> database = new(nameof(TestClearAsync));
             await database.ClearAsync();
@@ -29,7 +29,7 @@ namespace OpenOpusDatabase.Tests.Databases
         }
 
         [Fact]
-        public async void TestInsertAllAsyncAndGetAllAsync()
+        public async Task TestInsertAllAsyncAndGetAllAsync()
         {
             Database<Composer> database = new(nameof(TestInsertAllAsyncAndGetAllAsync));
             await database.ClearAsync();
@@ -44,7 +44,7 @@ namespace OpenOpusDatabase.Tests.Databases
         }
 
         [Fact]
-        public async void TestGetAsnyc()
+        public async Task TestGetAsnyc()
         {
             Database<Work> database = new(nameof(TestGetAsnyc));
             await database.ClearAsync();
@@ -54,7 +54,7 @@ namespace OpenOpusDatabase.Tests.Databases
         }
 
         [Fact]
-        public async void TestDeleteAsync()
+        public async Task TestDeleteAsync()
         {
             Database<Composer> database = new(nameof(TestDeleteAsync));
             await database.ClearAsync();
@@ -70,7 +70,7 @@ namespace OpenOpusDatabase.Tests.Databases
         }
 
         [Fact]
-        public async void TestUpdateAsync()
+        public async Task TestUpdateAsync()
         {
             Database<Work> database = new(nameof(TestUpdateAsync));
             await database.ClearAsync();
@@ -90,6 +90,19 @@ namespace OpenOpusDatabase.Tests.Databases
             for (int i = 1; i < Expected.Works.Count; ++i)
             {
                 Assert.Contains(Expected.Works[i], actualWorks);
+            }
+        }
+
+        [Fact]
+        public async Task TestGetIdsAsync()
+        {
+            Database<Composer> database = new(nameof(TestGetIdsAsync));
+            await database.ClearAsync();
+            await database.InsertAllAsync(Expected.Composers);
+            List<int> actualIds = await database.GetIdsAsync();
+            foreach (Composer expectedComposer in Expected.Composers)
+            {
+                Assert.Contains(expectedComposer.Id, actualIds);
             }
         }
     }
