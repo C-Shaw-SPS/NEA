@@ -17,7 +17,7 @@ namespace OpenOpusDatabase.App
         static async Task CreateComposerDatabase()
         {
             List<Composer> composers = ComposerGetter.GetFromOpenOpus();
-            ComposerDatabase composerDatabase = new(DatabaseProperties.NAME);
+            Database<Composer> composerDatabase = new(DatabaseProperties.NAME);
             await composerDatabase.ClearAsync();
             await composerDatabase.InsertAllAsync(composers);
         }
@@ -25,7 +25,7 @@ namespace OpenOpusDatabase.App
         static async Task CreateWorkDatabase()
         {
             List<Work> works = WorkGetter.GetFromOpenOpus();
-            WorkDatabase workDatabase = new(DatabaseProperties.NAME);
+            Database<Work> workDatabase = new(DatabaseProperties.NAME);
             await workDatabase.ClearAsync();
             await workDatabase.InsertAllAsync(works);
         }

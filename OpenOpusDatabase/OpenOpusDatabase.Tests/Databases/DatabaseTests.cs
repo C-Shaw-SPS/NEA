@@ -8,7 +8,7 @@ namespace OpenOpusDatabase.Tests.Databases
         [Fact]
         public async Task TestInsertAsync()
         {
-            ComposerDatabase database = new(nameof(TestInsertAsync));
+            Database<Composer> database = new(nameof(TestInsertAsync));
             await database.ClearAsync();
             await database.InsertAsync(Expected.Composers[0]);
             List<Composer> actualComposers = await database.GetAllAsync();
@@ -19,7 +19,7 @@ namespace OpenOpusDatabase.Tests.Databases
         [Fact]
         public async Task TestClearAsync()
         {
-            WorkDatabase database = new(nameof(TestClearAsync));
+            Database<Work> database = new(nameof(TestClearAsync));
             await database.ClearAsync();
             await database.InsertAllAsync(Expected.Works);
             await database.ClearAsync();
@@ -31,7 +31,7 @@ namespace OpenOpusDatabase.Tests.Databases
         [Fact]
         public async Task TestInsertAllAsyncAndGetAllAsync()
         {
-            ComposerDatabase database = new(nameof(TestInsertAllAsyncAndGetAllAsync));
+            Database<Composer> database = new(nameof(TestInsertAllAsyncAndGetAllAsync));
             await database.ClearAsync();
             await database.InsertAllAsync(Expected.Composers);
             List<Composer> actualComposers = await database.GetAllAsync();
@@ -46,7 +46,7 @@ namespace OpenOpusDatabase.Tests.Databases
         [Fact]
         public async Task TestGetAsnyc()
         {
-            WorkDatabase database = new(nameof(TestGetAsnyc));
+            Database<Work> database = new(nameof(TestGetAsnyc));
             await database.ClearAsync();
             await database.InsertAllAsync(Expected.Works);
             Work actualWork = await database.GetAsync(Expected.Works[0].Id);
@@ -56,7 +56,7 @@ namespace OpenOpusDatabase.Tests.Databases
         [Fact]
         public async Task TestDeleteAsync()
         {
-            ComposerDatabase database = new(nameof(TestDeleteAsync));
+            Database<Composer> database = new(nameof(TestDeleteAsync));
             await database.ClearAsync();
             await database.InsertAllAsync(Expected.Composers);
             await database.DeleteAsync(Expected.Composers[0]);
@@ -72,7 +72,7 @@ namespace OpenOpusDatabase.Tests.Databases
         [Fact]
         public async Task TestUpdateAsync()
         {
-            WorkDatabase database = new(nameof(TestUpdateAsync));
+            Database<Work> database = new(nameof(TestUpdateAsync));
             await database.ClearAsync();
             await database.InsertAllAsync(Expected.Works);
             Work updatedWork = new()
@@ -96,7 +96,7 @@ namespace OpenOpusDatabase.Tests.Databases
         [Fact]
         public async Task TestGetIdsAsync()
         {
-            ComposerDatabase database = new(nameof(TestGetIdsAsync));
+            Database<Composer> database = new(nameof(TestGetIdsAsync));
             await database.ClearAsync();
             await database.InsertAllAsync(Expected.Composers);
             List<int> actualIds = await database.GetIdsAsync();

@@ -1,8 +1,9 @@
 ﻿using SQLite;
+using System.Text;
 
 namespace OpenOpusDatabase.Lib.Databases
 {
-    public abstract class Database<T> where T : class, IIdentifiable, new()
+    public class Database<T> where T : class, ISqlStorable, new()
     {
         private SQLiteAsyncConnection _connection;
         private readonly string _path;
@@ -13,12 +14,6 @@ namespace OpenOpusDatabase.Lib.Databases
             _path = FormatDatabasePath(path);
             _tableName = TableNames.Get<T>();
         }
-
-        protected SQLiteAsyncConnection Connection => _connection;
-
-        protected string Path => _path;
-
-        protected string TableName => _tableName;
 
         private static string FormatDatabasePath(string path)
         {
@@ -43,12 +38,28 @@ namespace OpenOpusDatabase.Lib.Databases
             await _connection.CreateTableAsync<T>();
         }
 
-        public abstract Task InsertAsync(T value);
-
-        public async Task InsertAllAsync(IEnumerable<T> values)
+        public async Task InsertAsync(T value)
         {
             await InitAsync();
-            await _connection.InsertAllAsync(values);
+            string command = $"INSERT INTO {_tableName} VALUES {value.GetSqlValues()}";
+            await _connection.ExecuteAsync(command);
+        }
+
+        public async Task InsertAllAsync(List<T> values)
+        {
+            await InitAsync();
+            StringBuilder command = new();
+            command.AppendLine($"INSERT INTO {_tableName} VALUES");
+            for (int i = 0; i < values.Count; ++i)
+            {
+                command.Append(values[i].GetSqlValues());
+                if (i < values.Count - 1)
+                {
+                    command.Append(',');
+                }
+                command.AppendLine();
+            }
+            await _connection.ExecuteAsync(command.ToString());
         }
 
         public async Task DeleteAsync(T value)
@@ -67,9 +78,9 @@ namespace OpenOpusDatabase.Lib.Databases
         public async Task<T> GetAsync(int id)
         {
             await InitAsync();
-            List<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {_tableName} WHERE {nameof(IIdentifiable.Id)} = {id}");
+            List<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {_tableName} WHERE {nameof(ISqlStorable.Id)} = {id}");
             if (result.Count == 0)
-                throw new Exception($"No row in {_tableName} with {nameof(IIdentifiable.Id)} {id}");
+                throw new Exception($"No row in {_tableName} with {nameof(ISqlStorable.Id)} {id}");
             return result[0];
         }
 
@@ -88,7 +99,7 @@ namespace OpenOpusDatabase.Lib.Databases
         public async Task<List<int>> GetIdsAsync()
         {
             await InitAsync();
-            List<T> result = await _connection.QueryAsync<T>($"SELECT {nameof(IIdentifiable.Id)} FROM {_tableName}");
+            List<T> result = await _connection.QueryAsync<T>($"SELECT {nameof(ISqlStorable.Id)} FROM {_tableName}");
             return result.Select(c => c.Id).ToList();
         }
     }
