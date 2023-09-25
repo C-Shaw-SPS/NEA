@@ -141,40 +141,17 @@ namespace OpenOpusDatabase.Lib.Models
 
         public List<string> GetSqlValues()
         {
-            return new List<string>
+            List<object?> values = new()
             {
-                _id.ToString(),
-                $"\"{_name}\"",
-                $"\"{_completeName}\"",
-                _birthDate.Ticks.ToString(),
-                GetDeathDateSql(),
-                $"\"{_era}\"",
-                GetPortraitLinkSql()
+                _id,
+                _name,
+                _completeName,
+                _birthDate,
+                _deathDate,
+                _era,
+                _portraitLink,
             };
-        }
-
-        private string GetDeathDateSql()
-        {
-            if (_deathDate is DateTime dateTime)
-            {
-                return dateTime.Ticks.ToString();
-            }
-            else
-            {
-                return "NULL";
-            }
-        }
-
-        private string GetPortraitLinkSql()
-        {
-            if (_portraitLink is string s)
-            {
-                return $"\"{s}\"";
-            }
-            else
-            {
-                return "NULL";
-            }
+            return values.FormatAsSqlValues();
         }
 
         public static List<string> GetColumnNames()
