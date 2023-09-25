@@ -1,6 +1,7 @@
 ﻿using OpenOpusDatabase.Lib.APIFetching;
 using OpenOpusDatabase.Lib.Databases;
 using OpenOpusDatabase.Lib.Models;
+using System.Diagnostics;
 
 namespace OpenOpusDatabase.App
 {
@@ -8,10 +9,13 @@ namespace OpenOpusDatabase.App
     {
         static async Task Main(string[] args)
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
             await CreateComposerDatabase();
             Console.WriteLine("Composer database created");
             await CreateWorkDatabase();
             Console.WriteLine("Work database created");
+            stopwatch.Stop();
+            Console.WriteLine(stopwatch.Elapsed);
         }
 
         static async Task CreateComposerDatabase()
