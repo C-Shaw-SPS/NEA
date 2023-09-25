@@ -48,12 +48,12 @@ namespace OpenOpusDatabase.Lib.Databases
         public async Task InsertAllAsync(List<T> values)
         {
             await InitAsync();
-            List<Task> insertTasks = new();
+            List<Task> tasks = new();
             foreach (T value in values)
             {
-                insertTasks.Add(InsertAsync(value));
+                tasks.Add(InsertAsync(value));
             }
-            await Task.WhenAll(insertTasks);
+            await Task.WhenAll(tasks);
         }
 
         public async Task DeleteAsync(T value)
