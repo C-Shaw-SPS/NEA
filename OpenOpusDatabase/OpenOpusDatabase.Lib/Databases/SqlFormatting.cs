@@ -30,7 +30,7 @@ namespace OpenOpusDatabase.Lib.Databases
 
         public static string CommaJoin(this List<string> list)
         {
-            return OPEN_BRACKET + String.Join(COMMA_SEPARATOR, list) + CLOSE_BRACKET;
+            return OPEN_BRACKET + string.Join(COMMA_SEPARATOR, list) + CLOSE_BRACKET;
         }
 
         public static List<string> FormatAsSqlValues(this List<object?> values)
@@ -60,7 +60,7 @@ namespace OpenOpusDatabase.Lib.Databases
 
         private static string FormatSqlString(this string s)
         {
-            return $"\"{s.ReplaceQuotes()}\"";
+            return DOUBLE_QUOTE + s.ReplaceQuotes() + DOUBLE_QUOTE;
         }
 
         private static string ReplaceQuotes(this string s)
