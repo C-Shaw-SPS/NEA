@@ -41,7 +41,7 @@ namespace OpenOpusDatabase.Lib.Databases
         public async Task InsertAsync(T value)
         {
             await InitAsync();
-            string command = $"INSERT INTO {_tableName} {value.GetSqlColumnNames()} VALUES {value.GetSqlValues()}";
+            string command = $"INSERT INTO {_tableName} {T.GetColumnNames().CommaJoin()} VALUES {value.GetSqlValues().CommaJoin()}";
             await _connection.ExecuteAsync(command);
         }
 
