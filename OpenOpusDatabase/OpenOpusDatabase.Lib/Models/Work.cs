@@ -93,14 +93,15 @@ namespace OpenOpusDatabase.Lib.Models
 
         public List<string> GetSqlValues()
         {
-            return new List<string>
+            List<object?> values = new()
             {
-                _id.ToString(),
-                _composerId.ToString(),
-                $"\"{_title}\"",
-                $"\"{_subtitle}\"",
-                $"\"{_genre}\""
+                _id,
+                _composerId,
+                _title,
+                _subtitle,
+                _genre
             };
+            return values.FormatAsSqlValues();
         }
 
         public static List<string> GetColumnNames()
