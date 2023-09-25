@@ -144,11 +144,11 @@ namespace OpenOpusDatabase.Lib.Models
             return new List<string>
             {
                 _id.ToString(),
-                _name,
-                _completeName,
+                $"\"{_name}\"",
+                $"\"{_completeName}\"",
                 _birthDate.Ticks.ToString(),
                 GetDeathDateSql(),
-                _era,
+                $"\"{_era}\"",
                 GetPortraitLinkSql()
             };
         }
@@ -177,7 +177,7 @@ namespace OpenOpusDatabase.Lib.Models
             }
         }
 
-        public static List<string> GetSqlColumnNames()
+        public static List<string> GetColumnNames()
         {
             return new List<string>
             {

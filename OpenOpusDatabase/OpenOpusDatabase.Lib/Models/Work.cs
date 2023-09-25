@@ -97,13 +97,13 @@ namespace OpenOpusDatabase.Lib.Models
             {
                 _id.ToString(),
                 _composerId.ToString(),
-                _title,
-                _subtitle,
-                _genre
+                $"\"{_title}\"",
+                $"\"{_subtitle}\"",
+                $"\"{_genre}\""
             };
         }
 
-        public static List<string> GetSqlColumnNames()
+        public static List<string> GetColumnNames()
         {
             return new List<string>
             {
