@@ -8,12 +8,25 @@ namespace OpenOpusDatabase.Lib.Databases
 {
     internal static class SqlFormatting
     {
-        private const string COMMA_SEPARATOR = ",";
-        private const string OPEN_BRACKET = "(";
-        private const string CLOSE_BRACKET = ")";
-        private const string NULL = "NULL";
-        private const char DOUBLE_QUOTE = '\"';
-        private const char SINGLE_QUOTE = '\'';
+        public const string DB_FILE_EXTENSION = ".db";
+        public const string COMMA_SEPARATOR = ",";
+        public const string OPEN_BRACKET = "(";
+        public const string CLOSE_BRACKET = ")";
+        public const string NULL = "NULL";
+        public const char DOUBLE_QUOTE = '\"';
+        public const char SINGLE_QUOTE = '\'';
+
+        public static string FormatAsDatabasePath(this string s)
+        {
+            if (!s.EndsWith(DB_FILE_EXTENSION))
+            {
+                return s + DB_FILE_EXTENSION;
+            }
+            else
+            {
+                return s;
+            }
+        }
 
         public static string CommaJoin(this List<string> list)
         {

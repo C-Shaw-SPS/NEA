@@ -11,20 +11,8 @@ namespace OpenOpusDatabase.Lib.Databases
 
         public Database(string path)
         {
-            _path = FormatDatabasePath(path);
+            _path = path.FormatAsDatabasePath();
             _tableName = TableNames.Get<T>();
-        }
-
-        private static string FormatDatabasePath(string path)
-        {
-            if (path.EndsWith(".db"))
-            {
-                return path;
-            }
-            else
-            {
-                return path + ".db";
-            }
         }
 
         protected async Task InitAsync()
