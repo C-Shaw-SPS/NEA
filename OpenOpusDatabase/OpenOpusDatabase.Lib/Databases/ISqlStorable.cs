@@ -8,6 +8,6 @@
 
         public List<string> GetSqlValues();
 
-        public abstract static List<string> GetSqlColumnNames();
+        public abstract static List<string> GetColumnNames();
     }
 }
