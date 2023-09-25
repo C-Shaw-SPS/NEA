@@ -43,6 +43,15 @@
             "death": null,
             "epoch": "Post-War",
             "portrait": "https:\/\/assets.openopus.org\/portraits\/65680484-1568084938.jpg"
+        },
+        {
+            "id": "91",
+            "name": "Bunch",
+            "complete_name": "Kenji Bunch",
+            "birth": "1973-07-27",
+            "death": null,
+            "epoch": "21st Century",
+            "portrait": null
         }
     ]
 }

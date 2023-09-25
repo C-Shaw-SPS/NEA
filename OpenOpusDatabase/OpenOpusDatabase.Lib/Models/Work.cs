@@ -1,11 +1,12 @@
 ﻿using OpenOpusDatabase.Lib.Converters;
+using OpenOpusDatabase.Lib.Databases;
 using SQLite;
 using System.Text.Json.Serialization;
 
 namespace OpenOpusDatabase.Lib.Models
 {
     [Table("Works")]
-    public class Work : IIdentifiable, IEquatable<Work>
+    public class Work : ISqlStorable, IEquatable<Work>
     {
         private int _id;
         private int _composerId;
@@ -78,6 +79,8 @@ namespace OpenOpusDatabase.Lib.Models
             }
         }
 
+        public static string TableName => "Works";
+
         public bool Equals(Work? other)
         {
             return other != null
@@ -86,6 +89,31 @@ namespace OpenOpusDatabase.Lib.Models
                 && _title == other._title
                 && _subtitle == other._subtitle
                 && _genre == other._genre;
+        }
+
+        public List<string> GetSqlValues()
+        {
+            List<object?> values = new()
+            {
+                _id,
+                _composerId,
+                _title,
+                _subtitle,
+                _genre
+            };
+            return values.FormatAsSqlValues();
+        }
+
+        public static List<string> GetColumnNames()
+        {
+            return new List<string>
+            {
+                nameof(Id),
+                nameof(ComposerId),
+                nameof(Title),
+                nameof(Subtitle),
+                nameof(Genre)
+            };
         }
     }
 }

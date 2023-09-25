@@ -19,7 +19,7 @@ namespace OpenOpusDatabase.Tests.Composers
         };
 
         [Fact]
-        public void TestJsonDeserialiseWork()
+        public void TestJsonDeserialiseComposer()
         {
             Composer? actualComposer = JsonGetter.GetFromFile<Composer>(FILE_PATH);
             Assert.NotNull(actualComposer);

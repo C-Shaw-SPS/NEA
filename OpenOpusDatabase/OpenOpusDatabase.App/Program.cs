@@ -1,6 +1,7 @@
 ﻿using OpenOpusDatabase.Lib.APIFetching;
 using OpenOpusDatabase.Lib.Databases;
 using OpenOpusDatabase.Lib.Models;
+using System.Diagnostics;
 
 namespace OpenOpusDatabase.App
 {
@@ -25,9 +26,12 @@ namespace OpenOpusDatabase.App
         static async Task CreateWorkDatabase()
         {
             List<Work> works = WorkGetter.GetFromOpenOpus();
+            Stopwatch stopwatch = Stopwatch.StartNew();
             Database<Work> workDatabase = new(DatabaseProperties.NAME);
             await workDatabase.ClearAsync();
             await workDatabase.InsertAllAsync(works);
+            stopwatch.Stop();
+            Console.WriteLine(stopwatch.Elapsed);
         }
     }
 }

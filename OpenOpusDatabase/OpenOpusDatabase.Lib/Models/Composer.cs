@@ -1,12 +1,14 @@
 ﻿using OpenOpusDatabase.Lib.Converters;
+using OpenOpusDatabase.Lib.Databases;
 using SQLite;
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json.Serialization;
 
 namespace OpenOpusDatabase.Lib.Models
 {
     [Table("Composers")]
-    public class Composer : IEquatable<Composer>, IIdentifiable
+    public class Composer : IEquatable<Composer>, ISqlStorable
     {
         private int _id;
         private string _name = string.Empty;
@@ -110,6 +112,8 @@ namespace OpenOpusDatabase.Lib.Models
             }
         }
 
+        public static string TableName => "Composers";
+
         private static string FormatLink(string value)
         {
             StringBuilder link = new();
@@ -133,6 +137,35 @@ namespace OpenOpusDatabase.Lib.Models
                 && _deathDate == other._deathDate
                 && _era == other._era
                 && _portraitLink == other._portraitLink;
+        }
+
+        public List<string> GetSqlValues()
+        {
+            List<object?> values = new()
+            {
+                _id,
+                _name,
+                _completeName,
+                _birthDate,
+                _deathDate,
+                _era,
+                _portraitLink,
+            };
+            return values.FormatAsSqlValues();
+        }
+
+        public static List<string> GetColumnNames()
+        {
+            return new List<string>
+            {
+                nameof(Id),
+                nameof(Name),
+                nameof(CompleteName),
+                nameof(BirthDate),
+                nameof(DeathDate),
+                nameof(Era),
+                nameof(PortraitLink)
+            };
         }
     }
 }
