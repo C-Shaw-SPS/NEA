@@ -6,7 +6,7 @@ namespace OpenOpusDatabase.Lib.Databases
     {
         private StringBuilder _stringBuilder;
         private string _tableName;
-        private List<string> _columns;
+        private IEnumerable<string> _columns;
         private bool _containsValues;
 
         public InsertCommand()

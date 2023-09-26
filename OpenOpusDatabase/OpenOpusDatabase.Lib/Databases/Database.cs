@@ -1,5 +1,4 @@
 ﻿using SQLite;
-using System.Text;
 
 namespace OpenOpusDatabase.Lib.Databases
 {

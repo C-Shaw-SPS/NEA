@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace OpenOpusDatabase.Lib.Converters
 {
-    public class ComposerIdConverter : JsonConverter<int>
+    internal class ComposerIdConverter : JsonConverter<int>
     {
         public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

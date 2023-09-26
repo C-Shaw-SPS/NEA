@@ -138,7 +138,7 @@ namespace OpenOpusDatabase.Lib.Models
                 && _portraitLink == other._portraitLink;
         }
 
-        public List<string> GetSqlValues()
+        public IEnumerable<string> GetSqlValues()
         {
             List<object?> values = new()
             {
@@ -153,7 +153,7 @@ namespace OpenOpusDatabase.Lib.Models
             return values.FormatAsSqlValues();
         }
 
-        public static List<string> GetColumnNames()
+        public static IEnumerable<string> GetColumnNames()
         {
             return new List<string>
             {

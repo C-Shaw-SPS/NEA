@@ -1,9 +1,10 @@
-﻿using System.Text.Json;
+﻿using System.Runtime.CompilerServices;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace OpenOpusDatabase.Lib.Converters
 {
-    public class DateTimeConverter : JsonConverter<DateTime>
+    internal class DateTimeConverter : JsonConverter<DateTime>
     {
         public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

@@ -24,12 +24,12 @@ namespace OpenOpusDatabase.Lib.Databases
             }
         }
 
-        public static string CommaJoin(this List<string> list)
+        public static string CommaJoin(this IEnumerable<string> list)
         {
             return OPEN_BRACKET + string.Join(COMMA_SEPARATOR, list) + CLOSE_BRACKET;
         }
 
-        public static List<string> FormatAsSqlValues(this List<object?> values)
+        public static List<string> FormatAsSqlValues(this IEnumerable<object?> values)
         {
             List<string> result = new();
             foreach (object? value in values)

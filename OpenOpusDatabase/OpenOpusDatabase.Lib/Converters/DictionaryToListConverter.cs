@@ -1,9 +1,10 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.Runtime.CompilerServices;
 
 namespace OpenOpusDatabase.Lib.Converters
 {
-    public class DictionaryToListConverter<TKey, TValue> : JsonConverter<List<TValue>>
+    internal class DictionaryToListConverter<TKey, TValue> : JsonConverter<List<TValue>>
     {
         public override List<TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
