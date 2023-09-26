@@ -9,10 +9,13 @@ namespace OpenOpusDatabase.App
     {
         static async Task Main(string[] args)
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
             await CreateComposerDatabase();
             Console.WriteLine("Composer database created");
             await CreateWorkDatabase();
             Console.WriteLine("Work database created");
+            stopwatch.Stop();
+            Console.WriteLine(stopwatch.Elapsed);
         }
 
         static async Task CreateComposerDatabase()
@@ -26,12 +29,9 @@ namespace OpenOpusDatabase.App
         static async Task CreateWorkDatabase()
         {
             List<Work> works = WorkGetter.GetFromOpenOpus();
-            Stopwatch stopwatch = Stopwatch.StartNew();
             Database<Work> workDatabase = new(DatabaseProperties.NAME);
             await workDatabase.ClearAsync();
             await workDatabase.InsertAllAsync(works);
-            stopwatch.Stop();
-            Console.WriteLine(stopwatch.Elapsed);
         }
     }
 }
