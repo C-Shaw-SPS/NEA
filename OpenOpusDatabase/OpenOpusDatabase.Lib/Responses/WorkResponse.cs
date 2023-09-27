@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace OpenOpusDatabase.Lib.Responses
 {
-    public class WorkResponse : IResponse<Work>
+    internal class WorkResponse : IResponse<Work>
     {
         private IEnumerable<Work> _data = new List<Work>();
 

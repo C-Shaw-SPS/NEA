@@ -6,7 +6,7 @@ namespace OpenOpusDatabase.Lib.Databases
     {
         public const string NAME = "OpenOpusDatabase.db";
 
-        public const SQLiteOpenFlags FLAGS =
+        internal const SQLiteOpenFlags FLAGS =
             SQLiteOpenFlags.ReadWrite |
             SQLiteOpenFlags.Create |
             SQLiteOpenFlags.SharedCache;

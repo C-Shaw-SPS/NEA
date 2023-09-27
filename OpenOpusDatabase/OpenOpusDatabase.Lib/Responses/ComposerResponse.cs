@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace OpenOpusDatabase.Lib.Responses
 {
-    public class ComposerResponse : IResponse<Composer>
+    internal class ComposerResponse : IResponse<Composer>
     {
         private IEnumerable<Composer> _values;
 

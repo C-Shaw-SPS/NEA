@@ -1,9 +1,11 @@
 ﻿using OpenOpusDatabase.Lib.Responses;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
+[assembly: InternalsVisibleTo("OpenOpusDatabase.Tests")]
 namespace OpenOpusDatabase.Lib.APIFetching
 {
-    public static class JsonGetter
+    internal static class JsonGetter
     {
         public static IEnumerable<T> GetValuesFromResponse<T, TResponse>(string json) where TResponse : IResponse<T>
         {
