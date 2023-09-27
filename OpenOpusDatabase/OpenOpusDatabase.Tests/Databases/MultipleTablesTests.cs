@@ -17,8 +17,8 @@ namespace OpenOpusDatabase.Tests.Databases
             await composerDatabase.InsertAllAsync(Expected.Composers);
             await workDatabase.InsertAllAsync(Expected.Works);
 
-            List<Composer> actualComposers = await composerDatabase.GetAllAsync();
-            List<Work> actualWorks = await workDatabase.GetAllAsync();
+            IEnumerable<Composer> actualComposers = await composerDatabase.GetAllAsync();
+            IEnumerable<Work> actualWorks = await workDatabase.GetAllAsync();
 
             foreach (Composer expectedComposer in Expected.Composers)
             {
@@ -45,8 +45,8 @@ namespace OpenOpusDatabase.Tests.Databases
 
             await composerDatabase.ClearAsync();
 
-            List<Composer> actualComposers = await composerDatabase.GetAllAsync();
-            List<Work> actualWorks = await workDatabase.GetAllAsync();
+            IEnumerable<Composer> actualComposers = await composerDatabase.GetAllAsync();
+            IEnumerable<Work> actualWorks = await workDatabase.GetAllAsync();
 
             Assert.Empty(actualComposers);
 

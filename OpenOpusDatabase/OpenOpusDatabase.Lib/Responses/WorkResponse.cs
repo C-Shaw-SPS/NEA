@@ -6,10 +6,10 @@ namespace OpenOpusDatabase.Lib.Responses
 {
     public class WorkResponse : IResponse<Work>
     {
-        private List<Work> _data = new();
+        private IEnumerable<Work> _data = new List<Work>();
 
-        [JsonPropertyName("works"), JsonConverter(typeof(DictionaryToListConverter<string, Work>))]
-        public List<Work> Values
+        [JsonPropertyName("works"), JsonConverter(typeof(DictionaryToIEnumerableConverter<string, Work>))]
+        public IEnumerable<Work> Values
         {
             get
             {

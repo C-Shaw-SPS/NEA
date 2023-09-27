@@ -5,10 +5,10 @@ namespace OpenOpusDatabase.Lib.Responses
 {
     public class ComposerResponse : IResponse<Composer>
     {
-        private List<Composer> _values;
+        private IEnumerable<Composer> _values;
 
         [JsonPropertyName("composers")]
-        public List<Composer> Values
+        public IEnumerable<Composer> Values
         {
             get
             {

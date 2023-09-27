@@ -50,17 +50,17 @@ namespace OpenOpusDatabase.Lib.Databases
             await _connection.DeleteAsync(value);
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             await InitAsync();
-            List<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {_tableName}");
+            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {_tableName}");
             return result;
         }
 
         public async Task<T> GetAsync(int id)
         {
             await InitAsync();
-            List<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {_tableName} WHERE {nameof(ISqlStorable.Id)} = {id}");
+            IList<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {_tableName} WHERE {nameof(ISqlStorable.Id)} = {id}");
             if (result.Count == 0)
                 throw new Exception($"No row in {_tableName} with {nameof(ISqlStorable.Id)} {id}");
             return result[0];
@@ -78,17 +78,17 @@ namespace OpenOpusDatabase.Lib.Databases
             await _connection.UpdateAsync(value);
         }
 
-        public async Task<List<int>> GetIdsAsync()
+        public async Task<IEnumerable<int>> GetIdsAsync()
         {
             await InitAsync();
-            List<T> result = await _connection.QueryAsync<T>($"SELECT {nameof(ISqlStorable.Id)} FROM {_tableName}");
-            return result.Select(c => c.Id).ToList();
+            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT {nameof(ISqlStorable.Id)} FROM {_tableName}");
+            return result.Select(c => c.Id);
         }
 
         public async Task<int> GetNextIdAsync()
         {
             await InitAsync();
-            List<T> result = await _connection.QueryAsync<T>($"SELECT Max({nameof(ISqlStorable.Id)}) AS {nameof(ISqlStorable.Id)} FROM {_tableName}");
+            IList<T> result = await _connection.QueryAsync<T>($"SELECT Max({nameof(ISqlStorable.Id)}) AS {nameof(ISqlStorable.Id)} FROM {_tableName}");
             if (result.Count > 0)
             {
                 return result[0].Id + 1;

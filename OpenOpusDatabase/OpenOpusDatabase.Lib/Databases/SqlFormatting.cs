@@ -29,7 +29,7 @@ namespace OpenOpusDatabase.Lib.Databases
             return OPEN_BRACKET + string.Join(COMMA_SEPARATOR, list) + CLOSE_BRACKET;
         }
 
-        public static List<string> FormatAsSqlValues(this IEnumerable<object?> values)
+        public static IEnumerable<string> FormatAsSqlValues(this IEnumerable<object?> values)
         {
             List<string> result = new();
             foreach (object? value in values)

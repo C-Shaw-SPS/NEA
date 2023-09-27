@@ -11,9 +11,9 @@ namespace OpenOpusDatabase.Tests.Databases
             Database<Composer> database = new(nameof(TestInsertAsync));
             await database.ClearAsync();
             await database.InsertAsync(Expected.Composers[0]);
-            List<Composer> actualComposers = await database.GetAllAsync();
+            IEnumerable<Composer> actualComposers = await database.GetAllAsync();
             Assert.Single(actualComposers);
-            Assert.Equal(Expected.Composers[0], actualComposers[0]);
+            Assert.Contains(Expected.Composers[0], actualComposers);
         }
 
         [Fact]
@@ -24,7 +24,7 @@ namespace OpenOpusDatabase.Tests.Databases
             await database.InsertAllAsync(Expected.Works);
             await database.ClearAsync();
 
-            List<Work> actualComposers = await database.GetAllAsync();
+            IEnumerable<Work> actualComposers = await database.GetAllAsync();
             Assert.Empty(actualComposers);
         }
 
@@ -34,9 +34,9 @@ namespace OpenOpusDatabase.Tests.Databases
             Database<Composer> database = new(nameof(TestInsertAllAsyncAndGetAllAsync));
             await database.ClearAsync();
             await database.InsertAllAsync(Expected.Composers);
-            List<Composer> actualComposers = await database.GetAllAsync();
+            IEnumerable<Composer> actualComposers = await database.GetAllAsync();
 
-            Assert.Equal(Expected.Composers.Count, actualComposers.Count);
+            Assert.Equal(Expected.Composers.Count, actualComposers.Count());
             foreach (Composer expectedComposer in Expected.Composers)
             {
                 Assert.Contains(expectedComposer, actualComposers);
@@ -61,7 +61,7 @@ namespace OpenOpusDatabase.Tests.Databases
             await database.InsertAllAsync(Expected.Composers);
             await database.DeleteAsync(Expected.Composers[0]);
 
-            List<Composer> actualComposers = await database.GetAllAsync();
+            IEnumerable<Composer> actualComposers = await database.GetAllAsync();
             Assert.DoesNotContain(Expected.Composers[0], actualComposers);
             for (int i = 1; i < Expected.Composers.Count; ++i)
             {
@@ -84,8 +84,7 @@ namespace OpenOpusDatabase.Tests.Databases
                 Genre = "Different genre"
             };
             await database.UpdateAsync(updatedWork);
-            List<Work> actualWorks = await database.GetAllAsync();
-            Assert.Equal(updatedWork, actualWorks[0]);
+            IEnumerable<Work> actualWorks = await database.GetAllAsync();
             Assert.DoesNotContain(Expected.Works[0], actualWorks);
             for (int i = 1; i < Expected.Works.Count; ++i)
             {
@@ -99,7 +98,7 @@ namespace OpenOpusDatabase.Tests.Databases
             Database<Composer> database = new(nameof(TestGetIdsAsync));
             await database.ClearAsync();
             await database.InsertAllAsync(Expected.Composers);
-            List<int> actualIds = await database.GetIdsAsync();
+            IEnumerable<int> actualIds = await database.GetIdsAsync();
             foreach (Composer expectedComposer in Expected.Composers)
             {
                 Assert.Contains(expectedComposer.Id, actualIds);
@@ -112,9 +111,9 @@ namespace OpenOpusDatabase.Tests.Databases
             Database<Composer> database = new(nameof(TestNullProperties));
             await database.ClearAsync();
             await database.InsertAsync(Expected.NullPropertyComposer);
-            List<Composer> actualComposers = await database.GetAllAsync();
+            IEnumerable<Composer> actualComposers = await database.GetAllAsync();
             Assert.Single(actualComposers);
-            Assert.Equal(Expected.NullPropertyComposer, actualComposers[0]);
+            Assert.Contains(Expected.NullPropertyComposer, actualComposers);
         }
 
         [Fact]

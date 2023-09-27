@@ -2,6 +2,6 @@
 {
     public interface IResponse<T>
     {
-        public List<T> Values { get; set; }
+        public IEnumerable<T> Values { get; set; }
     }
 }

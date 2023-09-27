@@ -10,9 +10,9 @@ namespace OpenOpusDatabase.Tests.Composers
         [Fact]
         public void TestGetFromFile()
         {
-            List<Composer> actualComposers = ComposerGetter.GetFromFile(FILE_PATH);
+            IEnumerable<Composer> actualComposers = ComposerGetter.GetFromFile(FILE_PATH);
 
-            Assert.Equal(Expected.Composers.Count, actualComposers.Count);
+            Assert.Equal(Expected.Composers.Count, actualComposers.Count());
 
             foreach (Composer expectedComposer in Expected.Composers)
             {

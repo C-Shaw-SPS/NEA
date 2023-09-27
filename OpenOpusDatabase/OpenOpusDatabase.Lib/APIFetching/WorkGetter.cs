@@ -7,12 +7,12 @@ namespace OpenOpusDatabase.Lib.APIFetching
     {
         private const string _URL = "https://api.openopus.org/work/list/ids/.json";
 
-        public static List<Work> GetFromOpenOpus()
+        public static IEnumerable<Work> GetFromOpenOpus()
         {
             return JsonGetter.GetFromUrl<Work, WorkResponse>(_URL);
         }
 
-        public static List<Work> GetFromFile(string filePath)
+        public static IEnumerable<Work> GetFromFile(string filePath)
         {
             return JsonGetter.GetFromFile<Work, WorkResponse>(filePath);
         }

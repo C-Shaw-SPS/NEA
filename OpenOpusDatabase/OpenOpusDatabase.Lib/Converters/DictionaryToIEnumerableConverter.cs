@@ -1,12 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json;
-using System.Runtime.CompilerServices;
 
 namespace OpenOpusDatabase.Lib.Converters
 {
-    internal class DictionaryToListConverter<TKey, TValue> : JsonConverter<List<TValue>>
+    internal class DictionaryToIEnumerableConverter<TKey, TValue> : JsonConverter<IEnumerable<TValue>>
     {
-        public override List<TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override IEnumerable<TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
@@ -42,7 +41,7 @@ namespace OpenOpusDatabase.Lib.Converters
             throw new JsonException();
         }
 
-        public override void Write(Utf8JsonWriter writer, List<TValue> value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, IEnumerable<TValue> value, JsonSerializerOptions options)
         {
             throw new NotImplementedException();
         }
