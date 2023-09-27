@@ -5,7 +5,7 @@ namespace OpenOpusDatabase.Lib.Responses
 {
     internal class ComposerResponse : IResponse<Composer>
     {
-        private IEnumerable<Composer> _values;
+        private IEnumerable<Composer> _values = new List<Composer>();
 
         [JsonPropertyName("composers")]
         public IEnumerable<Composer> Values
