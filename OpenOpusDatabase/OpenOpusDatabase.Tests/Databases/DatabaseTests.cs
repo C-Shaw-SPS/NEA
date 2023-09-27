@@ -116,5 +116,15 @@ namespace OpenOpusDatabase.Tests.Databases
             Assert.Single(actualComposers);
             Assert.Equal(Expected.NullPropertyComposer, actualComposers[0]);
         }
+
+        [Fact]
+        public async Task TestGetNextIdAsync()
+        {
+            Database<Work> database = new(nameof(TestGetNextIdAsync));
+            await database.ClearAsync();
+            await database.InsertAllAsync(Expected.Works);
+            int nextId = await database.GetNextIdAsync();
+            Assert.Equal(Expected.Works.Max(w => w.Id) + 1, nextId);
+        }
     }
 }
