@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using Microsoft.Data.Sqlite;
 
 namespace OpenOpusDatabase.Lib.Databases
 {
@@ -32,7 +33,7 @@ namespace OpenOpusDatabase.Lib.Databases
             await _connection.ExecuteAsync(command);
         }
 
-        public async Task InsertAllAsync(List<T> values)
+        public async Task InsertAllAsync(IEnumerable<T> values)
         {
             await InitAsync();
             InsertCommand<T> insertCommand = new();
@@ -82,6 +83,20 @@ namespace OpenOpusDatabase.Lib.Databases
             await InitAsync();
             List<T> result = await _connection.QueryAsync<T>($"SELECT {nameof(ISqlStorable.Id)} FROM {_tableName}");
             return result.Select(c => c.Id).ToList();
+        }
+
+        public async Task<int> GetNextIdAsync()
+        {
+            await InitAsync();
+            List<T> result = await _connection.QueryAsync<T>($"SELECT Max({nameof(ISqlStorable.Id)}) AS {nameof(ISqlStorable.Id)} FROM {_tableName}");
+            if (result.Count > 0)
+            {
+                return result[0].Id + 1;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }
