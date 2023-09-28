@@ -27,8 +27,9 @@ namespace OpenOpusDatabase.Lib.Databases
         public async Task InsertAsync(T value)
         {
             await InitAsync();
-            string command = $"INSERT INTO {T.TableName} {T.GetColumnNames().CommaJoin()} VALUES {value.GetSqlValues().CommaJoin()}";
-            await _connection.ExecuteAsync(command);
+            InsertCommand<T> insertCommand = new();
+            insertCommand.AddValue(value);
+            await _connection.ExecuteAsync(insertCommand.ToString());
         }
 
         public async Task InsertAllAsync(IEnumerable<T> values)
