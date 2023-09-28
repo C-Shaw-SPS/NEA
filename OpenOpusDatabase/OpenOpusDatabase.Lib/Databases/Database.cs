@@ -7,12 +7,10 @@ namespace OpenOpusDatabase.Lib.Databases
     {
         private SQLiteAsyncConnection _connection;
         private readonly string _path;
-        private readonly string _tableName;
 
         public Database(string path)
         {
             _path = path.FormatAsDatabasePath();
-            _tableName = TableNames.Get<T>();
         }
 
         protected async Task InitAsync()
@@ -29,7 +27,7 @@ namespace OpenOpusDatabase.Lib.Databases
         public async Task InsertAsync(T value)
         {
             await InitAsync();
-            string command = $"INSERT INTO {_tableName} {T.GetColumnNames().CommaJoin()} VALUES {value.GetSqlValues().CommaJoin()}";
+            string command = $"INSERT INTO {T.TableName} {T.GetColumnNames().CommaJoin()} VALUES {value.GetSqlValues().CommaJoin()}";
             await _connection.ExecuteAsync(command);
         }
 
@@ -53,16 +51,16 @@ namespace OpenOpusDatabase.Lib.Databases
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             await InitAsync();
-            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {_tableName}");
+            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {T.TableName}");
             return result;
         }
 
         public async Task<T> GetAsync(int id)
         {
             await InitAsync();
-            IList<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {_tableName} WHERE {nameof(ISqlStorable.Id)} = {id}");
+            IList<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {T.TableName} WHERE {nameof(ISqlStorable.Id)} = {id}");
             if (result.Count == 0)
-                throw new Exception($"No row in {_tableName} with {nameof(ISqlStorable.Id)} {id}");
+                throw new Exception($"No row in {T.TableName} with {nameof(ISqlStorable.Id)} {id}");
             return result[0];
         }
 
@@ -81,14 +79,14 @@ namespace OpenOpusDatabase.Lib.Databases
         public async Task<IEnumerable<int>> GetIdsAsync()
         {
             await InitAsync();
-            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT {nameof(ISqlStorable.Id)} FROM {_tableName}");
+            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT {nameof(ISqlStorable.Id)} FROM {T.TableName}");
             return result.Select(c => c.Id);
         }
 
         public async Task<int> GetNextIdAsync()
         {
             await InitAsync();
-            IList<T> result = await _connection.QueryAsync<T>($"SELECT Max({nameof(ISqlStorable.Id)}) AS {nameof(ISqlStorable.Id)} FROM {_tableName}");
+            IList<T> result = await _connection.QueryAsync<T>($"SELECT Max({nameof(ISqlStorable.Id)}) AS {nameof(ISqlStorable.Id)} FROM {T.TableName}");
             if (result.Count > 0)
             {
                 return result[0].Id + 1;

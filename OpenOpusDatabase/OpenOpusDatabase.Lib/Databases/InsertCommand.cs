@@ -5,14 +5,12 @@ namespace OpenOpusDatabase.Lib.Databases
     internal class InsertCommand<T> where T : ISqlStorable, new()
     {
         private StringBuilder _stringBuilder;
-        private string _tableName;
         private IEnumerable<string> _columns;
         private bool _containsValues;
 
         public InsertCommand()
         {
             _stringBuilder = new();
-            _tableName = TableNames.Get<T>();
             _columns = T.GetColumnNames();
             _containsValues = false;
             AddInsertLine();
@@ -20,7 +18,7 @@ namespace OpenOpusDatabase.Lib.Databases
 
         private void AddInsertLine()
         {
-            _stringBuilder.AppendLine($"INSERT INTO {_tableName} {_columns.CommaJoin()} VALUES");
+            _stringBuilder.AppendLine($"INSERT INTO {T.TableName} {_columns.CommaJoin()} VALUES");
         }
 
         public void AddValue(T value)

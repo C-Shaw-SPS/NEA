@@ -5,9 +5,10 @@ using System.Text.Json.Serialization;
 
 namespace OpenOpusDatabase.Lib.Models
 {
-    [Table("Works")]
+    [Table(_TABLE_NAME)]
     public class Work : ISqlStorable, IEquatable<Work>
     {
+        private const string _TABLE_NAME = "Works";
         private int _id;
         private int _composerId;
         private string _title = string.Empty;
@@ -79,7 +80,7 @@ namespace OpenOpusDatabase.Lib.Models
             }
         }
 
-        public static string TableName => "Works";
+        public static string TableName => _TABLE_NAME;
 
         public bool Equals(Work? other)
         {

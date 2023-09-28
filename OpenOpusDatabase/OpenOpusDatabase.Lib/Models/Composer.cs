@@ -6,9 +6,10 @@ using System.Text.Json.Serialization;
 
 namespace OpenOpusDatabase.Lib.Models
 {
-    [Table("Composers")]
+    [Table(_TABLE_NAME)]
     public class Composer : IEquatable<Composer>, ISqlStorable
     {
+        private const string _TABLE_NAME = "Composers";
         private int _id;
         private string _name = string.Empty;
         private string _completeName = string.Empty;
@@ -111,7 +112,7 @@ namespace OpenOpusDatabase.Lib.Models
             }
         }
 
-        public static string TableName => "Composers";
+        public static string TableName => _TABLE_NAME;
 
         private static string FormatLink(string value)
         {
