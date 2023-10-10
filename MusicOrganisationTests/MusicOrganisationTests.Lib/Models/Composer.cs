@@ -10,6 +10,7 @@ namespace MusicOrganisationTests.Lib.Models
     public class Composer : IEquatable<Composer>, ISqlStorable
     {
         private const string _TABLE_NAME = "Composers";
+
         private int _id;
         private string _name = string.Empty;
         private string _completeName = string.Empty;
