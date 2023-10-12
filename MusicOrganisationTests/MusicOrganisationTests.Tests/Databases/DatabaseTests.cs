@@ -125,5 +125,19 @@ namespace MusicOrganisationTests.Tests.Databases
             int nextId = await database.GetNextIdAsync();
             Assert.Equal(Expected.Works.Max(w => w.Id) + 1, nextId);
         }
+
+        [Fact]
+        public async Task TestAddPupils()
+        {
+            Database<Pupil> database = new(nameof(TestAddPupils));
+            await database.ClearAsync();
+            await database.InsertAllAsync(Expected.Pupils);
+            IEnumerable<Pupil> actualPupils = await database.GetAllAsync();
+            Assert.Equal(Expected.Pupils.Count, actualPupils.Count());
+            foreach (Pupil expectedPupil in Expected.Pupils)
+            {
+                Assert.Contains(expectedPupil, actualPupils);
+            }
+        }
     }
 }
