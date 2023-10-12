@@ -142,17 +142,14 @@ namespace MusicOrganisationTests.Lib.Models
 
         public IEnumerable<string> GetSqlValues()
         {
-            List<object?> values = new()
-            {
+            return SqlFormatting.FormatAsSqlValues(
                 _id,
                 _name,
                 _completeName,
                 _birthDate,
                 _deathDate,
                 _era,
-                _portraitLink,
-            };
-            return values.FormatAsSqlValues();
+                _portraitLink);
         }
 
         public static IEnumerable<string> GetColumnNames()

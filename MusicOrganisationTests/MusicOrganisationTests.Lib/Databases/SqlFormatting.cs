@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using MusicOrganisationTests.Lib.Timetabling;
+using System.Text;
 
 namespace MusicOrganisationTests.Lib.Databases
 {
@@ -29,7 +30,7 @@ namespace MusicOrganisationTests.Lib.Databases
             return OPEN_BRACKET + string.Join(COMMA_SEPARATOR, list) + CLOSE_BRACKET;
         }
 
-        public static IEnumerable<string> FormatAsSqlValues(this IEnumerable<object?> values)
+        public static IEnumerable<string> FormatAsSqlValues(params object?[] values)
         {
             List<string> result = new();
             foreach (object? value in values)
@@ -45,6 +46,14 @@ namespace MusicOrganisationTests.Lib.Databases
                 else if (value is DateTime dateTime)
                 {
                     result.Add(dateTime.FormatSqlDateTime());
+                }
+                else if (value is TimeSpan timeSpan)
+                {
+                    result.Add(timeSpan.FormatSqlTimeSpan());
+                }
+                else if (value is Day day)
+                {
+                    result.Add(day.FormatSqlDay());
                 }
                 else
                 {
@@ -79,6 +88,16 @@ namespace MusicOrganisationTests.Lib.Databases
         private static string FormatSqlDateTime(this DateTime dateTime)
         {
             return dateTime.Ticks.ToString();
+        }
+
+        private static string FormatSqlTimeSpan(this TimeSpan timeSpan)
+        {
+            return timeSpan.Ticks.ToString();
+        }
+
+        private static string FormatSqlDay(this Day day)
+        {
+            return ((int)day).ToString();
         }
     }
 }

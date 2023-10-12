@@ -94,15 +94,12 @@ namespace MusicOrganisationTests.Lib.Models
 
         public IEnumerable<string> GetSqlValues()
         {
-            List<object?> values = new()
-            {
+            return SqlFormatting.FormatAsSqlValues(
                 _id,
                 _composerId,
                 _title,
                 _subtitle,
-                _genre
-            };
-            return values.FormatAsSqlValues();
+                _genre);
         }
 
         public static IEnumerable<string> GetColumnNames()
