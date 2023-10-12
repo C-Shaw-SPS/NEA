@@ -1,4 +1,5 @@
 ﻿using MusicOrganisationTests.Lib.Models;
+using MusicOrganisationTests.Lib.Timetabling;
 
 namespace MusicOrganisationTests.Tests
 {
@@ -14,7 +15,6 @@ namespace MusicOrganisationTests.Tests
             Era = "21st Century",
             PortraitLink = null
         };
-
 
         public static readonly List<Composer> Composers = new()
         {
@@ -78,6 +78,31 @@ namespace MusicOrganisationTests.Tests
                 Title = "3 Mouvements perp\u00e9tuels, FP14",
                 Subtitle = "",
                 Genre = "Keyboard"
+            }
+        };
+
+        public static readonly List<Pupil> Pupils = new()
+        {
+            new Pupil
+            {
+                Id = 0,
+                Name = "Pupil 0",
+                Level = "Grade 1",
+                LessonDuration = TimeSpan.FromMinutes(30),
+                LessonDay = Day.Monday,
+                DifferentTimes = true,
+                PhoneNumber = "0123456789",
+                Email = "testemail@gmail.com"
+            },
+            new Pupil
+            {
+                Id = 1,
+                Name = "Pupil 1",
+                Level = "Grade 8",
+                LessonDuration = TimeSpan.FromHours(2),
+                LessonDay = Day.Tuesday | Day.Wednesday | Day.Friday,
+                PhoneNumber = null,
+                Email = null
             }
         };
     }
