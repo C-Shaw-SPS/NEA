@@ -1,5 +1,5 @@
-﻿using MusicOrganisationTests.Lib.Models;
-using MusicOrganisationTests.Lib.Timetabling;
+﻿using MusicOrganisationTests.Lib.Enums;
+using MusicOrganisationTests.Lib.Models;
 
 namespace MusicOrganisationTests.Tests
 {
