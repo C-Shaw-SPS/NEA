@@ -1,5 +1,5 @@
 ﻿using MusicOrganisationTests.Lib.Databases;
-using MusicOrganisationTests.Lib.Timetabling;
+using MusicOrganisationTests.Lib.Enums;
 using SQLite;
 
 namespace MusicOrganisationTests.Lib.Models
