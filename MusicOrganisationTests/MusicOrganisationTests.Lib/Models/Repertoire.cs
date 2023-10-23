@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace MusicOrganisationTests.Lib.Models
 {
     [Table(_TABLE_NAME)]
-    public class Repetoire : ISqlStorable, IEquatable<Repetoire>
+    public class Repertoire : ISqlStorable, IEquatable<Repertoire>
     {
-        private const string _TABLE_NAME = "Repetoire";
+        private const string _TABLE_NAME = "Repertoire";
 
         private int _id;
         private int _pupilId;
@@ -120,9 +120,15 @@ namespace MusicOrganisationTests.Lib.Models
                 _status);
         }
 
-        public bool Equals(Repetoire? other)
+        public bool Equals(Repertoire? other)
         {
-            throw new NotImplementedException();
+            return other != null
+                && _id == other._id
+                && _pupilId == other._pupilId
+                && _workId == other._workId
+                && _dateStarted == other._dateStarted
+                && _syllabus == other._syllabus
+                && _status == other._status;
         }
     }
 }
