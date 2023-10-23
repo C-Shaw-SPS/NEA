@@ -13,7 +13,7 @@ namespace MusicOrganisationTests.Tests.Models
         [Fact]
         public async Task TestRepertoireSql()
         {
-            Table<Repertoire> table = new(nameof(TestRepertoireSql));
+            TableConnection<Repertoire> table = new(nameof(TestRepertoireSql));
             await table.ClearAsync();
             await table.InsertAllAsync(Expected.Repertoires);
             IEnumerable<Repertoire> actualRepertoires = await table.GetAllAsync();

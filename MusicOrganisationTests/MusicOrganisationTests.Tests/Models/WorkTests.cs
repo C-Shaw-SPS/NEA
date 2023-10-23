@@ -42,7 +42,7 @@ namespace MusicOrganisationTests.Tests.Models
         [Fact]
         public async Task TestWorkSql()
         {
-            Table<Work> table = new(nameof(TestWorkSql));
+            TableConnection<Work> table = new(nameof(TestWorkSql));
             await table.ClearAsync();
             await table.InsertAllAsync(Expected.Works);
             IEnumerable<Work> actualWorks = await table.GetAllAsync();

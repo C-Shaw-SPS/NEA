@@ -8,8 +8,8 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async void TestAddComposersAndWorks()
         {
-            Table<Composer> composerDatabase = new(nameof(TestAddComposersAndWorks));
-            Table<Work> workDatabase = new(nameof(TestAddComposersAndWorks));
+            TableConnection<Composer> composerDatabase = new(nameof(TestAddComposersAndWorks));
+            TableConnection<Work> workDatabase = new(nameof(TestAddComposersAndWorks));
 
             await composerDatabase.ClearAsync();
             await workDatabase.ClearAsync();
@@ -34,8 +34,8 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async void TestClearOneTable()
         {
-            Table<Composer> composerDatabase = new(nameof(TestClearOneTable));
-            Table<Work> workDatabase = new(nameof(TestClearOneTable));
+            TableConnection<Composer> composerDatabase = new(nameof(TestClearOneTable));
+            TableConnection<Work> workDatabase = new(nameof(TestClearOneTable));
 
             await composerDatabase.ClearAsync();
             await workDatabase.ClearAsync();

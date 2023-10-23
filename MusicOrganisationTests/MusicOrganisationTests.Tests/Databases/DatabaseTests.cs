@@ -8,7 +8,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestInsertAsync()
         {
-            Table<Composer> table = new(nameof(TestInsertAsync));
+            TableConnection<Composer> table = new(nameof(TestInsertAsync));
             await table.ClearAsync();
             await table.InsertAsync(Expected.Composers[0]);
             IEnumerable<Composer> actualComposers = await table.GetAllAsync();
@@ -19,7 +19,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestClearAsync()
         {
-            Table<Work> table = new(nameof(TestClearAsync));
+            TableConnection<Work> table = new(nameof(TestClearAsync));
             await table.ClearAsync();
             await table.InsertAllAsync(Expected.Works);
             await table.ClearAsync();
@@ -31,7 +31,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestInsertAllAsyncAndGetAllAsync()
         {
-            Table<Composer> table = new(nameof(TestInsertAllAsyncAndGetAllAsync));
+            TableConnection<Composer> table = new(nameof(TestInsertAllAsyncAndGetAllAsync));
             await table.ClearAsync();
             await table.InsertAllAsync(Expected.Composers);
             IEnumerable<Composer> actualComposers = await table.GetAllAsync();
@@ -46,7 +46,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestGetAsnyc()
         {
-            Table<Work> table = new(nameof(TestGetAsnyc));
+            TableConnection<Work> table = new(nameof(TestGetAsnyc));
             await table.ClearAsync();
             await table.InsertAllAsync(Expected.Works);
             Work actualWork = await table.GetAsync(Expected.Works[0].Id);
@@ -56,7 +56,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestDeleteAsync()
         {
-            Table<Composer> table = new(nameof(TestDeleteAsync));
+            TableConnection<Composer> table = new(nameof(TestDeleteAsync));
             await table.ClearAsync();
             await table.InsertAllAsync(Expected.Composers);
             await table.DeleteAsync(Expected.Composers[0]);
@@ -72,7 +72,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestUpdateAsync()
         {
-            Table<Work> table = new(nameof(TestUpdateAsync));
+            TableConnection<Work> table = new(nameof(TestUpdateAsync));
             await table.ClearAsync();
             await table.InsertAllAsync(Expected.Works);
             Work updatedWork = new()
@@ -95,7 +95,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestGetIdsAsync()
         {
-            Table<Composer> table = new(nameof(TestGetIdsAsync));
+            TableConnection<Composer> table = new(nameof(TestGetIdsAsync));
             await table.ClearAsync();
             await table.InsertAllAsync(Expected.Composers);
             IEnumerable<int> actualIds = await table.GetIdsAsync();
@@ -108,7 +108,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestNullProperties()
         {
-            Table<Composer> table = new(nameof(TestNullProperties));
+            TableConnection<Composer> table = new(nameof(TestNullProperties));
             await table.ClearAsync();
             await table.InsertAsync(Expected.NullPropertyComposer);
             IEnumerable<Composer> actualComposers = await table.GetAllAsync();
@@ -119,7 +119,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestGetNextIdAsync()
         {
-            Table<Work> table = new(nameof(TestGetNextIdAsync));
+            TableConnection<Work> table = new(nameof(TestGetNextIdAsync));
             await table.ClearAsync();
             await table.InsertAllAsync(Expected.Works);
             int nextId = await table.GetNextIdAsync();
@@ -129,7 +129,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestAddPupils()
         {
-            Table<Pupil> table = new(nameof(TestAddPupils));
+            TableConnection<Pupil> table = new(nameof(TestAddPupils));
             await table.ClearAsync();
             await table.InsertAllAsync(Expected.Pupils);
             IEnumerable<Pupil> actualPupils = await table.GetAllAsync();

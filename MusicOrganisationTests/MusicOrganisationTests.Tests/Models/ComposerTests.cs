@@ -31,7 +31,7 @@ namespace MusicOrganisationTests.Tests.Models
         [Fact]
         public async Task TestComposerSql()
         {
-            Table<Composer> table = new(nameof(TestComposerSql));
+            TableConnection<Composer> table = new(nameof(TestComposerSql));
             await table.ClearAsync();
             await table.InsertAllAsync(Expected.Composers);
             IEnumerable<Composer> actualComposers = await table.GetAllAsync();
