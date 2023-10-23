@@ -46,17 +46,31 @@ namespace MusicOrganisationTests.Lib.Models
 
         public static IEnumerable<string> GetColumnNames()
         {
-            throw new NotImplementedException();
-        }
-
-        public bool Equals(CareGiver? other)
-        {
-            throw new NotImplementedException();
+            return new List<string>()
+            {
+                nameof(Id),
+                nameof(Name),
+                nameof(Email),
+                nameof(PhoneNumber)
+            };
         }
 
         public IEnumerable<string> GetSqlValues()
         {
-            throw new NotImplementedException();
+            return SqlFormatting.FormatAsSqlValues(
+                _id,
+                _name,
+                _email,
+                _phoneNumber);
+        }
+
+        public bool Equals(CareGiver? other)
+        {
+            return other != null
+                && _id == other._id
+                && _name == other._name
+                && _email == other._email
+                && _phoneNumber == other._phoneNumber;
         }
     }
 }
