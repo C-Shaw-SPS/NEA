@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicOrganisationTests.Lib.Timetabling
+namespace MusicOrganisationTests.Lib.Enums
 {
     public enum Day
     {
