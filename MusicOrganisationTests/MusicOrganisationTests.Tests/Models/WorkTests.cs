@@ -1,11 +1,13 @@
 ﻿using MusicOrganisationTests.Lib.APIFetching;
+using MusicOrganisationTests.Lib.Databases;
 using MusicOrganisationTests.Lib.Models;
 
 namespace MusicOrganisationTests.Tests.Models
 {
     public class WorkTests
     {
-        const string FILE_PATH = "Models/work.json";
+        const string WORK_PATH = "Models/work.json";
+        const string RESPONSE_PATH = "Models/workResponse.json";
 
         readonly Work expectedWork = new()
         {
@@ -19,9 +21,37 @@ namespace MusicOrganisationTests.Tests.Models
         [Fact]
         public void TestJsonDeserialiseWork()
         {
-            Work? actualWork = JsonGetter.GetFromFile<Work>(FILE_PATH);
+            Work? actualWork = JsonGetter.GetFromFile<Work>(WORK_PATH);
             Assert.NotNull(actualWork);
             Assert.Equal(expectedWork, actualWork);
+        }
+
+        [Fact]
+        public void TestWorkResponse()
+        {
+            IEnumerable<Work> actualWorks = WorkGetter.GetFromFile(RESPONSE_PATH);
+
+            Assert.Equal(Expected.Works.Count, actualWorks.Count());
+
+            foreach (Work expectedWork in Expected.Works)
+            {
+                Assert.Contains(expectedWork, actualWorks);
+            }
+        }
+
+        [Fact]
+        public async Task TestWorkSql()
+        {
+            Database<Work> database = new(nameof(TestWorkSql));
+            await database.ClearAsync();
+            await database.InsertAllAsync(Expected.Works);
+            IEnumerable<Work> actualWorks = await database.GetAllAsync();
+
+            Assert.Equal(Expected.Works.Count, actualWorks.Count());
+            foreach (Work expectedWork in Expected.Works)
+            {
+                Assert.Contains(expectedWork, actualWorks);
+            }
         }
     }
 }
