@@ -1,4 +1,4 @@
-﻿using MusicOrganisationTests.Lib.Timetabling;
+﻿using MusicOrganisationTests.Lib.Enums;
 using System.Text;
 
 namespace MusicOrganisationTests.Lib.Databases
