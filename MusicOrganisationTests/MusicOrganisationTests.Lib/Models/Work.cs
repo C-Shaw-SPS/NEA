@@ -18,66 +18,36 @@ namespace MusicOrganisationTests.Lib.Models
         [PrimaryKey, JsonPropertyName("id"), JsonConverter(typeof(StringToIntConverter))]
         public int Id
         {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
+            get => _id;
+            set => _id = value;
         }
 
         [JsonPropertyName("composer"), JsonConverter(typeof(ComposerIdConverter))]
         public int ComposerId
         {
-            get
-            {
-                return _composerId;
-            }
-            set
-            {
-                _composerId = value;
-            }
+            get => _composerId;
+            set => _composerId = value;
         }
 
         [JsonPropertyName("title")]
         public string Title
         {
-            get
-            {
-                return _title;
-            }
-            set
-            {
-                _title = value;
-            }
+            get => _title;
+            set => _title = value;
         }
 
         [JsonPropertyName("subtitle")]
         public string Subtitle
         {
-            get
-            {
-                return _subtitle;
-            }
-            set
-            {
-                _subtitle = value;
-            }
+            get => _subtitle;
+            set => _subtitle = value;
         }
 
         [JsonPropertyName("genre")]
         public string Genre
         {
-            get
-            {
-                return _genre;
-            }
-            set
-            {
-                _genre = value;
-            }
+            get => _genre;
+            set => _genre = value;
         }
 
         public static string TableName => _TABLE_NAME;

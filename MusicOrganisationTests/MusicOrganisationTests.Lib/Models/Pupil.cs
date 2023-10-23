@@ -22,98 +22,50 @@ namespace MusicOrganisationTests.Lib.Models
 
         public int Id
         {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
+            get => _id;
+            set => _id = value;
         }
 
         public string Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
+            get => _name;
+            set => _name = value;
         }
 
         public string Level
         {
-            get
-            {
-                return _level;
-            }
-            set
-            {
-                _level = value;
-            }
+            get => _level;
+            set => _level = value;
         }
 
         public TimeSpan LessonDuration
         {
-            get
-            {
-                return _lessonDuration;
-            }
-            set
-            {
-                _lessonDuration = value;
-            }
+            get => _lessonDuration;
+            set => _lessonDuration = value;
         }
 
         public Day LessonDay
         {
-            get
-            {
-                return _lessonDay;
-            }
-            set
-            {
-                _lessonDay = value;
-            }
+            get => _lessonDay;
+            set => _lessonDay = value;
         }
 
         public bool DifferentTimes
         {
-            get
-            {
-                return _differentTimes;
-            }
-            set
-            {
-                _differentTimes = value;
-            }
+            get => _differentTimes;
+            set => _differentTimes = value;
         }
 
         public string? Email
         {
-            get
-            {
-                return _email;
-            }
-            set
-            {
-                _email = value;
-            }
+            get => _email;
+            set => _email = value;
         }
 
         public string? PhoneNumber
         {
-            get
-            {
-                return _phoneNumber;
-            }
-            set
-            {
-                _phoneNumber = value;
-            }
+            get => _phoneNumber;
+            set => _phoneNumber = value;
         }
 
         public bool Equals(Pupil? other)

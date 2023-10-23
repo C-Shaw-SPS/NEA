@@ -26,74 +26,38 @@ namespace MusicOrganisationTests.Lib.Models
         [PrimaryKey]
         public int Id
         {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
+            get => _id;
+            set => _id = value;
         }
 
         public int PupilId
         {
-            get
-            {
-                return _pupilId;
-            }
-            set
-            {
-                _pupilId = value;
-            }
+            get => _pupilId;
+            set => _pupilId = value;
         }
 
         public int WorkId
         {
-            get
-            {
-                return _workId;
-            }
-            set
-            {
-                _workId = value;
-            }
+            get => _workId;
+            set => _workId = value;
         }
 
         public DateTime DateStarted
         {
-            get
-            {
-                return _dateStarted;
-            }
-            set
-            {
-                _dateStarted = value;
-            }
+            get => _dateStarted;
+            set => _dateStarted = value;
         }
 
         public string Syllabus
         {
-            get
-            {
-                return _syllabus;
-            }
-            set
-            {
-                _syllabus = value;
-            }
+            get => _syllabus;
+            set => _syllabus = value;
         }
 
         public RepertoireStatus Status
         {
-            get
-            {
-                return _status;
-            }
-            set
-            {
-                _status = value;
-            }
+            get => _status;
+            set => _status = value;
         }
 
         public static IEnumerable<string> GetColumnNames()
