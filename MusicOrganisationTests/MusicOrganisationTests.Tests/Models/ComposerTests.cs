@@ -31,10 +31,10 @@ namespace MusicOrganisationTests.Tests.Models
         [Fact]
         public async Task TestComposerSql()
         {
-            Database<Composer> database = new(nameof(TestComposerSql));
-            await database.ClearAsync();
-            await database.InsertAllAsync(Expected.Composers);
-            IEnumerable<Composer> actualComposers = await database.GetAllAsync();
+            Table<Composer> table = new(nameof(TestComposerSql));
+            await table.ClearAsync();
+            await table.InsertAllAsync(Expected.Composers);
+            IEnumerable<Composer> actualComposers = await table.GetAllAsync();
 
             Assert.Equal(Expected.Composers.Count, actualComposers.Count());
             foreach (Composer expectedComposer in Expected.Composers)

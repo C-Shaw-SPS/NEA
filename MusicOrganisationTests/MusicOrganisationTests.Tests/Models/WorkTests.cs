@@ -42,10 +42,10 @@ namespace MusicOrganisationTests.Tests.Models
         [Fact]
         public async Task TestWorkSql()
         {
-            Database<Work> database = new(nameof(TestWorkSql));
-            await database.ClearAsync();
-            await database.InsertAllAsync(Expected.Works);
-            IEnumerable<Work> actualWorks = await database.GetAllAsync();
+            Table<Work> table = new(nameof(TestWorkSql));
+            await table.ClearAsync();
+            await table.InsertAllAsync(Expected.Works);
+            IEnumerable<Work> actualWorks = await table.GetAllAsync();
 
             Assert.Equal(Expected.Works.Count, actualWorks.Count());
             foreach (Work expectedWork in Expected.Works)
