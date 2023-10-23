@@ -55,6 +55,10 @@ namespace MusicOrganisationTests.Lib.Databases
                 {
                     result.Add(day.FormatSqlDay());
                 }
+                else if (value is RepertoireStatus repertoireStatus)
+                {
+                    result.Add(repertoireStatus.FormatSqlRepertoireStatus());
+                }
                 else
                 {
                     result.Add(value.ToString());
@@ -98,6 +102,11 @@ namespace MusicOrganisationTests.Lib.Databases
         private static string FormatSqlDay(this Day day)
         {
             return ((int)day).ToString();
+        }
+
+        private static string FormatSqlRepertoireStatus(this RepertoireStatus repertoireStatus)
+        {
+            return ((int)repertoireStatus).ToString();
         }
     }
 }

@@ -17,13 +17,13 @@ namespace MusicOrganisationTests.Lib.Models
         private int _id;
         private int _pupilId;
         private int _workId;
-        private DateOnly _dateStarted;
+        private DateTime _dateStarted;
         private string _syllabus = string.Empty;
-        private RepetoireStatus _status;
+        private RepertoireStatus _status;
 
         public static string TableName => _TABLE_NAME;
 
-        [AutoIncrement]
+        [PrimaryKey]
         public int Id
         {
             get
@@ -60,7 +60,7 @@ namespace MusicOrganisationTests.Lib.Models
             }
         }
 
-        public DateOnly DateStarted
+        public DateTime DateStarted
         {
             get
             {
@@ -84,7 +84,7 @@ namespace MusicOrganisationTests.Lib.Models
             }
         }
 
-        public RepetoireStatus Status
+        public RepertoireStatus Status
         {
             get
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicOrganisationTests.Lib.Enums
 {
-    public enum RepetoireStatus
+    public enum RepertoireStatus
     {
         CurrentlyLearning,
         FinishedLearning,

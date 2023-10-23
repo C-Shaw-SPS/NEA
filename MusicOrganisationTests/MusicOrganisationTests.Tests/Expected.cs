@@ -105,5 +105,26 @@ namespace MusicOrganisationTests.Tests
                 Email = null
             }
         };
+
+        public static readonly List<Repertoire> Repertoires = new()
+        {
+            new Repertoire
+            {
+                Id = 0,
+                PupilId = 0,
+                WorkId = 0,
+                DateStarted = DateTime.Parse("23/10/2023"),
+                Syllabus = "Grade 8",
+                Status = RepertoireStatus.CurrentlyLearning
+            },
+            new Repertoire
+            {
+                Id = 1,
+                PupilId = 1,
+                WorkId = 1,
+                DateStarted = DateTime.Now,
+                Status = RepertoireStatus.FinishedLearning
+            }
+        };
     }
 }
