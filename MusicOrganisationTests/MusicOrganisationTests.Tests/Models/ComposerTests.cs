@@ -1,11 +1,13 @@
 ﻿using MusicOrganisationTests.Lib.APIFetching;
+using MusicOrganisationTests.Lib.Databases;
 using MusicOrganisationTests.Lib.Models;
 
 namespace MusicOrganisationTests.Tests.Models
 {
     public class ComposerTests
     {
-        const string FILE_PATH = "Models/composer.json";
+        const string COMPOSER_PATH = "Models/composer.json";
+        const string RESPONSE_PATH = "Models/composerResponse.json";
 
         readonly Composer expectedComposer = new()
         {
@@ -21,9 +23,37 @@ namespace MusicOrganisationTests.Tests.Models
         [Fact]
         public void TestJsonDeserialiseComposer()
         {
-            Composer? actualComposer = JsonGetter.GetFromFile<Composer>(FILE_PATH);
+            Composer? actualComposer = JsonGetter.GetFromFile<Composer>(COMPOSER_PATH);
             Assert.NotNull(actualComposer);
             Assert.Equal(expectedComposer, actualComposer);
+        }
+
+        [Fact]
+        public async Task TestComposerSql()
+        {
+            Database<Composer> database = new(nameof(TestComposerSql));
+            await database.ClearAsync();
+            await database.InsertAllAsync(Expected.Composers);
+            IEnumerable<Composer> actualComposers = await database.GetAllAsync();
+
+            Assert.Equal(Expected.Composers.Count, actualComposers.Count());
+            foreach (Composer expectedComposer in Expected.Composers)
+            {
+                Assert.Contains(expectedComposer, actualComposers);
+            }
+        }
+
+        [Fact]
+        public void TestComposerGetter()
+        {
+            IEnumerable<Composer> actualComposers = ComposerGetter.GetFromFile(RESPONSE_PATH);
+
+            Assert.Equal(Expected.Composers.Count, actualComposers.Count());
+
+            foreach (Composer expectedComposer in Expected.Composers)
+            {
+                Assert.Contains(expectedComposer, actualComposers);
+            }
         }
     }
 }
