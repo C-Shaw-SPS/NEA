@@ -4,9 +4,9 @@ using SQLite;
 namespace MusicOrganisationTests.Lib.Models
 {
     [Table(_TABLE_NAME)]
-    public class CareGiver : ISqlStorable, IEquatable<CareGiver>
+    public class Caregiver : ISqlStorable, IEquatable<Caregiver>
     {
-        private const string _TABLE_NAME = "CareGivers";
+        private const string _TABLE_NAME = "Caregivers";
 
         private int _id;
         private string _name = string.Empty;
@@ -59,7 +59,7 @@ namespace MusicOrganisationTests.Lib.Models
                 _phoneNumber);
         }
 
-        public bool Equals(CareGiver? other)
+        public bool Equals(Caregiver? other)
         {
             return other != null
                 && _id == other._id
