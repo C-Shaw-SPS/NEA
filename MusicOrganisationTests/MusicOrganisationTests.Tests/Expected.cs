@@ -89,7 +89,7 @@ namespace MusicOrganisationTests.Tests
                 Name = "Pupil 0",
                 Level = "Grade 1",
                 LessonDuration = TimeSpan.FromMinutes(30),
-                LessonDay = Day.Monday,
+                LessonDays = Day.Monday,
                 DifferentTimes = true,
                 PhoneNumber = "0123456789",
                 Email = "testemail@gmail.com"
@@ -100,7 +100,7 @@ namespace MusicOrganisationTests.Tests
                 Name = "Pupil 1",
                 Level = "Grade 8",
                 LessonDuration = TimeSpan.FromHours(2),
-                LessonDay = Day.Tuesday | Day.Wednesday | Day.Friday,
+                LessonDays = Day.Tuesday | Day.Wednesday | Day.Friday,
                 PhoneNumber = null,
                 Email = null
             }
