@@ -13,7 +13,7 @@ namespace MusicOrganisationTests.Lib.Models
         private string _name = string.Empty;
         private string _level = string.Empty;
         private TimeSpan _lessonDuration;
-        private Day _lessonDay;
+        private Day _lessonDays;
         private bool _differentTimes;
         private string? _email;
         private string? _phoneNumber;
@@ -44,10 +44,10 @@ namespace MusicOrganisationTests.Lib.Models
             set => _lessonDuration = value;
         }
 
-        public Day LessonDay
+        public Day LessonDays
         {
-            get => _lessonDay;
-            set => _lessonDay = value;
+            get => _lessonDays;
+            set => _lessonDays = value;
         }
 
         public bool DifferentTimes
@@ -74,7 +74,7 @@ namespace MusicOrganisationTests.Lib.Models
                 && _id == other._id
                 && _name == other._name
                 && _level == other._level
-                && _lessonDay == other._lessonDay
+                && _lessonDays == other._lessonDays
                 && _differentTimes == other._differentTimes
                 && _email == other._email
                 && _phoneNumber == other._phoneNumber;
@@ -88,7 +88,7 @@ namespace MusicOrganisationTests.Lib.Models
                 nameof(Name),
                 nameof(Level),
                 nameof(LessonDuration),
-                nameof(LessonDay),
+                nameof(LessonDays),
                 nameof(DifferentTimes),
                 nameof(Email),
                 nameof(PhoneNumber)
@@ -102,7 +102,7 @@ namespace MusicOrganisationTests.Lib.Models
                 _name,
                 _level,
                 _lessonDuration,
-                _lessonDay,
+                _lessonDays,
                 _differentTimes,
                 _email,
                 _phoneNumber);
