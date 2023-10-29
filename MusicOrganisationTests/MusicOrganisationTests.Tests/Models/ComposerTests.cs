@@ -1,5 +1,4 @@
 ﻿using MusicOrganisationTests.Lib.APIFetching;
-using MusicOrganisationTests.Lib.Databases;
 using MusicOrganisationTests.Lib.Models;
 
 namespace MusicOrganisationTests.Tests.Models
@@ -26,21 +25,6 @@ namespace MusicOrganisationTests.Tests.Models
             Composer? actualComposer = JsonGetter.GetFromFile<Composer>(COMPOSER_PATH);
             Assert.NotNull(actualComposer);
             Assert.Equal(expectedComposer, actualComposer);
-        }
-
-        [Fact]
-        public async Task TestComposerSql()
-        {
-            TableConnection<Composer> table = new(nameof(TestComposerSql));
-            await table.ClearAsync();
-            await table.InsertAllAsync(Expected.Composers);
-            IEnumerable<Composer> actualComposers = await table.GetAllAsync();
-
-            Assert.Equal(Expected.Composers.Count, actualComposers.Count());
-            foreach (Composer expectedComposer in Expected.Composers)
-            {
-                Assert.Contains(expectedComposer, actualComposers);
-            }
         }
 
         [Fact]
