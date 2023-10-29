@@ -92,7 +92,7 @@ namespace MusicOrganisationTests.Tests
                 LessonDays = Day.Monday,
                 DifferentTimes = true,
                 PhoneNumber = "0123456789",
-                Email = "testemail@gmail.com"
+                Email = "pupil0@email.com"
             },
             new Pupil
             {
@@ -124,6 +124,24 @@ namespace MusicOrganisationTests.Tests
                 WorkId = 1,
                 DateStarted = DateTime.Now,
                 Status = RepertoireStatus.FinishedLearning
+            }
+        };
+
+        public static readonly List<Caregiver> Caregivers = new()
+        {
+            new Caregiver
+            {
+                Id = 0,
+                Name = "Caregiver 0",
+                Email = "caregiver0@email.com",
+                PhoneNumber = "0123456789"
+            },
+            new Caregiver
+            {
+                Id = 1,
+                Name = "Caregiver 1",
+                Email = null,
+                PhoneNumber = null
             }
         };
     }
