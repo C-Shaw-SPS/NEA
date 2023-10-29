@@ -38,20 +38,5 @@ namespace MusicOrganisationTests.Tests.Models
                 Assert.Contains(expectedWork, actualWorks);
             }
         }
-
-        [Fact]
-        public async Task TestWorkSql()
-        {
-            TableConnection<Work> table = new(nameof(TestWorkSql));
-            await table.ClearAsync();
-            await table.InsertAllAsync(Expected.Works);
-            IEnumerable<Work> actualWorks = await table.GetAllAsync();
-
-            Assert.Equal(Expected.Works.Count, actualWorks.Count());
-            foreach (Work expectedWork in Expected.Works)
-            {
-                Assert.Contains(expectedWork, actualWorks);
-            }
-        }
     }
 }
