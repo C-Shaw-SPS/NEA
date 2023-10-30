@@ -89,7 +89,7 @@ namespace MusicOrganisationTests.Lib.Models
 
         public IEnumerable<string> GetSqlValues()
         {
-            return SqlFormatting.FormatAsSqlValues(
+            return SqlFormatting.FormatValues(
                 _id,
                 _name,
                 _level,

@@ -30,7 +30,7 @@ namespace MusicOrganisationTests.Lib.Databases
             return OPEN_BRACKET + string.Join(COMMA_SEPARATOR, list) + CLOSE_BRACKET;
         }
 
-        public static IEnumerable<string> FormatAsSqlValues(params object?[] values)
+        public static IEnumerable<string> FormatValues(params object?[] values)
         {
             List<string> result = new();
             foreach (object? value in values)

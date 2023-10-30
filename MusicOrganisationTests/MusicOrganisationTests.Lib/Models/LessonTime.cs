@@ -54,7 +54,7 @@ namespace MusicOrganisationTests.Lib.Models
 
         public IEnumerable<string> GetSqlValues()
         {
-            return SqlFormatting.FormatAsSqlValues(
+            return SqlFormatting.FormatValues(
                 _id,
                 _dayOfWeek,
                 _startTime,
