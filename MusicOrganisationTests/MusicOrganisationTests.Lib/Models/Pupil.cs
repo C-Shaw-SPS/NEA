@@ -12,7 +12,6 @@ namespace MusicOrganisationTests.Lib.Models
         private int _id;
         private string _name = string.Empty;
         private string _level = string.Empty;
-        private TimeSpan _lessonDuration;
         private Day _lessonDays;
         private bool _differentTimes;
         private string? _email;
@@ -36,12 +35,6 @@ namespace MusicOrganisationTests.Lib.Models
         {
             get => _level;
             set => _level = value;
-        }
-
-        public TimeSpan LessonDuration
-        {
-            get => _lessonDuration;
-            set => _lessonDuration = value;
         }
 
         public Day LessonDays
@@ -87,7 +80,6 @@ namespace MusicOrganisationTests.Lib.Models
                 nameof(Id),
                 nameof(Name),
                 nameof(Level),
-                nameof(LessonDuration),
                 nameof(LessonDays),
                 nameof(DifferentTimes),
                 nameof(Email),
@@ -101,7 +93,6 @@ namespace MusicOrganisationTests.Lib.Models
                 _id,
                 _name,
                 _level,
-                _lessonDuration,
                 _lessonDays,
                 _differentTimes,
                 _email,
