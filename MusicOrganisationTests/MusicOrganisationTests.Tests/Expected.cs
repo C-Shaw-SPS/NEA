@@ -5,6 +5,18 @@ namespace MusicOrganisationTests.Tests
 {
     internal static class Expected
     {
+        public static readonly Composer NullPropertyComposer = new()
+        {
+            Id = 91,
+            Name = "Bunch",
+            CompleteName = "Kenji Bunch",
+            BirthDate = DateTime.Parse("1973-07-27"),
+            DeathDate = null,
+            Era = "21st Century",
+            PortraitLink = null
+        };
+
+
         public static readonly List<Caregiver> Caregivers = new()
         {
             new Caregiver
@@ -114,6 +126,18 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
+        public static readonly List<LessonRestriction> LessonRestrictions = new()
+        {
+            new LessonRestriction
+            {
+                Id = 0,
+                PupilId = 0,
+                Day = Day.Monday,
+                StartTime = DateTime.Parse("14:00"),
+                EndTime = DateTime.Parse("15:00")
+            }
+        };
+
         public static readonly List<LessonTime> LessonTimes = new()
         {
             new LessonTime
@@ -123,17 +147,6 @@ namespace MusicOrganisationTests.Tests
                 StartTime = DateTime.Parse("13:30"),
                 EndTime = DateTime.Parse("14:00")
             },
-        };
-
-        public static readonly Composer NullPropertyComposer = new()
-        {
-            Id = 91,
-            Name = "Bunch",
-            CompleteName = "Kenji Bunch",
-            BirthDate = DateTime.Parse("1973-07-27"),
-            DeathDate = null,
-            Era = "21st Century",
-            PortraitLink = null
         };
 
         public static readonly List<Pupil> Pupils = new()
