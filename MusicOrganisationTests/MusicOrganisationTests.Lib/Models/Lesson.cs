@@ -10,6 +10,7 @@ namespace MusicOrganisationTests.Lib.Models
 
         private int _id;
         private int _pupilId;
+        private int _lessonTimeId;
         private DateTime _date;
         private string? _notesFile;
 
@@ -26,6 +27,12 @@ namespace MusicOrganisationTests.Lib.Models
         {
             get => _pupilId;
             set => _pupilId = value;
+        }
+
+        public int LessonTimeId
+        {
+            get => _lessonTimeId;
+            set => _lessonTimeId = value;
         }
 
         public DateTime Date
@@ -47,6 +54,7 @@ namespace MusicOrganisationTests.Lib.Models
             {
                 nameof(Id),
                 nameof(PupilId),
+                nameof(LessonTimeId),
                 nameof(Date),
                 nameof(NotesFile)
             };
@@ -57,6 +65,7 @@ namespace MusicOrganisationTests.Lib.Models
             return SqlFormatting.FormatAsSqlValues(
                 _id,
                 _pupilId,
+                _lessonTimeId,
                 _date,
                 _notesFile);
         }
@@ -66,6 +75,7 @@ namespace MusicOrganisationTests.Lib.Models
             return other != null
                 && _id == other._id
                 && _pupilId == other._pupilId
+                && _lessonTimeId == other._lessonTimeId
                 && _date == other._date
                 && _notesFile == other._notesFile;
         }

@@ -166,6 +166,7 @@ namespace MusicOrganisationTests.Tests
             {
                 Id = 0,
                 PupilId = 0,
+                LessonTimeId = 0,
                 Date = DateTime.Parse("30/10/2023"),
                 NotesFile = "notes.txt"
             },
@@ -173,6 +174,7 @@ namespace MusicOrganisationTests.Tests
             {
                 Id = 1,
                 PupilId = 1,
+                LessonTimeId = 1,
                 Date = DateTime.Now
             }
         };
