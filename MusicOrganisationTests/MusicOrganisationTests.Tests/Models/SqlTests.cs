@@ -29,6 +29,12 @@ namespace MusicOrganisationTests.Tests.Models
         }
 
         [Fact]
+        public async Task TestFixedLessonSql()
+        {
+            await TestType(Expected.FixedLessons);
+        }
+
+        [Fact]
         public async Task TestLessonSql()
         {
             await TestType(Expected.Lessons);
