@@ -88,7 +88,6 @@ namespace MusicOrganisationTests.Tests
                 Id = 0,
                 Name = "Pupil 0",
                 Level = "Grade 1",
-                LessonDuration = TimeSpan.FromMinutes(30),
                 LessonDays = Day.Monday,
                 DifferentTimes = true,
                 PhoneNumber = "0123456789",
@@ -99,7 +98,6 @@ namespace MusicOrganisationTests.Tests
                 Id = 1,
                 Name = "Pupil 1",
                 Level = "Grade 8",
-                LessonDuration = TimeSpan.FromHours(2),
                 LessonDays = Day.Tuesday | Day.Wednesday | Day.Friday,
                 PhoneNumber = null,
                 Email = null
@@ -143,6 +141,51 @@ namespace MusicOrganisationTests.Tests
                 Email = null,
                 PhoneNumber = null
             }
+        };
+
+        public static readonly List<CaregiverMap> CaregiverMaps = new()
+        {
+            new CaregiverMap
+            {
+                Id = 0,
+                PupilId = 0,
+                CaregiverId = 0,
+                Description = "Caregiver"
+            },
+            new CaregiverMap
+            {
+                Id = 1,
+                PupilId = 1,
+                CaregiverId = 0
+            }
+        };
+
+        public static readonly List<Lesson> Lessons = new()
+        {
+            new Lesson
+            {
+                Id = 0,
+                PupilId = 0,
+                Date = DateTime.Parse("30/10/2023"),
+                NotesFile = "notes.txt"
+            },
+            new Lesson
+            {
+                Id = 1,
+                PupilId = 1,
+                Date = DateTime.Now
+            }
+        };
+
+        public static readonly List<LessonTime> LessonTimes = new()
+        {
+            new LessonTime
+            {
+                Id = 0,
+                DayOfWeek = Day.Monday,
+                StartTime = DateTime.Parse("13:30"),
+                EndTime = DateTime.Parse("14:00")
+            },
         };
     }
 }
