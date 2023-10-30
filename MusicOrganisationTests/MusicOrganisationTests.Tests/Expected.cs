@@ -5,15 +5,39 @@ namespace MusicOrganisationTests.Tests
 {
     internal static class Expected
     {
-        public static readonly Composer NullPropertyComposer = new()
+        public static readonly List<Caregiver> Caregivers = new()
         {
-            Id = 91,
-            Name = "Bunch",
-            CompleteName = "Kenji Bunch",
-            BirthDate = DateTime.Parse("1973-07-27"),
-            DeathDate = null,
-            Era = "21st Century",
-            PortraitLink = null
+            new Caregiver
+            {
+                Id = 0,
+                Name = "Caregiver 0",
+                Email = "caregiver0@email.com",
+                PhoneNumber = "0123456789"
+            },
+            new Caregiver
+            {
+                Id = 1,
+                Name = "Caregiver 1",
+                Email = null,
+                PhoneNumber = null
+            }
+        };
+
+        public static readonly List<CaregiverMap> CaregiverMaps = new()
+        {
+            new CaregiverMap
+            {
+                Id = 0,
+                PupilId = 0,
+                CaregiverId = 0,
+                Description = "Caregiver"
+            },
+            new CaregiverMap
+            {
+                Id = 1,
+                PupilId = 1,
+                CaregiverId = 0
+            }
         };
 
         public static readonly List<Composer> Composers = new()
@@ -61,24 +85,55 @@ namespace MusicOrganisationTests.Tests
             NullPropertyComposer
         };
 
-        public static readonly List<Work> Works = new()
+        public static readonly List<FixedLesson> FixedLessons = new()
         {
-            new Work
+            new FixedLesson
             {
-                Id = 20086,
-                ComposerId = 176,
-                Title = "3 Movements",
-                Subtitle = "",
-                Genre = "Orchestral"
-            },
-            new Work
-            {
-                Id = 25115,
-                ComposerId = 202,
-                Title = "3 Mouvements perp\u00e9tuels, FP14",
-                Subtitle = "",
-                Genre = "Keyboard"
+                Id = 0,
+                PupilId = 0,
+                LessonTimeId = 0
             }
+        };
+
+        public static readonly List<Lesson> Lessons = new()
+        {
+            new Lesson
+            {
+                Id = 0,
+                PupilId = 0,
+                LessonTimeId = 0,
+                Date = DateTime.Parse("30/10/2023"),
+                NotesFile = "notes.txt"
+            },
+            new Lesson
+            {
+                Id = 1,
+                PupilId = 1,
+                LessonTimeId = 1,
+                Date = DateTime.Now
+            }
+        };
+
+        public static readonly List<LessonTime> LessonTimes = new()
+        {
+            new LessonTime
+            {
+                Id = 0,
+                DayOfWeek = Day.Monday,
+                StartTime = DateTime.Parse("13:30"),
+                EndTime = DateTime.Parse("14:00")
+            },
+        };
+
+        public static readonly Composer NullPropertyComposer = new()
+        {
+            Id = 91,
+            Name = "Bunch",
+            CompleteName = "Kenji Bunch",
+            BirthDate = DateTime.Parse("1973-07-27"),
+            DeathDate = null,
+            Era = "21st Century",
+            PortraitLink = null
         };
 
         public static readonly List<Pupil> Pupils = new()
@@ -125,69 +180,24 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<Caregiver> Caregivers = new()
+        public static readonly List<Work> Works = new()
         {
-            new Caregiver
+            new Work
             {
-                Id = 0,
-                Name = "Caregiver 0",
-                Email = "caregiver0@email.com",
-                PhoneNumber = "0123456789"
+                Id = 20086,
+                ComposerId = 176,
+                Title = "3 Movements",
+                Subtitle = "",
+                Genre = "Orchestral"
             },
-            new Caregiver
+            new Work
             {
-                Id = 1,
-                Name = "Caregiver 1",
-                Email = null,
-                PhoneNumber = null
+                Id = 25115,
+                ComposerId = 202,
+                Title = "3 Mouvements perp\u00e9tuels, FP14",
+                Subtitle = "",
+                Genre = "Keyboard"
             }
-        };
-
-        public static readonly List<CaregiverMap> CaregiverMaps = new()
-        {
-            new CaregiverMap
-            {
-                Id = 0,
-                PupilId = 0,
-                CaregiverId = 0,
-                Description = "Caregiver"
-            },
-            new CaregiverMap
-            {
-                Id = 1,
-                PupilId = 1,
-                CaregiverId = 0
-            }
-        };
-
-        public static readonly List<Lesson> Lessons = new()
-        {
-            new Lesson
-            {
-                Id = 0,
-                PupilId = 0,
-                LessonTimeId = 0,
-                Date = DateTime.Parse("30/10/2023"),
-                NotesFile = "notes.txt"
-            },
-            new Lesson
-            {
-                Id = 1,
-                PupilId = 1,
-                LessonTimeId = 1,
-                Date = DateTime.Now
-            }
-        };
-
-        public static readonly List<LessonTime> LessonTimes = new()
-        {
-            new LessonTime
-            {
-                Id = 0,
-                DayOfWeek = Day.Monday,
-                StartTime = DateTime.Parse("13:30"),
-                EndTime = DateTime.Parse("14:00")
-            },
         };
     }
 }
