@@ -47,10 +47,6 @@ namespace MusicOrganisationTests.Lib.Databases
                 {
                     result.Add(dateTime.FormatSqlDateTime());
                 }
-                else if (value is TimeSpan timeSpan)
-                {
-                    result.Add(timeSpan.FormatSqlTimeSpan());
-                }
                 else if (value is Day day)
                 {
                     result.Add(day.FormatSqlDay());
@@ -61,7 +57,7 @@ namespace MusicOrganisationTests.Lib.Databases
                 }
                 else
                 {
-                    result.Add(value.ToString());
+                    result.Add(value.ToStringOrNull());
                 }
             }
             return result;
@@ -94,11 +90,6 @@ namespace MusicOrganisationTests.Lib.Databases
             return dateTime.Ticks.ToString();
         }
 
-        private static string FormatSqlTimeSpan(this TimeSpan timeSpan)
-        {
-            return timeSpan.Ticks.ToString();
-        }
-
         private static string FormatSqlDay(this Day day)
         {
             return ((int)day).ToString();
@@ -107,6 +98,19 @@ namespace MusicOrganisationTests.Lib.Databases
         private static string FormatSqlRepertoireStatus(this RepertoireStatus repertoireStatus)
         {
             return ((int)repertoireStatus).ToString();
+        }
+
+        private static string ToStringOrNull(this object value)
+        {
+            string? possiblyNullString = value.ToString();
+            if (possiblyNullString is string notNullString)
+            {
+                return notNullString;
+            }
+            else
+            {
+                return NULL;
+            }
         }
     }
 }
