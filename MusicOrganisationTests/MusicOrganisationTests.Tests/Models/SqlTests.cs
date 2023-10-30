@@ -41,6 +41,12 @@ namespace MusicOrganisationTests.Tests.Models
         }
 
         [Fact]
+        public async Task TestLessonRestrictionSql()
+        {
+            await TestType(Expected.LessonRestrictions);
+        }
+
+        [Fact]
         public async Task TestLessonTimeSql()
         {
             await TestType(Expected.LessonTimes);
