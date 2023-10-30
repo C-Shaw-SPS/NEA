@@ -8,25 +8,55 @@ namespace MusicOrganisationTests.Lib.Models
     {
         private const string _TABLE_NAME = "FixedLessons";
 
-
+        private int _id;
+        private int _pupilId;
+        private int _lessonTimeId;
 
         public static string TableName => _TABLE_NAME;
 
-        public int Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        [PrimaryKey]
+        public int Id
+        {
+            get => _id;
+            set => _id = value;
+        }
+
+        public int PupilId
+        {
+            get => _pupilId;
+            set => _pupilId = value;
+        }
+
+        public int LessonTimeId
+        {
+            get => _lessonTimeId;
+            set => _lessonTimeId = value;
+        }
 
         public static IEnumerable<string> GetColumnNames()
         {
-            throw new NotImplementedException();
+            return new List<string>
+            {
+                nameof(Id),
+                nameof(PupilId),
+                nameof(LessonTimeId)
+            };
         }
 
         public IEnumerable<string> GetSqlValues()
         {
-            throw new NotImplementedException();
+            return SqlFormatting.FormatAsSqlValues(
+                _id,
+                _pupilId,
+                _lessonTimeId);
         }
 
         public bool Equals(FixedLesson? other)
         {
-            throw new NotImplementedException();
+            return other != null
+                && _id == other._id
+                && _pupilId == other._pupilId
+                && _lessonTimeId == other._lessonTimeId;
         }
     }
 }
