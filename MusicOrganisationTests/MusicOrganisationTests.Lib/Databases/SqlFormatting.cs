@@ -1,5 +1,6 @@
 ﻿using MusicOrganisationTests.Lib.Enums;
 using System.Text;
+using static SQLite.SQLite3;
 
 namespace MusicOrganisationTests.Lib.Databases
 {
@@ -35,32 +36,37 @@ namespace MusicOrganisationTests.Lib.Databases
             List<string> result = new();
             foreach (object? value in values)
             {
-                if (value == null)
-                {
-                    result.Add(NULL);
-                }
-                else if (value is string s)
-                {
-                    result.Add(s.FormatSqlString());
-                }
-                else if (value is DateTime dateTime)
-                {
-                    result.Add(dateTime.FormatSqlDateTime());
-                }
-                else if (value is Day day)
-                {
-                    result.Add(day.FormatSqlDay());
-                }
-                else if (value is RepertoireStatus repertoireStatus)
-                {
-                    result.Add(repertoireStatus.FormatSqlRepertoireStatus());
-                }
-                else
-                {
-                    result.Add(value.ToStringOrNull());
-                }
+                result.Add(FormatValue(value));
             }
             return result;
+        }
+
+        public static string FormatValue(object? value)
+        {
+            if (value == null)
+            {
+                return NULL;
+            }
+            else if (value is string s)
+            {
+                return  s.FormatSqlString();
+            }
+            else if (value is DateTime dateTime)
+            {
+                return dateTime.FormatSqlDateTime();
+            }
+            else if (value is Day day)
+            {
+                return day.FormatSqlDay();
+            }
+            else if (value is RepertoireStatus repertoireStatus)
+            {
+                return repertoireStatus.FormatSqlRepertoireStatus();
+            }
+            else
+            {
+                return value.ToStringOrNull();
+            }
         }
 
         private static string FormatSqlString(this string s)
