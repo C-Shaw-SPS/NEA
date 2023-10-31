@@ -9,6 +9,8 @@ namespace MusicOrganisationTests.App
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
+
+            IEnumerable<Composer> composers = ComposerGetter.GetFromOpenOpus();
         }
     }
 }
