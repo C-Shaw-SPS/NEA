@@ -11,7 +11,5 @@ namespace MusicOrganisationTests.Lib.Services
         {
             _composerTable = new(path);
         }
-
-
     }
 }
