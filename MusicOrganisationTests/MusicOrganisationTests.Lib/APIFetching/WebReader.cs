@@ -8,6 +8,7 @@
             using (HttpClient client = new())
             {
                 HttpRequestMessage message = new(HttpMethod.Get, url);
+                // TODO: catch error from no connection
                 HttpResponseMessage response = client.Send(message);
                 text = GetDataFromResponse(response);
             }
