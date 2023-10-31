@@ -1,4 +1,5 @@
-﻿using MusicOrganisationTests.Lib.Models;
+﻿using MusicOrganisationTests.Lib.Enums;
+using MusicOrganisationTests.Lib.Models;
 
 namespace MusicOrganisationTests.Tests
 {
@@ -15,6 +16,41 @@ namespace MusicOrganisationTests.Tests
             PortraitLink = null
         };
 
+
+        public static readonly List<Caregiver> Caregivers = new()
+        {
+            new Caregiver
+            {
+                Id = 0,
+                Name = "Caregiver 0",
+                Email = "caregiver0@email.com",
+                PhoneNumber = "0123456789"
+            },
+            new Caregiver
+            {
+                Id = 1,
+                Name = "Caregiver 1",
+                Email = null,
+                PhoneNumber = null
+            }
+        };
+
+        public static readonly List<CaregiverMap> CaregiverMaps = new()
+        {
+            new CaregiverMap
+            {
+                Id = 0,
+                PupilId = 0,
+                CaregiverId = 0,
+                Description = "Caregiver"
+            },
+            new CaregiverMap
+            {
+                Id = 1,
+                PupilId = 1,
+                CaregiverId = 0
+            }
+        };
 
         public static readonly List<Composer> Composers = new()
         {
@@ -59,6 +95,102 @@ namespace MusicOrganisationTests.Tests
                 PortraitLink = "https://assets.openopus.org/portraits/21459195-1568084925.jpg"
             },
             NullPropertyComposer
+        };
+
+        public static readonly List<FixedLesson> FixedLessons = new()
+        {
+            new FixedLesson
+            {
+                Id = 0,
+                PupilId = 0,
+                LessonTimeId = 0
+            }
+        };
+
+        public static readonly List<Lesson> Lessons = new()
+        {
+            new Lesson
+            {
+                Id = 0,
+                PupilId = 0,
+                LessonTimeId = 0,
+                Date = DateTime.Parse("30/10/2023"),
+                NotesFile = "notes.txt"
+            },
+            new Lesson
+            {
+                Id = 1,
+                PupilId = 1,
+                LessonTimeId = 1,
+                Date = DateTime.Now
+            }
+        };
+
+        public static readonly List<LessonRestriction> LessonRestrictions = new()
+        {
+            new LessonRestriction
+            {
+                Id = 0,
+                PupilId = 0,
+                Day = Day.Monday,
+                StartTime = DateTime.Parse("14:00"),
+                EndTime = DateTime.Parse("15:00")
+            }
+        };
+
+        public static readonly List<LessonTime> LessonTimes = new()
+        {
+            new LessonTime
+            {
+                Id = 0,
+                DayOfWeek = Day.Monday,
+                StartTime = DateTime.Parse("13:30"),
+                EndTime = DateTime.Parse("14:00")
+            },
+        };
+
+        public static readonly List<Pupil> Pupils = new()
+        {
+            new Pupil
+            {
+                Id = 0,
+                Name = "Pupil 0",
+                Level = "Grade 1",
+                LessonDays = Day.Monday,
+                DifferentTimes = true,
+                PhoneNumber = "0123456789",
+                Email = "pupil0@email.com"
+            },
+            new Pupil
+            {
+                Id = 1,
+                Name = "Pupil 1",
+                Level = "Grade 8",
+                LessonDays = Day.Tuesday | Day.Wednesday | Day.Friday,
+                PhoneNumber = null,
+                Email = null
+            }
+        };
+
+        public static readonly List<Repertoire> Repertoires = new()
+        {
+            new Repertoire
+            {
+                Id = 0,
+                PupilId = 0,
+                WorkId = 0,
+                DateStarted = DateTime.Parse("23/10/2023"),
+                Syllabus = "Grade 8",
+                Status = RepertoireStatus.CurrentlyLearning
+            },
+            new Repertoire
+            {
+                Id = 1,
+                PupilId = 1,
+                WorkId = 1,
+                DateStarted = DateTime.Now,
+                Status = RepertoireStatus.FinishedLearning
+            }
         };
 
         public static readonly List<Work> Works = new()

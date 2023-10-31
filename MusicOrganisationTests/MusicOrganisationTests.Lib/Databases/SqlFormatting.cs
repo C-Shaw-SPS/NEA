@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using MusicOrganisationTests.Lib.Enums;
+using System.Text;
 
 namespace MusicOrganisationTests.Lib.Databases
 {
@@ -29,7 +30,7 @@ namespace MusicOrganisationTests.Lib.Databases
             return OPEN_BRACKET + string.Join(COMMA_SEPARATOR, list) + CLOSE_BRACKET;
         }
 
-        public static IEnumerable<string> FormatAsSqlValues(this IEnumerable<object?> values)
+        public static IEnumerable<string> FormatValues(params object?[] values)
         {
             List<string> result = new();
             foreach (object? value in values)
@@ -46,9 +47,17 @@ namespace MusicOrganisationTests.Lib.Databases
                 {
                     result.Add(dateTime.FormatSqlDateTime());
                 }
+                else if (value is Day day)
+                {
+                    result.Add(day.FormatSqlDay());
+                }
+                else if (value is RepertoireStatus repertoireStatus)
+                {
+                    result.Add(repertoireStatus.FormatSqlRepertoireStatus());
+                }
                 else
                 {
-                    result.Add(value.ToString());
+                    result.Add(value.ToStringOrNull());
                 }
             }
             return result;
@@ -79,6 +88,29 @@ namespace MusicOrganisationTests.Lib.Databases
         private static string FormatSqlDateTime(this DateTime dateTime)
         {
             return dateTime.Ticks.ToString();
+        }
+
+        private static string FormatSqlDay(this Day day)
+        {
+            return ((int)day).ToString();
+        }
+
+        private static string FormatSqlRepertoireStatus(this RepertoireStatus repertoireStatus)
+        {
+            return ((int)repertoireStatus).ToString();
+        }
+
+        private static string ToStringOrNull(this object value)
+        {
+            string? possiblyNullString = value.ToString();
+            if (possiblyNullString is string notNullString)
+            {
+                return notNullString;
+            }
+            else
+            {
+                return NULL;
+            }
         }
     }
 }

@@ -2,12 +2,12 @@
 
 namespace MusicOrganisationTests.Lib.Databases
 {
-    public class Database<T> where T : class, ISqlStorable, new()
+    public class TableConnection<T> where T : class, ISqlStorable, new()
     {
         private SQLiteAsyncConnection _connection;
         private readonly string _path;
 
-        public Database(string path)
+        public TableConnection(string path)
         {
             _path = path.FormatAsDatabasePath();
         }
@@ -26,20 +26,24 @@ namespace MusicOrganisationTests.Lib.Databases
         public async Task InsertAsync(T value)
         {
             await InitAsync();
+            
             InsertCommand<T> insertCommand = new();
             insertCommand.AddValue(value);
             await _connection.ExecuteAsync(insertCommand.ToString());
+            
         }
 
         public async Task InsertAllAsync(IEnumerable<T> values)
         {
             await InitAsync();
+            
             InsertCommand<T> insertCommand = new();
             foreach (T value in values)
             {
                 insertCommand.AddValue(value);
             }
             await _connection.ExecuteAsync(insertCommand.ToString());
+            
         }
 
         public async Task DeleteAsync(T value)

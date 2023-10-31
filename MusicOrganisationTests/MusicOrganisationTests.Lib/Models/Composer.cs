@@ -10,6 +10,7 @@ namespace MusicOrganisationTests.Lib.Models
     public class Composer : IEquatable<Composer>, ISqlStorable
     {
         private const string _TABLE_NAME = "Composers";
+
         private int _id;
         private string _name = string.Empty;
         private string _completeName = string.Empty;
@@ -21,101 +22,61 @@ namespace MusicOrganisationTests.Lib.Models
         [PrimaryKey, JsonPropertyName("id"), JsonConverter(typeof(StringToIntConverter))]
         public int Id
         {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
+            get => _id;
+            set => _id = value;
         }
 
         [JsonPropertyName("name")]
         public string Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
+            get => _name;
+            set => _name = value;
         }
 
         [JsonPropertyName("complete_name")]
         public string CompleteName
         {
-            get
-            {
-                return _completeName;
-            }
-            set
-            {
-                _completeName = value;
-            }
+            get => _completeName;
+            set => _completeName = value;
         }
 
         [JsonPropertyName("birth"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime BirthDate
         {
-            get
-            {
-                return _birthDate;
-            }
-            set
-            {
-                _birthDate = value;
-            }
+            get => _birthDate;
+            set => _birthDate = value;
         }
 
         [JsonPropertyName("death"), JsonConverter(typeof(DateTimeConverter))]
         public DateTime? DeathDate
         {
-            get
-            {
-                return _deathDate;
-            }
-            set
-            {
-                _deathDate = value;
-            }
+            get => _deathDate;
+            set => _deathDate = value;
         }
 
         [JsonPropertyName("epoch")]
         public string Era
         {
-            get
-            {
-                return _era;
-            }
-            set
-            {
-                _era = value;
-            }
+            get => _era;
+            set => _era = value;
         }
 
         [JsonPropertyName("portrait")]
         public string? PortraitLink
         {
-            get
-            {
-                return _portraitLink;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    _portraitLink = FormatLink(value);
-                }
-            }
+            get => _portraitLink;
+            set => _portraitLink = FormatLink(value);
         }
 
         public static string TableName => _TABLE_NAME;
 
-        private static string FormatLink(string value)
+        private static string? FormatLink(string? value)
         {
+            if (value == null)
+            {
+                return value;
+            }
+
             StringBuilder link = new();
             foreach (char c in value)
             {
@@ -141,17 +102,14 @@ namespace MusicOrganisationTests.Lib.Models
 
         public IEnumerable<string> GetSqlValues()
         {
-            List<object?> values = new()
-            {
+            return SqlFormatting.FormatValues(
                 _id,
                 _name,
                 _completeName,
                 _birthDate,
                 _deathDate,
                 _era,
-                _portraitLink,
-            };
-            return values.FormatAsSqlValues();
+                _portraitLink);
         }
 
         public static IEnumerable<string> GetColumnNames()

@@ -1,4 +1,8 @@
-﻿namespace MusicOrganisationTests.App
+﻿using MusicOrganisationTests.Lib.APIFetching;
+using MusicOrganisationTests.Lib.Models;
+using System.Reflection;
+
+namespace MusicOrganisationTests.App
 {
     internal class Program
     {
