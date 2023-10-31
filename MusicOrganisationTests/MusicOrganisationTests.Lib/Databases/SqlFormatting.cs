@@ -1,6 +1,5 @@
 ﻿using MusicOrganisationTests.Lib.Enums;
 using System.Text;
-using static SQLite.SQLite3;
 
 namespace MusicOrganisationTests.Lib.Databases
 {
