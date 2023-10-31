@@ -61,7 +61,7 @@ namespace MusicOrganisationTests.Lib.Databases
 
         public async Task<T> GetAsync(int id)
         {
-            IEnumerable<T> rows = await GetWhereEqual(nameof(ISqlStorable.Id), id);
+            IEnumerable<T> rows = await GetWhereEqualAsync(nameof(ISqlStorable.Id), id);
             T? result = rows.FirstOrDefault();
             if (result == null)
             {
@@ -73,10 +73,17 @@ namespace MusicOrganisationTests.Lib.Databases
             }
         }
 
-        public async Task<IEnumerable<T>> GetWhereEqual(string propertyName, object value)
+        public async Task<IEnumerable<T>> GetWhereEqualAsync(string propertyName, object value)
         {
             await InitAsync();
             IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {T.TableName} WHERE {propertyName} = {SqlFormatting.FormatValue(value)}");
+            return result;
+        }
+
+        public async Task<IEnumerable<T>> GetWhereTextLikeAsync(string propertyName, string text)
+        {
+            await InitAsync();
+            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {T.TableName} WHERE {propertyName} LIKE \"%{text}%\"");
             return result;
         }
 

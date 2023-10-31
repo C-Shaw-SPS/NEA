@@ -127,16 +127,26 @@ namespace MusicOrganisationTests.Tests.Databases
         }
 
         [Fact]
-        public async Task TestAddPupils()
+        public async Task TestGetWhereEqualAsync()
         {
-            TableConnection<Pupil> table = new(nameof(TestAddPupils));
+            TableConnection<Composer> table = new(nameof(TestGetWhereEqualAsync));
             await table.ClearAsync();
-            await table.InsertAllAsync(Expected.Pupils);
-            IEnumerable<Pupil> actualPupils = await table.GetAllAsync();
-            Assert.Equal(Expected.Pupils.Count, actualPupils.Count());
-            foreach (Pupil expectedPupil in Expected.Pupils)
+            await table.InsertAllAsync(Expected.Composers);
+            IEnumerable<Composer> actualComposers = await table.GetWhereEqualAsync(nameof(Composer.Name), Expected.Composers[0].Name);
+            Assert.Contains(Expected.Composers[0], actualComposers);
+        }
+
+        [Fact]
+        public async Task TestGetWhereTextLikeAsync()
+        {
+            TableConnection<Composer> table = new(nameof(TestGetWhereTextLikeAsync));
+            await table.ClearAsync();
+            await table.InsertAllAsync(Expected.Composers);
+            string expectedText = "ch";
+            IEnumerable<Composer> actualComposers = await table.GetWhereTextLikeAsync(nameof(Composer.Name), expectedText);
+            foreach (Composer composer in actualComposers)
             {
-                Assert.Contains(expectedPupil, actualPupils);
+                Assert.Contains(expectedText, composer.Name.ToLower());
             }
         }
     }
