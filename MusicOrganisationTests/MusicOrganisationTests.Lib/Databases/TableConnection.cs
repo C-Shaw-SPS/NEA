@@ -61,11 +61,23 @@ namespace MusicOrganisationTests.Lib.Databases
 
         public async Task<T> GetAsync(int id)
         {
-            await InitAsync();
-            IList<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {T.TableName} WHERE {nameof(ISqlStorable.Id)} = {id}");
-            if (result.Count == 0)
+            IEnumerable<T> rows = await GetWhereEqual(nameof(ISqlStorable.Id), id);
+            T? result = rows.FirstOrDefault();
+            if (result == null)
+            {
                 throw new Exception($"No row in {T.TableName} with {nameof(ISqlStorable.Id)} {id}");
-            return result[0];
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+        public async Task<IEnumerable<T>> GetWhereEqual(string propertyName, object value)
+        {
+            await InitAsync();
+            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {T.TableName} WHERE {propertyName} = {SqlFormatting.FormatValue(value)}");
+            return result;
         }
 
         public async Task ClearAsync()
