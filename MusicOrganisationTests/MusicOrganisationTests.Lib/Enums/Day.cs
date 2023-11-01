@@ -16,4 +16,30 @@ namespace MusicOrganisationTests.Lib.Enums
         Saturday = 0b0100000,
         Sunday = 0b1000000
     }
+
+    public static class DayConverter
+    {
+        public static Day ToDay(this DayOfWeek dayOfWeek)
+        {
+            switch (dayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    return Day.Monday;
+                case DayOfWeek.Tuesday:
+                    return Day.Tuesday;
+                case DayOfWeek.Wednesday:
+                    return Day.Wednesday;
+                case DayOfWeek.Thursday:
+                    return Day.Thursday;
+                case DayOfWeek.Friday:
+                    return Day.Friday;
+                case DayOfWeek.Saturday:
+                    return Day.Saturday;
+                case DayOfWeek.Sunday:
+                    return Day.Sunday;
+                default:
+                    throw new Exception($"Invalid day of week: {dayOfWeek}");
+            }
+        }
+    }
 }
