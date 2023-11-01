@@ -6,10 +6,10 @@ namespace MusicOrganisationTests.Tests.Databases
     public class MultipleTablesTests
     {
         [Fact]
-        public async void TestAddComposersAndWorks()
+        public async void TestMultipleTables()
         {
-            TableConnection<Composer> composerDatabase = new(nameof(TestAddComposersAndWorks));
-            TableConnection<Work> workDatabase = new(nameof(TestAddComposersAndWorks));
+            TableConnection<Composer> composerDatabase = new(nameof(TestMultipleTables));
+            TableConnection<Work> workDatabase = new(nameof(TestMultipleTables));
 
             await composerDatabase.ClearAsync();
             await workDatabase.ClearAsync();
