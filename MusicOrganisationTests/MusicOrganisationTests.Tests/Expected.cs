@@ -157,7 +157,7 @@ namespace MusicOrganisationTests.Tests
                 Name = "Pupil 0",
                 Level = "Grade 1",
                 LessonDays = Day.Monday,
-                DifferentTimes = true,
+                HasDifferentTimes = true,
                 PhoneNumber = "0123456789",
                 Email = "pupil0@email.com"
             },
