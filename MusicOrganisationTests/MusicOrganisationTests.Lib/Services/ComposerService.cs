@@ -4,24 +4,19 @@ using MusicOrganisationTests.Lib.Models;
 
 namespace MusicOrganisationTests.Lib.Services
 {
-    public class ComposerService
+    public class ComposerService : Service<Composer>
     {
-        private TableConnection<Composer> _composerTable;
-
-        public ComposerService(string path)
-        {
-            _composerTable = new(path);
-        }
+        public ComposerService(string path) : base(path) { }
 
         public async Task InitialiseData()
         {
             IEnumerable<Composer> composers = ComposerGetter.GetFromOpenOpus();
-            await _composerTable.InsertAllAsync(composers);
+            await _table.InsertAllAsync(composers);
         }
 
-        public async Task AddComposer(string name, string completeName, DateTime birthDate, DateTime deathDate, string era, string? portraitLink = null)
+        public async Task Add(string name, string completeName, DateTime birthDate, DateTime? deathDate, string era, string? portraitLink = null)
         {
-            int id = await _composerTable.GetNextIdAsync();
+            int id = await _table.GetNextIdAsync();
             Composer composer = new()
             {
                 Id = id,
@@ -29,9 +24,10 @@ namespace MusicOrganisationTests.Lib.Services
                 CompleteName = completeName,
                 BirthDate = birthDate,
                 DeathDate = deathDate,
+                Era = era,
                 PortraitLink = portraitLink
             };
-            await _composerTable.InsertAsync(composer);
+            await _table.InsertAsync(composer);
         }
     }
 }
