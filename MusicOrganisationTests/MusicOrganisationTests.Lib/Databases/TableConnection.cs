@@ -12,7 +12,7 @@ namespace MusicOrganisationTests.Lib.Databases
             _path = path.FormatAsDatabasePath();
         }
 
-        protected async Task InitAsync()
+        public async Task InitAsync()
         {
             if (_connection is not null)
             {
@@ -118,6 +118,12 @@ namespace MusicOrganisationTests.Lib.Databases
             {
                 return 0;
             }
+        }
+
+        public async Task<IEnumerable<T>> QueryAsync(string query)
+        {
+            await InitAsync();
+            return await _connection.QueryAsync<T>(query);
         }
     }
 }
