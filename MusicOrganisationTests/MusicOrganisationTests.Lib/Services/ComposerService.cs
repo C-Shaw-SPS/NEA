@@ -6,7 +6,13 @@ namespace MusicOrganisationTests.Lib.Services
 {
     public class ComposerService : Service<Composer>
     {
-        public ComposerService(string path) : base(path) { }
+
+
+
+        public ComposerService(string path) : base(path)
+        {
+
+        }
 
         public async Task InitialiseData()
         {
