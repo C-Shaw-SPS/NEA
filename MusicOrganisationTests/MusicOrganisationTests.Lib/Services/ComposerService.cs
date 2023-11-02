@@ -14,7 +14,7 @@ namespace MusicOrganisationTests.Lib.Services
             await _table.InsertAllAsync(composers);
         }
 
-        public async Task Add(string name, string completeName, DateTime birthDate, DateTime? deathDate, string era, string? portraitLink = null)
+        public async Task InsertAsync(string name, string completeName, DateTime birthDate, DateTime? deathDate, string era, string? portraitLink = null)
         {
             int id = await _table.GetNextIdAsync();
             Composer composer = new()
