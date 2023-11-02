@@ -21,25 +21,17 @@ namespace MusicOrganisationTests.Lib.Enums
     {
         public static Day ToDay(this DayOfWeek dayOfWeek)
         {
-            switch (dayOfWeek)
+            return dayOfWeek switch
             {
-                case DayOfWeek.Monday:
-                    return Day.Monday;
-                case DayOfWeek.Tuesday:
-                    return Day.Tuesday;
-                case DayOfWeek.Wednesday:
-                    return Day.Wednesday;
-                case DayOfWeek.Thursday:
-                    return Day.Thursday;
-                case DayOfWeek.Friday:
-                    return Day.Friday;
-                case DayOfWeek.Saturday:
-                    return Day.Saturday;
-                case DayOfWeek.Sunday:
-                    return Day.Sunday;
-                default:
-                    throw new Exception($"Invalid day of week: {dayOfWeek}");
-            }
+                DayOfWeek.Monday => Day.Monday,
+                DayOfWeek.Tuesday => Day.Tuesday,
+                DayOfWeek.Wednesday => Day.Wednesday,
+                DayOfWeek.Thursday => Day.Thursday,
+                DayOfWeek.Friday => Day.Friday,
+                DayOfWeek.Saturday => Day.Saturday,
+                DayOfWeek.Sunday => Day.Sunday,
+                _ => throw new Exception($"Invalid day of week: {dayOfWeek}"),
+            };
         }
     }
 }
