@@ -1,4 +1,5 @@
 ﻿using MusicOrganisationTests.Lib.Databases;
+using SQLite;
 
 namespace MusicOrganisationTests.Lib.Models
 {
@@ -13,24 +14,28 @@ namespace MusicOrganisationTests.Lib.Models
 
         public static string TableName => _TABLE_NAME;
 
+        [PrimaryKey]
         public int Id
         {
             get => _id;
             set => _id = value;
         }
 
+        [NotNull]
         public int PupilId
         {
             get => _pupilId;
             set => _pupilId = value;
         }
 
+        [NotNull]
         public int CaregiverId
         {
             get => _caregiverId;
             set => _caregiverId = value;
         }
 
+        [NotNull]
         public string Description
         {
             get => _description;

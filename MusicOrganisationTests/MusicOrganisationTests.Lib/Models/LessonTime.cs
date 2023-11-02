@@ -23,18 +23,21 @@ namespace MusicOrganisationTests.Lib.Models
             set => _id = value;
         }
 
+        [NotNull]
         public Day DayOfWeek
         {
             get => _dayOfWeek;
             set => _dayOfWeek = value;
         }
 
+        [NotNull]
         public DateTime StartTime
         {
             get => _startTime;
             set => _startTime = value;
         }
 
+        [NotNull]
         public DateTime EndTime
         {
             get => _endTime;

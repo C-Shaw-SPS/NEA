@@ -15,6 +15,9 @@ namespace MusicOrganisationTests.Lib.Models
         private string _subtitle = string.Empty;
         private string _genre = string.Empty;
 
+        public static string TableName => _TABLE_NAME;
+
+
         [PrimaryKey, JsonPropertyName("id"), JsonConverter(typeof(StringToIntConverter))]
         public int Id
         {
@@ -22,35 +25,33 @@ namespace MusicOrganisationTests.Lib.Models
             set => _id = value;
         }
 
-        [JsonPropertyName("composer"), JsonConverter(typeof(ComposerIdConverter))]
+        [NotNull, JsonPropertyName("composer"), JsonConverter(typeof(ComposerIdConverter))]
         public int ComposerId
         {
             get => _composerId;
             set => _composerId = value;
         }
 
-        [JsonPropertyName("title")]
+        [NotNull, JsonPropertyName("title")]
         public string Title
         {
             get => _title;
             set => _title = value;
         }
 
-        [JsonPropertyName("subtitle")]
+        [NotNull, JsonPropertyName("subtitle")]
         public string Subtitle
         {
             get => _subtitle;
             set => _subtitle = value;
         }
 
-        [JsonPropertyName("genre")]
+        [NotNull, JsonPropertyName("genre")]
         public string Genre
         {
             get => _genre;
             set => _genre = value;
         }
-
-        public static string TableName => _TABLE_NAME;
 
         public IEnumerable<string> GetSqlValues()
         {

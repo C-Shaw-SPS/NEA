@@ -25,30 +25,35 @@ namespace MusicOrganisationTests.Lib.Models
             set => _id = value;
         }
 
+        [NotNull]
         public int PupilId
         {
             get => _pupilId;
             set => _pupilId = value;
         }
 
+        [NotNull]
         public int WorkId
         {
             get => _workId;
             set => _workId = value;
         }
 
+        [NotNull]
         public DateTime DateStarted
         {
             get => _dateStarted;
             set => _dateStarted = value;
         }
 
+        [NotNull]
         public string Syllabus
         {
             get => _syllabus;
             set => _syllabus = value;
         }
 
+        [NotNull]
         public RepertoireStatus Status
         {
             get => _status;

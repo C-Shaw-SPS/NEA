@@ -26,21 +26,21 @@ namespace MusicOrganisationTests.Lib.Models
             set => _id = value;
         }
 
-        [JsonPropertyName("name")]
+        [JsonPropertyName("name"), NotNull]
         public string Name
         {
             get => _name;
             set => _name = value;
         }
 
-        [JsonPropertyName("complete_name")]
+        [JsonPropertyName("complete_name"), NotNull]
         public string CompleteName
         {
             get => _completeName;
             set => _completeName = value;
         }
 
-        [JsonPropertyName("birth"), JsonConverter(typeof(DateTimeConverter))]
+        [JsonPropertyName("birth"), JsonConverter(typeof(DateTimeConverter)), NotNull]
         public DateTime BirthDate
         {
             get => _birthDate;
@@ -54,7 +54,7 @@ namespace MusicOrganisationTests.Lib.Models
             set => _deathDate = value;
         }
 
-        [JsonPropertyName("epoch")]
+        [JsonPropertyName("epoch"), NotNull]
         public string Era
         {
             get => _era;

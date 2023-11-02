@@ -21,12 +21,14 @@ namespace MusicOrganisationTests.Lib.Models
             set => _id = value;
         }
 
+        [NotNull]
         public int PupilId
         {
             get => _pupilId;
             set => _pupilId = value;
         }
 
+        [NotNull]
         public int LessonTimeId
         {
             get => _lessonTimeId;

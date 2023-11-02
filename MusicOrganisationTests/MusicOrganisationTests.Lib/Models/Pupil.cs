@@ -19,30 +19,35 @@ namespace MusicOrganisationTests.Lib.Models
 
         public static string TableName => _TABLE_NAME;
 
+        [PrimaryKey]
         public int Id
         {
             get => _id;
             set => _id = value;
         }
 
+        [NotNull]
         public string Name
         {
             get => _name;
             set => _name = value;
         }
 
+        [NotNull]
         public string Level
         {
             get => _level;
             set => _level = value;
         }
 
+        [NotNull]
         public Day LessonDays
         {
             get => _lessonDays;
             set => _lessonDays = value;
         }
 
+        [NotNull]
         public bool HasDifferentTimes
         {
             get => _hasDifferentTimes;

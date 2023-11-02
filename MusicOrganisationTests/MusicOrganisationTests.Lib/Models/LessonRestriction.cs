@@ -24,24 +24,28 @@ namespace MusicOrganisationTests.Lib.Models
             set => _id = value;
         }
 
+        [NotNull]
         public int PupilId
         {
             get => _pupilId;
             set => _pupilId = value;
         }
 
+        [NotNull]
         public Day Day
         {
             get => _day;
             set => _day = value;
         }
 
+        [NotNull]
         public DateTime StartTime
         {
             get => _startTime;
             set => _startTime = value;
         }
 
+        [NotNull]
         public DateTime EndTime
         {
             get => _endTime;

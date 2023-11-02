@@ -15,12 +15,14 @@ namespace MusicOrganisationTests.Lib.Models
 
         public static string TableName => _TABLE_NAME;
 
+        [PrimaryKey]
         public int Id
         {
             get => _id;
             set => _id = value;
         }
 
+        [NotNull]
         public string Name
         {
             get => _name;
