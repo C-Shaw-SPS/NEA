@@ -1,16 +1,18 @@
 ﻿using MusicOrganisationTests.Lib.APIFetching;
+using MusicOrganisationTests.Lib.Databases;
 using MusicOrganisationTests.Lib.Models;
+using MusicOrganisationTests.Lib.Services;
 using System.Reflection;
 
 namespace MusicOrganisationTests.App
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
 
-            IEnumerable<Composer> composers = ComposerGetter.GetFromOpenOpus();
+            PupilService pupilService = new(DatabaseProperties.NAME);
         }
     }
 }
