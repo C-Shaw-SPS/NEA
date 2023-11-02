@@ -11,8 +11,8 @@ namespace MusicOrganisationTests.Tests.Databases
             TableConnection<Composer> composerDatabase = new(nameof(TestMultipleTables));
             TableConnection<Work> workDatabase = new(nameof(TestMultipleTables));
 
-            await composerDatabase.ClearAsync();
-            await workDatabase.ClearAsync();
+            await composerDatabase.ClearDataAsync();
+            await workDatabase.ClearDataAsync();
 
             await composerDatabase.InsertAllAsync(Expected.Composers);
             await workDatabase.InsertAllAsync(Expected.Works);
@@ -37,13 +37,13 @@ namespace MusicOrganisationTests.Tests.Databases
             TableConnection<Composer> composerDatabase = new(nameof(TestClearOneTable));
             TableConnection<Work> workDatabase = new(nameof(TestClearOneTable));
 
-            await composerDatabase.ClearAsync();
-            await workDatabase.ClearAsync();
+            await composerDatabase.ClearDataAsync();
+            await workDatabase.ClearDataAsync();
 
             await composerDatabase.InsertAllAsync(Expected.Composers);
             await workDatabase.InsertAllAsync(Expected.Works);
 
-            await composerDatabase.ClearAsync();
+            await composerDatabase.ClearDataAsync();
 
             IEnumerable<Composer> actualComposers = await composerDatabase.GetAllAsync();
             IEnumerable<Work> actualWorks = await workDatabase.GetAllAsync();

@@ -87,7 +87,7 @@ namespace MusicOrganisationTests.Lib.Databases
             return result;
         }
 
-        public async Task ClearAsync()
+        public async Task ClearDataAsync()
         {
             await InitAsync();
             await _connection.DeleteAllAsync<T>();
