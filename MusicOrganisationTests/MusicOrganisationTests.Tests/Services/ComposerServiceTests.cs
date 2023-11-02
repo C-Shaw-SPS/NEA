@@ -1,4 +1,5 @@
-﻿using MusicOrganisationTests.Lib.Services;
+﻿using MusicOrganisationTests.Lib.Models;
+using MusicOrganisationTests.Lib.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,26 @@ namespace MusicOrganisationTests.Tests.Services
 {
     public class ComposerServiceTests
     {
+
         [Fact]
-        public async Task TestAddComposer()
+        public async Task TestInsertComposer()
         {
-            ComposerService service = new(nameof(TestAddComposer));
-            await service.Add(
-                Expected.Composers[0].Name,
-                Expected.Composers[0].CompleteName,
-                Expected.Composers[0].BirthDate,
-                Expected.Composers[0].DeathDate,
-                Expected.Composers[0].Era,
-                Expected.Composers[0].PortraitLink
+            ComposerService service = new(nameof(TestInsertComposer));
+            await service.ClearData();
+            Composer expectedComposer = Expected.Composers[0];
+            await service.InsertAsync(
+                expectedComposer.Name,
+                expectedComposer.CompleteName,
+                expectedComposer.BirthDate,
+                expectedComposer.DeathDate,
+                expectedComposer.Era,
+                expectedComposer.PortraitLink
                 );
 
+            IEnumerable<Composer> actualComposers = await service.GetAllAsync();
+            Assert.Single(actualComposers);
+            Composer actualComposer = actualComposers.First();
+            Assert.Equal(expectedComposer, actualComposer);
         }
     }
 }
