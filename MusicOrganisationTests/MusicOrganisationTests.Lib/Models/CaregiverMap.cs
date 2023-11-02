@@ -3,6 +3,7 @@ using SQLite;
 
 namespace MusicOrganisationTests.Lib.Models
 {
+    [Table(_TABLE_NAME)]
     public class CaregiverMap : ISqlStorable, IEquatable<CaregiverMap>
     {
         private const string _TABLE_NAME = "CaregiverMap";
