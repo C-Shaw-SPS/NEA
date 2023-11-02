@@ -61,18 +61,6 @@ namespace MusicOrganisationTests.Lib.Models
             set => _phoneNumber = value;
         }
 
-        public bool Equals(Pupil? other)
-        {
-            return other != null
-                && _id == other._id
-                && _name == other._name
-                && _level == other._level
-                && _lessonDays == other._lessonDays
-                && _hasDifferentTimes == other._hasDifferentTimes
-                && _email == other._email
-                && _phoneNumber == other._phoneNumber;
-        }
-
         public static IEnumerable<string> GetColumnNames()
         {
             return new List<string>
@@ -97,6 +85,17 @@ namespace MusicOrganisationTests.Lib.Models
                 _hasDifferentTimes,
                 _email,
                 _phoneNumber);
+        }
+
+        public bool Equals(Pupil? other)
+        {
+            return other != null
+                && _name == other._name
+                && _level == other._level
+                && _lessonDays == other._lessonDays
+                && _hasDifferentTimes == other._hasDifferentTimes
+                && _email == other._email
+                && _phoneNumber == other._phoneNumber;
         }
     }
 }

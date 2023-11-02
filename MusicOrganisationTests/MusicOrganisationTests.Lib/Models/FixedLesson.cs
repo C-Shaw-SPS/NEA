@@ -54,7 +54,6 @@ namespace MusicOrganisationTests.Lib.Models
         public bool Equals(FixedLesson? other)
         {
             return other != null
-                && _id == other._id
                 && _pupilId == other._pupilId
                 && _lessonTimeId == other._lessonTimeId;
         }

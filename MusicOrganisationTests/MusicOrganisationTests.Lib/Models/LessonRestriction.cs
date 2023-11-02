@@ -73,7 +73,6 @@ namespace MusicOrganisationTests.Lib.Models
         public bool Equals(LessonRestriction? other)
         {
             return other != null
-                && _id == other._id
                 && _pupilId == other._pupilId
                 && _day == other._day
                 && _startTime == other._startTime

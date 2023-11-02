@@ -62,7 +62,6 @@ namespace MusicOrganisationTests.Lib.Models
         public bool Equals(Caregiver? other)
         {
             return other != null
-                && _id == other._id
                 && _name == other._name
                 && _email == other._email
                 && _phoneNumber == other._phoneNumber;

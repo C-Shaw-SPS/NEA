@@ -82,7 +82,6 @@ namespace MusicOrganisationTests.Lib.Models
         public bool Equals(Repertoire? other)
         {
             return other != null
-                && _id == other._id
                 && _pupilId == other._pupilId
                 && _workId == other._workId
                 && _dateStarted == other._dateStarted

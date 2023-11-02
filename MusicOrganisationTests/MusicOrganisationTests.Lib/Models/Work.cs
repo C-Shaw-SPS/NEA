@@ -52,16 +52,6 @@ namespace MusicOrganisationTests.Lib.Models
 
         public static string TableName => _TABLE_NAME;
 
-        public bool Equals(Work? other)
-        {
-            return other != null
-                && _id == other._id
-                && _composerId == other._composerId
-                && _title == other._title
-                && _subtitle == other._subtitle
-                && _genre == other._genre;
-        }
-
         public IEnumerable<string> GetSqlValues()
         {
             return SqlFormatting.FormatValues(
@@ -82,6 +72,15 @@ namespace MusicOrganisationTests.Lib.Models
                 nameof(Subtitle),
                 nameof(Genre)
             };
+        }
+
+        public bool Equals(Work? other)
+        {
+            return other != null
+                && _composerId == other._composerId
+                && _title == other._title
+                && _subtitle == other._subtitle
+                && _genre == other._genre;
         }
     }
 }

@@ -88,18 +88,6 @@ namespace MusicOrganisationTests.Lib.Models
             return link.ToString();
         }
 
-        public bool Equals(Composer? other)
-        {
-            return other != null
-                && _id == other._id
-                && _name == other._name
-                && _completeName == other._completeName
-                && _birthDate == other._birthDate
-                && _deathDate == other._deathDate
-                && _era == other._era
-                && _portraitLink == other._portraitLink;
-        }
-
         public IEnumerable<string> GetSqlValues()
         {
             return SqlFormatting.FormatValues(
@@ -124,6 +112,17 @@ namespace MusicOrganisationTests.Lib.Models
                 nameof(Era),
                 nameof(PortraitLink)
             };
+        }
+
+        public bool Equals(Composer? other)
+        {
+            return other != null
+                && _name == other._name
+                && _completeName == other._completeName
+                && _birthDate == other._birthDate
+                && _deathDate == other._deathDate
+                && _era == other._era
+                && _portraitLink == other._portraitLink;
         }
     }
 }

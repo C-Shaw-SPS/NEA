@@ -64,7 +64,6 @@ namespace MusicOrganisationTests.Lib.Models
         public bool Equals(LessonTime? other)
         {
             return other != null
-                && _id == other._id
                 && _dayOfWeek == other._dayOfWeek
                 && _startTime == other._startTime
                 && _endTime == other._endTime;
