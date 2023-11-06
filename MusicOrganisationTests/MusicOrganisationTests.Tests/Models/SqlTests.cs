@@ -70,7 +70,7 @@ namespace MusicOrganisationTests.Tests.Models
             await TestType(Expected.Pupils);
         }
 
-        private async static Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ISqlStorable, new()
+        private async static Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, new()
         {
             TableConnection<T> table = new(nameof(SqlTests));
             await table.ClearDataAsync();

@@ -5,7 +5,7 @@ using SQLite;
 namespace MusicOrganisationTests.Lib.Models
 {
     [Table(_TABLE_NAME)]
-    public class Pupil : IEquatable<Pupil>, ISqlStorable
+    public class Pupil : IEquatable<Pupil>, ITable
     {
         private const string _TABLE_NAME = "Pupils";
 

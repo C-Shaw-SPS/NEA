@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace MusicOrganisationTests.Lib.Models
 {
     [Table(_TABLE_NAME)]
-    public class Work : ISqlStorable, IEquatable<Work>
+    public class Work : ITable, IEquatable<Work>
     {
         private const string _TABLE_NAME = "Works";
         private int _id;

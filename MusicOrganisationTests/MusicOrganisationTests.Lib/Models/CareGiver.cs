@@ -4,7 +4,7 @@ using SQLite;
 namespace MusicOrganisationTests.Lib.Models
 {
     [Table(_TABLE_NAME)]
-    public class Caregiver : ISqlStorable, IEquatable<Caregiver>
+    public class Caregiver : ITable, IEquatable<Caregiver>
     {
         private const string _TABLE_NAME = "Caregivers";
 

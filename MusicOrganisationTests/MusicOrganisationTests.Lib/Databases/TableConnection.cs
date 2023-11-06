@@ -2,7 +2,7 @@
 
 namespace MusicOrganisationTests.Lib.Databases
 {
-    public class TableConnection<T> where T : class, ISqlStorable, new()
+    public class TableConnection<T> where T : class, ITable, new()
     {
         private SQLiteAsyncConnection _connection;
         private readonly string _path;
@@ -61,11 +61,11 @@ namespace MusicOrganisationTests.Lib.Databases
 
         public async Task<T> GetAsync(int id)
         {
-            IEnumerable<T> rows = await GetWhereEqualAsync(nameof(ISqlStorable.Id), id);
+            IEnumerable<T> rows = await GetWhereEqualAsync(nameof(ITable.Id), id);
             T? result = rows.FirstOrDefault();
             if (result == null)
             {
-                throw new Exception($"No row in {T.TableName} with {nameof(ISqlStorable.Id)} {id}");
+                throw new Exception($"No row in {T.TableName} with {nameof(ITable.Id)} {id}");
             }
             else
             {
@@ -102,14 +102,14 @@ namespace MusicOrganisationTests.Lib.Databases
         public async Task<IEnumerable<int>> GetIdsAsync()
         {
             await InitAsync();
-            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT {nameof(ISqlStorable.Id)} FROM {T.TableName}");
+            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT {nameof(ITable.Id)} FROM {T.TableName}");
             return result.Select(c => c.Id);
         }
 
         public async Task<int> GetNextIdAsync()
         {
             await InitAsync();
-            IList<T> result = await _connection.QueryAsync<T>($"SELECT Max({nameof(ISqlStorable.Id)}) AS {nameof(ISqlStorable.Id)} FROM {T.TableName}");
+            IList<T> result = await _connection.QueryAsync<T>($"SELECT Max({nameof(ITable.Id)}) AS {nameof(ITable.Id)} FROM {T.TableName}");
             if (result.Count > 0)
             {
                 return result[0].Id + 1;

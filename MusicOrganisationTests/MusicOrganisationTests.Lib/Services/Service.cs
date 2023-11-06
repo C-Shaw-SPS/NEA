@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MusicOrganisationTests.Lib.Services
 {
-    public abstract class Service<T> where T : class, ISqlStorable, new()
+    public abstract class Service<T> where T : class, ITable, new()
     {
         protected TableConnection<T> _table;
 

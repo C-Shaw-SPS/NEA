@@ -1,6 +1,6 @@
 ﻿namespace MusicOrganisationTests.Lib.Databases
 {
-    public interface ISqlStorable
+    public interface ITable
     {
         public abstract int Id { get; set; }
 

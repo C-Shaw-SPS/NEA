@@ -2,7 +2,7 @@
 
 namespace MusicOrganisationTests.Lib.Databases
 {
-    internal class InsertCommand<T> where T : ISqlStorable, new()
+    internal class InsertCommand<T> where T : ITable, new()
     {
         private StringBuilder _stringBuilder;
         private IEnumerable<string> _columns;

@@ -28,7 +28,7 @@ namespace MusicOrganisationTests.App
             await CreateAndInitTable<Work>(WorkGetter.GetFromOpenOpus());
         }
 
-        static async Task CreateAndInitTable<T>(IEnumerable<T>? data = null) where T : class, ISqlStorable, new()
+        static async Task CreateAndInitTable<T>(IEnumerable<T>? data = null) where T : class, ITable, new()
         {
             TableConnection<T> tableConnection = new(DatabaseProperties.NAME);
             await tableConnection.InitAsync();
