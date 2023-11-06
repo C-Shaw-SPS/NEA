@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 namespace MusicOrganisationTests.Lib.Models
 {
     [Table(_TABLE_NAME)]
-    public class Composer : IEquatable<Composer>, ISqlStorable
+    public class Composer : IEquatable<Composer>, ITable
     {
         private const string _TABLE_NAME = "Composers";
 
