@@ -11,7 +11,7 @@ namespace MusicOrganisationTests.Lib.Services
 
         }
 
-        public async Task AddPupil(string name, string level, Day lessonDays, bool hasDifferentTimes, string? email, string? phoneNumber)
+        public async Task InsertPupilAsync(string name, string level, Day lessonDays, bool hasDifferentTimes, string? email, string? phoneNumber)
         {
             int id = await GetNextIdAsync<Pupil>();
             Pupil pupil = new()
@@ -27,7 +27,7 @@ namespace MusicOrganisationTests.Lib.Services
             await InsertAsync(pupil);
         }
 
-        public async Task AddNewCaregiver(string name, string? email, string? phoneNumber, int pupilId, string description)
+        public async Task InsertNewCaregiverAsync(string name, string? email, string? phoneNumber, int pupilId, string description)
         {
             int caregiverId = await GetNextIdAsync<Caregiver>();
 
@@ -40,10 +40,10 @@ namespace MusicOrganisationTests.Lib.Services
             };
 
             await InsertAsync(caregiver);
-            await AddExistingCaregiver(pupilId, caregiverId, description);
+            await InsertExistingCaregiverAsync(pupilId, caregiverId, description);
         }
 
-        public async Task AddExistingCaregiver(int pupilId, int caregiverId, string description)
+        public async Task InsertExistingCaregiverAsync(int pupilId, int caregiverId, string description)
         {
             int id = await GetNextIdAsync<CaregiverMap>();
             CaregiverMap caregiverMap = new()
@@ -62,9 +62,9 @@ namespace MusicOrganisationTests.Lib.Services
             await InitAsync<Caregiver>();
             await InitAsync<CaregiverMap>();
             string query = $"""
-                SELECT Caregivers.Id, Caregivers.Name, Caregivers.Email, Caregivers.PhoneNumber
-                FROM Caregivers
-                JOIN CaregiverMap
+                SELECT {ITable.GetColumnNamesWithTableName<Caregiver>().CommaJoin()}
+                FROM {Caregiver.TableName}
+                JOIN {CaregiverMap.TableName}
                 ON Caregivers.Id = CaregiverMap.CaregiverId
                 WHERE CaregiverMap.PupilId = {pupilId}
                 """;
