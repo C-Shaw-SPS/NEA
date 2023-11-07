@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicOrganisationTests.Tests.Models
+namespace MusicOrganisationTests.Tests.Services
 {
-    public class SqlTests
+    public class TableTests
     {
         [Fact]
         public async Task TestCaregiverSql()
@@ -72,7 +72,7 @@ namespace MusicOrganisationTests.Tests.Models
 
         private async static Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, new()
         {
-            Service table = new(nameof(SqlTests));
+            Service table = new(nameof(TableTests));
             await table.ClearDataAsync<T>();
             await table.InsertAllAsync(expectedItems);
             IEnumerable<T> actual = await table.GetAllAsync<T>();

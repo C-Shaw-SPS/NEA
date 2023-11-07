@@ -6,8 +6,8 @@ namespace MusicOrganisationTests.Tests.Models
 {
     public class WorkTests
     {
-        const string WORK_PATH = "Models/work.json";
-        const string RESPONSE_PATH = "Models/workResponse.json";
+        const string WORK_PATH = "Json/work.json";
+        const string RESPONSE_PATH = "Json/workResponse.json";
 
         readonly Work expectedWork = new()
         {

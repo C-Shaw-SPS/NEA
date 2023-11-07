@@ -29,16 +29,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Models\composer.json">
+    <None Update="Json\composer.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Models\composerResponse.json">
+    <None Update="Json\composerResponse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Models\work.json">
+    <None Update="Json\work.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Models\workResponse.json">
+    <None Update="Json\workResponse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

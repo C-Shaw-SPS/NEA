@@ -5,8 +5,8 @@ namespace MusicOrganisationTests.Tests.Models
 {
     public class ComposerTests
     {
-        const string COMPOSER_PATH = "Models/composer.json";
-        const string RESPONSE_PATH = "Models/composerResponse.json";
+        const string COMPOSER_PATH = "Json/composer.json";
+        const string RESPONSE_PATH = "Json/composerResponse.json";
 
         readonly Composer expectedComposer = new()
         {
