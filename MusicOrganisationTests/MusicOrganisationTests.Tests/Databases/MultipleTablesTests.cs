@@ -8,8 +8,8 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async void TestMultipleTables()
         {
-            TableConnection<Composer> composerDatabase = new(nameof(TestMultipleTables));
-            TableConnection<Work> workDatabase = new(nameof(TestMultipleTables));
+            Service<Composer> composerDatabase = new(nameof(TestMultipleTables));
+            Service<Work> workDatabase = new(nameof(TestMultipleTables));
 
             await composerDatabase.ClearDataAsync();
             await workDatabase.ClearDataAsync();
@@ -34,8 +34,8 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async void TestClearOneTable()
         {
-            TableConnection<Composer> composerDatabase = new(nameof(TestClearOneTable));
-            TableConnection<Work> workDatabase = new(nameof(TestClearOneTable));
+            Service<Composer> composerDatabase = new(nameof(TestClearOneTable));
+            Service<Work> workDatabase = new(nameof(TestClearOneTable));
 
             await composerDatabase.ClearDataAsync();
             await workDatabase.ClearDataAsync();

@@ -2,12 +2,12 @@
 
 namespace MusicOrganisationTests.Lib.Databases
 {
-    public class TableConnection<T> where T : class, ITable, new()
+    public class Service<T> where T : class, ITable, new()
     {
-        private SQLiteAsyncConnection _connection;
+        protected SQLiteAsyncConnection _connection;
         private readonly string _path;
 
-        public TableConnection(string path)
+        public Service(string path)
         {
             _path = path.FormatAsDatabasePath();
         }

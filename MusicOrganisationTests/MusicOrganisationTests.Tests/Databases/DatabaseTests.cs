@@ -8,7 +8,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestInsertAsync()
         {
-            TableConnection<Composer> table = new(nameof(TestInsertAsync));
+            Service<Composer> table = new(nameof(TestInsertAsync));
             await table.ClearDataAsync();
             await table.InsertAsync(Expected.Composers[0]);
             IEnumerable<Composer> actualComposers = await table.GetAllAsync();
@@ -19,7 +19,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestClearDataAsync()
         {
-            TableConnection<Work> table = new(nameof(TestClearDataAsync));
+            Service<Work> table = new(nameof(TestClearDataAsync));
             await table.ClearDataAsync();
             await table.InsertAllAsync(Expected.Works);
             await table.ClearDataAsync();
@@ -31,7 +31,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestInsertAllAsyncAndGetAllAsync()
         {
-            TableConnection<Composer> table = new(nameof(TestInsertAllAsyncAndGetAllAsync));
+            Service<Composer> table = new(nameof(TestInsertAllAsyncAndGetAllAsync));
             await table.ClearDataAsync();
             await table.InsertAllAsync(Expected.Composers);
             IEnumerable<Composer> actualComposers = await table.GetAllAsync();
@@ -46,7 +46,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestGetAsnyc()
         {
-            TableConnection<Work> table = new(nameof(TestGetAsnyc));
+            Service<Work> table = new(nameof(TestGetAsnyc));
             await table.ClearDataAsync();
             await table.InsertAllAsync(Expected.Works);
             Work actualWork = await table.GetAsync(Expected.Works[0].Id);
@@ -56,7 +56,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestDeleteAsync()
         {
-            TableConnection<Composer> table = new(nameof(TestDeleteAsync));
+            Service<Composer> table = new(nameof(TestDeleteAsync));
             await table.ClearDataAsync();
             await table.InsertAllAsync(Expected.Composers);
             await table.DeleteAsync(Expected.Composers[0]);
@@ -72,7 +72,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestUpdateAsync()
         {
-            TableConnection<Work> table = new(nameof(TestUpdateAsync));
+            Service<Work> table = new(nameof(TestUpdateAsync));
             await table.ClearDataAsync();
             await table.InsertAllAsync(Expected.Works);
             Work updatedWork = new()
@@ -95,7 +95,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestGetIdsAsync()
         {
-            TableConnection<Composer> table = new(nameof(TestGetIdsAsync));
+            Service<Composer> table = new(nameof(TestGetIdsAsync));
             await table.ClearDataAsync();
             await table.InsertAllAsync(Expected.Composers);
             IEnumerable<int> actualIds = await table.GetIdsAsync();
@@ -108,7 +108,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestNullProperties()
         {
-            TableConnection<Composer> table = new(nameof(TestNullProperties));
+            Service<Composer> table = new(nameof(TestNullProperties));
             await table.ClearDataAsync();
             await table.InsertAsync(Expected.NullPropertyComposer);
             IEnumerable<Composer> actualComposers = await table.GetAllAsync();
@@ -119,7 +119,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestGetNextIdAsync()
         {
-            TableConnection<Work> table = new(nameof(TestGetNextIdAsync));
+            Service<Work> table = new(nameof(TestGetNextIdAsync));
             await table.ClearDataAsync();
             await table.InsertAllAsync(Expected.Works);
             int nextId = await table.GetNextIdAsync();
@@ -129,7 +129,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestGetWhereEqualAsync()
         {
-            TableConnection<Composer> table = new(nameof(TestGetWhereEqualAsync));
+            Service<Composer> table = new(nameof(TestGetWhereEqualAsync));
             await table.ClearDataAsync();
             await table.InsertAllAsync(Expected.Composers);
             IEnumerable<Composer> actualComposers = await table.GetWhereEqualAsync(nameof(Composer.Name), Expected.Composers[0].Name);
@@ -139,7 +139,7 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestGetWhereTextLikeAsync()
         {
-            TableConnection<Composer> table = new(nameof(TestGetWhereTextLikeAsync));
+            Service<Composer> table = new(nameof(TestGetWhereTextLikeAsync));
             await table.ClearDataAsync();
             await table.InsertAllAsync(Expected.Composers);
             string expectedText = "ch";

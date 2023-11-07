@@ -1,5 +1,6 @@
 ﻿using MusicOrganisationTests.Lib.APIFetching;
 using MusicOrganisationTests.Lib.Models;
+using MusicOrganisationTests.Lib.Databases;
 
 namespace MusicOrganisationTests.Lib.Services
 {
@@ -10,12 +11,12 @@ namespace MusicOrganisationTests.Lib.Services
         public async Task InitialiseData()
         {
             IEnumerable<Work> works = WorkGetter.GetFromOpenOpus();
-            await _table.InsertAllAsync(works);
+            await InsertAllAsync(works);
         }
 
         public async Task Add(int composerId, string title, string subtitle, string genre)
         {
-            int id = await _table.GetNextIdAsync();
+            int id = await GetNextIdAsync();
             Work work = new()
             {
                 Id = id,
@@ -24,12 +25,12 @@ namespace MusicOrganisationTests.Lib.Services
                 Subtitle = subtitle,
                 Genre = genre
             };
-            await _table.InsertAsync(work);
+            await InsertAsync(work);
         }
 
         public async Task<IEnumerable<Work>> GetFromComposer(Composer composer)
         {
-            return await _table.GetWhereEqualAsync(nameof(Work.ComposerId), composer.Id);
+            return await GetWhereEqualAsync(nameof(Work.ComposerId), composer.Id);
         }
     }
 }

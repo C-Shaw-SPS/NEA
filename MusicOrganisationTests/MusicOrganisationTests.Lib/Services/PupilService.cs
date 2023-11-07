@@ -6,9 +6,9 @@ namespace MusicOrganisationTests.Lib.Services
 {
     public class PupilService : Service<Pupil>
     {
-        private TableConnection<Repertoire> _repertoireTable;
-        private TableConnection<CaregiverMap> _caregiverMapTable;
-        private TableConnection<Caregiver> _caregiverTable;
+        private Service<Repertoire> _repertoireTable;
+        private Service<CaregiverMap> _caregiverMapTable;
+        private Service<Caregiver> _caregiverTable;
 
         public PupilService(string path) : base(path)
         {
@@ -17,17 +17,9 @@ namespace MusicOrganisationTests.Lib.Services
             _caregiverTable = new(path);
         }
 
-        public async Task InitAsync()
-        {
-            await _table.InitAsync();
-            await _repertoireTable.InitAsync();
-            await _caregiverMapTable.InitAsync();
-            await _caregiverTable.InitAsync();
-        }
-
         public async Task Add(string name, string level, Day lessonDays, bool hasDifferentTimes, string? email, string? phoneNumber)
         {
-            int id = await _table.GetNextIdAsync();
+            int id = await GetNextIdAsync();
             Pupil pupil = new()
             {
                 Id = id,
@@ -38,7 +30,7 @@ namespace MusicOrganisationTests.Lib.Services
                 Email = email,
                 PhoneNumber = phoneNumber
             };
-            await _table.InsertAsync(pupil);
+            await InsertAsync(pupil);
         }
 
         public async Task<IEnumerable<Caregiver>> GetCaregiversAsync(int pupilId)

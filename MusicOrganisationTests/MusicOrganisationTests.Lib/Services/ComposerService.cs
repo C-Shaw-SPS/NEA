@@ -17,12 +17,12 @@ namespace MusicOrganisationTests.Lib.Services
         public async Task InitialiseData()
         {
             IEnumerable<Composer> composers = ComposerGetter.GetFromOpenOpus();
-            await _table.InsertAllAsync(composers);
+            await InsertAllAsync(composers);
         }
 
         public async Task InsertAsync(string name, string completeName, DateTime birthDate, DateTime? deathDate, string era, string? portraitLink = null)
         {
-            int id = await _table.GetNextIdAsync();
+            int id = await GetNextIdAsync();
             Composer composer = new()
             {
                 Id = id,
@@ -33,7 +33,7 @@ namespace MusicOrganisationTests.Lib.Services
                 Era = era,
                 PortraitLink = portraitLink
             };
-            await _table.InsertAsync(composer);
+            await InsertAsync(composer);
         }
     }
 }
