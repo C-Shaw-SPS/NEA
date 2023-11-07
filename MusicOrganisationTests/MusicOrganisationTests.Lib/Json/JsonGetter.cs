@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 [assembly: InternalsVisibleTo("MusicOrganisationTests.Tests")]
-namespace MusicOrganisationTests.Lib.APIFetching
+namespace MusicOrganisationTests.Lib.Json
 {
     internal static class JsonGetter
     {

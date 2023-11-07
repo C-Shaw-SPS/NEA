@@ -1,7 +1,7 @@
 ﻿using MusicOrganisationTests.Lib.Tables;
 using MusicOrganisationTests.Lib.Responses;
 
-namespace MusicOrganisationTests.Lib.APIFetching
+namespace MusicOrganisationTests.Lib.Json
 {
     public static class WorkGetter
     {

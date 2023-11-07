@@ -1,7 +1,7 @@
 ﻿using MusicOrganisationTests.Lib.Responses;
 using MusicOrganisationTests.Lib.Tables;
 
-namespace MusicOrganisationTests.Lib.APIFetching
+namespace MusicOrganisationTests.Lib.Json
 {
     public static class ComposerGetter
     {

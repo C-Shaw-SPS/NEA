@@ -1,4 +1,4 @@
-﻿namespace MusicOrganisationTests.Lib.APIFetching
+﻿namespace MusicOrganisationTests.Lib.Json
 {
     internal static class WebReader
     {
