@@ -6,18 +6,12 @@ namespace MusicOrganisationTests.Lib.Services
 {
     public class PupilService : Service<Pupil>
     {
-        private Service<Repertoire> _repertoireTable;
-        private Service<CaregiverMap> _caregiverMapTable;
-        private Service<Caregiver> _caregiverTable;
-
         public PupilService(string path) : base(path)
         {
-            _repertoireTable = new(path);
-            _caregiverMapTable = new(path);
-            _caregiverTable = new(path);
+
         }
 
-        public async Task Add(string name, string level, Day lessonDays, bool hasDifferentTimes, string? email, string? phoneNumber)
+        public async Task AddPupil(string name, string level, Day lessonDays, bool hasDifferentTimes, string? email, string? phoneNumber)
         {
             int id = await GetNextIdAsync();
             Pupil pupil = new()
@@ -35,7 +29,17 @@ namespace MusicOrganisationTests.Lib.Services
 
         public async Task<IEnumerable<Caregiver>> GetCaregiversAsync(int pupilId)
         {
-            throw new NotImplementedException();
+            await InitAsync();
+            string query = $"""
+                SELECT Caregivers.Id, Caregivers.Name, Caregivers.Email, Caregivers.PhoneNumber
+                FROM Caregivers
+                JOIN CaregiverMap
+                ON Caregivers.Id = CaregiverMap.CaregiverId
+                WHERE CaregiverMap.PupilId = {pupilId}
+                """;
+
+            IEnumerable<Caregiver> result = await _connection.QueryAsync<Caregiver>(query);
+            return result;
         }
     }
 }
