@@ -14,12 +14,7 @@ namespace MusicOrganisationTests.Lib.Databases
 
         public async Task InitAsync<T>() where T : class, ITable, new()
         {
-            if (_connection is not null)
-            {
-                return;
-            }
-
-            _connection = new SQLiteAsyncConnection(_path, DatabaseProperties.FLAGS);
+            _connection ??= new SQLiteAsyncConnection(_path, DatabaseProperties.FLAGS);
             await _connection.CreateTableAsync<T>();
         }
 
@@ -86,7 +81,7 @@ namespace MusicOrganisationTests.Lib.Databases
             return result;
         }
 
-        public async Task ClearDataAsync<T>() where T : class, ITable, new()
+        public async Task ClearTableAsync<T>() where T : class, ITable, new()
         {
             await InitAsync<T>();
             await _connection.DeleteAllAsync<T>();
