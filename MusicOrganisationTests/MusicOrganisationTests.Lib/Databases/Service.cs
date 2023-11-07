@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using MusicOrganisationTests.Lib.Models;
+using SQLite;
 
 namespace MusicOrganisationTests.Lib.Databases
 {
@@ -108,10 +109,10 @@ namespace MusicOrganisationTests.Lib.Databases
         public async Task<int> GetNextIdAsync<T>() where T : class, ITable, new()
         {
             await InitAsync<T>();
-            IList<T> result = await _connection.QueryAsync<T>($"SELECT Max({nameof(ITable.Id)}) AS {nameof(ITable.Id)} FROM {T.TableName}");
-            if (result.Count > 0)
+            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT Max({nameof(ITable.Id)}) AS {nameof(ITable.Id)} FROM {T.TableName}");
+            if (result.Any())
             {
-                return result[0].Id + 1;
+                return result.First().Id + 1;
             }
             else
             {
