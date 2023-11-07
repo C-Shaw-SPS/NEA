@@ -18,7 +18,7 @@ namespace MusicOrganisationTests.Lib.Databases
 
         private void AddInsertLine()
         {
-            _stringBuilder.AppendLine($"INSERT INTO {T.TableName} {_columns.CommaJoin()} VALUES");
+            _stringBuilder.AppendLine($"INSERT INTO {T.TableName} {_columns.CommaJoin().AddBrackets()} VALUES");
         }
 
         public void AddValue(T value)
@@ -31,7 +31,7 @@ namespace MusicOrganisationTests.Lib.Databases
             {
                 _containsValues = true;
             }
-            _stringBuilder.Append(value.GetSqlValues().CommaJoin());
+            _stringBuilder.Append(value.GetSqlValues().CommaJoin().AddBrackets());
         }
 
         public override string ToString()

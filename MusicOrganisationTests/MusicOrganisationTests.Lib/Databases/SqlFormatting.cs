@@ -27,7 +27,12 @@ namespace MusicOrganisationTests.Lib.Databases
 
         public static string CommaJoin(this IEnumerable<string> list)
         {
-            return OPEN_BRACKET + string.Join(COMMA_SEPARATOR, list) + CLOSE_BRACKET;
+            return string.Join(COMMA_SEPARATOR, list);
+        }
+
+        public static string AddBrackets(this string s)
+        {
+            return OPEN_BRACKET + s + CLOSE_BRACKET;
         }
 
         public static IEnumerable<string> FormatValues(params object?[] values)
