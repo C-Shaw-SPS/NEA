@@ -27,6 +27,36 @@ namespace MusicOrganisationTests.Lib.Services
             await InsertAsync(pupil);
         }
 
+        public async Task AddNewCaregiver(string name, string? email, string? phoneNumber, int pupilId, string description)
+        {
+            int caregiverId = await GetNextIdAsync<Caregiver>();
+
+            Caregiver caregiver = new()
+            {
+                Id = caregiverId,
+                Name = name,
+                Email = email,
+                PhoneNumber = phoneNumber
+            };
+
+            await InsertAsync(caregiver);
+            await AddExistingCaregiver(pupilId, caregiverId, description);
+        }
+
+        public async Task AddExistingCaregiver(int pupilId, int caregiverId, string description)
+        {
+            int id = await GetNextIdAsync<CaregiverMap>();
+            CaregiverMap caregiverMap = new()
+            {
+                Id = id,
+                PupilId = pupilId,
+                CaregiverId = caregiverId,
+                Description = description
+            };
+
+            await InsertAsync(caregiverMap);
+        }
+
         public async Task<IEnumerable<Caregiver>> GetCaregiversAsync(int pupilId)
         {
             await InitAsync<Caregiver>();
@@ -41,6 +71,11 @@ namespace MusicOrganisationTests.Lib.Services
 
             IEnumerable<Caregiver> result = await _connection.QueryAsync<Caregiver>(query);
             return result;
+        }
+
+        public async Task<IEnumerable<Work>> GetRepertoireAsync(int pupilId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
