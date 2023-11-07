@@ -18,14 +18,14 @@ namespace MusicOrganisationTests.App
         {
             await CreateAndInitTable<Caregiver>();
             await CreateAndInitTable<CaregiverMap>();
-            await CreateAndInitTable<Composer>(ComposerGetter.GetFromOpenOpus());
+            await CreateAndInitTable(ComposerGetter.GetFromOpenOpus());
             await CreateAndInitTable<FixedLesson>();
             await CreateAndInitTable<Lesson>();
             await CreateAndInitTable<LessonRestriction>();
             await CreateAndInitTable<LessonTime>();
             await CreateAndInitTable<Pupil>();
             await CreateAndInitTable<Repertoire>();
-            await CreateAndInitTable<Work>(WorkGetter.GetFromOpenOpus());
+            await CreateAndInitTable(WorkGetter.GetFromOpenOpus());
         }
 
         static async Task CreateAndInitTable<T>(IEnumerable<T>? data = null) where T : class, ITable, new()
