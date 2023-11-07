@@ -10,7 +10,7 @@ namespace MusicOrganisationTests.Tests.Services
         public async Task TestInsertComposer()
         {
             ComposerService service = new(nameof(TestInsertComposer));
-            await service.ClearDataAsync<Composer>();
+            await service.ClearTableAsync<Composer>();
             Composer expectedComposer = Expected.Composers[0];
             await service.InsertComposerAsync(
                 expectedComposer.Name,
