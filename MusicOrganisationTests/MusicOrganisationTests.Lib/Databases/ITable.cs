@@ -1,4 +1,5 @@
-﻿namespace MusicOrganisationTests.Lib.Databases
+﻿
+namespace MusicOrganisationTests.Lib.Databases
 {
     public interface ITable
     {
