@@ -4,7 +4,7 @@ using MusicOrganisationTests.Lib.Models;
 
 namespace MusicOrganisationTests.Lib.Services
 {
-    public class PupilService : Service<Pupil>
+    public class PupilService : Service
     {
         public PupilService(string path) : base(path)
         {
@@ -13,7 +13,7 @@ namespace MusicOrganisationTests.Lib.Services
 
         public async Task AddPupil(string name, string level, Day lessonDays, bool hasDifferentTimes, string? email, string? phoneNumber)
         {
-            int id = await GetNextIdAsync();
+            int id = await GetNextIdAsync<Pupil>();
             Pupil pupil = new()
             {
                 Id = id,
@@ -29,7 +29,8 @@ namespace MusicOrganisationTests.Lib.Services
 
         public async Task<IEnumerable<Caregiver>> GetCaregiversAsync(int pupilId)
         {
-            await InitAsync();
+            await InitAsync<Caregiver>();
+            await InitAsync<CaregiverMap>();
             string query = $"""
                 SELECT Caregivers.Id, Caregivers.Name, Caregivers.Email, Caregivers.PhoneNumber
                 FROM Caregivers
