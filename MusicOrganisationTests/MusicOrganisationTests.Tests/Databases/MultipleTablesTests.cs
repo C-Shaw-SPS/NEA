@@ -8,17 +8,16 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async void TestMultipleTables()
         {
-            Service<Composer> composerDatabase = new(nameof(TestMultipleTables));
-            Service<Work> workDatabase = new(nameof(TestMultipleTables));
+            Service service = new(nameof(TestMultipleTables));
 
-            await composerDatabase.ClearDataAsync();
-            await workDatabase.ClearDataAsync();
+            await service.ClearDataAsync<Composer>();
+            await service.ClearDataAsync<Work>();
 
-            await composerDatabase.InsertAllAsync(Expected.Composers);
-            await workDatabase.InsertAllAsync(Expected.Works);
+            await service.InsertAllAsync(Expected.Composers);
+            await service.InsertAllAsync(Expected.Works);
 
-            IEnumerable<Composer> actualComposers = await composerDatabase.GetAllAsync();
-            IEnumerable<Work> actualWorks = await workDatabase.GetAllAsync();
+            IEnumerable<Composer> actualComposers = await service.GetAllAsync<Composer>();
+            IEnumerable<Work> actualWorks = await service.GetAllAsync<Work>();
 
             foreach (Composer expectedComposer in Expected.Composers)
             {
@@ -34,19 +33,18 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async void TestClearOneTable()
         {
-            Service<Composer> composerDatabase = new(nameof(TestClearOneTable));
-            Service<Work> workDatabase = new(nameof(TestClearOneTable));
+            Service service = new(nameof(TestClearOneTable));
 
-            await composerDatabase.ClearDataAsync();
-            await workDatabase.ClearDataAsync();
+            await service.ClearDataAsync<Composer>();
+            await service.ClearDataAsync<Work>();
 
-            await composerDatabase.InsertAllAsync(Expected.Composers);
-            await workDatabase.InsertAllAsync(Expected.Works);
+            await service.InsertAllAsync(Expected.Composers);
+            await service.InsertAllAsync(Expected.Works);
 
-            await composerDatabase.ClearDataAsync();
+            await service.ClearDataAsync<Composer>();
 
-            IEnumerable<Composer> actualComposers = await composerDatabase.GetAllAsync();
-            IEnumerable<Work> actualWorks = await workDatabase.GetAllAsync();
+            IEnumerable<Composer> actualComposers = await service.GetAllAsync<Composer>();
+            IEnumerable<Work> actualWorks = await service.GetAllAsync<Work>();
 
             Assert.Empty(actualComposers);
 

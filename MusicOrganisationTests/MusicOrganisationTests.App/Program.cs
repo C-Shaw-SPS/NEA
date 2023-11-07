@@ -30,8 +30,8 @@ namespace MusicOrganisationTests.App
 
         static async Task CreateAndInitTable<T>(IEnumerable<T>? data = null) where T : class, ITable, new()
         {
-            Service<T> tableConnection = new(DatabaseProperties.NAME);
-            await tableConnection.InitAsync();
+            Service tableConnection = new(DatabaseProperties.NAME);
+            await tableConnection.InitAsync<T>();
             if (data is not null)
             {
                 await tableConnection.InsertAllAsync(data);

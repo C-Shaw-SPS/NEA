@@ -4,7 +4,7 @@ using MusicOrganisationTests.Lib.Databases;
 
 namespace MusicOrganisationTests.Lib.Services
 {
-    public class WorkService : Service<Work>
+    public class WorkService : Service
     {
         public WorkService(string path) : base(path) { }
 
@@ -14,9 +14,9 @@ namespace MusicOrganisationTests.Lib.Services
             await InsertAllAsync(works);
         }
 
-        public async Task Add(int composerId, string title, string subtitle, string genre)
+        public async Task AddWork(int composerId, string title, string subtitle, string genre)
         {
-            int id = await GetNextIdAsync();
+            int id = await GetNextIdAsync<Work>();
             Work work = new()
             {
                 Id = id,
@@ -30,7 +30,7 @@ namespace MusicOrganisationTests.Lib.Services
 
         public async Task<IEnumerable<Work>> GetFromComposer(Composer composer)
         {
-            return await GetWhereEqualAsync(nameof(Work.ComposerId), composer.Id);
+            return await GetWhereEqualAsync<Work>(nameof(Work.ComposerId), composer.Id);
         }
     }
 }

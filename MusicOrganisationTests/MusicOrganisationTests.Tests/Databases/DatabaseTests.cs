@@ -8,10 +8,10 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestInsertAsync()
         {
-            Service<Composer> table = new(nameof(TestInsertAsync));
-            await table.ClearDataAsync();
+            Service table = new(nameof(TestInsertAsync));
+            await table.ClearDataAsync<Composer>();
             await table.InsertAsync(Expected.Composers[0]);
-            IEnumerable<Composer> actualComposers = await table.GetAllAsync();
+            IEnumerable<Composer> actualComposers = await table.GetAllAsync<Composer>();
             Assert.Single(actualComposers);
             Assert.Contains(Expected.Composers[0], actualComposers);
         }
@@ -19,22 +19,22 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestClearDataAsync()
         {
-            Service<Work> table = new(nameof(TestClearDataAsync));
-            await table.ClearDataAsync();
+            Service table = new(nameof(TestClearDataAsync));
+            await table.ClearDataAsync<Work>();
             await table.InsertAllAsync(Expected.Works);
-            await table.ClearDataAsync();
+            await table.ClearDataAsync<Work>();
 
-            IEnumerable<Work> actualComposers = await table.GetAllAsync();
+            IEnumerable<Work> actualComposers = await table.GetAllAsync<Work>();
             Assert.Empty(actualComposers);
         }
 
         [Fact]
         public async Task TestInsertAllAsyncAndGetAllAsync()
         {
-            Service<Composer> table = new(nameof(TestInsertAllAsyncAndGetAllAsync));
-            await table.ClearDataAsync();
+            Service table = new(nameof(TestInsertAllAsyncAndGetAllAsync));
+            await table.ClearDataAsync<Composer>();
             await table.InsertAllAsync(Expected.Composers);
-            IEnumerable<Composer> actualComposers = await table.GetAllAsync();
+            IEnumerable<Composer> actualComposers = await table.GetAllAsync<Composer>();
 
             Assert.Equal(Expected.Composers.Count, actualComposers.Count());
             foreach (Composer expectedComposer in Expected.Composers)
@@ -46,22 +46,22 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestGetAsnyc()
         {
-            Service<Work> table = new(nameof(TestGetAsnyc));
-            await table.ClearDataAsync();
+            Service table = new(nameof(TestGetAsnyc));
+            await table.ClearDataAsync<Work>();
             await table.InsertAllAsync(Expected.Works);
-            Work actualWork = await table.GetAsync(Expected.Works[0].Id);
+            Work actualWork = await table.GetAsync<Work>(Expected.Works[0].Id);
             Assert.Equal(Expected.Works[0], actualWork);
         }
 
         [Fact]
         public async Task TestDeleteAsync()
         {
-            Service<Composer> table = new(nameof(TestDeleteAsync));
-            await table.ClearDataAsync();
+            Service table = new(nameof(TestDeleteAsync));
+            await table.ClearDataAsync<Composer>();
             await table.InsertAllAsync(Expected.Composers);
             await table.DeleteAsync(Expected.Composers[0]);
 
-            IEnumerable<Composer> actualComposers = await table.GetAllAsync();
+            IEnumerable<Composer> actualComposers = await table.GetAllAsync<Composer>();
             Assert.DoesNotContain(Expected.Composers[0], actualComposers);
             for (int i = 1; i < Expected.Composers.Count; ++i)
             {
@@ -72,8 +72,8 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestUpdateAsync()
         {
-            Service<Work> table = new(nameof(TestUpdateAsync));
-            await table.ClearDataAsync();
+            Service table = new(nameof(TestUpdateAsync));
+            await table.ClearDataAsync<Work>();
             await table.InsertAllAsync(Expected.Works);
             Work updatedWork = new()
             {
@@ -84,7 +84,7 @@ namespace MusicOrganisationTests.Tests.Databases
                 Genre = "Different genre"
             };
             await table.UpdateAsync(updatedWork);
-            IEnumerable<Work> actualWorks = await table.GetAllAsync();
+            IEnumerable<Work> actualWorks = await table.GetAllAsync<Work>();
             Assert.DoesNotContain(Expected.Works[0], actualWorks);
             for (int i = 1; i < Expected.Works.Count; ++i)
             {
@@ -95,10 +95,10 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestGetIdsAsync()
         {
-            Service<Composer> table = new(nameof(TestGetIdsAsync));
-            await table.ClearDataAsync();
+            Service table = new(nameof(TestGetIdsAsync));
+            await table.ClearDataAsync<Composer>();
             await table.InsertAllAsync(Expected.Composers);
-            IEnumerable<int> actualIds = await table.GetIdsAsync();
+            IEnumerable<int> actualIds = await table.GetIdsAsync<Composer>();
             foreach (Composer expectedComposer in Expected.Composers)
             {
                 Assert.Contains(expectedComposer.Id, actualIds);
@@ -108,10 +108,10 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestNullProperties()
         {
-            Service<Composer> table = new(nameof(TestNullProperties));
-            await table.ClearDataAsync();
+            Service table = new(nameof(TestNullProperties));
+            await table.ClearDataAsync<Composer>();
             await table.InsertAsync(Expected.NullPropertyComposer);
-            IEnumerable<Composer> actualComposers = await table.GetAllAsync();
+            IEnumerable<Composer> actualComposers = await table.GetAllAsync<Composer>();
             Assert.Single(actualComposers);
             Assert.Contains(Expected.NullPropertyComposer, actualComposers);
         }
@@ -119,31 +119,31 @@ namespace MusicOrganisationTests.Tests.Databases
         [Fact]
         public async Task TestGetNextIdAsync()
         {
-            Service<Work> table = new(nameof(TestGetNextIdAsync));
-            await table.ClearDataAsync();
+            Service table = new(nameof(TestGetNextIdAsync));
+            await table.ClearDataAsync<Work>();
             await table.InsertAllAsync(Expected.Works);
-            int nextId = await table.GetNextIdAsync();
+            int nextId = await table.GetNextIdAsync<Work>();
             Assert.Equal(Expected.Works.Max(w => w.Id) + 1, nextId);
         }
 
         [Fact]
         public async Task TestGetWhereEqualAsync()
         {
-            Service<Composer> table = new(nameof(TestGetWhereEqualAsync));
-            await table.ClearDataAsync();
+            Service table = new(nameof(TestGetWhereEqualAsync));
+            await table.ClearDataAsync<Composer>();
             await table.InsertAllAsync(Expected.Composers);
-            IEnumerable<Composer> actualComposers = await table.GetWhereEqualAsync(nameof(Composer.Name), Expected.Composers[0].Name);
+            IEnumerable<Composer> actualComposers = await table.GetWhereEqualAsync<Composer>(nameof(Composer.Name), Expected.Composers[0].Name);
             Assert.Contains(Expected.Composers[0], actualComposers);
         }
 
         [Fact]
         public async Task TestGetWhereTextLikeAsync()
         {
-            Service<Composer> table = new(nameof(TestGetWhereTextLikeAsync));
-            await table.ClearDataAsync();
+            Service table = new(nameof(TestGetWhereTextLikeAsync));
+            await table.ClearDataAsync<Composer>();
             await table.InsertAllAsync(Expected.Composers);
             string expectedText = "ch";
-            IEnumerable<Composer> actualComposers = await table.GetWhereTextLikeAsync(nameof(Composer.Name), expectedText);
+            IEnumerable<Composer> actualComposers = await table.GetWhereTextLikeAsync<Composer>(nameof(Composer.Name), expectedText);
             foreach (Composer composer in actualComposers)
             {
                 Assert.Contains(expectedText, composer.Name.ToLower());

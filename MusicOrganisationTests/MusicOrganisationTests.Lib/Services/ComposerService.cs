@@ -4,10 +4,8 @@ using MusicOrganisationTests.Lib.Models;
 
 namespace MusicOrganisationTests.Lib.Services
 {
-    public class ComposerService : Service<Composer>
+    public class ComposerService : Service
     {
-
-
 
         public ComposerService(string path) : base(path)
         {
@@ -20,9 +18,9 @@ namespace MusicOrganisationTests.Lib.Services
             await InsertAllAsync(composers);
         }
 
-        public async Task InsertAsync(string name, string completeName, DateTime birthDate, DateTime? deathDate, string era, string? portraitLink = null)
+        public async Task InsertComposerAsync(string name, string completeName, DateTime birthDate, DateTime? deathDate, string era, string? portraitLink = null)
         {
-            int id = await GetNextIdAsync();
+            int id = await GetNextIdAsync<Composer>();
             Composer composer = new()
             {
                 Id = id,

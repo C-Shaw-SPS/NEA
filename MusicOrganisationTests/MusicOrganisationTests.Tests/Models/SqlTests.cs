@@ -72,10 +72,10 @@ namespace MusicOrganisationTests.Tests.Models
 
         private async static Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, new()
         {
-            Service<T> table = new(nameof(SqlTests));
-            await table.ClearDataAsync();
+            Service table = new(nameof(SqlTests));
+            await table.ClearDataAsync<T>();
             await table.InsertAllAsync(expectedItems);
-            IEnumerable<T> actual = await table.GetAllAsync();
+            IEnumerable<T> actual = await table.GetAllAsync<T>();
             Assert.Equal(expectedItems.Count(), actual.Count());
             foreach (T expectedItem in expectedItems)
             {
