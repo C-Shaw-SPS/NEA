@@ -1,4 +1,4 @@
-﻿using MusicOrganisationTests.Lib.Models;
+﻿using MusicOrganisationTests.Lib.Tables;
 using MusicOrganisationTests.Lib.Responses;
 
 namespace MusicOrganisationTests.Lib.APIFetching

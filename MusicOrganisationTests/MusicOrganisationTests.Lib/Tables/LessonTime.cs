@@ -2,7 +2,7 @@
 using MusicOrganisationTests.Lib.Enums;
 using SQLite;
 
-namespace MusicOrganisationTests.Lib.Models
+namespace MusicOrganisationTests.Lib.Tables
 {
     [Table(_TABLE_NAME)]
     public class LessonTime : ITable, IEquatable<LessonTime>
@@ -63,7 +63,7 @@ namespace MusicOrganisationTests.Lib.Models
                 _startTime,
                 _endTime);
         }
-        
+
         public bool Equals(LessonTime? other)
         {
             return other != null

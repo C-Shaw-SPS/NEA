@@ -2,7 +2,7 @@
 using MusicOrganisationTests.Lib.Enums;
 using SQLite;
 
-namespace MusicOrganisationTests.Lib.Models
+namespace MusicOrganisationTests.Lib.Tables
 {
     [Table(_TABLE_NAME)]
     public class LessonRestriction : ITable, IEquatable<LessonRestriction>

@@ -1,7 +1,7 @@
 ﻿using MusicOrganisationTests.Lib.Databases;
 using SQLite;
 
-namespace MusicOrganisationTests.Lib.Models
+namespace MusicOrganisationTests.Lib.Tables
 {
     [Table(_TABLE_NAME)]
     public class Lesson : ITable, IEquatable<Lesson>

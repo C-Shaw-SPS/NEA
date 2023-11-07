@@ -1,4 +1,4 @@
-﻿using MusicOrganisationTests.Lib.Models;
+﻿using MusicOrganisationTests.Lib.Tables;
 using MusicOrganisationTests.Lib.Converters;
 using System.Text.Json.Serialization;
 

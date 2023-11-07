@@ -4,7 +4,7 @@ using SQLite;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace MusicOrganisationTests.Lib.Models
+namespace MusicOrganisationTests.Lib.Tables
 {
     [Table(_TABLE_NAME)]
     public class Composer : IEquatable<Composer>, ITable

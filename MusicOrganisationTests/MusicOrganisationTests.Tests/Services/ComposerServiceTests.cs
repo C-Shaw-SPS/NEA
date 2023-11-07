@@ -1,10 +1,5 @@
-﻿using MusicOrganisationTests.Lib.Models;
-using MusicOrganisationTests.Lib.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MusicOrganisationTests.Lib.Services;
+using MusicOrganisationTests.Lib.Tables;
 
 namespace MusicOrganisationTests.Tests.Services
 {

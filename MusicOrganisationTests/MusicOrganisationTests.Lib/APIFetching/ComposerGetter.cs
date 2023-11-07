@@ -1,5 +1,5 @@
-﻿using MusicOrganisationTests.Lib.Models;
-using MusicOrganisationTests.Lib.Responses;
+﻿using MusicOrganisationTests.Lib.Responses;
+using MusicOrganisationTests.Lib.Tables;
 
 namespace MusicOrganisationTests.Lib.APIFetching
 {

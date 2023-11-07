@@ -3,7 +3,7 @@ using MusicOrganisationTests.Lib.Databases;
 using SQLite;
 using System.Text.Json.Serialization;
 
-namespace MusicOrganisationTests.Lib.Models
+namespace MusicOrganisationTests.Lib.Tables
 {
     [Table(_TABLE_NAME)]
     public class Work : ITable, IEquatable<Work>

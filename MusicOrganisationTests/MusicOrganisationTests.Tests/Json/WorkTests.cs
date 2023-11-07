@@ -1,8 +1,7 @@
 ﻿using MusicOrganisationTests.Lib.APIFetching;
-using MusicOrganisationTests.Lib.Databases;
-using MusicOrganisationTests.Lib.Models;
+using MusicOrganisationTests.Lib.Tables;
 
-namespace MusicOrganisationTests.Tests.Models
+namespace MusicOrganisationTests.Tests.Json
 {
     public class WorkTests
     {

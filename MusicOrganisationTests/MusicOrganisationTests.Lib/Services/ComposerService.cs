@@ -1,6 +1,6 @@
 ﻿using MusicOrganisationTests.Lib.APIFetching;
 using MusicOrganisationTests.Lib.Databases;
-using MusicOrganisationTests.Lib.Models;
+using MusicOrganisationTests.Lib.Tables;
 
 namespace MusicOrganisationTests.Lib.Services
 {

@@ -1,5 +1,4 @@
-﻿using MusicOrganisationTests.Lib.Models;
-using SQLite;
+﻿using SQLite;
 
 namespace MusicOrganisationTests.Lib.Databases
 {
