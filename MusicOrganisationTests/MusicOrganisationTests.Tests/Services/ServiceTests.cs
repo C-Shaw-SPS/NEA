@@ -10,10 +10,10 @@ namespace MusicOrganisationTests.Tests.Services
         {
             Service table = new(nameof(TestInsertAsync));
             await table.ClearTableAsync<ComposerData>();
-            await table.InsertAsync(Expected.Composers[0]);
+            await table.InsertAsync(Expected.ComposerData[0]);
             IEnumerable<ComposerData> actualComposers = await table.GetAllAsync<ComposerData>();
             Assert.Single(actualComposers);
-            Assert.Contains(Expected.Composers[0], actualComposers);
+            Assert.Contains(Expected.ComposerData[0], actualComposers);
         }
 
         [Fact]
@@ -21,7 +21,7 @@ namespace MusicOrganisationTests.Tests.Services
         {
             Service table = new(nameof(TestClearDataAsync));
             await table.ClearTableAsync<WorkData>();
-            await table.InsertAllAsync(Expected.Works);
+            await table.InsertAllAsync(Expected.WorkData);
             await table.ClearTableAsync<WorkData>();
 
             IEnumerable<WorkData> actualComposers = await table.GetAllAsync<WorkData>();
@@ -33,11 +33,11 @@ namespace MusicOrganisationTests.Tests.Services
         {
             Service table = new(nameof(TestInsertAllAsyncAndGetAllAsync));
             await table.ClearTableAsync<ComposerData>();
-            await table.InsertAllAsync(Expected.Composers);
+            await table.InsertAllAsync(Expected.ComposerData);
             IEnumerable<ComposerData> actualComposers = await table.GetAllAsync<ComposerData>();
 
-            Assert.Equal(Expected.Composers.Count, actualComposers.Count());
-            foreach (ComposerData expectedComposer in Expected.Composers)
+            Assert.Equal(Expected.ComposerData.Count, actualComposers.Count());
+            foreach (ComposerData expectedComposer in Expected.ComposerData)
             {
                 Assert.Contains(expectedComposer, actualComposers);
             }
@@ -48,9 +48,9 @@ namespace MusicOrganisationTests.Tests.Services
         {
             Service table = new(nameof(TestGetAsnyc));
             await table.ClearTableAsync<WorkData>();
-            await table.InsertAllAsync(Expected.Works);
-            WorkData actualWork = await table.GetAsync<WorkData>(Expected.Works[0].Id);
-            Assert.Equal(Expected.Works[0], actualWork);
+            await table.InsertAllAsync(Expected.WorkData);
+            WorkData actualWork = await table.GetAsync<WorkData>(Expected.WorkData[0].Id);
+            Assert.Equal(Expected.WorkData[0], actualWork);
         }
 
         [Fact]
@@ -58,14 +58,14 @@ namespace MusicOrganisationTests.Tests.Services
         {
             Service table = new(nameof(TestDeleteAsync));
             await table.ClearTableAsync<ComposerData>();
-            await table.InsertAllAsync(Expected.Composers);
-            await table.DeleteAsync(Expected.Composers[0]);
+            await table.InsertAllAsync(Expected.ComposerData);
+            await table.DeleteAsync(Expected.ComposerData[0]);
 
             IEnumerable<ComposerData> actualComposers = await table.GetAllAsync<ComposerData>();
-            Assert.DoesNotContain(Expected.Composers[0], actualComposers);
-            for (int i = 1; i < Expected.Composers.Count; ++i)
+            Assert.DoesNotContain(Expected.ComposerData[0], actualComposers);
+            for (int i = 1; i < Expected.ComposerData.Count; ++i)
             {
-                Assert.Contains(Expected.Composers[i], actualComposers);
+                Assert.Contains(Expected.ComposerData[i], actualComposers);
             }
         }
 
@@ -74,21 +74,21 @@ namespace MusicOrganisationTests.Tests.Services
         {
             Service table = new(nameof(TestUpdateAsync));
             await table.ClearTableAsync<WorkData>();
-            await table.InsertAllAsync(Expected.Works);
+            await table.InsertAllAsync(Expected.WorkData);
             WorkData updatedWork = new()
             {
-                Id = Expected.Works[0].Id,
-                ComposerId = Expected.Works[0].ComposerId,
+                Id = Expected.WorkData[0].Id,
+                ComposerId = Expected.WorkData[0].ComposerId,
                 Title = "Something different",
                 Subtitle = "New subtitle",
                 Genre = "Different genre"
             };
             await table.UpdateAsync(updatedWork);
             IEnumerable<WorkData> actualWorks = await table.GetAllAsync<WorkData>();
-            Assert.DoesNotContain(Expected.Works[0], actualWorks);
-            for (int i = 1; i < Expected.Works.Count; ++i)
+            Assert.DoesNotContain(Expected.WorkData[0], actualWorks);
+            for (int i = 1; i < Expected.WorkData.Count; ++i)
             {
-                Assert.Contains(Expected.Works[i], actualWorks);
+                Assert.Contains(Expected.WorkData[i], actualWorks);
             }
         }
 
@@ -97,9 +97,9 @@ namespace MusicOrganisationTests.Tests.Services
         {
             Service table = new(nameof(TestGetIdsAsync));
             await table.ClearTableAsync<ComposerData>();
-            await table.InsertAllAsync(Expected.Composers);
+            await table.InsertAllAsync(Expected.ComposerData);
             IEnumerable<int> actualIds = await table.GetIdsAsync<ComposerData>();
-            foreach (ComposerData expectedComposer in Expected.Composers)
+            foreach (ComposerData expectedComposer in Expected.ComposerData)
             {
                 Assert.Contains(expectedComposer.Id, actualIds);
             }
@@ -121,9 +121,9 @@ namespace MusicOrganisationTests.Tests.Services
         {
             Service table = new(nameof(TestGetNextIdAsync));
             await table.ClearTableAsync<WorkData>();
-            await table.InsertAllAsync(Expected.Works);
+            await table.InsertAllAsync(Expected.WorkData);
             int nextId = await table.GetNextIdAsync<WorkData>();
-            Assert.Equal(Expected.Works.Max(w => w.Id) + 1, nextId);
+            Assert.Equal(Expected.WorkData.Max(w => w.Id) + 1, nextId);
         }
 
         [Fact]
@@ -131,9 +131,9 @@ namespace MusicOrganisationTests.Tests.Services
         {
             Service table = new(nameof(TestGetWhereEqualAsync));
             await table.ClearTableAsync<ComposerData>();
-            await table.InsertAllAsync(Expected.Composers);
-            IEnumerable<ComposerData> actualComposers = await table.GetWhereEqualAsync<ComposerData>(nameof(ComposerData.Name), Expected.Composers[0].Name);
-            Assert.Contains(Expected.Composers[0], actualComposers);
+            await table.InsertAllAsync(Expected.ComposerData);
+            IEnumerable<ComposerData> actualComposers = await table.GetWhereEqualAsync<ComposerData>(nameof(ComposerData.Name), Expected.ComposerData[0].Name);
+            Assert.Contains(Expected.ComposerData[0], actualComposers);
         }
 
         [Fact]
@@ -141,7 +141,7 @@ namespace MusicOrganisationTests.Tests.Services
         {
             Service table = new(nameof(TestGetWhereTextLikeAsync));
             await table.ClearTableAsync<ComposerData>();
-            await table.InsertAllAsync(Expected.Composers);
+            await table.InsertAllAsync(Expected.ComposerData);
             string expectedText = "ch";
             IEnumerable<ComposerData> actualComposers = await table.GetWhereTextLikeAsync<ComposerData>(nameof(ComposerData.Name), expectedText);
             foreach (ComposerData composer in actualComposers)
@@ -158,18 +158,18 @@ namespace MusicOrganisationTests.Tests.Services
             await service.ClearTableAsync<ComposerData>();
             await service.ClearTableAsync<WorkData>();
 
-            await service.InsertAllAsync(Expected.Composers);
-            await service.InsertAllAsync(Expected.Works);
+            await service.InsertAllAsync(Expected.ComposerData);
+            await service.InsertAllAsync(Expected.WorkData);
 
             IEnumerable<ComposerData> actualComposers = await service.GetAllAsync<ComposerData>();
             IEnumerable<WorkData> actualWorks = await service.GetAllAsync<WorkData>();
 
-            foreach (ComposerData expectedComposer in Expected.Composers)
+            foreach (ComposerData expectedComposer in Expected.ComposerData)
             {
                 Assert.Contains(expectedComposer, actualComposers);
             }
 
-            foreach (WorkData expectedWork in Expected.Works)
+            foreach (WorkData expectedWork in Expected.WorkData)
             {
                 Assert.Contains(expectedWork, actualWorks);
             }
@@ -183,8 +183,8 @@ namespace MusicOrganisationTests.Tests.Services
             await service.ClearTableAsync<ComposerData>();
             await service.ClearTableAsync<WorkData>();
 
-            await service.InsertAllAsync(Expected.Composers);
-            await service.InsertAllAsync(Expected.Works);
+            await service.InsertAllAsync(Expected.ComposerData);
+            await service.InsertAllAsync(Expected.WorkData);
 
             await service.ClearTableAsync<ComposerData>();
 
@@ -193,7 +193,7 @@ namespace MusicOrganisationTests.Tests.Services
 
             Assert.Empty(actualComposers);
 
-            foreach (WorkData expectedWork in Expected.Works)
+            foreach (WorkData expectedWork in Expected.WorkData)
             {
                 Assert.Contains(expectedWork, actualWorks);
             }

@@ -1,4 +1,5 @@
-﻿using MusicOrganisationTests.Lib.Services;
+﻿using MusicOrganisationTests.Lib.Models;
+using MusicOrganisationTests.Lib.Services;
 using MusicOrganisationTests.Lib.Tables;
 
 namespace MusicOrganisationTests.Tests.Services
@@ -11,7 +12,8 @@ namespace MusicOrganisationTests.Tests.Services
             PupilService pupilService = new(nameof(TestAddPupilAsync));
             await pupilService.ClearTableAsync<PupilData>();
 
-            PupilData expectedPupil = Expected.Pupils[0];
+
+            PupilData expectedPupil = Expected.PupilData[0];
             await pupilService.InsertPupilAsync(
                 expectedPupil.Name,
                 expectedPupil.Level,
@@ -33,15 +35,15 @@ namespace MusicOrganisationTests.Tests.Services
             await pupilService.ClearTableAsync<CaregiverData>();
             await pupilService.ClearTableAsync<CaregiverMap>();
 
-            PupilData expectedPupil = Expected.Pupils[0];
-            CaregiverData expectedCaregiver = Expected.Caregivers[0];
+            PupilData expectedPupil = Expected.PupilData[0];
+            CaregiverData expectedCaregiverData = Expected.CaregiverData[0];
 
             await pupilService.InsertAsync(expectedPupil);
-            await pupilService.InsertAsync(expectedCaregiver);
-            await pupilService.InsertExistingCaregiverAsync(expectedPupil.Id, expectedCaregiver.Id, nameof(CaregiverData));
-            IEnumerable<CaregiverData> actualCaregivers = await pupilService.GetCaregiversAsync(expectedPupil.Id);
+            await pupilService.InsertAsync(expectedCaregiverData);
+            await pupilService.InsertExistingCaregiverAsync(expectedPupil.Id, expectedCaregiverData.Id, Expected.CaregiverMap[0].Description);
+            IEnumerable<Caregiver> actualCaregivers = await pupilService.GetCaregiversAsync(expectedPupil.Id);
             Assert.Single(actualCaregivers);
-            Assert.Contains(expectedCaregiver, actualCaregivers);
+            Assert.Contains(Expected.Caregiver, actualCaregivers);
         }
     }
 }

@@ -8,61 +8,61 @@ namespace MusicOrganisationTests.Tests.Services
         [Fact]
         public async Task TestCaregiverSql()
         {
-            await TestType(Expected.Caregivers);
+            await TestType(Expected.CaregiverData);
         }
 
         [Fact]
         public async Task TestCaregiverMapSql()
         {
-            await TestType(Expected.CaregiverMaps);
+            await TestType(Expected.CaregiverMap);
         }
 
         [Fact]
         public async Task TestComposerSql()
         {
-            await TestType(Expected.Composers);
+            await TestType(Expected.ComposerData);
         }
 
         [Fact]
         public async Task TestFixedLessonSql()
         {
-            await TestType(Expected.FixedLessons);
+            await TestType(Expected.FixedLessonData);
         }
 
         [Fact]
         public async Task TestLessonSql()
         {
-            await TestType(Expected.Lessons);
+            await TestType(Expected.LessonData);
         }
 
         [Fact]
         public async Task TestLessonRestrictionSql()
         {
-            await TestType(Expected.LessonRestrictions);
+            await TestType(Expected.LessonRestrictionData);
         }
 
         [Fact]
         public async Task TestLessonTimeSql()
         {
-            await TestType(Expected.LessonTimes);
+            await TestType(Expected.LessonTimeData);
         }
 
         [Fact]
         public async Task TestWorkSql()
         {
-            await TestType(Expected.Works);
+            await TestType(Expected.WorkData);
         }
 
         [Fact]
         public async Task TestRepertoireSql()
         {
-            await TestType(Expected.Repertoires);
+            await TestType(Expected.RepertoireData);
         }
 
         [Fact]
         public async Task TestPupilSql()
         {
-            await TestType(Expected.Pupils);
+            await TestType(Expected.PupilData);
         }
 
         private async static Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, new()

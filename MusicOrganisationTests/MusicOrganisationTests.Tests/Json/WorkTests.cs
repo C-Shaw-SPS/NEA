@@ -30,9 +30,9 @@ namespace MusicOrganisationTests.Tests.Json
         {
             IEnumerable<WorkData> actualWorks = WorkGetter.GetFromFile(RESPONSE_PATH);
 
-            Assert.Equal(Expected.Works.Count, actualWorks.Count());
+            Assert.Equal(Expected.WorkData.Count, actualWorks.Count());
 
-            foreach (WorkData expectedWork in Expected.Works)
+            foreach (WorkData expectedWork in Expected.WorkData)
             {
                 Assert.Contains(expectedWork, actualWorks);
             }
