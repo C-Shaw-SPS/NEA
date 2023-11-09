@@ -1,5 +1,6 @@
 ﻿using MusicOrganisationTests.Lib.Databases;
 using MusicOrganisationTests.Lib.Enums;
+using MusicOrganisationTests.Lib.Models;
 using MusicOrganisationTests.Lib.Tables;
 
 namespace MusicOrganisationTests.Lib.Services
@@ -57,25 +58,55 @@ namespace MusicOrganisationTests.Lib.Services
             await InsertAsync(caregiverMap);
         }
 
-        public async Task<IEnumerable<CaregiverData>> GetCaregiversAsync(int pupilId)
+        public async Task<IEnumerable<Caregiver>> GetCaregiversAsync(int pupilId)
         {
             await InitAsync<CaregiverData>();
             await InitAsync<CaregiverMap>();
+
             string query = $"""
-                SELECT {ITable.GetColumnNamesWithTableName<CaregiverData>().CommaJoin()}
+                SELECT
+                {CaregiverMap.TableName}.{nameof(CaregiverMap.Id)} AS {nameof(Caregiver.MapId)},
+                {CaregiverMap.TableName}.{nameof(CaregiverMap.CaregiverId)},
+                {CaregiverMap.TableName}.{nameof(CaregiverMap.Description)},
+                {CaregiverData.TableName}.{nameof(CaregiverData.Name)},
+                {CaregiverData.TableName}.{nameof(CaregiverData.Email)},
+                {CaregiverData.TableName}.{nameof(CaregiverData.PhoneNumber)}
                 FROM {CaregiverData.TableName}
                 JOIN {CaregiverMap.TableName}
                 ON {CaregiverData.TableName}.{nameof(CaregiverData.Id)} = {nameof(CaregiverMap)}.{nameof(CaregiverMap.CaregiverId)}
                 WHERE {CaregiverMap.TableName}.{nameof(CaregiverMap.PupilId)} = {pupilId}
                 """;
 
-            IEnumerable<CaregiverData> result = await _connection.QueryAsync<CaregiverData>(query);
+            IEnumerable<Caregiver> result = await _connection.QueryAsync<Caregiver>(query);
             return result;
         }
 
-        public async Task<IEnumerable<WorkData>> GetRepertoireAsync(int pupilId)
+        public async Task<IEnumerable<Repertoire>> GetRepertoireAsync(int pupilId)
         {
-            throw new NotImplementedException();
+            await InitAsync<RepertoireData>();
+            await InitAsync<WorkData>();
+            await InitAsync<ComposerData>();
+
+            string query = $"""
+                SELECT
+                {RepertoireData.TableName}.{nameof(RepertoireData.Id)} AS {nameof(Repertoire.RepertoireId)},
+                {RepertoireData.TableName}.{nameof(RepertoireData.DateStarted)},
+                {RepertoireData.TableName}.{nameof(RepertoireData.Syllabus)},
+                {RepertoireData.TableName}.{nameof(RepertoireData.Status)},
+                {WorkData.TableName}.{nameof(WorkData.Title)},
+                {WorkData.TableName}.{nameof(WorkData.Subtitle)},
+                {WorkData.TableName}.{nameof(WorkData.Genre)},
+                {ComposerData.TableName}.{nameof(ComposerData.CompleteName)} AS {nameof(Repertoire.ComposerName)}
+                FROM {RepertoireData.TableName}
+                JOIN {WorkData.TableName}
+                ON {RepertoireData.TableName}.{nameof(RepertoireData.WorkId)} = {WorkData.TableName}.{nameof(WorkData.Id)}
+                JOIN {ComposerData.TableName}
+                ON {WorkData.TableName}.{nameof(WorkData.ComposerId)} = {ComposerData.TableName}.{nameof(ComposerData.Id)}
+                WHERE {nameof(RepertoireData.PupilId)} = {pupilId}
+                """;
+
+            IEnumerable<Repertoire> repertoires = await _connection.QueryAsync<Repertoire>(query);
+            return repertoires;
         }
     }
 }
