@@ -1,6 +1,7 @@
-﻿using SQLite;
+﻿using MusicOrganisationTests.Lib.Databases;
+using SQLite;
 
-namespace MusicOrganisationTests.Lib.Databases
+namespace MusicOrganisationTests.Lib.Services
 {
     public class Service
     {
@@ -24,20 +25,20 @@ namespace MusicOrganisationTests.Lib.Databases
             InsertCommand<T> insertCommand = new();
             insertCommand.AddValue(value);
             await _connection.ExecuteAsync(insertCommand.ToString());
-            
+
         }
 
         public async Task InsertAllAsync<T>(IEnumerable<T> values) where T : class, ITable, new()
         {
             await InitAsync<T>();
-            
+
             InsertCommand<T> insertCommand = new();
             foreach (T value in values)
             {
                 insertCommand.AddValue(value);
             }
             await _connection.ExecuteAsync(insertCommand.ToString());
-            
+
         }
 
         public async Task DeleteAsync<T>(T value) where T : class, ITable, new()
