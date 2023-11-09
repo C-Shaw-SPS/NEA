@@ -1,4 +1,5 @@
 ﻿using MusicOrganisationTests.Lib.Enums;
+using MusicOrganisationTests.Lib.Models;
 using MusicOrganisationTests.Lib.Tables;
 
 namespace MusicOrganisationTests.Tests
@@ -17,7 +18,7 @@ namespace MusicOrganisationTests.Tests
         };
 
 
-        public static readonly List<CaregiverData> Caregivers = new()
+        public static readonly List<CaregiverData> CaregiverData = new()
         {
             new CaregiverData
             {
@@ -35,7 +36,7 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<CaregiverMap> CaregiverMaps = new()
+        public static readonly List<CaregiverMap> CaregiverMap = new()
         {
             new CaregiverMap
             {
@@ -52,7 +53,7 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<ComposerData> Composers = new()
+        public static readonly List<ComposerData> ComposerData = new()
         {
             new ComposerData
             {
@@ -97,7 +98,7 @@ namespace MusicOrganisationTests.Tests
             NullPropertyComposer
         };
 
-        public static readonly List<FixedLessonData> FixedLessons = new()
+        public static readonly List<FixedLessonData> FixedLessonData = new()
         {
             new FixedLessonData
             {
@@ -107,7 +108,7 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<LessonData> Lessons = new()
+        public static readonly List<LessonData> LessonData = new()
         {
             new LessonData
             {
@@ -126,7 +127,7 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<LessonRestrictionData> LessonRestrictions = new()
+        public static readonly List<LessonRestrictionData> LessonRestrictionData = new()
         {
             new LessonRestrictionData
             {
@@ -138,7 +139,7 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<LessonTimeData> LessonTimes = new()
+        public static readonly List<LessonTimeData> LessonTimeData = new()
         {
             new LessonTimeData
             {
@@ -149,7 +150,7 @@ namespace MusicOrganisationTests.Tests
             },
         };
 
-        public static readonly List<PupilData> Pupils = new()
+        public static readonly List<PupilData> PupilData = new()
         {
             new PupilData
             {
@@ -172,7 +173,7 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<RepertoireData> Repertoires = new()
+        public static readonly List<RepertoireData> RepertoireData = new()
         {
             new RepertoireData
             {
@@ -193,7 +194,7 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<WorkData> Works = new()
+        public static readonly List<WorkData> WorkData = new()
         {
             new WorkData
             {
@@ -211,6 +212,16 @@ namespace MusicOrganisationTests.Tests
                 Subtitle = "",
                 Genre = "Keyboard"
             }
+        };
+
+        public static readonly Caregiver Caregiver = new()
+        {
+            MapId = CaregiverMap[0].Id,
+            CaregiverId = CaregiverMap[0].CaregiverId,
+            Description = CaregiverMap[0].Description,
+            Name = CaregiverData[0].Name,
+            Email = CaregiverData[0].Email,
+            PhoneNumber = CaregiverData[0].PhoneNumber
         };
     }
 }
