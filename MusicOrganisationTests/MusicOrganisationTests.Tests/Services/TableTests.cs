@@ -65,7 +65,7 @@ namespace MusicOrganisationTests.Tests.Services
             await TestType(Expected.PupilData);
         }
 
-        private async static Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, new()
+        private static async Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, new()
         {
             Service table = new(nameof(TableTests));
             await table.ClearTableAsync<T>();
@@ -76,6 +76,11 @@ namespace MusicOrganisationTests.Tests.Services
             {
                 Assert.Contains(expectedItem, actual);
             }
+        }
+
+        private static async Task TestType<T>(params T[] expectedItems) where T : class, ITable, new()
+        {
+            await TestType((IEnumerable<T>)expectedItems);
         }
     }
 }
