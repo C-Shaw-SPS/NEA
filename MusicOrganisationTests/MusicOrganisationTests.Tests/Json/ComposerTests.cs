@@ -32,9 +32,9 @@ namespace MusicOrganisationTests.Tests.Json
         {
             IEnumerable<ComposerData> actualComposers = ComposerGetter.GetFromFile(RESPONSE_PATH);
 
-            Assert.Equal(Expected.Composers.Count, actualComposers.Count());
+            Assert.Equal(Expected.ComposerData.Count, actualComposers.Count());
 
-            foreach (ComposerData expectedComposer in Expected.Composers)
+            foreach (ComposerData expectedComposer in Expected.ComposerData)
             {
                 Assert.Contains(expectedComposer, actualComposers);
             }
