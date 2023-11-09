@@ -4,8 +4,8 @@ namespace MusicOrganisationTests.Lib.Databases
 {
     internal class InsertCommand<T> where T : ITable, new()
     {
-        private StringBuilder _stringBuilder;
-        private IEnumerable<string> _columns;
+        private readonly StringBuilder _stringBuilder;
+        private readonly IEnumerable<string> _columns;
         private bool _containsValues;
 
         public InsertCommand()
