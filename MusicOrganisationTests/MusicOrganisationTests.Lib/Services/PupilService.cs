@@ -62,23 +62,27 @@ namespace MusicOrganisationTests.Lib.Services
         {
             await InitAsync<CaregiverData>();
             await InitAsync<CaregiverMap>();
+            string query = GetCaregiverQuery(pupilId);
+            IEnumerable<Caregiver> result = await _connection.QueryAsync<Caregiver>(query);
+            return result;
+        }
 
+        public static string GetCaregiverQuery(int pupilId)
+        {
             string query = $"""
                 SELECT
                 {CaregiverMap.TableName}.{nameof(CaregiverMap.Id)} AS {nameof(Caregiver.MapId)},
-                {CaregiverMap.TableName}.{nameof(CaregiverMap.CaregiverId)},
-                {CaregiverMap.TableName}.{nameof(CaregiverMap.Description)},
-                {CaregiverData.TableName}.{nameof(CaregiverData.Name)},
-                {CaregiverData.TableName}.{nameof(CaregiverData.Email)},
-                {CaregiverData.TableName}.{nameof(CaregiverData.PhoneNumber)}
+                {CaregiverMap.TableName}.{nameof(CaregiverMap.Description)} AS {nameof(Caregiver.Description)},
+                {CaregiverData.TableName}.{nameof(CaregiverData.Id)} AS {nameof(Caregiver.CaregiverId)},
+                {CaregiverData.TableName}.{nameof(CaregiverData.Name)} AS {nameof(Caregiver.Name)},
+                {CaregiverData.TableName}.{nameof(CaregiverData.Email)} AS {nameof(Caregiver.Email)},
+                {CaregiverData.TableName}.{nameof(CaregiverData.PhoneNumber)} AS {nameof(Caregiver.PhoneNumber)}
                 FROM {CaregiverData.TableName}
                 JOIN {CaregiverMap.TableName}
                 ON {CaregiverData.TableName}.{nameof(CaregiverData.Id)} = {nameof(CaregiverMap)}.{nameof(CaregiverMap.CaregiverId)}
                 WHERE {CaregiverMap.TableName}.{nameof(CaregiverMap.PupilId)} = {pupilId}
                 """;
-
-            IEnumerable<Caregiver> result = await _connection.QueryAsync<Caregiver>(query);
-            return result;
+            return query;
         }
 
         public async Task<IEnumerable<Repertoire>> GetRepertoireAsync(int pupilId)
@@ -86,16 +90,24 @@ namespace MusicOrganisationTests.Lib.Services
             await InitAsync<RepertoireData>();
             await InitAsync<WorkData>();
             await InitAsync<ComposerData>();
+            string query = GetRepertoireQuery(pupilId);
+            IEnumerable<Repertoire> repertoires = await _connection.QueryAsync<Repertoire>(query);
+            return repertoires;
+        }
 
+        private static string GetRepertoireQuery(int pupilId)
+        {
             string query = $"""
                 SELECT
                 {RepertoireData.TableName}.{nameof(RepertoireData.Id)} AS {nameof(Repertoire.RepertoireId)},
-                {RepertoireData.TableName}.{nameof(RepertoireData.DateStarted)},
-                {RepertoireData.TableName}.{nameof(RepertoireData.Syllabus)},
-                {RepertoireData.TableName}.{nameof(RepertoireData.Status)},
-                {WorkData.TableName}.{nameof(WorkData.Title)},
-                {WorkData.TableName}.{nameof(WorkData.Subtitle)},
-                {WorkData.TableName}.{nameof(WorkData.Genre)},
+                {RepertoireData.TableName}.{nameof(RepertoireData.DateStarted)} AS {nameof(Repertoire.DateStarted)},
+                {RepertoireData.TableName}.{nameof(RepertoireData.Syllabus)} AS {nameof(Repertoire.Syllabus)},
+                {RepertoireData.TableName}.{nameof(RepertoireData.Status)} AS {nameof(Repertoire.Status)},
+                {WorkData.TableName}.{nameof(WorkData.Id)} AS {nameof(Repertoire.WorkId)},
+                {WorkData.TableName}.{nameof(WorkData.Title)} AS {nameof(Repertoire.Title)},
+                {WorkData.TableName}.{nameof(WorkData.Subtitle)} AS {nameof(Repertoire.Subtitle)},
+                {WorkData.TableName}.{nameof(WorkData.Genre)} AS {nameof(Repertoire.Genre)},
+                {ComposerData.TableName}.{nameof(ComposerData.Id)} AS {nameof(Repertoire.ComposerId)},
                 {ComposerData.TableName}.{nameof(ComposerData.CompleteName)} AS {nameof(Repertoire.ComposerName)}
                 FROM {RepertoireData.TableName}
                 JOIN {WorkData.TableName}
@@ -104,9 +116,7 @@ namespace MusicOrganisationTests.Lib.Services
                 ON {WorkData.TableName}.{nameof(WorkData.ComposerId)} = {ComposerData.TableName}.{nameof(ComposerData.Id)}
                 WHERE {nameof(RepertoireData.PupilId)} = {pupilId}
                 """;
-
-            IEnumerable<Repertoire> repertoires = await _connection.QueryAsync<Repertoire>(query);
-            return repertoires;
+            return query;
         }
     }
 }
