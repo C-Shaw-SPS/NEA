@@ -5,12 +5,13 @@ using SQLite;
 namespace MusicOrganisationTests.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class LessonTime : ITable, IEquatable<LessonTime>
+    public class LessonRestrictionData : ITable, IEquatable<LessonRestrictionData>
     {
-        private const string _TABLE_NAME = "LessonTimes";
+        private const string _TABLE_NAME = nameof(LessonRestrictionData);
 
         private int _id;
-        private Day _dayOfWeek;
+        private int _pupilId;
+        private Day _day;
         private DateTime _startTime;
         private DateTime _endTime;
 
@@ -24,10 +25,17 @@ namespace MusicOrganisationTests.Lib.Tables
         }
 
         [NotNull]
-        public Day DayOfWeek
+        public int PupilId
         {
-            get => _dayOfWeek;
-            set => _dayOfWeek = value;
+            get => _pupilId;
+            set => _pupilId = value;
+        }
+
+        [NotNull]
+        public Day Day
+        {
+            get => _day;
+            set => _day = value;
         }
 
         [NotNull]
@@ -49,7 +57,8 @@ namespace MusicOrganisationTests.Lib.Tables
             return new List<string>
             {
                 nameof(Id),
-                nameof(DayOfWeek),
+                nameof(PupilId),
+                nameof(Day),
                 nameof(StartTime),
                 nameof(EndTime)
             };
@@ -59,15 +68,17 @@ namespace MusicOrganisationTests.Lib.Tables
         {
             return SqlFormatting.FormatValues(
                 _id,
-                _dayOfWeek,
+                _pupilId,
+                _day,
                 _startTime,
                 _endTime);
         }
 
-        public bool Equals(LessonTime? other)
+        public bool Equals(LessonRestrictionData? other)
         {
             return other != null
-                && _dayOfWeek == other._dayOfWeek
+                && _pupilId == other._pupilId
+                && _day == other._day
                 && _startTime == other._startTime
                 && _endTime == other._endTime;
         }

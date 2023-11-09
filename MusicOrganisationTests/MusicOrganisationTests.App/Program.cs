@@ -14,15 +14,15 @@ namespace MusicOrganisationTests.App
 
         static async Task CreateEmptyDatabase()
         {
-            await CreateAndInitTable<Caregiver>();
+            await CreateAndInitTable<CaregiverData>();
             await CreateAndInitTable<CaregiverMap>();
             await CreateAndInitTable(ComposerGetter.GetFromOpenOpus());
-            await CreateAndInitTable<FixedLesson>();
-            await CreateAndInitTable<Lesson>();
-            await CreateAndInitTable<LessonRestriction>();
-            await CreateAndInitTable<LessonTime>();
-            await CreateAndInitTable<Pupil>();
-            await CreateAndInitTable<Repertoire>();
+            await CreateAndInitTable<FixedLessonData>();
+            await CreateAndInitTable<LessonData>();
+            await CreateAndInitTable<LessonRestrictionData>();
+            await CreateAndInitTable<LessonTimeData>();
+            await CreateAndInitTable<PupilData>();
+            await CreateAndInitTable<RepertoireData>();
             await CreateAndInitTable(WorkGetter.GetFromOpenOpus());
         }
 

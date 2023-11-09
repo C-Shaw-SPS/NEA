@@ -5,7 +5,7 @@ namespace MusicOrganisationTests.Tests
 {
     internal static class Expected
     {
-        public static readonly Composer NullPropertyComposer = new()
+        public static readonly ComposerData NullPropertyComposer = new()
         {
             Id = 91,
             Name = "Bunch",
@@ -17,16 +17,16 @@ namespace MusicOrganisationTests.Tests
         };
 
 
-        public static readonly List<Caregiver> Caregivers = new()
+        public static readonly List<CaregiverData> Caregivers = new()
         {
-            new Caregiver
+            new CaregiverData
             {
                 Id = 0,
                 Name = "Caregiver 0",
                 Email = "caregiver0@email.com",
                 PhoneNumber = "0123456789"
             },
-            new Caregiver
+            new CaregiverData
             {
                 Id = 1,
                 Name = "Caregiver 1",
@@ -52,9 +52,9 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<Composer> Composers = new()
+        public static readonly List<ComposerData> Composers = new()
         {
-            new Composer
+            new ComposerData
             {
                 Id = 36,
                 Name = "Vaughan Williams",
@@ -64,7 +64,7 @@ namespace MusicOrganisationTests.Tests
                 Era = "Late Romantic",
                 PortraitLink = "https://assets.openopus.org/portraits/72161419-1568084957.jpg"
             },
-            new Composer
+            new ComposerData
             {
                 Id = 87,
                 Name = "Bach",
@@ -74,7 +74,7 @@ namespace MusicOrganisationTests.Tests
                 Era = "Baroque",
                 PortraitLink = "https://assets.openopus.org/portraits/12091447-1568084857.jpg"
             },
-            new Composer
+            new ComposerData
             {
                 Id = 176,
                 Name = "Reich",
@@ -84,7 +84,7 @@ namespace MusicOrganisationTests.Tests
                 Era = "Post-War",
                 PortraitLink = "https://assets.openopus.org/portraits/65680484-1568084938.jpg"
             },
-            new Composer
+            new ComposerData
             {
                 Id = 196,
                 Name = "Mozart",
@@ -97,9 +97,9 @@ namespace MusicOrganisationTests.Tests
             NullPropertyComposer
         };
 
-        public static readonly List<FixedLesson> FixedLessons = new()
+        public static readonly List<FixedLessonData> FixedLessons = new()
         {
-            new FixedLesson
+            new FixedLessonData
             {
                 Id = 0,
                 PupilId = 0,
@@ -107,9 +107,9 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<Lesson> Lessons = new()
+        public static readonly List<LessonData> Lessons = new()
         {
-            new Lesson
+            new LessonData
             {
                 Id = 0,
                 PupilId = 0,
@@ -117,7 +117,7 @@ namespace MusicOrganisationTests.Tests
                 Date = DateTime.Parse("30/10/2023"),
                 NotesFile = "notes.txt"
             },
-            new Lesson
+            new LessonData
             {
                 Id = 1,
                 PupilId = 1,
@@ -126,9 +126,9 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<LessonRestriction> LessonRestrictions = new()
+        public static readonly List<LessonRestrictionData> LessonRestrictions = new()
         {
-            new LessonRestriction
+            new LessonRestrictionData
             {
                 Id = 0,
                 PupilId = 0,
@@ -138,9 +138,9 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<LessonTime> LessonTimes = new()
+        public static readonly List<LessonTimeData> LessonTimes = new()
         {
-            new LessonTime
+            new LessonTimeData
             {
                 Id = 0,
                 DayOfWeek = Day.Monday,
@@ -149,9 +149,9 @@ namespace MusicOrganisationTests.Tests
             },
         };
 
-        public static readonly List<Pupil> Pupils = new()
+        public static readonly List<PupilData> Pupils = new()
         {
-            new Pupil
+            new PupilData
             {
                 Id = 0,
                 Name = "Pupil 0",
@@ -161,7 +161,7 @@ namespace MusicOrganisationTests.Tests
                 PhoneNumber = "0123456789",
                 Email = "pupil0@email.com"
             },
-            new Pupil
+            new PupilData
             {
                 Id = 1,
                 Name = "Pupil 1",
@@ -172,9 +172,9 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<Repertoire> Repertoires = new()
+        public static readonly List<RepertoireData> Repertoires = new()
         {
-            new Repertoire
+            new RepertoireData
             {
                 Id = 0,
                 PupilId = 0,
@@ -183,7 +183,7 @@ namespace MusicOrganisationTests.Tests
                 Syllabus = "Grade 8",
                 Status = RepertoireStatus.CurrentlyLearning
             },
-            new Repertoire
+            new RepertoireData
             {
                 Id = 1,
                 PupilId = 1,
@@ -193,9 +193,9 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<Work> Works = new()
+        public static readonly List<WorkData> Works = new()
         {
-            new Work
+            new WorkData
             {
                 Id = 20086,
                 ComposerId = 176,
@@ -203,7 +203,7 @@ namespace MusicOrganisationTests.Tests
                 Subtitle = "",
                 Genre = "Orchestral"
             },
-            new Work
+            new WorkData
             {
                 Id = 25115,
                 ComposerId = 202,

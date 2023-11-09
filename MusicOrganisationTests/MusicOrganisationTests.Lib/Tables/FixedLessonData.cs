@@ -1,19 +1,16 @@
 ﻿using MusicOrganisationTests.Lib.Databases;
-using MusicOrganisationTests.Lib.Enums;
 using SQLite;
 
 namespace MusicOrganisationTests.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class LessonRestriction : ITable, IEquatable<LessonRestriction>
+    public class FixedLessonData : ITable, IEquatable<FixedLessonData>
     {
-        private const string _TABLE_NAME = "LessonRestrictions";
+        private const string _TABLE_NAME = nameof(FixedLessonData);
 
         private int _id;
         private int _pupilId;
-        private Day _day;
-        private DateTime _startTime;
-        private DateTime _endTime;
+        private int _lessonTimeId;
 
         public static string TableName => _TABLE_NAME;
 
@@ -32,24 +29,10 @@ namespace MusicOrganisationTests.Lib.Tables
         }
 
         [NotNull]
-        public Day Day
+        public int LessonTimeId
         {
-            get => _day;
-            set => _day = value;
-        }
-
-        [NotNull]
-        public DateTime StartTime
-        {
-            get => _startTime;
-            set => _startTime = value;
-        }
-
-        [NotNull]
-        public DateTime EndTime
-        {
-            get => _endTime;
-            set => _endTime = value;
+            get => _lessonTimeId;
+            set => _lessonTimeId = value;
         }
 
         public static IEnumerable<string> GetColumnNames()
@@ -58,9 +41,7 @@ namespace MusicOrganisationTests.Lib.Tables
             {
                 nameof(Id),
                 nameof(PupilId),
-                nameof(Day),
-                nameof(StartTime),
-                nameof(EndTime)
+                nameof(LessonTimeId)
             };
         }
 
@@ -69,18 +50,14 @@ namespace MusicOrganisationTests.Lib.Tables
             return SqlFormatting.FormatValues(
                 _id,
                 _pupilId,
-                _day,
-                _startTime,
-                _endTime);
+                _lessonTimeId);
         }
 
-        public bool Equals(LessonRestriction? other)
+        public bool Equals(FixedLessonData? other)
         {
             return other != null
                 && _pupilId == other._pupilId
-                && _day == other._day
-                && _startTime == other._startTime
-                && _endTime == other._endTime;
+                && _lessonTimeId == other._lessonTimeId;
         }
     }
 }

@@ -10,8 +10,8 @@ namespace MusicOrganisationTests.Tests.Services
         public async Task TestInsertComposer()
         {
             ComposerService service = new(nameof(TestInsertComposer));
-            await service.ClearTableAsync<Composer>();
-            Composer expectedComposer = Expected.Composers[0];
+            await service.ClearTableAsync<ComposerData>();
+            ComposerData expectedComposer = Expected.Composers[0];
             await service.InsertComposerAsync(
                 expectedComposer.Name,
                 expectedComposer.CompleteName,
@@ -21,9 +21,9 @@ namespace MusicOrganisationTests.Tests.Services
                 expectedComposer.PortraitLink
                 );
 
-            IEnumerable<Composer> actualComposers = await service.GetAllAsync<Composer>();
+            IEnumerable<ComposerData> actualComposers = await service.GetAllAsync<ComposerData>();
             Assert.Single(actualComposers);
-            Composer actualComposer = actualComposers.First();
+            ComposerData actualComposer = actualComposers.First();
             Assert.Equal(expectedComposer, actualComposer);
         }
     }

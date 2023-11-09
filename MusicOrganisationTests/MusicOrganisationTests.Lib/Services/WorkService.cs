@@ -10,14 +10,14 @@ namespace MusicOrganisationTests.Lib.Services
 
         public async Task InitialiseData()
         {
-            IEnumerable<Work> works = WorkGetter.GetFromOpenOpus();
+            IEnumerable<WorkData> works = WorkGetter.GetFromOpenOpus();
             await InsertAllAsync(works);
         }
 
         public async Task AddWork(int composerId, string title, string subtitle, string genre)
         {
-            int id = await GetNextIdAsync<Work>();
-            Work work = new()
+            int id = await GetNextIdAsync<WorkData>();
+            WorkData work = new()
             {
                 Id = id,
                 ComposerId = composerId,
@@ -28,9 +28,9 @@ namespace MusicOrganisationTests.Lib.Services
             await InsertAsync(work);
         }
 
-        public async Task<IEnumerable<Work>> GetFromComposer(Composer composer)
+        public async Task<IEnumerable<WorkData>> GetFromComposer(ComposerData composer)
         {
-            return await GetWhereEqualAsync<Work>(nameof(Work.ComposerId), composer.Id);
+            return await GetWhereEqualAsync<WorkData>(nameof(WorkData.ComposerId), composer.Id);
         }
     }
 }

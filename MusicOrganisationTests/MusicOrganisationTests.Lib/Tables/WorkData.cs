@@ -6,9 +6,9 @@ using System.Text.Json.Serialization;
 namespace MusicOrganisationTests.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class Work : ITable, IEquatable<Work>
+    public class WorkData : ITable, IEquatable<WorkData>
     {
-        private const string _TABLE_NAME = "Works";
+        private const string _TABLE_NAME = nameof(WorkData);
         private int _id;
         private int _composerId;
         private string _title = string.Empty;
@@ -75,7 +75,7 @@ namespace MusicOrganisationTests.Lib.Tables
             };
         }
 
-        public bool Equals(Work? other)
+        public bool Equals(WorkData? other)
         {
             return other != null
                 && _composerId == other._composerId

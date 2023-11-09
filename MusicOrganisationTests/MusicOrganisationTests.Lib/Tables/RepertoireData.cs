@@ -5,9 +5,9 @@ using SQLite;
 namespace MusicOrganisationTests.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class Repertoire : ITable, IEquatable<Repertoire>
+    public class RepertoireData : ITable, IEquatable<RepertoireData>
     {
-        private const string _TABLE_NAME = "Repertoire";
+        private const string _TABLE_NAME = nameof(RepertoireData);
 
         private int _id;
         private int _pupilId;
@@ -84,7 +84,7 @@ namespace MusicOrganisationTests.Lib.Tables
                 _status);
         }
 
-        public bool Equals(Repertoire? other)
+        public bool Equals(RepertoireData? other)
         {
             return other != null
                 && _pupilId == other._pupilId

@@ -14,14 +14,14 @@ namespace MusicOrganisationTests.Lib.Services
 
         public async Task InitialiseData()
         {
-            IEnumerable<Composer> composers = ComposerGetter.GetFromOpenOpus();
+            IEnumerable<ComposerData> composers = ComposerGetter.GetFromOpenOpus();
             await InsertAllAsync(composers);
         }
 
         public async Task InsertComposerAsync(string name, string completeName, DateTime birthDate, DateTime? deathDate, string era, string? portraitLink = null)
         {
-            int id = await GetNextIdAsync<Composer>();
-            Composer composer = new()
+            int id = await GetNextIdAsync<ComposerData>();
+            ComposerData composer = new()
             {
                 Id = id,
                 Name = name,

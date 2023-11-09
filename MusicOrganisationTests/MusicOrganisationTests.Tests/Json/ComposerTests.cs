@@ -8,7 +8,7 @@ namespace MusicOrganisationTests.Tests.Json
         const string COMPOSER_PATH = "Json/composer.json";
         const string RESPONSE_PATH = "Json/composerResponse.json";
 
-        readonly Composer expectedComposer = new()
+        readonly ComposerData expectedComposer = new()
         {
             Id = 87,
             Name = "Bach",
@@ -22,7 +22,7 @@ namespace MusicOrganisationTests.Tests.Json
         [Fact]
         public void TestJsonDeserialiseComposer()
         {
-            Composer? actualComposer = JsonGetter.GetFromFile<Composer>(COMPOSER_PATH);
+            ComposerData? actualComposer = JsonGetter.GetFromFile<ComposerData>(COMPOSER_PATH);
             Assert.NotNull(actualComposer);
             Assert.Equal(expectedComposer, actualComposer);
         }
@@ -30,11 +30,11 @@ namespace MusicOrganisationTests.Tests.Json
         [Fact]
         public void TestComposerGetter()
         {
-            IEnumerable<Composer> actualComposers = ComposerGetter.GetFromFile(RESPONSE_PATH);
+            IEnumerable<ComposerData> actualComposers = ComposerGetter.GetFromFile(RESPONSE_PATH);
 
             Assert.Equal(Expected.Composers.Count, actualComposers.Count());
 
-            foreach (Composer expectedComposer in Expected.Composers)
+            foreach (ComposerData expectedComposer in Expected.Composers)
             {
                 Assert.Contains(expectedComposer, actualComposers);
             }

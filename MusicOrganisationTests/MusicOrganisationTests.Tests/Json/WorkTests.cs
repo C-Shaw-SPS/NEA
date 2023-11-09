@@ -8,7 +8,7 @@ namespace MusicOrganisationTests.Tests.Json
         const string WORK_PATH = "Json/work.json";
         const string RESPONSE_PATH = "Json/workResponse.json";
 
-        readonly Work expectedWork = new()
+        readonly WorkData expectedWork = new()
         {
             Id = 20086,
             ComposerId = 176,
@@ -20,7 +20,7 @@ namespace MusicOrganisationTests.Tests.Json
         [Fact]
         public void TestJsonDeserialiseWork()
         {
-            Work? actualWork = JsonGetter.GetFromFile<Work>(WORK_PATH);
+            WorkData? actualWork = JsonGetter.GetFromFile<WorkData>(WORK_PATH);
             Assert.NotNull(actualWork);
             Assert.Equal(expectedWork, actualWork);
         }
@@ -28,11 +28,11 @@ namespace MusicOrganisationTests.Tests.Json
         [Fact]
         public void TestWorkResponse()
         {
-            IEnumerable<Work> actualWorks = WorkGetter.GetFromFile(RESPONSE_PATH);
+            IEnumerable<WorkData> actualWorks = WorkGetter.GetFromFile(RESPONSE_PATH);
 
             Assert.Equal(Expected.Works.Count, actualWorks.Count());
 
-            foreach (Work expectedWork in Expected.Works)
+            foreach (WorkData expectedWork in Expected.Works)
             {
                 Assert.Contains(expectedWork, actualWorks);
             }

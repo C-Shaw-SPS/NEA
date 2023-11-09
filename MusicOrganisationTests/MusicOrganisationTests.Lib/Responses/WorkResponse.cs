@@ -4,12 +4,12 @@ using System.Text.Json.Serialization;
 
 namespace MusicOrganisationTests.Lib.Responses
 {
-    internal class WorkResponse : IResponse<Work>
+    internal class WorkResponse : IResponse<WorkData>
     {
-        private IEnumerable<Work> _data = new List<Work>();
+        private IEnumerable<WorkData> _data = new List<WorkData>();
 
-        [JsonPropertyName("works"), JsonConverter(typeof(DictionaryToIEnumerableConverter<string, Work>))]
-        public IEnumerable<Work> Values
+        [JsonPropertyName("works"), JsonConverter(typeof(DictionaryToIEnumerableConverter<string, WorkData>))]
+        public IEnumerable<WorkData> Values
         {
             get
             {

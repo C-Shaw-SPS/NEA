@@ -6,14 +6,14 @@ namespace MusicOrganisationTests.Lib.Json
     public static class ComposerGetter
     {
         private const string _URL = "https://api.openopus.org/composer/list/search/.json";
-        public static IEnumerable<Composer> GetFromOpenOpus()
+        public static IEnumerable<ComposerData> GetFromOpenOpus()
         {
-            return JsonGetter.GetFromUrl<Composer, ComposerResponse>(_URL);
+            return JsonGetter.GetFromUrl<ComposerData, ComposerResponse>(_URL);
         }
 
-        public static IEnumerable<Composer> GetFromFile(string filePath)
+        public static IEnumerable<ComposerData> GetFromFile(string filePath)
         {
-            return JsonGetter.GetFromFile<Composer, ComposerResponse>(filePath);
+            return JsonGetter.GetFromFile<ComposerData, ComposerResponse>(filePath);
         }
     }
 }

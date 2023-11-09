@@ -13,8 +13,8 @@ namespace MusicOrganisationTests.Lib.Services
 
         public async Task InsertPupilAsync(string name, string level, Day lessonDays, bool hasDifferentTimes, string? email, string? phoneNumber)
         {
-            int id = await GetNextIdAsync<Pupil>();
-            Pupil pupil = new()
+            int id = await GetNextIdAsync<PupilData>();
+            PupilData pupil = new()
             {
                 Id = id,
                 Name = name,
@@ -29,9 +29,9 @@ namespace MusicOrganisationTests.Lib.Services
 
         public async Task InsertNewCaregiverAsync(string name, string? email, string? phoneNumber, int pupilId, string description)
         {
-            int caregiverId = await GetNextIdAsync<Caregiver>();
+            int caregiverId = await GetNextIdAsync<CaregiverData>();
 
-            Caregiver caregiver = new()
+            CaregiverData caregiver = new()
             {
                 Id = caregiverId,
                 Name = name,
@@ -57,23 +57,23 @@ namespace MusicOrganisationTests.Lib.Services
             await InsertAsync(caregiverMap);
         }
 
-        public async Task<IEnumerable<Caregiver>> GetCaregiversAsync(int pupilId)
+        public async Task<IEnumerable<CaregiverData>> GetCaregiversAsync(int pupilId)
         {
-            await InitAsync<Caregiver>();
+            await InitAsync<CaregiverData>();
             await InitAsync<CaregiverMap>();
             string query = $"""
-                SELECT {ITable.GetColumnNamesWithTableName<Caregiver>().CommaJoin()}
-                FROM {Caregiver.TableName}
+                SELECT {ITable.GetColumnNamesWithTableName<CaregiverData>().CommaJoin()}
+                FROM {CaregiverData.TableName}
                 JOIN {CaregiverMap.TableName}
-                ON Caregivers.Id = CaregiverMap.CaregiverId
-                WHERE CaregiverMap.PupilId = {pupilId}
+                ON {CaregiverData.TableName}.{nameof(CaregiverData.Id)} = {nameof(CaregiverMap)}.{nameof(CaregiverMap.CaregiverId)}
+                WHERE {CaregiverMap.TableName}.{nameof(CaregiverMap.PupilId)} = {pupilId}
                 """;
 
-            IEnumerable<Caregiver> result = await _connection.QueryAsync<Caregiver>(query);
+            IEnumerable<CaregiverData> result = await _connection.QueryAsync<CaregiverData>(query);
             return result;
         }
 
-        public async Task<IEnumerable<Work>> GetRepertoireAsync(int pupilId)
+        public async Task<IEnumerable<WorkData>> GetRepertoireAsync(int pupilId)
         {
             throw new NotImplementedException();
         }

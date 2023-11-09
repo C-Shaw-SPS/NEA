@@ -7,14 +7,14 @@ namespace MusicOrganisationTests.Lib.Json
     {
         private const string _URL = "https://api.openopus.org/work/list/ids/.json";
 
-        public static IEnumerable<Work> GetFromOpenOpus()
+        public static IEnumerable<WorkData> GetFromOpenOpus()
         {
-            return JsonGetter.GetFromUrl<Work, WorkResponse>(_URL);
+            return JsonGetter.GetFromUrl<WorkData, WorkResponse>(_URL);
         }
 
-        public static IEnumerable<Work> GetFromFile(string filePath)
+        public static IEnumerable<WorkData> GetFromFile(string filePath)
         {
-            return JsonGetter.GetFromFile<Work, WorkResponse>(filePath);
+            return JsonGetter.GetFromFile<WorkData, WorkResponse>(filePath);
         }
     }
 }

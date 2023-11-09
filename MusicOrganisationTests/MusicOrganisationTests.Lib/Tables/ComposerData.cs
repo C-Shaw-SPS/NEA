@@ -7,9 +7,9 @@ using System.Text.Json.Serialization;
 namespace MusicOrganisationTests.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class Composer : IEquatable<Composer>, ITable
+    public class ComposerData : IEquatable<ComposerData>, ITable
     {
-        private const string _TABLE_NAME = "Composers";
+        private const string _TABLE_NAME = nameof(ComposerData);
 
         private int _id;
         private string _name = string.Empty;
@@ -114,7 +114,7 @@ namespace MusicOrganisationTests.Lib.Tables
             };
         }
 
-        public bool Equals(Composer? other)
+        public bool Equals(ComposerData? other)
         {
             return other != null
                 && _name == other._name

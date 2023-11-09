@@ -6,7 +6,7 @@ namespace MusicOrganisationTests.Lib.Tables
     [Table(_TABLE_NAME)]
     public class CaregiverMap : ITable, IEquatable<CaregiverMap>
     {
-        private const string _TABLE_NAME = "CaregiverMap";
+        private const string _TABLE_NAME = nameof(CaregiverMap);
 
         private int _id;
         private int _pupilId;
