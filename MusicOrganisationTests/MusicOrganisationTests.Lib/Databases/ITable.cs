@@ -9,10 +9,5 @@
         public IEnumerable<string> GetSqlValues();
 
         public abstract static IEnumerable<string> GetColumnNames();
-
-        public static IEnumerable<string> GetColumnNamesWithTableName<T>() where T : ITable
-        {
-            return T.GetColumnNames().Select(x => T.TableName + "." + x);
-        }
     }
 }
