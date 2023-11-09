@@ -25,7 +25,7 @@ namespace MusicOrganisationTests.Lib.Databases
         {
             if (_containsValues)
             {
-                _stringBuilder.Append(", ");
+                _stringBuilder.Append(SqlFormatting.COMMA_SEPARATOR);
             }
             else
             {
