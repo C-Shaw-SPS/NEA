@@ -1,6 +1,7 @@
 ﻿using MusicOrganisationTests.Lib.Json;
 using MusicOrganisationTests.Lib.Databases;
 using MusicOrganisationTests.Lib.Tables;
+using MusicOrganisationTests.Lib.Services;
 
 namespace MusicOrganisationTests.App
 {
