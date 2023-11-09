@@ -8,8 +8,10 @@ namespace MusicOrganisationTests.Lib.Models
         private DateTime _dateStarted;
         private string _syllabus = string.Empty;
         private RepertoireStatus _status;
+        private int _workId;
         private string _title = string.Empty;
         private string _subtitle = string.Empty;
+        private int _composerId;
         private string _genre = string.Empty;
         private string _composerName = string.Empty;
 
@@ -37,6 +39,12 @@ namespace MusicOrganisationTests.Lib.Models
             set => _status = value;
         }
 
+        public int WorkId
+        {
+            get => _workId;
+            set => _workId = value;
+        }
+
         public string Title
         {
             get => _title;
@@ -53,6 +61,12 @@ namespace MusicOrganisationTests.Lib.Models
         {
             get => _genre;
             set => _genre = value;
+        }
+
+        public int ComposerId
+        {
+            get => _composerId;
+            set => _composerId = value;
         }
 
         public string ComposerName
