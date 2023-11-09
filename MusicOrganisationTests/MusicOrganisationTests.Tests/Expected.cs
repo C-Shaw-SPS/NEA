@@ -17,7 +17,6 @@ namespace MusicOrganisationTests.Tests
             PortraitLink = null
         };
 
-
         public static readonly List<CaregiverData> CaregiverData = new()
         {
             new CaregiverData
