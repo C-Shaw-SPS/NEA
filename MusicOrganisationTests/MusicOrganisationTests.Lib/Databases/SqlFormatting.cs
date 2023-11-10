@@ -73,6 +73,11 @@ namespace MusicOrganisationTests.Lib.Databases
             }
         }
 
+        public static string FormatLikeString(string value)
+        {
+            return FormatSqlString($"%{value}%");
+        }
+
         private static string FormatSqlString(this string s)
         {
             return DOUBLE_QUOTE + s.ReplaceQuotes() + DOUBLE_QUOTE;
