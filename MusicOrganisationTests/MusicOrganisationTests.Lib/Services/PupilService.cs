@@ -69,20 +69,17 @@ namespace MusicOrganisationTests.Lib.Services
 
         public static string GetCaregiverQuery(int pupilId)
         {
-            string query = $"""
-                SELECT
-                {CaregiverMap.TableName}.{nameof(CaregiverMap.Id)} AS {nameof(Caregiver.MapId)},
-                {CaregiverMap.TableName}.{nameof(CaregiverMap.Description)} AS {nameof(Caregiver.Description)},
-                {CaregiverData.TableName}.{nameof(CaregiverData.Id)} AS {nameof(Caregiver.CaregiverId)},
-                {CaregiverData.TableName}.{nameof(CaregiverData.Name)} AS {nameof(Caregiver.Name)},
-                {CaregiverData.TableName}.{nameof(CaregiverData.Email)} AS {nameof(Caregiver.Email)},
-                {CaregiverData.TableName}.{nameof(CaregiverData.PhoneNumber)} AS {nameof(Caregiver.PhoneNumber)}
-                FROM {CaregiverData.TableName}
-                JOIN {CaregiverMap.TableName}
-                ON {CaregiverData.TableName}.{nameof(CaregiverData.Id)} = {nameof(CaregiverMap)}.{nameof(CaregiverMap.CaregiverId)}
-                WHERE {CaregiverMap.TableName}.{nameof(CaregiverMap.PupilId)} = {pupilId}
-                """;
-            return query;
+            SqlQuery<CaregiverData> query = new();
+            query.AddColumn<CaregiverMap>(nameof(CaregiverMap.Id), nameof(Caregiver.MapId));
+            query.AddColumn<CaregiverMap>(nameof(CaregiverMap.Description), nameof(Caregiver.Description));
+            query.AddColumn<CaregiverData>(nameof(CaregiverData.Id), nameof(Caregiver.CaregiverId));
+            query.AddColumn<CaregiverData>(nameof(CaregiverData.Name), nameof(Caregiver.Name));
+            query.AddColumn<CaregiverData>(nameof(CaregiverData.Email), nameof(Caregiver.Email));
+            query.AddColumn<CaregiverData>(nameof(CaregiverData.PhoneNumber), nameof(Caregiver.PhoneNumber));
+            query.AddJoin<CaregiverMap, CaregiverData>(nameof(CaregiverMap.CaregiverId), nameof(CaregiverData.Id));
+            query.AddWhereEquals<CaregiverMap>(nameof(CaregiverMap.PupilId), pupilId);
+
+            return query.ToString();
         }
 
         public async Task<IEnumerable<Repertoire>> GetRepertoireAsync(int pupilId)
@@ -97,26 +94,22 @@ namespace MusicOrganisationTests.Lib.Services
 
         private static string GetRepertoireQuery(int pupilId)
         {
-            string query = $"""
-                SELECT
-                {RepertoireData.TableName}.{nameof(RepertoireData.Id)} AS {nameof(Repertoire.RepertoireId)},
-                {RepertoireData.TableName}.{nameof(RepertoireData.DateStarted)} AS {nameof(Repertoire.DateStarted)},
-                {RepertoireData.TableName}.{nameof(RepertoireData.Syllabus)} AS {nameof(Repertoire.Syllabus)},
-                {RepertoireData.TableName}.{nameof(RepertoireData.Status)} AS {nameof(Repertoire.Status)},
-                {WorkData.TableName}.{nameof(WorkData.Id)} AS {nameof(Repertoire.WorkId)},
-                {WorkData.TableName}.{nameof(WorkData.Title)} AS {nameof(Repertoire.Title)},
-                {WorkData.TableName}.{nameof(WorkData.Subtitle)} AS {nameof(Repertoire.Subtitle)},
-                {WorkData.TableName}.{nameof(WorkData.Genre)} AS {nameof(Repertoire.Genre)},
-                {ComposerData.TableName}.{nameof(ComposerData.Id)} AS {nameof(Repertoire.ComposerId)},
-                {ComposerData.TableName}.{nameof(ComposerData.CompleteName)} AS {nameof(Repertoire.ComposerName)}
-                FROM {RepertoireData.TableName}
-                JOIN {WorkData.TableName}
-                ON {RepertoireData.TableName}.{nameof(RepertoireData.WorkId)} = {WorkData.TableName}.{nameof(WorkData.Id)}
-                JOIN {ComposerData.TableName}
-                ON {WorkData.TableName}.{nameof(WorkData.ComposerId)} = {ComposerData.TableName}.{nameof(ComposerData.Id)}
-                WHERE {nameof(RepertoireData.PupilId)} = {pupilId}
-                """;
-            return query;
+            SqlQuery<RepertoireData> query = new();
+
+            query.AddColumn<RepertoireData>(nameof(RepertoireData.Id), nameof(Repertoire.RepertoireId));
+            query.AddColumn<RepertoireData>(nameof(RepertoireData.DateStarted), nameof(Repertoire.DateStarted));
+            query.AddColumn<RepertoireData>(nameof(RepertoireData.Syllabus), nameof(Repertoire.Syllabus));
+            query.AddColumn<RepertoireData>(nameof(RepertoireData.Status), nameof(Repertoire.Status));
+            query.AddColumn<WorkData>(nameof(WorkData.Id), nameof(Repertoire.WorkId));
+            query.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Repertoire.Title));
+            query.AddColumn<WorkData>(nameof(WorkData.Subtitle), nameof(Repertoire.Subtitle));
+            query.AddColumn<WorkData>(nameof(WorkData.Genre), nameof(Repertoire.Genre));
+            query.AddColumn<ComposerData>(nameof(ComposerData.Id), nameof(Repertoire.ComposerId));
+            query.AddColumn<ComposerData>(nameof(ComposerData.CompleteName), nameof(Repertoire.ComposerName));
+            query.AddJoin<WorkData, RepertoireData>(nameof(WorkData.Id), nameof(RepertoireData.WorkId));
+            query.AddJoin<WorkData, ComposerData>(nameof(WorkData.ComposerId), nameof(ComposerData.Id));
+
+            return query.ToString();
         }
     }
 }
