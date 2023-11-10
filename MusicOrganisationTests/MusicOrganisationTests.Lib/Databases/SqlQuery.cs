@@ -6,13 +6,13 @@ namespace MusicOrganisationTests.Lib.Databases
     {
         private List<(string table, string column, string alias)> _columns;
         private List<(string table1, string column1, string table2, string column2)> _joins;
-        private List<(string table, string column, string value)> _equals;
+        private List<(string table, string column, string value, string operation)> _conditions;
 
         public SqlQuery()
         {
             _columns = new();
             _joins = new();
-            _equals = new();
+            _conditions = new();
         }
 
         public void AddColumn<TTable>(string column, string alias) where TTable : ITable
@@ -27,7 +27,12 @@ namespace MusicOrganisationTests.Lib.Databases
 
         public void AddWhereEquals<TTable>(string column, object? value) where TTable : ITable
         {
-            _equals.Add((TTable.TableName, column, SqlFormatting.FormatValue(value)));
+            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatValue(value), "="));
+        }
+
+        public void AddWhereLike<TTable>(string column, string value) where TTable : ITable
+        {
+            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatLikeString(value), "LIKE"));
         }
 
         public override string ToString()
@@ -59,10 +64,10 @@ namespace MusicOrganisationTests.Lib.Databases
 
         private void AddWhereEqualsToStringbuilder(StringBuilder stringBuilder)
         {
-            if (_equals.Count > 0 )
+            if (_conditions.Count > 0 )
             {
                 stringBuilder.AppendLine("WHERE");
-                IEnumerable<string> formattedEquals = _equals.Select(e => $"{e.table}.{e.column} = {e.value}");
+                IEnumerable<string> formattedEquals = _conditions.Select(e => $"{e.table}.{e.column} {e.operation} {e.value}");
                 stringBuilder.AppendLine(string.Join("\nAND", formattedEquals));
             }
         }
