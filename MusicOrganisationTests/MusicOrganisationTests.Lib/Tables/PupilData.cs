@@ -16,6 +16,7 @@ namespace MusicOrganisationTests.Lib.Tables
         private bool _hasDifferentTimes;
         private string? _email;
         private string? _phoneNumber;
+        private string? _notesFile;
 
         public static string TableName => _TABLE_NAME;
 
@@ -66,6 +67,12 @@ namespace MusicOrganisationTests.Lib.Tables
             set => _phoneNumber = value;
         }
 
+        public string? NotesFile
+        {
+            get => _notesFile;
+            set => _notesFile = value;
+        }
+
         public static IEnumerable<string> GetColumnNames()
         {
             return new List<string>
@@ -76,7 +83,8 @@ namespace MusicOrganisationTests.Lib.Tables
                 nameof(LessonDays),
                 nameof(HasDifferentTimes),
                 nameof(Email),
-                nameof(PhoneNumber)
+                nameof(PhoneNumber),
+                nameof(NotesFile)
             };
         }
 
@@ -89,7 +97,8 @@ namespace MusicOrganisationTests.Lib.Tables
                 _lessonDays,
                 _hasDifferentTimes,
                 _email,
-                _phoneNumber);
+                _phoneNumber,
+                _notesFile);
         }
 
         public bool Equals(PupilData? other)
@@ -100,7 +109,8 @@ namespace MusicOrganisationTests.Lib.Tables
                 && _lessonDays == other._lessonDays
                 && _hasDifferentTimes == other._hasDifferentTimes
                 && _email == other._email
-                && _phoneNumber == other._phoneNumber;
+                && _phoneNumber == other._phoneNumber
+                && _notesFile == other._notesFile;
         }
     }
 }
