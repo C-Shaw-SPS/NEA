@@ -14,6 +14,7 @@ namespace MusicOrganisationTests.Lib.Tables
         private string _level = string.Empty;
         private Day _lessonDays;
         private bool _hasDifferentTimes;
+        private TimeSpan _lessonDuration;
         private string? _email;
         private string? _phoneNumber;
         private string? _notesFile;
@@ -55,6 +56,13 @@ namespace MusicOrganisationTests.Lib.Tables
             set => _hasDifferentTimes = value;
         }
 
+        [NotNull]
+        public TimeSpan LessonDuration
+        {
+            get => _lessonDuration;
+            set => _lessonDuration = value;
+        }
+
         public string? Email
         {
             get => _email;
@@ -82,6 +90,7 @@ namespace MusicOrganisationTests.Lib.Tables
                 nameof(Level),
                 nameof(LessonDays),
                 nameof(HasDifferentTimes),
+                nameof(LessonDuration),
                 nameof(Email),
                 nameof(PhoneNumber),
                 nameof(NotesFile)
@@ -96,6 +105,7 @@ namespace MusicOrganisationTests.Lib.Tables
                 _level,
                 _lessonDays,
                 _hasDifferentTimes,
+                _lessonDuration,
                 _email,
                 _phoneNumber,
                 _notesFile);
@@ -108,6 +118,7 @@ namespace MusicOrganisationTests.Lib.Tables
                 && _level == other._level
                 && _lessonDays == other._lessonDays
                 && _hasDifferentTimes == other._hasDifferentTimes
+                && _lessonDuration == other._lessonDuration
                 && _email == other._email
                 && _phoneNumber == other._phoneNumber
                 && _notesFile == other._notesFile;

@@ -12,7 +12,7 @@ namespace MusicOrganisationTests.Lib.Services
 
         }
 
-        public async Task InsertPupilAsync(string name, string level, Day lessonDays, bool hasDifferentTimes, string? email, string? phoneNumber)
+        public async Task InsertPupilAsync(string name, string level, Day lessonDays, bool hasDifferentTimes, TimeSpan lessonDuration, string? email, string? phoneNumber)
         {
             int id = await GetNextIdAsync<PupilData>();
             PupilData pupil = new()
@@ -22,6 +22,7 @@ namespace MusicOrganisationTests.Lib.Services
                 Level = level,
                 LessonDays = lessonDays,
                 HasDifferentTimes = hasDifferentTimes,
+                LessonDuration = lessonDuration,
                 Email = email,
                 PhoneNumber = phoneNumber
             };

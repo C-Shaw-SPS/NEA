@@ -59,6 +59,10 @@ namespace MusicOrganisationTests.Lib.Databases
             {
                 return dateTime.FormatSqlDateTime();
             }
+            else if (value is TimeSpan timeSpan)
+            {
+                return timeSpan.FormatSqlTimeSpan();
+            }
             else if (value is Day day)
             {
                 return day.FormatSqlDay();
@@ -103,6 +107,11 @@ namespace MusicOrganisationTests.Lib.Databases
         private static string FormatSqlDateTime(this DateTime dateTime)
         {
             return dateTime.Ticks.ToString();
+        }
+
+        private static string FormatSqlTimeSpan(this TimeSpan timeSpan)
+        {
+            return timeSpan.Ticks.ToString();
         }
 
         private static string FormatSqlDay(this Day day)

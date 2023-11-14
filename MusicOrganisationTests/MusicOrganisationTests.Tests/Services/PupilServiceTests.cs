@@ -19,6 +19,7 @@ namespace MusicOrganisationTests.Tests.Services
                 expectedPupil.Level,
                 expectedPupil.LessonDays,
                 expectedPupil.HasDifferentTimes,
+                expectedPupil.LessonDuration,
                 expectedPupil.Email,
                 expectedPupil.PhoneNumber
                 );
