@@ -5,9 +5,9 @@ using SQLite;
 namespace MusicOrganisationTests.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class LessonTimeData : ITable, IEquatable<LessonTimeData>
+    public class LessonSlotData : ITable, IEquatable<LessonSlotData>
     {
-        private const string _TABLE_NAME = nameof(LessonTimeData);
+        private const string _TABLE_NAME = nameof(LessonSlotData);
 
         private int _id;
         private DayOfWeek _dayOfWeek;
@@ -64,7 +64,7 @@ namespace MusicOrganisationTests.Lib.Tables
                 _endTime);
         }
 
-        public bool Equals(LessonTimeData? other)
+        public bool Equals(LessonSlotData? other)
         {
             return other != null
                 && _dayOfWeek == other._dayOfWeek

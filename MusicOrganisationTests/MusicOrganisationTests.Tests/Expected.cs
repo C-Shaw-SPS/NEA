@@ -126,9 +126,9 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<LessonTimeData> LessonTimeData = new()
+        public static readonly List<LessonSlotData> LessonTimeData = new()
         {
-            new LessonTimeData
+            new LessonSlotData
             {
                 Id = 0,
                 DayOfWeek = DayOfWeek.Monday,
