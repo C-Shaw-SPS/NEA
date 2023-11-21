@@ -63,7 +63,7 @@ namespace MusicOrganisationTests.Lib.Databases
             {
                 return timeSpan.FormatSqlTimeSpan();
             }
-            else if (value is Day day)
+            else if (value is DayOfWeek day)
             {
                 return day.FormatSqlDay();
             }
@@ -114,7 +114,7 @@ namespace MusicOrganisationTests.Lib.Databases
             return timeSpan.Ticks.ToString();
         }
 
-        private static string FormatSqlDay(this Day day)
+        private static string FormatSqlDay(this DayOfWeek day)
         {
             return ((int)day).ToString();
         }

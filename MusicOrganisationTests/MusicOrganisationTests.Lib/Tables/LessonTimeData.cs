@@ -10,7 +10,7 @@ namespace MusicOrganisationTests.Lib.Tables
         private const string _TABLE_NAME = nameof(LessonTimeData);
 
         private int _id;
-        private Day _dayOfWeek;
+        private DayOfWeek _dayOfWeek;
         private DateTime _startTime;
         private DateTime _endTime;
 
@@ -24,7 +24,7 @@ namespace MusicOrganisationTests.Lib.Tables
         }
 
         [NotNull]
-        public Day DayOfWeek
+        public DayOfWeek DayOfWeek
         {
             get => _dayOfWeek;
             set => _dayOfWeek = value;
