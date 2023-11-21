@@ -20,7 +20,6 @@ namespace MusicOrganisationTests.App
             await CreateAndInitTable(ComposerGetter.GetFromOpenOpus());
             await CreateAndInitTable<FixedLessonData>();
             await CreateAndInitTable<LessonData>();
-            await CreateAndInitTable<LessonRestrictionData>();
             await CreateAndInitTable<LessonTimeData>();
             await CreateAndInitTable<PupilData>();
             await CreateAndInitTable<RepertoireData>();

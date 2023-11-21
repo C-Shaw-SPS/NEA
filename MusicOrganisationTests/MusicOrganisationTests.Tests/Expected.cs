@@ -126,24 +126,12 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<LessonRestrictionData> LessonRestrictionData = new()
-        {
-            new LessonRestrictionData
-            {
-                Id = 0,
-                PupilId = 0,
-                Day = Day.Monday,
-                StartTime = DateTime.Parse("14:00"),
-                EndTime = DateTime.Parse("15:00")
-            }
-        };
-
         public static readonly List<LessonTimeData> LessonTimeData = new()
         {
             new LessonTimeData
             {
                 Id = 0,
-                DayOfWeek = Day.Monday,
+                DayOfWeek = DayOfWeek.Monday,
                 StartTime = DateTime.Parse("13:30"),
                 EndTime = DateTime.Parse("14:00")
             },
@@ -156,9 +144,15 @@ namespace MusicOrganisationTests.Tests
                 Id = 0,
                 Name = "Pupil 0",
                 Level = "Grade 1",
-                LessonDays = Day.Monday,
                 HasDifferentTimes = true,
                 LessonDuration = TimeSpan.FromHours(1),
+                MondayLessonSlots = 1234,
+                TuesdayLessonSlots = 1543,
+                WednesdayLessonSlots = 9036,
+                ThursdayLessonSlots = -34287,
+                FridayLessonSlots = 0,
+                SaturdayLessonSlots = int.MaxValue,
+                SundayLessonSlots = int.MinValue,
                 PhoneNumber = "0123456789",
                 Email = "pupil0@email.com"
             },
@@ -167,7 +161,6 @@ namespace MusicOrganisationTests.Tests
                 Id = 1,
                 Name = "Pupil 1",
                 Level = "Grade 8",
-                LessonDays = Day.Tuesday | Day.Wednesday | Day.Friday,
                 HasDifferentTimes = false,
                 LessonDuration = TimeSpan.FromMinutes(30),
                 PhoneNumber = null,
