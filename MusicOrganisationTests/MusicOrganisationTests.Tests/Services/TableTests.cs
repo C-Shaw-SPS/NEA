@@ -38,7 +38,7 @@ namespace MusicOrganisationTests.Tests.Services
         [Fact]
         public async Task TestLessonTimeSql()
         {
-            await TestType(Expected.LessonTimeData);
+            await TestType(Expected.LessonSlotData);
         }
 
         [Fact]

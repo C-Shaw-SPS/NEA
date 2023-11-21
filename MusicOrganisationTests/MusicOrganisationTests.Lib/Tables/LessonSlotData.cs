@@ -11,6 +11,7 @@ namespace MusicOrganisationTests.Lib.Tables
 
         private int _id;
         private DayOfWeek _dayOfWeek;
+        private int _flagIndex;
         private DateTime _startTime;
         private DateTime _endTime;
 
@@ -28,6 +29,13 @@ namespace MusicOrganisationTests.Lib.Tables
         {
             get => _dayOfWeek;
             set => _dayOfWeek = value;
+        }
+
+        [NotNull]
+        public int FlagIndex
+        {
+            get => _flagIndex;
+            set => _flagIndex = value;
         }
 
         [NotNull]
@@ -50,6 +58,7 @@ namespace MusicOrganisationTests.Lib.Tables
             {
                 nameof(Id),
                 nameof(DayOfWeek),
+                nameof(FlagIndex),
                 nameof(StartTime),
                 nameof(EndTime)
             };
@@ -60,6 +69,7 @@ namespace MusicOrganisationTests.Lib.Tables
             return SqlFormatting.FormatValues(
                 _id,
                 _dayOfWeek,
+                _flagIndex,
                 _startTime,
                 _endTime);
         }
@@ -68,6 +78,7 @@ namespace MusicOrganisationTests.Lib.Tables
         {
             return other != null
                 && _dayOfWeek == other._dayOfWeek
+                && _flagIndex == other._flagIndex
                 && _startTime == other._startTime
                 && _endTime == other._endTime;
         }

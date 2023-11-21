@@ -126,12 +126,13 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<LessonSlotData> LessonTimeData = new()
+        public static readonly List<LessonSlotData> LessonSlotData = new()
         {
             new LessonSlotData
             {
                 Id = 0,
                 DayOfWeek = DayOfWeek.Monday,
+                FlagIndex = 0,
                 StartTime = DateTime.Parse("13:30"),
                 EndTime = DateTime.Parse("14:00")
             },
