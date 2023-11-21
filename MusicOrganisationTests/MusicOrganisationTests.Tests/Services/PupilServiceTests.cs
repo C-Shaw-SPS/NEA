@@ -17,9 +17,15 @@ namespace MusicOrganisationTests.Tests.Services
             await pupilService.InsertPupilAsync(
                 expectedPupil.Name,
                 expectedPupil.Level,
-                expectedPupil.LessonDays,
                 expectedPupil.HasDifferentTimes,
                 expectedPupil.LessonDuration,
+                expectedPupil.MondayLessonSlots,
+                expectedPupil.TuesdayLessonSlots,
+                expectedPupil.WednesdayLessonSlots,
+                expectedPupil.ThursdayLessonSlots,
+                expectedPupil.FridayLessonSlots,
+                expectedPupil.SaturdayLessonSlots,
+                expectedPupil.SundayLessonSlots,
                 expectedPupil.Email,
                 expectedPupil.PhoneNumber
                 );
