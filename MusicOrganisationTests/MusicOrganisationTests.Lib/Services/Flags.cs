@@ -8,20 +8,20 @@ namespace MusicOrganisationTests.Lib.Services
 {
     public static class Flags
     {
-        public static bool HasFlagAtIndex(this uint flags, int index)
+        public static bool HasFlagAtIndex(this int flags, int index)
         {
             return ((flags >> index) & 1) == 1;
         }
 
-        public static void AddFlagAtIndex(this ref uint flags, int index)
+        public static void AddFlagAtIndex(this ref int flags, int index)
         {
-            uint newFlags = 1u << index;
+            int newFlags = 1 << index;
             flags |= newFlags;
         }
 
-        public static void RemoveFlagAtIndex(this ref uint flags, int index)
+        public static void RemoveFlagAtIndex(this ref int flags, int index)
         {
-            uint remainingFlags = ~(1u << index);
+            int remainingFlags = ~(1 << index);
             flags &= remainingFlags;
         }
     }

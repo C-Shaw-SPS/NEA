@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MusicOrganisationTests.Lib.Services;
+﻿using MusicOrganisationTests.Lib.Services;
 
 namespace MusicOrganisationTests.Tests.Services
 {
     public class FlagsTests
     {
-        private const uint FLAGS = 0b01101011;
+        private const int FLAGS = 0b01101011;
 
         [Theory]
         [InlineData(FLAGS, 0, true)]
@@ -20,7 +15,7 @@ namespace MusicOrganisationTests.Tests.Services
         [InlineData(FLAGS, 5, true)]
         [InlineData(FLAGS, 6, true)]
         [InlineData(FLAGS, 7, false)]
-        public void TestHasFlag(uint flags, int index, bool expectedHasFlag)
+        public void TestHasFlag(int flags, int index, bool expectedHasFlag)
         {
             bool actualHasFlag = flags.HasFlagAtIndex(index);
             Assert.Equal(expectedHasFlag, actualHasFlag);
@@ -29,9 +24,9 @@ namespace MusicOrganisationTests.Tests.Services
         [Fact]
         public void TestAddFlag()
         {
-            for (int i = 0; i < 8; ++i)
+            for (int i = 0; i < 32; ++i)
             {
-                uint flags = FLAGS;
+                int flags = FLAGS;
                 flags.AddFlagAtIndex(i);
                 Assert.True(flags.HasFlagAtIndex(i));
             }
@@ -40,9 +35,9 @@ namespace MusicOrganisationTests.Tests.Services
         [Fact]
         public void TestRemoveFlag()
         {
-            for (int i = 0; i < 8; ++i)
+            for (int i = 0; i < 32; ++i)
             {
-                uint flags = FLAGS;
+                int flags = FLAGS;
                 flags.RemoveFlagAtIndex(i);
                 Assert.False(flags.HasFlagAtIndex(i));
             }
