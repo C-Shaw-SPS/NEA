@@ -1,5 +1,6 @@
 ﻿using MusicOrganisationTests.Lib.Databases;
 using MusicOrganisationTests.Lib.Enums;
+using MusicOrganisationTests.Lib.Exceptions;
 using MusicOrganisationTests.Lib.Models;
 using MusicOrganisationTests.Lib.Tables;
 
@@ -115,6 +116,7 @@ namespace MusicOrganisationTests.Lib.Services
             query.AddColumn<ComposerData>(nameof(ComposerData.CompleteName), nameof(Repertoire.ComposerName));
             query.AddJoin<WorkData, RepertoireData>(nameof(WorkData.Id), nameof(RepertoireData.WorkId));
             query.AddJoin<WorkData, ComposerData>(nameof(WorkData.ComposerId), nameof(ComposerData.Id));
+            query.AddWhereEquals<RepertoireData>(nameof(RepertoireData.PupilId), pupilId);
 
             return query.ToString();
         }
