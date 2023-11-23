@@ -12,8 +12,8 @@ namespace MusicOrganisationTests.Lib.Tables
         private int _id;
         private DayOfWeek _dayOfWeek;
         private int _flagIndex;
-        private DateTime _startTime;
-        private DateTime _endTime;
+        private TimeSpan _startTime;
+        private TimeSpan _endTime;
 
         public static string TableName => _TABLE_NAME;
 
@@ -39,14 +39,14 @@ namespace MusicOrganisationTests.Lib.Tables
         }
 
         [NotNull]
-        public DateTime StartTime
+        public TimeSpan StartTime
         {
             get => _startTime;
             set => _startTime = value;
         }
 
         [NotNull]
-        public DateTime EndTime
+        public TimeSpan EndTime
         {
             get => _endTime;
             set => _endTime = value;
