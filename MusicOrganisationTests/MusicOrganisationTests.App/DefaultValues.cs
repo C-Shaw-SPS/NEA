@@ -9,7 +9,7 @@ namespace MusicOrganisationTests.App
 {
     public static class DefaultValues
     {
-        public static List<PupilData> PupilData = new()
+        public readonly static List<PupilData> PupilData = new()
         {
             new PupilData
             {
@@ -31,7 +31,7 @@ namespace MusicOrganisationTests.App
             }
         };
 
-        public static List<LessonSlotData> LessonSlotData = new()
+        public readonly static List<LessonSlotData> LessonSlotData = new()
         {
             new LessonSlotData
             {
