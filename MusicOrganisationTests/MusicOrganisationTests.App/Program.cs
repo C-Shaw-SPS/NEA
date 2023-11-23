@@ -2,6 +2,7 @@
 using MusicOrganisationTests.Lib.Databases;
 using MusicOrganisationTests.Lib.Tables;
 using MusicOrganisationTests.Lib.Services;
+using System.Reflection.Metadata;
 
 namespace MusicOrganisationTests.App
 {
@@ -15,24 +16,26 @@ namespace MusicOrganisationTests.App
 
         static async Task CreateEmptyDatabase()
         {
-            await CreateAndInitTable<CaregiverData>();
-            await CreateAndInitTable<CaregiverMap>();
-            await CreateAndInitTable(ComposerGetter.GetFromOpenOpus());
-            await CreateAndInitTable<FixedLessonData>();
-            await CreateAndInitTable<LessonData>();
-            await CreateAndInitTable<LessonSlotData>();
-            await CreateAndInitTable<PupilData>();
-            await CreateAndInitTable<RepertoireData>();
-            await CreateAndInitTable(WorkGetter.GetFromOpenOpus());
+            await Task.WhenAll(
+                CreateAndInitTable<CaregiverData>(),
+                CreateAndInitTable<CaregiverMap>(),
+                CreateAndInitTable(ComposerGetter.GetFromOpenOpus()),
+                CreateAndInitTable<FixedLessonData>(),
+                CreateAndInitTable<LessonData>(),
+                CreateAndInitTable(DefaultValues.LessonSlotData),
+                CreateAndInitTable(DefaultValues.PupilData),
+                CreateAndInitTable<RepertoireData>(),
+                CreateAndInitTable(WorkGetter.GetFromOpenOpus())
+            );
         }
 
         static async Task CreateAndInitTable<T>(IEnumerable<T>? data = null) where T : class, ITable, new()
         {
-            Service tableConnection = new(DatabaseProperties.NAME);
-            await tableConnection.InitAsync<T>();
+            Service service = new(DatabaseProperties.NAME);
+            await service.ClearTableAsync<T>();
             if (data is not null)
             {
-                await tableConnection.InsertAllAsync(data);
+                await service.InsertAllAsync(data);
             }
         }
     }
