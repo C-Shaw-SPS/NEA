@@ -4,9 +4,9 @@ namespace MusicOrganisationTests.Lib.Databases
 {
     public class SqlQuery<T> where T : ITable
     {
-        private List<(string table, string column, string alias)> _columns;
-        private List<(string newTable, string newColumn, string existingTable, string existingColumn)> _joins;
-        private List<(string table, string column, string value, string operation)> _conditions;
+        private readonly List<(string table, string column, string alias)> _columns;
+        private readonly List<(string newTable, string newColumn, string existingTable, string existingColumn)> _joins;
+        private readonly List<(string table, string column, string value, string operation)> _conditions;
 
         public SqlQuery()
         {
@@ -37,7 +37,7 @@ namespace MusicOrganisationTests.Lib.Databases
 
         public override string ToString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
             AddSelectColumnsToStringbuilder(stringBuilder);
             AddJoinsToStringbuilder(stringBuilder);
             AddWhereEqualsToStringbuilder(stringBuilder);
