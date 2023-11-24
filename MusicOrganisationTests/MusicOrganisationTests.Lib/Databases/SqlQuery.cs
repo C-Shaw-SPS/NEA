@@ -5,7 +5,7 @@ namespace MusicOrganisationTests.Lib.Databases
     public class SqlQuery<T> where T : ITable
     {
         private List<(string table, string column, string alias)> _columns;
-        private List<(string table1, string column1, string table2, string column2)> _joins;
+        private List<(string newTable, string newColumn, string existingTable, string existingColumn)> _joins;
         private List<(string table, string column, string value, string operation)> _conditions;
 
         public SqlQuery()
@@ -20,9 +20,9 @@ namespace MusicOrganisationTests.Lib.Databases
             _columns.Add((TTable.TableName, column, alias));
         }
 
-        public void AddJoin<TTable1, TTable2>(string column1, string column2) where TTable1 : ITable where TTable2 : ITable
+        public void AddJoin<TNew, TExisting>(string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
         {
-            _joins.Add((TTable1.TableName, column1, TTable2.TableName, column2));
+            _joins.Add((TNew.TableName, newColumn, TExisting.TableName, existingColumn));
         }
 
         public void AddWhereEquals<TTable>(string column, object? value) where TTable : ITable
@@ -56,9 +56,9 @@ namespace MusicOrganisationTests.Lib.Databases
 
         private void AddJoinsToStringbuilder(StringBuilder stringBuilder)
         {
-            foreach ((string table1, string column1, string table2, string column2) in _joins)
+            foreach ((string newTable, string newColumn, string existingTable, string existingColumn) in _joins)
             {
-                stringBuilder.AppendLine($"JOIN {table1} ON {table1}.{column1} = {table2}.{column2}");
+                stringBuilder.AppendLine($"JOIN {newTable} ON {newTable}.{newColumn} = {existingTable}.{existingColumn}");
             }
         }
 
