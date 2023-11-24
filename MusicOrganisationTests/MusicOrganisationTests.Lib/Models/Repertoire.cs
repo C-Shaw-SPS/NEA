@@ -2,7 +2,7 @@
 
 namespace MusicOrganisationTests.Lib.Models
 {
-    public class Repertoire
+    public class Repertoire : IEquatable<Repertoire>
     {
         private int _repertoireId;
         private DateTime _dateStarted;
@@ -73,6 +73,21 @@ namespace MusicOrganisationTests.Lib.Models
         {
             get => _composerName;
             set => _composerName = value;
+        }
+
+        public bool Equals(Repertoire? other)
+        {
+            return other != null
+                && _repertoireId == other._repertoireId
+                && _dateStarted == other._dateStarted
+                && _syllabus == other._syllabus
+                && _status == other._status
+                && _workId == other._workId
+                && _title == other._title
+                && _subtitle == other._subtitle
+                && _composerId == other._composerId
+                && _genre == other._genre
+                && _composerName == other._composerName;
         }
     }
 }

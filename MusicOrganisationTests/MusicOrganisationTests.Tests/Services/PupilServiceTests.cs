@@ -1,6 +1,8 @@
-﻿using MusicOrganisationTests.Lib.Models;
+﻿using MusicOrganisationTests.Lib.Enums;
+using MusicOrganisationTests.Lib.Models;
 using MusicOrganisationTests.Lib.Services;
 using MusicOrganisationTests.Lib.Tables;
+using System.Data.SqlTypes;
 
 namespace MusicOrganisationTests.Tests.Services
 {
@@ -51,6 +53,125 @@ namespace MusicOrganisationTests.Tests.Services
             IEnumerable<Caregiver> actualCaregivers = await pupilService.GetCaregiversAsync(expectedPupil.Id);
             Assert.Single(actualCaregivers);
             Assert.Contains(Expected.Caregiver, actualCaregivers);
+        }
+
+        [Fact]
+        public async Task TestGetRepertoireAsync()
+        {
+            PupilService pupilService = new(nameof(TestGetRepertoireAsync));
+            await Task.WhenAll
+            (
+                pupilService.ClearTableAsync<PupilData>(),
+                pupilService.ClearTableAsync<RepertoireData>(),
+                pupilService.ClearTableAsync<WorkData>(),
+                pupilService.ClearTableAsync<ComposerData>()
+            );
+
+            PupilData pupilData = new()
+            {
+                Id = 0
+            };
+
+            List<ComposerData> composerData = new()
+            {
+                new ComposerData
+                {
+                    Id = 0,
+                    CompleteName = "Composer 0"
+                },
+                new ComposerData
+                {
+                    Id = 1,
+                    CompleteName = "Composer 1"
+                }
+            };
+
+            List<WorkData> workData = new()
+            {
+                new WorkData
+                {
+                    Id = 0,
+                    Title = "Work 0",
+                    Subtitle = "Subtitle 0",
+                    Genre = "Genre 0",
+                    ComposerId = composerData[0].Id
+                },
+                new WorkData
+                {
+                    Id = 1,
+                    Title = "Work 1",
+                    Subtitle = "Subtitle 1",
+                    Genre = "Genre 1",
+                    ComposerId = composerData[1].Id
+                }
+            };
+
+            List<RepertoireData> repertoireData = new()
+            {
+                new RepertoireData
+                {
+                    Id = 0,
+                    PupilId = pupilData.Id,
+                    WorkId = workData[0].Id,
+                    DateStarted = new DateTime(2023 ,11, 24),
+                    Syllabus = "Syllabus 0",
+                    Status = RepertoireStatus.CurrentlyLearning
+                },
+                new RepertoireData
+                {
+                    Id = 1,
+                    PupilId = pupilData.Id,
+                    WorkId = workData[1].Id,
+                    DateStarted = new DateTime(2022, 11, 24),
+                    Syllabus = "Syllabus 1",
+                    Status = RepertoireStatus.FinishedLearning
+                }
+            };
+
+            List<Repertoire> expectedRepertoires = new()
+            {
+                new Repertoire
+                {
+                    RepertoireId = repertoireData[0].Id,
+                    DateStarted = repertoireData[0].DateStarted,
+                    Syllabus = repertoireData[0].Syllabus,
+                    Status = repertoireData[0].Status,
+                    WorkId = workData[0].Id,
+                    Title = workData[0].Title,
+                    Subtitle = workData[0].Subtitle,
+                    ComposerId = composerData[0].Id,
+                    Genre = workData[0].Genre,
+                    ComposerName = composerData[0].CompleteName
+                },
+                new Repertoire
+                {
+                    RepertoireId = repertoireData[1].Id,
+                    DateStarted = repertoireData[1].DateStarted,
+                    Syllabus = repertoireData[1].Syllabus,
+                    Status = repertoireData[1].Status,
+                    WorkId = workData[1].Id,
+                    Title = workData[1].Title,
+                    Subtitle = workData[1].Subtitle,
+                    ComposerId = composerData[1].Id,
+                    Genre = workData[1].Genre,
+                    ComposerName = composerData[1].CompleteName
+                }
+            };
+
+            await Task.WhenAll
+            (
+                pupilService.InsertAsync(pupilData),
+                pupilService.InsertAllAsync(composerData),
+                pupilService.InsertAllAsync(workData),
+                pupilService.InsertAllAsync(repertoireData)
+            );
+
+            IEnumerable<Repertoire> actualRepertoires = await pupilService.GetRepertoireAsync(pupilData.Id);
+            Assert.Equal(expectedRepertoires.Count, actualRepertoires.Count());
+            foreach (Repertoire expectedRepertoire in expectedRepertoires)
+            {
+                Assert.Contains(expectedRepertoire, actualRepertoires);
+            }
         }
     }
 }
