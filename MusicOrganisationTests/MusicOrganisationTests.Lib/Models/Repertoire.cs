@@ -5,7 +5,7 @@ namespace MusicOrganisationTests.Lib.Models
     public class Repertoire : IEquatable<Repertoire>
     {
         private int _repertoireId;
-        private DateTime _dateStarted;
+        private DateTime? _dateStarted;
         private string _syllabus = string.Empty;
         private RepertoireStatus _status;
         private int _workId;
@@ -21,7 +21,7 @@ namespace MusicOrganisationTests.Lib.Models
             set => _repertoireId = value;
         }
 
-        public DateTime DateStarted
+        public DateTime? DateStarted
         {
             get => _dateStarted;
             set => _dateStarted = value;

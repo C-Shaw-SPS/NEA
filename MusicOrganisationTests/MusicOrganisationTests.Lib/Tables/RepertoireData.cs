@@ -12,7 +12,7 @@ namespace MusicOrganisationTests.Lib.Tables
         private int _id;
         private int _pupilId;
         private int _workId;
-        private DateTime _dateStarted;
+        private DateTime? _dateStarted;
         private string _syllabus = string.Empty;
         private RepertoireStatus _status;
 
@@ -39,8 +39,7 @@ namespace MusicOrganisationTests.Lib.Tables
             set => _workId = value;
         }
 
-        [NotNull]
-        public DateTime DateStarted
+        public DateTime? DateStarted
         {
             get => _dateStarted;
             set => _dateStarted = value;
