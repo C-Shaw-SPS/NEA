@@ -52,6 +52,9 @@ namespace MusicOrganisationTests.Lib.Tables
             set => _endTime = value;
         }
 
+        [Ignore]
+        public TimeSpan Duration => _endTime - _startTime;
+
         public static IEnumerable<string> GetColumnNames()
         {
             return new List<string>
