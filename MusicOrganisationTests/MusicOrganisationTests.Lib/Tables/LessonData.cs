@@ -31,7 +31,7 @@ namespace MusicOrganisationTests.Lib.Tables
         }
 
         [NotNull]
-        public int LessonTimeId
+        public int LessonSlotId
         {
             get => _lessonTimeId;
             set => _lessonTimeId = value;
@@ -57,7 +57,7 @@ namespace MusicOrganisationTests.Lib.Tables
             {
                 nameof(Id),
                 nameof(PupilId),
-                nameof(LessonTimeId),
+                nameof(LessonSlotId),
                 nameof(Date),
                 nameof(NotesFile)
             };

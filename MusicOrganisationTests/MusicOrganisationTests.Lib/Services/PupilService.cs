@@ -21,7 +21,7 @@ namespace MusicOrganisationTests.Lib.Services
                 Id = id,
                 Name = name,
                 Level = level,
-                HasDifferentTimes = hasDifferentTimes,
+                NeedsDifferentTimes = hasDifferentTimes,
                 LessonDuration = lessonDuration,
                 MondayLessonSlots = mondayLessonSlots,
                 TuesdayLessonSlots = tuesdayLessonSlots,

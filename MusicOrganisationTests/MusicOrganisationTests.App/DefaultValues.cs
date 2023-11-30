@@ -15,7 +15,7 @@ namespace MusicOrganisationTests.App
             {
                 Id = 0,
                 Name = "Pupil 0",
-                HasDifferentTimes = true,
+                NeedsDifferentTimes = true,
                 LessonDuration = TimeSpan.FromMinutes(30),
                 MondayLessonSlots = 0b1001,
                 WednesdayLessonSlots = 0b1101,
@@ -24,7 +24,7 @@ namespace MusicOrganisationTests.App
             {
                 Id = 1,
                 Name = "Pupil 1",
-                HasDifferentTimes = false,
+                NeedsDifferentTimes = false,
                 LessonDuration = TimeSpan.FromMinutes(60),
                 MondayLessonSlots = 0b1010,
                 WednesdayLessonSlots = 0b1001

@@ -13,7 +13,7 @@ namespace MusicOrganisationTests.Lib.Tables
         private int _id;
         private string _name = string.Empty;
         private string _level = string.Empty;
-        private bool _hasDifferentTimes;
+        private bool _needsDifferentTimes;
         private TimeSpan _lessonDuration;
         private int _mondayLessonSlots;
         private int _tuesdayLessonSlots;
@@ -50,10 +50,10 @@ namespace MusicOrganisationTests.Lib.Tables
         }
 
         [NotNull]
-        public bool HasDifferentTimes
+        public bool NeedsDifferentTimes
         {
-            get => _hasDifferentTimes;
-            set => _hasDifferentTimes = value;
+            get => _needsDifferentTimes;
+            set => _needsDifferentTimes = value;
         }
 
         [NotNull]
@@ -137,7 +137,7 @@ namespace MusicOrganisationTests.Lib.Tables
                 nameof(Id),
                 nameof(Name),
                 nameof(Level),
-                nameof(HasDifferentTimes),
+                nameof(NeedsDifferentTimes),
                 nameof(LessonDuration),
                 nameof(MondayLessonSlots),
                 nameof(TuesdayLessonSlots),
@@ -158,7 +158,7 @@ namespace MusicOrganisationTests.Lib.Tables
                 _id,
                 _name,
                 _level,
-                _hasDifferentTimes,
+                _needsDifferentTimes,
                 _lessonDuration,
                 _mondayLessonSlots,
                 _tuesdayLessonSlots,
@@ -177,7 +177,7 @@ namespace MusicOrganisationTests.Lib.Tables
             return other != null
                 && _name == other._name
                 && _level == other._level
-                && _hasDifferentTimes == other._hasDifferentTimes
+                && _needsDifferentTimes == other._needsDifferentTimes
                 && _lessonDuration == other._lessonDuration
                 && _mondayLessonSlots == other._mondayLessonSlots
                 && _tuesdayLessonSlots == other._tuesdayLessonSlots

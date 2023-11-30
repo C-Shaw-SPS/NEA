@@ -113,7 +113,7 @@ namespace MusicOrganisationTests.Tests
             {
                 Id = 0,
                 PupilId = 0,
-                LessonTimeId = 0,
+                LessonSlotId = 0,
                 Date = DateTime.Parse("30/10/2023"),
                 NotesFile = "notes.txt"
             },
@@ -121,7 +121,7 @@ namespace MusicOrganisationTests.Tests
             {
                 Id = 1,
                 PupilId = 1,
-                LessonTimeId = 1,
+                LessonSlotId = 1,
                 Date = DateTime.Now
             }
         };
@@ -145,7 +145,7 @@ namespace MusicOrganisationTests.Tests
                 Id = 0,
                 Name = "Pupil 0",
                 Level = "Grade 1",
-                HasDifferentTimes = true,
+                NeedsDifferentTimes = true,
                 LessonDuration = TimeSpan.FromHours(1),
                 MondayLessonSlots = 1234,
                 TuesdayLessonSlots = 1543,
@@ -162,7 +162,7 @@ namespace MusicOrganisationTests.Tests
                 Id = 1,
                 Name = "Pupil 1",
                 Level = "Grade 8",
-                HasDifferentTimes = false,
+                NeedsDifferentTimes = false,
                 LessonDuration = TimeSpan.FromMinutes(30),
                 PhoneNumber = null,
                 Email = null
