@@ -10,7 +10,7 @@ namespace MusicOrganisationTests.Lib.Tables
 
         private int _id;
         private int _pupilId;
-        private int _lessonTimeId;
+        private int _lessonSlotId;
 
         public static string TableName => _TABLE_NAME;
 
@@ -28,11 +28,11 @@ namespace MusicOrganisationTests.Lib.Tables
             set => _pupilId = value;
         }
 
-        [NotNull]
-        public int LessonTimeId
+        [NotNull, Unique]
+        public int LessonSlotId
         {
-            get => _lessonTimeId;
-            set => _lessonTimeId = value;
+            get => _lessonSlotId;
+            set => _lessonSlotId = value;
         }
 
         public static IEnumerable<string> GetColumnNames()
@@ -41,7 +41,7 @@ namespace MusicOrganisationTests.Lib.Tables
             {
                 nameof(Id),
                 nameof(PupilId),
-                nameof(LessonTimeId)
+                nameof(LessonSlotId)
             };
         }
 
@@ -50,14 +50,14 @@ namespace MusicOrganisationTests.Lib.Tables
             return SqlFormatting.FormatValues(
                 _id,
                 _pupilId,
-                _lessonTimeId);
+                _lessonSlotId);
         }
 
         public bool Equals(FixedLessonData? other)
         {
             return other != null
                 && _pupilId == other._pupilId
-                && _lessonTimeId == other._lessonTimeId;
+                && _lessonSlotId == other._lessonSlotId;
         }
     }
 }
