@@ -27,7 +27,12 @@ namespace MusicOrganisationTests.Lib.Databases
 
         public static string CommaJoin(this IEnumerable<string> list)
         {
-            return OPEN_BRACKET + string.Join(COMMA_SEPARATOR, list) + CLOSE_BRACKET;
+            return string.Join(COMMA_SEPARATOR, list);
+        }
+
+        public static string AddBrackets(this string s)
+        {
+            return OPEN_BRACKET + s + CLOSE_BRACKET;
         }
 
         public static IEnumerable<string> FormatValues(params object?[] values)
@@ -35,32 +40,46 @@ namespace MusicOrganisationTests.Lib.Databases
             List<string> result = new();
             foreach (object? value in values)
             {
-                if (value == null)
-                {
-                    result.Add(NULL);
-                }
-                else if (value is string s)
-                {
-                    result.Add(s.FormatSqlString());
-                }
-                else if (value is DateTime dateTime)
-                {
-                    result.Add(dateTime.FormatSqlDateTime());
-                }
-                else if (value is Day day)
-                {
-                    result.Add(day.FormatSqlDay());
-                }
-                else if (value is RepertoireStatus repertoireStatus)
-                {
-                    result.Add(repertoireStatus.FormatSqlRepertoireStatus());
-                }
-                else
-                {
-                    result.Add(value.ToStringOrNull());
-                }
+                result.Add(FormatValue(value));
             }
             return result;
+        }
+
+        public static string FormatValue(object? value)
+        {
+            if (value == null)
+            {
+                return NULL;
+            }
+            else if (value is string s)
+            {
+                return  s.FormatSqlString();
+            }
+            else if (value is DateTime dateTime)
+            {
+                return dateTime.FormatSqlDateTime();
+            }
+            else if (value is TimeSpan timeSpan)
+            {
+                return timeSpan.FormatSqlTimeSpan();
+            }
+            else if (value is DayOfWeek day)
+            {
+                return day.FormatSqlDay();
+            }
+            else if (value is RepertoireStatus repertoireStatus)
+            {
+                return repertoireStatus.FormatSqlRepertoireStatus();
+            }
+            else
+            {
+                return value.ToStringOrNull();
+            }
+        }
+
+        public static string FormatLikeString(string value)
+        {
+            return FormatSqlString($"%{value}%");
         }
 
         private static string FormatSqlString(this string s)
@@ -90,7 +109,12 @@ namespace MusicOrganisationTests.Lib.Databases
             return dateTime.Ticks.ToString();
         }
 
-        private static string FormatSqlDay(this Day day)
+        private static string FormatSqlTimeSpan(this TimeSpan timeSpan)
+        {
+            return timeSpan.Ticks.ToString();
+        }
+
+        private static string FormatSqlDay(this DayOfWeek day)
         {
             return ((int)day).ToString();
         }

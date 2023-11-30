@@ -1,43 +1,27 @@
-﻿using MusicOrganisationTests.Lib.Databases;
-using MusicOrganisationTests.Lib.Enums;
-using SQLite;
+﻿using MusicOrganisationTests.Lib.Enums;
 
 namespace MusicOrganisationTests.Lib.Models
 {
-    [Table(_TABLE_NAME)]
-    public class Repertoire : ISqlStorable, IEquatable<Repertoire>
+    public class Repertoire : IEquatable<Repertoire>
     {
-        private const string _TABLE_NAME = "Repertoire";
-
-        private int _id;
-        private int _pupilId;
-        private int _workId;
-        private DateTime _dateStarted;
+        private int _repertoireId;
+        private DateTime? _dateStarted;
         private string _syllabus = string.Empty;
         private RepertoireStatus _status;
+        private int _workId;
+        private string _title = string.Empty;
+        private string _subtitle = string.Empty;
+        private int _composerId;
+        private string _genre = string.Empty;
+        private string _composerName = string.Empty;
 
-        public static string TableName => _TABLE_NAME;
-
-        [PrimaryKey]
-        public int Id
+        public int RepertoireId
         {
-            get => _id;
-            set => _id = value;
+            get => _repertoireId;
+            set => _repertoireId = value;
         }
 
-        public int PupilId
-        {
-            get => _pupilId;
-            set => _pupilId = value;
-        }
-
-        public int WorkId
-        {
-            get => _workId;
-            set => _workId = value;
-        }
-
-        public DateTime DateStarted
+        public DateTime? DateStarted
         {
             get => _dateStarted;
             set => _dateStarted = value;
@@ -55,39 +39,55 @@ namespace MusicOrganisationTests.Lib.Models
             set => _status = value;
         }
 
-        public static IEnumerable<string> GetColumnNames()
+        public int WorkId
         {
-            return new List<string>
-            {
-                nameof(Id),
-                nameof(PupilId),
-                nameof(WorkId),
-                nameof(DateStarted),
-                nameof(Syllabus),
-                nameof(Status)
-            };
+            get => _workId;
+            set => _workId = value;
         }
 
-        public IEnumerable<string> GetSqlValues()
+        public string Title
         {
-            return SqlFormatting.FormatValues(
-                _id,
-                _pupilId,
-                _workId,
-                _dateStarted,
-                _syllabus,
-                _status);
+            get => _title;
+            set => _title = value;
+        }
+
+        public string Subtitle
+        {
+            get => _subtitle;
+            set => _subtitle = value;
+        }
+
+        public string Genre
+        {
+            get => _genre;
+            set => _genre = value;
+        }
+
+        public int ComposerId
+        {
+            get => _composerId;
+            set => _composerId = value;
+        }
+
+        public string ComposerName
+        {
+            get => _composerName;
+            set => _composerName = value;
         }
 
         public bool Equals(Repertoire? other)
         {
             return other != null
-                && _id == other._id
-                && _pupilId == other._pupilId
-                && _workId == other._workId
+                && _repertoireId == other._repertoireId
                 && _dateStarted == other._dateStarted
                 && _syllabus == other._syllabus
-                && _status == other._status;
+                && _status == other._status
+                && _workId == other._workId
+                && _title == other._title
+                && _subtitle == other._subtitle
+                && _composerId == other._composerId
+                && _genre == other._genre
+                && _composerName == other._composerName;
         }
     }
 }

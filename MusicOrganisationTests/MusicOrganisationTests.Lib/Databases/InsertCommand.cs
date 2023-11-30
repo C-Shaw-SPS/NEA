@@ -2,10 +2,10 @@
 
 namespace MusicOrganisationTests.Lib.Databases
 {
-    internal class InsertCommand<T> where T : ISqlStorable, new()
+    internal class InsertCommand<T> where T : ITable, new()
     {
-        private StringBuilder _stringBuilder;
-        private IEnumerable<string> _columns;
+        private readonly StringBuilder _stringBuilder;
+        private readonly IEnumerable<string> _columns;
         private bool _containsValues;
 
         public InsertCommand()
@@ -18,20 +18,20 @@ namespace MusicOrganisationTests.Lib.Databases
 
         private void AddInsertLine()
         {
-            _stringBuilder.AppendLine($"INSERT INTO {T.TableName} {_columns.CommaJoin()} VALUES");
+            _stringBuilder.AppendLine($"INSERT INTO {T.TableName} {_columns.CommaJoin().AddBrackets()} VALUES");
         }
 
         public void AddValue(T value)
         {
             if (_containsValues)
             {
-                _stringBuilder.Append(", ");
+                _stringBuilder.Append(SqlFormatting.COMMA_SEPARATOR);
             }
             else
             {
                 _containsValues = true;
             }
-            _stringBuilder.Append(value.GetSqlValues().CommaJoin());
+            _stringBuilder.Append(value.GetSqlValues().CommaJoin().AddBrackets());
         }
 
         public override string ToString()
