@@ -103,7 +103,7 @@ namespace MusicOrganisationTests.Tests
             {
                 Id = 0,
                 PupilId = 0,
-                LessonTimeId = 0
+                LessonSlotId = 0
             }
         };
 
