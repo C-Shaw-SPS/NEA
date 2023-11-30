@@ -1,11 +1,7 @@
 ﻿using MusicOrganisationTests.Lib.Databases;
 using MusicOrganisationTests.Lib.Exceptions;
 using MusicOrganisationTests.Lib.Tables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MusicOrganisationTests.Lib.Services
 {
@@ -16,19 +12,21 @@ namespace MusicOrganisationTests.Lib.Services
         private readonly Dictionary<int, PupilData> _pupils;
         private readonly List<int> _shuffledPupilIds;
         private readonly Dictionary<int, LessonSlotData> _lessonSlots;
+        private readonly Dictionary<int, int> _fixedLessons;
         private readonly Dictionary<int, int> _previousLessonSlots;
-        private readonly Stack<(int pupilId, int lessonSlotIndex)> _stack;
+        private readonly Stack<(int pupilId, int lessonSlotId)> _stack;
         private readonly int _maximumLessonSlotId;
         private readonly Dictionary<int, int> _timetable;
 
-        public TimetableGenerator(IEnumerable<PupilData> pupilsList, IEnumerable<LessonSlotData> lessonSlotsList, IEnumerable<LessonData> previousLessons)
+        public TimetableGenerator(IEnumerable<PupilData> pupils, IEnumerable<LessonSlotData> lessonSlots, IEnumerable<LessonData> previousLessons, IEnumerable<FixedLessonData> fixedLessons)
         {
-            _pupils = GetDictionary(pupilsList);
-            _shuffledPupilIds = GetShuffledIds(pupilsList);
-            _lessonSlots = GetDictionary(lessonSlotsList);
+            _pupils = GetDictionary(pupils);
+            _shuffledPupilIds = GetShuffledIdsOfNonFixedLessons(_pupils.Values);
+            _lessonSlots = GetDictionary(lessonSlots);
+            _fixedLessons = GetFixedLessons(fixedLessons);
             _previousLessonSlots = GetPreviousLessonSlots(previousLessons);
             _stack = new();
-            _maximumLessonSlotId = GetMaximumId(lessonSlotsList);
+            _maximumLessonSlotId = GetMaximumId(_lessonSlots.Values);
             _timetable = new();
         }
 
@@ -42,6 +40,16 @@ namespace MusicOrganisationTests.Lib.Services
             return dictionary;
         }
 
+        private static Dictionary<int, int> GetFixedLessons(IEnumerable<FixedLessonData> fixedLessonsList)
+        {
+            Dictionary<int, int> fixedLessons = new();
+            foreach (FixedLessonData fixedLesson in fixedLessonsList)
+            {
+                fixedLessons.Add(fixedLesson.PupilId, fixedLesson.LessonSlotId);
+            }
+            return fixedLessons;
+        }
+
         private static Dictionary<int, int> GetPreviousLessonSlots(IEnumerable<LessonData> previousLessonsList)
         {
             Dictionary<int, int> previousLessonSlots = new();
@@ -52,9 +60,12 @@ namespace MusicOrganisationTests.Lib.Services
             return previousLessonSlots;
         }
 
-        private static List<int> GetShuffledIds<T>(IEnumerable<T> values) where T : ITable
+        private List<int> GetShuffledIdsOfNonFixedLessons(IEnumerable<PupilData> pupils)
         {
-            List<int> ids = values.Select(v => v.Id).ToList();
+            List<int> ids = pupils
+                .Where(p => !_fixedLessons.ContainsKey(p.Id))
+                .Select(p => p.Id)
+                .ToList();
             for (int n = ids.Count - 1; n > 1; --n)
             {
                 int k = _random.Next(n);
@@ -70,18 +81,76 @@ namespace MusicOrganisationTests.Lib.Services
 
         public void GenerateTimetable()
         {
-
+            InsertFixedLessons();
+            InsertVariableLessons();
         }
 
-        private (bool succeeded, int lessonSlotId) GetLessonSlot(int pupilId, int startAfterId)
+        private void InsertFixedLessons()
         {
-            for (int lessonSlotId = startAfterId + 1; lessonSlotId <= _maximumLessonSlotId; ++lessonSlotId)
+            foreach (int pupilId in _fixedLessons.Keys)
+            {
+                _timetable.Add(_fixedLessons[pupilId], pupilId);
+            }
+        }
+
+        private void InsertVariableLessons()
+        {
+            for (int pupilIndex = 0; pupilIndex < _shuffledPupilIds.Count; ++pupilIndex)
+            {
+                if (NoMoreSlotsAvaliable())
+                {
+                    return;
+                }
+
+                PupilData pupil = _pupils[pupilIndex];
+                InsertNewPupil(pupil);
+            }
+        }
+
+        private bool NoMoreSlotsAvaliable()
+        {
+            return _timetable.Count >= _lessonSlots.Count;
+        }
+
+        private void InsertNewPupil(PupilData pupil)
+        {
+            InsertPupil(pupil, 0);
+        }
+
+        private void InsertPupil(PupilData pupil, int minLessonSlotId)
+        {
+            bool succeeded;
+            do
+            {
+                (succeeded, int newLessonSlotId) = GetLessonSlot(pupil, minLessonSlotId);
+                if (succeeded)
+                {
+                    _timetable.Add(pupil.Id, newLessonSlotId);
+                }
+                else
+                {
+                    MovePreviousPupil();
+                }
+            } while (!succeeded);
+        }
+
+        private void MovePreviousPupil()
+        {
+            (int pupilId, int previousLessonSlotId) = _stack.Pop();
+            PupilData pupil = _pupils[pupilId];
+            _timetable.Remove(pupilId);
+            InsertPupil(pupil, previousLessonSlotId + 1);
+        }
+
+        private (bool succeeded, int lessonSlotId) GetLessonSlot(PupilData pupil, int minLessonSlotId)
+        {
+            for (int lessonSlotId = minLessonSlotId; lessonSlotId <= _maximumLessonSlotId; ++lessonSlotId)
             {
                 if (!IsValidLessonSlotId(lessonSlotId))
                 {
                     continue;
                 }
-                if (CanHaveLessonInSlot(pupilId, lessonSlotId))
+                if (CanHaveLessonInSlot(pupil, lessonSlotId))
                 {
                     return (true, lessonSlotId);
                 }
@@ -94,13 +163,12 @@ namespace MusicOrganisationTests.Lib.Services
             return _lessonSlots.ContainsKey(lessonSlotId);
         }
 
-        private bool CanHaveLessonInSlot(int pupilId, int lessonSlotId)
+        private bool CanHaveLessonInSlot(PupilData pupil, int lessonSlotId)
         {
-            PupilData pupilData = _pupils[pupilId];
             LessonSlotData lessonSlotData = _lessonSlots[lessonSlotId];
-            return IsPupilAvaliable(pupilData, lessonSlotData)
-                && IsLongEnoughLessonSlot(pupilData, lessonSlotData)
-                && IsDifferentTimeIfRequired(pupilData, lessonSlotData);
+            return IsPupilAvaliable(pupil, lessonSlotData)
+                && IsLongEnoughLessonSlot(pupil, lessonSlotData)
+                && IsDifferentTimeIfRequired(pupil, lessonSlotData);
         }
 
         private bool IsPupilAvaliable(PupilData pupilData, LessonSlotData lessonSlotData)
