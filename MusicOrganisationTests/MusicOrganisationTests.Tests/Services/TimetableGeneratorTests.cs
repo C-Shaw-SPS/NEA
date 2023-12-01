@@ -16,6 +16,8 @@ namespace MusicOrganisationTests.Tests.Services
                 Id = 0,
                 Name = "Pupil 0",
                 NeedsDifferentTimes = true,
+                LessonDuration = TimeSpan.FromMinutes(30),
+                MondayLessonSlots = 0b1001,
 
             }
         };
