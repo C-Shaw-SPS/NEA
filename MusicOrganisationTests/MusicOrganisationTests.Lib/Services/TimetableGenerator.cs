@@ -171,7 +171,7 @@ namespace MusicOrganisationTests.Lib.Services
                 && IsDifferentTimeIfRequired(pupil, lessonSlotData);
         }
 
-        private bool IsPupilAvaliable(PupilData pupilData, LessonSlotData lessonSlotData)
+        private static bool IsPupilAvaliable(PupilData pupilData, LessonSlotData lessonSlotData)
         {
             return lessonSlotData.DayOfWeek switch
             {
@@ -186,7 +186,7 @@ namespace MusicOrganisationTests.Lib.Services
             };
         }
 
-        private bool IsLongEnoughLessonSlot(PupilData pupilData, LessonSlotData lessonSlotData)
+        private static bool IsLongEnoughLessonSlot(PupilData pupilData, LessonSlotData lessonSlotData)
         {
             return pupilData.LessonDuration <= lessonSlotData.Duration;
         }
