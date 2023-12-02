@@ -1,9 +1,7 @@
 ﻿namespace MusicOrganisationTests.Lib.Databases
 {
-    public interface ITable
+    public interface ITable : IIdentifiable
     {
-        public abstract int Id { get; set; }
-
         public abstract static string TableName { get; }
 
         public IEnumerable<string> GetSqlValues();
