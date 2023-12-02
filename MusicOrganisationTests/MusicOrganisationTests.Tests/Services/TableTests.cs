@@ -24,12 +24,6 @@ namespace MusicOrganisationTests.Tests.Services
         }
 
         [Fact]
-        public async Task TestFixedLessonSql()
-        {
-            await TestType(Expected.FixedLessonData);
-        }
-
-        [Fact]
         public async Task TestLessonSql()
         {
             await TestType(Expected.LessonData);

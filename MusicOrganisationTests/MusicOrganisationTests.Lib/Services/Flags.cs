@@ -65,5 +65,15 @@ namespace MusicOrganisationTests.Lib.Services
 
             throw new FlagsException("No flags set to true");
         }
+
+        public static int GetNewFlags(params int[] indexes)
+        {
+            int flags = 0;
+            foreach (int index in indexes)
+            {
+                flags.AddFlagAtIndex(index);
+            }
+            return flags;
+        }
     }
 }

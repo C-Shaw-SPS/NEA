@@ -119,7 +119,7 @@ namespace MusicOrganisationTests.Lib.Services
             for (int n = values.Count - 1; n > 1; --n)
             {
                 int k = _random.Next(n);
-                (values[n], values[k]) = (values[k], values[k]);
+                (values[n], values[k]) = (values[k], values[n]);
             }
         }
 
@@ -131,10 +131,11 @@ namespace MusicOrganisationTests.Lib.Services
             return values.Max(v => v.Id);
         }
 
-        public void GenerateTimetable()
+        public Dictionary<int, int> GenerateTimetable()
         {
             InsertFixedLessons();
             InsertVariableLessons();
+            return new Dictionary<int, int>(_timetable);
         }
 
         private void InsertFixedLessons()
@@ -154,7 +155,7 @@ namespace MusicOrganisationTests.Lib.Services
                     return;
                 }
 
-                Pupil pupil = _pupils[pupilIndex];
+                Pupil pupil = _pupils[_shuffledPupilIds[pupilIndex]];
                 InsertNewPupil(pupil);
             }
         }
