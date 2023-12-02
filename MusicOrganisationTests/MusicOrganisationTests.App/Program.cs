@@ -20,7 +20,6 @@ namespace MusicOrganisationTests.App
                 CreateAndInitTable<CaregiverData>(),
                 CreateAndInitTable<CaregiverMap>(),
                 CreateAndInitTable(ComposerGetter.GetFromOpenOpus()),
-                CreateAndInitTable<FixedLessonData>(),
                 CreateAndInitTable<LessonData>(),
                 CreateAndInitTable(DefaultValues.LessonSlotData),
                 CreateAndInitTable(DefaultValues.PupilData),

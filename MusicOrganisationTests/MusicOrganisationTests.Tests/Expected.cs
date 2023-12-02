@@ -97,16 +97,6 @@ namespace MusicOrganisationTests.Tests
             NullPropertyComposer
         };
 
-        public static readonly List<FixedLessonData> FixedLessonData = new()
-        {
-            new FixedLessonData
-            {
-                Id = 0,
-                PupilId = 0,
-                LessonSlotId = 0
-            }
-        };
-
         public static readonly List<LessonData> LessonData = new()
         {
             new LessonData
