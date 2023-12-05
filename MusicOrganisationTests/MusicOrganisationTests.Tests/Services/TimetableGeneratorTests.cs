@@ -80,23 +80,23 @@ namespace MusicOrganisationTests.Tests.Services
             }
         };
 
-        static List<PupilData> _pupilData = new()
+        static List<Pupil> _pupils = new()
         {
-            new PupilData
+            new Pupil
             {
                 Id = 0,
                 LessonDuration = new TimeSpan(01,00,00),
                 NeedsDifferentTimes = false,
                 MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[0].FlagIndex)
             },
-            new PupilData
+            new Pupil
             {
                 Id = 1,
                 LessonDuration = new TimeSpan(00,30,00),
                 NeedsDifferentTimes = false,
                 MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[1].FlagIndex)
             },
-            new PupilData
+            new Pupil
             {
                 Id = 2,
                 LessonDuration = new TimeSpan(00,30,00),
@@ -104,7 +104,7 @@ namespace MusicOrganisationTests.Tests.Services
                 MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[0].FlagIndex, _lessonSlots[2].FlagIndex),
                 TuesdayLessonSlots = Flags.GetNewFlags(_lessonSlots[4].FlagIndex, _lessonSlots[6].FlagIndex)
             },
-            new PupilData
+            new Pupil
             {
                 Id = 3,
                 LessonDuration = new TimeSpan(00,45,00),
@@ -112,7 +112,7 @@ namespace MusicOrganisationTests.Tests.Services
                 MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[0].FlagIndex, _lessonSlots[1].FlagIndex),
                 TuesdayLessonSlots = Flags.GetNewFlags(_lessonSlots[6].FlagIndex, _lessonSlots[7].FlagIndex)
             },
-            new PupilData
+            new Pupil
             {
                 Id = 4,
                 LessonDuration = new TimeSpan(00,30,00),
@@ -120,21 +120,21 @@ namespace MusicOrganisationTests.Tests.Services
                 MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[3].FlagIndex),
                 TuesdayLessonSlots = Flags.GetNewFlags(_lessonSlots[4].FlagIndex, _lessonSlots[5].FlagIndex)
             },
-            new PupilData
+            new Pupil
             {
                 Id = 5,
                 LessonDuration = new TimeSpan(01,00,00),
                 NeedsDifferentTimes = false,
                 TuesdayLessonSlots = Flags.GetNewFlags(_lessonSlots[5].FlagIndex)
             },
-            new PupilData
+            new Pupil
             {
                 Id = 6,
                 LessonDuration = new TimeSpan(00,45,00),
                 NeedsDifferentTimes = true,
                 TuesdayLessonSlots = Flags.GetNewFlags(_lessonSlots[4].FlagIndex, _lessonSlots[5].FlagIndex, _lessonSlots[6].FlagIndex, _lessonSlots[7].FlagIndex)
             },
-            new PupilData
+            new Pupil
             {
                 Id = 7,
                 LessonDuration = new TimeSpan(01,00,00),
@@ -148,42 +148,42 @@ namespace MusicOrganisationTests.Tests.Services
         {
             new LessonData
             {
-                PupilId = _pupilData[0].Id,
+                PupilId = _pupils[0].Id,
                 LessonSlotId = _lessonSlots[0].Id
             },
             new LessonData
             {
-                PupilId = _pupilData[1].Id,
+                PupilId = _pupils[1].Id,
                 LessonSlotId = _lessonSlots[1].Id
             },
             new LessonData
             {
-                PupilId = _pupilData[2].Id,
+                PupilId = _pupils[2].Id,
                 LessonSlotId = _lessonSlots[4].Id
             },
             new LessonData
             {
-                PupilId = _pupilData[3].Id,
+                PupilId = _pupils[3].Id,
                 LessonSlotId = _lessonSlots[7].Id
             },
             new LessonData
             {
-                PupilId = _pupilData[4].Id,
+                PupilId = _pupils[4].Id,
                 LessonSlotId = _lessonSlots[3].Id
             },
             new LessonData
             {
-                PupilId = _pupilData[5].Id,
+                PupilId = _pupils[5].Id,
                 LessonSlotId = _lessonSlots[5].Id
             },
             new LessonData
             {
-                PupilId = _pupilData[6].Id,
+                PupilId = _pupils[6].Id,
                 LessonSlotId = _lessonSlots[2].Id
             },
             new LessonData
             {
-                PupilId = _pupilData[7].Id,
+                PupilId = _pupils[7].Id,
                 LessonSlotId = _lessonSlots[6].Id
             }
         };
@@ -191,8 +191,7 @@ namespace MusicOrganisationTests.Tests.Services
         [Fact]
         public void TestTimetableGenerator()
         {
-            IEnumerable<Pupil> pupils = _pupilData.Select(pupil => new Pupil(pupil));
-            TimetableGenerator timetableGenerator = new(pupils, _lessonSlots, _previousLessons);
+            TimetableGenerator timetableGenerator = new(_pupils, _lessonSlots, _previousLessons);
             Dictionary<int, int> timetable = timetableGenerator.GenerateTimetable();
         }
     }

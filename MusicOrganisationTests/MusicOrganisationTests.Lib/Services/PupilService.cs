@@ -15,8 +15,8 @@ namespace MusicOrganisationTests.Lib.Services
 
         public async Task InsertPupilAsync(string name, string level, bool hasDifferentTimes, TimeSpan lessonDuration, int mondayLessonSlots, int tuesdayLessonSlots, int wednesdayLessonSlots, int thursdayLessonSlots, int fridayLessonSlots, int saturdayLessonSlots, int sundayLessonSlots, string? email, string? phoneNumber)
         {
-            int id = await GetNextIdAsync<PupilData>();
-            PupilData pupil = new()
+            int id = await GetNextIdAsync<Pupil>();
+            Pupil pupil = new()
             {
                 Id = id,
                 Name = name,

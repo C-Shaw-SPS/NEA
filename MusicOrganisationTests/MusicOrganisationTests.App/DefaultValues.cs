@@ -1,4 +1,5 @@
-﻿using MusicOrganisationTests.Lib.Tables;
+﻿using MusicOrganisationTests.Lib.Models;
+using MusicOrganisationTests.Lib.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace MusicOrganisationTests.App
 {
     public static class DefaultValues
     {
-        public readonly static List<PupilData> PupilData = new()
+        public readonly static List<Pupil> Pupils = new()
         {
-            new PupilData
+            new Pupil
             {
                 Id = 0,
                 Name = "Pupil 0",
@@ -20,7 +21,7 @@ namespace MusicOrganisationTests.App
                 MondayLessonSlots = 0b1001,
                 WednesdayLessonSlots = 0b1101,
             },
-            new PupilData
+            new Pupil
             {
                 Id = 1,
                 Name = "Pupil 1",

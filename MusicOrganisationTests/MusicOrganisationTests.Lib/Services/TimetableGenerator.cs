@@ -34,7 +34,7 @@ namespace MusicOrganisationTests.Lib.Services
         /// <summary>
         /// Returns a dictionary with the ID of each value as the key
         /// </summary>
-        private static Dictionary<int, TValue> GetDictionary<TValue>(IEnumerable<TValue> values) where TValue : IIdentifiable
+        private static Dictionary<int, TValue> GetDictionary<TValue>(IEnumerable<TValue> values) where TValue : ITable
         {
             Dictionary<int, TValue> dictionary = new();
             foreach (TValue value in values)
@@ -53,7 +53,7 @@ namespace MusicOrganisationTests.Lib.Services
             Dictionary<int, int> fixedLessons = new();
             foreach (Pupil pupil in pupils)
             {
-                if (pupil.HasFixedLessonSlot)
+                if (pupil.HasFixedLessonSlot())
                 {
                     (DayOfWeek, int) dayAndIndex = pupil.GetFixedLessonSlot();
                     LessonSlotData lessonSlot = lessonSlotsFromDayAndIndex[dayAndIndex];
@@ -105,7 +105,7 @@ namespace MusicOrganisationTests.Lib.Services
         private static List<int> GetIdsOfVariableLessonPupils(IEnumerable<Pupil> pupils)
         {
             List<int> ids = pupils
-                .Where(p => !p.HasFixedLessonSlot && p.HasAnyLessonSlots)
+                .Where(p => !p.HasFixedLessonSlot() && p.HasAnyLessonSlots())
                 .Select(p => p.Id)
                 .ToList();
             return ids;

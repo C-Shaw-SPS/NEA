@@ -22,7 +22,7 @@ namespace MusicOrganisationTests.App
                 CreateAndInitTable(ComposerGetter.GetFromOpenOpus()),
                 CreateAndInitTable<LessonData>(),
                 CreateAndInitTable(DefaultValues.LessonSlotData),
-                CreateAndInitTable(DefaultValues.PupilData),
+                CreateAndInitTable(DefaultValues.Pupils),
                 CreateAndInitTable<RepertoireData>(),
                 CreateAndInitTable(WorkGetter.GetFromOpenOpus())
             );

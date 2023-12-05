@@ -12,10 +12,10 @@ namespace MusicOrganisationTests.Tests.Services
         public async Task TestAddPupilAsync()
         {
             PupilService pupilService = new(nameof(TestAddPupilAsync));
-            await pupilService.ClearTableAsync<PupilData>();
+            await pupilService.ClearTableAsync<Pupil>();
 
 
-            PupilData expectedPupil = Expected.PupilData[0];
+            Pupil expectedPupil = Expected.Pupils[0];
             await pupilService.InsertPupilAsync(
                 expectedPupil.Name,
                 expectedPupil.Level,
@@ -31,7 +31,7 @@ namespace MusicOrganisationTests.Tests.Services
                 expectedPupil.Email,
                 expectedPupil.PhoneNumber
                 );
-            IEnumerable<PupilData> actualPupils = await pupilService.GetAllAsync<PupilData>();
+            IEnumerable<Pupil> actualPupils = await pupilService.GetAllAsync<Pupil>();
             Assert.Single(actualPupils);
             Assert.Contains(expectedPupil, actualPupils);
         }
@@ -40,11 +40,11 @@ namespace MusicOrganisationTests.Tests.Services
         public async Task TestAddExistingCaregiverAsync()
         {
             PupilService pupilService = new(nameof(TestAddExistingCaregiverAsync));
-            await pupilService.ClearTableAsync<PupilData>();
+            await pupilService.ClearTableAsync<Pupil>();
             await pupilService.ClearTableAsync<CaregiverData>();
             await pupilService.ClearTableAsync<CaregiverMap>();
 
-            PupilData expectedPupil = Expected.PupilData[0];
+            Pupil expectedPupil = Expected.Pupils[0];
             CaregiverData expectedCaregiverData = Expected.CaregiverData[0];
 
             await pupilService.InsertAsync(expectedPupil);
@@ -61,13 +61,13 @@ namespace MusicOrganisationTests.Tests.Services
             PupilService pupilService = new(nameof(TestGetRepertoireAsync));
             await Task.WhenAll
             (
-                pupilService.ClearTableAsync<PupilData>(),
+                pupilService.ClearTableAsync<Pupil>(),
                 pupilService.ClearTableAsync<RepertoireData>(),
                 pupilService.ClearTableAsync<WorkData>(),
                 pupilService.ClearTableAsync<ComposerData>()
             );
 
-            PupilData pupilData = new()
+            Pupil pupil = new()
             {
                 Id = 0
             };
@@ -111,7 +111,7 @@ namespace MusicOrganisationTests.Tests.Services
                 new RepertoireData
                 {
                     Id = 0,
-                    PupilId = pupilData.Id,
+                    PupilId = pupil.Id,
                     WorkId = workData[0].Id,
                     DateStarted = new DateTime(2023 ,11, 24),
                     Syllabus = "Syllabus 0",
@@ -120,7 +120,7 @@ namespace MusicOrganisationTests.Tests.Services
                 new RepertoireData
                 {
                     Id = 1,
-                    PupilId = pupilData.Id,
+                    PupilId = pupil.Id,
                     WorkId = workData[1].Id,
                     DateStarted = new DateTime(2022, 11, 24),
                     Syllabus = "Syllabus 1",
@@ -160,13 +160,13 @@ namespace MusicOrganisationTests.Tests.Services
 
             await Task.WhenAll
             (
-                pupilService.InsertAsync(pupilData),
+                pupilService.InsertAsync(pupil),
                 pupilService.InsertAllAsync(composerData),
                 pupilService.InsertAllAsync(workData),
                 pupilService.InsertAllAsync(repertoireData)
             );
 
-            IEnumerable<Repertoire> actualRepertoires = await pupilService.GetRepertoireAsync(pupilData.Id);
+            IEnumerable<Repertoire> actualRepertoires = await pupilService.GetRepertoireAsync(pupil.Id);
             Assert.Equal(expectedRepertoires.Count, actualRepertoires.Count());
             foreach (Repertoire expectedRepertoire in expectedRepertoires)
             {

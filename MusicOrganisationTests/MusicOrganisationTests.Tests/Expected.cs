@@ -128,9 +128,9 @@ namespace MusicOrganisationTests.Tests
             }
         };
 
-        public static readonly List<PupilData> PupilData = new()
+        public static readonly List<Pupil> Pupils = new()
         {
-            new PupilData
+            new Pupil
             {
                 Id = 0,
                 Name = "Pupil 0",
@@ -147,7 +147,7 @@ namespace MusicOrganisationTests.Tests
                 PhoneNumber = "0123456789",
                 Email = "pupil0@email.com"
             },
-            new PupilData
+            new Pupil
             {
                 Id = 1,
                 Name = "Pupil 1",
