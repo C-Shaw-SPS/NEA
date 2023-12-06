@@ -9,7 +9,7 @@ namespace MusicOrganisationTests.Lib.Models
     [Table(_TABLE_NAME)]
     public class Pupil : ITable, IEquatable<Pupil>
     {
-        private const string _TABLE_NAME = nameof(Pupil);
+        private const string _TABLE_NAME = $"{nameof(Pupil)}s";
 
         private int _id;
         private string _name = string.Empty;
@@ -127,7 +127,7 @@ namespace MusicOrganisationTests.Lib.Models
 
         private static Dictionary<DayOfWeek, int> GetEmptyLessonSlots()
         {
-            Dictionary<DayOfWeek, int> dictionary = new();
+            Dictionary<DayOfWeek, int> dictionary = [];
             for (DayOfWeek day = DayOfWeek.Sunday; day <= DayOfWeek.Saturday; ++day)
             {
                 dictionary.Add(day, 0);

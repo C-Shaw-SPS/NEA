@@ -38,7 +38,6 @@ namespace MusicOrganisationTests.Lib.Services
                 insertCommand.AddValue(value);
             }
             await _connection.ExecuteAsync(insertCommand.ToString());
-
         }
 
         public async Task DeleteAsync<T>(T value) where T : class, ITable, new()

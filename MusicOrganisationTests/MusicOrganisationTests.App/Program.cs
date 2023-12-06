@@ -3,6 +3,8 @@ using MusicOrganisationTests.Lib.Databases;
 using MusicOrganisationTests.Lib.Tables;
 using MusicOrganisationTests.Lib.Services;
 using System.Reflection.Metadata;
+using MusicOrganisationTests.Lib.Models;
+using MusicOrganisationTests.App.TimetableTestCases;
 
 namespace MusicOrganisationTests.App
 {
@@ -11,7 +13,7 @@ namespace MusicOrganisationTests.App
         static async Task Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-            await CreateEmptyDatabase();
+            await TimetableTestCase1.CreateTestCase();
         }
 
         static async Task CreateEmptyDatabase()
@@ -21,8 +23,8 @@ namespace MusicOrganisationTests.App
                 CreateAndInitTable<CaregiverMap>(),
                 CreateAndInitTable(ComposerGetter.GetFromOpenOpus()),
                 CreateAndInitTable<LessonData>(),
-                CreateAndInitTable(DefaultValues.LessonSlotData),
-                CreateAndInitTable(DefaultValues.Pupils),
+                CreateAndInitTable<LessonSlotData>(),
+                CreateAndInitTable<Pupil>(),
                 CreateAndInitTable<RepertoireData>(),
                 CreateAndInitTable(WorkGetter.GetFromOpenOpus())
             );
