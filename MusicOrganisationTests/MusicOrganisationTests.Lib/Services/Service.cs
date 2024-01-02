@@ -15,7 +15,7 @@ namespace MusicOrganisationTests.Lib.Services
 
         public async Task InitAsync<T>() where T : class, ITable, new()
         {
-            _connection ??= new SQLiteAsyncConnection(_path, DatabaseProperties.FLAGS);
+            _connection ??= new(_path, DatabaseProperties.FLAGS);
             await _connection.CreateTableAsync<T>();
         }
 

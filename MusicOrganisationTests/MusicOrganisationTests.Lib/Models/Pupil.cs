@@ -16,7 +16,7 @@ namespace MusicOrganisationTests.Lib.Models
         private string _level = string.Empty;
         private bool _needsDifferentTimes;
         private TimeSpan _lessonDuration;
-        private Dictionary<DayOfWeek, int> _lessonSlots = GetEmptyLessonSlots();
+        private readonly Dictionary<DayOfWeek, int> _lessonSlots = GetEmptyLessonSlots();
         private string? _email;
         private string? _phoneNumber;
         private string? _notesFile;
@@ -187,9 +187,9 @@ namespace MusicOrganisationTests.Lib.Models
             return true;
         }
 
-        public bool IsAvaliableInSlot(DayOfWeek dayOfWeek, int index)
+        public bool IsAvaliableInSlot(LessonSlotData lessonSlot)
         {
-            return _lessonSlots[dayOfWeek].HasFlagAtIndex(index);
+            return _lessonSlots[lessonSlot.DayOfWeek].HasFlagAtIndex(lessonSlot.FlagIndex);
         }
 
         public (DayOfWeek dayOfWeek, int index) GetFixedLessonSlot()

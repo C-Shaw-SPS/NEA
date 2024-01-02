@@ -6,187 +6,188 @@ namespace MusicOrganisationTests.Tests.Services
 {
     public class TimetableGeneratorTests
     {
-        static List<LessonSlotData> _lessonSlots = new()
+        #region Data
+
+        static readonly List<LessonSlotData> _lessonSlots = new()
         {
             new LessonSlotData
             {
                 Id = 0,
                 DayOfWeek = DayOfWeek.Monday,
-                StartTime = new TimeSpan(09,00,00),
-                EndTime = new TimeSpan(10,00,00),
-                FlagIndex = 0
+                FlagIndex = 0,
+                StartTime = new TimeSpan(09, 00, 00),
+                EndTime = new TimeSpan(10, 00, 00)
             },
             new LessonSlotData
             {
                 Id = 1,
                 DayOfWeek = DayOfWeek.Monday,
-                StartTime = new TimeSpan(10,00,00),
-                EndTime = new TimeSpan(10,30,00),
-                FlagIndex = 1
+                FlagIndex = 2,
+                StartTime = new TimeSpan(10, 00, 00),
+                EndTime = new TimeSpan(11, 00, 00)
             },
             new LessonSlotData
             {
                 Id = 2,
                 DayOfWeek = DayOfWeek.Monday,
-                StartTime = new TimeSpan(11,00,00),
-                EndTime = new TimeSpan(11,45,00),
-                FlagIndex = 4
+                FlagIndex = 4,
+                StartTime = new TimeSpan(11, 00, 00),
+                EndTime = new TimeSpan(12, 00, 00)
             },
             new LessonSlotData
             {
                 Id = 3,
                 DayOfWeek = DayOfWeek.Monday,
-                StartTime = new TimeSpan(12,00,00),
-                EndTime = new TimeSpan(13,00,00),
-                FlagIndex = 3
+                FlagIndex = 6,
+                StartTime = new TimeSpan(12, 00, 00),
+                EndTime = new TimeSpan(13, 00, 00)
             },
             new LessonSlotData
             {
                 Id = 4,
-                DayOfWeek = DayOfWeek.Tuesday,
-                StartTime = new TimeSpan(09,00,00),
-                EndTime = new TimeSpan(09,30,00),
-                FlagIndex = 2
+                DayOfWeek = DayOfWeek.Monday,
+                FlagIndex = 8,
+                StartTime = new TimeSpan(12, 00, 00),
+                EndTime = new TimeSpan(13, 00, 00)
             },
             new LessonSlotData
             {
                 Id = 5,
-                DayOfWeek = DayOfWeek.Tuesday,
-                StartTime = new TimeSpan(10,00,00),
-                EndTime = new TimeSpan(11,00,00),
-                FlagIndex = 5
+                DayOfWeek = DayOfWeek.Monday,
+                FlagIndex = 10,
+                StartTime = new TimeSpan(13, 00, 00),
+                EndTime = new TimeSpan(14, 00, 00)
             },
             new LessonSlotData
             {
                 Id = 6,
-                DayOfWeek = DayOfWeek.Tuesday,
-                StartTime = new TimeSpan(11,00,00),
-                EndTime = new TimeSpan(12,00,00),
-                FlagIndex = 3
+                DayOfWeek = DayOfWeek.Monday,
+                FlagIndex = 12,
+                StartTime = new TimeSpan(14, 00, 00),
+                EndTime = new TimeSpan(15, 00, 00)
             },
             new LessonSlotData
             {
                 Id = 7,
-                DayOfWeek = DayOfWeek.Tuesday,
-                StartTime = new TimeSpan(12,15,00),
-                EndTime = new TimeSpan(12,00,00),
-                FlagIndex = 9
+                DayOfWeek = DayOfWeek.Monday,
+                FlagIndex = 14,
+                StartTime = new TimeSpan(15, 00, 00),
+                EndTime = new TimeSpan(16, 00, 00)
             }
         };
 
-        static List<Pupil> _pupils = new()
+        static readonly List<Pupil> _pupils = new()
         {
             new Pupil
             {
                 Id = 0,
-                LessonDuration = new TimeSpan(01,00,00),
                 NeedsDifferentTimes = false,
+                LessonDuration = new TimeSpan(01, 00, 00),
                 MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[0].FlagIndex)
             },
             new Pupil
             {
                 Id = 1,
-                LessonDuration = new TimeSpan(00,30,00),
                 NeedsDifferentTimes = false,
+                LessonDuration = new TimeSpan(01, 00, 00),
                 MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[1].FlagIndex)
             },
             new Pupil
             {
                 Id = 2,
-                LessonDuration = new TimeSpan(00,30,00),
-                NeedsDifferentTimes = true,
-                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[0].FlagIndex, _lessonSlots[2].FlagIndex),
-                TuesdayLessonSlots = Flags.GetNewFlags(_lessonSlots[4].FlagIndex, _lessonSlots[6].FlagIndex)
+                NeedsDifferentTimes = false,
+                LessonDuration = new TimeSpan(01, 00, 00),
+                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[1].FlagIndex, _lessonSlots[2].FlagIndex)
             },
             new Pupil
             {
                 Id = 3,
-                LessonDuration = new TimeSpan(00,45,00),
-                NeedsDifferentTimes = true,
-                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[0].FlagIndex, _lessonSlots[1].FlagIndex),
-                TuesdayLessonSlots = Flags.GetNewFlags(_lessonSlots[6].FlagIndex, _lessonSlots[7].FlagIndex)
+                NeedsDifferentTimes = false,
+                LessonDuration = new TimeSpan(01, 00, 00),
+                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[2].FlagIndex, _lessonSlots[3].FlagIndex)
             },
             new Pupil
             {
                 Id = 4,
-                LessonDuration = new TimeSpan(00,30,00),
                 NeedsDifferentTimes = true,
-                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[3].FlagIndex),
-                TuesdayLessonSlots = Flags.GetNewFlags(_lessonSlots[4].FlagIndex, _lessonSlots[5].FlagIndex)
+                LessonDuration = new TimeSpan(01, 00, 00),
+                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[3].FlagIndex, _lessonSlots[4].FlagIndex, _lessonSlots[5].FlagIndex)
             },
             new Pupil
             {
                 Id = 5,
-                LessonDuration = new TimeSpan(01,00,00),
-                NeedsDifferentTimes = false,
-                TuesdayLessonSlots = Flags.GetNewFlags(_lessonSlots[5].FlagIndex)
+                NeedsDifferentTimes = true,
+                LessonDuration = new TimeSpan(01, 00, 00),
+                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[4].FlagIndex, _lessonSlots[5].FlagIndex, _lessonSlots[6].FlagIndex)
             },
             new Pupil
             {
                 Id = 6,
-                LessonDuration = new TimeSpan(00,45,00),
                 NeedsDifferentTimes = true,
-                TuesdayLessonSlots = Flags.GetNewFlags(_lessonSlots[4].FlagIndex, _lessonSlots[5].FlagIndex, _lessonSlots[6].FlagIndex, _lessonSlots[7].FlagIndex)
+                LessonDuration = new TimeSpan(01, 00, 00),
+                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[5].FlagIndex, _lessonSlots[6].FlagIndex, _lessonSlots[7].FlagIndex)
             },
             new Pupil
             {
                 Id = 7,
-                LessonDuration = new TimeSpan(01,00,00),
-                NeedsDifferentTimes = false,
-                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[0].FlagIndex, _lessonSlots[1].FlagIndex, _lessonSlots[2].FlagIndex, _lessonSlots[3].FlagIndex),
-                TuesdayLessonSlots = Flags.GetNewFlags(_lessonSlots[6].FlagIndex)
+                NeedsDifferentTimes = true,
+                LessonDuration = new TimeSpan(01, 00, 00),
+                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[6].FlagIndex, _lessonSlots[7].FlagIndex, _lessonSlots[4].FlagIndex)
             }
         };
 
-        static List<LessonData> _previousLessons = new()
+        static readonly List<LessonData> _prevLessons = new()
         {
             new LessonData
             {
-                PupilId = _pupils[0].Id,
-                LessonSlotId = _lessonSlots[0].Id
+                PupilId = 0,
+                LessonSlotId = 0
             },
             new LessonData
             {
-                PupilId = _pupils[1].Id,
-                LessonSlotId = _lessonSlots[1].Id
+                PupilId = 1,
+                LessonSlotId = 1
             },
             new LessonData
             {
-                PupilId = _pupils[2].Id,
-                LessonSlotId = _lessonSlots[4].Id
+                PupilId = 2,
+                LessonSlotId = 2
             },
             new LessonData
             {
-                PupilId = _pupils[3].Id,
-                LessonSlotId = _lessonSlots[7].Id
+                PupilId = 3,
+                LessonSlotId = 3
             },
             new LessonData
             {
-                PupilId = _pupils[4].Id,
-                LessonSlotId = _lessonSlots[3].Id
+                PupilId = 4,
+                LessonSlotId = 5
             },
             new LessonData
             {
-                PupilId = _pupils[5].Id,
-                LessonSlotId = _lessonSlots[5].Id
+                PupilId = 5,
+                LessonSlotId = 6
             },
             new LessonData
             {
-                PupilId = _pupils[6].Id,
-                LessonSlotId = _lessonSlots[2].Id
+                PupilId = 6,
+                LessonSlotId = 7
             },
             new LessonData
             {
-                PupilId = _pupils[7].Id,
-                LessonSlotId = _lessonSlots[6].Id
-            }
+                PupilId = 7,
+                LessonSlotId = 4
+            },
         };
+
+        #endregion
 
         [Fact]
         public void TestTimetableGenerator()
         {
-            TimetableGenerator timetableGenerator = new(_pupils, _lessonSlots, _previousLessons);
-            Dictionary<int, int> timetable = timetableGenerator.GenerateTimetable();
+            TimetableGenerator timetableGenerator = new(_pupils, _lessonSlots, _prevLessons);
+            bool suceeded = timetableGenerator.TryGenerateTimetable(out Dictionary<int, int> timetable);
+            Assert.True(suceeded);
         }
     }
 }
