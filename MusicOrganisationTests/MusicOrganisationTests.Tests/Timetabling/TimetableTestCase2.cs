@@ -4,7 +4,7 @@ using MusicOrganisationTests.Lib.Tables;
 
 namespace MusicOrganisationTests.App.TimetableTestCases
 {
-    public class TimetableTestCase1 : ITimetableTestCase
+    public class TimetableTestCase2 : ITimetableTestCase
     {
         private const bool _IS_POSSIBLE = true;
 
@@ -208,13 +208,13 @@ namespace MusicOrganisationTests.App.TimetableTestCases
 
         #endregion
 
+        public static bool IsPossible => _IS_POSSIBLE;
+
         public static IEnumerable<Pupil> Pupils => _pupils;
 
         public static IEnumerable<LessonSlotData> LessonSlots => _lessonSlots;
 
         public static IEnumerable<LessonData> PrevLessons => _prevLessons;
-
-        public static bool IsPossible => _IS_POSSIBLE;
 
         public static Dictionary<int, int>? ExpectedTimetable => _expectedTimetable;
     }
