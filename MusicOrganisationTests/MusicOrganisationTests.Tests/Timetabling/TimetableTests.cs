@@ -17,16 +17,35 @@ namespace MusicOrganisationTests.Tests.Timetabling
             TestCase<TimetableTestCase2>();
         }
 
+        [Fact]
+        public void TestAllFixed()
+        {
+            TestCase<AllFixedTestCase>();
+        }
+
+        [Fact]
+        public void TestAllDifferentTimes()
+        {
+            TestCase<AllDifferentTimesTestCase>();
+        }
+
+        [Fact]
+        public void TestAllDifferentDurations()
+        {
+            TestCase<AllDifferentDurationsTestCase>();
+        }
+
         private static void TestCase<T>() where T : ITimetableTestCase
         {
             TimetableGenerator timetableGenerator = new(T.Pupils, T.LessonSlots, T.PrevLessons);
-            bool suceeded = timetableGenerator.TryGenerateTimetable(out Dictionary<int, int> timetable);
+            bool suceeded = timetableGenerator.TryGenerateTimetable(out Dictionary<int, int> actualTimetable);
             Assert.Equal(T.IsPossible, suceeded);
+
             if (T.ExpectedTimetable is not null)
             {
                 foreach (int lessonSlotId in T.ExpectedTimetable.Keys)
                 {
-                    Assert.True(timetable.TryGetValue(lessonSlotId, out int pupilId));
+                    Assert.True(actualTimetable.TryGetValue(lessonSlotId, out int pupilId));
                     Assert.Equal(T.ExpectedTimetable[lessonSlotId], pupilId);
                 }
             }
