@@ -8,13 +8,13 @@ namespace MusicOrganisationTests.Tests.Timetabling
         [Fact]
         public void TestCase1()
         {
-            TestCase<TimetableTestCase1>();
+            TestCase<GeneralTestCase1>();
         }
 
         [Fact]
         public void TestCase2()
         {
-            TestCase<TimetableTestCase2>();
+            TestCase<GeneralTestCase2>();
         }
 
         [Fact]

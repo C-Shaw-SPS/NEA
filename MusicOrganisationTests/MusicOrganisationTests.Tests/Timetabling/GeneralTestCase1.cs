@@ -4,7 +4,7 @@ using MusicOrganisationTests.Lib.Tables;
 
 namespace MusicOrganisationTests.App.TimetableTestCases
 {
-    public class TimetableTestCase1 : ITimetableTestCase
+    public class GeneralTestCase1 : ITimetableTestCase
     {
         private const bool _IS_POSSIBLE = true;
 
