@@ -11,8 +11,8 @@ namespace MusicOrganisationTests.App.TimetableTestCases
 
         public abstract static IEnumerable<LessonData> PrevLessons { get; }
 
-        public abstract static string DatabaseName { get; }
-
         public abstract static bool IsPossible { get; }
+
+        public abstract static Dictionary<int, int>? ExpectedTimetable { get; }
     }
 }
