@@ -15,6 +15,7 @@ namespace MusicOrganisationTests.Lib.Services
         private readonly Dictionary<int, int> _prevTimetable;
         private readonly List<(int lessonSlotId, int pupilId)> _fixedLessons;
         private readonly int _maxPupilId;
+        private readonly int _variablePupilsCount;
         private readonly List<int> _variableLessons;
 
         public TimetableGenerator(IEnumerable<Pupil> pupils, IEnumerable<LessonSlotData> lessonSlots, IEnumerable<LessonData> prevLessons)
@@ -26,6 +27,7 @@ namespace MusicOrganisationTests.Lib.Services
             _prevTimetable = GetTimetable(prevLessons);
             _fixedLessons = GetFixedLessons(pupils, lessonSlots);
             _maxPupilId = GetMaxId(pupils);
+            _variablePupilsCount = GetVariablePupilsCount(_pupils, _fixedLessons);
             _variableLessons = GetVariableLessons(lessonSlots, _fixedLessons);
         }
 
@@ -83,6 +85,11 @@ namespace MusicOrganisationTests.Lib.Services
             return values.Max(v => v.Id);
         }
 
+        private static int GetVariablePupilsCount(Dictionary<int, Pupil> pupils, List<(int lessonSlotId, int pupilId)> fixedLessons)
+        {
+            return pupils.Count - fixedLessons.Count;
+        }
+
         private static List<int> GetVariableLessons(IEnumerable<LessonSlotData> lessonSlots, List<(int lessonSlotId, int pupilId)> fixedLessonSlots)
         {
             List<int> variableLessonSlots = [];
@@ -131,16 +138,22 @@ namespace MusicOrganisationTests.Lib.Services
 
         private bool TryInsertVariableLessons()
         {
+            int slotsFilled = 0;
             foreach (int lessonSlotId in _variableLessons)
             {
-                if (_timetable.Count == _pupils.Count)
+                if (slotsFilled == _variablePupilsCount)
                 {
                     return true;
                 }
-                TryFillLessonSlot(lessonSlotId, 0);
+
+                bool filledSlot = TryFillLessonSlot(lessonSlotId, 0);
+                if (filledSlot)
+                {
+                    ++slotsFilled;
+                }
             }
 
-            return _timetable.Count == _pupils.Count;
+            return slotsFilled == _variablePupilsCount;
         }
 
         private bool TryFillLessonSlot(int lessonSlotId, int minPupilId)
