@@ -2,9 +2,9 @@
 using MusicOrganisationTests.Lib.Services;
 using MusicOrganisationTests.Lib.Tables;
 
-namespace MusicOrganisationTests.Tests.Services
+namespace MusicOrganisationTests.Tests.Timetabling
 {
-    public class TimetableGeneratorTests
+    public class TimetableTest1
     {
         #region Data
 

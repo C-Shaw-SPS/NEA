@@ -1,7 +1,6 @@
 ﻿using MusicOrganisationTests.Lib.Databases;
 using MusicOrganisationTests.Lib.Models;
 using MusicOrganisationTests.Lib.Tables;
-using System.Runtime.CompilerServices;
 
 namespace MusicOrganisationTests.Lib.Services
 {
@@ -173,7 +172,8 @@ namespace MusicOrganisationTests.Lib.Services
         {
             for (pupilId = minPupilId; pupilId <= _maxPupilId; ++pupilId)
             {
-                if (IsValidPupilIdForLessonSlot(pupilId, lessonSlot))
+                bool isValid = IsValidPupilIdForLessonSlot(pupilId, lessonSlot);
+                if (isValid)
                 {
                     return true;
                 }
@@ -200,7 +200,7 @@ namespace MusicOrganisationTests.Lib.Services
 
         public bool IsValidPupilIdForLessonSlot(int pupilId, LessonSlotData lessonSlot)
         {
-            if (_timetable.ContainsKey(pupilId))
+            if (_timetable.ContainsValue(pupilId))
             {
                 return false;
             }
