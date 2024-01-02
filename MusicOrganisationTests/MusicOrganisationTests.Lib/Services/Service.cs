@@ -32,12 +32,15 @@ namespace MusicOrganisationTests.Lib.Services
         {
             await InitAsync<T>();
 
-            InsertCommand<T> insertCommand = new();
-            foreach (T value in values)
+            if (values.Any())
             {
-                insertCommand.AddValue(value);
+                InsertCommand<T> insertCommand = new();
+                foreach (T value in values)
+                {
+                    insertCommand.AddValue(value);
+                }
+                await _connection.ExecuteAsync(insertCommand.ToString());
             }
-            await _connection.ExecuteAsync(insertCommand.ToString());
         }
 
         public async Task DeleteAsync<T>(T value) where T : class, ITable, new()
