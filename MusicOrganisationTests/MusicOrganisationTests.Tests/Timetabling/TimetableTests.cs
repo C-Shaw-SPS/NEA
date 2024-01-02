@@ -13,13 +13,13 @@ namespace MusicOrganisationTests.Tests.Timetabling
         [Fact]
         public void TestCase1()
         {
-            TestCase<TimetableTestCase1>();
+            TestCase<TimetableTestCase2>();
         }
 
         [Fact]
         public void TestCase2()
         {
-            TestCase<TimetableTestCase2>();
+            TestCase<TimetableTestCase1>();
         }
 
         private static void TestCase<T>() where T : ITimetableTestCase
