@@ -1,10 +1,5 @@
 ﻿using MusicOrganisationTests.App.TimetableTestCases;
 using MusicOrganisationTests.Lib.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicOrganisationTests.Tests.Timetabling
 {
@@ -13,13 +8,13 @@ namespace MusicOrganisationTests.Tests.Timetabling
         [Fact]
         public void TestCase1()
         {
-            TestCase<TimetableTestCase2>();
+            TestCase<TimetableTestCase1>();
         }
 
         [Fact]
         public void TestCase2()
         {
-            TestCase<TimetableTestCase1>();
+            TestCase<TimetableTestCase2>();
         }
 
         private static void TestCase<T>() where T : ITimetableTestCase
