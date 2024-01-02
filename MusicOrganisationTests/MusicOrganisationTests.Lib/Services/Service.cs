@@ -11,11 +11,11 @@ namespace MusicOrganisationTests.Lib.Services
         public Service(string path)
         {
             _path = path.FormatAsDatabasePath();
+            _connection = new(_path, DatabaseProperties.FLAGS);
         }
 
         public async Task InitAsync<T>() where T : class, ITable, new()
         {
-            _connection ??= new(_path, DatabaseProperties.FLAGS);
             await _connection.CreateTableAsync<T>();
         }
 
