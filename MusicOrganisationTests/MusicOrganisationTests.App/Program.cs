@@ -4,7 +4,6 @@ using MusicOrganisationTests.Lib.Tables;
 using MusicOrganisationTests.Lib.Services;
 using System.Reflection.Metadata;
 using MusicOrganisationTests.Lib.Models;
-using MusicOrganisationTests.App.TimetableTestCases;
 
 namespace MusicOrganisationTests.App
 {
@@ -13,7 +12,6 @@ namespace MusicOrganisationTests.App
         static async Task Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-            await TimetableTestCase1.CreateTestCase();
         }
 
         static async Task CreateEmptyDatabase()

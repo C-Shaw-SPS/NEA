@@ -2,10 +2,13 @@
 using MusicOrganisationTests.Lib.Services;
 using MusicOrganisationTests.Lib.Tables;
 
-namespace MusicOrganisationTests.Tests.Timetabling
+namespace MusicOrganisationTests.App.TimetableTestCases
 {
-    public class TimetableTest1
+    public class TimetableTestCase2 : ITimetableTestCase
     {
+        private const string _DATABASE_NAME = "TimetableTestCase2.db";
+        private const bool _IS_POSSIBLE = true;
+
         #region Data
 
         static readonly List<LessonSlotData> _lessonSlots = new()
@@ -182,12 +185,14 @@ namespace MusicOrganisationTests.Tests.Timetabling
 
         #endregion
 
-        [Fact]
-        public void TestTimetableGenerator()
-        {
-            TimetableGenerator timetableGenerator = new(_pupils, _lessonSlots, _prevLessons);
-            bool suceeded = timetableGenerator.TryGenerateTimetable(out Dictionary<int, int> timetable);
-            Assert.True(suceeded);
-        }
+        public static IEnumerable<Pupil> Pupils => _pupils;
+
+        public static IEnumerable<LessonSlotData> LessonSlots => _lessonSlots;
+
+        public static IEnumerable<LessonData> PrevLessons => _prevLessons;
+
+        public static string DatabaseName => _DATABASE_NAME;
+
+        public static bool IsPossible => _IS_POSSIBLE;
     }
 }

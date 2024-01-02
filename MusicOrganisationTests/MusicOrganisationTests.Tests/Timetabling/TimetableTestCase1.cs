@@ -2,13 +2,11 @@
 using MusicOrganisationTests.Lib.Services;
 using MusicOrganisationTests.Lib.Tables;
 
-namespace MusicOrganisationTests.Tests.Timetabling
+namespace MusicOrganisationTests.App.TimetableTestCases
 {
-    public class TimetableTest2
+    public class TimetableTestCase1 : ITimetableTestCase
     {
-        #region Data
-
-        static List<LessonSlotData> _lessonSlots = new()
+        private static List<LessonSlotData> _lessonSlots = new()
         {
             new LessonSlotData
             {
@@ -76,7 +74,7 @@ namespace MusicOrganisationTests.Tests.Timetabling
             }
         };
 
-        static List<Pupil> _pupils = new()
+        private static List<Pupil> _pupils = new()
         {
             new Pupil
             {
@@ -140,58 +138,70 @@ namespace MusicOrganisationTests.Tests.Timetabling
             }
         };
 
-        static List<LessonData> _previousLessons = new()
+        private static List<LessonData> _prevLessons = new()
         {
             new LessonData
             {
+                Id = 0,
                 PupilId = _pupils[0].Id,
                 LessonSlotId = _lessonSlots[0].Id
             },
             new LessonData
             {
+                Id = 1,
                 PupilId = _pupils[1].Id,
                 LessonSlotId = _lessonSlots[1].Id
             },
             new LessonData
             {
+                Id = 2,
                 PupilId = _pupils[2].Id,
                 LessonSlotId = _lessonSlots[4].Id
             },
             new LessonData
             {
+                Id = 3,
                 PupilId = _pupils[3].Id,
                 LessonSlotId = _lessonSlots[7].Id
             },
             new LessonData
             {
+                Id = 4,
                 PupilId = _pupils[4].Id,
                 LessonSlotId = _lessonSlots[3].Id
             },
             new LessonData
             {
+                Id = 5,
                 PupilId = _pupils[5].Id,
                 LessonSlotId = _lessonSlots[5].Id
             },
             new LessonData
             {
+                Id = 6,
                 PupilId = _pupils[6].Id,
                 LessonSlotId = _lessonSlots[2].Id
             },
             new LessonData
             {
+                Id = 7,
                 PupilId = _pupils[7].Id,
                 LessonSlotId = _lessonSlots[6].Id
             }
         };
 
-        #endregion
+        private const string _DATABASE_NAME = "TimetableTestCase1.db";
 
-        [Fact]
-        public void TestTimetableGenerator()
-        {
-            TimetableGenerator timetableGenerator = new(_pupils, _lessonSlots, _previousLessons);
-            bool suceeded = timetableGenerator.TryGenerateTimetable(out Dictionary<int, int> timetable);
-            Assert.True(suceeded);
-        }
+        private const bool _IS_POSSIBLE = true;
+
+        public static IEnumerable<Pupil> Pupils => _pupils;
+
+        public static IEnumerable<LessonSlotData> LessonSlots => _lessonSlots;
+
+        public static IEnumerable<LessonData> PrevLessons => _prevLessons;
+
+        public static string DatabaseName => _DATABASE_NAME;
+
+        public static bool IsPossible => _IS_POSSIBLE;
     }
 }
