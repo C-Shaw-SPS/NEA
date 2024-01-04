@@ -162,6 +162,11 @@ namespace MusicOrganisationTests.Lib.Models
             return GetTotalLessonSlots() == 1;
         }
 
+        public bool HasVariableLessonSlots()
+        {
+            return GetTotalLessonSlots() > 1;
+        }
+
         public bool Equals(Pupil? other)
         {
             return other != null

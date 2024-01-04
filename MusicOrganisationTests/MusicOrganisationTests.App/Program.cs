@@ -8,9 +8,10 @@ namespace MusicOrganisationTests.App
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
+            await CreateEmptyDatabase();
         }
 
         static async Task CreateEmptyDatabase()
