@@ -9,8 +9,7 @@ namespace MusicOrganisationTests.Lib.Services
         private static readonly Random _random = new();
 
         private Dictionary<int, int> _timetable;
-        private Stack<(int lessonSlotId, int pupilId)> _stack;
-        private readonly Dictionary<int, Pupil> _pupils;
+        private Stack<(int lessonSlotId, Pupil pupil)> _stack;
         private readonly Dictionary<int, LessonSlotData> _lessonSlots;
         private readonly Dictionary<int, int> _prevTimetable;
         private readonly List<Pupil> _fixedLessonPupils;
@@ -21,7 +20,6 @@ namespace MusicOrganisationTests.Lib.Services
         {
             _timetable = [];
             _stack = [];
-            _pupils = GetDictionary(pupils);
             _lessonSlots = GetDictionary(lessonSlots);
             _prevTimetable = GetTimetable(prevLessons);
             _fixedLessonPupils = GetFixedLessonPupils(pupils);
@@ -139,7 +137,7 @@ namespace MusicOrganisationTests.Lib.Services
         private bool TryInsertVariableLessonPupil(Pupil pupil)
         {
             Dictionary<int, int> currentTimetable = new(_timetable);
-            Stack<(int lessonSlotId, int pupilId)> currentStack = new(_stack);
+            Stack<(int lessonSlotId, Pupil pupil)> currentStack = new(_stack);
             bool suceeded = TryInsertPupil(pupil, 0);
             if (!suceeded)
             {
@@ -155,7 +153,7 @@ namespace MusicOrganisationTests.Lib.Services
             if (canInsert)
             {
                 _timetable.Add(lessonSlotId, pupil.Id);
-                _stack.Push((lessonSlotId, pupil.Id));
+                _stack.Push((lessonSlotId, pupil));
                 return true;
             }
 
@@ -165,7 +163,7 @@ namespace MusicOrganisationTests.Lib.Services
                 if (canInsert)
                 {
                     _timetable.Add(lessonSlotId, pupil.Id);
-                    _stack.Push((lessonSlotId, pupil.Id));
+                    _stack.Push((lessonSlotId, pupil));
                     return true;
                 }
             }
@@ -179,8 +177,7 @@ namespace MusicOrganisationTests.Lib.Services
                 return false;
             }
 
-            (int lessonSlotId, int pupilId) = _stack.Pop();
-            Pupil pupil = _pupils[pupilId];
+            (int lessonSlotId, Pupil pupil) = _stack.Pop();
             _timetable.Remove(lessonSlotId);
             bool succeeded = TryInsertPupil(pupil, lessonSlotId + 1);
             return succeeded;
