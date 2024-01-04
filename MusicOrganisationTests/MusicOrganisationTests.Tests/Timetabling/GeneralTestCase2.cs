@@ -2,7 +2,7 @@
 using MusicOrganisationTests.Lib.Services;
 using MusicOrganisationTests.Lib.Tables;
 
-namespace MusicOrganisationTests.App.TimetableTestCases
+namespace MusicOrganisationTests.Tests.Timetabling
 {
     public class GeneralTestCase2 : ITimetableTestCase
     {

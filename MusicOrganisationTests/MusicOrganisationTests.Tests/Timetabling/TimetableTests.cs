@@ -1,18 +1,17 @@
-﻿using MusicOrganisationTests.App.TimetableTestCases;
-using MusicOrganisationTests.Lib.Services;
+﻿using MusicOrganisationTests.Lib.Services;
 
 namespace MusicOrganisationTests.Tests.Timetabling
 {
     public class TimetableTests
     {
         [Fact]
-        public void TestCase1()
+        public void TestGeneralCase1()
         {
             TestCase<GeneralTestCase1>();
         }
 
         [Fact]
-        public void TestCase2()
+        public void TestGeneralCase2()
         {
             TestCase<GeneralTestCase2>();
         }
@@ -33,6 +32,12 @@ namespace MusicOrganisationTests.Tests.Timetabling
         public void TestAllDifferentDurations()
         {
             TestCase<AllDifferentDurationsTestCase>();
+        }
+
+        [Fact]
+        public void TestImpossibleCase1()
+        {
+            TestCase<ImpossibleTestCase1>();
         }
 
         private static void TestCase<T>() where T : ITimetableTestCase

@@ -1,5 +1,4 @@
-﻿using MusicOrganisationTests.App.TimetableTestCases;
-using MusicOrganisationTests.Lib.Models;
+﻿using MusicOrganisationTests.Lib.Models;
 using MusicOrganisationTests.Lib.Services;
 using MusicOrganisationTests.Lib.Tables;
 

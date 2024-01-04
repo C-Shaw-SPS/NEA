@@ -4,9 +4,9 @@ using MusicOrganisationTests.Lib.Tables;
 
 namespace MusicOrganisationTests.Tests.Timetabling
 {
-    internal class AllDifferentTimesTestCase : ITimetableTestCase
+    internal class ImpossibleTestCase1 : ITimetableTestCase
     {
-        private const bool _IS_POSSIBLE = true;
+        private const bool _IS_POSSIBLE = false;
 
         #region Data
 
@@ -51,30 +51,30 @@ namespace MusicOrganisationTests.Tests.Timetabling
             new Pupil
             {
                 Id = 0,
-                NeedsDifferentTimes = true,
+                NeedsDifferentTimes = false,
                 LessonDuration = new TimeSpan(01, 00, 00),
-                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[0].FlagIndex, _lessonSlots[1].FlagIndex)
+                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[0].FlagIndex)
             },
             new Pupil
             {
                 Id = 1,
-                NeedsDifferentTimes = true,
+                NeedsDifferentTimes = false,
                 LessonDuration = new TimeSpan(01, 00, 00),
-                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[1].FlagIndex, _lessonSlots[2].FlagIndex)
+                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[1].FlagIndex)
             },
             new Pupil
             {
                 Id = 2,
                 NeedsDifferentTimes = true,
                 LessonDuration = new TimeSpan(01, 00, 00),
-                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[2].FlagIndex, _lessonSlots[3].FlagIndex)
+                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[0].FlagIndex, _lessonSlots[1].FlagIndex, _lessonSlots[2].FlagIndex, _lessonSlots[3].FlagIndex)
             },
             new Pupil
             {
                 Id = 3,
                 NeedsDifferentTimes = true,
                 LessonDuration = new TimeSpan(01, 00, 00),
-                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[3].FlagIndex, _lessonSlots[0].FlagIndex)
+                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[0].FlagIndex, _lessonSlots[1].FlagIndex)
             }
         };
 
@@ -83,33 +83,26 @@ namespace MusicOrganisationTests.Tests.Timetabling
             new LessonData
             {
                 PupilId = 0,
-                LessonSlotId = 1
+                LessonSlotId = 0
             },
             new LessonData
             {
                 PupilId = 1,
-                LessonSlotId = 2
+                LessonSlotId = 1
             },
             new LessonData
             {
                 PupilId = 2,
                 LessonSlotId = 3
             },
-            new LessonData
-            {
-                PupilId = 3,
-                LessonSlotId = 0
-            },
         };
 
-        private static readonly Dictionary<int, int> _expectedTimetable = new()
+        private static readonly Dictionary<int, int> _expectedTimeTable = new()
         {
             { 0, 0 },
             { 1, 1 },
-            { 2, 2 },
-            { 3, 3 }
+            { 2, 2 }
         };
-
 
         #endregion
 
@@ -121,6 +114,6 @@ namespace MusicOrganisationTests.Tests.Timetabling
 
         public static IEnumerable<LessonData> PrevLessons => _prevLessons;
 
-        public static Dictionary<int, int>? ExpectedTimetable => _expectedTimetable;
+        public static Dictionary<int, int>? ExpectedTimetable => _expectedTimeTable;
     }
 }

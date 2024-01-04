@@ -1,7 +1,7 @@
 ﻿using MusicOrganisationTests.Lib.Models;
 using MusicOrganisationTests.Lib.Tables;
 
-namespace MusicOrganisationTests.App.TimetableTestCases
+namespace MusicOrganisationTests.Tests.Timetabling
 {
     public interface ITimetableTestCase
     {
