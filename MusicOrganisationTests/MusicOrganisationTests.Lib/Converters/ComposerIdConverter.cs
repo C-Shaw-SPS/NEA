@@ -5,6 +5,8 @@ namespace MusicOrganisationTests.Lib.Converters
 {
     internal class ComposerIdConverter : JsonConverter<int>
     {
+        private const string _ID = "id";
+
         public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             CheckStartObject(ref reader);
@@ -31,11 +33,12 @@ namespace MusicOrganisationTests.Lib.Converters
                 }
 
                 string? propertyName = reader.GetString();
-                if (propertyName == "id")
+                if (propertyName == _ID)
                 {
                     id = ParseJsonIdProperty(ref reader);
                 }
             }
+
             throw new JsonException();
         }
 

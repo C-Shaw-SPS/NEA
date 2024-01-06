@@ -24,12 +24,6 @@ namespace MusicOrganisationTests.Tests.Services
         }
 
         [Fact]
-        public async Task TestFixedLessonSql()
-        {
-            await TestType(Expected.FixedLessonData);
-        }
-
-        [Fact]
         public async Task TestLessonSql()
         {
             await TestType(Expected.LessonData);
@@ -56,7 +50,7 @@ namespace MusicOrganisationTests.Tests.Services
         [Fact]
         public async Task TestPupilSql()
         {
-            await TestType(Expected.PupilData);
+            await TestType(Expected.Pupils);
         }
 
         private static async Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, new()

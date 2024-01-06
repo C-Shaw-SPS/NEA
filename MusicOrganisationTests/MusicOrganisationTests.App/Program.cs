@@ -2,7 +2,7 @@
 using MusicOrganisationTests.Lib.Databases;
 using MusicOrganisationTests.Lib.Tables;
 using MusicOrganisationTests.Lib.Services;
-using System.Reflection.Metadata;
+using MusicOrganisationTests.Lib.Models;
 
 namespace MusicOrganisationTests.App
 {
@@ -20,10 +20,9 @@ namespace MusicOrganisationTests.App
                 CreateAndInitTable<CaregiverData>(),
                 CreateAndInitTable<CaregiverMap>(),
                 CreateAndInitTable(ComposerGetter.GetFromOpenOpus()),
-                CreateAndInitTable<FixedLessonData>(),
                 CreateAndInitTable<LessonData>(),
-                CreateAndInitTable(DefaultValues.LessonSlotData),
-                CreateAndInitTable(DefaultValues.PupilData),
+                CreateAndInitTable<LessonSlotData>(),
+                CreateAndInitTable<Pupil>(),
                 CreateAndInitTable<RepertoireData>(),
                 CreateAndInitTable(WorkGetter.GetFromOpenOpus())
             );

@@ -24,7 +24,7 @@ namespace MusicOrganisationTests.Tests.Services
         [Fact]
         public void TestAddFlag()
         {
-            for (int i = 0; i < 32; ++i)
+            for (int i = 0; i < Flags.MAX_FLAG_INDEX; ++i)
             {
                 int flags = FLAGS;
                 flags.AddFlagAtIndex(i);
@@ -35,12 +35,23 @@ namespace MusicOrganisationTests.Tests.Services
         [Fact]
         public void TestRemoveFlag()
         {
-            for (int i = 0; i < 32; ++i)
+            for (int i = 0; i < Flags.MAX_FLAG_INDEX; ++i)
             {
                 int flags = FLAGS;
                 flags.RemoveFlagAtIndex(i);
                 Assert.False(flags.HasFlagAtIndex(i));
             }
+        }
+
+        [Theory]
+        [InlineData(0b1111, 4)]
+        [InlineData(0b0, 0)]
+        [InlineData(0b1010, 2)]
+        [InlineData(0b0110, 2)]
+        public void TestGetNumberOfFlags(int flags, int expectedCount)
+        {
+            int actualCount = flags.GetNumberOfFlags();
+            Assert.Equal(expectedCount, actualCount);
         }
     }
 }

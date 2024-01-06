@@ -11,11 +11,11 @@ namespace MusicOrganisationTests.Lib.Services
         public Service(string path)
         {
             _path = path.FormatAsDatabasePath();
+            _connection = new(_path, DatabaseProperties.FLAGS);
         }
 
         public async Task InitAsync<T>() where T : class, ITable, new()
         {
-            _connection ??= new SQLiteAsyncConnection(_path, DatabaseProperties.FLAGS);
             await _connection.CreateTableAsync<T>();
         }
 
@@ -32,13 +32,15 @@ namespace MusicOrganisationTests.Lib.Services
         {
             await InitAsync<T>();
 
-            InsertCommand<T> insertCommand = new();
-            foreach (T value in values)
+            if (values.Any())
             {
-                insertCommand.AddValue(value);
+                InsertCommand<T> insertCommand = new();
+                foreach (T value in values)
+                {
+                    insertCommand.AddValue(value);
+                }
+                await _connection.ExecuteAsync(insertCommand.ToString());
             }
-            await _connection.ExecuteAsync(insertCommand.ToString());
-
         }
 
         public async Task DeleteAsync<T>(T value) where T : class, ITable, new()

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace MusicOrganisationTests.Lib.Exceptions
 {
-    public class NoMoreFlagsException : Exception
+    public class FlagsException : Exception
     {
-        public NoMoreFlagsException(DayOfWeek dayOfWeek) : base($"No more flags avaliable on {dayOfWeek}") { }
+        public FlagsException() : base() { }
+
+        public FlagsException(string message) : base(message) { }
     }
 }
