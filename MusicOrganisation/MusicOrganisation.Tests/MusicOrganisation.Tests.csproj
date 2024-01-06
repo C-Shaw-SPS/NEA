@@ -24,4 +24,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MusicOrganisation.Lib\MusicOrganisation.Lib.csproj" />
+  </ItemGroup>
+
 </Project>
