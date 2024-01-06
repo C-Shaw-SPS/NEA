@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-[assembly: InternalsVisibleTo("MusicOrganisationTests.Tests")]
+[assembly: InternalsVisibleTo("MusicOrganisation.Tests")]
 namespace MusicOrganisation.Lib.Json
 {
     internal static class JsonGetter
