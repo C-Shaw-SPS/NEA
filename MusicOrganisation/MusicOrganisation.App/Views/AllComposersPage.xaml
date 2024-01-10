@@ -10,9 +10,32 @@
     </ContentPage.BindingContext>
     
     <VerticalStackLayout>
-        <CollectionView ItemsSource="{Binding Composers}">
+
+        <Grid RowDefinitions="500,*">
+            <CollectionView ItemsSource="{Binding Composers}"
+                        VerticalOptions="FillAndExpand"
+                        VerticalScrollBarVisibility="Always">
+
+                <CollectionView.ItemsLayout>
+
+                    <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="20"/>
+
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding Name}"/>
+                        </StackLayout>
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
             
-        </CollectionView>
+        </Grid>
 
         <Button Command="{Binding InitialiseCommand}"
                 Text="Initialise composers"/>

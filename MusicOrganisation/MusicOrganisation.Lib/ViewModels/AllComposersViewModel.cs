@@ -5,6 +5,7 @@ using MusicOrganisation.Lib.Json;
 using MusicOrganisation.Lib.Services;
 using MusicOrganisation.Lib.Tables;
 using MusicOrganisation.Lib.Viewmodels;
+using System.Collections.ObjectModel;
 using System.IO;
 
 namespace MusicOrganisation.Lib.ViewModels
@@ -19,9 +20,8 @@ namespace MusicOrganisation.Lib.ViewModels
         private AsyncRelayCommand _refreshCommand;
         private AsyncRelayCommand _initialiseCommand;
 
-
         [ObservableProperty]
-        private List<ComposerData> _composers;
+        private ObservableCollection<ComposerData> _composers;
 
         public AllComposersViewModel()
         {
@@ -38,8 +38,12 @@ namespace MusicOrganisation.Lib.ViewModels
 
         public async Task RefreshAsync()
         {
+            Composers.Clear();
             IEnumerable<ComposerData> composers = await _composerService.GetAllAsync<ComposerData>();
-            Composers.AddRange(composers);
+            foreach (ComposerData composer in composers)
+            {
+                Composers.Add(composer);
+            }
         }
 
         private async Task InitialiseAsync()
