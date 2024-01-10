@@ -15,6 +15,10 @@
             <ShellContent ContentTemplate="{DataTemplate views:AllComposersPage}"/>
         </Tab>
 
+        <Tab Title="Main page">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+        </Tab>
+
     </TabBar>
 
 </Shell>

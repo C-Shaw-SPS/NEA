@@ -12,6 +12,6 @@ public partial class AllComposersPage : ContentPage
     protected async override void OnAppearing()
     {
         AllComposersViewModel viewModel = (AllComposersViewModel)BindingContext;
-        await viewModel.Refresh();
+        await viewModel.RefreshAsync();
     }
 }

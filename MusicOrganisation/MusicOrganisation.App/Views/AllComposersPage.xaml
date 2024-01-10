@@ -10,8 +10,11 @@
     </ContentPage.BindingContext>
     
     <VerticalStackLayout>
-        <CollectionView ItemsSource="{Binding }">
+        <CollectionView ItemsSource="{Binding Composers}">
             
         </CollectionView>
+
+        <Button Command="{Binding InitialiseCommand}"
+                Text="Initialise composers"/>
     </VerticalStackLayout>
 </ContentPage>
