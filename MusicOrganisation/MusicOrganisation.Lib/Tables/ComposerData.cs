@@ -17,7 +17,6 @@ namespace MusicOrganisation.Lib.Tables
         private DateTime _birthDate;
         private DateTime? _deathDate;
         private string _era = string.Empty;
-        private string? _portraitLink;
 
         [PrimaryKey, JsonPropertyName("id"), JsonConverter(typeof(StringToIntConverter))]
         public int Id
@@ -61,13 +60,6 @@ namespace MusicOrganisation.Lib.Tables
             set => _era = value;
         }
 
-        [JsonPropertyName("portrait")]
-        public string? PortraitLink
-        {
-            get => _portraitLink;
-            set => _portraitLink = FormatLink(value);
-        }
-
         public static string TableName => _TABLE_NAME;
 
         private static string? FormatLink(string? value)
@@ -96,8 +88,7 @@ namespace MusicOrganisation.Lib.Tables
                 _completeName,
                 _birthDate,
                 _deathDate,
-                _era,
-                _portraitLink);
+                _era);
         }
 
         public static IEnumerable<string> GetColumnNames()
@@ -110,7 +101,6 @@ namespace MusicOrganisation.Lib.Tables
                 nameof(BirthDate),
                 nameof(DeathDate),
                 nameof(Era),
-                nameof(PortraitLink)
             };
         }
 
@@ -121,8 +111,7 @@ namespace MusicOrganisation.Lib.Tables
                 && _completeName == other._completeName
                 && _birthDate == other._birthDate
                 && _deathDate == other._deathDate
-                && _era == other._era
-                && _portraitLink == other._portraitLink;
+                && _era == other._era;
         }
     }
 }

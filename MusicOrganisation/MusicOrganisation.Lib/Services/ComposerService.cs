@@ -17,7 +17,7 @@ namespace MusicOrganisation.Lib.Services
             await InsertAllAsync(composers);
         }
 
-        public async Task InsertComposerAsync(string name, string completeName, DateTime birthDate, DateTime? deathDate, string era, string? portraitLink = null)
+        public async Task InsertComposerAsync(string name, string completeName, DateTime birthDate, DateTime? deathDate, string era)
         {
             int id = await GetNextIdAsync<ComposerData>();
             ComposerData composer = new()
@@ -28,7 +28,6 @@ namespace MusicOrganisation.Lib.Services
                 BirthDate = birthDate,
                 DeathDate = deathDate,
                 Era = era,
-                PortraitLink = portraitLink
             };
             await InsertAsync(composer);
         }
