@@ -7,9 +7,9 @@ namespace MusicOrganisation.Lib.Json
     {
         private const string _URL = "https://api.openopus.org/work/list/ids/.json";
 
-        public static IEnumerable<WorkData> GetFromOpenOpus()
+        public static async Task<IEnumerable<WorkData>> GetFromOpenOpus()
         {
-            return JsonGetter.GetFromUrl<WorkData, WorkResponse>(_URL);
+            return await JsonGetter.GetFromUrl<WorkData, WorkResponse>(_URL);
         }
 
         public static IEnumerable<WorkData> GetFromFile(string filePath)

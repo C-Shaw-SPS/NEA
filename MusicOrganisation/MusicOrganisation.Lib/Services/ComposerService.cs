@@ -13,7 +13,7 @@ namespace MusicOrganisation.Lib.Services
 
         public async Task InitialiseData()
         {
-            IEnumerable<ComposerData> composers = ComposerGetter.GetFromOpenOpus();
+            IEnumerable<ComposerData> composers = await ComposerGetter.GetFromOpenOpus();
             await InsertAllAsync(composers);
         }
 

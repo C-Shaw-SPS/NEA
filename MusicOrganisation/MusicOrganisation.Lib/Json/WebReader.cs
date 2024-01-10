@@ -2,14 +2,13 @@
 {
     internal static class WebReader
     {
-        public static string DownloadText(string url)
+        public async static Task<string> DownloadText(string url)
         {
             string text;
             using (HttpClient client = new())
             {
                 HttpRequestMessage message = new(HttpMethod.Get, url);
-                // TODO: catch error from no connection
-                HttpResponseMessage response = client.Send(message);
+                HttpResponseMessage response = await client.SendAsync(message);
                 text = GetDataFromResponse(response);
             }
             return text;

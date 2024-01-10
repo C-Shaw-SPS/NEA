@@ -26,9 +26,9 @@ namespace MusicOrganisation.Lib.Json
             return GetValuesFromResponse<T, TResponse>(json);
         }
 
-        public static IEnumerable<T> GetFromUrl<T, TResponse>(string url) where TResponse : IResponse<T>
+        public async static Task<IEnumerable<T>> GetFromUrl<T, TResponse>(string url) where TResponse : IResponse<T>
         {
-            string json = WebReader.DownloadText(url);
+            string json = await WebReader.DownloadText(url);
             return GetValuesFromResponse<T, TResponse>(json);
         }
 

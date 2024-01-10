@@ -9,7 +9,7 @@ namespace MusicOrganisation.Lib.Services
 
         public async Task InitialiseData()
         {
-            IEnumerable<WorkData> works = WorkGetter.GetFromOpenOpus();
+            IEnumerable<WorkData> works = await WorkGetter.GetFromOpenOpus();
             await InsertAllAsync(works);
         }
 
