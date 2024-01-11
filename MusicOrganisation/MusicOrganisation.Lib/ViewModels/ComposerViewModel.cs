@@ -1,20 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MusicOrganisation.Lib.Tables;
 using MusicOrganisation.Lib.Viewmodels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicOrganisation.Lib.ViewModels
 {
-    public partial class ComposerViewModel : ViewModelBase
+    public partial class ComposerViewModel : ViewModelBase, IQueryAttributable
     {
         public const string ROUTE = nameof(ComposerViewModel);
 
         public const string QUERY_PARAMETER = nameof(ComposerData);
 
+        [ObservableProperty]
         private ComposerData? _composer;
 
         [ObservableProperty]
@@ -51,16 +47,17 @@ namespace MusicOrganisation.Lib.ViewModels
 
         private void SetComposer(ComposerData composer)
         {
-            _composer = composer;
-            Name = _composer.Name;
-            CompleteName = _composer.CompleteName;
-            if (_composer.BirthDate is DateTime birthDate)
+            Composer = composer;
+            Name = Composer.Name;
+            CompleteName = Composer.CompleteName;
+            Era = Composer.Era;
+            if (Composer.BirthDate is DateTime birthDate)
             {
-                BirthDate = birthDate.ToShortDateString();
+                BirthDate = birthDate.Year.ToString();
             }
-            if (_composer.DeathDate is DateTime deathDate)
+            if (Composer.DeathDate is DateTime deathDate)
             {
-                DeathDate = deathDate.ToShortDateString();
+                DeathDate = deathDate.Year.ToString();
             }
         }
     }

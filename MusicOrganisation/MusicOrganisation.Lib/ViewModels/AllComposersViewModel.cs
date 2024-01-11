@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Platform;
 using MusicOrganisation.Lib.Databases;
 using MusicOrganisation.Lib.Json;
 using MusicOrganisation.Lib.Services;
@@ -30,6 +29,7 @@ namespace MusicOrganisation.Lib.ViewModels
         private AsyncRelayCommand _refreshCommand;
         private AsyncRelayCommand _initialiseCommand;
         private AsyncRelayCommand _searchCommand;
+        private AsyncRelayCommand _selectCommand;
 
         [ObservableProperty]
         private string _searchText;
@@ -53,6 +53,7 @@ namespace MusicOrganisation.Lib.ViewModels
             _refreshCommand = new(RefreshAsync);
             _initialiseCommand = new(InitialiseAsync);
             _searchCommand = new(SearchAsync);
+            _selectCommand = new(SelectAsync);
         }
 
         public ObservableCollection<string> Orderings => new(_orderings.Keys);
@@ -62,6 +63,8 @@ namespace MusicOrganisation.Lib.ViewModels
         public AsyncRelayCommand InitialiseCommand => _initialiseCommand;
 
         public AsyncRelayCommand SearchCommand => _searchCommand;
+
+        public AsyncRelayCommand SelectCommand => _selectCommand;
 
         public async Task RefreshAsync()
         {
@@ -87,21 +90,21 @@ namespace MusicOrganisation.Lib.ViewModels
             }
         }
 
-        async partial void OnOrderingChanged(string value)
+        private async Task SelectAsync()
         {
-            await SearchAsync();
-        }
-
-        async partial void OnSelectedComposerChanged(ComposerData? value)
-        {
-            if (value is not null)
+            if (SelectedComposer is not null)
             {
                 Dictionary<string, object> routeParameters = new()
                 {
-                    { ComposerViewModel.QUERY_PARAMETER, value }
+                    [ComposerViewModel.QUERY_PARAMETER] = SelectedComposer
                 };
                 await Shell.Current.GoToAsync(ComposerViewModel.ROUTE, routeParameters);
             }
+        }
+
+        async partial void OnOrderingChanged(string value)
+        {
+            await SearchAsync();
         }
     }
 }

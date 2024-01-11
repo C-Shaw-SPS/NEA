@@ -51,6 +51,8 @@
             HorizontalOptions="FillAndExpand"
             VerticalScrollBarVisibility="Always"
             SelectionMode="Single"
+            SelectedItem="{Binding SelectedComposer}"
+            SelectionChangedCommand="{Binding SelectCommand}"
             Margin="20">
 
             <CollectionView.ItemsLayout>
