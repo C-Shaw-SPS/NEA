@@ -14,8 +14,8 @@ namespace MusicOrganisation.Lib.Tables
         private int _id;
         private string _name = string.Empty;
         private string _completeName = string.Empty;
-        private DateTime? _birthDate;
-        private DateTime? _deathDate;
+        private int? _birthYear;
+        private int? _deathYear;
         private string _era = string.Empty;
 
         [PrimaryKey, JsonPropertyName("id"), JsonConverter(typeof(StringToIntConverter))]
@@ -39,18 +39,18 @@ namespace MusicOrganisation.Lib.Tables
             set => _completeName = value;
         }
 
-        [JsonPropertyName("birth"), JsonConverter(typeof(DateTimeConverter))]
-        public DateTime? BirthDate
+        [JsonPropertyName("birth"), JsonConverter(typeof(YearConverter))]
+        public int? BirthYear
         {
-            get => _birthDate;
-            set => _birthDate = value;
+            get => _birthYear;
+            set => _birthYear = value;
         }
 
-        [JsonPropertyName("death"), JsonConverter(typeof(DateTimeConverter))]
-        public DateTime? DeathDate
+        [JsonPropertyName("death"), JsonConverter(typeof(YearConverter))]
+        public int? DeathYear
         {
-            get => _deathDate;
-            set => _deathDate = value;
+            get => _deathYear;
+            set => _deathYear = value;
         }
 
         [JsonPropertyName("epoch"), NotNull]
@@ -86,8 +86,8 @@ namespace MusicOrganisation.Lib.Tables
                 _id,
                 _name,
                 _completeName,
-                _birthDate,
-                _deathDate,
+                _birthYear,
+                _deathYear,
                 _era);
         }
 
@@ -98,8 +98,8 @@ namespace MusicOrganisation.Lib.Tables
                 nameof(Id),
                 nameof(Name),
                 nameof(CompleteName),
-                nameof(BirthDate),
-                nameof(DeathDate),
+                nameof(BirthYear),
+                nameof(DeathYear),
                 nameof(Era),
             };
         }
@@ -109,8 +109,8 @@ namespace MusicOrganisation.Lib.Tables
             return other != null
                 && _name == other._name
                 && _completeName == other._completeName
-                && _birthDate == other._birthDate
-                && _deathDate == other._deathDate
+                && _birthYear == other._birthYear
+                && _deathYear == other._deathYear
                 && _era == other._era;
         }
     }

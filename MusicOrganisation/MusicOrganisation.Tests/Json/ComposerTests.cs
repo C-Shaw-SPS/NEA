@@ -13,8 +13,8 @@ namespace MusicOrganisation.Tests.Json
             Id = 87,
             Name = "Bach",
             CompleteName = "Johann Sebastian Bach",
-            BirthDate = DateTime.Parse("1685-01-01"),
-            DeathDate = DateTime.Parse("1750-01-01"),
+            BirthYear = 1685,
+            DeathYear = 1750,
             Era = "Baroque"
         };
 

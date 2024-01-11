@@ -19,8 +19,8 @@ namespace MusicOrganisation.Lib.ViewModels
         {
             { "Name", nameof(ComposerData.Name) },
             { "Complete name", nameof(ComposerData.CompleteName) },
-            { "Date of birth", nameof(ComposerData.BirthDate) },
-            { "Date of death", nameof(ComposerData.DeathDate) }
+            { "Date of birth", nameof(ComposerData.BirthYear) },
+            { "Date of death", nameof(ComposerData.DeathYear) }
         };
 
         private ComposerService _composerService;

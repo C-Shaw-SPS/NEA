@@ -51,13 +51,13 @@ namespace MusicOrganisation.Lib.ViewModels
             Name = Composer.Name;
             CompleteName = Composer.CompleteName;
             Era = Composer.Era;
-            if (Composer.BirthDate is DateTime birthDate)
+            if (Composer.BirthYear is int birthYear)
             {
-                BirthDate = birthDate.Year.ToString();
+                BirthDate = birthYear.ToString();
             }
-            if (Composer.DeathDate is DateTime deathDate)
+            if (Composer.DeathYear is int deathYear)
             {
-                DeathDate = deathDate.Year.ToString();
+                DeathDate = deathYear.ToString();
             }
         }
     }

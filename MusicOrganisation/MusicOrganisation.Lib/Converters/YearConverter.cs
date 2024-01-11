@@ -3,11 +3,11 @@ using System.Text.Json.Serialization;
 
 namespace MusicOrganisation.Lib.Converters
 {
-    internal class DateTimeConverter : JsonConverter<DateTime>
+    internal class YearConverter : JsonConverter<int?>
     {
-        public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override int? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (typeToConvert == typeof(DateTime))
+            if (typeToConvert == typeof(int?))
             {
                 return GetDateTime(ref reader);
             }
@@ -17,12 +17,12 @@ namespace MusicOrganisation.Lib.Converters
             }
         }
 
-        private static DateTime GetDateTime(ref Utf8JsonReader reader)
+        private static int? GetDateTime(ref Utf8JsonReader reader)
         {
             string? s = reader.GetString();
             if (s != null)
             {
-                return DateTime.Parse(s);
+                return DateTime.Parse(s).Year;
             }
             else
             {
@@ -30,9 +30,9 @@ namespace MusicOrganisation.Lib.Converters
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, int? value, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(value.ToString());
+            throw new NotImplementedException();
         }
     }
 }

@@ -15,8 +15,8 @@ namespace MusicOrganisation.Tests.Services
             await service.InsertComposerAsync(
                 expectedComposer.Name,
                 expectedComposer.CompleteName,
-                expectedComposer.BirthDate,
-                expectedComposer.DeathDate,
+                expectedComposer.BirthYear,
+                expectedComposer.DeathYear,
                 expectedComposer.Era
                 );
 

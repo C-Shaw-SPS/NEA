@@ -11,8 +11,8 @@ namespace MusicOrganisation.Tests
             Id = 91,
             Name = "Bunch",
             CompleteName = "Kenji Bunch",
-            BirthDate = DateTime.Parse("1973-07-27"),
-            DeathDate = null,
+            BirthYear = 1973,
+            DeathYear = null,
             Era = "21st Century",
         };
 
@@ -58,8 +58,8 @@ namespace MusicOrganisation.Tests
                 Id = 36,
                 Name = "Vaughan Williams",
                 CompleteName = "Ralph Vaughan Williams",
-                BirthDate = DateTime.Parse("1872-01-01"),
-                DeathDate = DateTime.Parse("1958-01-01"),
+                BirthYear = 1872,
+                DeathYear = 1958,
                 Era = "Late Romantic"
             },
             new ComposerData
@@ -67,8 +67,8 @@ namespace MusicOrganisation.Tests
                 Id = 87,
                 Name = "Bach",
                 CompleteName = "Johann Sebastian Bach",
-                BirthDate =DateTime.Parse("1685-01-01"),
-                DeathDate = DateTime.Parse("1750-01-01"),
+                BirthYear =1685,
+                DeathYear = 1750,
                 Era = "Baroque"
             },
             new ComposerData
@@ -76,8 +76,8 @@ namespace MusicOrganisation.Tests
                 Id = 176,
                 Name = "Reich",
                 CompleteName = "Steve Reich",
-                BirthDate = DateTime.Parse("1936-01-01"),
-                DeathDate = null,
+                BirthYear = 1936,
+                DeathYear = null,
                 Era = "Post-War"
             },
             new ComposerData
@@ -85,8 +85,8 @@ namespace MusicOrganisation.Tests
                 Id = 196,
                 Name = "Mozart",
                 CompleteName = "Wolfgang Amadeus Mozart",
-                BirthDate = DateTime.Parse("1756-01-01"),
-                DeathDate = DateTime.Parse("1791-01-01"),
+                BirthYear = 1756,
+                DeathYear = 1791,
                 Era = "Classical"
             },
             NullPropertyComposer
