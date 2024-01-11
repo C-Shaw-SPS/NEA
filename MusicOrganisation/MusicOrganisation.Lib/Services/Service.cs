@@ -132,7 +132,13 @@ namespace MusicOrganisation.Lib.Services
             query.AddOrderBy<T>(orderParameter);
             query.SetLimit(limit);
             string queryString = query.ToString();
-            return await _connection.QueryAsync<T>(queryString);
+            return await QueryAsync<T>(queryString);
+        }
+
+        public async Task DropTableIfExists<T>() where T : class, ITable, new()
+        {
+            await InitAsync<T>();
+            await _connection.DropTableAsync<T>();
         }
     }
 }

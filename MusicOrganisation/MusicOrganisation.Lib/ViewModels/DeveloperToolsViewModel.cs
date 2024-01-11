@@ -1,40 +1,44 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using MusicOrganisation.Lib.Databases;
 using MusicOrganisation.Lib.Json;
+using MusicOrganisation.Lib.Models;
 using MusicOrganisation.Lib.Services;
 using MusicOrganisation.Lib.Tables;
 using MusicOrganisation.Lib.Viewmodels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicOrganisation.Lib.ViewModels
 {
     public class DeveloperToolsViewModel : ViewModelBase
     {
-        public const string PATH = nameof(DeveloperToolsViewModel);
+        public const string ROUTE = nameof(DeveloperToolsViewModel);
 
         private readonly Service _service;
 
-        private readonly RelayCommand _deleteDatabaseCommand;
+        private readonly AsyncRelayCommand _deleteDatabaseCommand;
         private readonly AsyncRelayCommand _resetComposersAndWorksCommand;
 
         public DeveloperToolsViewModel()
         {
             _service = new(_databasePath);
-            _deleteDatabaseCommand = new(DeleteDatabase);
+            _deleteDatabaseCommand = new(DeleteDatabaseTables);
             _resetComposersAndWorksCommand = new(ResetComposersAndWorks);
         }
 
-        public RelayCommand DeleteDatabaseCommand => _deleteDatabaseCommand;
+        public AsyncRelayCommand DeleteDatabaseCommand => _deleteDatabaseCommand;
 
         public AsyncRelayCommand ResetComposersAndWorksCommand => _resetComposersAndWorksCommand;
 
-        private void DeleteDatabase()
+        private async Task DeleteDatabaseTables()
         {
-            File.Delete(_databasePath);
+            await Task.WhenAll(
+                _service.DropTableIfExists<Pupil>(),
+                _service.DropTableIfExists<CaregiverData>(),
+                _service.DropTableIfExists<CaregiverMap>(),
+                _service.DropTableIfExists<ComposerData>(),
+                _service.DropTableIfExists<LessonData>(),
+                _service.DropTableIfExists<LessonSlotData>(),
+                _service.DropTableIfExists<RepertoireData>(),
+                _service.DropTableIfExists<WorkData>()
+                );
         }
 
         private async Task ResetComposersAndWorks()

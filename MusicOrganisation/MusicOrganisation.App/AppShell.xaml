@@ -11,12 +11,16 @@
 
     <TabBar>
 
+        <Tab Title="Main page">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+        </Tab>
+
         <Tab Title="Composers">
             <ShellContent ContentTemplate="{DataTemplate views:AllComposersPage}"/>
         </Tab>
 
-        <Tab Title="Main page">
-            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+        <Tab Title="Developer tools">
+            <ShellContent ContentTemplate="{DataTemplate views:DeveloperToolsPage}"/>
         </Tab>
 
     </TabBar>
