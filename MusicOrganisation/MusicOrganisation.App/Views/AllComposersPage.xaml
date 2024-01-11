@@ -4,46 +4,45 @@
              xmlns:viewmodels="clr-namespace:MusicOrganisation.Lib.ViewModels;assembly=MusicOrganisation.Lib"
              x:Class="MusicOrganisation.App.Views.AllComposersPage"
              Title="Composers">
- 
+
     <ContentPage.BindingContext>
         <viewmodels:AllComposersViewModel/>
     </ContentPage.BindingContext>
 
-    <Grid RowSpacing="10"
+        <Grid RowSpacing="10"
           ColumnSpacing="10">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <SearchBar 
+            <SearchBar 
             Grid.Row="0"
             Grid.Column="0"
             Text="{Binding SearchText}"
             SearchCommand="{Binding SearchCommand}"/>
 
-        <Label
+            <Label
             Grid.Row="0"
             Grid.Column="1"
             Text="Sort by:"
             VerticalTextAlignment="Center"
             HorizontalTextAlignment="End"/>
 
-        <Picker
+            <Picker
             Grid.Row="0"
             Grid.Column="2"
             ItemsSource="{Binding Orderings}"
             SelectedItem="{Binding Ordering}"
             />
-
         <CollectionView
             Grid.Row="1"
             Grid.ColumnSpan="4"
@@ -81,5 +80,5 @@
         </CollectionView>
 
     </Grid>
-    
+
 </ContentPage>
