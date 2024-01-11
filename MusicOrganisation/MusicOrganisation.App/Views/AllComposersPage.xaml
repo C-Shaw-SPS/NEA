@@ -9,7 +9,8 @@
         <viewmodels:AllComposersViewModel/>
     </ContentPage.BindingContext>
 
-    <Grid>
+    <Grid RowSpacing="10"
+          ColumnSpacing="10">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -18,8 +19,8 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -32,7 +33,7 @@
         <Label
             Grid.Row="0"
             Grid.Column="1"
-            Text="Ordering: "
+            Text="Sort by:"
             VerticalTextAlignment="Center"
             HorizontalTextAlignment="End"/>
 
