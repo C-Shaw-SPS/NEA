@@ -11,10 +11,6 @@
 
     <TabBar>
 
-        <Tab Title="Main page">
-            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
-        </Tab>
-
         <Tab Title="Composers">
             <ShellContent ContentTemplate="{DataTemplate views:AllComposersPage}"/>
         </Tab>

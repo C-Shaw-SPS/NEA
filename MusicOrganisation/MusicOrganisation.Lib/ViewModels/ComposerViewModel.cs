@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MusicOrganisation.Lib.Tables;
 using MusicOrganisation.Lib.Viewmodels;
 
@@ -28,6 +29,8 @@ namespace MusicOrganisation.Lib.ViewModels
         [ObservableProperty]
         private string _era;
 
+        private readonly AsyncRelayCommand _editCommand;
+
         public ComposerViewModel()
         {
             _name = string.Empty;
@@ -35,6 +38,21 @@ namespace MusicOrganisation.Lib.ViewModels
             _birthDate = string.Empty;
             _deathDate = string.Empty;
             _era = string.Empty;
+            _editCommand = new(EditAsync);
+        }
+
+        public AsyncRelayCommand EditCommand => _editCommand;
+
+        private async Task EditAsync()
+        {
+            if (Composer is not null)
+            {
+                Dictionary<string, object> routeParameters = new()
+                {
+                    [EditComposerViewModel.QUERY_PARAMETER] = Composer
+                };
+                await Shell.Current.GoToAsync(EditComposerViewModel.ROUTE, routeParameters);
+            }
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)

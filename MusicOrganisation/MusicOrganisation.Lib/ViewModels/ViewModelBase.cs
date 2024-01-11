@@ -5,6 +5,8 @@ namespace MusicOrganisation.Lib.Viewmodels
 {
     public abstract class ViewModelBase : ObservableObject
     {
+        protected const string _RETURN = "..";
+
         protected string _databasePath;
 
         public ViewModelBase()

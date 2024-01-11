@@ -13,6 +13,7 @@ namespace MusicOrganisation.App
             Routing.RegisterRoute(AllComposersViewModel.ROUTE, typeof(AllComposersPage));
             Routing.RegisterRoute(ComposerViewModel.ROUTE, typeof(ComposerPage));
             Routing.RegisterRoute(DeveloperToolsViewModel.ROUTE, typeof(DeveloperToolsPage));
+            Routing.RegisterRoute(EditComposerViewModel.ROUTE, typeof(EditComposerPage));
 
             Debug.WriteLine($"App data directory: {FileSystem.AppDataDirectory}");
         }

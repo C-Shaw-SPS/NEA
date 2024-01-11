@@ -4,9 +4,16 @@
              xmlns:viewmodels="clr-namespace:MusicOrganisation.Lib.ViewModels;assembly=MusicOrganisation.Lib"
              x:Class="MusicOrganisation.App.Views.ComposerPage"
              Title="{Binding Name}">
+    
     <ContentPage.BindingContext>
         <viewmodels:ComposerViewModel/>
     </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Edit"
+            Command="{Binding EditCommand}"/>
+    </ContentPage.ToolbarItems>
 
     <Grid Margin="20"
           RowSpacing="10"
