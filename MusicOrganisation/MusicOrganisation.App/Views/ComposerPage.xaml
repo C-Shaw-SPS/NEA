@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:MusicOrganisation.Lib.ViewModels;assembly=MusicOrganisation.Lib"
              x:Class="MusicOrganisation.App.Views.ComposerPage"
-             Title="{Binding CompleteName}">
+             Title="{Binding Name}">
     <ContentPage.BindingContext>
         <viewmodels:ComposerViewModel/>
     </ContentPage.BindingContext>
