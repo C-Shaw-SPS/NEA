@@ -23,13 +23,12 @@ namespace MusicOrganisation.Lib.ViewModels
             { "Date of death", nameof(ComposerData.DeathYear) }
         };
 
-        private ComposerService _composerService;
-        private string _path;
+        private readonly ComposerService _composerService;
 
-        private AsyncRelayCommand _refreshCommand;
-        private AsyncRelayCommand _initialiseCommand;
-        private AsyncRelayCommand _searchCommand;
-        private AsyncRelayCommand _selectCommand;
+        private readonly AsyncRelayCommand _refreshCommand;
+        private readonly AsyncRelayCommand _initialiseCommand;
+        private readonly AsyncRelayCommand _searchCommand;
+        private readonly AsyncRelayCommand _selectCommand;
 
         [ObservableProperty]
         private string _searchText;
@@ -45,8 +44,7 @@ namespace MusicOrganisation.Lib.ViewModels
 
         public AllComposersViewModel()
         {
-            _path = Path.Combine(FileSystem.AppDataDirectory, DatabaseProperties.NAME);
-            _composerService = new(_path);
+            _composerService = new(_databasePath);
             _composers = [];
             _searchText = string.Empty;
             _ordering = _orderings.Keys.First();
