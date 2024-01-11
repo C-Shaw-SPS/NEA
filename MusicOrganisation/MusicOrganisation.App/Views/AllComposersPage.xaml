@@ -18,6 +18,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -31,19 +32,20 @@
         <Label
             Grid.Row="0"
             Grid.Column="1"
-            Text="Ordering"
-            VerticalTextAlignment="Center"/>
+            Text="Ordering: "
+            VerticalTextAlignment="Center"
+            HorizontalTextAlignment="End"/>
 
         <Picker
             Grid.Row="0"
             Grid.Column="2"
             ItemsSource="{Binding Orderings}"
-            SelectedIndex="{Binding Ordering}"
+            SelectedItem="{Binding Ordering}"
             />
 
         <CollectionView
             Grid.Row="1"
-            Grid.ColumnSpan="3"
+            Grid.ColumnSpan="4"
             ItemsSource="{Binding Composers}"
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"

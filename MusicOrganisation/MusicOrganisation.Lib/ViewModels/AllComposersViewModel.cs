@@ -16,7 +16,7 @@ namespace MusicOrganisation.Lib.ViewModels
 
         public const string ROUTE = nameof(AllComposersViewModel);
 
-        private static Dictionary<string, string> _orderings = new()
+        private readonly Dictionary<string, string> _orderings = new()
         {
             { "Name", nameof(ComposerData.Name) },
             { "Complete name", nameof(ComposerData.CompleteName) },
@@ -62,12 +62,7 @@ namespace MusicOrganisation.Lib.ViewModels
 
         public async Task RefreshAsync()
         {
-            Composers.Clear();
-            IEnumerable<ComposerData> composers = await _composerService.GetAllAsync<ComposerData>();
-            foreach (ComposerData composer in composers)
-            {
-                Composers.Add(composer);
-            }
+            await SearchAsync();
         }
 
         private async Task InitialiseAsync()
@@ -80,13 +75,18 @@ namespace MusicOrganisation.Lib.ViewModels
 
         private async Task SearchAsync()
         {
-            
-            IEnumerable<ComposerData> composers = await _composerService.SearchAsync<ComposerData>(nameof(ComposerData.CompleteName), SearchText, _orderings[Ordering], _LIMIT);
+            string ordering = _orderings[Ordering];
+            IEnumerable<ComposerData> composers = await _composerService.SearchAsync<ComposerData>(nameof(ComposerData.CompleteName), SearchText, ordering, _LIMIT);
             Composers.Clear();
             foreach (ComposerData compsoer in composers)
             {
                 Composers.Add(compsoer);
             }
+        }
+
+        partial void OnOrderingChanged(string value)
+        {
+            SearchAsync();
         }
     }
 }
