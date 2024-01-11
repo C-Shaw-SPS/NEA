@@ -122,5 +122,16 @@ namespace MusicOrganisation.Lib.Services
             await InitAsync<T>();
             return await _connection.QueryAsync<T>(query);
         }
+
+        public async Task<IEnumerable<T>> SearchAsync<T>(string searchParameter, string like, string orderParameter, int limit) where T : class, ITable, new()
+        {
+            SqlQuery<T> query = new();
+            query.SelectAll();
+            query.AddWhereLike<T>(searchParameter, like);
+            query.AddOrderBy<T>(orderParameter);
+            query.SetLimit(limit);
+            string queryString = query.ToString();
+            return await _connection.QueryAsync<T>(queryString);
+        }
     }
 }

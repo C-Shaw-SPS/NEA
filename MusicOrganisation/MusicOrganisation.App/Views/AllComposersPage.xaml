@@ -9,13 +9,46 @@
         <viewmodels:AllComposersViewModel/>
     </ContentPage.BindingContext>
 
-    <Grid RowDefinitions="*">
-        <CollectionView ItemsSource="{Binding Composers}"
-                    VerticalOptions="FillAndExpand"
-                        HorizontalOptions="FillAndExpand"
-                    VerticalScrollBarVisibility="Always"
-                    SelectionMode="Single"
-                    Margin="20">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <SearchBar 
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="{Binding SearchText}"
+            SearchCommand="{Binding SearchCommand}"/>
+
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="Ordering:"/>
+
+        <Picker
+            Grid.Row="0"
+            Grid.Column="2"
+            ItemsSource="{Binding Orderings}"
+            SelectedItem="{Binding Ordering}"
+            />
+
+        <CollectionView
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            ItemsSource="{Binding Composers}"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Always"
+            SelectionMode="Single"
+            Margin="20">
 
             <CollectionView.ItemsLayout>
 
