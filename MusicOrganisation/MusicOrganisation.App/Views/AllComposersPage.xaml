@@ -31,13 +31,14 @@
         <Label
             Grid.Row="0"
             Grid.Column="1"
-            Text="Ordering:"/>
+            Text="Ordering"
+            VerticalTextAlignment="Center"/>
 
         <Picker
             Grid.Row="0"
             Grid.Column="2"
             ItemsSource="{Binding Orderings}"
-            SelectedItem="{Binding Ordering}"
+            SelectedIndex="{Binding Ordering}"
             />
 
         <CollectionView

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Platform;
 using MusicOrganisation.Lib.Databases;
 using MusicOrganisation.Lib.Json;
 using MusicOrganisation.Lib.Services;
@@ -51,7 +52,7 @@ namespace MusicOrganisation.Lib.ViewModels
             _searchCommand = new(SearchAsync);
         }
 
-        public IEnumerable<string> Orderings => _orderings.Values;
+        public ObservableCollection<string> Orderings => new(_orderings.Keys);
 
         public AsyncRelayCommand RefreshCommand => _refreshCommand;
 
@@ -79,7 +80,8 @@ namespace MusicOrganisation.Lib.ViewModels
 
         private async Task SearchAsync()
         {
-            IEnumerable<ComposerData> composers = await _composerService.SearchAsync<ComposerData>(nameof(ComposerData.CompleteName), SearchText, Ordering, _LIMIT);
+            
+            IEnumerable<ComposerData> composers = await _composerService.SearchAsync<ComposerData>(nameof(ComposerData.CompleteName), SearchText, _orderings[Ordering], _LIMIT);
             Composers.Clear();
             foreach (ComposerData compsoer in composers)
             {
