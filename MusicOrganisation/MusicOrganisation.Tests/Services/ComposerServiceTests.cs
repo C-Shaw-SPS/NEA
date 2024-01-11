@@ -17,8 +17,7 @@ namespace MusicOrganisation.Tests.Services
                 expectedComposer.CompleteName,
                 expectedComposer.BirthDate,
                 expectedComposer.DeathDate,
-                expectedComposer.Era,
-                expectedComposer.PortraitLink
+                expectedComposer.Era
                 );
 
             IEnumerable<ComposerData> actualComposers = await service.GetAllAsync<ComposerData>();

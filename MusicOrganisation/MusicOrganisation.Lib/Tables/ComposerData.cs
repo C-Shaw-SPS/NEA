@@ -14,7 +14,7 @@ namespace MusicOrganisation.Lib.Tables
         private int _id;
         private string _name = string.Empty;
         private string _completeName = string.Empty;
-        private DateTime _birthDate;
+        private DateTime? _birthDate;
         private DateTime? _deathDate;
         private string _era = string.Empty;
 
@@ -39,8 +39,8 @@ namespace MusicOrganisation.Lib.Tables
             set => _completeName = value;
         }
 
-        [JsonPropertyName("birth"), JsonConverter(typeof(DateTimeConverter)), NotNull]
-        public DateTime BirthDate
+        [JsonPropertyName("birth"), JsonConverter(typeof(DateTimeConverter))]
+        public DateTime? BirthDate
         {
             get => _birthDate;
             set => _birthDate = value;

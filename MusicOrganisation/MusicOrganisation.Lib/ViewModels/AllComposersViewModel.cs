@@ -40,6 +40,9 @@ namespace MusicOrganisation.Lib.ViewModels
         [ObservableProperty]
         private ObservableCollection<ComposerData> _composers;
 
+        [ObservableProperty]
+        private ComposerData? _selectedComposer;
+
         public AllComposersViewModel()
         {
             _path = Path.Combine(FileSystem.AppDataDirectory, DatabaseProperties.NAME);
@@ -84,9 +87,21 @@ namespace MusicOrganisation.Lib.ViewModels
             }
         }
 
-        partial void OnOrderingChanged(string value)
+        async partial void OnOrderingChanged(string value)
         {
-            SearchAsync();
+            await SearchAsync();
+        }
+
+        async partial void OnSelectedComposerChanged(ComposerData? value)
+        {
+            if (value is not null)
+            {
+                Dictionary<string, object> routeParameters = new()
+                {
+                    { ComposerViewModel.QUERY_PARAMETER, value }
+                };
+                await Shell.Current.GoToAsync(ComposerViewModel.ROUTE, routeParameters);
+            }
         }
     }
 }

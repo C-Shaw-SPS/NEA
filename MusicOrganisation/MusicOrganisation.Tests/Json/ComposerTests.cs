@@ -15,8 +15,7 @@ namespace MusicOrganisation.Tests.Json
             CompleteName = "Johann Sebastian Bach",
             BirthDate = DateTime.Parse("1685-01-01"),
             DeathDate = DateTime.Parse("1750-01-01"),
-            Era = "Baroque",
-            PortraitLink = "https://assets.openopus.org/portraits/12091447-1568084857.jpg"
+            Era = "Baroque"
         };
 
         [Fact]

@@ -13,5 +13,6 @@ public partial class AllComposersPage : ContentPage
     {
         AllComposersViewModel viewModel = (AllComposersViewModel)BindingContext;
         await viewModel.RefreshAsync();
+        viewModel.SelectedComposer = null;
     }
 }

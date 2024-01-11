@@ -10,6 +10,7 @@ namespace MusicOrganisation.App
             InitializeComponent();
 
             Routing.RegisterRoute(AllComposersViewModel.ROUTE, typeof(AllComposersPage));
+            Routing.RegisterRoute(ComposerViewModel.ROUTE, typeof(ComposerPage));
         }
     }
 }

@@ -14,7 +14,6 @@ namespace MusicOrganisation.Tests
             BirthDate = DateTime.Parse("1973-07-27"),
             DeathDate = null,
             Era = "21st Century",
-            PortraitLink = null
         };
 
         public static readonly List<CaregiverData> CaregiverData = new()
@@ -61,8 +60,7 @@ namespace MusicOrganisation.Tests
                 CompleteName = "Ralph Vaughan Williams",
                 BirthDate = DateTime.Parse("1872-01-01"),
                 DeathDate = DateTime.Parse("1958-01-01"),
-                Era = "Late Romantic",
-                PortraitLink = "https://assets.openopus.org/portraits/72161419-1568084957.jpg"
+                Era = "Late Romantic"
             },
             new ComposerData
             {
@@ -71,8 +69,7 @@ namespace MusicOrganisation.Tests
                 CompleteName = "Johann Sebastian Bach",
                 BirthDate =DateTime.Parse("1685-01-01"),
                 DeathDate = DateTime.Parse("1750-01-01"),
-                Era = "Baroque",
-                PortraitLink = "https://assets.openopus.org/portraits/12091447-1568084857.jpg"
+                Era = "Baroque"
             },
             new ComposerData
             {
@@ -81,8 +78,7 @@ namespace MusicOrganisation.Tests
                 CompleteName = "Steve Reich",
                 BirthDate = DateTime.Parse("1936-01-01"),
                 DeathDate = null,
-                Era = "Post-War",
-                PortraitLink = "https://assets.openopus.org/portraits/65680484-1568084938.jpg"
+                Era = "Post-War"
             },
             new ComposerData
             {
@@ -91,8 +87,7 @@ namespace MusicOrganisation.Tests
                 CompleteName = "Wolfgang Amadeus Mozart",
                 BirthDate = DateTime.Parse("1756-01-01"),
                 DeathDate = DateTime.Parse("1791-01-01"),
-                Era = "Classical",
-                PortraitLink = "https://assets.openopus.org/portraits/21459195-1568084925.jpg"
+                Era = "Classical"
             },
             NullPropertyComposer
         };
