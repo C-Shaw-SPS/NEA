@@ -40,14 +40,14 @@
 
         <Label Grid.Row="2"
                Grid.Column="0"
-               Text="Date of birth:"/>
+               Text="Year of birth:"/>
         <Label Grid.Row="2"
                Grid.Column="1"
                Text="{Binding BirthDate}"/>
 
         <Label Grid.Row="3"
                Grid.Column="0"
-               Text="Date of death:"/>
+               Text="Year of death:"/>
         <Label Grid.Row="3"
                Grid.Column="1"
                Text="{Binding DeathDate}"/>
