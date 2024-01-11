@@ -4,7 +4,7 @@
              xmlns:viewmodels="clr-namespace:MusicOrganisation.Lib.ViewModels;assembly=MusicOrganisation.Lib"
              x:Class="MusicOrganisation.App.Views.AllComposersPage"
              Title="Composers">
-
+ 
     <ContentPage.BindingContext>
         <viewmodels:AllComposersViewModel/>
     </ContentPage.BindingContext>
