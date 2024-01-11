@@ -125,6 +125,7 @@ namespace MusicOrganisation.Lib.Services
 
         public async Task<IEnumerable<T>> SearchAsync<T>(string searchParameter, string like, string orderParameter, int limit) where T : class, ITable, new()
         {
+            await InitAsync<T>();
             SqlQuery<T> query = new();
             query.SelectAll();
             query.AddWhereLike<T>(searchParameter, like);
