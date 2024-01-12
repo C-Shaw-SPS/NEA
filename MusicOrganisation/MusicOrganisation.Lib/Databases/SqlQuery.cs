@@ -21,7 +21,7 @@ namespace MusicOrganisation.Lib.Databases
             _limit = 0;
         }
 
-        public void SelectAll()
+        public void SetSelectAll()
         {
             _selectAll = true;
         }
