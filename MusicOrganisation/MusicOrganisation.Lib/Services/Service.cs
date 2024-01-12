@@ -128,7 +128,7 @@ namespace MusicOrganisation.Lib.Services
             await InitAsync<T>();
             SqlQuery<T> query = new();
             query.SelectAll();
-            query.AddWhereLike<T>(searchParameter, like);
+            query.AddWhereLike<T>(searchParameter, like, SqlBool.OR);
             query.AddOrderBy<T>(orderParameter);
             query.SetLimit(limit);
             string queryString = query.ToString();

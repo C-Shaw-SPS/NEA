@@ -7,7 +7,7 @@ namespace MusicOrganisation.Lib.Databases
         bool _selectAll;
         private readonly List<(string table, string column, string alias)> _columns;
         private readonly List<(string newTable, string newColumn, string existingTable, string existingColumn)> _joins;
-        private readonly List<(string table, string column, string value, string operation)> _conditions;
+        private readonly List<(string table, string column, string value, string comparison, SqlBool boolean)> _conditions;
         private readonly List<(string table, string column)> _orderBys;
         private int _limit;
 
@@ -36,14 +36,14 @@ namespace MusicOrganisation.Lib.Databases
             _joins.Add((TNew.TableName, newColumn, TExisting.TableName, existingColumn));
         }
 
-        public void AddWhereEquals<TTable>(string column, object? value) where TTable : ITable
+        public void AddWhereEquals<TTable>(string column, object? value, SqlBool boolean) where TTable : ITable
         {
-            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatValue(value), "="));
+            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatValue(value), "=", boolean));
         }
 
-        public void AddWhereLike<TTable>(string column, string value) where TTable : ITable
+        public void AddWhereLike<TTable>(string column, string value, SqlBool boolean) where TTable : ITable
         {
-            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatLikeString(value), "LIKE"));
+            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatLikeString(value), "LIKE", boolean));
         }
 
         public void AddOrderBy<TTable>(string column) where TTable : ITable
@@ -95,12 +95,23 @@ namespace MusicOrganisation.Lib.Databases
 
         private void AddWhereEqualsToStringbuilder(StringBuilder stringBuilder)
         {
-            if (_conditions.Count > 0)
+            if (_conditions.Count >= 1)
             {
                 stringBuilder.AppendLine("WHERE");
-                IEnumerable<string> formattedEquals = _conditions.Select(e => $"{e.table}.{e.column} {e.operation} {e.value}");
-                stringBuilder.AppendLine(string.Join("\nAND", formattedEquals));
+                stringBuilder.AppendLine(FormatCondition(0));
             }
+            for (int i = 2; i < _conditions.Count; i++)
+            {
+                string condition = FormatCondition(i);
+                string line = $"{_conditions[i].boolean} {condition}";
+                stringBuilder.AppendLine(line);
+            }
+        }
+
+        private string FormatCondition(int conditionIndex)
+        {
+            (string table, string column, string value, string comparison, SqlBool _) = _conditions[conditionIndex];
+            return $"{table}.{column} {comparison} {value}";
         }
 
         private void AddOrderBys(StringBuilder stringBuilder)
