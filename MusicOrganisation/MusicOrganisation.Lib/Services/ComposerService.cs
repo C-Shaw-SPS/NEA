@@ -17,14 +17,13 @@ namespace MusicOrganisation.Lib.Services
             await InsertAllAsync(composers);
         }
 
-        public async Task InsertComposerAsync(string name, string completeName, int? birthDate, int? deathDate, string era)
+        public async Task InsertComposerAsync(string name, int? birthDate, int? deathDate, string era)
         {
             int id = await GetNextIdAsync<ComposerData>();
             ComposerData composer = new()
             {
                 Id = id,
                 Name = name,
-                CompleteName = completeName,
                 BirthYear = birthDate,
                 DeathYear = deathDate,
                 Era = era,

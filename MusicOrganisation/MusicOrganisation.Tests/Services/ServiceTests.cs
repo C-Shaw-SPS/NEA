@@ -9,7 +9,7 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestInsertAsync()
         {
             Service table = new(nameof(TestInsertAsync));
-            await table.ClearTableAsync<ComposerData>();
+            await table.DropTableIfExistsAsync<ComposerData>();
             await table.InsertAsync(Expected.ComposerData[0]);
             IEnumerable<ComposerData> actualComposers = await table.GetAllAsync<ComposerData>();
             Assert.Single(actualComposers);
@@ -20,7 +20,7 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestClearDataAsync()
         {
             Service table = new(nameof(TestClearDataAsync));
-            await table.ClearTableAsync<WorkData>();
+            await table.DropTableIfExistsAsync<WorkData>();
             await table.InsertAllAsync(Expected.WorkData);
             await table.ClearTableAsync<WorkData>();
 
@@ -32,7 +32,7 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestInsertAllAsyncAndGetAllAsync()
         {
             Service table = new(nameof(TestInsertAllAsyncAndGetAllAsync));
-            await table.ClearTableAsync<ComposerData>();
+            await table.DropTableIfExistsAsync<ComposerData>();
             await table.InsertAllAsync(Expected.ComposerData);
             IEnumerable<ComposerData> actualComposers = await table.GetAllAsync<ComposerData>();
 
@@ -47,7 +47,7 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestGetAsnyc()
         {
             Service table = new(nameof(TestGetAsnyc));
-            await table.ClearTableAsync<WorkData>();
+            await table.DropTableIfExistsAsync<WorkData>();
             await table.InsertAllAsync(Expected.WorkData);
             WorkData actualWork = await table.GetAsync<WorkData>(Expected.WorkData[0].Id);
             Assert.Equal(Expected.WorkData[0], actualWork);
@@ -57,7 +57,7 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestDeleteAsync()
         {
             Service table = new(nameof(TestDeleteAsync));
-            await table.ClearTableAsync<ComposerData>();
+            await table.DropTableIfExistsAsync<ComposerData>();
             await table.InsertAllAsync(Expected.ComposerData);
             await table.DeleteAsync(Expected.ComposerData[0]);
 
@@ -73,7 +73,7 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestUpdateAsync()
         {
             Service table = new(nameof(TestUpdateAsync));
-            await table.ClearTableAsync<WorkData>();
+            await table.DropTableIfExistsAsync<WorkData>();
             await table.InsertAllAsync(Expected.WorkData);
             WorkData updatedWork = new()
             {
@@ -96,7 +96,7 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestGetIdsAsync()
         {
             Service table = new(nameof(TestGetIdsAsync));
-            await table.ClearTableAsync<ComposerData>();
+            await table.DropTableIfExistsAsync<ComposerData>();
             await table.InsertAllAsync(Expected.ComposerData);
             IEnumerable<int> actualIds = await table.GetIdsAsync<ComposerData>();
             foreach (ComposerData expectedComposer in Expected.ComposerData)
@@ -109,7 +109,7 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestNullProperties()
         {
             Service table = new(nameof(TestNullProperties));
-            await table.ClearTableAsync<ComposerData>();
+            await table.DropTableIfExistsAsync<ComposerData>();
             await table.InsertAsync(Expected.NullPropertyComposer);
             IEnumerable<ComposerData> actualComposers = await table.GetAllAsync<ComposerData>();
             Assert.Single(actualComposers);
@@ -120,7 +120,7 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestGetNextIdAsync()
         {
             Service table = new(nameof(TestGetNextIdAsync));
-            await table.ClearTableAsync<WorkData>();
+            await table.DropTableIfExistsAsync<WorkData>();
             await table.InsertAllAsync(Expected.WorkData);
             int nextId = await table.GetNextIdAsync<WorkData>();
             Assert.Equal(Expected.WorkData.Max(w => w.Id) + 1, nextId);
@@ -130,7 +130,7 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestGetWhereEqualAsync()
         {
             Service table = new(nameof(TestGetWhereEqualAsync));
-            await table.ClearTableAsync<ComposerData>();
+            await table.DropTableIfExistsAsync<ComposerData>();
             await table.InsertAllAsync(Expected.ComposerData);
             IEnumerable<ComposerData> actualComposers = await table.GetWhereEqualAsync<ComposerData>(nameof(ComposerData.Name), Expected.ComposerData[0].Name);
             Assert.Contains(Expected.ComposerData[0], actualComposers);
@@ -140,7 +140,7 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestGetWhereTextLikeAsync()
         {
             Service table = new(nameof(TestGetWhereTextLikeAsync));
-            await table.ClearTableAsync<ComposerData>();
+            await table.DropTableIfExistsAsync<ComposerData>();
             await table.InsertAllAsync(Expected.ComposerData);
             string expectedText = "ch";
             IEnumerable<ComposerData> actualComposers = await table.GetWhereTextLikeAsync<ComposerData>(nameof(ComposerData.Name), expectedText);
@@ -155,8 +155,8 @@ namespace MusicOrganisation.Tests.Services
         {
             Service service = new(nameof(TestMultipleTables));
 
-            await service.ClearTableAsync<ComposerData>();
-            await service.ClearTableAsync<WorkData>();
+            await service.DropTableIfExistsAsync<ComposerData>();
+            await service.DropTableIfExistsAsync<WorkData>();
 
             await service.InsertAllAsync(Expected.ComposerData);
             await service.InsertAllAsync(Expected.WorkData);
@@ -180,8 +180,8 @@ namespace MusicOrganisation.Tests.Services
         {
             Service service = new(nameof(TestClearOneTable));
 
-            await service.ClearTableAsync<ComposerData>();
-            await service.ClearTableAsync<WorkData>();
+            await service.DropTableIfExistsAsync<ComposerData>();
+            await service.DropTableIfExistsAsync<WorkData>();
 
             await service.InsertAllAsync(Expected.ComposerData);
             await service.InsertAllAsync(Expected.WorkData);

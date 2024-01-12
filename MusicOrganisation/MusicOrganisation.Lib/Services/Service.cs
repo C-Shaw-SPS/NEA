@@ -123,7 +123,7 @@ namespace MusicOrganisation.Lib.Services
             return await _connection.QueryAsync<T>(query);
         }
 
-        public async Task DropTableIfExists<T>() where T : class, ITable, new()
+        public async Task DropTableIfExistsAsync<T>() where T : class, ITable, new()
         {
             await InitAsync<T>();
             await _connection.DropTableAsync<T>();

@@ -13,7 +13,6 @@ namespace MusicOrganisation.Lib.Tables
 
         private int _id;
         private string _name = string.Empty;
-        private string _completeName = string.Empty;
         private int? _birthYear;
         private int? _deathYear;
         private string _era = string.Empty;
@@ -25,18 +24,11 @@ namespace MusicOrganisation.Lib.Tables
             set => _id = value;
         }
 
-        [JsonPropertyName("name"), NotNull]
+        [JsonPropertyName("complete_name"), NotNull]
         public string Name
         {
             get => _name;
             set => _name = value;
-        }
-
-        [JsonPropertyName("complete_name"), NotNull]
-        public string CompleteName
-        {
-            get => _completeName;
-            set => _completeName = value;
         }
 
         [JsonPropertyName("birth"), JsonConverter(typeof(YearConverter))]
@@ -85,7 +77,6 @@ namespace MusicOrganisation.Lib.Tables
             return SqlFormatting.FormatValues(
                 _id,
                 _name,
-                _completeName,
                 _birthYear,
                 _deathYear,
                 _era);
@@ -97,7 +88,6 @@ namespace MusicOrganisation.Lib.Tables
             {
                 nameof(Id),
                 nameof(Name),
-                nameof(CompleteName),
                 nameof(BirthYear),
                 nameof(DeathYear),
                 nameof(Era),
@@ -108,7 +98,6 @@ namespace MusicOrganisation.Lib.Tables
         {
             return other != null
                 && _name == other._name
-                && _completeName == other._completeName
                 && _birthYear == other._birthYear
                 && _deathYear == other._deathYear
                 && _era == other._era;

@@ -11,8 +11,7 @@ namespace MusicOrganisation.Tests.Json
         readonly ComposerData expectedComposer = new()
         {
             Id = 87,
-            Name = "Bach",
-            CompleteName = "Johann Sebastian Bach",
+            Name = "Johann Sebastian Bach",
             BirthYear = 1685,
             DeathYear = 1750,
             Era = "Baroque"

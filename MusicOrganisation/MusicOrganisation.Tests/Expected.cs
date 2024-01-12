@@ -9,8 +9,7 @@ namespace MusicOrganisation.Tests
         public static readonly ComposerData NullPropertyComposer = new()
         {
             Id = 91,
-            Name = "Bunch",
-            CompleteName = "Kenji Bunch",
+            Name = "Kenji Bunch",
             BirthYear = 1973,
             DeathYear = null,
             Era = "21st Century",
@@ -56,8 +55,7 @@ namespace MusicOrganisation.Tests
             new ComposerData
             {
                 Id = 36,
-                Name = "Vaughan Williams",
-                CompleteName = "Ralph Vaughan Williams",
+                Name = "Ralph Vaughan Williams",
                 BirthYear = 1872,
                 DeathYear = 1958,
                 Era = "Late Romantic"
@@ -65,8 +63,7 @@ namespace MusicOrganisation.Tests
             new ComposerData
             {
                 Id = 87,
-                Name = "Bach",
-                CompleteName = "Johann Sebastian Bach",
+                Name = "Johann Sebastian Bach",
                 BirthYear =1685,
                 DeathYear = 1750,
                 Era = "Baroque"
@@ -74,8 +71,7 @@ namespace MusicOrganisation.Tests
             new ComposerData
             {
                 Id = 176,
-                Name = "Reich",
-                CompleteName = "Steve Reich",
+                Name = "Steve Reich",
                 BirthYear = 1936,
                 DeathYear = null,
                 Era = "Post-War"
@@ -83,8 +79,7 @@ namespace MusicOrganisation.Tests
             new ComposerData
             {
                 Id = 196,
-                Name = "Mozart",
-                CompleteName = "Wolfgang Amadeus Mozart",
+                Name = "Wolfgang Amadeus Mozart",
                 BirthYear = 1756,
                 DeathYear = 1791,
                 Era = "Classical"

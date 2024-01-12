@@ -58,7 +58,7 @@ namespace MusicOrganisation.Lib.ViewModels
                 _composer.Id = _id;
             }
             _composer.Name = Name;
-            _composer.CompleteName = CompleteName;
+            _composer.Name = CompleteName;
             _composer.Era = Era;
 
             if (BirthYear == string.Empty)
@@ -137,7 +137,7 @@ namespace MusicOrganisation.Lib.ViewModels
         {
             _composer = composer;
             Name = _composer.Name;
-            CompleteName = _composer.CompleteName;
+            CompleteName = _composer.Name;
             Era = _composer.Era;
             if (_composer.BirthYear is int birthYear)
             {

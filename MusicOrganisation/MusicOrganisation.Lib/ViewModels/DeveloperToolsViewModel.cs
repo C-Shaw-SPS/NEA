@@ -30,14 +30,14 @@ namespace MusicOrganisation.Lib.ViewModels
         private async Task DeleteDatabaseTables()
         {
             await Task.WhenAll(
-                _service.DropTableIfExists<Pupil>(),
-                _service.DropTableIfExists<CaregiverData>(),
-                _service.DropTableIfExists<CaregiverMap>(),
-                _service.DropTableIfExists<ComposerData>(),
-                _service.DropTableIfExists<LessonData>(),
-                _service.DropTableIfExists<LessonSlotData>(),
-                _service.DropTableIfExists<RepertoireData>(),
-                _service.DropTableIfExists<WorkData>()
+                _service.DropTableIfExistsAsync<Pupil>(),
+                _service.DropTableIfExistsAsync<CaregiverData>(),
+                _service.DropTableIfExistsAsync<CaregiverMap>(),
+                _service.DropTableIfExistsAsync<ComposerData>(),
+                _service.DropTableIfExistsAsync<LessonData>(),
+                _service.DropTableIfExistsAsync<LessonSlotData>(),
+                _service.DropTableIfExistsAsync<RepertoireData>(),
+                _service.DropTableIfExistsAsync<WorkData>()
                 );
         }
 
@@ -47,8 +47,8 @@ namespace MusicOrganisation.Lib.ViewModels
             Task<IEnumerable<WorkData>> workTask = WorkGetter.GetFromOpenOpus();
 
             await Task.WhenAll(
-                _service.ClearTableAsync<ComposerData>(),
-                _service.ClearTableAsync<WorkData>(),
+                _service.DropTableIfExistsAsync<ComposerData>(),
+                _service.DropTableIfExistsAsync<WorkData>(),
                 composerTask,
                 workTask
                 );

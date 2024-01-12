@@ -68,7 +68,7 @@ namespace MusicOrganisation.Lib.ViewModels
         {
             Composer = composer;
             Name = Composer.Name;
-            CompleteName = Composer.CompleteName;
+            CompleteName = Composer.Name;
             Era = Composer.Era;
             if (Composer.BirthYear is int birthYear)
             {

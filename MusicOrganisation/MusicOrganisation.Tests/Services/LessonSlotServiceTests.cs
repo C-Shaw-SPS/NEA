@@ -72,7 +72,7 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestGetNextFlagIndex(DayOfWeek dayOfWeek, int expectedFlagIndex)
         {
             LessonSlotService service = new(nameof(TestGetNextFlagIndex));
-            await service.ClearTableAsync<LessonSlotData>();
+            await service.DropTableIfExistsAsync<LessonSlotData>();
             await service.InsertAllAsync(_lessonSlotData);
             int actualFlagIndex = await service.GetNextFlagIndexAsync(dayOfWeek);
             Assert.Equal(expectedFlagIndex, actualFlagIndex);

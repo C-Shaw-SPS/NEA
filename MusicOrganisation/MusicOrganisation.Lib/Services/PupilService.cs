@@ -111,7 +111,7 @@ namespace MusicOrganisation.Lib.Services
             query.AddColumn<WorkData>(nameof(WorkData.Subtitle), nameof(Repertoire.Subtitle));
             query.AddColumn<WorkData>(nameof(WorkData.Genre), nameof(Repertoire.Genre));
             query.AddColumn<ComposerData>(nameof(ComposerData.Id), nameof(Repertoire.ComposerId));
-            query.AddColumn<ComposerData>(nameof(ComposerData.CompleteName), nameof(Repertoire.ComposerName));
+            query.AddColumn<ComposerData>(nameof(ComposerData.Name), nameof(Repertoire.ComposerName));
             query.AddJoin<WorkData, RepertoireData>(nameof(WorkData.Id), nameof(RepertoireData.WorkId));
             query.AddJoin<ComposerData, WorkData>(nameof(ComposerData.Id), nameof(WorkData.ComposerId));
             query.AddWhereEquals<RepertoireData>(nameof(RepertoireData.PupilId), pupilId, SqlBool.AND);

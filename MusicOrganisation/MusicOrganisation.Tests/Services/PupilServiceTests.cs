@@ -11,7 +11,7 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestAddPupilAsync()
         {
             PupilService pupilService = new(nameof(TestAddPupilAsync));
-            await pupilService.ClearTableAsync<Pupil>();
+            await pupilService.DropTableIfExistsAsync<Pupil>();
 
 
             Pupil expectedPupil = Expected.Pupils[0];
@@ -39,9 +39,9 @@ namespace MusicOrganisation.Tests.Services
         public async Task TestAddExistingCaregiverAsync()
         {
             PupilService pupilService = new(nameof(TestAddExistingCaregiverAsync));
-            await pupilService.ClearTableAsync<Pupil>();
-            await pupilService.ClearTableAsync<CaregiverData>();
-            await pupilService.ClearTableAsync<CaregiverMap>();
+            await pupilService.DropTableIfExistsAsync<Pupil>();
+            await pupilService.DropTableIfExistsAsync<CaregiverData>();
+            await pupilService.DropTableIfExistsAsync<CaregiverMap>();
 
             Pupil expectedPupil = Expected.Pupils[0];
             CaregiverData expectedCaregiverData = Expected.CaregiverData[0];
@@ -60,10 +60,10 @@ namespace MusicOrganisation.Tests.Services
             PupilService pupilService = new(nameof(TestGetRepertoireAsync));
             await Task.WhenAll
             (
-                pupilService.ClearTableAsync<Pupil>(),
-                pupilService.ClearTableAsync<RepertoireData>(),
-                pupilService.ClearTableAsync<WorkData>(),
-                pupilService.ClearTableAsync<ComposerData>()
+                pupilService.DropTableIfExistsAsync<Pupil>(),
+                pupilService.DropTableIfExistsAsync<RepertoireData>(),
+                pupilService.DropTableIfExistsAsync<WorkData>(),
+                pupilService.DropTableIfExistsAsync<ComposerData>()
             );
 
             Pupil pupil = new()
@@ -76,12 +76,12 @@ namespace MusicOrganisation.Tests.Services
                 new ComposerData
                 {
                     Id = 0,
-                    CompleteName = "Composer 0"
+                    Name = "Composer 0"
                 },
                 new ComposerData
                 {
                     Id = 1,
-                    CompleteName = "Composer 1"
+                    Name = "Composer 1"
                 }
             };
 
@@ -140,7 +140,7 @@ namespace MusicOrganisation.Tests.Services
                     Subtitle = workData[0].Subtitle,
                     ComposerId = composerData[0].Id,
                     Genre = workData[0].Genre,
-                    ComposerName = composerData[0].CompleteName
+                    ComposerName = composerData[0].Name
                 },
                 new Repertoire
                 {
@@ -153,7 +153,7 @@ namespace MusicOrganisation.Tests.Services
                     Subtitle = workData[1].Subtitle,
                     ComposerId = composerData[1].Id,
                     Genre = workData[1].Genre,
-                    ComposerName = composerData[1].CompleteName
+                    ComposerName = composerData[1].Name
                 }
             };
 
