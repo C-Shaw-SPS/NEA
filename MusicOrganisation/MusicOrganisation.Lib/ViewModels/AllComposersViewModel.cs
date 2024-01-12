@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MusicOrganisation.Lib.Databases;
 using MusicOrganisation.Lib.Json;
 using MusicOrganisation.Lib.Services;
 using MusicOrganisation.Lib.Tables;
@@ -75,7 +76,17 @@ namespace MusicOrganisation.Lib.ViewModels
         private async Task SearchAsync()
         {
             string ordering = _orderings[Ordering];
-            IEnumerable<ComposerData> composers = await _composerService.SearchAsync<ComposerData>(nameof(ComposerData.CompleteName), SearchText, ordering, _LIMIT);
+
+            SqlQuery<ComposerData> query = new();
+            query.SetSelectAll();
+            query.AddWhereLike<ComposerData>(nameof(ComposerData.Name), SearchText, SqlBool.OR);
+            query.AddWhereLike<ComposerData>(nameof(ComposerData.CompleteName), SearchText, SqlBool.OR);
+            query.AddOrderBy<ComposerData>(ordering);
+            query.SetLimit(_LIMIT);
+
+            string queryString = query.ToString();
+
+            IEnumerable<ComposerData> composers = await _composerService.QueryAsync<ComposerData>(queryString);
             Composers.Clear();
             foreach (ComposerData compsoer in composers)
             {
