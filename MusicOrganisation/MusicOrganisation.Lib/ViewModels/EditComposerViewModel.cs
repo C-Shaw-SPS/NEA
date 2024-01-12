@@ -47,49 +47,49 @@ namespace MusicOrganisation.Lib.ViewModels
 
         private async Task SaveAsync()
         {
-            if (_composer is not null)
+            _composer.Name = Name;
+            _composer.CompleteName = CompleteName;
+            _composer.Era = Era;
+
+            if (BirthYear == string.Empty)
             {
-                await _composerService.UpdateAsync(_composer);
-                await Shell.Current.GoToAsync(_RETURN);
+                _composer.BirthYear = null;
             }
-        }
-
-        partial void OnNameChanged(string value)
-        {
-            _composer.Name = value;
-        }
-
-        partial void OnCompleteNameChanged(string value)
-        {
-            _composer.CompleteName = value;
-        }
-
-        partial void OnEraChanged(string value)
-        {
-            _composer.Era = value;
-        }
-
-        partial void OnBirthYearChanged(string value)
-        {
-            if (int.TryParse(value, out int birthYear))
+            else if (int.TryParse(BirthYear, out int birthYear))
             {
                 _composer.BirthYear = birthYear;
             }
             else
             {
-                BirthYear = string.Empty;
+                BirthYear = _composer.BirthYear.ToString()?? string.Empty;
             }
-        }
 
-        partial void OnDeathYearChanged(string value)
-        {
-            if (int.TryParse(value, out int deathYear) && deathYear >= _composer.BirthYear)
+            if (int.TryParse(DeathYear, out int deathYear) && deathYear >= _composer.BirthYear)
             {
                 _composer.DeathYear = deathYear;
             }
             else
             {
+                _composer.DeathYear = null;
                 DeathYear = string.Empty;
+            }
+
+            await _composerService.UpdateAsync(_composer);
+        }
+
+        partial void OnBirthYearChanged(string? oldValue, string newValue)
+        {
+            if (newValue != string.Empty && !int.TryParse(newValue, out _))
+            {
+                BirthYear = oldValue ?? string.Empty;
+            }
+        }
+
+        partial void OnDeathYearChanged(string? oldValue, string newValue)
+        {
+            if (newValue != string.Empty && !int.TryParse(newValue, out _))
+            {
+                DeathYear = oldValue ?? string.Empty;
             }
         }
 
