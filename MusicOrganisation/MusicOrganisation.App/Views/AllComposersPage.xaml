@@ -59,9 +59,6 @@
                     <StackLayout>
                         <Label Text="{Binding Name}"
                                FontSize="18"/>
-                        <Label Text="{Binding CompleteName}"
-                               FontSize="14"
-                               TextColor="Silver"/>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

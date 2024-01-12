@@ -21,9 +21,6 @@ namespace MusicOrganisation.Lib.ViewModels
         private string _name;
 
         [ObservableProperty]
-        private string _completeName;
-
-        [ObservableProperty]
         private string _era;
 
         [ObservableProperty]
@@ -41,7 +38,6 @@ namespace MusicOrganisation.Lib.ViewModels
             _isNew = false;
 
             _name = string.Empty;
-            _completeName = string.Empty;
             _era = string.Empty;
             _birthYear = string.Empty;
             _deathYear = string.Empty;
@@ -58,7 +54,6 @@ namespace MusicOrganisation.Lib.ViewModels
                 _composer.Id = _id;
             }
             _composer.Name = Name;
-            _composer.Name = CompleteName;
             _composer.Era = Era;
 
             if (BirthYear == string.Empty)
@@ -137,7 +132,6 @@ namespace MusicOrganisation.Lib.ViewModels
         {
             _composer = composer;
             Name = _composer.Name;
-            CompleteName = _composer.Name;
             Era = _composer.Era;
             if (_composer.BirthYear is int birthYear)
             {

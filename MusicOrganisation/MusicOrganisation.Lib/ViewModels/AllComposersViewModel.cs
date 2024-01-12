@@ -18,7 +18,6 @@ namespace MusicOrganisation.Lib.ViewModels
         private readonly Dictionary<string, string> _orderings = new()
         {
             { "Name", nameof(ComposerData.Name) },
-            { "Complete name", nameof(ComposerData.Name) },
             { "Year of birth", nameof(ComposerData.BirthYear) },
             { "Year of death", nameof(ComposerData.DeathYear) }
         };
@@ -71,7 +70,6 @@ namespace MusicOrganisation.Lib.ViewModels
 
             SqlQuery<ComposerData> query = new();
             query.SetSelectAll();
-            query.AddWhereLike<ComposerData>(nameof(ComposerData.Name), SearchText, SqlBool.OR);
             query.AddWhereLike<ComposerData>(nameof(ComposerData.Name), SearchText, SqlBool.OR);
             query.AddOrderBy<ComposerData>(ordering);
             query.SetLimit(_LIMIT);

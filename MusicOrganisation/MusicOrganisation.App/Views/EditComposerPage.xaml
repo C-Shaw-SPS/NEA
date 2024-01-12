@@ -24,7 +24,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -44,36 +43,27 @@
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            Text="Full name:"/>
-        <Entry
-            Grid.Row="1"
-            Grid.Column="1"
-            Text="{Binding CompleteName}"/>
-
-        <Label
-            Grid.Row="2"
-            Grid.Column="0"
             Text="Era:"/>
         <Entry
-            Grid.Row="2"
+            Grid.Row="1"
             Grid.Column="1"
             Text="{Binding Era}"/>
 
         <Label
-            Grid.Row="3"
+            Grid.Row="2"
             Grid.Column="0"
             Text="Year of birth:"/>
         <Entry
-            Grid.Row="3"
+            Grid.Row="2"
             Grid.Column="1"
             Text="{Binding BirthYear}"/>
 
         <Label
-            Grid.Row="4"
+            Grid.Row="3"
             Grid.Column="0"
             Text="Year of death:"/>
         <Editor
-            Grid.Row="4"
+            Grid.Row="3"
             Grid.Column="1"
             Text="{Binding DeathYear}"/>
 

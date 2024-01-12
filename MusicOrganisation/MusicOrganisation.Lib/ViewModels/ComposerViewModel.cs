@@ -18,9 +18,6 @@ namespace MusicOrganisation.Lib.ViewModels
         private string _name;
 
         [ObservableProperty]
-        private string _completeName;
-
-        [ObservableProperty]
         private string _birthDate;
 
         [ObservableProperty]
@@ -34,7 +31,6 @@ namespace MusicOrganisation.Lib.ViewModels
         public ComposerViewModel()
         {
             _name = string.Empty;
-            _completeName = string.Empty;
             _birthDate = string.Empty;
             _deathDate = string.Empty;
             _era = string.Empty;
@@ -68,7 +64,6 @@ namespace MusicOrganisation.Lib.ViewModels
         {
             Composer = composer;
             Name = Composer.Name;
-            CompleteName = Composer.Name;
             Era = Composer.Era;
             if (Composer.BirthYear is int birthYear)
             {
