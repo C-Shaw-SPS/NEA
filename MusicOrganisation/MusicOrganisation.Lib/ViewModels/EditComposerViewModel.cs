@@ -9,7 +9,7 @@ namespace MusicOrganisation.Lib.ViewModels
     public partial class EditComposerViewModel : ViewModelBase, IQueryAttributable
     {
         public const string ROUTE = nameof(EditComposerViewModel);
-        public const string COMPOSER_PARAMETER = nameof(COMPOSER_PARAMETER);
+        public const string COMPOSER_ID_PARAMETER = nameof(COMPOSER_ID_PARAMETER);
         public const string IS_NEW_PARAMETER = nameof(IS_NEW_PARAMETER);
 
         private const string _EDIT_COMPOSER = "Edit composer";
@@ -91,12 +91,17 @@ namespace MusicOrganisation.Lib.ViewModels
                 {
                     _isNew = false;
                     await _composerService.InsertAsync(_composer);
+                    Dictionary<string, object> parameters = new()
+                    {
+                        [ComposerViewModel.COMPOSER_ID] = _composer.Id
+                    };
+                    await Shell.Current.GoToAsync($"{_RETURN}/{ComposerViewModel.ROUTE}", parameters);
                 }
                 else
                 {
                     await _composerService.UpdateAsync(_composer);
+                    await Shell.Current.GoToAsync(_RETURN);
                 }
-                await Shell.Current.GoToAsync(_RETURN);
             }
         }
 
@@ -230,9 +235,9 @@ namespace MusicOrganisation.Lib.ViewModels
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.TryGetValue(COMPOSER_PARAMETER, out object? value) && value is ComposerData composer)
+            if (query.TryGetValue(COMPOSER_ID_PARAMETER, out object? value) && value is int composerId)
             {
-                SetComposer(composer);
+                await SetComposer(composerId);
             }
             if (query.TryGetValue(IS_NEW_PARAMETER, out  value) && value is bool isNew && isNew)
             {
@@ -240,9 +245,9 @@ namespace MusicOrganisation.Lib.ViewModels
             }
         }
 
-        private void SetComposer(ComposerData composer)
+        private async Task SetComposer(int composerId)
         {
-            _composer = composer;
+            _composer = await _composerService.GetAsync<ComposerData>(composerId);
             Name = _composer.Name;
             Era = _composer.Era;
             if (_composer.BirthYear is int birthYear)

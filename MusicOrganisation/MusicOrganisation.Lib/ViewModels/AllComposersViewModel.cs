@@ -88,21 +88,21 @@ namespace MusicOrganisation.Lib.ViewModels
         {
             if (SelectedComposer is not null)
             {
-                Dictionary<string, object> routeParameters = new()
+                Dictionary<string, object> parameters = new()
                 {
-                    [ComposerViewModel.QUERY_PARAMETER] = SelectedComposer
+                    [ComposerViewModel.COMPOSER_ID] = SelectedComposer.Id
                 };
-                await Shell.Current.GoToAsync(ComposerViewModel.ROUTE, routeParameters);
+                await Shell.Current.GoToAsync(ComposerViewModel.ROUTE, parameters);
             }
         }
 
         private async Task NewAsync()
         {
-            Dictionary<string, object> routeParameters = new()
+            Dictionary<string, object> parameters = new()
             {
                 [EditComposerViewModel.IS_NEW_PARAMETER] = true
             };
-            await Shell.Current.GoToAsync(EditComposerViewModel.ROUTE, routeParameters);
+            await Shell.Current.GoToAsync(EditComposerViewModel.ROUTE, parameters);
         }
 
         async partial void OnOrderingChanged(string value)

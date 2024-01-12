@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MusicOrganisation.Lib.Services;
 using MusicOrganisation.Lib.Tables;
 using MusicOrganisation.Lib.Viewmodels;
 
@@ -9,9 +10,10 @@ namespace MusicOrganisation.Lib.ViewModels
     {
         public const string ROUTE = nameof(ComposerViewModel);
 
-        public const string QUERY_PARAMETER = nameof(ComposerData);
+        public const string COMPOSER_ID = nameof(ComposerData);
 
-        [ObservableProperty]
+        private readonly ComposerService _composerService;
+
         private ComposerData? _composer;
 
         [ObservableProperty]
@@ -30,6 +32,7 @@ namespace MusicOrganisation.Lib.ViewModels
 
         public ComposerViewModel()
         {
+            _composerService = new(_databasePath);
             _name = string.Empty;
             _birthYear = string.Empty;
             _deathYear = string.Empty;
@@ -41,32 +44,32 @@ namespace MusicOrganisation.Lib.ViewModels
 
         private async Task EditAsync()
         {
-            if (Composer is not null)
+            if (_composer is not null)
             {
-                Dictionary<string, object> routeParameters = new()
+                Dictionary<string, object> parameters = new()
                 {
-                    [EditComposerViewModel.COMPOSER_PARAMETER] = Composer,
+                    [EditComposerViewModel.COMPOSER_ID_PARAMETER] = _composer.Id,
                     [EditComposerViewModel.IS_NEW_PARAMETER] = false
                 };
-                await Shell.Current.GoToAsync(EditComposerViewModel.ROUTE, routeParameters);
+                await Shell.Current.GoToAsync(EditComposerViewModel.ROUTE, parameters);
             }
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.TryGetValue(QUERY_PARAMETER, out object? value) && value is ComposerData composer)
+            if (query.TryGetValue(COMPOSER_ID, out object? value) && value is int composerId)
             {
-                SetComposer(composer);
+                await SetComposer(composerId);
             }
         }
 
-        private void SetComposer(ComposerData composer)
+        private async Task SetComposer(int composerId)
         {
-            Composer = composer;
-            Name = Composer.Name;
-            Era = Composer.Era;
+            _composer = await _composerService.GetAsync<ComposerData>(composerId);
+            Name = _composer.Name;
+            Era = _composer.Era;
 
-            if (Composer.BirthYear is int birthYear)
+            if (_composer.BirthYear is int birthYear)
             {
                 BirthYear = birthYear.ToString();
             }
@@ -75,7 +78,7 @@ namespace MusicOrganisation.Lib.ViewModels
                 BirthYear = string.Empty;
             }
 
-            if (Composer.DeathYear is int deathYear)
+            if (_composer.DeathYear is int deathYear)
             {
                 DeathYear = deathYear.ToString();
             }
