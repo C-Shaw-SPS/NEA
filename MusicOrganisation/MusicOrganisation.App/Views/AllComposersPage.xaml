@@ -27,19 +27,23 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        
         <SearchBar Grid.Row="0"
                    Grid.Column="0"
                    Text="{Binding SearchText}"
                    SearchCommand="{Binding SearchCommand}"/>
+        
         <Label Grid.Row="0"
                Grid.Column="1"
                Text="Sort by:"
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="End"/>
+        
         <Picker Grid.Row="0"
                 Grid.Column="2"
                 ItemsSource="{Binding Orderings}"
                 SelectedItem="{Binding Ordering}"/>
+        
         <CollectionView Grid.Row="1"
                         Grid.ColumnSpan="4"
                         ItemsSource="{Binding Composers}"
@@ -50,15 +54,16 @@
                         SelectedItem="{Binding SelectedComposer}"
                         SelectionChangedCommand="{Binding SelectCommand}"
                         Margin="20">
+            
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"
-                                   ItemSpacing="20"/>
+                                   ItemSpacing="10"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>
                         <Label Text="{Binding Name}"
-                               FontSize="18"/>
+                               FontSize="22"/>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

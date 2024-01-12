@@ -18,10 +18,10 @@ namespace MusicOrganisation.Lib.ViewModels
         private string _name;
 
         [ObservableProperty]
-        private string _birthDate;
+        private string _birthYear;
 
         [ObservableProperty]
-        private string _deathDate;
+        private string _deathYear;
 
         [ObservableProperty]
         private string _era;
@@ -31,8 +31,8 @@ namespace MusicOrganisation.Lib.ViewModels
         public ComposerViewModel()
         {
             _name = string.Empty;
-            _birthDate = string.Empty;
-            _deathDate = string.Empty;
+            _birthYear = string.Empty;
+            _deathYear = string.Empty;
             _era = string.Empty;
             _editCommand = new(EditAsync);
         }
@@ -65,13 +65,23 @@ namespace MusicOrganisation.Lib.ViewModels
             Composer = composer;
             Name = Composer.Name;
             Era = Composer.Era;
+
             if (Composer.BirthYear is int birthYear)
             {
-                BirthDate = birthYear.ToString();
+                BirthYear = birthYear.ToString();
             }
+            else
+            {
+                BirthYear = string.Empty;
+            }
+
             if (Composer.DeathYear is int deathYear)
             {
-                DeathDate = deathYear.ToString();
+                DeathYear = deathYear.ToString();
+            }
+            else
+            {
+                DeathYear = string.Empty;
             }
         }
     }

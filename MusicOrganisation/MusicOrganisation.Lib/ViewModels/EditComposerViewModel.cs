@@ -12,10 +12,21 @@ namespace MusicOrganisation.Lib.ViewModels
         public const string COMPOSER_PARAMETER = nameof(COMPOSER_PARAMETER);
         public const string IS_NEW_PARAMETER = nameof(IS_NEW_PARAMETER);
 
+        private const string _EDIT_COMPOSER = "Edit composer";
+        private const string _NEW_COMPOSER = "New composer";
+
+        private const string _BLANK_NAME_ERROR = "Name must not be blank";
+        private const string _INVALID_YEAR_FORMAT_ERROR = "Invalid year format";
+        private const string _NEGATIVE_YEAR_ERROR = "Year cannot be less than zero";
+        private const string _DEATH_BEFORE_BIRTH_ERROR = "Year of death cannot be before year of birth";
+
         private readonly ComposerService _composerService;
         private ComposerData _composer;
         private bool _isNew;
         private int _id;
+
+        [ObservableProperty]
+        private string _status;
 
         [ObservableProperty]
         private string _name;
@@ -29,10 +40,21 @@ namespace MusicOrganisation.Lib.ViewModels
         [ObservableProperty]
         private string _deathYear;
 
+        [ObservableProperty]
+        private string _nameError;
+
+        [ObservableProperty]
+        private string _birthYearError;
+
+        [ObservableProperty]
+        private string _deathYearError;
+
         private readonly AsyncRelayCommand _saveCommand;
 
         public EditComposerViewModel()
         {
+            _status = _EDIT_COMPOSER;
+
             _composerService = new(_databasePath);
             _composer = new();
             _isNew = false;
@@ -42,53 +64,139 @@ namespace MusicOrganisation.Lib.ViewModels
             _birthYear = string.Empty;
             _deathYear = string.Empty;
 
+            _nameError = string.Empty;
+            _birthYearError = string.Empty;
+            _deathYearError = string.Empty;
+
             _saveCommand = new(SaveAsync);
         }
 
         public AsyncRelayCommand SaveCommand => _saveCommand;
 
+
+        #region Saving
         private async Task SaveAsync()
+        {
+            SetComposerId();
+            SetComposerEra();
+
+            bool canSave = true;
+            canSave &= TrySetComposerName();
+            canSave &= TrySetComposerBirthYear();
+            canSave &= TrySetComposerDeathYear();
+
+            if (canSave)
+            {
+                if (_isNew)
+                {
+                    _isNew = false;
+                    await _composerService.InsertAsync(_composer);
+                }
+                else
+                {
+                    await _composerService.UpdateAsync(_composer);
+                }
+                await Shell.Current.GoToAsync(_RETURN);
+            }
+        }
+
+        private void SetComposerId()
         {
             if (_isNew)
             {
                 _composer.Id = _id;
             }
-            _composer.Name = Name;
-            _composer.Era = Era;
+        }
 
+        private bool TrySetComposerName()
+        {
+            NameError = string.Empty;
+            if (Name == string.Empty)
+            {
+                NameError = _BLANK_NAME_ERROR;
+                return false;
+            }
+            else
+            {
+                _composer.Name = Name;
+                return true;
+            }
+        }
+
+        private void SetComposerEra()
+        {
+            _composer.Era = Era;
+        }
+
+        private bool TrySetComposerBirthYear()
+        {
+            BirthYearError = string.Empty;
             if (BirthYear == string.Empty)
             {
                 _composer.BirthYear = null;
+                return true;
             }
-            else if (int.TryParse(BirthYear, out int birthYear) && birthYear >= 0)
+            else if (int.TryParse(BirthYear, out int birthYear))
             {
-                _composer.BirthYear = birthYear;
-            }
-            else
-            {
-                BirthYear = _composer.BirthYear.ToString()?? string.Empty;
-            }
-
-            if (int.TryParse(DeathYear, out int deathYear) && deathYear >= (_composer.BirthYear?? 0))
-            {
-                _composer.DeathYear = deathYear;
-            }
-            else
-            {
-                _composer.DeathYear = null;
-                DeathYear = string.Empty;
-            }
-
-            if (_isNew)
-            {
-                _isNew = false;
-                await _composerService.InsertAsync(_composer);
+                if (birthYear >= 0)
+                {
+                    _composer.BirthYear = birthYear;
+                    return true;
+                }
+                else
+                {
+                    BirthYear = string.Empty;
+                    BirthYearError = _NEGATIVE_YEAR_ERROR;
+                    return false;
+                }
             }
             else
             {
-                await _composerService.UpdateAsync(_composer);
+                BirthYear = string.Empty;
+                BirthYearError = _INVALID_YEAR_FORMAT_ERROR;
+                return false;
             }
         }
+
+        private bool TrySetComposerDeathYear()
+        {
+            DeathYearError = string.Empty;
+            if (DeathYear == string.Empty)
+            {
+                _composer.DeathYear = null;
+                return true;
+            }
+            else if (int.TryParse(DeathYear, out int deathYear))
+            {
+                if (deathYear < 0)
+                {
+                    DeathYearError = _NEGATIVE_YEAR_ERROR;
+                    DeathYear = string.Empty;
+                    return false;
+                }
+                else if (_composer.BirthYear == null || deathYear >= _composer.BirthYear)
+                {
+                    _composer.DeathYear = deathYear;
+                    return true;
+                }
+                else
+                {
+                    DeathYearError = _DEATH_BEFORE_BIRTH_ERROR;
+                    DeathYear = string.Empty;
+                    return false;
+                }
+            }
+            else
+            {
+                DeathYearError = _INVALID_YEAR_FORMAT_ERROR;
+                DeathYear = string.Empty;
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region Validation
 
         partial void OnBirthYearChanged(string? oldValue, string newValue)
         {
@@ -116,6 +224,10 @@ namespace MusicOrganisation.Lib.ViewModels
             DeathYear = oldValue ?? string.Empty;
         }
 
+        #endregion
+
+        #region Querying
+
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.TryGetValue(COMPOSER_PARAMETER, out object? value) && value is ComposerData composer)
@@ -124,7 +236,7 @@ namespace MusicOrganisation.Lib.ViewModels
             }
             if (query.TryGetValue(IS_NEW_PARAMETER, out  value) && value is bool isNew && isNew)
             {
-                await SetNewComposer();
+                await SetCreateNewComposer();
             }
         }
 
@@ -144,10 +256,13 @@ namespace MusicOrganisation.Lib.ViewModels
             _id = _composer.Id;
         }
 
-        private async Task SetNewComposer()
+        private async Task SetCreateNewComposer()
         {
             _isNew = true;
             _id = await _composerService.GetNextIdAsync<ComposerData>();
+            Status = _NEW_COMPOSER;
         }
+
+        #endregion
     }
 }

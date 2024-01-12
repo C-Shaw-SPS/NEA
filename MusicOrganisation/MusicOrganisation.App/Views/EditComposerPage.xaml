@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MusicOrganisation.App.Views.EditComposerPage"
              xmlns:viewmodels="clr-namespace:MusicOrganisation.Lib.ViewModels;assembly=MusicOrganisation.Lib"
-             Title="Edit">
+             Title="{Binding Status}">
 
     <ContentPage.BindingContext>
         <viewmodels:EditComposerViewModel/>
@@ -29,21 +29,29 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            Text="Name:"/>
+            Text="Name:"
+            VerticalOptions="Center"/>
         <Entry
             Grid.Row="0"
             Grid.Column="1"
             Text="{Binding Name}"/>
+        <Label
+            Grid.Row="0"
+            Grid.Column="3"
+            Text="{Binding NameError}"
+            VerticalOptions="Center"/>
 
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            Text="Era:"/>
+            Text="Era:"
+            VerticalOptions="Center"/>
         <Entry
             Grid.Row="1"
             Grid.Column="1"
@@ -52,21 +60,32 @@
         <Label
             Grid.Row="2"
             Grid.Column="0"
-            Text="Year of birth:"/>
+            Text="Born:"
+            VerticalOptions="Center"/>
         <Entry
             Grid.Row="2"
             Grid.Column="1"
             Text="{Binding BirthYear}"/>
+        <Label
+            Grid.Row="2"
+            Grid.Column="3"
+            Text="{Binding BirthYearError}"
+            VerticalOptions="Center"/>
 
         <Label
             Grid.Row="3"
             Grid.Column="0"
-            Text="Year of death:"/>
-        <Editor
+            Text="Died:"
+            VerticalOptions="Center"/>
+        <Entry
             Grid.Row="3"
             Grid.Column="1"
             Text="{Binding DeathYear}"/>
-
+        <Label
+            Grid.Row="3"
+            Grid.Column="3"
+            Text="{Binding DeathYearError}"
+            VerticalOptions="Center"/>
 
     </Grid>
 </ContentPage>
