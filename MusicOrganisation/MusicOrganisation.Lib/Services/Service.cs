@@ -123,18 +123,6 @@ namespace MusicOrganisation.Lib.Services
             return await _connection.QueryAsync<T>(query);
         }
 
-        public async Task<IEnumerable<T>> SearchAsync<T>(string searchParameter, string like, string orderParameter, int limit) where T : class, ITable, new()
-        {
-            await InitAsync<T>();
-            SqlQuery<T> query = new();
-            query.SelectAll();
-            query.AddWhereLike<T>(searchParameter, like, SqlBool.OR);
-            query.AddOrderBy<T>(orderParameter);
-            query.SetLimit(limit);
-            string queryString = query.ToString();
-            return await QueryAsync<T>(queryString);
-        }
-
         public async Task DropTableIfExists<T>() where T : class, ITable, new()
         {
             await InitAsync<T>();
