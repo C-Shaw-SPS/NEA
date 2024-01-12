@@ -45,6 +45,7 @@ namespace MusicOrganisation.Lib.ViewModels
             _era = string.Empty;
             _birthYear = string.Empty;
             _deathYear = string.Empty;
+
             _saveCommand = new(SaveAsync);
         }
 
