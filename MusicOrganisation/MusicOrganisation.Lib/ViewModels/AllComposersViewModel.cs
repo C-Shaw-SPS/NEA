@@ -26,6 +26,7 @@ namespace MusicOrganisation.Lib.ViewModels
 
         private readonly AsyncRelayCommand _searchCommand;
         private readonly AsyncRelayCommand _selectCommand;
+        private readonly AsyncRelayCommand _newCommand;
 
         [ObservableProperty]
         private string _searchText;
@@ -47,6 +48,7 @@ namespace MusicOrganisation.Lib.ViewModels
             _ordering = _orderings.Keys.First();
             _searchCommand = new(SearchAsync);
             _selectCommand = new(SelectAsync);
+            _newCommand = new(NewAsync);
         }
 
         public List<string> Orderings => new(_orderings.Keys);
@@ -55,6 +57,7 @@ namespace MusicOrganisation.Lib.ViewModels
 
         public AsyncRelayCommand SelectCommand => _selectCommand;
 
+        public AsyncRelayCommand NewCommand => _newCommand;
 
         public async Task RefreshAsync()
         {
@@ -90,6 +93,11 @@ namespace MusicOrganisation.Lib.ViewModels
                 };
                 await Shell.Current.GoToAsync(ComposerViewModel.ROUTE, routeParameters);
             }
+        }
+
+        private async Task NewAsync()
+        {
+            throw new NotImplementedException();
         }
 
         async partial void OnOrderingChanged(string value)

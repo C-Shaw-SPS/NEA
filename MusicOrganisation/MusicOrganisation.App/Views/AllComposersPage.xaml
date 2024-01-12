@@ -9,6 +9,12 @@
         <viewmodels:AllComposersViewModel/>
     </ContentPage.BindingContext>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add"
+                     Command="{Binding NewCommand}"
+                     IconImageSource="{FontImage Glyph='+', Color=Black, Size=22}"/>
+    </ContentPage.ToolbarItems>
+    
     <Grid RowSpacing="10"
           ColumnSpacing="10">
         <Grid.RowDefinitions>
