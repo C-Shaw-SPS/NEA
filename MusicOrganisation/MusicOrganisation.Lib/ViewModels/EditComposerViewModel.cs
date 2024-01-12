@@ -9,10 +9,13 @@ namespace MusicOrganisation.Lib.ViewModels
     public partial class EditComposerViewModel : ViewModelBase, IQueryAttributable
     {
         public const string ROUTE = nameof(EditComposerViewModel);
-        public const string QUERY_PARAMETER = nameof(ComposerData);
+        public const string COMPOSER_PARAMETER = nameof(COMPOSER_PARAMETER);
+        public const string IS_NEW_PARAMETER = nameof(IS_NEW_PARAMETER);
 
         private readonly ComposerService _composerService;
         private ComposerData _composer;
+        private bool _isNew;
+        private int _id;
 
         [ObservableProperty]
         private string _name;
@@ -35,6 +38,8 @@ namespace MusicOrganisation.Lib.ViewModels
         {
             _composerService = new(_databasePath);
             _composer = new();
+            _isNew = false;
+
             _name = string.Empty;
             _completeName = string.Empty;
             _era = string.Empty;
@@ -47,6 +52,10 @@ namespace MusicOrganisation.Lib.ViewModels
 
         private async Task SaveAsync()
         {
+            if (_isNew)
+            {
+                _composer.Id = _id;
+            }
             _composer.Name = Name;
             _composer.CompleteName = CompleteName;
             _composer.Era = Era;
@@ -74,7 +83,15 @@ namespace MusicOrganisation.Lib.ViewModels
                 DeathYear = string.Empty;
             }
 
-            await _composerService.UpdateAsync(_composer);
+            if (_isNew)
+            {
+                _isNew = false;
+                await _composerService.InsertAsync(_composer);
+            }
+            else
+            {
+                await _composerService.UpdateAsync(_composer);
+            }
         }
 
         partial void OnBirthYearChanged(string? oldValue, string newValue)
@@ -103,11 +120,15 @@ namespace MusicOrganisation.Lib.ViewModels
             DeathYear = oldValue ?? string.Empty;
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.TryGetValue(QUERY_PARAMETER, out object? value) && value is ComposerData composer)
+            if (query.TryGetValue(COMPOSER_PARAMETER, out object? value) && value is ComposerData composer)
             {
                 SetComposer(composer);
+            }
+            if (query.TryGetValue(IS_NEW_PARAMETER, out  value) && value is bool isNew && isNew)
+            {
+                await SetNewComposer();
             }
         }
 
@@ -125,6 +146,13 @@ namespace MusicOrganisation.Lib.ViewModels
             {
                 DeathYear = deathYear.ToString();
             }
+            _id = _composer.Id;
+        }
+
+        private async Task SetNewComposer()
+        {
+            _isNew = true;
+            _id = await _composerService.GetNextIdAsync<ComposerData>();
         }
     }
 }

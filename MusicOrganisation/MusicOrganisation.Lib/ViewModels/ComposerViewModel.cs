@@ -49,7 +49,8 @@ namespace MusicOrganisation.Lib.ViewModels
             {
                 Dictionary<string, object> routeParameters = new()
                 {
-                    [EditComposerViewModel.QUERY_PARAMETER] = Composer
+                    [EditComposerViewModel.COMPOSER_PARAMETER] = Composer,
+                    [EditComposerViewModel.IS_NEW_PARAMETER] = false
                 };
                 await Shell.Current.GoToAsync(EditComposerViewModel.ROUTE, routeParameters);
             }

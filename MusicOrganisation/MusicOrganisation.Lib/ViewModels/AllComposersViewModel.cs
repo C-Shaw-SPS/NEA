@@ -97,7 +97,11 @@ namespace MusicOrganisation.Lib.ViewModels
 
         private async Task NewAsync()
         {
-            throw new NotImplementedException();
+            Dictionary<string, object> routeParameters = new()
+            {
+                [EditComposerViewModel.IS_NEW_PARAMETER] = true
+            };
+            await Shell.Current.GoToAsync(EditComposerViewModel.ROUTE, routeParameters);
         }
 
         async partial void OnOrderingChanged(string value)
