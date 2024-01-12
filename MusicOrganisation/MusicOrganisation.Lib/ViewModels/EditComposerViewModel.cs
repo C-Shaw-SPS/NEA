@@ -55,7 +55,7 @@ namespace MusicOrganisation.Lib.ViewModels
             {
                 _composer.BirthYear = null;
             }
-            else if (int.TryParse(BirthYear, out int birthYear))
+            else if (int.TryParse(BirthYear, out int birthYear) && birthYear >= 0)
             {
                 _composer.BirthYear = birthYear;
             }
@@ -64,7 +64,7 @@ namespace MusicOrganisation.Lib.ViewModels
                 BirthYear = _composer.BirthYear.ToString()?? string.Empty;
             }
 
-            if (int.TryParse(DeathYear, out int deathYear) && deathYear >= _composer.BirthYear)
+            if (int.TryParse(DeathYear, out int deathYear) && deathYear >= (_composer.BirthYear?? 0))
             {
                 _composer.DeathYear = deathYear;
             }
@@ -79,18 +79,28 @@ namespace MusicOrganisation.Lib.ViewModels
 
         partial void OnBirthYearChanged(string? oldValue, string newValue)
         {
-            if (newValue != string.Empty && !int.TryParse(newValue, out _))
+            if (newValue == string.Empty)
             {
-                BirthYear = oldValue ?? string.Empty;
+                return;
             }
+            if (int.TryParse(newValue, out int birthYear) && birthYear >= 0)
+            {
+                return;
+            }
+            BirthYear = oldValue?? string.Empty;
         }
 
         partial void OnDeathYearChanged(string? oldValue, string newValue)
         {
-            if (newValue != string.Empty && !int.TryParse(newValue, out _))
+            if (newValue == string.Empty)
             {
-                DeathYear = oldValue ?? string.Empty;
+                return;
             }
+            if (int.TryParse(newValue, out int deathYear) && deathYear >= 0)
+            {
+                return;
+            }
+            DeathYear = oldValue ?? string.Empty;
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
