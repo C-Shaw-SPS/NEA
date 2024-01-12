@@ -4,12 +4,13 @@ using MusicOrganisation.Lib.Json;
 using MusicOrganisation.Lib.Services;
 using MusicOrganisation.Lib.Tables;
 using MusicOrganisation.Lib.Viewmodels;
+using System.Collections.ObjectModel;
 
 namespace MusicOrganisation.Lib.ViewModels
 {
     public partial class AllComposersViewModel : ViewModelBase
     {
-        private const int _GROUP_SIZE = 128;
+        private const int _LIMIT = 128;
 
         public const string ROUTE = nameof(AllComposersViewModel);
 
@@ -22,11 +23,9 @@ namespace MusicOrganisation.Lib.ViewModels
         };
 
         private readonly ComposerService _composerService;
-        private int _groupCount;
 
         private readonly AsyncRelayCommand _searchCommand;
         private readonly AsyncRelayCommand _selectCommand;
-        private readonly AsyncRelayCommand _loadMoreCommand;
 
         [ObservableProperty]
         private string _searchText;
@@ -35,7 +34,7 @@ namespace MusicOrganisation.Lib.ViewModels
         private string _ordering;
         
         [ObservableProperty]
-        private List<ComposerData> _composers;
+        private ObservableCollection<ComposerData> _composers;
 
         [ObservableProperty]
         private ComposerData? _selectedComposer;
@@ -43,13 +42,11 @@ namespace MusicOrganisation.Lib.ViewModels
         public AllComposersViewModel()
         {
             _composerService = new(_databasePath);
-            _groupCount = 1;
             _composers = [];
             _searchText = string.Empty;
             _ordering = _orderings.Keys.First();
             _searchCommand = new(SearchAsync);
             _selectCommand = new(SelectAsync);
-            _loadMoreCommand = new(LoadMoreAsync);
         }
 
         public List<string> Orderings => new(_orderings.Keys);
@@ -58,11 +55,9 @@ namespace MusicOrganisation.Lib.ViewModels
 
         public AsyncRelayCommand SelectCommand => _selectCommand;
 
-        public AsyncRelayCommand LoadMoreCommand => _loadMoreCommand;
 
         public async Task RefreshAsync()
         {
-            _groupCount = 1;
             await SearchAsync();
         }
 
@@ -76,27 +71,13 @@ namespace MusicOrganisation.Lib.ViewModels
 
         private async Task SearchAsync()
         {
-            _groupCount = 1;
-            await LoadAsync();
-        }
-
-        private async Task LoadMoreAsync()
-        {
-            int prevLimit = _groupCount * _GROUP_SIZE;
-            if (Composers.Count == prevLimit)
-            {
-                ++_groupCount;
-                await LoadAsync();
-            }
-        }
-
-        private async Task LoadAsync()
-        {
             string ordering = _orderings[Ordering];
-            int limit = _groupCount * _GROUP_SIZE;
-            IEnumerable<ComposerData> composers = await _composerService.SearchAsync<ComposerData>(nameof(ComposerData.CompleteName), SearchText, ordering, limit);
+            IEnumerable<ComposerData> composers = await _composerService.SearchAsync<ComposerData>(nameof(ComposerData.CompleteName), SearchText, ordering, _LIMIT);
             Composers.Clear();
-            Composers.AddRange(composers);
+            foreach (ComposerData compsoer in composers)
+            {
+                Composers.Add(compsoer);
+            }
         }
 
         private async Task SelectAsync()
