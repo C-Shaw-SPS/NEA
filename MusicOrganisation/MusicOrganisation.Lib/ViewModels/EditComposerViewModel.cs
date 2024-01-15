@@ -266,7 +266,7 @@ namespace MusicOrganisation.Lib.ViewModels
         {
             if (query.TryGetValue(COMPOSER_ID_PARAMETER, out object? value) && value is int composerId)
             {
-                await SetComposerAsync(composerId);
+                await SetComposerValuesAsync(composerId);
             }
             if (query.TryGetValue(IS_NEW_PARAMETER, out  value) && value is bool isNew && isNew)
             {
@@ -274,7 +274,7 @@ namespace MusicOrganisation.Lib.ViewModels
             }
         }
 
-        private async Task SetComposerAsync(int composerId)
+        private async Task SetComposerValuesAsync(int composerId)
         {
             _composer = await _composerService.GetAsync<ComposerData>(composerId);
             Name = _composer.Name;
