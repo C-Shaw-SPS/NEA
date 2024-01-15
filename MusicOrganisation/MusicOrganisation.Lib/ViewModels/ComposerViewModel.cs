@@ -51,7 +51,7 @@ namespace MusicOrganisation.Lib.ViewModels
                     [EditComposerViewModel.COMPOSER_ID_PARAMETER] = _composer.Id,
                     [EditComposerViewModel.IS_NEW_PARAMETER] = false
                 };
-                await Shell.Current.GoToAsync(EditComposerViewModel.ROUTE, parameters);
+                await GoToAsync(parameters, EditComposerViewModel.ROUTE);
             }
         }
 

@@ -92,7 +92,7 @@ namespace MusicOrganisation.Lib.ViewModels
                 {
                     [ComposerViewModel.COMPOSER_ID] = SelectedComposer.Id
                 };
-                await Shell.Current.GoToAsync(ComposerViewModel.ROUTE, parameters);
+                await GoToAsync(parameters, ComposerViewModel.ROUTE);
             }
         }
 
@@ -102,7 +102,7 @@ namespace MusicOrganisation.Lib.ViewModels
             {
                 [EditComposerViewModel.IS_NEW_PARAMETER] = true
             };
-            await Shell.Current.GoToAsync(EditComposerViewModel.ROUTE, parameters);
+            await GoToAsync(parameters, EditComposerViewModel.ROUTE);
         }
 
         async partial void OnOrderingChanged(string value)

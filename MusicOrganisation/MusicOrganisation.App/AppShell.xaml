@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MusicOrganisation.App"
     xmlns:views="clr-namespace:MusicOrganisation.App.Views"
-    xmlns:viewmodels="clr-namespace:MusicOrganisation.Lib.ViewModels;assembly=MusicOrganisation.Lib"
     Shell.FlyoutBehavior="Disabled"
     Title="MusicOrganisation.App">
 

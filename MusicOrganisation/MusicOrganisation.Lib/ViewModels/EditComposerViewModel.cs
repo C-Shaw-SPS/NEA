@@ -26,7 +26,10 @@ namespace MusicOrganisation.Lib.ViewModels
         private int _id;
 
         [ObservableProperty]
-        private string _status;
+        private string _pageTitle;
+
+        [ObservableProperty]
+        private bool _canDelete;
 
         [ObservableProperty]
         private string _name;
@@ -53,7 +56,8 @@ namespace MusicOrganisation.Lib.ViewModels
 
         public EditComposerViewModel()
         {
-            _status = _EDIT_COMPOSER;
+            _pageTitle = _EDIT_COMPOSER;
+            _canDelete = true;
 
             _composerService = new(_databasePath);
             _composer = new();
@@ -68,14 +72,14 @@ namespace MusicOrganisation.Lib.ViewModels
             _birthYearError = string.Empty;
             _deathYearError = string.Empty;
 
-            _saveCommand = new(SaveAsync);
+            _saveCommand = new(TrySaveAsync);
         }
 
         public AsyncRelayCommand SaveCommand => _saveCommand;
 
 
         #region Saving
-        private async Task SaveAsync()
+        private async Task TrySaveAsync()
         {
             SetComposerId();
             SetComposerEra();
@@ -89,20 +93,31 @@ namespace MusicOrganisation.Lib.ViewModels
             {
                 if (_isNew)
                 {
-                    _isNew = false;
-                    await _composerService.InsertAsync(_composer);
-                    Dictionary<string, object> parameters = new()
-                    {
-                        [ComposerViewModel.COMPOSER_ID] = _composer.Id
-                    };
-                    await Shell.Current.GoToAsync($"{_RETURN}/{ComposerViewModel.ROUTE}", parameters);
+                    await SaveNewAsync();
                 }
                 else
                 {
-                    await _composerService.UpdateAsync(_composer);
-                    await Shell.Current.GoToAsync(_RETURN);
+                    await SaveExistingAsync();
                 }
             }
+        }
+
+        private async Task SaveNewAsync()
+        {
+            _isNew = false;
+            CanDelete = true;
+            await _composerService.InsertAsync(_composer);
+            Dictionary<string, object> parameters = new()
+            {
+                [ComposerViewModel.COMPOSER_ID] = _composer.Id
+            };
+            await GoToAsync(parameters, _RETURN, ComposerViewModel.ROUTE);
+        }
+
+        private async Task SaveExistingAsync()
+        {
+            await _composerService.UpdateAsync(_composer);
+            await GoToAsync(_RETURN);
         }
 
         private void SetComposerId()
@@ -264,8 +279,9 @@ namespace MusicOrganisation.Lib.ViewModels
         private async Task SetCreateNewComposer()
         {
             _isNew = true;
+            CanDelete = false;
             _id = await _composerService.GetNextIdAsync<ComposerData>();
-            Status = _NEW_COMPOSER;
+            PageTitle = _NEW_COMPOSER;
         }
 
         #endregion

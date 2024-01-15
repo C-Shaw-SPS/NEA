@@ -27,12 +27,12 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
+
         <SearchBar Grid.Row="0"
                    Grid.Column="0"
                    Text="{Binding SearchText}"
                    SearchCommand="{Binding SearchCommand}"/>
-        
+
         <Label Grid.Row="0"
                Grid.Column="1"
                Text="Sort by:"
@@ -64,6 +64,9 @@
                     <StackLayout>
                         <Label Text="{Binding Name}"
                                FontSize="22"/>
+                        <Label Text="{Binding Era}"
+                               FontSize="14"
+                               TextColor="Silver"/>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
