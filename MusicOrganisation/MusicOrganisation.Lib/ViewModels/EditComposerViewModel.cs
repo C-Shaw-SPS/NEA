@@ -230,11 +230,7 @@ namespace MusicOrganisation.Lib.ViewModels
 
         partial void OnBirthYearChanged(string? oldValue, string newValue)
         {
-            if (newValue == string.Empty)
-            {
-                return;
-            }
-            if (int.TryParse(newValue, out int birthYear) && birthYear >= 0)
+            if (IsNumeric(newValue))
             {
                 return;
             }
@@ -243,15 +239,23 @@ namespace MusicOrganisation.Lib.ViewModels
 
         partial void OnDeathYearChanged(string? oldValue, string newValue)
         {
-            if (newValue == string.Empty)
-            {
-                return;
-            }
-            if (int.TryParse(newValue, out int deathYear) && deathYear >= 0)
+            if (IsNumeric(newValue))
             {
                 return;
             }
             DeathYear = oldValue ?? string.Empty;
+        }
+
+        private static bool IsNumeric(string value)
+        {
+            foreach (char c in value)
+            {
+                if (c < '0' || c > '9')
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         #endregion
