@@ -28,7 +28,7 @@ namespace MusicOrganisation.Lib.Viewmodels
 
         private static string GetRoute(IEnumerable<string> routes)
         {
-            string route = string.Join("/", routes);
+            string route = string.Join('/', routes);
             return route;
         }
     }

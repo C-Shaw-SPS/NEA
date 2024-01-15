@@ -10,7 +10,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add"
+        <ToolbarItem Text="New"
                      Command="{Binding NewCommand}"
                      IconImageSource="{FontImage Glyph='+', Color=Black, Size=22}"/>
     </ContentPage.ToolbarItems>
@@ -46,12 +46,12 @@
         
         <CollectionView Grid.Row="1"
                         Grid.ColumnSpan="4"
-                        ItemsSource="{Binding Composers}"
+                        ItemsSource="{Binding Collection}"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"
                         VerticalScrollBarVisibility="Always"
                         SelectionMode="Single"
-                        SelectedItem="{Binding SelectedComposer}"
+                        SelectedItem="{Binding SelectedItem}"
                         SelectionChangedCommand="{Binding SelectCommand}"
                         Margin="20">
             

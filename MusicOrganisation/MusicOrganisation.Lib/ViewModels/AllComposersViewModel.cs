@@ -1,21 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using MusicOrganisation.Lib.Databases;
-using MusicOrganisation.Lib.Json;
 using MusicOrganisation.Lib.Services;
 using MusicOrganisation.Lib.Tables;
-using MusicOrganisation.Lib.Viewmodels;
 using System.Collections.ObjectModel;
 
 namespace MusicOrganisation.Lib.ViewModels
 {
-    public partial class AllComposersViewModel : ViewModelBase
+    public partial class AllComposersViewModel : CollectionViewModel<ComposerData>
     {
         private const int _LIMIT = 128;
 
         public const string ROUTE = nameof(AllComposersViewModel);
 
-        private readonly Dictionary<string, string> _orderings = new()
+        private static readonly Dictionary<string, string> _orderings = new()
         {
             { "Name", nameof(ComposerData.Name) },
             { "Year of birth", nameof(ComposerData.BirthYear) },
@@ -24,47 +21,19 @@ namespace MusicOrganisation.Lib.ViewModels
 
         private readonly ComposerService _composerService;
 
-        private readonly AsyncRelayCommand _searchCommand;
-        private readonly AsyncRelayCommand _selectCommand;
-        private readonly AsyncRelayCommand _newCommand;
-
-        [ObservableProperty]
-        private string _searchText;
-
-        [ObservableProperty]
-        private string _ordering;
         
-        [ObservableProperty]
-        private ObservableCollection<ComposerData> _composers;
 
-        [ObservableProperty]
-        private ComposerData? _selectedComposer;
-
-        public AllComposersViewModel()
+        public AllComposersViewModel() : base(_orderings)
         {
             _composerService = new(_databasePath);
-            _composers = [];
-            _searchText = string.Empty;
-            _ordering = _orderings.Keys.First();
-            _searchCommand = new(SearchAsync);
-            _selectCommand = new(SelectAsync);
-            _newCommand = new(NewAsync);
         }
-
-        public List<string> Orderings => new(_orderings.Keys);
-
-        public AsyncRelayCommand SearchCommand => _searchCommand;
-
-        public AsyncRelayCommand SelectCommand => _selectCommand;
-
-        public AsyncRelayCommand NewCommand => _newCommand;
 
         public async Task RefreshAsync()
         {
             await SearchAsync();
         }
 
-        private async Task SearchAsync()
+        protected override async Task SearchAsync()
         {
             string ordering = _orderings[Ordering];
 
@@ -77,37 +46,32 @@ namespace MusicOrganisation.Lib.ViewModels
             string queryString = query.ToString();
 
             IEnumerable<ComposerData> composers = await _composerService.QueryAsync<ComposerData>(queryString);
-            Composers.Clear();
+            Collection.Clear();
             foreach (ComposerData compsoer in composers)
             {
-                Composers.Add(compsoer);
+                Collection.Add(compsoer);
             }
         }
 
-        private async Task SelectAsync()
+        protected override async Task SelectAsync()
         {
-            if (SelectedComposer is not null)
+            if (SelectedItem is not null)
             {
                 Dictionary<string, object> parameters = new()
                 {
-                    [ComposerViewModel.COMPOSER_ID] = SelectedComposer.Id
+                    [ComposerViewModel.COMPOSER_ID] = SelectedItem.Id
                 };
                 await GoToAsync(parameters, ComposerViewModel.ROUTE);
             }
         }
 
-        private async Task NewAsync()
+        protected override async Task AddNewAsync()
         {
             Dictionary<string, object> parameters = new()
             {
                 [EditComposerViewModel.IS_NEW_PARAMETER] = true
             };
             await GoToAsync(parameters, EditComposerViewModel.ROUTE);
-        }
-
-        async partial void OnOrderingChanged(string value)
-        {
-            await SearchAsync();
         }
     }
 }

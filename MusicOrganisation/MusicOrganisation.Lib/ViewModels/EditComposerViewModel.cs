@@ -82,7 +82,6 @@ namespace MusicOrganisation.Lib.ViewModels
 
         public AsyncRelayCommand DeleteCommand => _deleteCommand;
 
-
         #region Saving
         private async Task TrySaveAsync()
         {
@@ -227,7 +226,7 @@ namespace MusicOrganisation.Lib.ViewModels
             await GoToAsync(_RETURN, _RETURN);
         }
 
-        #region Validation
+        #region Data Validation
 
         partial void OnBirthYearChanged(string? oldValue, string newValue)
         {
@@ -257,7 +256,7 @@ namespace MusicOrganisation.Lib.ViewModels
 
         #endregion
 
-        #region Querying
+        #region Page Setup
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
