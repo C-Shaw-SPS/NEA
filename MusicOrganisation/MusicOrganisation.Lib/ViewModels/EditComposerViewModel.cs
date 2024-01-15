@@ -54,6 +54,8 @@ namespace MusicOrganisation.Lib.ViewModels
 
         private readonly AsyncRelayCommand _saveCommand;
 
+        private readonly AsyncRelayCommand _deleteCommand;
+
         public EditComposerViewModel()
         {
             _pageTitle = _EDIT_COMPOSER;
@@ -73,9 +75,12 @@ namespace MusicOrganisation.Lib.ViewModels
             _deathYearError = string.Empty;
 
             _saveCommand = new(TrySaveAsync);
+            _deleteCommand = new(DeleteAsync);
         }
 
         public AsyncRelayCommand SaveCommand => _saveCommand;
+
+        public AsyncRelayCommand DeleteCommand => _deleteCommand;
 
 
         #region Saving
@@ -216,6 +221,12 @@ namespace MusicOrganisation.Lib.ViewModels
 
         #endregion
 
+        private async Task DeleteAsync()
+        {
+            await _composerService.DeleteAsync(_composer);
+            await GoToAsync(_RETURN, _RETURN);
+        }
+
         #region Validation
 
         partial void OnBirthYearChanged(string? oldValue, string newValue)
@@ -252,15 +263,15 @@ namespace MusicOrganisation.Lib.ViewModels
         {
             if (query.TryGetValue(COMPOSER_ID_PARAMETER, out object? value) && value is int composerId)
             {
-                await SetComposer(composerId);
+                await SetComposerAsync(composerId);
             }
             if (query.TryGetValue(IS_NEW_PARAMETER, out  value) && value is bool isNew && isNew)
             {
-                await SetCreateNewComposer();
+                await SetCreateNewComposerAsync();
             }
         }
 
-        private async Task SetComposer(int composerId)
+        private async Task SetComposerAsync(int composerId)
         {
             _composer = await _composerService.GetAsync<ComposerData>(composerId);
             Name = _composer.Name;
@@ -276,7 +287,7 @@ namespace MusicOrganisation.Lib.ViewModels
             _id = _composer.Id;
         }
 
-        private async Task SetCreateNewComposer()
+        private async Task SetCreateNewComposerAsync()
         {
             _isNew = true;
             CanDelete = false;

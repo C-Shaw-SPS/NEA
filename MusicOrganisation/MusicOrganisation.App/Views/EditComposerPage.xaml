@@ -13,7 +13,8 @@
         <ToolbarItem Text="Save"
                      Command="{Binding SaveCommand}"/>
         <ToolbarItem Text="Delete"
-                     IsEnabled="{Binding CanDelete}"/>
+                     IsEnabled="{Binding CanDelete}"
+                     Command="{Binding DeleteCommand}"/>
     </ContentPage.ToolbarItems>
     
     <Grid Margin="20"
