@@ -21,8 +21,6 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
 
         private readonly ComposerService _composerService;
 
-
-
         public AllComposersViewModel() : base(_orderings)
         {
             _composerService = new(_databasePath);
