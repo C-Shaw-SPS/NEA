@@ -1,4 +1,4 @@
-using MusicOrganisation.Lib.ViewModels;
+using MusicOrganisation.Lib.ViewModels.CollectionViewModels;
 
 namespace MusicOrganisation.App.Views;
 

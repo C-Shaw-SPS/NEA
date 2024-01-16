@@ -1,12 +1,12 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using MusicOrganisation.Lib.Databases;
+﻿using MusicOrganisation.Lib.Databases;
 using MusicOrganisation.Lib.Services;
 using MusicOrganisation.Lib.Tables;
-using System.Collections.ObjectModel;
+using MusicOrganisation.Lib.ViewModels.EditViewModels;
+using MusicOrganisation.Lib.ViewModels.ModelViewModels;
 
-namespace MusicOrganisation.Lib.ViewModels
+namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
 {
-    public partial class AllComposersViewModel : CollectionViewModel<ComposerData>
+    public partial class AllComposersViewModel : CollectionViewModelBase<ComposerData>
     {
         private const int _LIMIT = 128;
 
@@ -21,7 +21,7 @@ namespace MusicOrganisation.Lib.ViewModels
 
         private readonly ComposerService _composerService;
 
-        
+
 
         public AllComposersViewModel() : base(_orderings)
         {

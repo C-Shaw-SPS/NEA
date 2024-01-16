@@ -3,9 +3,9 @@ using CommunityToolkit.Mvvm.Input;
 using MusicOrganisation.Lib.Viewmodels;
 using System.Collections.ObjectModel;
 
-namespace MusicOrganisation.Lib.ViewModels
+namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
 {
-    public abstract partial class CollectionViewModel<T> : ViewModelBase
+    public abstract partial class CollectionViewModelBase<T> : ViewModelBase
     {
         private const int _LIMIT = 128;
 
@@ -26,7 +26,7 @@ namespace MusicOrganisation.Lib.ViewModels
         [ObservableProperty]
         private T? _selectedItem;
 
-        public CollectionViewModel(Dictionary<string, string> orderings)
+        public CollectionViewModelBase(Dictionary<string, string> orderings)
         {
             _searchCommand = new(SearchAsync);
             _selectCommand = new(SelectAsync);

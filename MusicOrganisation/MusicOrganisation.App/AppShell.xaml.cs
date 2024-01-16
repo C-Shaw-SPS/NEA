@@ -1,5 +1,8 @@
 ﻿using MusicOrganisation.App.Views;
 using MusicOrganisation.Lib.ViewModels;
+using MusicOrganisation.Lib.ViewModels.CollectionViewModels;
+using MusicOrganisation.Lib.ViewModels.ModelViewModels;
+using MusicOrganisation.Lib.ViewModels.EditViewModels;
 using System.Diagnostics;
 
 namespace MusicOrganisation.App

@@ -3,8 +3,9 @@ using CommunityToolkit.Mvvm.Input;
 using MusicOrganisation.Lib.Services;
 using MusicOrganisation.Lib.Tables;
 using MusicOrganisation.Lib.Viewmodels;
+using MusicOrganisation.Lib.ViewModels.ModelViewModels;
 
-namespace MusicOrganisation.Lib.ViewModels
+namespace MusicOrganisation.Lib.ViewModels.EditViewModels
 {
     public partial class EditComposerViewModel : ViewModelBase, IQueryAttributable
     {
