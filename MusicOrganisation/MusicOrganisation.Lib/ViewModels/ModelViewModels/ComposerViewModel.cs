@@ -2,16 +2,13 @@
 using CommunityToolkit.Mvvm.Input;
 using MusicOrganisation.Lib.Services;
 using MusicOrganisation.Lib.Tables;
-using MusicOrganisation.Lib.Viewmodels;
 using MusicOrganisation.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisation.Lib.ViewModels.ModelViewModels
 {
-    public partial class ComposerViewModel : ViewModelBase, IQueryAttributable
+    public partial class ComposerViewModel : ModelViewModelBase<ComposerData>, IQueryAttributable
     {
         public const string ROUTE = nameof(ComposerViewModel);
-
-        public const string COMPOSER_ID = nameof(ComposerData);
 
         private readonly ComposerService _composerService;
 
@@ -49,7 +46,7 @@ namespace MusicOrganisation.Lib.ViewModels.ModelViewModels
             {
                 Dictionary<string, object> parameters = new()
                 {
-                    [EditComposerViewModel.COMPOSER_ID_PARAMETER] = _composer.Id,
+                    [EditComposerViewModel.ID_PARAMETER] = _composer.Id,
                     [EditComposerViewModel.IS_NEW_PARAMETER] = false
                 };
                 await GoToAsync(parameters, EditComposerViewModel.ROUTE);
@@ -58,7 +55,7 @@ namespace MusicOrganisation.Lib.ViewModels.ModelViewModels
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.TryGetValue(COMPOSER_ID, out object? value) && value is int composerId)
+            if (query.TryGetValue(ID_PARAMETER, out object? value) && value is int composerId)
             {
                 await SetComposer(composerId);
             }

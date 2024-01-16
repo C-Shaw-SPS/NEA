@@ -59,7 +59,7 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
             {
                 Dictionary<string, object> parameters = new()
                 {
-                    [ComposerViewModel.COMPOSER_ID] = SelectedItem.Id
+                    [ComposerViewModel.ID_PARAMETER] = SelectedItem.Id
                 };
                 await GoToAsync(parameters, ComposerViewModel.ROUTE);
             }

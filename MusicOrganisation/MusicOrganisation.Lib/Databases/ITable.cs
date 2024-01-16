@@ -2,7 +2,7 @@
 {
     public interface ITable
     {
-        public abstract int Id { get; }
+        public abstract int Id { get; set; }
 
         public abstract static string TableName { get; }
 
