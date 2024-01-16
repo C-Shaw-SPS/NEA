@@ -199,7 +199,6 @@ namespace MusicOrganisation.Lib.ViewModels.EditViewModels
             {
                 DeathYear = deathYear.ToString();
             }
-            _id = _value.Id;
         }
 
         #endregion

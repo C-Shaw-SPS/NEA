@@ -7,19 +7,19 @@ using MusicOrganisation.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisation.Lib.ViewModels.EditViewModels
 {
-    public abstract partial class EditViewModelBase<TModel> : ViewModelBase, IQueryAttributable where TModel : class, ITable, new()
+    public abstract partial class EditViewModelBase<T> : ViewModelBase, IQueryAttributable where T : class, ITable, new()
     {
         public const string ID_PARAMETER = nameof(ID_PARAMETER);
         public const string IS_NEW_PARAMETER = nameof(IS_NEW_PARAMETER);
 
         private readonly Service _service;
-        protected TModel _value;
-        protected int _id;
+        private int _id;
         private bool _isNew;
-
         private readonly string _newPageTitle;
         private readonly string _editPageTitle;
         private readonly string _modelViewModelRoute;
+
+        protected T _value;
 
         [ObservableProperty]
         private string _pageTitle;
@@ -36,7 +36,7 @@ namespace MusicOrganisation.Lib.ViewModels.EditViewModels
             _editPageTitle = editPageTitle;
             _modelViewModelRoute = modelViewModelRoute;
 
-            _pageTitle = _newPageTitle;
+            _pageTitle = _editPageTitle;
             _canDelete = true;
 
             _service = new(_databasePath);
@@ -79,7 +79,7 @@ namespace MusicOrganisation.Lib.ViewModels.EditViewModels
             await _service.InsertAsync(_value);
             Dictionary<string, object> parameters = new()
             {
-                [ModelViewModelBase<TModel>.ID_PARAMETER] = _id
+                [ModelViewModelBase<T>.ID_PARAMETER] = _id
             };
             await GoToAsync(parameters, _RETURN, _modelViewModelRoute);
         }
@@ -104,7 +104,8 @@ namespace MusicOrganisation.Lib.ViewModels.EditViewModels
         {
             if (query.TryGetValue(ID_PARAMETER, out object? value) && value is int id)
             {
-                _value = await _service.GetAsync<TModel>(id);
+                _id = id;
+                _value = await _service.GetAsync<T>(id);
                 SetDisplayValues();
             }
             if (query.TryGetValue(IS_NEW_PARAMETER, out value) && value is bool isNew && isNew)
@@ -119,8 +120,8 @@ namespace MusicOrganisation.Lib.ViewModels.EditViewModels
         {
             _isNew = true;
             CanDelete = false;
-            _id = await _service.GetNextIdAsync<TModel>();
-            PageTitle = _editPageTitle;
+            _id = await _service.GetNextIdAsync<T>();
+            PageTitle = _newPageTitle;
         }
 
         #endregion
