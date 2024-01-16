@@ -21,7 +21,7 @@ namespace MusicOrganisation.Lib.ViewModels.EditViewModels
         private const string _NEGATIVE_YEAR_ERROR = "Year cannot be less than zero";
         private const string _DEATH_BEFORE_BIRTH_ERROR = "Year of death cannot be before year of birth";
 
-        private readonly ComposerService _composerService;
+        private readonly Service _composerService;
         private ComposerData _composer;
         private bool _isNew;
         private int _id;
@@ -54,7 +54,6 @@ namespace MusicOrganisation.Lib.ViewModels.EditViewModels
         private string _deathYearError;
 
         private readonly AsyncRelayCommand _saveCommand;
-
         private readonly AsyncRelayCommand _deleteCommand;
 
         public EditComposerViewModel()
