@@ -19,7 +19,7 @@ namespace MusicOrganisation.Lib.Models
         private readonly Dictionary<DayOfWeek, int> _lessonSlots = GetEmptyLessonSlots();
         private string? _email;
         private string? _phoneNumber;
-        private string? _notesFile;
+        private string _notes = string.Empty;
 
         [PrimaryKey]
         public int Id
@@ -117,10 +117,10 @@ namespace MusicOrganisation.Lib.Models
             set => _phoneNumber = value;
         }
 
-        public string? NotesFile
+        public string Notes
         {
-            get => _notesFile;
-            set => _notesFile = value;
+            get => _notes;
+            set => _notes = value;
         }
 
         public static string TableName => _TABLE_NAME;
@@ -177,7 +177,7 @@ namespace MusicOrganisation.Lib.Models
                 && EqualLessonSlots(_lessonSlots, other._lessonSlots)
                 && _email == other._email
                 && _phoneNumber == other._phoneNumber
-                && _notesFile == other._notesFile;
+                && _notes == other._notes;
         }
 
         private static bool EqualLessonSlots(Dictionary<DayOfWeek, int> lessonSlots1, Dictionary<DayOfWeek, int> lessonSlots2)
@@ -242,7 +242,7 @@ namespace MusicOrganisation.Lib.Models
                 nameof(SundayLessonSlots),
                 nameof(Email),
                 nameof(PhoneNumber),
-                nameof(NotesFile)
+                nameof(Notes)
             };
         }
 
@@ -263,7 +263,7 @@ namespace MusicOrganisation.Lib.Models
                 _lessonSlots[DayOfWeek.Sunday],
                 _email,
                 _phoneNumber,
-                _notesFile);
+                _notes);
         }
     }
 }

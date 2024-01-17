@@ -15,6 +15,7 @@ namespace MusicOrganisation.Lib.Tables
         private DateTime? _dateStarted;
         private string _syllabus = string.Empty;
         private RepertoireStatus _status;
+        private string _notes = string.Empty;
 
         public static string TableName => _TABLE_NAME;
 
@@ -57,6 +58,13 @@ namespace MusicOrganisation.Lib.Tables
         {
             get => _status;
             set => _status = value;
+        }
+
+        [NotNull]
+        public string Notes
+        {
+            get => _notes;
+            set => _notes = value;
         }
 
         public static IEnumerable<string> GetColumnNames()

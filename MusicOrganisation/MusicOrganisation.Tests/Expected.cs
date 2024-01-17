@@ -95,7 +95,7 @@ namespace MusicOrganisation.Tests
                 PupilId = 0,
                 LessonSlotId = 0,
                 Date = DateTime.Parse("30/10/2023"),
-                NotesFile = "notes.txt"
+                Notes = "notes.txt"
             },
             new LessonData
             {

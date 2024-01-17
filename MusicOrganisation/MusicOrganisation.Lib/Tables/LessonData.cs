@@ -12,7 +12,7 @@ namespace MusicOrganisation.Lib.Tables
         private int _pupilId;
         private int _lessonTimeId;
         private DateTime _date;
-        private string? _notesFile;
+        private string _notes = string.Empty;
 
         public static string TableName => _TABLE_NAME;
 
@@ -44,10 +44,10 @@ namespace MusicOrganisation.Lib.Tables
             set => _date = value.Date;
         }
 
-        public string? NotesFile
+        public string Notes
         {
-            get => _notesFile;
-            set => _notesFile = value;
+            get => _notes;
+            set => _notes = value;
         }
 
 
@@ -59,7 +59,7 @@ namespace MusicOrganisation.Lib.Tables
                 nameof(PupilId),
                 nameof(LessonSlotId),
                 nameof(Date),
-                nameof(NotesFile)
+                nameof(Notes)
             };
         }
 
@@ -70,7 +70,7 @@ namespace MusicOrganisation.Lib.Tables
                 _pupilId,
                 _lessonTimeId,
                 _date,
-                _notesFile);
+                _notes);
         }
 
         public bool Equals(LessonData? other)
@@ -79,7 +79,7 @@ namespace MusicOrganisation.Lib.Tables
                 && _pupilId == other._pupilId
                 && _lessonTimeId == other._lessonTimeId
                 && _date == other._date
-                && _notesFile == other._notesFile;
+                && _notes == other._notes;
         }
     }
 }
