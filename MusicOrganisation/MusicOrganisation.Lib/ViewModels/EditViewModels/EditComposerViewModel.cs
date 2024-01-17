@@ -4,9 +4,9 @@ using MusicOrganisation.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisation.Lib.ViewModels.EditViewModels
 {
-    public partial class EditComposerViewModel : EditViewModelBase<ComposerData>, IQueryAttributable
+    public partial class EditComposerViewModel : EditViewModelBase<ComposerData, ComposerViewModel>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(EditComposerViewModel);
+        private const string _ROUTE = nameof(EditComposerViewModel);
 
         private const string _EDIT_COMPOSER_PAGE_TITLE = "Edit composer";
         private const string _NEW_COMPOSER_PAGE_TITLE = "New composer";
@@ -37,7 +37,7 @@ namespace MusicOrganisation.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private string _deathYearError;
 
-        public EditComposerViewModel() : base(_NEW_COMPOSER_PAGE_TITLE, _EDIT_COMPOSER_PAGE_TITLE, ComposerViewModel.ROUTE)
+        public EditComposerViewModel() : base(_NEW_COMPOSER_PAGE_TITLE, _EDIT_COMPOSER_PAGE_TITLE)
         {
             _name = string.Empty;
             _era = string.Empty;
@@ -48,6 +48,8 @@ namespace MusicOrganisation.Lib.ViewModels.EditViewModels
             _birthYearError = string.Empty;
             _deathYearError = string.Empty;
         }
+
+        public static string Route => _ROUTE;
 
         #region Saving
 

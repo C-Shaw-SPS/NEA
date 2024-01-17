@@ -8,7 +8,10 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
 {
-    public abstract partial class CollectionViewModelBase<T> : ViewModelBase where T : class, ITable, new()
+    public abstract partial class CollectionViewModelBase<TModel, TModelViewModel, TEditViewModel> : ViewModelBase 
+        where TModel : class, ITable, new()
+        where TModelViewModel : ModelViewModelBase, IViewModel
+        where TEditViewModel : EditViewModelBase, IViewModel
     {
         protected const int _LIMIT = 256;
 
@@ -16,8 +19,6 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
         private readonly AsyncRelayCommand _selectCommand;
         private readonly AsyncRelayCommand _newCommand;
         private readonly Dictionary<string, string> _orderings;
-        private readonly string _modelViewModelRoute;
-        private readonly string _editViewModelRoute;
         private readonly string _searchParameter;
 
         [ObservableProperty]
@@ -27,20 +28,18 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
         private string _ordering;
 
         [ObservableProperty]
-        private ObservableCollection<T> _collection;
+        private ObservableCollection<TModel> _collection;
 
         [ObservableProperty]
-        private T? _selectedItem;
+        private TModel? _selectedItem;
 
-        public CollectionViewModelBase(Dictionary<string, string> orderings, string modelViewModelRoute, string editViewModelRoute, string searchParameter)
+        public CollectionViewModelBase(Dictionary<string, string> orderings, string searchParameter)
         {
             _searchCommand = new(SearchAsync);
             _selectCommand = new(SelectAsync);
             _newCommand = new(AddNewAsync);
 
             _orderings = orderings;
-            _modelViewModelRoute = modelViewModelRoute;
-            _editViewModelRoute = editViewModelRoute;
             _searchParameter = searchParameter;
 
             _searchText = string.Empty;
@@ -64,17 +63,17 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
         private async Task SearchAsync()
         {
             string ordering = _orderings[Ordering];
-            SqlQuery<T> query = new();
+            SqlQuery<TModel> query = new();
             query.SetSelectAll();
-            query.AddWhereLike<T>(_searchParameter, SearchText);
-            query.AddOrderBy<T>(ordering);
+            query.AddWhereLike<TModel>(_searchParameter, SearchText);
+            query.AddOrderBy<TModel>(ordering);
             query.SetLimit(_LIMIT);
 
             string queryString = query.ToString();
-            IEnumerable<T> values = await _service.QueryAsync<T>(queryString);
+            IEnumerable<TModel> values = await _service.QueryAsync<TModel>(queryString);
 
             Collection.Clear();
-            foreach (T value in values)
+            foreach (TModel value in values)
             {
                 Collection.Add(value);
             }
@@ -86,9 +85,9 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
             {
                 Dictionary<string, object> parameters = new()
                 {
-                    [ModelViewModelBase<T>.ID_PARAMETER] = SelectedItem.Id,
+                    [ModelViewModelBase.ID_PARAMETER] = SelectedItem.Id,
                 };
-                await GoToAsync(parameters, _modelViewModelRoute);
+                await GoToAsync(parameters, TModelViewModel.Route);
             }
         }
 
@@ -98,7 +97,7 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
             {
                 [EditViewModelBase.IS_NEW_PARAMETER] = true
             };
-            await GoToAsync(parameters, _editViewModelRoute);
+            await GoToAsync(parameters, TEditViewModel.Route);
         }
     }
 }

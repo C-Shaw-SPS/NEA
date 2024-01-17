@@ -6,9 +6,9 @@ using MusicOrganisation.Lib.Viewmodels;
 
 namespace MusicOrganisation.Lib.ViewModels
 {
-    public class DeveloperToolsViewModel : ViewModelBase
+    public class DeveloperToolsViewModel : ViewModelBase, IViewModel
     {
-        public const string ROUTE = nameof(DeveloperToolsViewModel);
+        private const string _ROUTE = nameof(DeveloperToolsViewModel);
 
         private readonly AsyncRelayCommand _deleteDatabaseCommand;
         private readonly AsyncRelayCommand _resetComposersAndWorksCommand;
@@ -18,6 +18,8 @@ namespace MusicOrganisation.Lib.ViewModels
             _deleteDatabaseCommand = new(DeleteDatabaseTables);
             _resetComposersAndWorksCommand = new(ResetComposersAndWorks);
         }
+
+        public static string Route => _ROUTE;
 
         public AsyncRelayCommand DeleteDatabaseCommand => _deleteDatabaseCommand;
 

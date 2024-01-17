@@ -6,9 +6,9 @@ using MusicOrganisation.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisation.Lib.ViewModels.ModelViewModels
 {
-    public partial class ComposerViewModel : ModelViewModelBase<ComposerData>, IQueryAttributable
+    public partial class ComposerViewModel : ModelViewModelBase<ComposerData>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(ComposerViewModel);
+        private const string _ROUTE = nameof(ComposerViewModel);
 
         [ObservableProperty]
         private string _name;
@@ -22,13 +22,15 @@ namespace MusicOrganisation.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _era;
 
-        public ComposerViewModel() : base(EditComposerViewModel.ROUTE)
+        public ComposerViewModel() : base(EditComposerViewModel.Route)
         {
             _name = string.Empty;
             _birthYear = string.Empty;
             _deathYear = string.Empty;
             _era = string.Empty;
         }
+
+        public static string Route => _ROUTE;
 
         protected override void SetDisplayValues()
         {

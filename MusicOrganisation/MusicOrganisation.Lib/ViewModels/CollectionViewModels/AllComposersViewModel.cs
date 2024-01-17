@@ -4,9 +4,9 @@ using MusicOrganisation.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
 {
-    public partial class AllComposersViewModel : CollectionViewModelBase<ComposerData>
+    public partial class AllComposersViewModel : CollectionViewModelBase<ComposerData, ComposerViewModel, EditComposerViewModel>, IViewModel
     {
-        public const string ROUTE = nameof(AllComposersViewModel);
+        private const string _ROUTE = nameof(AllComposersViewModel);
 
         private static readonly Dictionary<string, string> _orderings = new()
         {
@@ -15,9 +15,11 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
             { "Year of death", nameof(ComposerData.DeathYear) }
         };
 
-        public AllComposersViewModel() : base(_orderings, ComposerViewModel.ROUTE, EditComposerViewModel.ROUTE, nameof(ComposerData.Name))
+        public AllComposersViewModel() : base(_orderings, nameof(ComposerData.Name))
         {
 
         }
+
+        public static string Route => _ROUTE;
     }
 }

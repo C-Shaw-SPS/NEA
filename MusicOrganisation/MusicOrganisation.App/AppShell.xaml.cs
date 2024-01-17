@@ -13,10 +13,10 @@ namespace MusicOrganisation.App
         {
             InitializeComponent();
 
-            Routing.RegisterRoute(AllComposersViewModel.ROUTE, typeof(AllComposersPage));
-            Routing.RegisterRoute(ComposerViewModel.ROUTE, typeof(ComposerPage));
-            Routing.RegisterRoute(DeveloperToolsViewModel.ROUTE, typeof(DeveloperToolsPage));
-            Routing.RegisterRoute(EditComposerViewModel.ROUTE, typeof(EditComposerPage));
+            Routing.RegisterRoute(AllComposersViewModel.Route, typeof(AllComposersPage));
+            Routing.RegisterRoute(ComposerViewModel.Route, typeof(ComposerPage));
+            Routing.RegisterRoute(DeveloperToolsViewModel.Route, typeof(DeveloperToolsPage));
+            Routing.RegisterRoute(EditComposerViewModel.Route, typeof(EditComposerPage));
 
             Debug.WriteLine($"App data directory: {FileSystem.AppDataDirectory}");
         }
