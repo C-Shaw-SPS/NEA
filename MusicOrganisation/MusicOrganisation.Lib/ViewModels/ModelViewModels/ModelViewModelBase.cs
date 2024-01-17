@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using MusicOrganisation.Lib.Databases;
-using MusicOrganisation.Lib.Services;
 using MusicOrganisation.Lib.Viewmodels;
 using MusicOrganisation.Lib.ViewModels.EditViewModels;
 
@@ -10,7 +9,6 @@ namespace MusicOrganisation.Lib.ViewModels.ModelViewModels
     {
         public const string ID_PARAMETER = nameof(ID_PARAMETER);
 
-        private readonly Service _service;
         private readonly string _editViewModelRoute;
 
         protected T _value;
@@ -19,7 +17,6 @@ namespace MusicOrganisation.Lib.ViewModels.ModelViewModels
 
         public ModelViewModelBase(string editViewModelRoute)
         {
-            _service = new(_databasePath);
             _editViewModelRoute = editViewModelRoute;
             _value = new();
             _editCommand = new(EditAsync);

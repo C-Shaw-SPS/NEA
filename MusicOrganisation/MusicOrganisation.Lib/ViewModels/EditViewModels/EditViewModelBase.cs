@@ -12,7 +12,6 @@ namespace MusicOrganisation.Lib.ViewModels.EditViewModels
         public const string ID_PARAMETER = nameof(ID_PARAMETER);
         public const string IS_NEW_PARAMETER = nameof(IS_NEW_PARAMETER);
 
-        private readonly Service _service;
         private int _id;
         private bool _isNew;
         private readonly string _newPageTitle;
@@ -39,7 +38,6 @@ namespace MusicOrganisation.Lib.ViewModels.EditViewModels
             _pageTitle = _editPageTitle;
             _canDelete = true;
 
-            _service = new(_databasePath);
             _value = new();
             _isNew = false;
 

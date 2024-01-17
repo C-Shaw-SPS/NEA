@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MusicOrganisation.Lib.Databases;
+using MusicOrganisation.Lib.Services;
 
 namespace MusicOrganisation.Lib.Viewmodels
 {
@@ -7,11 +8,14 @@ namespace MusicOrganisation.Lib.Viewmodels
     {
         protected const string _RETURN = "..";
 
-        protected string _databasePath;
+        protected readonly string _databasePath;
+
+        protected readonly Service _service;
 
         public ViewModelBase()
         {
             _databasePath = Path.Combine(FileSystem.AppDataDirectory, DatabaseProperties.NAME);
+            _service = new(_databasePath);
         }
 
         protected static async Task GoToAsync(Dictionary<string, object> parameters, params string[] routes)

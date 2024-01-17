@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using MusicOrganisation.Lib.Json;
 using MusicOrganisation.Lib.Models;
-using MusicOrganisation.Lib.Services;
 using MusicOrganisation.Lib.Tables;
 using MusicOrganisation.Lib.Viewmodels;
 
@@ -11,14 +10,11 @@ namespace MusicOrganisation.Lib.ViewModels
     {
         public const string ROUTE = nameof(DeveloperToolsViewModel);
 
-        private readonly Service _service;
-
         private readonly AsyncRelayCommand _deleteDatabaseCommand;
         private readonly AsyncRelayCommand _resetComposersAndWorksCommand;
 
         public DeveloperToolsViewModel()
         {
-            _service = new(_databasePath);
             _deleteDatabaseCommand = new(DeleteDatabaseTables);
             _resetComposersAndWorksCommand = new(ResetComposersAndWorks);
         }
