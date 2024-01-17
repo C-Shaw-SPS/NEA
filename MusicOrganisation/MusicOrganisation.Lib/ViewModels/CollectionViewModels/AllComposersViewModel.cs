@@ -8,8 +8,6 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
 {
     public partial class AllComposersViewModel : CollectionViewModelBase<ComposerData>
     {
-        private const int _LIMIT = 128;
-
         public const string ROUTE = nameof(AllComposersViewModel);
 
         private static readonly Dictionary<string, string> _orderings = new()
@@ -19,36 +17,9 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
             { "Year of death", nameof(ComposerData.DeathYear) }
         };
 
-        private readonly ComposerService _composerService;
-
-        public AllComposersViewModel() : base(_orderings)
+        public AllComposersViewModel() : base(_orderings, ComposerViewModel.ROUTE, nameof(ComposerData.Name))
         {
-            _composerService = new(_databasePath);
-        }
 
-        public async Task RefreshAsync()
-        {
-            await SearchAsync();
-        }
-
-        protected override async Task SearchAsync()
-        {
-            string ordering = _orderings[Ordering];
-
-            SqlQuery<ComposerData> query = new();
-            query.SetSelectAll();
-            query.AddWhereLike<ComposerData>(nameof(ComposerData.Name), SearchText, SqlBool.OR);
-            query.AddOrderBy<ComposerData>(ordering);
-            query.SetLimit(_LIMIT);
-
-            string queryString = query.ToString();
-
-            IEnumerable<ComposerData> composers = await _composerService.QueryAsync<ComposerData>(queryString);
-            Collection.Clear();
-            foreach (ComposerData compsoer in composers)
-            {
-                Collection.Add(compsoer);
-            }
         }
 
         protected override async Task SelectAsync()
