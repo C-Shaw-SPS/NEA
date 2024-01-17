@@ -24,7 +24,8 @@ namespace MusicOrganisation.Lib.Services
             await InitAsync<T>();
             InsertCommand<T> insertCommand = new();
             insertCommand.AddValue(value);
-            await _connection.ExecuteAsync(insertCommand.ToString());
+            string insertString = insertCommand.ToString();
+            await _connection.ExecuteAsync(insertString);
 
         }
 
@@ -39,7 +40,8 @@ namespace MusicOrganisation.Lib.Services
                 {
                     insertCommand.AddValue(value);
                 }
-                await _connection.ExecuteAsync(insertCommand.ToString());
+                string insertString = insertCommand.ToString();
+                await _connection.ExecuteAsync(insertString);
             }
         }
 

@@ -157,13 +157,11 @@ namespace MusicOrganisation.Tests.Services
                 }
             };
 
-            await Task.WhenAll
-            (
-                pupilService.InsertAsync(pupil),
-                pupilService.InsertAllAsync(composerData),
-                pupilService.InsertAllAsync(workData),
-                pupilService.InsertAllAsync(repertoireData)
-            );
+
+            await pupilService.InsertAsync(pupil);
+            await pupilService.InsertAllAsync(composerData);
+            await pupilService.InsertAllAsync(workData);
+            await pupilService.InsertAllAsync(repertoireData);
 
             IEnumerable<Repertoire> actualRepertoires = await pupilService.GetRepertoireAsync(pupil.Id);
             Assert.Equal(expectedRepertoires.Count, actualRepertoires.Count());

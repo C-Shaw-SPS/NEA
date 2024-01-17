@@ -76,7 +76,8 @@ namespace MusicOrganisation.Lib.Tables
                 nameof(WorkId),
                 nameof(DateStarted),
                 nameof(Syllabus),
-                nameof(Status)
+                nameof(Status),
+                nameof(Notes)
             };
         }
 
@@ -88,7 +89,8 @@ namespace MusicOrganisation.Lib.Tables
                 _workId,
                 _dateStarted,
                 _syllabus,
-                _status);
+                _status,
+                _notes);
         }
 
         public bool Equals(RepertoireData? other)
@@ -98,7 +100,8 @@ namespace MusicOrganisation.Lib.Tables
                 && _workId == other._workId
                 && _dateStarted == other._dateStarted
                 && _syllabus == other._syllabus
-                && _status == other._status;
+                && _status == other._status
+                && _notes == other._notes;
         }
     }
 }
