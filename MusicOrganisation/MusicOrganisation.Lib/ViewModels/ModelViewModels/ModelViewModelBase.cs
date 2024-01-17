@@ -5,13 +5,16 @@ using MusicOrganisation.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisation.Lib.ViewModels.ModelViewModels
 {
-    public abstract class ModelViewModelBase<T> : ViewModelBase, IQueryAttributable where T : class, ITable, new()
+    public abstract class ModelViewModelBase : ViewModelBase
     {
         public const string ID_PARAMETER = nameof(ID_PARAMETER);
+    }
 
+    public abstract class ModelViewModelBase<TModel> : ModelViewModelBase, IQueryAttributable where TModel : class, ITable, new()
+    {
         private readonly string _editViewModelRoute;
 
-        protected T _value;
+        protected TModel _value;
 
         private readonly AsyncRelayCommand _editCommand;
 
@@ -30,8 +33,8 @@ namespace MusicOrganisation.Lib.ViewModels.ModelViewModels
             {
                 Dictionary<string, object> parameters = new()
                 {
-                    [EditViewModelBase<T>.ID_PARAMETER] = _value.Id,
-                    [EditViewModelBase<T>.IS_NEW_PARAMETER] = false,
+                    [EditViewModelBase.ID_PARAMETER] = _value.Id,
+                    [EditViewModelBase.IS_NEW_PARAMETER] = false,
                 };
                 await GoToAsync(parameters, _editViewModelRoute);
             }
@@ -47,7 +50,7 @@ namespace MusicOrganisation.Lib.ViewModels.ModelViewModels
 
         private async Task SetValue(int id)
         {
-            T value = await _service.GetAsync<T>(id);
+            TModel value = await _service.GetAsync<TModel>(id);
             _value = value;
             SetDisplayValues();
         }

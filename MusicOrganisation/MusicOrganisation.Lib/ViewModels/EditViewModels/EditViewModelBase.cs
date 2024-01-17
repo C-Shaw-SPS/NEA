@@ -1,17 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MusicOrganisation.Lib.Databases;
-using MusicOrganisation.Lib.Services;
 using MusicOrganisation.Lib.Viewmodels;
 using MusicOrganisation.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisation.Lib.ViewModels.EditViewModels
 {
-    public abstract partial class EditViewModelBase<T> : ViewModelBase, IQueryAttributable where T : class, ITable, new()
+    public abstract class EditViewModelBase : ViewModelBase
     {
         public const string ID_PARAMETER = nameof(ID_PARAMETER);
         public const string IS_NEW_PARAMETER = nameof(IS_NEW_PARAMETER);
+    }
 
+    public abstract partial class EditViewModelBase<T> : EditViewModelBase, IQueryAttributable where T : class, ITable, new()
+    {
         private int _id;
         private bool _isNew;
         private readonly string _newPageTitle;

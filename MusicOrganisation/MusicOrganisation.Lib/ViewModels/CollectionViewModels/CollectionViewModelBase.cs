@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Graphics.Text;
 using MusicOrganisation.Lib.Databases;
 using MusicOrganisation.Lib.Viewmodels;
 using MusicOrganisation.Lib.ViewModels.EditViewModels;
@@ -97,7 +96,7 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
         {
             Dictionary<string, object> parameters = new()
             {
-                [EditViewModelBase<T>.IS_NEW_PARAMETER] = true
+                [EditViewModelBase.IS_NEW_PARAMETER] = true
             };
             await GoToAsync(parameters, _editViewModelRoute);
         }
