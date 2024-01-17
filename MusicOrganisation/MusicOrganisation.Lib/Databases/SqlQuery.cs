@@ -7,7 +7,7 @@ namespace MusicOrganisation.Lib.Databases
         bool _selectAll;
         private readonly List<(string table, string column, string alias)> _columns;
         private readonly List<(string newTable, string newColumn, string existingTable, string existingColumn)> _joins;
-        private readonly List<(string table, string column, string value, string comparison, SqlBool boolean)> _conditions;
+        private readonly List<(string table, string column, string value, string comparison)> _conditions;
         private readonly List<(string table, string column)> _orderBys;
         private int _limit;
 
@@ -36,14 +36,14 @@ namespace MusicOrganisation.Lib.Databases
             _joins.Add((TNew.TableName, newColumn, TExisting.TableName, existingColumn));
         }
 
-        public void AddWhereEquals<TTable>(string column, object? value, SqlBool boolean) where TTable : ITable
+        public void AddWhereEquals<TTable>(string column, object? value) where TTable : ITable
         {
-            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatValue(value), "=", boolean));
+            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatValue(value), "="));
         }
 
-        public void AddWhereLike<TTable>(string column, string value, SqlBool boolean) where TTable : ITable
+        public void AddWhereLike<TTable>(string column, string value) where TTable : ITable
         {
-            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatLikeString(value), "LIKE", boolean));
+            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatLikeString(value), "LIKE"));
         }
 
         public void AddOrderBy<TTable>(string column) where TTable : ITable
@@ -103,14 +103,14 @@ namespace MusicOrganisation.Lib.Databases
             for (int i = 2; i < _conditions.Count; i++)
             {
                 string condition = FormatCondition(i);
-                string line = $"{_conditions[i].boolean} {condition}";
+                string line = $"AND {condition}";
                 stringBuilder.AppendLine(line);
             }
         }
 
         private string FormatCondition(int conditionIndex)
         {
-            (string table, string column, string value, string comparison, SqlBool _) = _conditions[conditionIndex];
+            (string table, string column, string value, string comparison) = _conditions[conditionIndex];
             return $"{table}.{column} {comparison} {value}";
         }
 

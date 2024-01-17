@@ -83,7 +83,7 @@ namespace MusicOrganisation.Lib.Services
             query.AddColumn<CaregiverData>(nameof(CaregiverData.Email), nameof(Caregiver.Email));
             query.AddColumn<CaregiverData>(nameof(CaregiverData.PhoneNumber), nameof(Caregiver.PhoneNumber));
             query.AddJoin<CaregiverMap, CaregiverData>(nameof(CaregiverMap.CaregiverId), nameof(CaregiverData.Id));
-            query.AddWhereEquals<CaregiverMap>(nameof(CaregiverMap.PupilId), pupilId, SqlBool.AND);
+            query.AddWhereEquals<CaregiverMap>(nameof(CaregiverMap.PupilId), pupilId);
 
             return query.ToString();
         }
@@ -114,7 +114,7 @@ namespace MusicOrganisation.Lib.Services
             query.AddColumn<ComposerData>(nameof(ComposerData.Name), nameof(Repertoire.ComposerName));
             query.AddJoin<WorkData, RepertoireData>(nameof(WorkData.Id), nameof(RepertoireData.WorkId));
             query.AddJoin<ComposerData, WorkData>(nameof(ComposerData.Id), nameof(WorkData.ComposerId));
-            query.AddWhereEquals<RepertoireData>(nameof(RepertoireData.PupilId), pupilId, SqlBool.AND);
+            query.AddWhereEquals<RepertoireData>(nameof(RepertoireData.PupilId), pupilId);
 
             return query.ToString();
         }
