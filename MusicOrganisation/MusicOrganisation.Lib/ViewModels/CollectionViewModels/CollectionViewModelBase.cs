@@ -1,7 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Graphics.Text;
 using MusicOrganisation.Lib.Databases;
 using MusicOrganisation.Lib.Viewmodels;
+using MusicOrganisation.Lib.ViewModels.EditViewModels;
+using MusicOrganisation.Lib.ViewModels.ModelViewModels;
 using System.Collections.ObjectModel;
 
 namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
@@ -15,6 +18,7 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
         private readonly AsyncRelayCommand _newCommand;
         private readonly Dictionary<string, string> _orderings;
         private readonly string _modelViewModelRoute;
+        private readonly string _editViewModelRoute;
         private readonly string _searchParameter;
 
         [ObservableProperty]
@@ -29,7 +33,7 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
         [ObservableProperty]
         private T? _selectedItem;
 
-        public CollectionViewModelBase(Dictionary<string, string> orderings, string modelViewModelRoute, string searchParameter)
+        public CollectionViewModelBase(Dictionary<string, string> orderings, string modelViewModelRoute, string editViewModelRoute, string searchParameter)
         {
             _searchCommand = new(SearchAsync);
             _selectCommand = new(SelectAsync);
@@ -37,6 +41,7 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
 
             _orderings = orderings;
             _modelViewModelRoute = modelViewModelRoute;
+            _editViewModelRoute = editViewModelRoute;
             _searchParameter = searchParameter;
 
             _searchText = string.Empty;
@@ -57,7 +62,7 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
             await SearchAsync();
         }
 
-        protected virtual async Task SearchAsync()
+        private async Task SearchAsync()
         {
             string ordering = _orderings[Ordering];
             SqlQuery<T> query = new();
@@ -76,8 +81,25 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
             }
         }
 
-        protected abstract Task SelectAsync();
+        private async Task SelectAsync()
+        {
+            if (SelectedItem is not null)
+            {
+                Dictionary<string, object> parameters = new()
+                {
+                    [ModelViewModelBase<T>.ID_PARAMETER] = SelectedItem.Id,
+                };
+                await GoToAsync(parameters, _modelViewModelRoute);
+            }
+        }
 
-        protected abstract Task AddNewAsync();
+        private async Task AddNewAsync()
+        {
+            Dictionary<string, object> parameters = new()
+            {
+                [EditViewModelBase<T>.IS_NEW_PARAMETER] = true
+            };
+            await GoToAsync(parameters, _editViewModelRoute);
+        }
     }
 }
