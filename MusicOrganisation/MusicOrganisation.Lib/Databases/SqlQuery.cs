@@ -2,7 +2,7 @@
 
 namespace MusicOrganisation.Lib.Databases
 {
-    public class SqlQuery<T> where T : ITable
+    public class SqlQuery<T> : ISqlQuery where T : ITable
     {
         bool _selectAll;
         private readonly List<(string table, string column, string alias)> _columns;
@@ -56,7 +56,7 @@ namespace MusicOrganisation.Lib.Databases
             _limit = limit;
         }
 
-        public override string ToString()
+        public string GetQuery()
         {
             StringBuilder stringBuilder = new();
             AddSelectColumnsToStringbuilder(stringBuilder);
