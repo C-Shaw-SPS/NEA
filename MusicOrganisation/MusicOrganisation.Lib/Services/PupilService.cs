@@ -85,7 +85,7 @@ namespace MusicOrganisation.Lib.Services
             query.AddJoin<CaregiverMap, CaregiverData>(nameof(CaregiverMap.CaregiverId), nameof(CaregiverData.Id));
             query.AddWhereEquals<CaregiverMap>(nameof(CaregiverMap.PupilId), pupilId);
 
-            return query.GetQuery();
+            return query.GetSql();
         }
 
         public async Task<IEnumerable<Repertoire>> GetRepertoireAsync(int pupilId)
@@ -116,7 +116,7 @@ namespace MusicOrganisation.Lib.Services
             query.AddJoin<ComposerData, WorkData>(nameof(ComposerData.Id), nameof(WorkData.ComposerId));
             query.AddWhereEquals<RepertoireData>(nameof(RepertoireData.PupilId), pupilId);
 
-            return query.GetQuery();
+            return query.GetSql();
         }
     }
 }

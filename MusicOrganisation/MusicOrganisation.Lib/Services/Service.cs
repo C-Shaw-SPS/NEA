@@ -22,9 +22,9 @@ namespace MusicOrganisation.Lib.Services
         public async Task InsertAsync<T>(T value) where T : class, ITable, new()
         {
             await InitAsync<T>();
-            InsertCommand<T> insertCommand = new();
+            InsertStatement<T> insertCommand = new();
             insertCommand.AddValue(value);
-            string insertString = insertCommand.GetQuery();
+            string insertString = insertCommand.GetSql();
             await _connection.ExecuteAsync(insertString);
 
         }
@@ -35,12 +35,12 @@ namespace MusicOrganisation.Lib.Services
 
             if (values.Any())
             {
-                InsertCommand<T> insertCommand = new();
+                InsertStatement<T> insertCommand = new();
                 foreach (T value in values)
                 {
                     insertCommand.AddValue(value);
                 }
-                string insertString = insertCommand.GetQuery();
+                string insertString = insertCommand.GetSql();
                 await _connection.ExecuteAsync(insertString);
             }
         }
@@ -95,7 +95,8 @@ namespace MusicOrganisation.Lib.Services
         public async Task UpdateAsync<T>(T value) where T : class, ITable, new()
         {
             await InitAsync<T>();
-            await _connection.UpdateAsync(value);
+            UpdateStatement<T> updateStatement = new(value);
+            await QueryAsync<T>(updateStatement);
         }
 
         public async Task<IEnumerable<int>> GetIdsAsync<T>() where T : class, ITable, new()
@@ -125,9 +126,9 @@ namespace MusicOrganisation.Lib.Services
             return await _connection.QueryAsync<T>(query);
         }
 
-        public async Task<IEnumerable<T>> QueryAsync<T>(ISqlQuery query) where T : class, ITable, new()
+        public async Task<IEnumerable<T>> QueryAsync<T>(ISqlStatement query) where T : class, ITable, new()
         {
-            string queryString = query.GetQuery();
+            string queryString = query.GetSql();
             IEnumerable<T> result = await QueryAsync<T>(queryString);
             return result;
         }

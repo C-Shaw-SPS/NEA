@@ -2,13 +2,13 @@
 
 namespace MusicOrganisation.Lib.Databases
 {
-    internal class InsertCommand<T> : ISqlQuery where T : ITable, new()
+    internal class InsertStatement<T> : ISqlStatement where T : ITable, new()
     {
         private readonly StringBuilder _stringBuilder;
         private readonly IEnumerable<string> _columns;
         private bool _containsValues;
 
-        public InsertCommand()
+        public InsertStatement()
         {
             _stringBuilder = new();
             _columns = T.GetColumnNames();
@@ -46,7 +46,7 @@ namespace MusicOrganisation.Lib.Databases
             return sqlStrings;
         }
 
-        public string GetQuery()
+        public string GetSql()
         {
             return _stringBuilder.ToString();
         }

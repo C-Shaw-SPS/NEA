@@ -53,7 +53,7 @@ namespace MusicOrganisation.Lib.Models
             set => _composerName = value;
         }
 
-        public ISqlQuery GetSelectAllQuery()
+        public ISqlStatement GetSelectAllQuery()
         {
             SqlQuery<WorkData> query = new();
             query.AddColumn<WorkData>(nameof(WorkData.Id), nameof(WorkId));
@@ -63,6 +63,7 @@ namespace MusicOrganisation.Lib.Models
             query.AddColumn<WorkData>(nameof(WorkData.Genre), nameof(Genre));
             query.AddJoin<ComposerData, WorkData>(nameof(ComposerData.Id), nameof(WorkData.ComposerId));
             query.AddColumn<ComposerData>(nameof(ComposerData.Name), nameof(ComposerName));
+            query.AddWhereEquals<WorkData>(nameof(WorkData.IsDeleted), false);
             return query;
         }
     }

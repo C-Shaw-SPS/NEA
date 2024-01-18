@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MusicOrganisation.Lib.Databases
 {
-    public interface ISqlQuery
+    public interface ISqlStatement
     {
-        public string GetQuery();
+        public string GetSql();
     }
 }
