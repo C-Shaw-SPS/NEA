@@ -17,9 +17,10 @@ namespace MusicOrganisation.Lib.Models
         private bool _needsDifferentTimes;
         private TimeSpan _lessonDuration;
         private readonly Dictionary<DayOfWeek, int> _lessonSlots = GetEmptyLessonSlots();
-        private string? _email;
-        private string? _phoneNumber;
+        private string _email = string.Empty;
+        private string _phoneNumber = string.Empty;
         private string _notes = string.Empty;
+        private bool _isDeleted = false;
 
         [PrimaryKey]
         public int Id
@@ -105,22 +106,32 @@ namespace MusicOrganisation.Lib.Models
             set => _lessonSlots[DayOfWeek.Sunday] = value;
         }
 
-        public string? Email
+        [NotNull]
+        public string Email
         {
             get => _email;
             set => _email = value;
         }
 
-        public string? PhoneNumber
+        [NotNull]
+        public string PhoneNumber
         {
             get => _phoneNumber;
             set => _phoneNumber = value;
         }
 
+        [NotNull]
         public string Notes
         {
             get => _notes;
             set => _notes = value;
+        }
+
+        [NotNull]
+        public bool IsDeleted
+        {
+            get => _isDeleted;
+            set => _isDeleted = value;
         }
 
         public static string TableName => _TABLE_NAME;
@@ -177,7 +188,8 @@ namespace MusicOrganisation.Lib.Models
                 && EqualLessonSlots(_lessonSlots, other._lessonSlots)
                 && _email == other._email
                 && _phoneNumber == other._phoneNumber
-                && _notes == other._notes;
+                && _notes == other._notes
+                && _isDeleted == other._isDeleted;
         }
 
         private static bool EqualLessonSlots(Dictionary<DayOfWeek, int> lessonSlots1, Dictionary<DayOfWeek, int> lessonSlots2)
@@ -242,7 +254,8 @@ namespace MusicOrganisation.Lib.Models
                 nameof(SundayLessonSlots),
                 nameof(Email),
                 nameof(PhoneNumber),
-                nameof(Notes)
+                nameof(Notes),
+                nameof(IsDeleted)
             };
         }
 
@@ -263,7 +276,8 @@ namespace MusicOrganisation.Lib.Models
                 _lessonSlots[DayOfWeek.Sunday],
                 _email,
                 _phoneNumber,
-                _notes);
+                _notes,
+                _isDeleted);
         }
     }
 }

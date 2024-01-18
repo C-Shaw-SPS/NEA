@@ -4,6 +4,8 @@
     {
         public abstract int Id { get; set; }
 
+        public abstract bool IsDeleted { get; set; }
+
         public abstract static string TableName { get; }
 
         public IEnumerable<string> GetSqlValues();

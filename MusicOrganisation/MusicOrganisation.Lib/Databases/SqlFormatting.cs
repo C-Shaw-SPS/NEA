@@ -55,6 +55,10 @@ namespace MusicOrganisation.Lib.Databases
             {
                 return s.FormatSqlString();
             }
+            else if (value is bool b)
+            {
+                return b.FormatSqlBool();
+            }
             else if (value is DateTime dateTime)
             {
                 return dateTime.FormatSqlDateTime();
@@ -102,6 +106,11 @@ namespace MusicOrganisation.Lib.Databases
                 }
             }
             return result.ToString();
+        }
+
+        private static string FormatSqlBool(this bool b)
+        {
+            return b.ToString();
         }
 
         private static string FormatSqlDateTime(this DateTime dateTime)

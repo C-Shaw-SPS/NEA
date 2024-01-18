@@ -27,9 +27,7 @@ namespace MusicOrganisation.Tests
             new CaregiverData
             {
                 Id = 1,
-                Name = "Caregiver 1",
-                Email = null,
-                PhoneNumber = null
+                Name = "Caregiver 1"
             }
         };
 
@@ -143,9 +141,7 @@ namespace MusicOrganisation.Tests
                 Name = "Pupil 1",
                 Level = "Grade 8",
                 NeedsDifferentTimes = false,
-                LessonDuration = TimeSpan.FromMinutes(30),
-                PhoneNumber = null,
-                Email = null
+                LessonDuration = TimeSpan.FromMinutes(30)
             }
         };
 

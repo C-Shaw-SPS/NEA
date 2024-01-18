@@ -10,8 +10,9 @@ namespace MusicOrganisation.Lib.Tables
 
         private int _id;
         private string _name = string.Empty;
-        private string? _email;
-        private string? _phoneNumber;
+        private string _email = string.Empty;
+        private string _phoneNumber = string.Empty;
+        private bool _isDeleted;
 
         public static string TableName => _TABLE_NAME;
 
@@ -29,16 +30,25 @@ namespace MusicOrganisation.Lib.Tables
             set => _name = value;
         }
 
-        public string? Email
+        [NotNull]
+        public string Email
         {
             get => _email;
             set => _email = value;
         }
 
-        public string? PhoneNumber
+        [NotNull]
+        public string PhoneNumber
         {
             get => _phoneNumber;
             set => _phoneNumber = value;
+        }
+
+        [NotNull]
+        public bool IsDeleted
+        {
+            get => _isDeleted;
+            set => _isDeleted = value;
         }
 
         public static IEnumerable<string> GetColumnNames()
@@ -48,7 +58,8 @@ namespace MusicOrganisation.Lib.Tables
                 nameof(Id),
                 nameof(Name),
                 nameof(Email),
-                nameof(PhoneNumber)
+                nameof(PhoneNumber),
+                nameof(IsDeleted)
             };
         }
 
@@ -58,7 +69,8 @@ namespace MusicOrganisation.Lib.Tables
                 _id,
                 _name,
                 _email,
-                _phoneNumber);
+                _phoneNumber,
+                _isDeleted);
         }
 
         public bool Equals(CaregiverData? other)
@@ -66,7 +78,8 @@ namespace MusicOrganisation.Lib.Tables
             return other != null
                 && _name == other._name
                 && _email == other._email
-                && _phoneNumber == other._phoneNumber;
+                && _phoneNumber == other._phoneNumber
+                && _isDeleted == other._isDeleted;
         }
     }
 }

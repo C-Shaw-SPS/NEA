@@ -14,6 +14,7 @@ namespace MusicOrganisation.Lib.Tables
         private int _flagIndex;
         private TimeSpan _startTime;
         private TimeSpan _endTime;
+        private bool _isDeleted = false;
 
         public static string TableName => _TABLE_NAME;
 
@@ -52,6 +53,13 @@ namespace MusicOrganisation.Lib.Tables
             set => _endTime = value;
         }
 
+        [NotNull]
+        public bool IsDeleted
+        {
+            get => _isDeleted;
+            set => _isDeleted = value;
+        }
+
         [Ignore]
         public TimeSpan Duration => _endTime - _startTime;
 
@@ -63,7 +71,8 @@ namespace MusicOrganisation.Lib.Tables
                 nameof(DayOfWeek),
                 nameof(FlagIndex),
                 nameof(StartTime),
-                nameof(EndTime)
+                nameof(EndTime),
+                nameof(IsDeleted)
             };
         }
 
@@ -74,7 +83,8 @@ namespace MusicOrganisation.Lib.Tables
                 _dayOfWeek,
                 _flagIndex,
                 _startTime,
-                _endTime);
+                _endTime,
+                _isDeleted);
         }
 
         public bool Equals(LessonSlotData? other)
@@ -83,7 +93,8 @@ namespace MusicOrganisation.Lib.Tables
                 && _dayOfWeek == other._dayOfWeek
                 && _flagIndex == other._flagIndex
                 && _startTime == other._startTime
-                && _endTime == other._endTime;
+                && _endTime == other._endTime
+                && _isDeleted == other._isDeleted;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace MusicOrganisation.Lib.Tables
         private string _title = string.Empty;
         private string _subtitle = string.Empty;
         private string _genre = string.Empty;
+        private bool _isDeleted = false;
 
         public static string TableName => _TABLE_NAME;
 
@@ -53,6 +54,13 @@ namespace MusicOrganisation.Lib.Tables
             set => _genre = value;
         }
 
+        [NotNull]
+        public bool IsDeleted
+        {
+            get => _isDeleted;
+            set => _isDeleted = value;
+        }
+
         public IEnumerable<string> GetSqlValues()
         {
             return SqlFormatting.FormatValues(
@@ -60,7 +68,8 @@ namespace MusicOrganisation.Lib.Tables
                 _composerId,
                 _title,
                 _subtitle,
-                _genre);
+                _genre,
+                _isDeleted);
         }
 
         public static IEnumerable<string> GetColumnNames()
@@ -71,7 +80,8 @@ namespace MusicOrganisation.Lib.Tables
                 nameof(ComposerId),
                 nameof(Title),
                 nameof(Subtitle),
-                nameof(Genre)
+                nameof(Genre),
+                nameof(IsDeleted)
             };
         }
 
@@ -81,7 +91,8 @@ namespace MusicOrganisation.Lib.Tables
                 && _composerId == other._composerId
                 && _title == other._title
                 && _subtitle == other._subtitle
-                && _genre == other._genre;
+                && _genre == other._genre
+                && _isDeleted == other._isDeleted;
         }
     }
 }

@@ -16,6 +16,7 @@ namespace MusicOrganisation.Lib.Tables
         private int? _birthYear;
         private int? _deathYear;
         private string _era = string.Empty;
+        private bool _isDeleted = false;
 
         [PrimaryKey, JsonPropertyName("id"), JsonConverter(typeof(StringToIntConverter))]
         public int Id
@@ -52,25 +53,14 @@ namespace MusicOrganisation.Lib.Tables
             set => _era = value;
         }
 
-        public static string TableName => _TABLE_NAME;
-
-        private static string? FormatLink(string? value)
+        [NotNull]
+        public bool IsDeleted
         {
-            if (value == null)
-            {
-                return value;
-            }
-
-            StringBuilder link = new();
-            foreach (char c in value)
-            {
-                if (c != '\\')
-                {
-                    link.Append(c);
-                }
-            }
-            return link.ToString();
+            get => _isDeleted;
+            set => _isDeleted = value;
         }
+
+        public static string TableName => _TABLE_NAME;
 
         public IEnumerable<string> GetSqlValues()
         {
@@ -79,7 +69,8 @@ namespace MusicOrganisation.Lib.Tables
                 _name,
                 _birthYear,
                 _deathYear,
-                _era);
+                _era,
+                _isDeleted);
         }
 
         public static IEnumerable<string> GetColumnNames()
@@ -91,6 +82,7 @@ namespace MusicOrganisation.Lib.Tables
                 nameof(BirthYear),
                 nameof(DeathYear),
                 nameof(Era),
+                nameof(IsDeleted)
             };
         }
 
@@ -100,7 +92,8 @@ namespace MusicOrganisation.Lib.Tables
                 && _name == other._name
                 && _birthYear == other._birthYear
                 && _deathYear == other._deathYear
-                && _era == other._era;
+                && _era == other._era
+                && _isDeleted == other._isDeleted;
         }
     }
 }

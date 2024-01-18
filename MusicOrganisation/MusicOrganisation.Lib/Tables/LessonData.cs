@@ -13,6 +13,7 @@ namespace MusicOrganisation.Lib.Tables
         private int _lessonTimeId;
         private DateTime _date;
         private string _notes = string.Empty;
+        private bool _isDeleted = false;
 
         public static string TableName => _TABLE_NAME;
 
@@ -44,10 +45,18 @@ namespace MusicOrganisation.Lib.Tables
             set => _date = value.Date;
         }
 
+        [NotNull]
         public string Notes
         {
             get => _notes;
             set => _notes = value;
+        }
+
+        [NotNull]
+        public bool IsDeleted
+        {
+            get => _isDeleted;
+            set => _isDeleted = value;
         }
 
 
@@ -59,7 +68,8 @@ namespace MusicOrganisation.Lib.Tables
                 nameof(PupilId),
                 nameof(LessonSlotId),
                 nameof(Date),
-                nameof(Notes)
+                nameof(Notes),
+                nameof(IsDeleted)
             };
         }
 
@@ -70,7 +80,8 @@ namespace MusicOrganisation.Lib.Tables
                 _pupilId,
                 _lessonTimeId,
                 _date,
-                _notes);
+                _notes,
+                _isDeleted);
         }
 
         public bool Equals(LessonData? other)
@@ -79,7 +90,8 @@ namespace MusicOrganisation.Lib.Tables
                 && _pupilId == other._pupilId
                 && _lessonTimeId == other._lessonTimeId
                 && _date == other._date
-                && _notes == other._notes;
+                && _notes == other._notes
+                && _isDeleted == other._isDeleted;
         }
     }
 }

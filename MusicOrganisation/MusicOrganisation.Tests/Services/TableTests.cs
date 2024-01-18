@@ -1,5 +1,6 @@
 ﻿using MusicOrganisation.Lib.Databases;
 using MusicOrganisation.Lib.Services;
+using MusicOrganisation.Lib.Tables;
 
 namespace MusicOrganisation.Tests.Services
 {
