@@ -96,6 +96,7 @@ namespace MusicOrganisation.Lib.Services
         {
             await InitAsync<T>();
             UpdateStatement<T> updateStatement = new(value);
+            updateStatement.SetUpdateAll();
             await QueryAsync<T>(updateStatement);
         }
 

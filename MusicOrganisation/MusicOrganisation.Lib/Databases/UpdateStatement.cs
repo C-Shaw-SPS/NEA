@@ -18,6 +18,12 @@ namespace MusicOrganisation.Lib.Databases
             _columnsToUpdate.Add(columnName);
         }
 
+        public void SetUpdateAll()
+        {
+            _columnsToUpdate.Clear();
+            _columnsToUpdate.AddRange(T.GetColumnNames());
+        }
+
         public string GetSql()
         {
             StringBuilder stringBuilder = new();
