@@ -2,6 +2,11 @@
 
 namespace MusicOrganisation.Lib.Databases
 {
+    public abstract class SqlQuery : ISqlStatement
+    {
+        public abstract string GetSql();
+    }
+
     public class SqlQuery<T> : ISqlStatement where T : ITable
     {
         bool _selectAll;
