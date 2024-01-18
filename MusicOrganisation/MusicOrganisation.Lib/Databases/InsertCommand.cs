@@ -2,7 +2,7 @@
 
 namespace MusicOrganisation.Lib.Databases
 {
-    internal class InsertCommand<T> where T : ITable, new()
+    internal class InsertCommand<T> : ISqlQuery where T : ITable, new()
     {
         private readonly StringBuilder _stringBuilder;
         private readonly IEnumerable<string> _columns;
@@ -13,12 +13,6 @@ namespace MusicOrganisation.Lib.Databases
             _stringBuilder = new();
             _columns = T.GetColumnNames();
             _containsValues = false;
-            AddInsertLine();
-        }
-
-        private void AddInsertLine()
-        {
-            _stringBuilder.AppendLine($"INSERT INTO {T.TableName} {_columns.CommaJoin().AddBrackets()} VALUES");
         }
 
         public void AddValue(T value)
@@ -29,12 +23,30 @@ namespace MusicOrganisation.Lib.Databases
             }
             else
             {
+                AddInsertLine();
                 _containsValues = true;
             }
-            _stringBuilder.Append(value.GetSqlValues().Values.CommaJoin().AddBrackets());
+            IEnumerable<string> sqlValues = GetSqlValues(value);
+            _stringBuilder.Append(sqlValues.CommaJoin().AddBrackets());
         }
 
-        public override string ToString()
+        private void AddInsertLine()
+        {
+            _stringBuilder.AppendLine($"INSERT INTO {T.TableName} {_columns.CommaJoin().AddBrackets()} VALUES");
+        }
+
+        private List<string> GetSqlValues(T value)
+        {
+            IDictionary<string, string> sqlValues = value.GetSqlValues();
+            List<string> sqlStrings = new();
+            foreach (string column in _columns)
+            {
+                sqlStrings.Add(sqlValues[column]);
+            }
+            return sqlStrings;
+        }
+
+        public string GetQuery()
         {
             return _stringBuilder.ToString();
         }
