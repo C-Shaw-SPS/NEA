@@ -1,10 +1,5 @@
 ﻿using MusicOrganisation.Lib.Databases;
 using MusicOrganisation.Lib.Tables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicOrganisation.Lib.Models
 {
@@ -53,7 +48,7 @@ namespace MusicOrganisation.Lib.Models
             set => _composerName = value;
         }
 
-        public ISqlStatement GetSelectAllQuery()
+        public  GetSelectAllQuery()
         {
             SqlQuery<WorkData> query = new();
             query.AddColumn<WorkData>(nameof(WorkData.Id), nameof(WorkId));
@@ -65,6 +60,11 @@ namespace MusicOrganisation.Lib.Models
             query.AddColumn<ComposerData>(nameof(ComposerData.Name), nameof(ComposerName));
             query.AddWhereEquals<WorkData>(nameof(WorkData.IsDeleted), false);
             return query;
+        }
+
+        public ISqlStatement GetSelectFromComposerQuery()
+        {
+            
         }
     }
 }
