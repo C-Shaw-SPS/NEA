@@ -1,10 +1,5 @@
 ﻿using MusicOrganisation.Lib.Tables;
 using MusicOrganisation.Lib.ViewModels.ModelViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicOrganisation.Lib.ViewModels.EditViewModels
 {

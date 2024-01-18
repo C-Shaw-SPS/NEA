@@ -4,7 +4,7 @@ using MusicOrganisation.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
 {
-    internal class AllWorksViewModel : CollectionViewModelBase<WorkData, WorkViewModel, EditWorkViewModel>, IViewModel
+    public class AllWorksViewModel : CollectionViewModelBase<WorkData, WorkViewModel, EditWorkViewModel>, IViewModel
     {
         private const string _ROUTE = nameof(AllWorksViewModel);
 
