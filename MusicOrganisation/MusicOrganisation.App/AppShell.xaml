@@ -14,6 +14,10 @@
             <ShellContent ContentTemplate="{DataTemplate views:AllComposersPage}"/>
         </Tab>
 
+        <Tab Title="Works">
+            <ShellContent ContentTemplate="{DataTemplate views:AllWorksPage}"/>
+        </Tab>
+
         <Tab Title="Developer tools">
             <ShellContent ContentTemplate="{DataTemplate views:DeveloperToolsPage}"/>
         </Tab>
