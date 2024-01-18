@@ -11,7 +11,7 @@ namespace MusicOrganisation.Lib.Services
 
         }
 
-        public async Task InsertPupilAsync(string name, string level, bool hasDifferentTimes, TimeSpan lessonDuration, int mondayLessonSlots, int tuesdayLessonSlots, int wednesdayLessonSlots, int thursdayLessonSlots, int fridayLessonSlots, int saturdayLessonSlots, int sundayLessonSlots, string? email, string? phoneNumber)
+        public async Task InsertPupilAsync(string name, string level, bool hasDifferentTimes, TimeSpan lessonDuration, int mondayLessonSlots, int tuesdayLessonSlots, int wednesdayLessonSlots, int thursdayLessonSlots, int fridayLessonSlots, int saturdayLessonSlots, int sundayLessonSlots, string email, string phoneNumber)
         {
             int id = await GetNextIdAsync<Pupil>();
             Pupil pupil = new()
@@ -34,7 +34,7 @@ namespace MusicOrganisation.Lib.Services
             await InsertAsync(pupil);
         }
 
-        public async Task InsertNewCaregiverAsync(string name, string? email, string? phoneNumber, int pupilId, string description)
+        public async Task InsertNewCaregiverAsync(string name, string email, string phoneNumber, int pupilId, string description)
         {
             int caregiverId = await GetNextIdAsync<CaregiverData>();
 
@@ -85,7 +85,7 @@ namespace MusicOrganisation.Lib.Services
             query.AddJoin<CaregiverMap, CaregiverData>(nameof(CaregiverMap.CaregiverId), nameof(CaregiverData.Id));
             query.AddWhereEquals<CaregiverMap>(nameof(CaregiverMap.PupilId), pupilId);
 
-            return query.ToString();
+            return query.GetQuery();
         }
 
         public async Task<IEnumerable<Repertoire>> GetRepertoireAsync(int pupilId)
@@ -116,7 +116,7 @@ namespace MusicOrganisation.Lib.Services
             query.AddJoin<ComposerData, WorkData>(nameof(ComposerData.Id), nameof(WorkData.ComposerId));
             query.AddWhereEquals<RepertoireData>(nameof(RepertoireData.PupilId), pupilId);
 
-            return query.ToString();
+            return query.GetQuery();
         }
     }
 }
