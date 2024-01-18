@@ -6,6 +6,13 @@ namespace MusicOrganisation.Tests.Services
     public class ServiceTests
     {
         [Fact]
+        public async Task TestEmptyQueryAsync()
+        {
+            Service service = new(nameof(TestEmptyQueryAsync));
+            await service.QueryAsync<ComposerData>(string.Empty);
+        }
+
+        [Fact]
         public async Task TestInsertAsync()
         {
             Service table = new(nameof(TestInsertAsync));

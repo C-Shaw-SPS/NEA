@@ -63,14 +63,16 @@ namespace MusicOrganisation.Lib.Tables
             };
         }
 
-        public IEnumerable<string> GetSqlValues()
+        public IDictionary<string, string> GetSqlValues()
         {
-            return SqlFormatting.FormatValues(
-                _id,
-                _name,
-                _email,
-                _phoneNumber,
-                _isDeleted);
+            IDictionary<string, string> sqlValues = SqlFormatting.FormatValues(
+                (nameof(Id), _id),
+                (nameof(Name), _name),
+                (nameof(Email), _email),
+                (nameof(PhoneNumber), _phoneNumber),
+                (nameof(IsDeleted), _isDeleted)
+                );
+            return sqlValues;
         }
 
         public bool Equals(CaregiverData? other)

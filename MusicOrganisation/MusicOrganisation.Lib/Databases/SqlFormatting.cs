@@ -35,12 +35,12 @@ namespace MusicOrganisation.Lib.Databases
             return OPEN_BRACKET + s + CLOSE_BRACKET;
         }
 
-        public static IEnumerable<string> FormatValues(params object?[] values)
+        public static IDictionary<string, string> FormatValues(params (string name, object? value)[] values)
         {
-            List<string> result = new();
-            foreach (object? value in values)
+            Dictionary<string, string> result = new();
+            foreach ((string name, object? value) in values)
             {
-                result.Add(FormatValue(value));
+                result.Add(name, FormatValue(value));
             }
             return result;
         }

@@ -69,7 +69,7 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
             query.AddOrderBy<TModel>(ordering);
             query.SetLimit(_LIMIT);
 
-            string queryString = query.ToString();
+            string queryString = query.GetQuery();
             IEnumerable<TModel> values = await _service.QueryAsync<TModel>(queryString);
 
             Collection.Clear();

@@ -90,17 +90,19 @@ namespace MusicOrganisation.Lib.Tables
             };
         }
 
-        public IEnumerable<string> GetSqlValues()
+        public IDictionary<string, string> GetSqlValues()
         {
-            return SqlFormatting.FormatValues(
-                _id,
-                _pupilId,
-                _workId,
-                _dateStarted,
-                _syllabus,
-                _status,
-                _notes,
-                _isDeleted);
+            IDictionary<string, string> sqlValues = SqlFormatting.FormatValues(
+                (nameof(Id), _id),
+                (nameof(PupilId), _pupilId),
+                (nameof(WorkId), _workId),
+                (nameof(DateStarted), _dateStarted),
+                (nameof(Syllabus), _syllabus),
+                (nameof(Status), _status),
+                (nameof(Notes), _notes),
+                (nameof(IsDeleted), _isDeleted)
+                );
+            return sqlValues;
         }
 
         public bool Equals(RepertoireData? other)

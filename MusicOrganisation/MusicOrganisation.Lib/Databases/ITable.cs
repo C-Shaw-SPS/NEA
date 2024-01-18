@@ -8,7 +8,7 @@
 
         public abstract static string TableName { get; }
 
-        public IEnumerable<string> GetSqlValues();
+        public IDictionary<string, string> GetSqlValues();
 
         public abstract static IEnumerable<string> GetColumnNames();
     }

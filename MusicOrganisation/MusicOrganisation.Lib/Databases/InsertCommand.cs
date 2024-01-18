@@ -31,7 +31,7 @@ namespace MusicOrganisation.Lib.Databases
             {
                 _containsValues = true;
             }
-            _stringBuilder.Append(value.GetSqlValues().CommaJoin().AddBrackets());
+            _stringBuilder.Append(value.GetSqlValues().Values.CommaJoin().AddBrackets());
         }
 
         public override string ToString()

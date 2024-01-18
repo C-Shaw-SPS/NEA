@@ -76,15 +76,17 @@ namespace MusicOrganisation.Lib.Tables
             };
         }
 
-        public IEnumerable<string> GetSqlValues()
+        public IDictionary<string, string> GetSqlValues()
         {
-            return SqlFormatting.FormatValues(
-                _id,
-                _dayOfWeek,
-                _flagIndex,
-                _startTime,
-                _endTime,
-                _isDeleted);
+            IDictionary<string, string> sqlValues = SqlFormatting.FormatValues(
+                (nameof(Id), _id),
+                (nameof(DayOfWeek), _dayOfWeek),
+                (nameof(FlagIndex), _flagIndex),
+                (nameof(StartTime), _startTime),
+                (nameof(EndTime), _endTime),
+                (nameof(IsDeleted), _isDeleted)
+                );
+            return sqlValues;
         }
 
         public bool Equals(LessonSlotData? other)

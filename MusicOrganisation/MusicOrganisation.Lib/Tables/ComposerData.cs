@@ -62,17 +62,6 @@ namespace MusicOrganisation.Lib.Tables
 
         public static string TableName => _TABLE_NAME;
 
-        public IEnumerable<string> GetSqlValues()
-        {
-            return SqlFormatting.FormatValues(
-                _id,
-                _name,
-                _birthYear,
-                _deathYear,
-                _era,
-                _isDeleted);
-        }
-
         public static IEnumerable<string> GetColumnNames()
         {
             return new List<string>
@@ -84,6 +73,19 @@ namespace MusicOrganisation.Lib.Tables
                 nameof(Era),
                 nameof(IsDeleted)
             };
+        }
+
+        public IDictionary<string, string> GetSqlValues()
+        {
+            IDictionary<string, string> sqlValues = SqlFormatting.FormatValues(
+                (nameof(Id), _id),
+                (nameof(Name), _name),
+                (nameof(BirthYear), _birthYear),
+                (nameof(DeathYear), _deathYear),
+                (nameof(Era), _era),
+                (nameof(IsDeleted), _isDeleted)
+                );
+            return sqlValues;
         }
 
         public bool Equals(ComposerData? other)

@@ -10,7 +10,7 @@ namespace MusicOrganisation.Lib.Tables
 
         private int _id;
         private int _pupilId;
-        private int _lessonTimeId;
+        private int _lessonSlotId;
         private DateTime _date;
         private string _notes = string.Empty;
         private bool _isDeleted = false;
@@ -34,8 +34,8 @@ namespace MusicOrganisation.Lib.Tables
         [NotNull]
         public int LessonSlotId
         {
-            get => _lessonTimeId;
-            set => _lessonTimeId = value;
+            get => _lessonSlotId;
+            set => _lessonSlotId = value;
         }
 
         [NotNull]
@@ -73,22 +73,23 @@ namespace MusicOrganisation.Lib.Tables
             };
         }
 
-        public IEnumerable<string> GetSqlValues()
+        public IDictionary<string, string> GetSqlValues()
         {
-            return SqlFormatting.FormatValues(
-                _id,
-                _pupilId,
-                _lessonTimeId,
-                _date,
-                _notes,
-                _isDeleted);
+            IDictionary<string, string> sqlValues = SqlFormatting.FormatValues(
+                (nameof(Id), _id),
+                (nameof(PupilId), _pupilId),
+                (nameof(LessonSlotId), _lessonSlotId),
+                (nameof(Date), _date),
+                (nameof(Notes), _notes),
+                (nameof(IsDeleted), _isDeleted));
+            return sqlValues;
         }
 
         public bool Equals(LessonData? other)
         {
             return other != null
                 && _pupilId == other._pupilId
-                && _lessonTimeId == other._lessonTimeId
+                && _lessonSlotId == other._lessonSlotId
                 && _date == other._date
                 && _notes == other._notes
                 && _isDeleted == other._isDeleted;

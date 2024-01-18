@@ -259,25 +259,27 @@ namespace MusicOrganisation.Lib.Models
             };
         }
 
-        public IEnumerable<string> GetSqlValues()
+        public IDictionary<string, string> GetSqlValues()
         {
-            return SqlFormatting.FormatValues(
-                _id,
-                _name,
-                _level,
-                _needsDifferentTimes,
-                _lessonDuration,
-                _lessonSlots[DayOfWeek.Monday],
-                _lessonSlots[DayOfWeek.Tuesday],
-                _lessonSlots[DayOfWeek.Wednesday],
-                _lessonSlots[DayOfWeek.Thursday],
-                _lessonSlots[DayOfWeek.Friday],
-                _lessonSlots[DayOfWeek.Saturday],
-                _lessonSlots[DayOfWeek.Sunday],
-                _email,
-                _phoneNumber,
-                _notes,
-                _isDeleted);
+            IDictionary<string, string> sqlValues = SqlFormatting.FormatValues(
+                (nameof(Id), _id),
+                (nameof(Name), _name),
+                (nameof(Level), _level),
+                (nameof(NeedsDifferentTimes), _needsDifferentTimes),
+                (nameof(LessonDuration), _lessonDuration),
+                (nameof(MondayLessonSlots), _lessonSlots[DayOfWeek.Monday]),
+                (nameof(TuesdayLessonSlots), _lessonSlots[DayOfWeek.Tuesday]),
+                (nameof(WednesdayLessonSlots), _lessonSlots[DayOfWeek.Wednesday]),
+                (nameof(ThursdayLessonSlots), _lessonSlots[DayOfWeek.Thursday]),
+                (nameof(FridayLessonSlots), _lessonSlots[DayOfWeek.Friday]),
+                (nameof(SaturdayLessonSlots), _lessonSlots[DayOfWeek.Saturday]),
+                (nameof(SundayLessonSlots), _lessonSlots[DayOfWeek.Sunday]),
+                (nameof(Email), _email),
+                (nameof(PhoneNumber), _phoneNumber),
+                (nameof(Notes), _notes),
+                (nameof(IsDeleted), _isDeleted)
+                );
+            return sqlValues;
         }
     }
 }

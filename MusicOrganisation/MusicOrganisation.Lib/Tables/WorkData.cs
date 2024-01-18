@@ -61,15 +61,17 @@ namespace MusicOrganisation.Lib.Tables
             set => _isDeleted = value;
         }
 
-        public IEnumerable<string> GetSqlValues()
+        public IDictionary<string, string> GetSqlValues()
         {
-            return SqlFormatting.FormatValues(
-                _id,
-                _composerId,
-                _title,
-                _subtitle,
-                _genre,
-                _isDeleted);
+            IDictionary<string, string> sqlValues = SqlFormatting.FormatValues(
+                (nameof(Id), _id),
+                (nameof(ComposerId), _composerId),
+                (nameof(Title), _title),
+                (nameof(Subtitle), _subtitle),
+                (nameof(Genre), _genre),
+                (nameof(IsDeleted), _isDeleted)
+                );
+            return sqlValues;
         }
 
         public static IEnumerable<string> GetColumnNames()
