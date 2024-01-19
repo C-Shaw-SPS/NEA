@@ -1,14 +1,13 @@
-﻿using MusicOrganisation.Lib.Databases;
-using SQLite;
+﻿using SQLite;
 
-namespace MusicOrganisation.Lib.Services
+namespace MusicOrganisation.Lib.Databases
 {
-    public class Service
+    public class Database
     {
         protected SQLiteAsyncConnection _connection;
         private readonly string _path;
 
-        public Service(string path)
+        public Database(string path)
         {
             _path = path.FormatAsDatabasePath();
             _connection = new(_path, DatabaseProperties.FLAGS);

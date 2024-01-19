@@ -1,4 +1,5 @@
-﻿using MusicOrganisation.Lib.Exceptions;
+﻿using MusicOrganisation.Lib.Databases;
+using MusicOrganisation.Lib.Exceptions;
 using MusicOrganisation.Lib.Tables;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MusicOrganisation.Lib.Services
 {
-    public class TimetableService : Service
+    public class TimetableService : Database
     {
         public TimetableService(string path) : base(path)
         {

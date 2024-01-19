@@ -28,14 +28,14 @@ namespace MusicOrganisation.Lib.ViewModels
         private async Task DeleteDatabaseTables()
         {
             await Task.WhenAll(
-                _service.DropTableIfExistsAsync<Pupil>(),
-                _service.DropTableIfExistsAsync<CaregiverData>(),
-                _service.DropTableIfExistsAsync<CaregiverMap>(),
-                _service.DropTableIfExistsAsync<ComposerData>(),
-                _service.DropTableIfExistsAsync<LessonData>(),
-                _service.DropTableIfExistsAsync<LessonSlotData>(),
-                _service.DropTableIfExistsAsync<RepertoireData>(),
-                _service.DropTableIfExistsAsync<WorkData>()
+                _database.DropTableIfExistsAsync<Pupil>(),
+                _database.DropTableIfExistsAsync<CaregiverData>(),
+                _database.DropTableIfExistsAsync<CaregiverMap>(),
+                _database.DropTableIfExistsAsync<ComposerData>(),
+                _database.DropTableIfExistsAsync<LessonData>(),
+                _database.DropTableIfExistsAsync<LessonSlotData>(),
+                _database.DropTableIfExistsAsync<RepertoireData>(),
+                _database.DropTableIfExistsAsync<WorkData>()
                 );
         }
 
@@ -45,8 +45,8 @@ namespace MusicOrganisation.Lib.ViewModels
             Task<IEnumerable<WorkData>> workTask = WorkGetter.GetFromOpenOpus();
 
             await Task.WhenAll(
-                _service.DropTableIfExistsAsync<ComposerData>(),
-                _service.DropTableIfExistsAsync<WorkData>(),
+                _database.DropTableIfExistsAsync<ComposerData>(),
+                _database.DropTableIfExistsAsync<WorkData>(),
                 composerTask,
                 workTask
                 );
@@ -55,8 +55,8 @@ namespace MusicOrganisation.Lib.ViewModels
             IEnumerable<WorkData> works = workTask.Result;
 
             await Task.WhenAll(
-                _service.InsertAllAsync(composers),
-                _service.InsertAllAsync(works)
+                _database.InsertAllAsync(composers),
+                _database.InsertAllAsync(works)
                 );
         }
     }

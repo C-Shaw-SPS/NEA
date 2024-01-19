@@ -1,9 +1,10 @@
-﻿using MusicOrganisation.Lib.Exceptions;
+﻿using MusicOrganisation.Lib.Databases;
+using MusicOrganisation.Lib.Exceptions;
 using MusicOrganisation.Lib.Tables;
 
 namespace MusicOrganisation.Lib.Services
 {
-    public class LessonSlotService : Service
+    public class LessonSlotService : Database
     {
         private const int _MAX_FLAG_INDEX = 32;
 

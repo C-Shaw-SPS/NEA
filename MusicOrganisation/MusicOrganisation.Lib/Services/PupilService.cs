@@ -4,7 +4,7 @@ using MusicOrganisation.Lib.Models;
 
 namespace MusicOrganisation.Lib.Services
 {
-    public class PupilService : Service
+    public class PupilService : Database
     {
         public PupilService(string path) : base(path)
         {

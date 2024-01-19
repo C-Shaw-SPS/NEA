@@ -1,9 +1,10 @@
 ﻿using MusicOrganisation.Lib.Tables;
 using MusicOrganisation.Lib.Json;
+using MusicOrganisation.Lib.Databases;
 
 namespace MusicOrganisation.Lib.Services
 {
-    public class WorkService : Service
+    public class WorkService : Database
     {
         public WorkService(string path) : base(path) { }
 
