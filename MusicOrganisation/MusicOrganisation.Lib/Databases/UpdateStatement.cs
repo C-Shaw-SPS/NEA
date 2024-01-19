@@ -2,43 +2,51 @@
 
 namespace MusicOrganisation.Lib.Databases
 {
-    internal class UpdateStatement<T> : ISqlStatement where T : ITable
+    public class UpdateStatement : ISqlStatement
     {
-        private readonly T _value;
-        private readonly List<string> _columnsToUpdate;
+        private readonly string _tableName;
+        private readonly int _id;
+        private readonly IDictionary<string, string> _sqlValues;
+        private readonly IList<string> _columnsToUpdate;
 
-        public UpdateStatement(T value)
+        public UpdateStatement(string tableName, int id)
         {
-            _value = value;
+            _tableName = tableName;
+            _id = id;
+            _sqlValues = new Dictionary<string, string>();
             _columnsToUpdate = [];
         }
 
-        public void AddColumnToUpdate(string columnName)
+        public void AddColumnToUpdate(string columnName, string value)
         {
-            _columnsToUpdate.Add(columnName);
-        }
-
-        public void SetUpdateAll()
-        {
-            _columnsToUpdate.Clear();
-            _columnsToUpdate.AddRange(T.GetColumnNames());
+            _sqlValues[columnName] = value;
         }
 
         public string GetSql()
         {
             StringBuilder stringBuilder = new();
-            stringBuilder.AppendLine($"UPDATE {T.TableName}");
+            stringBuilder.AppendLine($"UPDATE {_tableName}");
             stringBuilder.AppendLine("SET");
-            IDictionary<string, string> sqlValues = _value.GetSqlValues();
             List<string> sets = new();
-            foreach (string column in _columnsToUpdate)
+            foreach (string column in _sqlValues.Keys)
             {
-                sets.Add($"{column} = {sqlValues[column]}");
+                sets.Add($"{column} = {_sqlValues[column]}");
             }
             stringBuilder.AppendLine(string.Join(",\n", sets));
-            stringBuilder.AppendLine($"WHERE {nameof(ITable.Id)} = {_value.Id}");
+            stringBuilder.AppendLine($"WHERE {nameof(ITable.Id)} = {_id}");
             string statement = stringBuilder.ToString();
             return statement;
+        }
+
+        public static UpdateStatement GetUpdateAllColumns<T>(T value) where T : ITable
+        {
+            UpdateStatement updateStatement = new(T.TableName, value.Id);
+            IDictionary<string, string> sqlValues = value.GetSqlValues();
+            foreach (string column in sqlValues.Keys)
+            {
+                updateStatement.AddColumnToUpdate(column, sqlValues[column]);
+            }
+            return updateStatement;
         }
     }
 }

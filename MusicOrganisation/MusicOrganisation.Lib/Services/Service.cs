@@ -95,8 +95,7 @@ namespace MusicOrganisation.Lib.Services
         public async Task UpdateAsync<T>(T value) where T : class, ITable, new()
         {
             await InitAsync<T>();
-            UpdateStatement<T> updateStatement = new(value);
-            updateStatement.SetUpdateAll();
+            UpdateStatement updateStatement = UpdateStatement.GetUpdateAllColumns(value);
             await QueryAsync<T>(updateStatement);
         }
 

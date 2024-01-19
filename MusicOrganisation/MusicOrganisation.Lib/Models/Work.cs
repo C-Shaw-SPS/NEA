@@ -48,9 +48,9 @@ namespace MusicOrganisation.Lib.Models
             set => _composerName = value;
         }
 
-        public  GetSelectAllQuery()
+        public static SqlQuery GetSelectAllQuery()
         {
-            SqlQuery<WorkData> query = new();
+            SqlQuery<WorkData> query = new(SqlQuery.DEFAULT_LIMIT);
             query.AddColumn<WorkData>(nameof(WorkData.Id), nameof(WorkId));
             query.AddColumn<WorkData>(nameof(WorkData.ComposerId), nameof(ComposerId));
             query.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Title));
@@ -62,9 +62,16 @@ namespace MusicOrganisation.Lib.Models
             return query;
         }
 
-        public ISqlStatement GetSelectFromComposerQuery()
+        public static SqlQuery GetSelectFromComposerIdQuery(int composerId)
         {
-            
+            SqlQuery query = GetSelectAllQuery();
+            query.AddWhereEquals<ComposerData>(nameof(ComposerData.Id), composerId);
+            return query;
+        }
+
+        public UpdateStatement GetUpdateStatement()
+        {
+            throw new NotImplementedException();
         }
     }
 }

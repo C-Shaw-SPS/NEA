@@ -4,27 +4,28 @@ namespace MusicOrganisation.Lib.Databases
 {
     public abstract class SqlQuery : ISqlStatement
     {
-        public abstract string GetSql();
-    }
+        public const int DEFAULT_LIMIT = 256;
 
-    public class SqlQuery<T> : ISqlStatement where T : ITable
-    {
-        bool _selectAll;
+        private readonly string _tableName;
+        private bool _selectAll;
         private readonly List<(string table, string column, string alias)> _columns;
         private readonly List<(string newTable, string newColumn, string existingTable, string existingColumn)> _joins;
         private readonly List<(string table, string column, string value, string comparison)> _conditions;
         private readonly List<(string table, string column)> _orderBys;
-        private int _limit;
+        private readonly int? _limit;
 
-        public SqlQuery()
+        public SqlQuery(string tableName, int? limit)
         {
+            _tableName = tableName;
             _selectAll = false;
             _columns = [];
             _joins = [];
             _conditions = [];
             _orderBys = [];
-            _limit = 0;
+            _limit = limit;
         }
+
+        public SqlQuery(string tableName) : this(tableName, null) { }
 
         public void SetSelectAll()
         {
@@ -56,11 +57,6 @@ namespace MusicOrganisation.Lib.Databases
             _orderBys.Add((TTable.TableName, column));
         }
 
-        public void SetLimit(int limit)
-        {
-            _limit = limit;
-        }
-
         public string GetSql()
         {
             StringBuilder stringBuilder = new();
@@ -77,7 +73,7 @@ namespace MusicOrganisation.Lib.Databases
         {
             if (_selectAll)
             {
-                stringBuilder.AppendLine($"SELECT * FROM {T.TableName}");
+                stringBuilder.AppendLine($"SELECT * FROM {_tableName}");
             }
             else
             {
@@ -86,7 +82,7 @@ namespace MusicOrganisation.Lib.Databases
                 IEnumerable<string> formattedColumns = _columns.Select(c => $"{c.table}.{c.column} AS {c.alias}");
                 stringBuilder.AppendLine(string.Join(",\n", formattedColumns));
 
-                stringBuilder.AppendLine($"FROM {T.TableName}");
+                stringBuilder.AppendLine($"FROM {_tableName}");
             }
         }
 
@@ -131,10 +127,18 @@ namespace MusicOrganisation.Lib.Databases
 
         private void AddLimit(StringBuilder stringBuilder)
         {
-            if (_limit > 0)
+            if (_limit is not null)
             {
                 stringBuilder.AppendLine($"LIMIT {_limit}");
             }
         }
+    }
+
+    public class SqlQuery<T> : SqlQuery where T : ITable
+    {
+
+        public SqlQuery(int limit) : base(T.TableName, limit) { }
+
+        public SqlQuery() : base(T.TableName) { }
     }
 }

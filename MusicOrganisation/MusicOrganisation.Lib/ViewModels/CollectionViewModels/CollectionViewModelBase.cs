@@ -63,11 +63,10 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
         private async Task SearchAsync()
         {
             string ordering = _orderings[Ordering];
-            SqlQuery<TModel> query = new();
+            SqlQuery<TModel> query = new(_LIMIT);
             query.SetSelectAll();
             query.AddWhereLike<TModel>(_searchParameter, SearchText);
             query.AddOrderBy<TModel>(ordering);
-            query.SetLimit(_LIMIT);
 
             string queryString = query.GetSql();
             IEnumerable<TModel> values = await _service.QueryAsync<TModel>(queryString);
