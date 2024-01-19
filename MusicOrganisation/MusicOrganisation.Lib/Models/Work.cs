@@ -71,7 +71,12 @@ namespace MusicOrganisation.Lib.Models
 
         public UpdateStatement GetUpdateStatement()
         {
-            throw new NotImplementedException();
+            UpdateStatement<WorkData> updateStatement = new(_workId);
+            updateStatement.AddColumnToUpdate(nameof(WorkData.ComposerId), _composerId);
+            updateStatement.AddColumnToUpdate(nameof(WorkData.Title), _title);
+            updateStatement.AddColumnToUpdate(nameof(WorkData.Subtitle), _subtitle);
+            updateStatement.AddColumnToUpdate(nameof(WorkData.Genre), _genre);
+            return updateStatement;
         }
     }
 }
