@@ -26,4 +26,9 @@
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.7" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="ViewModels\EditViewModels\" />
+	  <Folder Include="ViewModels\ModelViewModels\" />
+	</ItemGroup>
+
 </Project>
