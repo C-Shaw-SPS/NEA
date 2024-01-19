@@ -17,9 +17,10 @@ namespace MusicOrganisation.Lib.Databases
             _columnsToUpdate = [];
         }
 
-        public void AddColumnToUpdate(string columnName, string value)
+        public void AddColumnToUpdate(string columnName, object? value)
         {
-            _sqlValues[columnName] = value;
+            string sqlValue = SqlFormatting.FormatValue(value);
+            _sqlValues[columnName] = sqlValue;
         }
 
         public string GetSql()
@@ -48,5 +49,10 @@ namespace MusicOrganisation.Lib.Databases
             }
             return updateStatement;
         }
+    }
+
+    public class UpdateStatement<T> : UpdateStatement where T : ITable
+    {
+        public UpdateStatement(int id) : base(T.TableName, id) { }
     }
 }
