@@ -141,7 +141,7 @@ namespace MusicOrganisationApp.Lib.Databases
         }
     }
 
-    public class SqlQuery<T> : SqlQuery where T : ITable
+    public class SqlQuery<T> : SqlQuery where T : class, ITable, new()
     {
 
         public SqlQuery(int limit) : base(T.TableName, limit) { }
