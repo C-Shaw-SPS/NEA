@@ -12,7 +12,7 @@ namespace MusicOrganisationApp.Lib.Converters
                 throw new JsonException();
             }
 
-            List<TValue> values = new();
+            List<TValue> values = [];
 
             while (reader.Read())
             {
