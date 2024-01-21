@@ -2,10 +2,9 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-[assembly: InternalsVisibleTo("MusicOrganisation.Tests")]
 namespace MusicOrganisationApp.Lib.Json
 {
-    internal static class JsonGetter
+    public static class JsonGetter
     {
         public static IEnumerable<T> GetValuesFromResponse<T, TResponse>(string json) where TResponse : IResponse<T>
         {

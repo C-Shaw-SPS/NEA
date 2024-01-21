@@ -2,7 +2,7 @@
 using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.Models;
 
-namespace MusicOrganisationApp.Tests.Databases
+namespace MusicOrganisationApp.Tests
 {
     internal static class Expected
     {
