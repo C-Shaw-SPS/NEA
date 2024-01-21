@@ -3,12 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using MusicOrganisation.Lib.Databases;
 using MusicOrganisation.Lib.Tables;
 using MusicOrganisation.Lib.Viewmodels;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
 {
