@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using MusicOrganisationApp.Lib.Enums;
+using System.Text;
 
 namespace MusicOrganisationApp.Lib.Databases
 {
@@ -65,7 +66,11 @@ namespace MusicOrganisationApp.Lib.Databases
             }
             else if (value is DayOfWeek day)
             {
-                return day.FormatSqlDay();
+                return day.FormatSqlDayOfWeek();
+            }
+            else if (value is RepertoireStatus repertoireStatus)
+            {
+                return repertoireStatus.FormatSqlRepertoireStatus();
             }
             else
             {
@@ -115,9 +120,14 @@ namespace MusicOrganisationApp.Lib.Databases
             return timeSpan.Ticks.ToString();
         }
 
-        private static string FormatSqlDay(this DayOfWeek day)
+        private static string FormatSqlDayOfWeek(this DayOfWeek day)
         {
             return ((int)day).ToString();
+        }
+
+        private static string FormatSqlRepertoireStatus(this RepertoireStatus repertoireStatus)
+        {
+            return ((int)repertoireStatus).ToString();
         }
 
         private static string ToStringOrNull(this object value)
