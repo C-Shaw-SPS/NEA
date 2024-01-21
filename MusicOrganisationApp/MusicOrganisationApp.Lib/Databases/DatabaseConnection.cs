@@ -14,7 +14,7 @@ namespace MusicOrganisationApp.Lib.Databases
             _connection = new(_path, DatabaseProperties.FLAGS);
         }
 
-        public async Task CerateTableAsync<T>() where T : class, ITable, new()
+        public async Task CreateTableAsync<T>() where T : class, ITable, new()
         {
             await _connection.CreateTableAsync<T>();
         }
@@ -30,6 +30,72 @@ namespace MusicOrganisationApp.Lib.Databases
         {
             string sql = sqlStatement.GetSql();
             await _connection.ExecuteAsync(sql);
+        }
+
+        public async Task InsertAsync<T>(T value) where T : class, ITable, new()
+        {
+            await CreateTableAsync<T>();
+
+            InsertStatement<T> insertStatement = new();
+            insertStatement.AddValue(value);
+            await ExecuteAsync(insertStatement);
+        }
+
+        public async Task InsertAllAsync<T>(IEnumerable<T> values) where T : class, ITable, new()
+        {
+            await CreateTableAsync<T>();
+
+            InsertStatement<T> insertStatement = new();
+            foreach (T value in values)
+            {
+                insertStatement.AddValue(value);
+            }
+            await ExecuteAsync(insertStatement);
+        }
+
+        public async Task ClearTableAsync<T>() where T : class, ITable, new()
+        {
+            await CreateTableAsync<T>();
+
+            DeleteStatement<T> deleteStatement = new();
+            await ExecuteAsync(deleteStatement);
+        }
+
+        public async Task<(bool found, T value)> TryGetAsync<T>(int id) where T : class, ITable, new()
+        {
+            await CreateTableAsync<T>();
+
+            SqlQuery<T> sqlQuery = new();
+            sqlQuery.SetSelectAll();
+            sqlQuery.AddWhereEquals<T>(nameof(ITable.Id), id);
+            IEnumerable<T> result = await QueryAsync<T>(sqlQuery);
+            if (result.Any())
+            {
+                T value = result.First();
+                return (true, value);
+            }
+            else
+            {
+                return (false, new());
+            }
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync<T>() where T : class, ITable, new()
+        {
+            await CreateTableAsync<T>();
+
+            SqlQuery<T> sqlQuery = new();
+            sqlQuery.SetSelectAll();
+            IEnumerable<T> result = await QueryAsync<T>(sqlQuery);
+            return result;
+        }
+
+        public async Task DropTableAsync<T>() where T : class, ITable, new()
+        {
+            await CreateTableAsync<T>();
+
+            DropTableStatement<T> dropTableStatement = new();
+            await ExecuteAsync(dropTableStatement);
         }
     }
 }
