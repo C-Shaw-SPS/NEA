@@ -2,7 +2,7 @@
 
 namespace MusicOrganisationApp.Lib.Databases
 {
-    public class DeleteStatement<T> where T : class, ITable, new()
+    public class DeleteStatement<T> : ISqlStatement where T : class, ITable, new()
     {
         private readonly List<(string column, string value)> _conditions;
 
