@@ -19,15 +19,17 @@ namespace MusicOrganisationApp.Lib.Databases
             await _connection.CreateTableAsync<T>();
         }
 
-        public async Task<IEnumerable<T>> QueryAsync<T>(ISqlStatement sqlStatement) where T : class, new()
+        public async Task<IEnumerable<T>> QueryAsync<T>(SqlQuery sqlQuery) where T : class, new()
         {
-            string sql = sqlStatement.GetSql();
+            string sql = sqlQuery.GetSql();
             IEnumerable<T> result = await _connection.QueryAsync<T>(sql);
             return result;
         }
 
-        public async Task ExecuteAsync(ISqlStatement sqlStatement)
+        public async Task ExecuteAsync<T>(ISqlExecutable<T> sqlStatement) where T : class, ITable, new()
         {
+            await CreateTableAsync<T>();
+
             string sql = sqlStatement.GetSql();
             await _connection.ExecuteAsync(sql);
         }
@@ -38,7 +40,7 @@ namespace MusicOrganisationApp.Lib.Databases
 
             InsertStatement<T> insertStatement = new();
             insertStatement.AddValue(value);
-            await ExecuteAsync(insertStatement);
+            await ExecuteAsync<T>(insertStatement);
         }
 
         public async Task InsertAllAsync<T>(IEnumerable<T> values) where T : class, ITable, new()
@@ -50,7 +52,7 @@ namespace MusicOrganisationApp.Lib.Databases
             {
                 insertStatement.AddValue(value);
             }
-            await ExecuteAsync(insertStatement);
+            await ExecuteAsync<T>(insertStatement);
         }
 
         public async Task ClearTableAsync<T>() where T : class, ITable, new()
@@ -58,7 +60,7 @@ namespace MusicOrganisationApp.Lib.Databases
             await CreateTableAsync<T>();
 
             DeleteStatement<T> deleteStatement = new();
-            await ExecuteAsync(deleteStatement);
+            await ExecuteAsync<T>(deleteStatement);
         }
 
         public async Task<(bool found, T value)> TryGetAsync<T>(int id) where T : class, ITable, new()
@@ -96,15 +98,15 @@ namespace MusicOrganisationApp.Lib.Databases
 
             DeleteStatement<T> deleteStatement = new();
             deleteStatement.AddCondition(nameof(ITable.Id), value.Id);
-            await ExecuteAsync(deleteStatement);
+            await ExecuteAsync<T>(deleteStatement);
         }
 
         public async Task UpdateAsync<T>(T value) where T : class, ITable, new()
         {
             await CreateTableAsync<T>();
 
-            UpdateStatement updateStatement = UpdateStatement.GetUpdateAllColumns(value);
-            await ExecuteAsync(updateStatement);
+            UpdateStatement<T> updateStatement = UpdateStatement<T>.GetUpdateAllColumns(value);
+            await ExecuteAsync<T>(updateStatement);
         }
 
         public async Task DropTableAsync<T>() where T : class, ITable, new()
@@ -112,7 +114,7 @@ namespace MusicOrganisationApp.Lib.Databases
             await CreateTableAsync<T>();
 
             DropTableStatement<T> dropTableStatement = new();
-            await ExecuteAsync(dropTableStatement);
+            await ExecuteAsync<T>(dropTableStatement);
         }
 
         public async Task<IEnumerable<int>> GetIdsAsync<T>() where T : class, ITable, new()

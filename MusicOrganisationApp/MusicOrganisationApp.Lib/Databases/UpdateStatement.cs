@@ -2,16 +2,16 @@
 
 namespace MusicOrganisationApp.Lib.Databases
 {
-    public abstract class UpdateStatement : ISqlStatement
+    public class UpdateStatement<T> : ISqlExecutable<T> where T : class, ITable, new()
     {
         private readonly string _tableName;
         private readonly int _id;
         private readonly IDictionary<string, string> _sqlValues;
         private readonly IList<string> _columnsToUpdate;
 
-        public UpdateStatement(string tableName, int id)
+        public UpdateStatement(int id)
         {
-            _tableName = tableName;
+            _tableName = T.TableName;
             _id = id;
             _sqlValues = new Dictionary<string, string>();
             _columnsToUpdate = [];
@@ -41,7 +41,7 @@ namespace MusicOrganisationApp.Lib.Databases
             return statement;
         }
 
-        public static UpdateStatement GetUpdateAllColumns<T>(T value) where T : ITable
+        public static UpdateStatement<T> GetUpdateAllColumns(T value)
         {
             UpdateStatement<T> updateStatement = new(value.Id);
             IDictionary<string, string> sqlValues = value.GetSqlValues();
@@ -51,10 +51,5 @@ namespace MusicOrganisationApp.Lib.Databases
             }
             return updateStatement;
         }
-    }
-
-    public class UpdateStatement<T> : UpdateStatement where T : ITable
-    {
-        public UpdateStatement(int id) : base(T.TableName, id) { }
     }
 }
