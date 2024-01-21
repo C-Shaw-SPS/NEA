@@ -21,7 +21,7 @@ namespace MusicOrganisation.Lib.Databases
         public async Task InsertAsync<T>(T value) where T : class, ITable, new()
         {
             await InitAsync<T>();
-            InsertStatement<T> insertCommand = new();
+            InsertQuery<T> insertCommand = new();
             insertCommand.AddValue(value);
             string insertString = insertCommand.GetSql();
             await _connection.ExecuteAsync(insertString);
@@ -34,7 +34,7 @@ namespace MusicOrganisation.Lib.Databases
 
             if (values.Any())
             {
-                InsertStatement<T> insertCommand = new();
+                InsertQuery<T> insertCommand = new();
                 foreach (T value in values)
                 {
                     insertCommand.AddValue(value);
@@ -94,7 +94,7 @@ namespace MusicOrganisation.Lib.Databases
         public async Task UpdateAsync<T>(T value) where T : class, ITable, new()
         {
             await InitAsync<T>();
-            UpdateStatement updateStatement = UpdateStatement.GetUpdateAllColumns(value);
+            UpdateQuery updateStatement = UpdateQuery.GetUpdateAllColumns(value);
             await QueryAsync<T>(updateStatement);
         }
 
@@ -125,11 +125,27 @@ namespace MusicOrganisation.Lib.Databases
             return await _connection.QueryAsync<T>(query);
         }
 
-        public async Task<IEnumerable<T>> QueryAsync<T>(ISqlStatement query) where T : class, new()
+        public async Task<IEnumerable<T>> QueryAsync<T>(ISqlQuery query) where T : class, new()
         {
             string queryString = query.GetSql();
             IEnumerable<T> result = await _connection.QueryAsync<T>(queryString);
             return result;
+        }
+
+        public async Task ExecuteAsync(ISqlQuery query)
+        {
+            string sql = query.GetSql();
+            await _connection.ExecuteAsync(sql);
+        }
+
+        public async Task ExecuteAllAsync(IEnumerable<ISqlQuery> queries)
+        {
+            List<Task> tasks = [];
+            foreach (ISqlQuery query in queries)
+            {
+                Task task = ExecuteAsync(query);
+            }
+            await Task.WhenAll(tasks);
         }
 
         public async Task DropTableIfExistsAsync<T>() where T : class, ITable, new()

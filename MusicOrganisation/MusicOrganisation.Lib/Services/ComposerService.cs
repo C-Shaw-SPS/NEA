@@ -15,7 +15,7 @@ namespace MusicOrganisation.Lib.Services
 
         public async Task DeleteAsync(ComposerData value)
         {
-            throw new NotImplementedException();
+
         }
 
         public async Task<IEnumerable<ComposerData>> GetAllAsync()

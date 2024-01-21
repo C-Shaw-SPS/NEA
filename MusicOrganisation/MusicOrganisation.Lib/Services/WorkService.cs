@@ -21,14 +21,14 @@ namespace MusicOrganisation.Lib.Services
 
         public async Task<IEnumerable<Work>> GetAllAsync()
         {
-            SqlQuery sqlQuery = GetSqlQuery();
-            IEnumerable<Work> works = await _database.QueryAsync<Work>(sqlQuery);
+            SelectQuery query = GetSelectQuery();
+            IEnumerable<Work> works = await _database.QueryAsync<Work>(query);
             return works;
         }
 
-        private SqlQuery GetSqlQuery()
+        private static SelectQuery GetSelectQuery()
         {
-            SqlQuery<WorkData> query = new(SqlQuery.DEFAULT_LIMIT);
+            SqlQuery<WorkData> query = new(SelectQuery.DEFAULT_LIMIT);
             query.AddColumn<WorkData>(nameof(WorkData.Id), nameof(Work.WorkId));
             query.AddColumn<WorkData>(nameof(WorkData.ComposerId), nameof(Work.ComposerId));
             query.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Work.Title));

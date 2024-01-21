@@ -47,7 +47,7 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
         public async Task SearchAsync()
         {
             string ordering = _orderings[SelectedOrdering];
-            SqlQuery<ComposerData> sqlQuery = new(SqlQuery.DEFAULT_LIMIT);
+            SqlQuery<ComposerData> sqlQuery = new(SelectQuery.DEFAULT_LIMIT);
             sqlQuery.SetSelectAll();
             sqlQuery.AddWhereLike<ComposerData>(nameof(ComposerData.Name), SearchText);
             sqlQuery.AddOrderBy<ComposerData>(ordering);

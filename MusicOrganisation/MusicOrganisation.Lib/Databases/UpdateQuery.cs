@@ -2,14 +2,14 @@
 
 namespace MusicOrganisation.Lib.Databases
 {
-    public class UpdateStatement : ISqlStatement
+    public class UpdateQuery : ISqlQuery
     {
         private readonly string _tableName;
         private readonly int _id;
         private readonly IDictionary<string, string> _sqlValues;
         private readonly IList<string> _columnsToUpdate;
 
-        public UpdateStatement(string tableName, int id)
+        public UpdateQuery(string tableName, int id)
         {
             _tableName = tableName;
             _id = id;
@@ -39,9 +39,9 @@ namespace MusicOrganisation.Lib.Databases
             return statement;
         }
 
-        public static UpdateStatement GetUpdateAllColumns<T>(T value) where T : ITable
+        public static UpdateQuery GetUpdateAllColumns<T>(T value) where T : ITable
         {
-            UpdateStatement updateStatement = new(T.TableName, value.Id);
+            UpdateQuery updateStatement = new(T.TableName, value.Id);
             IDictionary<string, string> sqlValues = value.GetSqlValues();
             foreach (string column in sqlValues.Keys)
             {
@@ -51,7 +51,7 @@ namespace MusicOrganisation.Lib.Databases
         }
     }
 
-    public class UpdateStatement<T> : UpdateStatement where T : ITable
+    public class UpdateStatement<T> : UpdateQuery where T : ITable
     {
         public UpdateStatement(int id) : base(T.TableName, id) { }
     }
