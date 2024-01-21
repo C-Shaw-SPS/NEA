@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MusicOrganisationApp.Tests
+namespace MusicOrganisationApp.Tests.Databases
 {
     public class TableTests
     {
