@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.InteropServices.ComTypes;
+using System.Text;
 
 namespace MusicOrganisationApp.Lib.Databases
 {
@@ -21,16 +22,24 @@ namespace MusicOrganisationApp.Lib.Databases
         public string GetSql()
         {
             StringBuilder stringBuilder = new();
-            stringBuilder.AppendLine($"DELETE FROM {T.TableName} WHERE");
-            stringBuilder.AppendLine(GetConditions());
+            stringBuilder.AppendLine($"DELETE FROM {T.TableName}");
+
+            IEnumerable<string> conditions = GetConditions();
+
+            if (conditions.Any())
+            {
+                stringBuilder.AppendLine("WHERE");
+                stringBuilder.AppendLine(string.Join("\nOR", conditions));
+            }
+
             string sql = stringBuilder.ToString();
             return sql;
         }
 
-        private string GetConditions()
+        private IEnumerable<string> GetConditions()
         {
             IEnumerable<string> conditions = _conditions.Select(condition => FormatCondition(condition.column, condition.value));
-            return string.Join("\nOR", conditions);
+            return conditions;
         }
 
         private static string FormatCondition(string column, string value)
