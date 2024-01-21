@@ -2,7 +2,7 @@
 
 namespace MusicOrganisationApp.Lib.Databases
 {
-    internal class InsertStatement<T> : ISqlStatement where T : ITable, new()
+    internal class InsertStatement<T> : ISqlStatement where T : class, ITable, new()
     {
         private readonly StringBuilder _stringBuilder;
         private readonly IEnumerable<string> _columns;
@@ -14,8 +14,6 @@ namespace MusicOrganisationApp.Lib.Databases
             _columns = T.GetColumnNames();
             _containsValues = false;
         }
-
-        public string TableName => T.TableName;
 
         public void AddValue(T value)
         {
@@ -40,7 +38,7 @@ namespace MusicOrganisationApp.Lib.Databases
         private List<string> GetSqlValues(T value)
         {
             IDictionary<string, string> sqlValues = value.GetSqlValues();
-            List<string> sqlStrings = new();
+            List<string> sqlStrings = [];
             foreach (string column in _columns)
             {
                 sqlStrings.Add(sqlValues[column]);
