@@ -15,49 +15,49 @@ namespace MusicOrganisationApp.Tests.Databases
         [Fact]
         public async Task TestCaregiverSql()
         {
-            await TestType(Expected.CaregiverData);
+            await TestType(ExpectedTables.CaregiverData);
         }
 
         [Fact]
         public async Task TestCaregiverMapSql()
         {
-            await TestType(Expected.CaregiverMaps);
+            await TestType(ExpectedTables.CaregiverMaps);
         }
 
         [Fact]
         public async Task TestComposerSql()
         {
-            await TestType(Expected.ComposerData);
+            await TestType(ExpectedTables.ComposerData);
         }
 
         [Fact]
         public async Task TestLessonSql()
         {
-            await TestType(Expected.LessonData);
+            await TestType(ExpectedTables.LessonData);
         }
 
         [Fact]
         public async Task TestLessonTimeSql()
         {
-            await TestType(Expected.LessonSlotData);
+            await TestType(ExpectedTables.LessonSlotData);
         }
 
         [Fact]
         public async Task TestWorkSql()
         {
-            await TestType(Expected.WorkData);
+            await TestType(ExpectedTables.WorkData);
         }
 
         [Fact]
         public async Task TestRepertoireSql()
         {
-            await TestType(Expected.RepertoireData);
+            await TestType(ExpectedTables.RepertoireData);
         }
 
         [Fact]
         public async Task TestPupilSql()
         {
-            await TestType(Expected.Pupils);
+            await TestType(ExpectedTables.Pupils);
         }
 
         private static async Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, new()

@@ -1,5 +1,6 @@
 ﻿using MusicOrganisationApp.Lib.Json;
 using MusicOrganisationApp.Lib.Tables;
+using MusicOrganisationApp.Tests.Databases;
 
 namespace MusicOrganisationApp.Tests.Json
 {
@@ -8,21 +9,12 @@ namespace MusicOrganisationApp.Tests.Json
         const string WORK_PATH = "Json/work.json";
         const string RESPONSE_PATH = "Json/workResponse.json";
 
-        readonly WorkData expectedWork = new()
-        {
-            Id = 20086,
-            ComposerId = 176,
-            Title = "3 Movements",
-            Subtitle = "",
-            Genre = "Orchestral",
-        };
-
         [Fact]
         public void TestJsonDeserialiseWork()
         {
             WorkData? actualWork = JsonGetter.GetFromFile<WorkData>(WORK_PATH);
             Assert.NotNull(actualWork);
-            Assert.Equal(expectedWork, actualWork);
+            Assert.Equal(ExpectedJson.Work, actualWork);
         }
 
         [Fact]
@@ -30,9 +22,9 @@ namespace MusicOrganisationApp.Tests.Json
         {
             IEnumerable<WorkData> actualWorks = WorkGetter.GetFromFile(RESPONSE_PATH);
 
-            Assert.Equal(Expected.WorkData.Count, actualWorks.Count());
+            Assert.Equal(ExpectedJson.ResponseWorks.Count, actualWorks.Count());
 
-            foreach (WorkData expectedWork in Expected.WorkData)
+            foreach (WorkData expectedWork in ExpectedJson.ResponseWorks)
             {
                 Assert.Contains(expectedWork, actualWorks);
             }

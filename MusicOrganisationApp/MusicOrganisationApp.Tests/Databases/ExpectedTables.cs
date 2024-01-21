@@ -2,9 +2,9 @@
 using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.Models;
 
-namespace MusicOrganisationApp.Tests
+namespace MusicOrganisationApp.Tests.Databases
 {
-    internal static class Expected
+    internal static class ExpectedTables
     {
         public static readonly ComposerData NullPropertyComposer = new()
         {

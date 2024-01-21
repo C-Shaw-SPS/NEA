@@ -1,38 +1,30 @@
 ﻿using MusicOrganisationApp.Lib.Json;
 using MusicOrganisationApp.Lib.Tables;
+using MusicOrganisationApp.Tests.Databases;
 
 namespace MusicOrganisationApp.Tests.Json
 {
     public class ComposerTests
     {
-        const string COMPOSER_PATH = "Json/composer.json";
-        const string RESPONSE_PATH = "Json/composerResponse.json";
-
-        readonly ComposerData expectedComposer = new()
-        {
-            Id = 87,
-            Name = "Johann Sebastian Bach",
-            BirthYear = 1685,
-            DeathYear = 1750,
-            Era = "Baroque"
-        };
+        private const string _COMPOSER_PATH = "Json/composer.json";
+        private const string _RESPONSE_PATH = "Json/composerResponse.json";
 
         [Fact]
         public void TestJsonDeserialiseComposer()
         {
-            ComposerData? actualComposer = JsonGetter.GetFromFile<ComposerData>(COMPOSER_PATH);
+            ComposerData? actualComposer = JsonGetter.GetFromFile<ComposerData>(_COMPOSER_PATH);
             Assert.NotNull(actualComposer);
-            Assert.Equal(expectedComposer, actualComposer);
+            Assert.Equal(ExpectedJson.Composer, actualComposer);
         }
 
         [Fact]
         public void TestComposerGetter()
         {
-            IEnumerable<ComposerData> actualComposers = ComposerGetter.GetFromFile(RESPONSE_PATH);
+            IEnumerable<ComposerData> actualComposers = ComposerGetter.GetFromFile(_RESPONSE_PATH);
 
-            Assert.Equal(Expected.ComposerData.Count, actualComposers.Count());
+            Assert.Equal(ExpectedJson.ResponseComposers.Count, actualComposers.Count());
 
-            foreach (ComposerData expectedComposer in Expected.ComposerData)
+            foreach (ComposerData expectedComposer in ExpectedJson.ResponseComposers)
             {
                 Assert.Contains(expectedComposer, actualComposers);
             }
