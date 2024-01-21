@@ -90,12 +90,51 @@ namespace MusicOrganisationApp.Lib.Databases
             return result;
         }
 
+        public async Task DeleteAsync<T>(T value) where T : class, ITable, new()
+        {
+            await CreateTableAsync<T>();
+
+            DeleteStatement<T> deleteStatement = new();
+            deleteStatement.AddCondition(nameof(ITable.Id), value.Id);
+            await ExecuteAsync(deleteStatement);
+        }
+
+        public async Task UpdateAsync<T>(T value) where T : class, ITable, new()
+        {
+            await CreateTableAsync<T>();
+
+            UpdateStatement updateStatement = UpdateStatement.GetUpdateAllColumns(value);
+            await ExecuteAsync(updateStatement);
+        }
+
         public async Task DropTableAsync<T>() where T : class, ITable, new()
         {
             await CreateTableAsync<T>();
 
             DropTableStatement<T> dropTableStatement = new();
             await ExecuteAsync(dropTableStatement);
+        }
+
+        public async Task<IEnumerable<int>> GetIdsAsync<T>() where T : class, ITable, new()
+        {
+            await CreateTableAsync<T>();
+
+            SqlQuery<T> sqlQuery = new();
+            sqlQuery.AddColumn<T>(nameof(ITable.Id));
+
+            IEnumerable<T> values = await QueryAsync<T>(sqlQuery);
+            IEnumerable<int> ids = values.Select(x => x.Id);
+            return ids;
+        }
+
+        public async Task<int> GetNextIdAsync<T>() where T : class, ITable, new()
+        {
+            await CreateTableAsync<T>();
+
+            string query = $"SELECT MAX({nameof(ITable.Id)}) AS {nameof(ITable.Id)} FROM {T.TableName}";
+            IEnumerable<T> result = await _connection.QueryAsync<T>(query);
+            int nextId = result.First().Id + 1;
+            return nextId;
         }
     }
 }
