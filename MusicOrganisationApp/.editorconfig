@@ -74,3 +74,6 @@ dotnet_naming_style.pascal_case.required_prefix =
 dotnet_naming_style.pascal_case.required_suffix = 
 dotnet_naming_style.pascal_case.word_separator = 
 dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+# IDE0028: Simplify collection initialization
+dotnet_diagnostic.IDE0028.severity = none
