@@ -7,9 +7,9 @@ namespace MusicOrganisation.Lib.Services
 {
     public class WorkService : IService<Work>
     {
-        private readonly Database _database;
+        private readonly DatabaseConnection _database;
 
-        public WorkService(Database database)
+        public WorkService(DatabaseConnection database)
         {
             _database = database;
         }
@@ -26,9 +26,9 @@ namespace MusicOrganisation.Lib.Services
             return works;
         }
 
-        private static SelectQuery GetSelectQuery()
+        private static SelectQuery<WorkData> GetSelectQuery()
         {
-            SqlQuery<WorkData> query = new(SelectQuery.DEFAULT_LIMIT);
+            SelectQuery<WorkData> query = new(SelectQuery.DEFAULT_LIMIT);
             query.AddColumn<WorkData>(nameof(WorkData.Id), nameof(Work.WorkId));
             query.AddColumn<WorkData>(nameof(WorkData.ComposerId), nameof(Work.ComposerId));
             query.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Work.Title));

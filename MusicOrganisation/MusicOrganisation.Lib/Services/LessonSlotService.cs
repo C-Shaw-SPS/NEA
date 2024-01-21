@@ -4,7 +4,7 @@ using MusicOrganisation.Lib.Tables;
 
 namespace MusicOrganisation.Lib.Services
 {
-    public class LessonSlotService : Database
+    public class LessonSlotService : DatabaseConnection
     {
         private const int _MAX_FLAG_INDEX = 32;
 

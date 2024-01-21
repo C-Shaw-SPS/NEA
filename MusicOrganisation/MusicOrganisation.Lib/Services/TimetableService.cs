@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MusicOrganisation.Lib.Services
 {
-    public class TimetableService : Database
+    public class TimetableService : DatabaseConnection
     {
         public TimetableService(string path) : base(path)
         {

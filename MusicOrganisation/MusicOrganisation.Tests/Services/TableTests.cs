@@ -55,7 +55,7 @@ namespace MusicOrganisation.Tests.Services
 
         private static async Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, new()
         {
-            Database table = new(nameof(TableTests));
+            DatabaseConnection table = new(nameof(TableTests));
             await table.DropTableIfExistsAsync<T>();
             await table.InsertAllAsync(expectedItems);
             IEnumerable<T> actual = await table.GetAllAsync<T>();

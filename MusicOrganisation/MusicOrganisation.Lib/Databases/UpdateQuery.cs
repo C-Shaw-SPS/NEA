@@ -17,9 +17,11 @@ namespace MusicOrganisation.Lib.Databases
             _columnsToUpdate = [];
         }
 
+        public string TableName => _tableName;
+
         public void AddColumnToUpdate(string columnName, object? value)
         {
-            string sqlValue = SqlFormatting.FormatValue(value);
+            string sqlValue = SqlFormatting.FormatSqlValue(value);
             _sqlValues[columnName] = sqlValue;
         }
 

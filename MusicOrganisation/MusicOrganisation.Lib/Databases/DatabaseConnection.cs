@@ -2,12 +2,12 @@
 
 namespace MusicOrganisation.Lib.Databases
 {
-    public class Database
+    public class DatabaseConnection
     {
         protected SQLiteAsyncConnection _connection;
         private readonly string _path;
 
-        public Database(string path)
+        public DatabaseConnection(string path)
         {
             _path = path.FormatAsDatabasePath();
             _connection = new(_path, DatabaseProperties.FLAGS);
@@ -47,7 +47,9 @@ namespace MusicOrganisation.Lib.Databases
         public async Task DeleteAsync<T>(T value) where T : class, ITable, new()
         {
             await InitAsync<T>();
-            await _connection.DeleteAsync(value);
+            DeleteQuery<T> deleteQuery = new();
+            deleteQuery.AddCondition(nameof(ITable.Id), value.Id);
+            await ExecuteAsync(deleteQuery);
         }
 
         public async Task<IEnumerable<T>> GetAllAsync<T>() where T : class, ITable, new()
@@ -74,7 +76,7 @@ namespace MusicOrganisation.Lib.Databases
         public async Task<IEnumerable<T>> GetWhereEqualAsync<T>(string propertyName, object value) where T : class, ITable, new()
         {
             await InitAsync<T>();
-            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {T.TableName} WHERE {propertyName} = {SqlFormatting.FormatValue(value)}");
+            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {T.TableName} WHERE {propertyName} = {SqlFormatting.FormatSqlValue(value)}");
             return result;
         }
 
@@ -87,28 +89,27 @@ namespace MusicOrganisation.Lib.Databases
 
         public async Task ClearTableAsync<T>() where T : class, ITable, new()
         {
-            await InitAsync<T>();
-            await _connection.DeleteAllAsync<T>();
+            DeleteQuery<T> deleteQuery = new();
+            await ExecuteAsync(deleteQuery);
         }
 
         public async Task UpdateAsync<T>(T value) where T : class, ITable, new()
         {
-            await InitAsync<T>();
             UpdateQuery updateStatement = UpdateQuery.GetUpdateAllColumns(value);
             await QueryAsync<T>(updateStatement);
         }
 
         public async Task<IEnumerable<int>> GetIdsAsync<T>() where T : class, ITable, new()
         {
-            await InitAsync<T>();
-            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT {nameof(ITable.Id)} FROM {T.TableName}");
+            SelectQuery<T> selectQuery = new();
+            selectQuery.AddColumn<T>(nameof(ITable.Id));
+            IEnumerable<T> result = await QueryAsync<T>(selectQuery);
             return result.Select(c => c.Id);
         }
 
         public async Task<int> GetNextIdAsync<T>() where T : class, ITable, new()
         {
-            await InitAsync<T>();
-            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT Max({nameof(ITable.Id)}) AS {nameof(ITable.Id)} FROM {T.TableName}");
+            IEnumerable<T> result = await QueryAsync<T>($"SELECT Max({nameof(ITable.Id)}) AS {nameof(ITable.Id)} FROM {T.TableName}");
             if (result.Any())
             {
                 return result.First().Id + 1;

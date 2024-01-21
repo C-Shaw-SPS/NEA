@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using SQLitePCL;
+using System.Text;
 
 namespace MusicOrganisation.Lib.Databases
 {
@@ -14,6 +15,8 @@ namespace MusicOrganisation.Lib.Databases
             _columns = T.GetColumnNames();
             _containsValues = false;
         }
+
+        public string TableName => T.TableName;
 
         public void AddValue(T value)
         {

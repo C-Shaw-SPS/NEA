@@ -9,7 +9,7 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
 {
     public partial class AllComposersViewModel : ViewModelBase
     {
-        private static Dictionary<string, string> _orderings = new()
+        private static readonly Dictionary<string, string> _orderings = new()
         {
             ["Name"] = nameof(ComposerData.Name),
             ["Year of birth"] = nameof(ComposerData.BirthYear),
@@ -28,9 +28,9 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
         [ObservableProperty]
         private ObservableCollection<ComposerData> _collection;
 
-        private AsyncRelayCommand _searchCommand;
-        private AsyncRelayCommand _selectCommand;
-        private AsyncRelayCommand _newCommand;
+        private readonly AsyncRelayCommand _searchCommand;
+        private readonly AsyncRelayCommand _selectCommand;
+        private readonly AsyncRelayCommand _newCommand;
 
         public AllComposersViewModel()
         {
@@ -47,10 +47,11 @@ namespace MusicOrganisation.Lib.ViewModels.CollectionViewModels
         public async Task SearchAsync()
         {
             string ordering = _orderings[SelectedOrdering];
-            SqlQuery<ComposerData> sqlQuery = new(SelectQuery.DEFAULT_LIMIT);
+            SelectQuery<ComposerData> sqlQuery = new(SelectQuery.DEFAULT_LIMIT);
             sqlQuery.SetSelectAll();
             sqlQuery.AddWhereLike<ComposerData>(nameof(ComposerData.Name), SearchText);
             sqlQuery.AddOrderBy<ComposerData>(ordering);
+
             throw new NotImplementedException();
         }
     }

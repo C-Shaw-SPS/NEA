@@ -9,5 +9,7 @@ namespace MusicOrganisation.Lib.Databases
     public interface ISqlQuery
     {
         public string GetSql();
+
+        public string TableName { get; }
     }
 }

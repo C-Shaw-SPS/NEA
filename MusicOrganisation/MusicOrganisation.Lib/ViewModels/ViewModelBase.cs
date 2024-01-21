@@ -9,7 +9,7 @@ namespace MusicOrganisation.Lib.Viewmodels
 
         protected readonly string _databasePath;
 
-        protected readonly Database _database;
+        protected readonly DatabaseConnection _database;
 
         public ViewModelBase()
         {

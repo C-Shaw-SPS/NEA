@@ -50,7 +50,7 @@ namespace MusicOrganisation.Lib.Models
 
         public static SelectQuery GetSelectAllQuery()
         {
-            SqlQuery<WorkData> query = new(SelectQuery.DEFAULT_LIMIT);
+            SelectQuery<WorkData> query = new(SelectQuery.DEFAULT_LIMIT);
             query.AddColumn<WorkData>(nameof(WorkData.Id), nameof(WorkId));
             query.AddColumn<WorkData>(nameof(WorkData.ComposerId), nameof(ComposerId));
             query.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Title));
