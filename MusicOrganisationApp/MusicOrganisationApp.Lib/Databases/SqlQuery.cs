@@ -2,7 +2,7 @@
 
 namespace MusicOrganisationApp.Lib.Databases
 {
-    public abstract class SqlQuery : ISqlStatement
+    public abstract class SqlQuery
     {
         public const int DEFAULT_LIMIT = 256;
 
