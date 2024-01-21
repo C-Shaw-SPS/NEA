@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace MusicOrganisationApp.Lib.Databases
 {
-    public abstract class UpdateStatement
+    public abstract class UpdateStatement : ISqlStatement
     {
         private readonly string _tableName;
         private readonly int _id;
