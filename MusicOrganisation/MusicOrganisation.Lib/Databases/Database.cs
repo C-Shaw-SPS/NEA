@@ -125,10 +125,10 @@ namespace MusicOrganisation.Lib.Databases
             return await _connection.QueryAsync<T>(query);
         }
 
-        public async Task<IEnumerable<T>> QueryAsync<T>(ISqlStatement query) where T : class, ITable, new()
+        public async Task<IEnumerable<T>> QueryAsync<T>(ISqlStatement query) where T : class, new()
         {
             string queryString = query.GetSql();
-            IEnumerable<T> result = await QueryAsync<T>(queryString);
+            IEnumerable<T> result = await _connection.QueryAsync<T>(queryString);
             return result;
         }
 
