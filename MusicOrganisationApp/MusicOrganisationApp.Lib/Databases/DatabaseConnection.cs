@@ -18,5 +18,18 @@ namespace MusicOrganisationApp.Lib.Databases
         {
             await _connection.CreateTableAsync<T>();
         }
+
+        public async Task<IEnumerable<T>> QueryAsync<T>(ISqlStatement sqlStatement) where T : class, new()
+        {
+            string sql = sqlStatement.GetSql();
+            IEnumerable<T> result = await _connection.QueryAsync<T>(sql);
+            return result;
+        }
+
+        public async Task ExecuteAsync(ISqlStatement sqlStatement)
+        {
+            string sql = sqlStatement.GetSql();
+            await _connection.ExecuteAsync(sql);
+        }
     }
 }
