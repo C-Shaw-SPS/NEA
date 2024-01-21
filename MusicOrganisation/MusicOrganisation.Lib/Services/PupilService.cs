@@ -4,7 +4,7 @@ using MusicOrganisation.Lib.Models;
 
 namespace MusicOrganisation.Lib.Services
 {
-    public class PupilService : Service
+    public class PupilService : DatabaseConnection
     {
         public PupilService(string path) : base(path)
         {
@@ -75,7 +75,7 @@ namespace MusicOrganisation.Lib.Services
 
         public static string GetCaregiverQuery(int pupilId)
         {
-            SqlQuery<CaregiverData> query = new();
+            SelectQuery<CaregiverData> query = new();
             query.AddColumn<CaregiverMap>(nameof(CaregiverMap.Id), nameof(Caregiver.MapId));
             query.AddColumn<CaregiverMap>(nameof(CaregiverMap.Description), nameof(Caregiver.Description));
             query.AddColumn<CaregiverData>(nameof(CaregiverData.Id), nameof(Caregiver.CaregiverId));
@@ -100,7 +100,7 @@ namespace MusicOrganisation.Lib.Services
 
         private static string GetRepertoireQuery(int pupilId)
         {
-            SqlQuery<RepertoireData> query = new();
+            SelectQuery<RepertoireData> query = new();
 
             query.AddColumn<RepertoireData>(nameof(RepertoireData.Id), nameof(Repertoire.RepertoireId));
             query.AddColumn<RepertoireData>(nameof(RepertoireData.DateStarted), nameof(Repertoire.DateStarted));

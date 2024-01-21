@@ -1,5 +1,4 @@
 ﻿using MusicOrganisation.Lib.Databases;
-using MusicOrganisation.Lib.Services;
 using MusicOrganisation.Lib.Tables;
 
 namespace MusicOrganisation.Tests.Services
@@ -56,7 +55,7 @@ namespace MusicOrganisation.Tests.Services
 
         private static async Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, new()
         {
-            Service table = new(nameof(TableTests));
+            DatabaseConnection table = new(nameof(TableTests));
             await table.DropTableIfExistsAsync<T>();
             await table.InsertAllAsync(expectedItems);
             IEnumerable<T> actual = await table.GetAllAsync<T>();

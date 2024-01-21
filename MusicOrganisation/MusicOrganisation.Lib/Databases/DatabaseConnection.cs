@@ -1,14 +1,13 @@
-﻿using MusicOrganisation.Lib.Databases;
-using SQLite;
+﻿using SQLite;
 
-namespace MusicOrganisation.Lib.Services
+namespace MusicOrganisation.Lib.Databases
 {
-    public class Service
+    public class DatabaseConnection
     {
         protected SQLiteAsyncConnection _connection;
         private readonly string _path;
 
-        public Service(string path)
+        public DatabaseConnection(string path)
         {
             _path = path.FormatAsDatabasePath();
             _connection = new(_path, DatabaseProperties.FLAGS);
@@ -22,7 +21,7 @@ namespace MusicOrganisation.Lib.Services
         public async Task InsertAsync<T>(T value) where T : class, ITable, new()
         {
             await InitAsync<T>();
-            InsertStatement<T> insertCommand = new();
+            InsertQuery<T> insertCommand = new();
             insertCommand.AddValue(value);
             string insertString = insertCommand.GetSql();
             await _connection.ExecuteAsync(insertString);
@@ -35,7 +34,7 @@ namespace MusicOrganisation.Lib.Services
 
             if (values.Any())
             {
-                InsertStatement<T> insertCommand = new();
+                InsertQuery<T> insertCommand = new();
                 foreach (T value in values)
                 {
                     insertCommand.AddValue(value);
@@ -48,7 +47,9 @@ namespace MusicOrganisation.Lib.Services
         public async Task DeleteAsync<T>(T value) where T : class, ITable, new()
         {
             await InitAsync<T>();
-            await _connection.DeleteAsync(value);
+            DeleteQuery<T> deleteQuery = new();
+            deleteQuery.AddCondition(nameof(ITable.Id), value.Id);
+            await ExecuteAsync(deleteQuery);
         }
 
         public async Task<IEnumerable<T>> GetAllAsync<T>() where T : class, ITable, new()
@@ -75,7 +76,7 @@ namespace MusicOrganisation.Lib.Services
         public async Task<IEnumerable<T>> GetWhereEqualAsync<T>(string propertyName, object value) where T : class, ITable, new()
         {
             await InitAsync<T>();
-            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {T.TableName} WHERE {propertyName} = {SqlFormatting.FormatValue(value)}");
+            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT * FROM {T.TableName} WHERE {propertyName} = {SqlFormatting.FormatSqlValue(value)}");
             return result;
         }
 
@@ -88,28 +89,27 @@ namespace MusicOrganisation.Lib.Services
 
         public async Task ClearTableAsync<T>() where T : class, ITable, new()
         {
-            await InitAsync<T>();
-            await _connection.DeleteAllAsync<T>();
+            DeleteQuery<T> deleteQuery = new();
+            await ExecuteAsync(deleteQuery);
         }
 
         public async Task UpdateAsync<T>(T value) where T : class, ITable, new()
         {
-            await InitAsync<T>();
-            UpdateStatement updateStatement = UpdateStatement.GetUpdateAllColumns(value);
+            UpdateQuery updateStatement = UpdateQuery.GetUpdateAllColumns(value);
             await QueryAsync<T>(updateStatement);
         }
 
         public async Task<IEnumerable<int>> GetIdsAsync<T>() where T : class, ITable, new()
         {
-            await InitAsync<T>();
-            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT {nameof(ITable.Id)} FROM {T.TableName}");
+            SelectQuery<T> selectQuery = new();
+            selectQuery.AddColumn<T>(nameof(ITable.Id));
+            IEnumerable<T> result = await QueryAsync<T>(selectQuery);
             return result.Select(c => c.Id);
         }
 
         public async Task<int> GetNextIdAsync<T>() where T : class, ITable, new()
         {
-            await InitAsync<T>();
-            IEnumerable<T> result = await _connection.QueryAsync<T>($"SELECT Max({nameof(ITable.Id)}) AS {nameof(ITable.Id)} FROM {T.TableName}");
+            IEnumerable<T> result = await QueryAsync<T>($"SELECT Max({nameof(ITable.Id)}) AS {nameof(ITable.Id)} FROM {T.TableName}");
             if (result.Any())
             {
                 return result.First().Id + 1;
@@ -126,11 +126,27 @@ namespace MusicOrganisation.Lib.Services
             return await _connection.QueryAsync<T>(query);
         }
 
-        public async Task<IEnumerable<T>> QueryAsync<T>(ISqlStatement query) where T : class, ITable, new()
+        public async Task<IEnumerable<T>> QueryAsync<T>(ISqlQuery query) where T : class, new()
         {
             string queryString = query.GetSql();
-            IEnumerable<T> result = await QueryAsync<T>(queryString);
+            IEnumerable<T> result = await _connection.QueryAsync<T>(queryString);
             return result;
+        }
+
+        public async Task ExecuteAsync(ISqlQuery query)
+        {
+            string sql = query.GetSql();
+            await _connection.ExecuteAsync(sql);
+        }
+
+        public async Task ExecuteAllAsync(IEnumerable<ISqlQuery> queries)
+        {
+            List<Task> tasks = [];
+            foreach (ISqlQuery query in queries)
+            {
+                Task task = ExecuteAsync(query);
+            }
+            await Task.WhenAll(tasks);
         }
 
         public async Task DropTableIfExistsAsync<T>() where T : class, ITable, new()

@@ -40,12 +40,12 @@ namespace MusicOrganisation.Lib.Databases
             Dictionary<string, string> result = new();
             foreach ((string name, object? value) in values)
             {
-                result.Add(name, FormatValue(value));
+                result.Add(name, FormatSqlValue(value));
             }
             return result;
         }
 
-        public static string FormatValue(object? value)
+        public static string FormatSqlValue(this object? value)
         {
             if (value == null)
             {

@@ -48,9 +48,9 @@ namespace MusicOrganisation.Lib.Models
             set => _composerName = value;
         }
 
-        public static SqlQuery GetSelectAllQuery()
+        public static SelectQuery GetSelectAllQuery()
         {
-            SqlQuery<WorkData> query = new(SqlQuery.DEFAULT_LIMIT);
+            SelectQuery<WorkData> query = new(SelectQuery.DEFAULT_LIMIT);
             query.AddColumn<WorkData>(nameof(WorkData.Id), nameof(WorkId));
             query.AddColumn<WorkData>(nameof(WorkData.ComposerId), nameof(ComposerId));
             query.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Title));
@@ -62,14 +62,14 @@ namespace MusicOrganisation.Lib.Models
             return query;
         }
 
-        public static SqlQuery GetSelectFromComposerIdQuery(int composerId)
+        public static SelectQuery GetSelectFromComposerIdQuery(int composerId)
         {
-            SqlQuery query = GetSelectAllQuery();
+            SelectQuery query = GetSelectAllQuery();
             query.AddWhereEquals<ComposerData>(nameof(ComposerData.Id), composerId);
             return query;
         }
 
-        public UpdateStatement GetUpdateStatement()
+        public UpdateQuery GetUpdateStatement()
         {
             UpdateStatement<WorkData> updateStatement = new(_workId);
             updateStatement.AddColumnToUpdate(nameof(WorkData.ComposerId), _composerId);

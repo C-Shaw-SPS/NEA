@@ -2,7 +2,7 @@
 
 namespace MusicOrganisation.Lib.Databases
 {
-    public abstract class SqlQuery : ISqlStatement
+    public abstract class SelectQuery : ISqlQuery
     {
         public const int DEFAULT_LIMIT = 256;
 
@@ -14,7 +14,7 @@ namespace MusicOrganisation.Lib.Databases
         private readonly List<(string table, string column)> _orderBys;
         private readonly int? _limit;
 
-        public SqlQuery(string tableName, int? limit)
+        public SelectQuery(string tableName, int? limit)
         {
             _tableName = tableName;
             _selectAll = false;
@@ -25,7 +25,9 @@ namespace MusicOrganisation.Lib.Databases
             _limit = limit;
         }
 
-        public SqlQuery(string tableName) : this(tableName, null) { }
+        public SelectQuery(string tableName) : this(tableName, null) { }
+
+        public string TableName => _tableName;
 
         public void SetSelectAll()
         {
@@ -37,6 +39,11 @@ namespace MusicOrganisation.Lib.Databases
             _columns.Add((TTable.TableName, column, alias));
         }
 
+        public void AddColumn<TTable>(string column) where TTable : ITable
+        {
+            AddColumn<TTable>(column, column);
+        }
+
         public void AddJoin<TNew, TExisting>(string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
         {
             _joins.Add((TNew.TableName, newColumn, TExisting.TableName, existingColumn));
@@ -44,7 +51,7 @@ namespace MusicOrganisation.Lib.Databases
 
         public void AddWhereEquals<TTable>(string column, object? value) where TTable : ITable
         {
-            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatValue(value), "="));
+            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatSqlValue(value), "="));
         }
 
         public void AddWhereLike<TTable>(string column, string value) where TTable : ITable
@@ -134,11 +141,11 @@ namespace MusicOrganisation.Lib.Databases
         }
     }
 
-    public class SqlQuery<T> : SqlQuery where T : ITable
+    public class SelectQuery<T> : SelectQuery where T : ITable
     {
 
-        public SqlQuery(int limit) : base(T.TableName, limit) { }
+        public SelectQuery(int limit) : base(T.TableName, limit) { }
 
-        public SqlQuery() : base(T.TableName) { }
+        public SelectQuery() : base(T.TableName) { }
     }
 }
