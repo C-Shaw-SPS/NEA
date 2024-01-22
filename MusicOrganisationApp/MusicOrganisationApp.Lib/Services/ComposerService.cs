@@ -1,10 +1,5 @@
 ﻿using MusicOrganisationApp.Lib.Databases;
 using MusicOrganisationApp.Lib.Tables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicOrganisationApp.Lib.Services
 {
@@ -29,8 +24,9 @@ namespace MusicOrganisationApp.Lib.Services
             DeleteStatement<RepertoireData> deleteRepertoireStatement = await GetDeleteRepertoireStatement(composer);
 
             await _database.DeleteAsync(composer);
-            await _database.ExecuteAsync<WorkData>(deleteWorksStatement);
-            await _database.ExecuteAsync<RepertoireData>(deleteRepertoireStatement);
+            await _database.ExecuteAsync(deleteWorksStatement);
+            await _database.ExecuteAsync(deleteRepertoireStatement);
+
         }
 
         private static DeleteStatement<WorkData> GetDeleteWorksStatement(ComposerData composer)
@@ -53,7 +49,6 @@ namespace MusicOrganisationApp.Lib.Services
 
         private async Task<IEnumerable<int>> GetWorkIdsAsync(ComposerData composer)
         {
-            await _database.CreateTableAsync<WorkData>();
             SqlQuery<WorkData> sqlQuery = new();
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Id));
             sqlQuery.AddWhereEquals<WorkData>(nameof(WorkData.ComposerId), composer.Id);
@@ -62,9 +57,9 @@ namespace MusicOrganisationApp.Lib.Services
             return workIds;
         }
 
-        public Task UpdateAsync(ComposerData value)
+        public async Task UpdateAsync(ComposerData value)
         {
-            throw new NotImplementedException();
+            await _database.UpdateAsync(value);
         }
     }
 }
