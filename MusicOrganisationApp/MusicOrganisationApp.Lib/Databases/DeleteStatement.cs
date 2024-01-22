@@ -29,7 +29,7 @@ namespace MusicOrganisationApp.Lib.Databases
             if (conditions.Any())
             {
                 stringBuilder.AppendLine("WHERE");
-                stringBuilder.AppendLine(string.Join("\nOR", conditions));
+                stringBuilder.AppendLine(string.Join("\nOR ", conditions));
             }
 
             string sql = stringBuilder.ToString();
