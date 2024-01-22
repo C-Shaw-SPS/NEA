@@ -80,6 +80,7 @@ namespace MusicOrganisationApp.Lib.Tables
         public bool Equals(ComposerData? other)
         {
             return other != null
+                && _id == other._id
                 && _name == other._name
                 && _birthYear == other._birthYear
                 && _deathYear == other._deathYear
