@@ -173,6 +173,7 @@ namespace MusicOrganisationApp.Lib.Models
         public bool Equals(Pupil? other)
         {
             return other != null
+                && _id == other._id
                 && _name == other._name
                 && _level == other._level
                 && _needsDifferentTimes == other._needsDifferentTimes

@@ -78,6 +78,7 @@ namespace MusicOrganisationApp.Lib.Tables
         public bool Equals(LessonData? other)
         {
             return other != null
+                && _id == other._id
                 && _pupilId == other._pupilId
                 && _lessonSlotId == other._lessonSlotId
                 && _date == other._date

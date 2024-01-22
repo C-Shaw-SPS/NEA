@@ -81,6 +81,7 @@ namespace MusicOrganisationApp.Lib.Tables
         public bool Equals(LessonSlotData? other)
         {
             return other != null
+                && _id == other._id
                 && _dayOfWeek == other._dayOfWeek
                 && _flagIndex == other._flagIndex
                 && _startTime == other._startTime

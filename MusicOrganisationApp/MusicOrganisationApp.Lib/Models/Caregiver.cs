@@ -48,6 +48,7 @@
         public bool Equals(Caregiver? other)
         {
             return other != null
+                && _mapId == other._mapId
                 && _caregiverId == other._caregiverId
                 && _name == other._name
                 && _description == other._description
