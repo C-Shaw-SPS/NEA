@@ -194,5 +194,15 @@ namespace MusicOrganisationApp.Tests.Databases
                 Assert.Contains(expectedWork, actualWorks);
             }
         }
+
+        [Fact]
+        public async Task TestQueryWithoutCreateTableAsync()
+        {
+            DatabaseConnection database = new(nameof(TestQueryWithoutCreateTableAsync));
+            SqlQuery<ComposerData> sqlQuery = new();
+            sqlQuery.SetSelectAll();
+            IEnumerable<ComposerData> composers = await database.QueryAsync<ComposerData>(sqlQuery);
+            Assert.Empty(composers);
+        }
     }
 }
