@@ -61,5 +61,10 @@ namespace MusicOrganisationApp.Lib.Services
         {
             await _database.UpdateAsync(value);
         }
+
+        public async Task InsertAsync(ComposerData value)
+        {
+            await _database.InsertAsync(value);
+        }
     }
 }
