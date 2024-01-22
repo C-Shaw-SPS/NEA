@@ -20,7 +20,6 @@ namespace MusicOrganisationApp.Lib.Models
         private string _email = string.Empty;
         private string _phoneNumber = string.Empty;
         private string _notes = string.Empty;
-        private bool _isDeleted = false;
 
         [PrimaryKey]
         public int Id
@@ -127,13 +126,6 @@ namespace MusicOrganisationApp.Lib.Models
             set => _notes = value;
         }
 
-        [NotNull]
-        public bool IsDeleted
-        {
-            get => _isDeleted;
-            set => _isDeleted = value;
-        }
-
         public static string TableName => _TABLE_NAME;
 
         private static Dictionary<DayOfWeek, int> GetEmptyLessonSlots()
@@ -188,8 +180,7 @@ namespace MusicOrganisationApp.Lib.Models
                 && EqualLessonSlots(_lessonSlots, other._lessonSlots)
                 && _email == other._email
                 && _phoneNumber == other._phoneNumber
-                && _notes == other._notes
-                && _isDeleted == other._isDeleted;
+                && _notes == other._notes;
         }
 
         private static bool EqualLessonSlots(Dictionary<DayOfWeek, int> lessonSlots1, Dictionary<DayOfWeek, int> lessonSlots2)
@@ -254,8 +245,7 @@ namespace MusicOrganisationApp.Lib.Models
                 nameof(SundayLessonSlots),
                 nameof(Email),
                 nameof(PhoneNumber),
-                nameof(Notes),
-                nameof(IsDeleted)
+                nameof(Notes)
             };
         }
 
@@ -276,8 +266,7 @@ namespace MusicOrganisationApp.Lib.Models
                 (nameof(SundayLessonSlots), _lessonSlots[DayOfWeek.Sunday]),
                 (nameof(Email), _email),
                 (nameof(PhoneNumber), _phoneNumber),
-                (nameof(Notes), _notes),
-                (nameof(IsDeleted), _isDeleted)
+                (nameof(Notes), _notes)
                 );
             return sqlValues;
         }

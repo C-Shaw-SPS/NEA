@@ -12,7 +12,6 @@ namespace MusicOrganisationApp.Lib.Tables
         private string _name = string.Empty;
         private string _email = string.Empty;
         private string _phoneNumber = string.Empty;
-        private bool _isDeleted;
 
         public static string TableName => _TABLE_NAME;
 
@@ -44,13 +43,6 @@ namespace MusicOrganisationApp.Lib.Tables
             set => _phoneNumber = value;
         }
 
-        [NotNull]
-        public bool IsDeleted
-        {
-            get => _isDeleted;
-            set => _isDeleted = value;
-        }
-
         public static IEnumerable<string> GetColumnNames()
         {
             return new List<string>()
@@ -58,8 +50,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 nameof(Id),
                 nameof(Name),
                 nameof(Email),
-                nameof(PhoneNumber),
-                nameof(IsDeleted)
+                nameof(PhoneNumber)
             };
         }
 
@@ -69,8 +60,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 (nameof(Id), _id),
                 (nameof(Name), _name),
                 (nameof(Email), _email),
-                (nameof(PhoneNumber), _phoneNumber),
-                (nameof(IsDeleted), _isDeleted)
+                (nameof(PhoneNumber), _phoneNumber)
                 );
             return sqlValues;
         }
@@ -80,8 +70,7 @@ namespace MusicOrganisationApp.Lib.Tables
             return other != null
                 && _name == other._name
                 && _email == other._email
-                && _phoneNumber == other._phoneNumber
-                && _isDeleted == other._isDeleted;
+                && _phoneNumber == other._phoneNumber;
         }
     }
 }

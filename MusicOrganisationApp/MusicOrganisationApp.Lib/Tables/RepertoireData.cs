@@ -16,7 +16,6 @@ namespace MusicOrganisationApp.Lib.Tables
         private string _syllabus = string.Empty;
         private RepertoireStatus _status;
         private string _notes = string.Empty;
-        private bool _isDeleted = false;
 
         public static string TableName => _TABLE_NAME;
 
@@ -68,13 +67,6 @@ namespace MusicOrganisationApp.Lib.Tables
             set => _notes = value;
         }
 
-        [NotNull]
-        public bool IsDeleted
-        {
-            get => _isDeleted;
-            set => _isDeleted = value;
-        }
-
         public static IEnumerable<string> GetColumnNames()
         {
             return new List<string>
@@ -85,8 +77,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 nameof(DateStarted),
                 nameof(Syllabus),
                 nameof(Status),
-                nameof(Notes),
-                nameof(IsDeleted)
+                nameof(Notes)
             };
         }
 
@@ -99,8 +90,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 (nameof(DateStarted), _dateStarted),
                 (nameof(Syllabus), _syllabus),
                 (nameof(Status), _status),
-                (nameof(Notes), _notes),
-                (nameof(IsDeleted), _isDeleted)
+                (nameof(Notes), _notes)
                 );
             return sqlValues;
         }
@@ -113,8 +103,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 && _dateStarted == other._dateStarted
                 && _syllabus == other._syllabus
                 && _status == other._status
-                && _notes == other._notes
-                && _isDeleted == other._isDeleted;
+                && _notes == other._notes;
         }
     }
 }

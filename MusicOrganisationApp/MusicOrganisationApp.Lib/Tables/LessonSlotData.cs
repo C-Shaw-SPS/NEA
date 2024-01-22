@@ -13,7 +13,6 @@ namespace MusicOrganisationApp.Lib.Tables
         private int _flagIndex;
         private TimeSpan _startTime;
         private TimeSpan _endTime;
-        private bool _isDeleted = false;
 
         public static string TableName => _TABLE_NAME;
 
@@ -52,13 +51,6 @@ namespace MusicOrganisationApp.Lib.Tables
             set => _endTime = value;
         }
 
-        [NotNull]
-        public bool IsDeleted
-        {
-            get => _isDeleted;
-            set => _isDeleted = value;
-        }
-
         [Ignore]
         public TimeSpan Duration => _endTime - _startTime;
 
@@ -70,8 +62,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 nameof(DayOfWeek),
                 nameof(FlagIndex),
                 nameof(StartTime),
-                nameof(EndTime),
-                nameof(IsDeleted)
+                nameof(EndTime)
             };
         }
 
@@ -82,8 +73,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 (nameof(DayOfWeek), _dayOfWeek),
                 (nameof(FlagIndex), _flagIndex),
                 (nameof(StartTime), _startTime),
-                (nameof(EndTime), _endTime),
-                (nameof(IsDeleted), _isDeleted)
+                (nameof(EndTime), _endTime)
                 );
             return sqlValues;
         }
@@ -94,8 +84,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 && _dayOfWeek == other._dayOfWeek
                 && _flagIndex == other._flagIndex
                 && _startTime == other._startTime
-                && _endTime == other._endTime
-                && _isDeleted == other._isDeleted;
+                && _endTime == other._endTime;
         }
     }
 }

@@ -12,7 +12,6 @@ namespace MusicOrganisationApp.Lib.Tables
         private int _pupilId;
         private int _caregiverId;
         private string _description = string.Empty;
-        private bool _isDeleted = false;
 
         public static string TableName => _TABLE_NAME;
 
@@ -44,13 +43,6 @@ namespace MusicOrganisationApp.Lib.Tables
             set => _description = value;
         }
 
-        [NotNull]
-        public bool IsDeleted
-        {
-            get => _isDeleted;
-            set => _isDeleted = value;
-        }
-
         public static IEnumerable<string> GetColumnNames()
         {
             return new List<string>
@@ -58,8 +50,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 nameof(Id),
                 nameof(PupilId),
                 nameof(CaregiverId),
-                nameof(Description),
-                nameof(IsDeleted)
+                nameof(Description)
             };
         }
 
@@ -69,8 +60,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 (nameof(Id), _id),
                 (nameof(PupilId), _pupilId),
                 (nameof(CaregiverId), _caregiverId),
-                (nameof(Description), _description),
-                (nameof(IsDeleted), _isDeleted)
+                (nameof(Description), _description)
                 );
             return sqlValues;
         }
@@ -79,8 +69,7 @@ namespace MusicOrganisationApp.Lib.Tables
             return other != null
                 && _pupilId == other._pupilId
                 && _caregiverId == other._caregiverId
-                && _description == other._description
-                && _isDeleted == other._isDeleted;
+                && _description == other._description;
         }
     }
 }

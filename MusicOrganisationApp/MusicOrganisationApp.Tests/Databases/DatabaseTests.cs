@@ -138,6 +138,15 @@ namespace MusicOrganisationApp.Tests.Databases
         }
 
         [Fact]
+        public async Task TestGetNextIdFromEmptyAsync()
+        {
+            DatabaseConnection database = new(nameof(TestGetNextIdFromEmptyAsync));
+            await database.DropTableAsync<ComposerData>();
+            int nextId = await database.GetNextIdAsync<ComposerData>();
+            Assert.Equal(1, nextId);
+        }
+
+        [Fact]
         public async void TestMultipleTables()
         {
             DatabaseConnection database = new(nameof(TestMultipleTables));
