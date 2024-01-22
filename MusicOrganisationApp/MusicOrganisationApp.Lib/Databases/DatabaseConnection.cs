@@ -19,8 +19,15 @@ namespace MusicOrganisationApp.Lib.Databases
             await _connection.CreateTableAsync<T>();
         }
 
+        public async Task CreateTablesAsync(IEnumerable<Type> types)
+        {
+            Type[] typeArray = [.. types];
+            await _connection.CreateTablesAsync(CreateFlags.None, typeArray);
+        }
+
         public async Task<IEnumerable<T>> QueryAsync<T>(SqlQuery sqlQuery) where T : class, new()
         {
+            await CreateTablesAsync(sqlQuery.Tables);
             string sql = sqlQuery.GetSql();
             IEnumerable<T> result = await _connection.QueryAsync<T>(sql);
             return result;
@@ -132,7 +139,6 @@ namespace MusicOrganisationApp.Lib.Databases
         public async Task<int> GetNextIdAsync<T>() where T : class, ITable, new()
         {
             await CreateTableAsync<T>();
-
             string query = $"SELECT MAX({nameof(ITable.Id)}) AS {nameof(ITable.Id)} FROM {T.TableName}";
             IEnumerable<T> result = await _connection.QueryAsync<T>(query);
             int nextId = result.First().Id + 1;
