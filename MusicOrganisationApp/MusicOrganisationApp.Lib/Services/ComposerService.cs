@@ -66,5 +66,18 @@ namespace MusicOrganisationApp.Lib.Services
         {
             await _database.InsertAsync(value);
         }
+
+        public async Task<IEnumerable<ComposerData>> SearchAsync(string search, string ordering)
+        {
+            SqlQuery<ComposerData> query = new()
+            {
+                SelectAll = true
+            };
+            query.AddWhereLike<ComposerData>(nameof(ComposerData.Name), search);
+            query.AddOrderBy<ComposerData>(ordering);
+
+            IEnumerable<ComposerData> composers = await _database.QueryAsync<ComposerData>(query);
+            return composers;
+        }
     }
 }

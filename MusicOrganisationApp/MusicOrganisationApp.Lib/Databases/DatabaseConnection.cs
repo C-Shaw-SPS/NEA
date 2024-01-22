@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Microsoft.Maui.Graphics.Text;
+using SQLite;
 using SQLitePCL;
 
 namespace MusicOrganisationApp.Lib.Databases
@@ -74,8 +75,10 @@ namespace MusicOrganisationApp.Lib.Databases
         {
             await CreateTableAsync<T>();
 
-            SqlQuery<T> sqlQuery = new();
-            sqlQuery.SetSelectAll();
+            SqlQuery<T> sqlQuery = new()
+            {
+                SelectAll = true
+            };
             sqlQuery.AddWhereEquals<T>(nameof(ITable.Id), id);
             IEnumerable<T> result = await QueryAsync<T>(sqlQuery);
             if (result.Any())
@@ -93,8 +96,10 @@ namespace MusicOrganisationApp.Lib.Databases
         {
             await CreateTableAsync<T>();
 
-            SqlQuery<T> sqlQuery = new();
-            sqlQuery.SetSelectAll();
+            SqlQuery<T> sqlQuery = new()
+            {
+                SelectAll = true
+            };
             IEnumerable<T> result = await QueryAsync<T>(sqlQuery);
             return result;
         }

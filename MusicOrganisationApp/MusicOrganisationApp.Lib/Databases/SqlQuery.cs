@@ -32,12 +32,13 @@ namespace MusicOrganisationApp.Lib.Databases
 
         public string TableName => _tableName;
 
-        public IEnumerable<Type> Tables => _tables;
-
-        public void SetSelectAll()
+        public bool SelectAll
         {
-            _selectAll = true;
+            get => _selectAll;
+            set => _selectAll = value;
         }
+
+        public IEnumerable<Type> Tables => _tables;
 
         public void AddColumn<TTable>(string column, string alias) where TTable : ITable
         {

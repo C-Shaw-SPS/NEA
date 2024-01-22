@@ -199,8 +199,10 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestQueryWithoutCreateTableAsync()
         {
             DatabaseConnection database = new(nameof(TestQueryWithoutCreateTableAsync));
-            SqlQuery<ComposerData> sqlQuery = new();
-            sqlQuery.SetSelectAll();
+            SqlQuery<ComposerData> sqlQuery = new()
+            {
+                SelectAll = true
+            };
             IEnumerable<ComposerData> composers = await database.QueryAsync<ComposerData>(sqlQuery);
             Assert.Empty(composers);
         }
