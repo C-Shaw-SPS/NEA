@@ -9,5 +9,7 @@
         public Task DeleteAsync(T value);
 
         public Task UpdateAsync(T value);
+
+        public Task<IEnumerable<T>> SearchAsync(string search, string ordering);
     }
 }
