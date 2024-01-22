@@ -68,7 +68,7 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestDeleteAsync()
         {
             DatabaseConnection database = new(nameof(TestDeleteAsync));
-            await database.ClearTableAsync<ComposerData>();
+            await database.DropTableAsync<ComposerData>();
             await database.InsertAllAsync(ExpectedTables.ComposerData);
             await database.DeleteAsync(ExpectedTables.ComposerData[0]);
 
@@ -84,7 +84,7 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestUpdateAsync()
         {
             DatabaseConnection database = new(nameof(TestUpdateAsync));
-            await database.ClearTableAsync<WorkData>();
+            await database.DropTableAsync<WorkData>();
             await database.InsertAllAsync(ExpectedTables.WorkData);
             WorkData updatedWork = new()
             {
@@ -107,7 +107,7 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestGetIdsAsync()
         {
             DatabaseConnection database = new(nameof(TestGetIdsAsync));
-            await database.ClearTableAsync<ComposerData>();
+            await database.DropTableAsync<ComposerData>();
             await database.InsertAllAsync(ExpectedTables.ComposerData);
             IEnumerable<int> actualIds = await database.GetIdsAsync<ComposerData>();
             foreach (ComposerData expectedComposer in ExpectedTables.ComposerData)
@@ -120,7 +120,7 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestNullProperties()
         {
             DatabaseConnection database = new(nameof(TestNullProperties));
-            await database.ClearTableAsync<ComposerData>();
+            await database.DropTableAsync<ComposerData>();
             await database.InsertAsync(ExpectedTables.NullPropertyComposer);
             IEnumerable<ComposerData> actualComposers = await database.GetAllAsync<ComposerData>();
             Assert.Single(actualComposers);
@@ -131,7 +131,7 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestGetNextIdAsync()
         {
             DatabaseConnection database = new(nameof(TestGetNextIdAsync));
-            await database.ClearTableAsync<WorkData>();
+            await database.DropTableAsync<WorkData>();
             await database.InsertAllAsync(ExpectedTables.WorkData);
             int nextId = await database.GetNextIdAsync<WorkData>();
             Assert.Equal(ExpectedTables.WorkData.Max(w => w.Id) + 1, nextId);
@@ -151,8 +151,8 @@ namespace MusicOrganisationApp.Tests.Databases
         {
             DatabaseConnection database = new(nameof(TestMultipleTables));
 
-            await database.ClearTableAsync<ComposerData>();
-            await database.ClearTableAsync<WorkData>();
+            await database.DropTableAsync<ComposerData>();
+            await database.DropTableAsync<WorkData>();
 
             await database.InsertAllAsync(ExpectedTables.ComposerData);
             await database.InsertAllAsync(ExpectedTables.WorkData);
@@ -176,8 +176,8 @@ namespace MusicOrganisationApp.Tests.Databases
         {
             DatabaseConnection database = new(nameof(TestClearOneTable));
 
-            await database.ClearTableAsync<ComposerData>();
-            await database.ClearTableAsync<WorkData>();
+            await database.DropTableAsync<ComposerData>();
+            await database.DropTableAsync<WorkData>();
 
             await database.InsertAllAsync(ExpectedTables.ComposerData);
             await database.InsertAllAsync(ExpectedTables.WorkData);
