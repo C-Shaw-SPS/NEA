@@ -4,12 +4,19 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MusicOrganisationApp.App"
+    xmlns:views="clr-namespace:MusicOrganisationApp.App.Views"
     Shell.FlyoutBehavior="Disabled"
     Title="MusicOrganisationApp.App">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <Tab
+            Title="Main Page">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+        </Tab>
+        <Tab
+            Title="Composers">
+            <ShellContent ContentTemplate="{DataTemplate views:AllComposersPage}"/>
+        </Tab>
+    </TabBar>
 
 </Shell>
