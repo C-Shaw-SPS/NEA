@@ -14,7 +14,9 @@ namespace MusicOrganisationApp.Lib.Databases
         private readonly List<(string table, string column)> _orderBys;
         private readonly int? _limit;
 
-        public SqlQuery(string tableName, int? limit)
+        private readonly HashSet<Type> _tables;
+
+        public SqlQuery(string tableName, int? limit, Type tableType)
         {
             _tableName = tableName;
             _selectAll = false;
@@ -23,11 +25,14 @@ namespace MusicOrganisationApp.Lib.Databases
             _conditions = [];
             _orderBys = [];
             _limit = limit;
+            _tables = [tableType];
         }
 
-        public SqlQuery(string tableName) : this(tableName, null) { }
+        public SqlQuery(string tableName, Type tableType) : this(tableName, null, tableType) { }
 
         public string TableName => _tableName;
+
+        public IEnumerable<Type> Tables => _tables;
 
         public void SetSelectAll()
         {
@@ -143,9 +148,8 @@ namespace MusicOrganisationApp.Lib.Databases
 
     public class SqlQuery<T> : SqlQuery where T : class, ITable, new()
     {
+        public SqlQuery(int limit) : base(T.TableName, limit, typeof(T)) { }
 
-        public SqlQuery(int limit) : base(T.TableName, limit) { }
-
-        public SqlQuery() : base(T.TableName) { }
+        public SqlQuery() : base(T.TableName, typeof(T)) { }
     }
 }
