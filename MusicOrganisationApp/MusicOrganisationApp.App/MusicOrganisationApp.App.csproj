@@ -69,4 +69,14 @@
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.7" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\MusicOrganisationApp.Lib\MusicOrganisationApp.Lib.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\AllComposersPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
