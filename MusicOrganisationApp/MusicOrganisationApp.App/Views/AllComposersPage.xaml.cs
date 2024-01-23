@@ -1,3 +1,5 @@
+using MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;
+
 namespace MusicOrganisationApp.App.Views;
 
 public partial class AllComposersPage : ContentPage
@@ -6,4 +8,10 @@ public partial class AllComposersPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    protected override async void OnAppearing()
+    {
+        AllComposersViewModel viewModel = (AllComposersViewModel)BindingContext;
+        await viewModel.RefreshAsync();
+    }
 }

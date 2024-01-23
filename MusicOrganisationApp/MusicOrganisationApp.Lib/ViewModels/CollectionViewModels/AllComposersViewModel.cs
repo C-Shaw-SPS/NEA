@@ -4,7 +4,7 @@ using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 using System.Collections.ObjectModel;
 
-namespace MusicOrganisationApp.Lib.ViewModels
+namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
     public partial class AllComposersViewModel : ViewModelBase
     {
@@ -47,13 +47,18 @@ namespace MusicOrganisationApp.Lib.ViewModels
             _selectCommand = new(SelectAsync);
         }
 
-        public IEnumerable<string> Orderings => _orderings.Keys;
+        public List<string> Orderings => _orderings.Keys.ToList();
 
         public AsyncRelayCommand AddNewCommand => _addNewCommand;
 
         public AsyncRelayCommand SearchCommand => _searchCommand;
 
         public AsyncRelayCommand SelectCommand => _selectCommand;
+
+        public async Task RefreshAsync()
+        {
+            await SearchAsync();
+        }
 
         private async Task AddNewAsync()
         {
