@@ -1,4 +1,4 @@
-namespace MusicOrganisationApp.App.Views
+namespace MusicOrganisationApp.App.Views.IndividualViews
 {
     public partial class ComposerPage : ContentPage
     {

@@ -77,10 +77,10 @@
 	  <MauiXaml Update="Views\CollectionViews\AllComposersPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ComposerPage.xaml">
+	  <MauiXaml Update="Views\DeveloperToolsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\DeveloperToolsPage.xaml">
+	  <MauiXaml Update="Views\IndividualViews\ComposerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

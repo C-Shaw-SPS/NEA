@@ -1,4 +1,4 @@
-﻿using MusicOrganisationApp.App.Views;
+﻿using MusicOrganisationApp.App.Views.IndividualViews;
 using MusicOrganisationApp.Lib.ViewModels.IndividualViewModels;
 
 namespace MusicOrganisationApp.App
