@@ -47,7 +47,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             _selectCommand = new(SelectAsync);
         }
 
-        public List<string> Orderings => _orderings.Keys.ToList();
+        public static List<string> Orderings => _orderings.Keys.ToList();
 
         public AsyncRelayCommand AddNewCommand => _addNewCommand;
 

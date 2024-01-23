@@ -10,7 +10,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.IndividualViewModels
         private const string _ROUTE = nameof(ComposerViewModel);
         private const string _ID_PARAMETER = nameof(_ID_PARAMETER);
 
-        private ComposerService _service;
+        private readonly ComposerService _service;
         private ComposerData _value;
 
         [ObservableProperty]
