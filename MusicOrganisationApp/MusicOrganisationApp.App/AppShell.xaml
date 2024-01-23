@@ -5,13 +5,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MusicOrganisationApp.App"
     xmlns:views="clr-namespace:MusicOrganisationApp.App.Views"
+    xmlns:collectionViews="clr-namespace:MusicOrganisationApp.App.Views.CollectionViews"
     Shell.FlyoutBehavior="Disabled"
     Title="MusicOrganisationApp.App">
 
     <TabBar>
 
         <Tab Title="Composers">
-            <ShellContent ContentTemplate="{DataTemplate views:AllComposersPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate collectionViews:AllComposersPage}"/>
         </Tab>
 
         <Tab Title="Developer tools">
