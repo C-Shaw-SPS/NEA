@@ -7,8 +7,9 @@ namespace MusicOrganisationApp.Lib.ViewModels.IndividualViewModels
 {
     public partial class ComposerViewModel : ViewModelBase, IQueryAttributable
     {
+        public const string ID_PARAMETER = nameof(ID_PARAMETER);
+
         private const string _ROUTE = nameof(ComposerViewModel);
-        private const string _ID_PARAMETER = nameof(_ID_PARAMETER);
 
         private readonly ComposerService _service;
         private ComposerData _value;
@@ -25,6 +26,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.IndividualViewModels
         [ObservableProperty]
         private string _era;
 
+        private readonly AsyncRelayCommand _editCommand;
+
         public ComposerViewModel()
         {
             _service = new(_database);
@@ -33,15 +36,22 @@ namespace MusicOrganisationApp.Lib.ViewModels.IndividualViewModels
             _birthYear = string.Empty;
             _deathYear = string.Empty;
             _era = string.Empty;
+
+            _editCommand = new(EditAsync);
         }
 
         public static string Route => _ROUTE;
 
-        public AsyncRelayCommand EditCommand => throw new NotImplementedException();
+        public AsyncRelayCommand EditCommand => _editCommand;
+
+        private async Task EditAsync()
+        {
+            throw new NotImplementedException();
+        }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.TryGetValue(_ID_PARAMETER, out object? value) && value is int id)
+            if (query.TryGetValue(ID_PARAMETER, out object? value) && value is int id)
             {
                 await SetValue(id);
             }

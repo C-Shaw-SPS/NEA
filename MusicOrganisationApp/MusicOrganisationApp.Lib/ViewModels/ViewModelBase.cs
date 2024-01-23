@@ -21,13 +21,13 @@ namespace MusicOrganisationApp.Lib.ViewModels
             _database = new(_path);
         }
 
-        protected static async Task GoToAsync(Dictionary<string, object?> parameters, params string[] routes)
+        protected static async Task GoToAsync(Dictionary<string, object> parameters, params string[] routes)
         {
             string route = GetRoute(routes);
             await Shell.Current.GoToAsync(route, parameters);
         }
 
-        protected static async Task ReturnAsync(Dictionary<string, object?> parameters)
+        protected static async Task ReturnAsync(Dictionary<string, object> parameters)
         {
             await GoToAsync(parameters, _RETURN);
         }
