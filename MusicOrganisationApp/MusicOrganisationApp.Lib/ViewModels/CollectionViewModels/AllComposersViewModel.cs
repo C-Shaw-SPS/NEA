@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
+using MusicOrganisationApp.Lib.ViewModels.IndividualViewModels;
 using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
@@ -78,7 +79,14 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private async Task SelectAsync()
         {
-            throw new NotImplementedException();
+            if (SelectedItem is not null)
+            {
+                Dictionary<string, object> parameters = new()
+                {
+                    [ComposerViewModel.ID_PARAMETER] = SelectedItem.Id
+                };
+                await GoToAsync(parameters, ComposerViewModel.Route);
+            }
         }
     }
 }

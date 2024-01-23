@@ -1,4 +1,7 @@
-﻿namespace MusicOrganisationApp.App
+﻿using MusicOrganisationApp.App.Views;
+using MusicOrganisationApp.Lib.ViewModels.IndividualViewModels;
+
+namespace MusicOrganisationApp.App
 {
     public partial class App : Application
     {
@@ -7,6 +10,8 @@
             InitializeComponent();
 
             MainPage = new AppShell();
+
+            Routing.RegisterRoute(ComposerViewModel.Route, typeof(ComposerPage));
         }
     }
 }
