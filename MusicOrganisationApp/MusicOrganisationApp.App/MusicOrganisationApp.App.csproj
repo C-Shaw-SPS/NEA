@@ -74,7 +74,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\AllComposersPage.xaml">
+	  <MauiXaml Update="Views\CollectionViews\AllComposersPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ComposerPage.xaml">
