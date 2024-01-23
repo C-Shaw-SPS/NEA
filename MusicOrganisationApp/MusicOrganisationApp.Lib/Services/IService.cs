@@ -7,6 +7,8 @@
 
     public interface IService<T> : IService
     {
+        public Task<(bool, T)> GetAsync(int id);
+
         public Task<IEnumerable<T>> GetAllAsync();
 
         public Task InsertAsync(T value);

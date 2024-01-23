@@ -79,5 +79,11 @@ namespace MusicOrganisationApp.Lib.Services
             IEnumerable<ComposerData> composers = await _database.QueryAsync<ComposerData>(query);
             return composers;
         }
+
+        public async Task<(bool, ComposerData)> GetAsync(int id)
+        {
+            (bool suceeded, ComposerData compser) value = await _database.TryGetAsync<ComposerData>(id);
+            return value;
+        }
     }
 }
