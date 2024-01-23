@@ -11,7 +11,7 @@ namespace MusicOrganisationApp.Tests.Services
         public async Task TestAddComposerAsync()
         {
             DatabaseConnection database = new(nameof(TestAddComposerAsync));
-            await database.DropTableAsync<ComposerData>();
+            await database.DropTableIfExistsAsync<ComposerData>();
 
             ComposerService composerService = new(database);
             await composerService.InsertAsync(ExpectedComposerService.Composers[0]);
@@ -26,9 +26,9 @@ namespace MusicOrganisationApp.Tests.Services
         public async Task TestDeleteComposerAsync()
         {
             DatabaseConnection database = new(nameof(TestAddComposerAsync));
-            await database.DropTableAsync<ComposerData>();
-            await database.DropTableAsync<WorkData>();
-            await database.DropTableAsync<RepertoireData>();
+            await database.DropTableIfExistsAsync<ComposerData>();
+            await database.DropTableIfExistsAsync<WorkData>();
+            await database.DropTableIfExistsAsync<RepertoireData>();
 
             await database.InsertAllAsync(ExpectedComposerService.Composers);
             await database.InsertAllAsync(ExpectedComposerService.Works);

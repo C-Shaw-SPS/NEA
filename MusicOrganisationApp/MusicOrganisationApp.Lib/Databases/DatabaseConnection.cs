@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui.Graphics.Text;
-using SQLite;
-using SQLitePCL;
+﻿using SQLite;
 
 namespace MusicOrganisationApp.Lib.Databases
 {
@@ -48,7 +46,7 @@ namespace MusicOrganisationApp.Lib.Databases
 
             InsertStatement<T> insertStatement = new();
             insertStatement.AddValue(value);
-            await ExecuteAsync<T>(insertStatement);
+            await ExecuteAsync(insertStatement);
         }
 
         public async Task InsertAllAsync<T>(IEnumerable<T> values) where T : class, ITable, new()
@@ -68,7 +66,7 @@ namespace MusicOrganisationApp.Lib.Databases
             await CreateTableAsync<T>();
 
             DeleteStatement<T> deleteStatement = new();
-            await ExecuteAsync<T>(deleteStatement);
+            await ExecuteAsync(deleteStatement);
         }
 
         public async Task<(bool found, T value)> TryGetAsync<T>(int id) where T : class, ITable, new()
@@ -110,7 +108,7 @@ namespace MusicOrganisationApp.Lib.Databases
 
             DeleteStatement<T> deleteStatement = new();
             deleteStatement.AddCondition(nameof(ITable.Id), value.Id);
-            await ExecuteAsync<T>(deleteStatement);
+            await ExecuteAsync(deleteStatement);
         }
 
         public async Task UpdateAsync<T>(T value) where T : class, ITable, new()
@@ -118,15 +116,15 @@ namespace MusicOrganisationApp.Lib.Databases
             await CreateTableAsync<T>();
 
             UpdateStatement<T> updateStatement = UpdateStatement<T>.GetUpdateAllColumns(value);
-            await ExecuteAsync<T>(updateStatement);
+            await ExecuteAsync(updateStatement);
         }
 
-        public async Task DropTableAsync<T>() where T : class, ITable, new()
+        public async Task DropTableIfExistsAsync<T>() where T : class, ITable, new()
         {
             await CreateTableAsync<T>();
 
             DropTableStatement<T> dropTableStatement = new();
-            await ExecuteAsync<T>(dropTableStatement);
+            await ExecuteAsync(dropTableStatement);
         }
 
         public async Task<IEnumerable<int>> GetIdsAsync<T>() where T : class, ITable, new()

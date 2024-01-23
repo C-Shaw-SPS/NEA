@@ -63,7 +63,7 @@ namespace MusicOrganisationApp.Tests.Databases
         private static async Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, new()
         {
             DatabaseConnection database = new(nameof(TableTests));
-            await database.DropTableAsync<T>();
+            await database.DropTableIfExistsAsync<T>();
             await database.InsertAllAsync(expectedItems);
             IEnumerable<T> actual = await database.GetAllAsync<T>();
             Assert.Equal(expectedItems.Count(), actual.Count());
