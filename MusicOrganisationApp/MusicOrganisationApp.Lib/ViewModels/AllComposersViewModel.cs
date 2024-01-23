@@ -1,23 +1,79 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MusicOrganisationApp.Lib.Tables;
+using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels
 {
     public partial class AllComposersViewModel : ViewModelBase
     {
+        private static readonly Dictionary<string, string> _orderings = new()
+        {
+            ["Name"] = nameof(ComposerData.Name),
+            ["Year of birth"] = nameof(ComposerData.BirthYear),
+            ["Year of death"] = nameof(ComposerData.DeathYear)
+        };
+
         private readonly ComposerService _service;
 
         [ObservableProperty]
-        private string _searchText = string.Empty;
+        private string _searchText;
+
+        [ObservableProperty]
+        private string _selectedOrdering;
+
+        [ObservableProperty]
+        private ObservableCollection<ComposerData> _collection;
+
+        [ObservableProperty]
+        private ComposerData? _selectedItem;
+
+        private readonly AsyncRelayCommand _addNewCommand;
+        private readonly AsyncRelayCommand _searchCommand;
+        private readonly AsyncRelayCommand _selectCommand;
 
         public AllComposersViewModel()
         {
             _service = new(_database);
+
+            _searchText = string.Empty;
+            _selectedOrdering = _orderings.Keys.First();
+            _collection = [];
+            _selectedItem = null;
+
+            _addNewCommand = new(AddNewAsync);
+            _searchCommand = new(SearchAsync);
+            _selectCommand = new(SelectAsync);
+        }
+
+        public IEnumerable<string> Orderings => _orderings.Keys;
+
+        public AsyncRelayCommand AddNewCommand => _addNewCommand;
+
+        public AsyncRelayCommand SearchCommand => _searchCommand;
+
+        public AsyncRelayCommand SelectCommand => _selectCommand;
+
+        private async Task AddNewAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        private async Task SearchAsync()
+        {
+            string ordering = _orderings[SelectedOrdering];
+            IEnumerable<ComposerData> composers = await _service.SearchAsync(SearchText, ordering);
+            Collection.Clear();
+            foreach (ComposerData composer in composers)
+            {
+                Collection.Add(composer);
+            }
+        }
+
+        private async Task SelectAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }
