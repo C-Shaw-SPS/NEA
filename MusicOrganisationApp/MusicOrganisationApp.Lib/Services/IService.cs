@@ -1,6 +1,11 @@
 ﻿namespace MusicOrganisationApp.Lib.Services
 {
-    public interface IService<T>
+    public interface IService
+    {
+        public const int DEFAULT_LIMIT = 256;
+    }
+
+    public interface IService<T> : IService
     {
         public Task<IEnumerable<T>> GetAllAsync();
 

@@ -69,7 +69,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task<IEnumerable<ComposerData>> SearchAsync(string search, string ordering)
         {
-            SqlQuery<ComposerData> query = new()
+            SqlQuery<ComposerData> query = new(IService.DEFAULT_LIMIT)
             {
                 SelectAll = true
             };
