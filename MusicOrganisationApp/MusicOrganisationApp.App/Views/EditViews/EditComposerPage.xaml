@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:MusicOrganisationApp.Lib.ViewModels.EditViewModels;assembly=MusicOrganisationApp.Lib"
              x:Class="MusicOrganisationApp.App.Views.EditViews.EditComposerPage"
-             Title="EditComposerPage">
+             Title="{Binding PageTitle}">
 
     <ContentPage.BindingContext>
         <viewModels:EditComposerViewModel/>
