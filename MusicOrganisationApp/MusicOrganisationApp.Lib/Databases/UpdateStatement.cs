@@ -33,7 +33,9 @@ namespace MusicOrganisationApp.Lib.Databases
             List<string> setValues = [];
             foreach (string column in _sqlValues.Keys)
             {
-                setValues.Add($"{column} = {_sqlValues[column]}");
+                string value = _sqlValues[column];
+                string setValue = $"{column} = {value}";
+                setValues.Add(setValue);
             }
             stringBuilder.AppendLine(string.Join(",\n", setValues));
             stringBuilder.AppendLine($"WHERE {nameof(ITable.Id)} = {_id}");
@@ -47,7 +49,7 @@ namespace MusicOrganisationApp.Lib.Databases
             IDictionary<string, string> sqlValues = value.GetSqlValues();
             foreach (string column in sqlValues.Keys)
             {
-                updateStatement.AddColumnToUpdate(column, sqlValues[column]);
+                updateStatement._sqlValues[column] = sqlValues[column];
             }
             return updateStatement;
         }
