@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
+using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.IndividualViewModels
 {
@@ -46,7 +47,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.IndividualViewModels
 
         private async Task EditAsync()
         {
-            throw new NotImplementedException();
+            Dictionary<string, object> parameters = new()
+            {
+                [EditComposerViewModel.ID_PARAMETER] = _value.Id,
+                [EditComposerViewModel.IS_NEW_PARAMETER] = false
+            };
+            await GoToAsync(parameters, EditComposerViewModel.Route);
         }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
