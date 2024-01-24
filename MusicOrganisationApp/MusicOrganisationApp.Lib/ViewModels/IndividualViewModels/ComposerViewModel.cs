@@ -14,6 +14,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.IndividualViewModels
         private readonly ComposerService _service;
         private ComposerData _value;
 
+        private readonly AsyncRelayCommand _editCommand;
+
         [ObservableProperty]
         private string _name;
 
@@ -25,8 +27,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.IndividualViewModels
 
         [ObservableProperty]
         private string _era;
-
-        private readonly AsyncRelayCommand _editCommand;
 
         public ComposerViewModel()
         {
