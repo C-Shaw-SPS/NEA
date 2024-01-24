@@ -11,7 +11,7 @@
 
         public Task<IEnumerable<T>> GetAllAsync();
 
-        public Task InsertAsync(T value);
+        public Task InsertAsync(T value, bool getNewId);
 
         public Task DeleteAsync(T value);
 

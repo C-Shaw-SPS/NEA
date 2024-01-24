@@ -14,7 +14,7 @@ namespace MusicOrganisationApp.Tests.Services
             await database.DropTableIfExistsAsync<ComposerData>();
 
             ComposerService composerService = new(database);
-            await composerService.InsertAsync(ExpectedComposerService.Composers[0]);
+            await composerService.InsertAsync(ExpectedComposerService.Composers[0], false);
 
             IEnumerable<ComposerData> actualComposers = await composerService.GetAllAsync();
 

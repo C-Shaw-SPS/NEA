@@ -62,8 +62,13 @@ namespace MusicOrganisationApp.Lib.Services
             await _database.UpdateAsync(value);
         }
 
-        public async Task InsertAsync(ComposerData value)
+        public async Task InsertAsync(ComposerData value, bool getNewId)
         {
+            if (getNewId)
+            {
+                int id = await _database.GetNextIdAsync<ComposerData>();
+                value.Id = id;
+            }
             await _database.InsertAsync(value);
         }
 
