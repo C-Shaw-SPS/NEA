@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
+using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 using MusicOrganisationApp.Lib.ViewModels.IndividualViewModels;
 using System.Collections.ObjectModel;
 
@@ -9,6 +10,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
     public partial class AllComposersViewModel : ViewModelBase
     {
+        private const string _ROUTE = nameof(AllComposersViewModel);
+
         private static readonly Dictionary<string, string> _orderings = new()
         {
             ["Name"] = nameof(ComposerData.Name),
@@ -48,6 +51,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             _selectCommand = new(SelectAsync);
         }
 
+        public static string Route => _ROUTE;
+
         public static List<string> Orderings => _orderings.Keys.ToList();
 
         public AsyncRelayCommand AddNewCommand => _addNewCommand;
@@ -63,7 +68,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private async Task AddNewAsync()
         {
-            throw new NotImplementedException();
+            Dictionary<string, object> parameters = new()
+            {
+                [EditComposerViewModel.IS_NEW_PARAMETER] = true
+            };
+            await GoToAsync(parameters, EditComposerViewModel.Route);
         }
 
         private async Task SearchAsync()
