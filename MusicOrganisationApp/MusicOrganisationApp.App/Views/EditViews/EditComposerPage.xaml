@@ -11,7 +11,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Save"
-                     Command="{Binding SaveCommand}"/>
+                     Command="{Binding TrySaveCommand}"/>
         <ToolbarItem Text="Delete"
                      IsEnabled="{Binding CanDelete}"
                      Command="{Binding DeleteCommand}"/>
