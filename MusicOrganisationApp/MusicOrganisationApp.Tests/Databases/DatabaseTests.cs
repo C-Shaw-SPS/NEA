@@ -211,7 +211,7 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestUnsucessfulGetAsnyc()
         {
             DatabaseConnection database = new(nameof(TestUnsucessfulGetAsnyc));
-            await database.InsertAllAsync(ExpectedTables.ComposerData);
+            await database.ResetTableAsync(ExpectedTables.ComposerData);
             int id = ExpectedTables.ComposerData.Max(composer => composer.Id) + 1;
             (bool suceeded, ComposerData actualComposer) = await database.TryGetAsync<ComposerData>(id);
             Assert.False(suceeded);
