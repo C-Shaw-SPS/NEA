@@ -73,7 +73,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.IndividualViewModels
             }
             else
             {
-                await ReturnAsync();
+                await GoBackAsync();
             }
         }
 

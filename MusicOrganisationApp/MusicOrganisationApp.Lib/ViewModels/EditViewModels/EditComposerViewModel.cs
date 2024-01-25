@@ -97,7 +97,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
                 {
                     await _service.UpdateAsync(_value);
                 }
-                await ReturnAsync();
+                await GoBackAsync();
             }
         }
 
@@ -204,7 +204,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private async Task DeleteAsync()
         {
             await _service.DeleteAsync(_value);
-            await ReturnAsync();
+            await GoBackAsync();
         }
 
         #region Data Validation
@@ -266,7 +266,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
             else
             {
-                await ReturnAsync();
+                await GoBackAsync();
                 return;
             }
         }
