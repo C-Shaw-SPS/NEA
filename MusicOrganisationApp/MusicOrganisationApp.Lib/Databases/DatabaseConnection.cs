@@ -104,10 +104,15 @@ namespace MusicOrganisationApp.Lib.Databases
 
         public async Task DeleteAsync<T>(T value) where T : class, ITable, new()
         {
+            await DeleteAsync<T>(value.Id);
+        }
+
+        public async Task DeleteAsync<T>(int id) where T : class, ITable, new()
+        {
             await CreateTableAsync<T>();
 
             DeleteStatement<T> deleteStatement = new();
-            deleteStatement.AddCondition(nameof(ITable.Id), value.Id);
+            deleteStatement.AddCondition(nameof(ITable.Id), id);
             await ExecuteAsync(deleteStatement);
         }
 
