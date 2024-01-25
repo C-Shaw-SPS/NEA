@@ -1,28 +1,16 @@
 ﻿using MusicOrganisationApp.Lib.Databases;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Tables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicOrganisationApp.Lib.Services
 {
     public class WorkService : IService<Work>
     {
         private readonly DatabaseConnection _database;
-        private int? _composerId;
 
         public WorkService(DatabaseConnection database)
         {
             _database = database;
-        }
-
-        public int? ComposerId
-        {
-            get => _composerId;
-            set => _composerId = value;
         }
 
         public async Task DeleteAsync(Work value)
@@ -47,7 +35,52 @@ namespace MusicOrganisationApp.Lib.Services
             return works;
         }
 
-        private SqlQuery<WorkData> GetSqlQuery()
+        public async Task<(bool, Work)> GetAsync(int id)
+        {
+            SqlQuery<WorkData> sqlQuery = GetSqlQuery();
+            sqlQuery.AddWhereEquals<WorkData>(nameof(WorkData.Id), id);
+            IEnumerable<Work> result = await _database.QueryAsync<Work>(sqlQuery);
+            if (result.Any())
+            {
+                return (true, result.First());
+            }
+            else
+            {
+                return (false, new());
+            }
+        }
+
+        public async Task InsertAsync(Work value, bool getNewId)
+        {
+            WorkData workData = await GetWorkData(value, getNewId);
+            await _database.InsertAsync(workData);
+        }
+
+        public async Task<IEnumerable<Work>> SearchAsync(string search, string ordering)
+        {
+            SqlQuery<WorkData> sqlQuery = GetSqlQuery();
+            sqlQuery.AddWhereLike<WorkData>(nameof(WorkData.Title), search);
+
+            if (WorkData.GetColumnNames().Contains(ordering))
+            {
+                sqlQuery.AddOrderBy<WorkData>(ordering);
+            }
+            else
+            {
+                sqlQuery.AddOrderBy<ComposerData>(ordering);
+            }
+
+            IEnumerable<Work> works = await _database.QueryAsync<Work>(sqlQuery);
+            return works;
+        }
+
+        public async Task UpdateAsync(Work value)
+        {
+            WorkData workData = await GetWorkData(value, false);
+            await _database.UpdateAsync(workData);
+        }
+
+        private static SqlQuery<WorkData> GetSqlQuery()
         {
             SqlQuery<WorkData> sqlQuery = new();
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Id), nameof(Work.WorkId));
@@ -58,32 +91,21 @@ namespace MusicOrganisationApp.Lib.Services
             sqlQuery.AddJoin<ComposerData, WorkData>(nameof(ComposerData.Id), nameof(WorkData.ComposerId));
             sqlQuery.AddColumn<ComposerData>(nameof(ComposerData.Name), nameof(Work.ComposerName));
 
-            if (_composerId is not null)
-            {
-                sqlQuery.AddWhereEquals<WorkData>(nameof(WorkData.ComposerId), _composerId);
-            }
-
             return sqlQuery;
         }
 
-        public Task<(bool, Work)> GetAsync(int id)
+        private async Task<WorkData> GetWorkData(Work work, bool getNewId)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task InsertAsync(Work value, bool getNewId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Work>> SearchAsync(string search, string ordering)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(Work value)
-        {
-            throw new NotImplementedException();
+            int id = getNewId ? await _database.GetNextIdAsync<WorkData>() : work.WorkId;
+            WorkData workData = new()
+            {
+                Id = id,
+                ComposerId = work.ComposerId,
+                Title = work.Title,
+                Subtitle = work.Subtitle,
+                Genre = work.Genre
+            };
+            return workData;
         }
     }
 }
