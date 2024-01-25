@@ -110,9 +110,9 @@ namespace MusicOrganisationApp.Tests.Services
             Work updatedWork = new()
             {
                 WorkId = originalWork.WorkId,
-                ComposerId = originalWork.ComposerId + 1,
+                ComposerId = ExpectedService.ComposerData[1].Id,
                 Title = originalWork.Title[1..],
-                ComposerName = originalWork.ComposerName,
+                ComposerName = ExpectedService.ComposerData[1].Name,
             };
 
             await service.UpdateAsync(updatedWork);
