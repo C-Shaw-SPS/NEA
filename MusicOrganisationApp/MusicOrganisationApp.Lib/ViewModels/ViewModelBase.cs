@@ -5,37 +5,47 @@ namespace MusicOrganisationApp.Lib.ViewModels
 {
     public abstract class ViewModelBase : ObservableObject
     {
-        protected const string _RETURN = "..";
+        protected const string _GO_BACK = "..";
 
         private readonly string _path;
+        private readonly bool _isTesting;
         protected readonly DatabaseConnection _database;
 
         public ViewModelBase()
         {
             _path = Path.Combine(FileSystem.AppDataDirectory, DatabaseProperties.NAME);
+            _isTesting = false;
             _database = new(_path);
         }
 
-        protected static async Task GoToAsync(Dictionary<string, object> parameters, params string[] routes)
+        public ViewModelBase(string path, bool isTesting)
         {
-            string route = GetRoute(routes);
-            await Shell.Current.GoToAsync(route, parameters);
+            _path = SqlFormatting.FormatAsDatabasePath(path);
+            _isTesting = isTesting;
+            _database = new(path);
         }
 
-        protected static async Task ReturnAsync(Dictionary<string, object> parameters)
+        protected async Task GoToAsync(Dictionary<string, object> parameters, params string[] routes)
         {
-            await GoToAsync(parameters, _RETURN);
+            if (!_isTesting)
+            {
+                string route = GetRoute(routes);
+                await Shell.Current.GoToAsync(route, parameters);
+            }
         }
 
-        protected static async Task GoToAsync(params string[] routes)
+        protected  async Task GoToAsync(params string[] routes)
         {
-            string route = GetRoute(routes);
-            await Shell.Current.GoToAsync(route);
+            if (!_isTesting)
+            {
+                string route = GetRoute(routes);
+                await Shell.Current.GoToAsync(route);
+            }
         }
 
-        protected static async Task ReturnAsync()
+        protected async Task GoBackAsync()
         {
-            await GoToAsync(_RETURN);
+            await GoToAsync(_GO_BACK);
         }
 
         private static string GetRoute(IEnumerable<string> routes)
