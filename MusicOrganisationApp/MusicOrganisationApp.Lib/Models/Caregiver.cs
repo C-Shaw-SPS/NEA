@@ -1,9 +1,9 @@
 ﻿namespace MusicOrganisationApp.Lib.Models
 {
-    public class Caregiver : IEquatable<Caregiver>
+    public class Caregiver : IEquatable<Caregiver>, IModel
     {
         private int _mapId;
-        private int _caregiverId;
+        private int _id;
         private string _name = string.Empty;
         private string _description = string.Empty;
         private string? _email;
@@ -15,10 +15,10 @@
             set => _mapId = value;
         }
 
-        public int CaregiverId
+        public int Id
         {
-            get => _caregiverId;
-            set => _caregiverId = value;
+            get => _id;
+            set => _id = value;
         }
 
         public string Name
@@ -49,7 +49,7 @@
         {
             return other != null
                 && _mapId == other._mapId
-                && _caregiverId == other._caregiverId
+                && _id == other._id
                 && _name == other._name
                 && _description == other._description
                 && _email == other._email

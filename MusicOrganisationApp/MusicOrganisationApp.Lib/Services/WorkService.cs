@@ -15,9 +15,9 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task DeleteAsync(Work value)
         {
-            DeleteStatement<RepertoireData> deleteStatement = GetDeleteRepertoireQuery(value.WorkId);
+            DeleteStatement<RepertoireData> deleteStatement = GetDeleteRepertoireQuery(value.Id);
 
-            await _database.DeleteAsync<WorkData>(value.WorkId);
+            await _database.DeleteAsync<WorkData>(value.Id);
             await _database.ExecuteAsync(deleteStatement);
         }
 
@@ -35,7 +35,7 @@ namespace MusicOrganisationApp.Lib.Services
             return works;
         }
 
-        public async Task<(bool, Work)> GetAsync(int id)
+        public async Task<(bool, Work)> TryGetAsync(int id)
         {
             SqlQuery<WorkData> sqlQuery = GetSqlQuery();
             sqlQuery.AddWhereEquals<WorkData>(nameof(WorkData.Id), id);
@@ -83,7 +83,7 @@ namespace MusicOrganisationApp.Lib.Services
         private static SqlQuery<WorkData> GetSqlQuery()
         {
             SqlQuery<WorkData> sqlQuery = new();
-            sqlQuery.AddColumn<WorkData>(nameof(WorkData.Id), nameof(Work.WorkId));
+            sqlQuery.AddColumn<WorkData>(nameof(WorkData.Id), nameof(Work.Id));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.ComposerId), nameof(Work.ComposerId));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Work.Title));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Subtitle), nameof(Work.Subtitle));
@@ -96,7 +96,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         private async Task<WorkData> GetWorkData(Work work, bool getNewId)
         {
-            int id = getNewId ? await _database.GetNextIdAsync<WorkData>() : work.WorkId;
+            int id = getNewId ? await _database.GetNextIdAsync<WorkData>() : work.Id;
             WorkData workData = new()
             {
                 Id = id,

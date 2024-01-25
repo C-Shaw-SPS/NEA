@@ -2,9 +2,9 @@
 
 namespace MusicOrganisationApp.Lib.Models
 {
-    public class Repertoire : IEquatable<Repertoire>
+    public class Repertoire : IEquatable<Repertoire>, IModel
     {
-        private int _repertoireId;
+        private int _id;
         private DateTime? _dateStarted;
         private string _syllabus = string.Empty;
         private RepertoireStatus _status;
@@ -15,10 +15,10 @@ namespace MusicOrganisationApp.Lib.Models
         private string _genre = string.Empty;
         private string _composerName = string.Empty;
 
-        public int RepertoireId
+        public int Id
         {
-            get => _repertoireId;
-            set => _repertoireId = value;
+            get => _id;
+            set => _id = value;
         }
 
         public DateTime? DateStarted
@@ -78,7 +78,7 @@ namespace MusicOrganisationApp.Lib.Models
         public bool Equals(Repertoire? other)
         {
             return other != null
-                && _repertoireId == other._repertoireId
+                && _id == other._id
                 && _dateStarted == other._dateStarted
                 && _syllabus == other._syllabus
                 && _status == other._status

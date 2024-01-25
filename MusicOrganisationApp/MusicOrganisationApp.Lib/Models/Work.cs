@@ -1,18 +1,18 @@
 ﻿namespace MusicOrganisationApp.Lib.Models
 {
-    public class Work : IEquatable<Work>
+    public class Work : IEquatable<Work>, IModel
     {
-        private int _workId;
+        private int _id;
         private int _composerId;
         private string _title = string.Empty;
         private string _subtitle = string.Empty;
         private string _genre = string.Empty;
         private string _composerName = string.Empty;
 
-        public int WorkId
+        public int Id
         {
-            get => _workId;
-            set => _workId = value;
+            get => _id;
+            set => _id = value;
         }
 
         public int ComposerId
@@ -48,7 +48,7 @@
         public bool Equals(Work? other)
         {
             return other is not null &&
-                   _workId == other._workId &&
+                   _id == other._id &&
                    _composerId == other._composerId &&
                    _title == other._title &&
                    _subtitle == other._subtitle &&

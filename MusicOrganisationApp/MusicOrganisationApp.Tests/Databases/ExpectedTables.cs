@@ -189,7 +189,7 @@ namespace MusicOrganisationApp.Tests.Databases
         public static readonly Caregiver Caregiver = new()
         {
             MapId = CaregiverMaps[0].Id,
-            CaregiverId = CaregiverMaps[0].CaregiverId,
+            Id = CaregiverMaps[0].CaregiverId,
             Description = CaregiverMaps[0].Description,
             Name = CaregiverData[0].Name,
             Email = CaregiverData[0].Email,

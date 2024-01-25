@@ -80,7 +80,7 @@ namespace MusicOrganisationApp.Tests.Services
             {
                 Work work = new()
                 {
-                    WorkId = WorkData[i].Id,
+                    Id = WorkData[i].Id,
                     ComposerId = WorkData[i].ComposerId,
                     Title = WorkData[i].Title,
                     ComposerName = ComposerData[WorkData[i].ComposerId].Name

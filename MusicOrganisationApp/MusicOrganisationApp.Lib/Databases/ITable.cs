@@ -1,10 +1,10 @@
-﻿namespace MusicOrganisationApp.Lib
+﻿using MusicOrganisationApp.Lib.Models;
+
+namespace MusicOrganisationApp.Lib
 {
-    public interface ITable
+    public interface ITable : IModel
     {
         public abstract static string TableName { get; }
-
-        public abstract int Id { get; set; }
 
         public static abstract IEnumerable<string> GetColumnNames();
 
