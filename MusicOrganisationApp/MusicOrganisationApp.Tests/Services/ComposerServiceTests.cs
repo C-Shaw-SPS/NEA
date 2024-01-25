@@ -12,7 +12,6 @@ namespace MusicOrganisationApp.Tests.Services
         public async Task TestInsertComposerAsync()
         {
             (DatabaseConnection database, ComposerService service) = await GetDatabaseAndServiceAsync(nameof(TestInsertComposerAsync));
-            await database.DropTableIfExistsAsync<ComposerData>();
 
             await service.InsertAsync(ExpectedService.ComposerData[0], false);
 

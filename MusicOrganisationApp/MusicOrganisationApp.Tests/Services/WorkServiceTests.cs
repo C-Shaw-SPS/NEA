@@ -12,7 +12,7 @@ namespace MusicOrganisationApp.Tests.Services
         {
             (DatabaseConnection database, WorkService service) = await GetDatabaseAndWorkServiceAsync(nameof(TestInsertWorkAsync));
             
-            await database.ResetTableAsync(ExpectedService.ComposerData);
+            await database.InsertAllAsync(ExpectedService.ComposerData);
 
             Work expectedWork = ExpectedService.Works[0];
             await service.InsertAsync(expectedWork, false);
@@ -27,8 +27,8 @@ namespace MusicOrganisationApp.Tests.Services
         {
             (DatabaseConnection database, WorkService service) = await GetDatabaseAndWorkServiceAsync(nameof(TestGetAllWorksAsync));
 
-            await database.ResetTableAsync(ExpectedService.ComposerData);
-            await database.ResetTableAsync(ExpectedService.WorkData);
+            await database.InsertAllAsync(ExpectedService.ComposerData);
+            await database.InsertAllAsync(ExpectedService.WorkData);
 
             IEnumerable<Work> actualWorks = await service.GetAllAsync();
 
@@ -45,8 +45,8 @@ namespace MusicOrganisationApp.Tests.Services
         {
             (DatabaseConnection database, WorkService service) = await GetDatabaseAndWorkServiceAsync(nameof(TestGetWorkAsync));
 
-            await database.ResetTableAsync(ExpectedService.ComposerData);
-            await database.ResetTableAsync(ExpectedService.WorkData);
+            await database.InsertAllAsync(ExpectedService.ComposerData);
+            await database.InsertAllAsync(ExpectedService.WorkData);
 
             Work expectedWork = ExpectedService.Works[0];
             (bool suceeded, Work actualWork) = await service.GetAsync(expectedWork.WorkId);
@@ -85,7 +85,7 @@ namespace MusicOrganisationApp.Tests.Services
         {
             (DatabaseConnection database, WorkService service) = await GetDatabaseAndWorkServiceAsync(nameof(TestSearchWorkAsync));
 
-            await database.ResetTableAsync(ExpectedService.ComposerData);
+            await database.InsertAllAsync(ExpectedService.ComposerData);
             await database.ResetTableAsync(ExpectedService.WorkData);
 
             Work workToSearch = ExpectedService.Works[0];
@@ -102,8 +102,8 @@ namespace MusicOrganisationApp.Tests.Services
         {
             (DatabaseConnection database, WorkService service) = await GetDatabaseAndWorkServiceAsync(nameof(TestUpdateWorkAsync));
 
-            await database.ResetTableAsync(ExpectedService.ComposerData);
-            await database.ResetTableAsync(ExpectedService.WorkData);
+            await database.InsertAllAsync(ExpectedService.ComposerData);
+            await database.InsertAllAsync(ExpectedService.WorkData);
 
             Work originalWork = ExpectedService.Works[0];
 
