@@ -1,9 +1,10 @@
-namespace MusicOrganisationApp.App.Views.EditViews;
-
-public partial class EditComposerPage : ContentPage
+namespace MusicOrganisationApp.App.Views.EditViews
 {
-	public EditComposerPage()
-	{
-		InitializeComponent();
-	}
+    public partial class EditComposerPage : ContentPage
+    {
+    	public EditComposerPage()
+    	{
+    		InitializeComponent();
+    	}
+    }
 }
