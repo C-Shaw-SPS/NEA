@@ -85,7 +85,7 @@ namespace MusicOrganisationApp.Lib.Services
             return composers;
         }
 
-        public async Task<(bool, ComposerData)> GetAsync(int id)
+        public async Task<(bool, ComposerData)> TryGetAsync(int id)
         {
             (bool suceeded, ComposerData compser) value = await _database.TryGetAsync<ComposerData>(id);
             return value;

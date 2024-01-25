@@ -257,7 +257,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private async Task SetComposer(int id)
         {
-            (bool suceeded, ComposerData composer) = await _service.GetAsync(id);
+            (bool suceeded, ComposerData composer) = await _service.TryGetAsync(id);
             if (suceeded)
             {
                 _id = id;

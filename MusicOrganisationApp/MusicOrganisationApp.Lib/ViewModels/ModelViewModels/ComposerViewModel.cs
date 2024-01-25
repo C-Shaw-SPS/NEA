@@ -65,7 +65,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 
         private async Task SetValue(int id)
         {
-            (bool suceeded, ComposerData composer) = await _service.GetAsync(id);
+            (bool suceeded, ComposerData composer) = await _service.TryGetAsync(id);
             if (suceeded)
             {
                 _value = composer;

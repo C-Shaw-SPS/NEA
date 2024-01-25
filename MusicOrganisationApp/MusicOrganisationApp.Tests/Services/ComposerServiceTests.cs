@@ -93,7 +93,7 @@ namespace MusicOrganisationApp.Tests.Services
             (DatabaseConnection database, ComposerService service) = await GetDatabaseAndServiceAsync(nameof(TestGetComposerAsync));
             await database.InsertAllAsync(ExpectedService.ComposerData);
             ComposerData expectedComposer = ExpectedService.ComposerData[0];
-            (bool suceeded, ComposerData actualComposer) = await service.GetAsync(expectedComposer.Id);
+            (bool suceeded, ComposerData actualComposer) = await service.TryGetAsync(expectedComposer.Id);
             Assert.True(suceeded);
             Assert.Equal(expectedComposer, actualComposer);
         }

@@ -5,9 +5,9 @@
         public const int DEFAULT_LIMIT = 256;
     }
 
-    public interface IService<T> : IService
+    public interface IService<T> : IService where T : class, new()
     {
-        public Task<(bool, T)> GetAsync(int id);
+        public Task<(bool, T)> TryGetAsync(int id);
 
         public Task<IEnumerable<T>> GetAllAsync();
 

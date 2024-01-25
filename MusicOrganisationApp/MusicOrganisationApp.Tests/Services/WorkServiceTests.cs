@@ -49,7 +49,7 @@ namespace MusicOrganisationApp.Tests.Services
             await database.InsertAllAsync(ExpectedService.WorkData);
 
             Work expectedWork = ExpectedService.Works[0];
-            (bool suceeded, Work actualWork) = await service.GetAsync(expectedWork.WorkId);
+            (bool suceeded, Work actualWork) = await service.TryGetAsync(expectedWork.Id);
 
             Assert.True(suceeded);
             Assert.Equal(expectedWork, actualWork);
@@ -65,7 +65,7 @@ namespace MusicOrganisationApp.Tests.Services
             await database.ResetTableAsync(ExpectedService.RepertoireData);
 
             Work workToDelete = ExpectedService.Works[0];
-            WorkData workDataToDelete = ExpectedService.WorkData[workToDelete.WorkId];
+            WorkData workDataToDelete = ExpectedService.WorkData[workToDelete.Id];
             IEnumerable<RepertoireData> repertoireDataToDelete = ExpectedService.RepertoireData.Where(r => r.WorkId == workDataToDelete.Id);
 
             await service.DeleteAsync(workToDelete);
@@ -109,7 +109,7 @@ namespace MusicOrganisationApp.Tests.Services
 
             Work updatedWork = new()
             {
-                WorkId = originalWork.WorkId,
+                Id = originalWork.Id,
                 ComposerId = ExpectedService.ComposerData[1].Id,
                 Title = originalWork.Title[1..],
                 ComposerName = ExpectedService.ComposerData[1].Name,
