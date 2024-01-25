@@ -1,6 +1,6 @@
 ﻿namespace MusicOrganisationApp.Lib.Models
 {
-    public class Work
+    public class Work : IEquatable<Work>
     {
         private int _workId;
         private int _composerId;
@@ -43,6 +43,17 @@
         {
             get => _composerName;
             set => _composerName = value;
+        }
+
+        public bool Equals(Work? other)
+        {
+            return other is not null &&
+                   _workId == other._workId &&
+                   _composerId == other._composerId &&
+                   _title == other._title &&
+                   _subtitle == other._subtitle &&
+                   _genre == other._genre &&
+                   _composerName == other._composerName;
         }
     }
 }

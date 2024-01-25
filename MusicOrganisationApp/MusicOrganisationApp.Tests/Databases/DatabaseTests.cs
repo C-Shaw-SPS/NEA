@@ -206,5 +206,16 @@ namespace MusicOrganisationApp.Tests.Databases
             IEnumerable<ComposerData> composers = await database.QueryAsync<ComposerData>(sqlQuery);
             Assert.Empty(composers);
         }
+
+        [Fact]
+        public async Task TestUnsucessfulGetAsnyc()
+        {
+            DatabaseConnection database = new(nameof(TestUnsucessfulGetAsnyc));
+            await database.InsertAllAsync(ExpectedTables.ComposerData);
+            int id = ExpectedTables.ComposerData.Max(composer => composer.Id) + 1;
+            (bool suceeded, ComposerData actualComposer) = await database.TryGetAsync<ComposerData>(id);
+            Assert.False(suceeded);
+            Assert.Equal(new(), actualComposer);
+        }
     }
 }

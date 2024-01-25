@@ -152,5 +152,11 @@ namespace MusicOrganisationApp.Lib.Databases
             int nextId = result.First().Id + 1;
             return nextId;
         }
+
+        public async Task ResetTableAsync<T>(IEnumerable<T> values) where T : class, ITable, new()
+        {
+            await DropTableIfExistsAsync<T>();
+            await InsertAllAsync(values);
+        }
     }
 }
