@@ -83,7 +83,7 @@
 	  <MauiXaml Update="Views\EditViews\EditComposerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\IndividualViews\ComposerPage.xaml">
+	  <MauiXaml Update="Views\ModelViews\ComposerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

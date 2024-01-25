@@ -4,7 +4,7 @@ using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 
-namespace MusicOrganisationApp.Lib.ViewModels.IndividualViewModels
+namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
     public partial class ComposerViewModel : ViewModelBase, IQueryAttributable
     {

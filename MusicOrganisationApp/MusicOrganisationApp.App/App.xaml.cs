@@ -1,9 +1,9 @@
 ﻿using MusicOrganisationApp.App.Views.CollectionViews;
 using MusicOrganisationApp.App.Views.EditViews;
-using MusicOrganisationApp.App.Views.IndividualViews;
+using MusicOrganisationApp.App.Views.ModelViews;
 using MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
-using MusicOrganisationApp.Lib.ViewModels.IndividualViewModels;
+using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.App
 {

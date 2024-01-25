@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
-using MusicOrganisationApp.Lib.ViewModels.IndividualViewModels;
+using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
