@@ -20,6 +20,9 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         };
 
         private readonly ComposerService _service;
+        private readonly AsyncRelayCommand _addNewCommand;
+        private readonly AsyncRelayCommand _searchCommand;
+        private readonly AsyncRelayCommand _selectCommand;
 
         [ObservableProperty]
         private string _searchText;
@@ -33,22 +36,17 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         [ObservableProperty]
         private ComposerData? _selectedItem;
 
-        private readonly AsyncRelayCommand _addNewCommand;
-        private readonly AsyncRelayCommand _searchCommand;
-        private readonly AsyncRelayCommand _selectCommand;
-
         public AllComposersViewModel()
         {
             _service = new(_database);
+            _addNewCommand = new(AddNewAsync);
+            _searchCommand = new(SearchAsync);
+            _selectCommand = new(SelectAsync);
 
             _searchText = string.Empty;
             _selectedOrdering = _orderings.Keys.First();
             _collection = [];
             _selectedItem = null;
-
-            _addNewCommand = new(AddNewAsync);
-            _searchCommand = new(SearchAsync);
-            _selectCommand = new(SelectAsync);
         }
 
         public static string Route => _ROUTE;
