@@ -18,6 +18,10 @@ namespace MusicOrganisationApp.App
             Routing.RegisterRoute(AllComposersViewModel.Route, typeof(AllComposersPage));
             Routing.RegisterRoute(ComposerViewModel.Route, typeof(ComposerPage));
             Routing.RegisterRoute(EditComposerViewModel.Route, typeof(EditComposerPage));
+
+            Routing.RegisterRoute(AllWorksViewModel.Route, typeof(AllWorksPage));
+            Routing.RegisterRoute(WorkViewModel.Route, typeof(WorkPage));
+            Routing.RegisterRoute(EditWorkViewModel.Route, typeof(EditWorkPage));
         }
     }
 }
