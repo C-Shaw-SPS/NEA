@@ -1,9 +1,10 @@
-namespace MusicOrganisationApp.App.Views.ModelViews;
-
-public partial class WorkPage : ContentPage
+namespace MusicOrganisationApp.App.Views.ModelViews
 {
-	public WorkPage()
-	{
-		InitializeComponent();
-	}
+    public partial class WorkPage : ContentPage
+    {
+    	public WorkPage()
+    	{
+    		InitializeComponent();
+    	}
+    }
 }
