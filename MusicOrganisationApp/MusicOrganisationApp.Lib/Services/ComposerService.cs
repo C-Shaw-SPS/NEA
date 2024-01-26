@@ -79,7 +79,7 @@ namespace MusicOrganisationApp.Lib.Services
                 SelectAll = true
             };
             query.AddWhereLike<ComposerData>(nameof(ComposerData.Name), search);
-            query.AddOrderBy<ComposerData>(ordering);
+            query.AddOrderBy(ordering);
 
             IEnumerable<ComposerData> composers = await _database.QueryAsync<ComposerData>(query);
             return composers;

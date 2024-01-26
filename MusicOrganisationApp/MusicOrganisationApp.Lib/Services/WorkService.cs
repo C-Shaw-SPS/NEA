@@ -60,15 +60,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             SqlQuery<WorkData> sqlQuery = GetSqlQuery();
             sqlQuery.AddWhereLike<WorkData>(nameof(WorkData.Title), search);
-
-            if (WorkData.GetColumnNames().Contains(ordering))
-            {
-                sqlQuery.AddOrderBy<WorkData>(ordering);
-            }
-            else
-            {
-                sqlQuery.AddOrderBy<ComposerData>(ordering);
-            }
+            sqlQuery.AddOrderBy(ordering);
 
             IEnumerable<Work> works = await _database.QueryAsync<Work>(sqlQuery);
             return works;
@@ -82,7 +74,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         private static SqlQuery<WorkData> GetSqlQuery()
         {
-            SqlQuery<WorkData> sqlQuery = new();
+            SqlQuery<WorkData> sqlQuery = new(SqlQuery.DEFAULT_LIMIT);
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Id), nameof(Work.Id));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.ComposerId), nameof(Work.ComposerId));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Work.Title));

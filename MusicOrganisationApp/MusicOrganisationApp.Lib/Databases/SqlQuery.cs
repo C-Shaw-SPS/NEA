@@ -11,7 +11,7 @@ namespace MusicOrganisationApp.Lib.Databases
         private readonly List<(string table, string column, string alias)> _columns;
         private readonly List<(string newTable, string newColumn, string existingTable, string existingColumn)> _joins;
         private readonly List<(string table, string column, string value, string comparison)> _conditions;
-        private readonly List<(string table, string column)> _orderBys;
+        private readonly List<string> _orderBys;
         private readonly int? _limit;
 
         private readonly HashSet<Type> _tables;
@@ -65,9 +65,9 @@ namespace MusicOrganisationApp.Lib.Databases
             _conditions.Add((TTable.TableName, column, SqlFormatting.FormatLikeString(value), "LIKE"));
         }
 
-        public void AddOrderBy<TTable>(string column) where TTable : ITable
+        public void AddOrderBy(string column)
         {
-            _orderBys.Add((TTable.TableName, column));
+            _orderBys.Add(column);
         }
 
         public string GetSql()
@@ -133,8 +133,7 @@ namespace MusicOrganisationApp.Lib.Databases
             if (_orderBys.Count > 0)
             {
                 stringBuilder.AppendLine("ORDER BY");
-                IEnumerable<string> formattedOrderBys = _orderBys.Select(s => $"{s.table}.{s.column}");
-                stringBuilder.AppendLine(string.Join(", ", formattedOrderBys));
+                stringBuilder.AppendLine(string.Join(", ", _orderBys));
             }
         }
 
