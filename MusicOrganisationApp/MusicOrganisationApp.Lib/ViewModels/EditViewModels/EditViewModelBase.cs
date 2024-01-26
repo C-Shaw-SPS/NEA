@@ -16,33 +16,30 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private readonly string _editPageTitle;
         private readonly string _newPageTitle;
 
-        private int _id;
-        private bool _isNew;
-        private T _value;
+        private bool _isNew = false;
+        protected T _value = new();
 
         private readonly AsyncRelayCommand _trySaveCommand;
         private readonly AsyncRelayCommand _deleteCommand;
 
         [ObservableProperty]
-        private string _pageTitle;
+        private string _pageTitle = string.Empty;
 
         [ObservableProperty]
-        private bool _canDelete;
+        private bool _canDelete = true;
 
         public EditViewModelBase(string editPageTitle, string newPageTitle)
         {
             _editPageTitle = editPageTitle;
             _newPageTitle = newPageTitle;
 
-            _isNew = false;
-            _value = new();
-
-            _pageTitle = _editPageTitle;
-            _canDelete = true;
-
             _trySaveCommand = new(TrySaveAsync);
             _deleteCommand = new(DeleteAsync);
         }
+
+        public AsyncRelayCommand TrySaveCommand => _trySaveCommand;
+
+        public AsyncRelayCommand DeleteCommand => _deleteCommand;
 
         protected abstract IService<T> Service { get; }
 
@@ -88,7 +85,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             (bool suceeded, T value) = await Service.TryGetAsync(id);
             if (suceeded)
             {
-                _id = id;
                 _value = value;
                 SetDisplayValues();
             }

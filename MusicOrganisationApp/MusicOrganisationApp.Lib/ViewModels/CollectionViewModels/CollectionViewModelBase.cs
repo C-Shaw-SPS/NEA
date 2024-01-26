@@ -18,13 +18,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         private readonly AsyncRelayCommand _addNewCommand;
 
         [ObservableProperty]
-        private string _searchText;
+        private string _searchText = string.Empty;
 
         [ObservableProperty]
         private string _selectedOrdering;
 
         [ObservableProperty]
-        private ObservableCollection<T> _collection;
+        private ObservableCollection<T> _collection = [];
 
         [ObservableProperty]
         private T? _selectedItem;
@@ -39,10 +39,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             _selectCommand = new(SelectAsync);
             _addNewCommand = new(AddNewAsync);
 
-            _searchText = string.Empty;
             _selectedOrdering = Orderings.First();
-            _collection = [];
-            _selectedItem = null;
         }
 
         protected abstract IService<T> Service { get; }

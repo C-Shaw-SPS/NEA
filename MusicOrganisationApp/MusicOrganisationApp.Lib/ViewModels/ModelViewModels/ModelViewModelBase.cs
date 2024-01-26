@@ -14,13 +14,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
     {
         private readonly string _editRoute;
         private readonly AsyncRelayCommand _editCommand;
-        protected T _value;
+        protected T _value = new();
 
         public ModelViewModelBase(string editRoute)
         {
             _editCommand = new(EditAsync);
             _editRoute = editRoute;
-            _value = new();
         }
 
         protected abstract IService<T> Service { get; } 
