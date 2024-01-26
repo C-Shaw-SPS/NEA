@@ -55,6 +55,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         protected override IService<Work> Service => _workService;
 
+        public AsyncRelayCommand SearchComposersCommand => _searchComposersCommand;
+
         public static string Route => _ROUTE;
 
         private async Task SearchComposersAsync()
