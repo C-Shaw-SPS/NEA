@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Models;
+using MusicOrganisationApp.Lib.Services;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
@@ -17,7 +18,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private int _id;
         private bool _isNew;
-        private T? _value;
+        private T _value;
 
         private readonly AsyncRelayCommand _trySaveCommand;
         private readonly AsyncRelayCommand _deleteCommand;
@@ -43,19 +44,76 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _deleteCommand = new(DeleteAsync);
         }
 
+        protected abstract IService<T> Service { get; }
+
         private async Task TrySaveAsync()
         {
-            throw new NotImplementedException();
+            bool canSave = TrySetValuesToSave();
+            if (canSave)
+            {
+                if (_isNew)
+                {
+                    await Service.InsertAsync(_value, true);
+                }
+                else
+                {
+                    await Service.UpdateAsync(_value);
+                }
+                await GoBackAsync();
+            }
         }
+
+        protected abstract bool TrySetValuesToSave();
 
         private async Task DeleteAsync()
         {
-            throw new NotImplementedException();
+            await Service.DeleteAsync(_value);
+            await GoBackAsync();
         }
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            throw new NotImplementedException();
+            if (query.TryGetValue(ID_PARAMETER, out object? value) && value is int id)
+            {
+                await SetValue(id);
+            }
+            if (query.TryGetValue(IS_NEW_PARAMETER, out value) && value is bool isNew)
+            {
+                SetIsNew(isNew);
+            }
+        }
+
+        private async Task SetValue(int id)
+        {
+            (bool suceeded, T value) = await Service.TryGetAsync(id);
+            if (suceeded)
+            {
+                _id = id;
+                _value = value;
+                SetDisplayValues();
+            }
+            else
+            {
+                await GoBackAsync();
+            }
+        }
+
+        protected abstract void SetDisplayValues();
+
+        private void SetIsNew(bool isNew)
+        {
+            if (isNew)
+            {
+                _isNew = true;
+                PageTitle = _newPageTitle;
+                CanDelete = false;
+            }
+            else
+            {
+                _isNew = false;
+                PageTitle = _editPageTitle;
+                CanDelete = true;
+            }
         }
     }
 }
