@@ -25,6 +25,21 @@
         RowSpacing="10"
         ColumnSpacing="10">
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
         <Label
             Grid.Row="0"
             Grid.Column="0"
@@ -38,6 +53,60 @@
             Grid.Row="0"
             Grid.Column="2"
             Text="{Binding TitleError}"/>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Subtitle:"
+            VerticalOptions="Center"/>
+        <Entry
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding Subtitle}"/>
+
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="Genre:"
+            VerticalOptions="Center"/>
+        <Editor
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="{Binding Genre}"/>
+
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Text="Compooser:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="{Binding ComposerName}"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="3"
+            Grid.Column="2"
+            Text="{Binding ComposerError}"
+            VerticalOptions="Center"/>
+
+        <SearchBar
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Text="{Binding ComposerSearchText}"
+            SearchCommand="{Binding SearchComposersCommand}"/>
+
+        <CollectionView
+            Grid.Row="5"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
+            ItemsSource="{Binding Composers}"
+            SelectedItem="{Binding SelectedComposer}"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Always"
+            SelectionMode="Single"/>
 
     </Grid>
 
