@@ -9,7 +9,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         public const string ID_PARAMETER = nameof(ID_PARAMETER);
     }
 
-    public abstract class ModelViewModelBase<T> : ModelViewModelBase, IQueryAttributable where T : class, IModel, new()
+    public abstract class ModelViewModelBase<T> : ModelViewModelBase, IQueryAttributable where T : class, IIdentifiable, new()
     {
         private readonly string _editPath;
         private readonly AsyncRelayCommand _editCommand;

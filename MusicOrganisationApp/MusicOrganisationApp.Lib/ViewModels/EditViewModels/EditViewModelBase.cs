@@ -13,7 +13,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         public const string IS_NEW_PARAMETER = nameof(IS_NEW_PARAMETER);
     }
 
-    public class EditViewModelBase<T> : EditViewModelBase where T : class, IModel, new()
+    public class EditViewModelBase<T> : EditViewModelBase where T : class, IIdentifiable, new()
     {
 
     }

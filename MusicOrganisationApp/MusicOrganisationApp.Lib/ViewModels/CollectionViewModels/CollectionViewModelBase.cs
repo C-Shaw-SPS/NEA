@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public abstract partial class CollectionViewModelBase<T> : ViewModelBase where T : class, IModel, new()
+    public abstract partial class CollectionViewModelBase<T> : ViewModelBase where T : class, IIdentifiable, new()
     {
         private readonly string _modelPath;
         private readonly string _editPath;
