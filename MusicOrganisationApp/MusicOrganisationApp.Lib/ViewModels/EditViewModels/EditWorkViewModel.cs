@@ -18,6 +18,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private readonly WorkService _workService;
         private readonly ComposerService _composerService;
         private readonly AsyncRelayCommand _searchComposersCommand;
+        private readonly AsyncRelayCommand _addNewComposerCommand;
 
         [ObservableProperty]
         private string _title = string.Empty;
@@ -27,6 +28,9 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         [ObservableProperty]
         private string _genre = string.Empty;
+
+        [ObservableProperty]
+        private string _notes = string.Empty;
 
         [ObservableProperty]
         private string _composerName = string.Empty;
@@ -51,11 +55,14 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _workService = new(_database);
             _composerService = new(_database);
             _searchComposersCommand = new(SearchComposersAsync);
+            _addNewComposerCommand = new(AddNewComposerAsync);
         }
 
         protected override IService<Work> Service => _workService;
 
         public AsyncRelayCommand SearchComposersCommand => _searchComposersCommand;
+
+        public AsyncRelayCommand AddNewComposerCommand => _addNewComposerCommand;
 
         public static string Route => _ROUTE;
 
@@ -69,12 +76,30 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
         }
 
+        private async Task AddNewComposerAsync()
+        {
+            Dictionary<string, object> parameters = new()
+            {
+                [IS_NEW_PARAMETER] = true
+            };
+            await GoToAsync(parameters, EditComposerViewModel.Route);
+        }
+
         protected override void SetDisplayValues()
         {
             Title = _value.Title;
             Subtitle = _value.Subtitle;
             Genre = _value.Genre;
+            Notes = _value.Notes;
             ComposerName = _value.ComposerName;
+        }
+
+        partial void OnSelectedComposerChanged(ComposerData? value)
+        {
+            if (value is not null)
+            {
+                ComposerName = value.Name;
+            }
         }
 
         #region Data Validation
@@ -83,6 +108,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         {
             _value.Subtitle = Subtitle;
             _value.Genre = Genre;
+            _value.Notes = Notes;
 
             bool canSave = true;
             canSave &= TrySetTitle();
@@ -109,16 +135,20 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private bool TrySetComposer()
         {
-            if (SelectedComposer is null)
+            if (SelectedComposer is not null)
+            {
+                _value.ComposerId = SelectedComposer.Id;
+                _value.ComposerName = SelectedComposer.Name;
+                ComposerError = string.Empty;
+                return true;
+            }
+            else if (_isNew)
             {
                 ComposerError = _NO_COMPOSER_SELECTED_ERROR;
                 return false;
             }
             else
             {
-                _value.ComposerId = SelectedComposer.Id;
-                _value.ComposerName = SelectedComposer.Name;
-                ComposerError = string.Empty;
                 return true;
             }
         }

@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;assembly=MusicOrganisationApp.Lib"
     x:Class="MusicOrganisationApp.App.Views.CollectionViews.AllWorksPage"
-    Title="AllWorksPage">
+    Title="Works">
 
     <ContentPage.BindingContext>
         <viewmodels:AllWorksViewModel/>
@@ -18,8 +18,8 @@
     </ContentPage.ToolbarItems>
 
     <Grid
-    RowSpacing="10"
-    ColumnSpacing="10">
+        RowSpacing="10"
+        ColumnSpacing="10">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

@@ -53,6 +53,7 @@ namespace MusicOrganisationApp.Lib.Tables
             set => _genre = value;
         }
 
+        [NotNull]
         public string Notes
         {
             get => _notes;

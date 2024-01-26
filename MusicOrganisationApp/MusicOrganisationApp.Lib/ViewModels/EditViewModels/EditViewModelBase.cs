@@ -16,7 +16,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private readonly string _editPageTitle;
         private readonly string _newPageTitle;
 
-        private bool _isNew = false;
+        protected bool _isNew = false;
         protected T _value = new();
 
         private readonly AsyncRelayCommand _trySaveCommand;

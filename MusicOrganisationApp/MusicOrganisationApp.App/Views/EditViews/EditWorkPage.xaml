@@ -12,12 +12,16 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
-        Text="Save"
-        Command="{Binding TrySaveCommand}"/>
+            Text="Save"
+            Command="{Binding TrySaveCommand}"/>
         <ToolbarItem
-        Text="Delete"
-        IsEnabled="{Binding CanDelete}"
-        Command="{Binding DeleteCommand}"/>
+            Text="Delete"
+            IsEnabled="{Binding CanDelete}"
+            Command="{Binding DeleteCommand}"/>
+        <ToolbarItem
+            Text="New composer"
+            Command="{Binding AddNewComposerCommand}"
+            IconImageSource="{FontImage Glyph='+', Color=Black, Size=22}"/>
     </ContentPage.ToolbarItems>
 
     <Grid
@@ -26,6 +30,7 @@
         ColumnSpacing="10">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -48,11 +53,13 @@
         <Entry
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Title}"/>
+            Text="{Binding Title}"
+            VerticalOptions="Center"/>
         <Label
             Grid.Row="0"
             Grid.Column="2"
-            Text="{Binding TitleError}"/>
+            Text="{Binding TitleError}"
+            VerticalOptions="Center"/>
 
         <Label
             Grid.Row="1"
@@ -62,43 +69,59 @@
         <Entry
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Subtitle}"/>
+            Text="{Binding Subtitle}"
+            VerticalOptions="Center"/>
 
         <Label
             Grid.Row="2"
             Grid.Column="0"
             Text="Genre:"
             VerticalOptions="Center"/>
-        <Editor
+        <Entry
             Grid.Row="2"
             Grid.Column="1"
-            Text="{Binding Genre}"/>
+            Text="{Binding Genre}"
+            VerticalOptions="Center"/>
 
         <Label
             Grid.Row="3"
             Grid.Column="0"
+            Text="Notes:"
+            VerticalOptions="Center"/>
+        <Editor
+            Grid.Row="3"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Text="{Binding Notes}"
+            VerticalOptions="Center"
+            AutoSize="TextChanges"
+            />
+
+        <Label
+            Grid.Row="4"
+            Grid.Column="0"
             Text="Compooser:"
             VerticalOptions="Center"/>
         <Label
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.Column="1"
             Text="{Binding ComposerName}"
             VerticalOptions="Center"/>
         <Label
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.Column="2"
             Text="{Binding ComposerError}"
             VerticalOptions="Center"/>
 
         <SearchBar
-            Grid.Row="4"
+            Grid.Row="5"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Text="{Binding ComposerSearchText}"
             SearchCommand="{Binding SearchComposersCommand}"/>
 
         <CollectionView
-            Grid.Row="5"
+            Grid.Row="6"
             Grid.Column="0"
             Grid.ColumnSpan="4"
             ItemsSource="{Binding Composers}"
@@ -106,7 +129,20 @@
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"
             VerticalScrollBarVisibility="Always"
-            SelectionMode="Single"/>
+            SelectionMode="Single">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout
+                    Orientation="Vertical"
+                    ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Name}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
 
     </Grid>
 
