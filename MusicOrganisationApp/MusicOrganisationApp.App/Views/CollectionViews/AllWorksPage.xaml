@@ -33,51 +33,51 @@
         </Grid.ColumnDefinitions>
 
         <SearchBar
-        Grid.Row="0"
-        Grid.Column="0"
-        Text="{Binding SearchText}"
-        SearchCommand="{Binding SearchCommand}"/>
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="{Binding SearchText}"
+            SearchCommand="{Binding SearchCommand}"/>
 
         <Label
-        Grid.Row="0"
-        Grid.Column="1"
-        Text="Sort by:"
-        VerticalTextAlignment="Center"
-        HorizontalTextAlignment="End"/>
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="Sort by:"
+            VerticalTextAlignment="Center"
+            HorizontalTextAlignment="End"/>
 
         <Picker
-        Grid.Row="0"
-        Grid.Column="2"
-        ItemsSource="{Binding Orderings}"
-        SelectedItem="{Binding SelectedOrdering}"/>
+            Grid.Row="0"
+            Grid.Column="2"
+            ItemsSource="{Binding Orderings}"
+            SelectedItem="{Binding SelectedOrdering}"/>
 
         <CollectionView
-        Grid.Row="1"
-        Grid.ColumnSpan="4"
-        ItemsSource="{Binding Collection}"
-        VerticalOptions="FillAndExpand"
-        HorizontalOptions="FillAndExpand"
-        VerticalScrollBarVisibility="Always"
-        SelectionMode="Single"
-        SelectedItem="{Binding SelectedItem}"
-        SelectionChangedCommand="{Binding SelectCommand}"
-        Margin="20">
+            Grid.Row="1"
+            Grid.ColumnSpan="4"
+            ItemsSource="{Binding Collection}"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Always"
+            SelectionMode="Single"
+            SelectedItem="{Binding SelectedItem}"
+            SelectionChangedCommand="{Binding SelectCommand}"
+            Margin="20">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout
-                Orientation="Vertical"
-                ItemSpacing="10"/>
+                    Orientation="Vertical"
+                    ItemSpacing="10"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>
                         <Label
-                        Text="{Binding Title}"
-                        FontSize="22"/>
+                            Text="{Binding Title}"
+                            FontSize="22"/>
                         <Label
-                        Text="{Binding ComposerName}"
-                        FontSize="14"
-                        TextColor="Silver"/>
+                            Text="{Binding ComposerName}"
+                            FontSize="14"
+                            TextColor="Silver"/>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
