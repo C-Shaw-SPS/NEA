@@ -1,9 +1,18 @@
-namespace MusicOrganisationApp.App.Views.CollectionViews;
+using MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;
 
-public partial class AllWorksPage : ContentPage
+namespace MusicOrganisationApp.App.Views.CollectionViews
 {
-	public AllWorksPage()
-	{
-		InitializeComponent();
-	}
+    public partial class AllWorksPage : ContentPage
+    {
+    	public AllWorksPage()
+    	{
+    		InitializeComponent();
+    	}
+
+        protected override async void OnAppearing()
+        {
+            AllWorksViewModel viewModel = (AllWorksViewModel)BindingContext;
+            await viewModel.RefreshAsync();
+        }
+    }
 }
