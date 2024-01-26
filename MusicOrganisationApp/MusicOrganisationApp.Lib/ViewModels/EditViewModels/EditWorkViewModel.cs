@@ -9,6 +9,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
     public partial class EditWorkViewModel : EditViewModelBase<Work>, IQueryAttributable
     {
+        private const string _ROUTE = nameof(EditWorkViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit work";
         private const string _NEW_PAGE_TITLE = "New work";
         private const string _BLANK_TITLE_ERROR = "Title cannot be blank";
@@ -53,6 +54,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         }
 
         protected override IService<Work> Service => _workService;
+
+        public static string Route => _ROUTE;
 
         private async Task SearchComposersAsync()
         {
