@@ -1,15 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditComposerViewModel : ViewModelBase, IQueryAttributable
+    public partial class EditComposerViewModel : EditViewModelBase<ComposerData>, IQueryAttributable
     {
-        public const string ID_PARAMETER = nameof(ID_PARAMETER);
-        public const string IS_NEW_PARAMETER = nameof(IS_NEW_PARAMETER);
-
         private const string _ROUTE = nameof(EditComposerViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit composer";
         private const string _NEW_PAGE_TITLE = "New composer";
@@ -19,89 +15,42 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private const string _NEGATIVE_YEAR_ERROR = "Year cannot be negative";
         private const string _DEATH_BEFORE_BIRTH_ERROR = "Year of death cannot be before year of birth";
 
-        private int _id;
-        private bool _isNew;
-        private ComposerData _value;
         private readonly ComposerService _service;
 
-        private readonly AsyncRelayCommand _trySaveCommand;
-        private readonly AsyncRelayCommand _deleteCommand;
+        [ObservableProperty]
+        private string _name = string.Empty;
 
         [ObservableProperty]
-        private string _pageTitle;
+        private string _era = string.Empty;
 
         [ObservableProperty]
-        private bool _canDelete;
+        private string _birthYear = string.Empty;
 
         [ObservableProperty]
-        private string _name;
+        private string _deathYear = string.Empty;
 
         [ObservableProperty]
-        private string _era;
+        private string _nameError = string.Empty;
 
         [ObservableProperty]
-        private string _birthYear;
+        private string _birthYearError = string.Empty;
 
         [ObservableProperty]
-        private string _deathYear;
+        private string _deathYearError = string.Empty;
 
-        [ObservableProperty]
-        private string _nameError;
-
-        [ObservableProperty]
-        private string _birthYearError;
-
-        [ObservableProperty]
-        private string _deathYearError;
-
-        public EditComposerViewModel()
+        public EditComposerViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE)
         {
-            _isNew = false;
-            _value = new();
             _service = new(_database);
-
-            _pageTitle = _EDIT_PAGE_TITLE;
-            _canDelete = true;
-
-            _trySaveCommand = new(TrySaveAsync);
-            _deleteCommand = new(DeleteAsync);
-
-            _name = string.Empty;
-            _era = string.Empty;
-            _birthYear = string.Empty;
-            _deathYear = string.Empty;
-
-            _nameError = string.Empty;
-            _birthYearError = string.Empty;
-            _deathYearError = string.Empty;
         }
+
+        protected override IService<ComposerData> Service => _service;
 
         public static string Route => _ROUTE;
 
-        public AsyncRelayCommand TrySaveCommand => _trySaveCommand;
-
-        public AsyncRelayCommand DeleteCommand => _deleteCommand;
 
         #region Saving
 
-        private async Task TrySaveAsync()
-        {
-            bool canSave = TrySetValuesToSave();
-            if (canSave)
-            {
-                if (_isNew)
-                {
-                    await _service.InsertAsync(_value, true);
-                }
-                else
-                {
-                    await _service.UpdateAsync(_value);
-                }
-                await GoBackAsync();
-            }
-        }
-
-        private bool TrySetValuesToSave()
+        protected override bool TrySetValuesToSave()
         {
             SetComposerEra();
 
@@ -243,34 +192,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         #region Page Setup
 
-        public async void ApplyQueryAttributes(IDictionary<string, object> query)
-        {
-            if (query.TryGetValue(ID_PARAMETER, out object? value) && value is int id)
-            {
-                await SetComposer(id);
-            }
-            if (query.TryGetValue(IS_NEW_PARAMETER, out value) && value is bool isNew && isNew)
-            {
-                SetCreateNew();
-            }
-        }
-
-        private async Task SetComposer(int id)
-        {
-            (bool suceeded, ComposerData composer) = await _service.TryGetAsync(id);
-            if (suceeded)
-            {
-                _id = id;
-                _value = composer;
-                SetDisplayValues();
-            }
-            else
-            {
-                await GoBackAsync();
-            }
-        }
-
-        private void SetDisplayValues()
+        protected override void SetDisplayValues()
         {
             Name = _value.Name;
             Era = _value.Era;
@@ -282,13 +204,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             {
                 DeathYear = deathYear.ToString();
             }
-        }
-
-        private void SetCreateNew()
-        {
-            _isNew = true;
-            CanDelete = false;
-            PageTitle = _NEW_PAGE_TITLE;
         }
 
         #endregion
