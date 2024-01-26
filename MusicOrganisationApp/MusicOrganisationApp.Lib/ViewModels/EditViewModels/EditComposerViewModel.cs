@@ -70,7 +70,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private bool TrySetComposerName()
         {
             NameError = string.Empty;
-            if (Name == string.Empty)
+            if (string.IsNullOrWhiteSpace(Name))
             {
                 NameError = _BLANK_NAME_ERROR;
                 return false;
