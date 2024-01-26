@@ -14,6 +14,7 @@ namespace MusicOrganisationApp.Lib.Tables
         private string _title = string.Empty;
         private string _subtitle = string.Empty;
         private string _genre = string.Empty;
+        private string _notes = string.Empty;
         public static string TableName => _TABLE_NAME;
 
 
@@ -52,6 +53,12 @@ namespace MusicOrganisationApp.Lib.Tables
             set => _genre = value;
         }
 
+        public string Notes
+        {
+            get => _notes;
+            set => _notes = value;
+        }
+
         public IDictionary<string, string> GetSqlValues()
         {
             IDictionary<string, string> sqlValues = SqlFormatting.FormatValues(
@@ -59,7 +66,8 @@ namespace MusicOrganisationApp.Lib.Tables
                 (nameof(ComposerId), _composerId),
                 (nameof(Title), _title),
                 (nameof(Subtitle), _subtitle),
-                (nameof(Genre), _genre)
+                (nameof(Genre), _genre),
+                (nameof(Notes), _notes)
                 );
             return sqlValues;
         }
@@ -72,7 +80,8 @@ namespace MusicOrganisationApp.Lib.Tables
                 nameof(ComposerId),
                 nameof(Title),
                 nameof(Subtitle),
-                nameof(Genre)
+                nameof(Genre),
+                nameof(Notes)
             };
         }
 
@@ -83,7 +92,8 @@ namespace MusicOrganisationApp.Lib.Tables
                 && _composerId == other._composerId
                 && _title == other._title
                 && _subtitle == other._subtitle
-                && _genre == other._genre;
+                && _genre == other._genre
+                && _notes == other._notes;
         }
     }
 }

@@ -8,6 +8,7 @@
         private string _subtitle = string.Empty;
         private string _genre = string.Empty;
         private string _composerName = string.Empty;
+        private string _notes = string.Empty;
 
         public int Id
         {
@@ -45,15 +46,22 @@
             set => _composerName = value;
         }
 
+        public string Notes
+        {
+            get => _notes;
+            set => _notes = value;
+        }
+
         public bool Equals(Work? other)
         {
-            return other is not null &&
-                   _id == other._id &&
-                   _composerId == other._composerId &&
-                   _title == other._title &&
-                   _subtitle == other._subtitle &&
-                   _genre == other._genre &&
-                   _composerName == other._composerName;
+            return other is not null
+                && _id == other._id
+                && _composerId == other._composerId
+                && _title == other._title
+                && _subtitle == other._subtitle
+                && _genre == other._genre
+                && _composerName == other._composerName
+                && _notes == other._notes;
         }
     }
 }
