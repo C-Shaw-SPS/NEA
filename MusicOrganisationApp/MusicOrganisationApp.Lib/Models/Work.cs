@@ -1,6 +1,6 @@
 ﻿namespace MusicOrganisationApp.Lib.Models
 {
-    public class Work : IEquatable<Work>, IModel
+    public class Work : IEquatable<Work>, IIdentifiable
     {
         private int _id;
         private int _composerId;

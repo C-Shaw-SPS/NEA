@@ -1,6 +1,6 @@
 ﻿namespace MusicOrganisationApp.Lib.Models
 {
-    public class Caregiver : IEquatable<Caregiver>, IModel
+    public class Caregiver : IEquatable<Caregiver>, IIdentifiable
     {
         private int _mapId;
         private int _id;

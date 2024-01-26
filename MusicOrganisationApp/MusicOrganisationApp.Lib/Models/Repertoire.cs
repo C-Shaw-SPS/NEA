@@ -2,7 +2,7 @@
 
 namespace MusicOrganisationApp.Lib.Models
 {
-    public class Repertoire : IEquatable<Repertoire>, IModel
+    public class Repertoire : IEquatable<Repertoire>, IIdentifiable
     {
         private int _id;
         private DateTime? _dateStarted;

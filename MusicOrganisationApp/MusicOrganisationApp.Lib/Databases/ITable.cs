@@ -2,7 +2,7 @@
 
 namespace MusicOrganisationApp.Lib
 {
-    public interface ITable : IModel
+    public interface ITable : IIdentifiable
     {
         public abstract static string TableName { get; }
 

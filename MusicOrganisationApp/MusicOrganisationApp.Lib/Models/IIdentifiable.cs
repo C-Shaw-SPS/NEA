@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicOrganisationApp.Lib.Models
 {
-    public interface IModel
+    public interface IIdentifiable
     {
         public int Id { get; set; }
     }
