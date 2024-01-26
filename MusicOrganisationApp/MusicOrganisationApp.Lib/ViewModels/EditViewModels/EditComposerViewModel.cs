@@ -267,7 +267,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             else
             {
                 await GoBackAsync();
-                return;
             }
         }
 
