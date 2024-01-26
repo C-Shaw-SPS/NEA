@@ -10,8 +10,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
     public abstract partial class CollectionViewModelBase<T> : ViewModelBase where T : class, IIdentifiable, new()
     {
-        private readonly string _modelPath;
-        private readonly string _editPath;
+        private readonly string _modelRoute;
+        private readonly string _editRoute;
         private readonly Dictionary<string, string> _orderings;
         private readonly AsyncRelayCommand _searchCommand;
         private readonly AsyncRelayCommand _selectCommand;
@@ -29,10 +29,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         [ObservableProperty]
         private T? _selectedItem;
 
-        public CollectionViewModelBase(string modelPath, string editPath, Dictionary<string, string> orderings)
+        public CollectionViewModelBase(string modelRoute, string editRoute, Dictionary<string, string> orderings)
         {
-            _modelPath = modelPath;
-            _editPath = editPath;
+            _modelRoute = modelRoute;
+            _editRoute = editRoute;
             _orderings = orderings;
 
             _searchCommand = new(SearchAsync);
@@ -47,7 +47,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         protected abstract IService<T> Service { get; }
 
-        public List<string> Orderings => _orderings.Values.ToList();
+        public List<string> Orderings => _orderings.Keys.ToList();
 
         public AsyncRelayCommand SearchCommand => _searchCommand;
 
@@ -79,7 +79,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
                 {
                     [ModelViewModelBase.ID_PARAMETER] = SelectedItem.Id
                 };
-                await GoToAsync(paramters, _modelPath);
+                await GoToAsync(paramters, _modelRoute);
             }
         }
 
@@ -89,7 +89,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             {
                 [EditViewModelBase.IS_NEW_PARAMETER] = true
             };
-            await GoToAsync(paramters, _editPath);
+            await GoToAsync(paramters, _editRoute);
         }
     }
 }
