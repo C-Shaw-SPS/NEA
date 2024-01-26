@@ -6,16 +6,11 @@ using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
-    public partial class ComposerViewModel : ViewModelBase, IQueryAttributable
+    public partial class ComposerViewModel : ModelViewModelBase<ComposerData>, IQueryAttributable
     {
-        public const string ID_PARAMETER = nameof(ID_PARAMETER);
-
         private const string _ROUTE = nameof(ComposerViewModel);
 
         private readonly ComposerService _service;
-        private ComposerData _value;
-
-        private readonly AsyncRelayCommand _editCommand;
 
         [ObservableProperty]
         private string _name;
@@ -29,55 +24,21 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _era;
 
-        public ComposerViewModel()
+        public ComposerViewModel() : base(EditComposerViewModel.Route)
         {
             _service = new(_database);
-            _value = new();
+
             _name = string.Empty;
             _birthYear = string.Empty;
             _deathYear = string.Empty;
             _era = string.Empty;
-
-            _editCommand = new(EditAsync);
         }
 
         public static string Route => _ROUTE;
 
-        public AsyncRelayCommand EditCommand => _editCommand;
+        protected override IService<ComposerData> Service => _service;
 
-        private async Task EditAsync()
-        {
-            Dictionary<string, object> parameters = new()
-            {
-                [EditComposerViewModel.ID_PARAMETER] = _value.Id,
-                [EditComposerViewModel.IS_NEW_PARAMETER] = false
-            };
-            await GoToAsync(parameters, EditComposerViewModel.Route);
-        }
-
-        public async void ApplyQueryAttributes(IDictionary<string, object> query)
-        {
-            if (query.TryGetValue(ID_PARAMETER, out object? value) && value is int id)
-            {
-                await SetValue(id);
-            }
-        }
-
-        private async Task SetValue(int id)
-        {
-            (bool suceeded, ComposerData composer) = await _service.TryGetAsync(id);
-            if (suceeded)
-            {
-                _value = composer;
-                SetDisplayValues();
-            }
-            else
-            {
-                await GoBackAsync();
-            }
-        }
-
-        private void SetDisplayValues()
+        protected override void SetDisplayValues()
         {
             Name = _value.Name;
             BirthYear = _value.BirthYear.ToString() ?? string.Empty;

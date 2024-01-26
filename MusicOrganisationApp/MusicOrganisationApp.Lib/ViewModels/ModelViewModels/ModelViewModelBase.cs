@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
+using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
@@ -11,14 +12,14 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 
     public abstract class ModelViewModelBase<T> : ModelViewModelBase, IQueryAttributable where T : class, IIdentifiable, new()
     {
-        private readonly string _editPath;
+        private readonly string _editRoute;
         private readonly AsyncRelayCommand _editCommand;
-        private T _value;
+        protected T _value;
 
-        public ModelViewModelBase(string editPath)
+        public ModelViewModelBase(string editRoute)
         {
             _editCommand = new(EditAsync);
-            _editPath = editPath;
+            _editRoute = editRoute;
             _value = new();
         }
 
@@ -28,7 +29,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 
         private async Task EditAsync()
         {
-            throw new NotImplementedException();
+            Dictionary<string, object> parameters = new()
+            {
+                [EditViewModelBase.ID_PARAMETER] = _value.Id,
+                [EditViewModelBase.IS_NEW_PARAMETER] = false
+            };
+            await GoToAsync(parameters, _editRoute);
         }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
