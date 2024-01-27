@@ -24,126 +24,130 @@
             IconImageSource="{FontImage Glyph='+', Color=Black, Size=22}"/>
     </ContentPage.ToolbarItems>
 
-    <Grid
-        Margin="20"
-        RowSpacing="10"
-        ColumnSpacing="10">
+    <ScrollView>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid
+            Margin="20"
+            RowSpacing="10"
+            ColumnSpacing="10">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <Label
-            Grid.Row="0"
-            Grid.Column="0"
-            Text="Title:"
-            VerticalOptions="Center"/>
-        <Entry
-            Grid.Row="0"
-            Grid.Column="1"
-            Text="{Binding Title}"
-            VerticalOptions="Center"/>
-        <Label
-            Grid.Row="0"
-            Grid.Column="2"
-            Text="{Binding TitleError}"
-            VerticalOptions="Center"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            Text="Subtitle:"
-            VerticalOptions="Center"/>
-        <Entry
-            Grid.Row="1"
-            Grid.Column="1"
-            Text="{Binding Subtitle}"
-            VerticalOptions="Center"/>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Title:"
+                VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="{Binding Title}"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="0"
+                Grid.Column="2"
+                Text="{Binding TitleError}"
+                VerticalOptions="Center"/>
 
-        <Label
-            Grid.Row="2"
-            Grid.Column="0"
-            Text="Genre:"
-            VerticalOptions="Center"/>
-        <Entry
-            Grid.Row="2"
-            Grid.Column="1"
-            Text="{Binding Genre}"
-            VerticalOptions="Center"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Subtitle:"
+                VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding Subtitle}"
+                VerticalOptions="Center"/>
 
-        <Label
-            Grid.Row="3"
-            Grid.Column="0"
-            Text="Notes:"
-            VerticalOptions="Center"/>
-        <Editor
-            Grid.Row="3"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
-            Text="{Binding Notes}"
-            VerticalOptions="Center"
-            AutoSize="TextChanges"
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Genre:"
+                VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="{Binding Genre}"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Text="Notes:"
+                VerticalOptions="Center"/>
+            <Editor
+                Grid.Row="3"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Text="{Binding Notes}"
+                VerticalOptions="Center"
+                AutoSize="TextChanges"
             />
 
-        <Label
-            Grid.Row="4"
-            Grid.Column="0"
-            Text="Compooser:"
-            VerticalOptions="Center"/>
-        <Label
-            Grid.Row="4"
-            Grid.Column="1"
-            Text="{Binding ComposerName}"
-            VerticalOptions="Center"/>
-        <Label
-            Grid.Row="4"
-            Grid.Column="2"
-            Text="{Binding ComposerError}"
-            VerticalOptions="Center"/>
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Text="Compooser:"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="4"
+                Grid.Column="1"
+                Text="{Binding ComposerName}"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="4"
+                Grid.Column="2"
+                Text="{Binding ComposerError}"
+                VerticalOptions="Center"/>
 
-        <SearchBar
-            Grid.Row="5"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Text="{Binding ComposerSearchText}"
-            SearchCommand="{Binding SearchComposersCommand}"/>
+            <SearchBar
+                Grid.Row="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Text="{Binding ComposerSearchText}"
+                SearchCommand="{Binding SearchComposersCommand}"/>
 
-        <CollectionView
-            Grid.Row="6"
-            Grid.Column="0"
-            Grid.ColumnSpan="4"
-            ItemsSource="{Binding Composers}"
-            SelectedItem="{Binding SelectedComposer}"
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="FillAndExpand"
-            VerticalScrollBarVisibility="Always"
-            SelectionMode="Single">
+            <CollectionView
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                ItemsSource="{Binding Composers}"
+                SelectedItem="{Binding SelectedComposer}"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+                VerticalScrollBarVisibility="Always"
+                SelectionMode="Single">
 
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout
-                    Orientation="Vertical"
-                    ItemSpacing="10"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding Name}"/>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Vertical"
+                        ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Name}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
-        </CollectionView>
+            </CollectionView>
 
-    </Grid>
+        </Grid>
+
+    </ScrollView>
 
 </ContentPage>
