@@ -110,7 +110,6 @@ namespace MusicOrganisationApp.Tests.Databases
             {
                 Id = 0,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 0,
                 StartTime = new TimeSpan(13, 00, 00),
                 EndTime = new TimeSpan(14, 00, 00)
             }

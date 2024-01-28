@@ -1,8 +1,5 @@
 ﻿using SQLite;
 using MusicOrganisationApp.Lib.Databases;
-using MusicOrganisationApp.Lib.Tables;
-using MusicOrganisationApp.Lib.Services;
-using MusicOrganisationApp.Lib.Exceptions;
 
 namespace MusicOrganisationApp.Lib.Models
 {

@@ -17,64 +17,56 @@ namespace MusicOrganisationApp.Tests.Timetabling
                 Id = 0,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(09,00,00),
-                EndTime = new TimeSpan(10,00,00),
-                FlagIndex = 0
+                EndTime = new TimeSpan(10,00,00)
             },
             new LessonSlotData
             {
                 Id = 1,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(10,00,00),
-                EndTime = new TimeSpan(10,30,00),
-                FlagIndex = 1
+                EndTime = new TimeSpan(10,30,00)
             },
             new LessonSlotData
             {
                 Id = 2,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(11,00,00),
-                EndTime = new TimeSpan(11,45,00),
-                FlagIndex = 4
+                EndTime = new TimeSpan(11,45,00)
             },
             new LessonSlotData
             {
                 Id = 3,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(12,00,00),
-                EndTime = new TimeSpan(13,00,00),
-                FlagIndex = 3
+                EndTime = new TimeSpan(13,00,00)
             },
             new LessonSlotData
             {
                 Id = 4,
                 DayOfWeek = DayOfWeek.Tuesday,
                 StartTime = new TimeSpan(09,00,00),
-                EndTime = new TimeSpan(09,30,00),
-                FlagIndex = 2
+                EndTime = new TimeSpan(09,30,00)
             },
             new LessonSlotData
             {
                 Id = 5,
                 DayOfWeek = DayOfWeek.Tuesday,
                 StartTime = new TimeSpan(10,00,00),
-                EndTime = new TimeSpan(11,00,00),
-                FlagIndex = 5
+                EndTime = new TimeSpan(11,00,00)
             },
             new LessonSlotData
             {
                 Id = 6,
                 DayOfWeek = DayOfWeek.Tuesday,
                 StartTime = new TimeSpan(11,00,00),
-                EndTime = new TimeSpan(12,00,00),
-                FlagIndex = 3
+                EndTime = new TimeSpan(12,00,00)
             },
             new LessonSlotData
             {
                 Id = 7,
                 DayOfWeek = DayOfWeek.Tuesday,
                 StartTime = new TimeSpan(12,15,00),
-                EndTime = new TimeSpan(13,00,00),
-                FlagIndex = 9
+                EndTime = new TimeSpan(13,00,00)
             }
         };
 
