@@ -16,7 +16,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 0,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 0,
                 StartTime = new TimeSpan(09, 00, 00),
                 EndTime = new TimeSpan(10, 00, 00)
             },
@@ -24,7 +23,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 1,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 2,
                 StartTime = new TimeSpan(10, 00, 00),
                 EndTime = new TimeSpan(11, 00, 00)
             },
@@ -32,7 +30,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 2,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 4,
                 StartTime = new TimeSpan(11, 00, 00),
                 EndTime = new TimeSpan(12, 00, 00)
             },
@@ -40,7 +37,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 3,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 6,
                 StartTime = new TimeSpan(12, 00, 00),
                 EndTime = new TimeSpan(13, 00, 00)
             },
@@ -48,7 +44,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 4,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 8,
                 StartTime = new TimeSpan(12, 00, 00),
                 EndTime = new TimeSpan(13, 00, 00)
             },
@@ -56,7 +51,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 5,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 10,
                 StartTime = new TimeSpan(13, 00, 00),
                 EndTime = new TimeSpan(14, 00, 00)
             },
@@ -64,7 +58,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 6,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 12,
                 StartTime = new TimeSpan(14, 00, 00),
                 EndTime = new TimeSpan(15, 00, 00)
             },
@@ -72,7 +65,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 7,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 14,
                 StartTime = new TimeSpan(15, 00, 00),
                 EndTime = new TimeSpan(16, 00, 00)
             }

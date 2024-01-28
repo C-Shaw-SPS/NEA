@@ -15,7 +15,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 0,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 0,
                 StartTime = new TimeSpan(09, 00, 00),
                 EndTime = new TimeSpan(10, 00, 00)
             },
@@ -23,7 +22,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 1,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 1,
                 StartTime = new TimeSpan(10, 00, 00),
                 EndTime = new TimeSpan(11, 00, 00)
             },
@@ -31,7 +29,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 2,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 2,
                 StartTime = new TimeSpan(11, 00, 00),
                 EndTime = new TimeSpan(12, 00, 00)
             },
@@ -39,7 +36,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 3,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 3,
                 StartTime = new TimeSpan(12, 00, 00),
                 EndTime = new TimeSpan(13, 00, 00)
             }
