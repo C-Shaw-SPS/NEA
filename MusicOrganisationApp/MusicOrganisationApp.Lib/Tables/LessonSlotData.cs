@@ -10,7 +10,6 @@ namespace MusicOrganisationApp.Lib.Tables
 
         private int _id;
         private DayOfWeek _dayOfWeek;
-        private int _flagIndex;
         private TimeSpan _startTime;
         private TimeSpan _endTime;
 
@@ -28,13 +27,6 @@ namespace MusicOrganisationApp.Lib.Tables
         {
             get => _dayOfWeek;
             set => _dayOfWeek = value;
-        }
-
-        [NotNull]
-        public int FlagIndex
-        {
-            get => _flagIndex;
-            set => _flagIndex = value;
         }
 
         [NotNull]
@@ -60,7 +52,6 @@ namespace MusicOrganisationApp.Lib.Tables
             {
                 nameof(Id),
                 nameof(DayOfWeek),
-                nameof(FlagIndex),
                 nameof(StartTime),
                 nameof(EndTime)
             };
@@ -71,7 +62,6 @@ namespace MusicOrganisationApp.Lib.Tables
             IDictionary<string, string> sqlValues = SqlFormatting.FormatValues(
                 (nameof(Id), _id),
                 (nameof(DayOfWeek), _dayOfWeek),
-                (nameof(FlagIndex), _flagIndex),
                 (nameof(StartTime), _startTime),
                 (nameof(EndTime), _endTime)
                 );
@@ -83,7 +73,6 @@ namespace MusicOrganisationApp.Lib.Tables
             return other != null
                 && _id == other._id
                 && _dayOfWeek == other._dayOfWeek
-                && _flagIndex == other._flagIndex
                 && _startTime == other._startTime
                 && _endTime == other._endTime;
         }

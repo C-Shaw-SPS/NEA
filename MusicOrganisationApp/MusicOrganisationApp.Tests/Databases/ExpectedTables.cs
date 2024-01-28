@@ -110,7 +110,6 @@ namespace MusicOrganisationApp.Tests.Databases
             {
                 Id = 0,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 0,
                 StartTime = new TimeSpan(13, 00, 00),
                 EndTime = new TimeSpan(14, 00, 00)
             }
@@ -125,13 +124,6 @@ namespace MusicOrganisationApp.Tests.Databases
                 Level = "Grade 1",
                 NeedsDifferentTimes = true,
                 LessonDuration = TimeSpan.FromHours(1),
-                MondayLessonSlots = 1234,
-                TuesdayLessonSlots = 1543,
-                WednesdayLessonSlots = 9036,
-                ThursdayLessonSlots = -34287,
-                FridayLessonSlots = 0,
-                SaturdayLessonSlots = int.MaxValue,
-                SundayLessonSlots = int.MinValue,
                 PhoneNumber = "0123456789",
                 Email = "pupil0@email.com"
             },

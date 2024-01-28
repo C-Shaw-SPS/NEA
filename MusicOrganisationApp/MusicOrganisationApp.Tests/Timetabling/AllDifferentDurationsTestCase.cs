@@ -1,5 +1,4 @@
 ﻿using MusicOrganisationApp.Lib.Models;
-using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Tests.Timetabling
@@ -16,7 +15,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 0,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 0,
                 StartTime = new TimeSpan(09, 00, 00),
                 EndTime = new TimeSpan(09, 15, 00)
             },
@@ -24,7 +22,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 1,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 1,
                 StartTime = new TimeSpan(10, 00, 00),
                 EndTime = new TimeSpan(10, 30, 00)
             },
@@ -32,7 +29,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 2,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 2,
                 StartTime = new TimeSpan(11, 00, 00),
                 EndTime = new TimeSpan(11, 45, 00)
             },
@@ -40,13 +36,10 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 3,
                 DayOfWeek = DayOfWeek.Monday,
-                FlagIndex = 3,
                 StartTime = new TimeSpan(12, 00, 00),
                 EndTime = new TimeSpan(13, 00, 00)
             }
         };
-
-        private static readonly int _avaliableLessonSlots = Flags.GetNewFlags(_lessonSlots[0].FlagIndex, _lessonSlots[1].FlagIndex, _lessonSlots[2].FlagIndex, _lessonSlots[3].FlagIndex);
 
         private static readonly List<Pupil> _pupils = new()
         {
@@ -55,28 +48,24 @@ namespace MusicOrganisationApp.Tests.Timetabling
                 Id = 0,
                 NeedsDifferentTimes = false,
                 LessonDuration = _lessonSlots[0].Duration,
-                MondayLessonSlots = _avaliableLessonSlots
             },
             new Pupil
             {
                 Id = 1,
                 NeedsDifferentTimes = false,
                 LessonDuration = _lessonSlots[1].Duration,
-                MondayLessonSlots = _avaliableLessonSlots
             },
             new Pupil
             {
                 Id = 2,
                 NeedsDifferentTimes = false,
                 LessonDuration = _lessonSlots[2].Duration,
-                MondayLessonSlots = _avaliableLessonSlots
             },
             new Pupil
             {
                 Id = 3,
                 NeedsDifferentTimes = false,
                 LessonDuration = _lessonSlots[3].Duration,
-                MondayLessonSlots = _avaliableLessonSlots
             }
         };
 
@@ -112,6 +101,29 @@ namespace MusicOrganisationApp.Tests.Timetabling
             { 3, 3 }
         };
 
+        private static readonly List<PupilLessonSlotData> _pupilLessonSlots = GetPupilLessonSlots();
+
+        private static List<PupilLessonSlotData> GetPupilLessonSlots()
+        {
+            List<PupilLessonSlotData> pupilLessonSlots = [];
+            int id = 0;
+            foreach (Pupil pupil in _pupils)
+            {
+                foreach (LessonSlotData lessonSlot in _lessonSlots)
+                {
+                    PupilLessonSlotData pupilLessonSlot = new()
+                    {
+                        Id = id,
+                        PupilId = pupil.Id,
+                        LessonSlotId = lessonSlot.Id
+                    };
+                    pupilLessonSlots.Add(pupilLessonSlot);
+                    ++id;
+                }
+            }
+            return pupilLessonSlots;
+        }
+
         #endregion
 
         public static bool IsPossible => _IS_POSSIBLE;
@@ -123,5 +135,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
         public static IEnumerable<LessonData> PrevLessons => _prevLessons;
 
         public static Dictionary<int, int>? ExpectedTimetable => _expectedTimetable;
+
+        public static IEnumerable<PupilLessonSlotData> PupilLessonSlots => _pupilLessonSlots;
     }
 }

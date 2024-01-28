@@ -1,8 +1,5 @@
 ﻿using SQLite;
 using MusicOrganisationApp.Lib.Databases;
-using MusicOrganisationApp.Lib.Tables;
-using MusicOrganisationApp.Lib.Services;
-using MusicOrganisationApp.Lib.Exceptions;
 
 namespace MusicOrganisationApp.Lib.Models
 {
@@ -16,7 +13,6 @@ namespace MusicOrganisationApp.Lib.Models
         private string _level = string.Empty;
         private bool _needsDifferentTimes;
         private TimeSpan _lessonDuration;
-        private readonly Dictionary<DayOfWeek, int> _lessonSlots = GetEmptyLessonSlots();
         private string _email = string.Empty;
         private string _phoneNumber = string.Empty;
         private string _notes = string.Empty;
@@ -57,55 +53,6 @@ namespace MusicOrganisationApp.Lib.Models
         }
 
         [NotNull]
-        public int MondayLessonSlots
-        {
-            get => _lessonSlots[DayOfWeek.Monday];
-            set => _lessonSlots[DayOfWeek.Monday] = value;
-        }
-
-        [NotNull]
-        public int TuesdayLessonSlots
-        {
-            get => _lessonSlots[DayOfWeek.Tuesday];
-            set => _lessonSlots[DayOfWeek.Tuesday] = value;
-        }
-
-        [NotNull]
-        public int WednesdayLessonSlots
-        {
-            get => _lessonSlots[DayOfWeek.Wednesday];
-            set => _lessonSlots[DayOfWeek.Wednesday] = value;
-        }
-
-        [NotNull]
-        public int ThursdayLessonSlots
-        {
-            get => _lessonSlots[DayOfWeek.Thursday];
-            set => _lessonSlots[DayOfWeek.Thursday] = value;
-        }
-
-        [NotNull]
-        public int FridayLessonSlots
-        {
-            get => _lessonSlots[DayOfWeek.Friday];
-            set => _lessonSlots[DayOfWeek.Friday] = value;
-        }
-
-        [NotNull]
-        public int SaturdayLessonSlots
-        {
-            get => _lessonSlots[DayOfWeek.Saturday];
-            set => _lessonSlots[DayOfWeek.Saturday] = value;
-        }
-
-        [NotNull]
-        public int SundayLessonSlots
-        {
-            get => _lessonSlots[DayOfWeek.Sunday];
-            set => _lessonSlots[DayOfWeek.Sunday] = value;
-        }
-
-        [NotNull]
         public string Email
         {
             get => _email;
@@ -138,38 +85,6 @@ namespace MusicOrganisationApp.Lib.Models
             return dictionary;
         }
 
-        public int GetTotalLessonSlots()
-        {
-            int totalSlots = 0;
-            foreach (int flags in _lessonSlots.Values)
-            {
-                totalSlots += flags.GetNumberOfFlags();
-            }
-            return totalSlots;
-        }
-
-        public bool HasAnyLessonSlots()
-        {
-            foreach (int flags in _lessonSlots.Values)
-            {
-                if (flags != 0)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public bool HasFixedLessonSlot()
-        {
-            return GetTotalLessonSlots() == 1;
-        }
-
-        public bool HasVariableLessonSlots()
-        {
-            return GetTotalLessonSlots() > 1;
-        }
-
         public bool Equals(Pupil? other)
         {
             return other != null
@@ -178,54 +93,9 @@ namespace MusicOrganisationApp.Lib.Models
                 && _level == other._level
                 && _needsDifferentTimes == other._needsDifferentTimes
                 && _lessonDuration == other._lessonDuration
-                && EqualLessonSlots(_lessonSlots, other._lessonSlots)
                 && _email == other._email
                 && _phoneNumber == other._phoneNumber
                 && _notes == other._notes;
-        }
-
-        private static bool EqualLessonSlots(Dictionary<DayOfWeek, int> lessonSlots1, Dictionary<DayOfWeek, int> lessonSlots2)
-        {
-            for (DayOfWeek day = DayOfWeek.Monday; day <= DayOfWeek.Sunday; ++day)
-            {
-                if (lessonSlots1[day] != lessonSlots2[day])
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public bool IsAvaliableInSlot(LessonSlotData lessonSlot)
-        {
-            return _lessonSlots[lessonSlot.DayOfWeek].HasFlagAtIndex(lessonSlot.FlagIndex);
-        }
-
-        public (DayOfWeek dayOfWeek, int index) GetFixedLessonSlot()
-        {
-            foreach (DayOfWeek dayOfWeek in _lessonSlots.Keys)
-            {
-                if (_lessonSlots[dayOfWeek].GetNumberOfFlags() == 1)
-                {
-                    return (dayOfWeek, _lessonSlots[dayOfWeek].GetIndexOfFirstFlag());
-                }
-            }
-
-            throw new NoFixedLessonException(this);
-        }
-
-        public void AddLessonSlot(LessonSlotData lessonSlot)
-        {
-            int newFlags = _lessonSlots[lessonSlot.DayOfWeek];
-            newFlags.AddFlagAtIndex(lessonSlot.FlagIndex);
-            _lessonSlots[lessonSlot.DayOfWeek] = newFlags;
-        }
-
-        public void RemoveLessonSlot(LessonSlotData lessonSlot)
-        {
-            int newFlags = _lessonSlots[lessonSlot.DayOfWeek];
-            newFlags.RemoveFlagAtIndex(lessonSlot.FlagIndex);
-            _lessonSlots[lessonSlot.DayOfWeek] = newFlags;
         }
 
         public static IEnumerable<string> GetColumnNames()
@@ -237,13 +107,6 @@ namespace MusicOrganisationApp.Lib.Models
                 nameof(Level),
                 nameof(NeedsDifferentTimes),
                 nameof(LessonDuration),
-                nameof(MondayLessonSlots),
-                nameof(TuesdayLessonSlots),
-                nameof(WednesdayLessonSlots),
-                nameof(ThursdayLessonSlots),
-                nameof(FridayLessonSlots),
-                nameof(SaturdayLessonSlots),
-                nameof(SundayLessonSlots),
                 nameof(Email),
                 nameof(PhoneNumber),
                 nameof(Notes)
@@ -258,13 +121,6 @@ namespace MusicOrganisationApp.Lib.Models
                 (nameof(Level), _level),
                 (nameof(NeedsDifferentTimes), _needsDifferentTimes),
                 (nameof(LessonDuration), _lessonDuration),
-                (nameof(MondayLessonSlots), _lessonSlots[DayOfWeek.Monday]),
-                (nameof(TuesdayLessonSlots), _lessonSlots[DayOfWeek.Tuesday]),
-                (nameof(WednesdayLessonSlots), _lessonSlots[DayOfWeek.Wednesday]),
-                (nameof(ThursdayLessonSlots), _lessonSlots[DayOfWeek.Thursday]),
-                (nameof(FridayLessonSlots), _lessonSlots[DayOfWeek.Friday]),
-                (nameof(SaturdayLessonSlots), _lessonSlots[DayOfWeek.Saturday]),
-                (nameof(SundayLessonSlots), _lessonSlots[DayOfWeek.Sunday]),
                 (nameof(Email), _email),
                 (nameof(PhoneNumber), _phoneNumber),
                 (nameof(Notes), _notes)
