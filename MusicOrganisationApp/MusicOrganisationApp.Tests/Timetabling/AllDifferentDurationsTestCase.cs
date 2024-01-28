@@ -55,28 +55,24 @@ namespace MusicOrganisationApp.Tests.Timetabling
                 Id = 0,
                 NeedsDifferentTimes = false,
                 LessonDuration = _lessonSlots[0].Duration,
-                MondayLessonSlots = _avaliableLessonSlots
             },
             new Pupil
             {
                 Id = 1,
                 NeedsDifferentTimes = false,
                 LessonDuration = _lessonSlots[1].Duration,
-                MondayLessonSlots = _avaliableLessonSlots
             },
             new Pupil
             {
                 Id = 2,
                 NeedsDifferentTimes = false,
                 LessonDuration = _lessonSlots[2].Duration,
-                MondayLessonSlots = _avaliableLessonSlots
             },
             new Pupil
             {
                 Id = 3,
                 NeedsDifferentTimes = false,
                 LessonDuration = _lessonSlots[3].Duration,
-                MondayLessonSlots = _avaliableLessonSlots
             }
         };
 
@@ -112,6 +108,29 @@ namespace MusicOrganisationApp.Tests.Timetabling
             { 3, 3 }
         };
 
+        private static readonly List<PupilLessonSlotData> _pupilLessonSlots = GetPupilLessonSlots();
+
+        private static List<PupilLessonSlotData> GetPupilLessonSlots()
+        {
+            List<PupilLessonSlotData> pupilLessonSlots = [];
+            int id = 0;
+            foreach (Pupil pupil in _pupils)
+            {
+                foreach (LessonSlotData lessonSlot in _lessonSlots)
+                {
+                    PupilLessonSlotData pupilLessonSlot = new()
+                    {
+                        Id = id,
+                        PupilId = pupil.Id,
+                        LessonSlotId = lessonSlot.Id
+                    };
+                    pupilLessonSlots.Add(pupilLessonSlot);
+                    ++id;
+                }
+            }
+            return pupilLessonSlots;
+        }
+
         #endregion
 
         public static bool IsPossible => _IS_POSSIBLE;
@@ -123,5 +142,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
         public static IEnumerable<LessonData> PrevLessons => _prevLessons;
 
         public static Dictionary<int, int>? ExpectedTimetable => _expectedTimetable;
+
+        public static IEnumerable<PupilLessonSlotData> PupilLessonSlots => _pupilLessonSlots;
     }
 }

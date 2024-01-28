@@ -52,29 +52,25 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 0,
                 NeedsDifferentTimes = false,
-                LessonDuration = new TimeSpan(01, 00, 00),
-                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[0].FlagIndex)
+                LessonDuration = new TimeSpan(01, 00, 00)
             },
             new Pupil
             {
                 Id = 1,
                 NeedsDifferentTimes = false,
-                LessonDuration = new TimeSpan(01, 00, 00),
-                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[1].FlagIndex)
+                LessonDuration = new TimeSpan(01, 00, 00)
             },
             new Pupil
             {
                 Id = 2,
                 NeedsDifferentTimes = false,
-                LessonDuration = new TimeSpan(01, 00, 00),
-                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[2].FlagIndex)
+                LessonDuration = new TimeSpan(01, 00, 00)
             },
             new Pupil
             {
                 Id = 3,
                 NeedsDifferentTimes = false,
-                LessonDuration = new TimeSpan(01, 00, 00),
-                MondayLessonSlots = Flags.GetNewFlags(_lessonSlots[3].FlagIndex)
+                LessonDuration = new TimeSpan(01, 00, 00)
             }
         };
 
@@ -110,6 +106,23 @@ namespace MusicOrganisationApp.Tests.Timetabling
             { 3, 3 }
         };
 
+        private static readonly List<PupilLessonSlotData> _pupilLessonSlots = GetPupilLessonSlots();
+        private static List<PupilLessonSlotData> GetPupilLessonSlots()
+        {
+            List<PupilLessonSlotData> pupilLessonSlots = [];
+            for (int i = 0; i < _pupils.Count; ++i)
+            {
+                PupilLessonSlotData pupilLessonSlot = new()
+                {
+                    Id = i,
+                    PupilId = _pupils[i].Id,
+                    LessonSlotId = _lessonSlots[i].Id
+                };
+                pupilLessonSlots.Add(pupilLessonSlot);
+            }
+            return pupilLessonSlots;
+        }
+
         #endregion
 
         public static bool IsPossible => _IS_POSSIBLE;
@@ -121,5 +134,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
         public static IEnumerable<LessonData> PrevLessons => _prevLessons;
 
         public static Dictionary<int, int>? ExpectedTimetable => _expectedTimetable;
+
+        public static IEnumerable<PupilLessonSlotData> PupilLessonSlots => _pupilLessonSlots;
     }
 }
