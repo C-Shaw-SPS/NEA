@@ -4,13 +4,19 @@ namespace MusicOrganisationApp.Lib.Databases
 {
     public abstract class SqlQuery
     {
+        private const string _WHERE = "WHERE";
+        private const string _AND = "AND";
+        private const string _OR = "OR";
+        private const string _EQUALS = "=";
+        private const string _LIKE = "LIKE";
+
         public const int DEFAULT_LIMIT = 256;
 
         private readonly string _tableName;
         private bool _selectAll;
         private readonly List<(string table, string column, string alias)> _columns;
         private readonly List<(string newTable, string newColumn, string existingTable, string existingColumn)> _joins;
-        private readonly List<(string table, string column, string value, string comparison)> _conditions;
+        private readonly List<(string keyword, string table, string column, string value, string comparison)> _conditions;
         private readonly List<string> _orderBys;
         private readonly int? _limit;
 
@@ -57,12 +63,17 @@ namespace MusicOrganisationApp.Lib.Databases
 
         public void AddWhereEquals<TTable>(string column, object? value) where TTable : ITable
         {
-            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatSqlValue(value), "="));
+            AddCondition<TTable>(_WHERE, column, value, _EQUALS);
         }
 
         public void AddWhereLike<TTable>(string column, string value) where TTable : ITable
         {
-            _conditions.Add((TTable.TableName, column, SqlFormatting.FormatLikeString(value), "LIKE"));
+            AddCondition<TTable>(_WHERE, column, $"%{value}%", _LIKE);
+        }
+
+        private void AddCondition<TTable>(string keyword, string column, object? value, string condition) where TTable : ITable
+        {
+            _conditions.Add((keyword, TTable.TableName, column, SqlFormatting.FormatSqlValue(value), condition));
         }
 
         public void AddOrderBy(string column)
@@ -75,7 +86,7 @@ namespace MusicOrganisationApp.Lib.Databases
             StringBuilder stringBuilder = new();
             AddSelectColumnsToStringbuilder(stringBuilder);
             AddJoinsToStringbuilder(stringBuilder);
-            AddWhereEqualsToStringbuilder(stringBuilder);
+            AddConditionsToStringBuilder(stringBuilder);
             AddOrderBys(stringBuilder);
             AddLimit(stringBuilder);
 
@@ -107,25 +118,19 @@ namespace MusicOrganisationApp.Lib.Databases
             }
         }
 
-        private void AddWhereEqualsToStringbuilder(StringBuilder stringBuilder)
+        private void AddConditionsToStringBuilder(StringBuilder stringBuilder)
         {
-            if (_conditions.Count >= 1)
-            {
-                stringBuilder.AppendLine("WHERE");
-                stringBuilder.AppendLine(FormatCondition(0));
-            }
-            for (int i = 2; i < _conditions.Count; i++)
+            for (int i = 0; i < _conditions.Count; ++i)
             {
                 string condition = FormatCondition(i);
-                string line = $"AND {condition}";
-                stringBuilder.AppendLine(line);
+                stringBuilder.AppendLine(condition);
             }
         }
 
         private string FormatCondition(int conditionIndex)
         {
-            (string table, string column, string value, string comparison) = _conditions[conditionIndex];
-            return $"{table}.{column} {comparison} {value}";
+            (string keyword, string table, string column, string value, string comparison) = _conditions[conditionIndex];
+            return $"{keyword} {table}.{column} {comparison} {value}";
         }
 
         private void AddOrderBys(StringBuilder stringBuilder)
