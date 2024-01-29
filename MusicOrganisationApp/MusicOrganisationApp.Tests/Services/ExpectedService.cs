@@ -47,32 +47,119 @@ namespace MusicOrganisationApp.Tests.Services
             }
         };
 
+        public static readonly List<Pupil> Pupils = new()
+        {
+            new Pupil
+            {
+                Id = 0
+            },
+            new Pupil
+            {
+                Id = 1
+            }
+        };
+
         public static readonly List<RepertoireData> RepertoireData = new()
         {
             new RepertoireData
             {
                 Id = 0,
-                WorkId = WorkData[0].Id
+                WorkId = WorkData[0].Id,
+                PupilId = Pupils[0].Id
             },
             new RepertoireData
             {
                 Id = 1,
-                WorkId = WorkData[1].Id
+                WorkId = WorkData[1].Id,
+                PupilId = Pupils[0].Id
             },
             new RepertoireData
             {
                 Id = 2,
-                WorkId = WorkData[2].Id
+                WorkId = WorkData[2].Id,
+                PupilId = Pupils[1].Id
             },
             new RepertoireData
             {
                 Id = 3,
-                WorkId = WorkData[3].Id
+                WorkId = WorkData[3].Id,
+                PupilId = Pupils[1].Id
             }
         };
 
-        public static readonly List<Work> Works = GetWorks();
+        public static readonly List<CaregiverMap> CaregiverMaps = new()
+        {
+            new CaregiverMap
+            {
+                Id = 0,
+                PupilId = Pupils[0].Id
+            },
+            new CaregiverMap
+            {
+                Id = 1,
+                PupilId = Pupils[0].Id
+            },
+            new CaregiverMap
+            {
+                Id = 2,
+                PupilId = Pupils[1].Id
+            },
+            new CaregiverMap
+            {
+                Id = 3,
+                PupilId = Pupils[1].Id
+            }
+        };
 
+        public static readonly List<LessonData> LessonData = new()
+        {
+            new LessonData
+            {
+                Id = 0,
+                PupilId  = Pupils[0].Id
+            },
+            new LessonData
+            {
+                Id = 1,
+                PupilId = Pupils[0].Id
+            },
+            new LessonData
+            {
+                Id = 2,
+                PupilId  = Pupils[1].Id
+            },
+            new LessonData
+            {
+                Id = 3,
+                PupilId = Pupils[1].Id
+            }
+        };
+
+        public static readonly List<PupilAvaliability> PupilAvaliabilities = new()
+        {
+            new PupilAvaliability
+            {
+                Id = 0,
+                PupilId = Pupils[0].Id
+            },
+            new PupilAvaliability
+            {
+                Id = 1,
+                PupilId = Pupils[0].Id
+            },
+            new PupilAvaliability
+            {
+                Id = 2,
+                PupilId = Pupils[1].Id
+            },
+            new PupilAvaliability
+            {
+                Id = 3,
+                PupilId = Pupils[1].Id
+            },
+        };
+
+        public static readonly List<Work> Works = GetWorks();
         private static List<Work> GetWorks()
         {
             List<Work> works = new();
