@@ -4,7 +4,7 @@ using SQLite;
 namespace MusicOrganisationApp.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class PupilLessonSlotData : ITable, IEquatable<PupilLessonSlotData>
+    public class PupilLessonSlotData : ITable, IEquatable<PupilLessonSlotData>, IPupilIdentifiable
     {
         private const string _TABLE_NAME = nameof(PupilLessonSlotData);
 

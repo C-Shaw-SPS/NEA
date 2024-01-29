@@ -4,7 +4,7 @@ using SQLite;
 namespace MusicOrganisationApp.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class CaregiverMap : ITable, IEquatable<CaregiverMap>
+    public class CaregiverMap : ITable, IEquatable<CaregiverMap>, IPupilIdentifiable
     {
         private const string _TABLE_NAME = nameof(CaregiverMap);
 
