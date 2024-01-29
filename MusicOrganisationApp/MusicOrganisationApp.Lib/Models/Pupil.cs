@@ -11,7 +11,7 @@ namespace MusicOrganisationApp.Lib.Models
         private int _id;
         private string _name = string.Empty;
         private string _level = string.Empty;
-        private bool _needsDifferentTimes;
+        private bool _needsDifferentTimes = false;
         private TimeSpan _lessonDuration;
         private string _email = string.Empty;
         private string _phoneNumber = string.Empty;
