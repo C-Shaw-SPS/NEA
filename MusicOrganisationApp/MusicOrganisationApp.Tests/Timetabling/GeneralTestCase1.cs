@@ -165,111 +165,111 @@ namespace MusicOrganisationApp.Tests.Timetabling
             },
         };
 
-        private static readonly List<PupilLessonSlotData> _pupilLessonSlots = new()
+        private static readonly List<PupilAvaliability> _pupilLessonSlots = new()
         {
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 0,
                 PupilId = _pupils[0].Id,
                 LessonSlotId = _lessonSlots[0].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 1,
                 PupilId = _pupils[1].Id,
                 LessonSlotId = _lessonSlots[1].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 2,
                 PupilId = _pupils[2].Id,
                 LessonSlotId = _lessonSlots[1].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 3,
                 PupilId = _pupils[2].Id,
                 LessonSlotId = _lessonSlots[2].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 4,
                 PupilId = _pupils[3].Id,
                 LessonSlotId = _lessonSlots[2].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 5,
                 PupilId = _pupils[3].Id,
                 LessonSlotId = _lessonSlots[3].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 6,
                 PupilId = _pupils[4].Id,
                 LessonSlotId = _lessonSlots[3].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 7,
                 PupilId = _pupils[4].Id,
                 LessonSlotId = _lessonSlots[4].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 8,
                 PupilId = _pupils[4].Id,
                 LessonSlotId = _lessonSlots[5].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 9,
                 PupilId = _pupils[5].Id,
                 LessonSlotId = _lessonSlots[4].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 10,
                 PupilId = _pupils[5].Id,
                 LessonSlotId = _lessonSlots[5].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 11,
                 PupilId = _pupils[5].Id,
                 LessonSlotId = _lessonSlots[6].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 12,
                 PupilId = _pupils[6].Id,
                 LessonSlotId = _lessonSlots[5].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 13,
                 PupilId = _pupils[6].Id,
                 LessonSlotId = _lessonSlots[6].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 14,
                 PupilId = _pupils[6].Id,
                 LessonSlotId = _lessonSlots[7].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 15,
                 PupilId = _pupils[7].Id,
                 LessonSlotId = _lessonSlots[6].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 16,
                 PupilId = _pupils[7].Id,
                 LessonSlotId = _lessonSlots[7].Id
             },
-            new PupilLessonSlotData
+            new PupilAvaliability
             {
                 Id = 17,
                 PupilId = _pupils[7].Id,
@@ -301,6 +301,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
 
         public static Dictionary<int, int>? ExpectedTimetable => _expectedTimetable;
 
-        public static IEnumerable<PupilLessonSlotData> PupilLessonSlots => _pupilLessonSlots;
+        public static IEnumerable<PupilAvaliability> PupilLessonSlots => _pupilLessonSlots;
     }
 }

@@ -19,7 +19,7 @@ namespace MusicOrganisationApp.Lib.Services
             await DeletePupilData<RepertoireData>(value.Id);
             await DeletePupilData<CaregiverMap>(value.Id);
             await DeletePupilData<LessonData>(value.Id);
-            await DeletePupilData<PupilLessonSlotData>(value.Id);
+            await DeletePupilData<PupilAvaliability>(value.Id);
         }
 
 
@@ -30,29 +30,43 @@ namespace MusicOrganisationApp.Lib.Services
             await _database.ExecuteAsync(deleteStatement);
         }
 
-        public Task<IEnumerable<Pupil>> GetAllAsync()
+        public async Task<IEnumerable<Pupil>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            IEnumerable<Pupil> pupils = await _database.GetAllAsync<Pupil>();
+            return pupils;
         }
 
-        public Task InsertAsync(Pupil value, bool getNewId)
+        public async Task InsertAsync(Pupil value, bool getNewId)
         {
-            throw new NotImplementedException();
+            if (getNewId)
+            {
+                int newId = await _database.GetNextIdAsync<Pupil>();
+                value.Id = newId;
+            }
+            await _database.InsertAsync(value);
         }
 
-        public Task<IEnumerable<Pupil>> SearchAsync(string search, string ordering)
+        public async Task<IEnumerable<Pupil>> SearchAsync(string search, string ordering)
         {
-            throw new NotImplementedException();
+            SqlQuery<Pupil> sqlQuery = new(SqlQuery.DEFAULT_LIMIT)
+            {
+                SelectAll = true
+            };
+            sqlQuery.AddWhereLike<Pupil>(nameof(Pupil.Name), search);
+            sqlQuery.AddOrderBy(ordering);
+            IEnumerable<Pupil> result = await _database.QueryAsync<Pupil>(sqlQuery);
+            return result;
         }
 
-        public Task<(bool, Pupil)> TryGetAsync(int id)
+        public async Task<(bool, Pupil)> TryGetAsync(int id)
         {
-            throw new NotImplementedException();
+            (bool suceeded, Pupil pupil) result = await _database.TryGetAsync<Pupil>(id);
+            return result;
         }
 
-        public Task UpdateAsync(Pupil value)
+        public async Task UpdateAsync(Pupil value)
         {
-            throw new NotImplementedException();
+            await _database.UpdateAsync(value);
         }
     }
 }

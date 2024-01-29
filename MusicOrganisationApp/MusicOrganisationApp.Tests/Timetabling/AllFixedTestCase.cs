@@ -102,13 +102,13 @@ namespace MusicOrganisationApp.Tests.Timetabling
             { 3, 3 }
         };
 
-        private static readonly List<PupilLessonSlotData> _pupilLessonSlots = GetPupilLessonSlots();
-        private static List<PupilLessonSlotData> GetPupilLessonSlots()
+        private static readonly List<PupilAvaliability> _pupilLessonSlots = GetPupilLessonSlots();
+        private static List<PupilAvaliability> GetPupilLessonSlots()
         {
-            List<PupilLessonSlotData> pupilLessonSlots = [];
+            List<PupilAvaliability> pupilLessonSlots = [];
             for (int i = 0; i < _pupils.Count; ++i)
             {
-                PupilLessonSlotData pupilLessonSlot = new()
+                PupilAvaliability pupilLessonSlot = new()
                 {
                     Id = i,
                     PupilId = _pupils[i].Id,
@@ -131,6 +131,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
 
         public static Dictionary<int, int>? ExpectedTimetable => _expectedTimetable;
 
-        public static IEnumerable<PupilLessonSlotData> PupilLessonSlots => _pupilLessonSlots;
+        public static IEnumerable<PupilAvaliability> PupilLessonSlots => _pupilLessonSlots;
     }
 }
