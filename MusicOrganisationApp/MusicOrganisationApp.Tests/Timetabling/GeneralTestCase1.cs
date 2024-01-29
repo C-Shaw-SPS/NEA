@@ -1,5 +1,4 @@
 ﻿using MusicOrganisationApp.Lib.Models;
-using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Tests.Timetabling
