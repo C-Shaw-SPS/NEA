@@ -14,7 +14,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
     {
         private const string _ROUTE = nameof(AllPupilsViewModel);
 
-        private static Dictionary<string, string> _orderings = new()
+        private static readonly Dictionary<string, string> _orderings = new()
         {
             ["Name"] = nameof(Pupil.Name)
         };
