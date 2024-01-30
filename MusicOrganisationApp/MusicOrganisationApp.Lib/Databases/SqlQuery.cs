@@ -71,6 +71,11 @@ namespace MusicOrganisationApp.Lib.Databases
             AddCondition<TTable>(_WHERE, column, $"%{value}%", _LIKE);
         }
 
+        public void AddAndEqual<TTable>(string column, object? value) where TTable : ITable
+        {
+            AddCondition<TTable>(_AND, column, value, _EQUALS);
+        }
+
         private void AddCondition<TTable>(string keyword, string column, object? value, string condition) where TTable : ITable
         {
             _conditions.Add((keyword, TTable.TableName, column, SqlFormatting.FormatSqlValue(value), condition));
