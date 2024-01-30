@@ -107,7 +107,7 @@
                 Grid.Row="6"
                 Grid.Column="0"
                 Text="Notes:"
-                VerticalOptions="Center"/>
+                VerticalOptions="Start"/>
             <Label
                 Grid.Row="6"
                 Grid.Column="1"
