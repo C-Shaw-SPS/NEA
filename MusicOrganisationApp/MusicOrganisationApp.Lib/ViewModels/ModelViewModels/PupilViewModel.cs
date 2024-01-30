@@ -5,7 +5,7 @@ using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
-    public partial class PupilViewModel : ModelViewModelBase<Pupil>
+    public partial class PupilViewModel : ModelViewModelBase<Pupil>, IQueryAttributable
     {
         private const string _ROUTE = nameof(PupilViewModel);
 
