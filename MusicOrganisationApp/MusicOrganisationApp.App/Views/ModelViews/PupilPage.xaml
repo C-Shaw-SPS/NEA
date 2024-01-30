@@ -10,4 +10,111 @@
         <viewmodels:PupilViewModel/>
     </ContentPage.BindingContext>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Edit"
+            Command="{Binding EditCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <Grid
+            Margin="20"
+            RowSpacing="10"
+            ColumnSpacing="10">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Name:"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="{Binding Name}"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Level:"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding Level}"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Different times each week:"
+                VerticalOptions="Center"/>
+            <CheckBox
+                Grid.Row="2"
+                Grid.Column="1"
+                IsChecked="{Binding NeedsDifferentTimes}"
+                IsEnabled="False"/>
+
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Text="Lesson duration:"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="3"
+                Grid.Column="1"
+                Text="{Binding LessonDuration}"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Text="Email:"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="4"
+                Grid.Column="1"
+                Text="{Binding Email}"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Row="5"
+                Grid.Column="0"
+                Text="Phone number:"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="5"
+                Grid.Column="1"
+                Text="{Binding PhoneNumber}"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Row="6"
+                Grid.Column="0"
+                Text="Notes:"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="6"
+                Grid.Column="1"
+                Text="{Binding Notes}"
+                VerticalOptions="Center"/>
+
+        </Grid>
+    </ScrollView>
+
 </ContentPage>
