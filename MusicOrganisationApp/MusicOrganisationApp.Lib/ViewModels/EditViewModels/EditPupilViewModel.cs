@@ -27,10 +27,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private bool _needsDifferentTimes = false;
 
         [ObservableProperty]
-        private string _lessonDurationHours = string.Empty;
+        private string _lessonHours = string.Empty;
 
         [ObservableProperty]
-        private string _lessonDurationMinutes = string.Empty;
+        private string _lessonMinutes = string.Empty;
 
         [ObservableProperty]
         private string _email = string.Empty;
@@ -61,8 +61,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             Name = _value.Name;
             Level = _value.Level;
             NeedsDifferentTimes = _value.NeedsDifferentTimes;
-            LessonDurationHours = _value.LessonDuration.Hours.ToString();
-            LessonDurationMinutes = _value.LessonDuration.Minutes.ToString();
+            LessonHours = _value.LessonDuration.Hours.ToString();
+            LessonMinutes = _value.LessonDuration.Minutes.ToString();
             Email = _value.Email;
             PhoneNumber = _value.PhoneNumber;
             Notes = _value.Notes;
@@ -100,22 +100,22 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private bool TrySetLessonDuration()
         {
-            bool validHours = TryGetPositiveInt(LessonDurationHours, out int hours);
-            bool validMinutes = TryGetPositiveInt(LessonDurationHours, out int minutes);
+            bool validHours = TryGetPositiveInt(LessonHours, out int hours);
+            bool validMinutes = TryGetPositiveInt(LessonMinutes, out int minutes);
 
             if (validHours && validMinutes)
             {
                 TimeSpan lessonDuration = new(hours, minutes, 0);
                 _value.LessonDuration = lessonDuration;
-                LessonDurationHours = lessonDuration.Hours.ToString();
-                LessonDurationMinutes = lessonDuration.Minutes.ToString();
+                LessonHours = lessonDuration.Hours.ToString();
+                LessonMinutes = lessonDuration.Minutes.ToString();
                 LessonDurationError = string.Empty;
                 return true;
             }
             else
             {
-                LessonDurationHours = string.Empty;
-                LessonDurationMinutes = string.Empty;
+                LessonHours = string.Empty;
+                LessonMinutes = string.Empty;
                 LessonDurationError = _INVALID_DURATION_ERROR;
                 return false;
             }
