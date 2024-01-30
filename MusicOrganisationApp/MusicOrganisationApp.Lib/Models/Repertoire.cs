@@ -8,12 +8,14 @@ namespace MusicOrganisationApp.Lib.Models
         private DateTime? _dateStarted;
         private string _syllabus = string.Empty;
         private RepertoireStatus _status;
+        private int _pupilId;
         private int _workId;
         private string _title = string.Empty;
         private string _subtitle = string.Empty;
         private int _composerId;
         private string _genre = string.Empty;
         private string _composerName = string.Empty;
+        private string _notes = string.Empty;
 
         public int Id
         {
@@ -37,6 +39,12 @@ namespace MusicOrganisationApp.Lib.Models
         {
             get => _status;
             set => _status = value;
+        }
+
+        public int PupilId
+        {
+            get => _pupilId;
+            set => _pupilId = value;
         }
 
         public int WorkId
@@ -75,19 +83,27 @@ namespace MusicOrganisationApp.Lib.Models
             set => _composerName = value;
         }
 
+        public string Notes
+        {
+            get => _notes;
+            set => _notes = value;
+        }
+
         public bool Equals(Repertoire? other)
         {
-            return other != null
+            return other is not null
                 && _id == other._id
                 && _dateStarted == other._dateStarted
                 && _syllabus == other._syllabus
                 && _status == other._status
+                && _pupilId == other._pupilId
                 && _workId == other._workId
                 && _title == other._title
                 && _subtitle == other._subtitle
                 && _composerId == other._composerId
                 && _genre == other._genre
-                && _composerName == other._composerName;
+                && _composerName == other._composerName
+                && _notes == other._notes;
         }
     }
 }
