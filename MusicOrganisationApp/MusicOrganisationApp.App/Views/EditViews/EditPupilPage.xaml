@@ -1,12 +1,83 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels.EditViewModels;assembly=MusicOrganisationApp.Lib"
              x:Class="MusicOrganisationApp.App.Views.EditViews.EditPupilPage"
-             Title="EditPupilPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="{Binding PageTitle}">
+
+    <ContentPage.BindingContext>
+        <viewmodels:EditPupilViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Save"
+            Command="{Binding TrySaveCommand}"/>
+        <ToolbarItem
+            Text="Delete"
+            IsEnabled="{Binding CanDelete}"
+            Command="{Binding DeleteCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid
+        Margin="20"
+        RowSpacing="10"
+        ColumnSpacing="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="Name:"
+            VerticalOptions="Center"/>
+        <Entry
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="{Binding Name}"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="0"
+            Grid.Column="2"
+            Text="{Binding NameError}"
+            VerticalOptions="Center"/>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Level:"
+            VerticalOptions="Center"/>
+        <Entry
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding Level}"/>
+
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="Lesson duration:"
+            VerticalOptions="Center"/>
+        <TimePicker
+            Grid.Row="2"
+            Grid.Column="1"
+            Time="{Binding LessonDuration}"/>
+        <Label
+            Grid.Row="2"
+            Grid.Column="2"
+            Text="{Binding LessonDurationError}"
+            VerticalOptions="Center"/>
+
+
+    </Grid>
+
 </ContentPage>
