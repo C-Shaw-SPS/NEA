@@ -68,7 +68,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             await GoBackAsync();
         }
 
-        public async void ApplyQueryAttributes(IDictionary<string, object> query)
+        public async virtual void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.TryGetValue(ID_PARAMETER, out object? value) && value is int id)
             {
