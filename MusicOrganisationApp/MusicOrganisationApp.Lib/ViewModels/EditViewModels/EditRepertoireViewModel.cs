@@ -8,13 +8,22 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
     {
         public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
-        private RepertoireService _service;
+        private readonly RepertoireService _service;
 
         [ObservableProperty]
         private DateTime _dateStarted;
 
         [ObservableProperty]
         private string _syllabus = string.Empty;
+
+        [ObservableProperty]
+        private bool _isFinishedLearning;
+
+        [ObservableProperty]
+        private string _notes = string.Empty;
+
+        [ObservableProperty]
+        private int _workId;
 
         public EditRepertoireViewModel(string editPageTitle, string newPageTitle) : base(editPageTitle, newPageTitle)
         {
@@ -25,7 +34,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         protected override void SetDisplayValues()
         {
-            throw new NotImplementedException();
+            DateStarted = _value.DateStarted;
         }
 
         protected override bool TrySetValuesToSave()
