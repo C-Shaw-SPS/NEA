@@ -146,7 +146,7 @@ namespace MusicOrganisationApp.Tests.Databases
                 WorkId = 0,
                 DateStarted = DateTime.Parse("23/10/2023"),
                 Syllabus = "Grade 8",
-                Status = RepertoireStatus.CurrentlyLearning
+                IsFinishedLearning = true
             },
             new RepertoireData
             {
@@ -154,7 +154,7 @@ namespace MusicOrganisationApp.Tests.Databases
                 PupilId = 1,
                 WorkId = 1,
                 DateStarted = DateTime.Now,
-                Status = RepertoireStatus.FinishedLearning
+                IsFinishedLearning = false
             }
         };
 

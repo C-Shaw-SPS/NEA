@@ -1,13 +1,11 @@
-﻿using MusicOrganisationApp.Lib.Enums;
-
-namespace MusicOrganisationApp.Lib.Models
+﻿namespace MusicOrganisationApp.Lib.Models
 {
     public class Repertoire : IEquatable<Repertoire>, IIdentifiable
     {
         private int _id;
         private DateTime? _dateStarted;
         private string _syllabus = string.Empty;
-        private RepertoireStatus _status;
+        private bool _isFinishedLearning;
         private int _pupilId;
         private int _workId;
         private string _title = string.Empty;
@@ -35,10 +33,10 @@ namespace MusicOrganisationApp.Lib.Models
             set => _syllabus = value;
         }
 
-        public RepertoireStatus Status
+        public bool IsFinishedLearning
         {
-            get => _status;
-            set => _status = value;
+            get => _isFinishedLearning;
+            set => _isFinishedLearning = value;
         }
 
         public int PupilId
@@ -95,7 +93,7 @@ namespace MusicOrganisationApp.Lib.Models
                 && _id == other._id
                 && _dateStarted == other._dateStarted
                 && _syllabus == other._syllabus
-                && _status == other._status
+                && _isFinishedLearning == other._isFinishedLearning
                 && _pupilId == other._pupilId
                 && _workId == other._workId
                 && _title == other._title

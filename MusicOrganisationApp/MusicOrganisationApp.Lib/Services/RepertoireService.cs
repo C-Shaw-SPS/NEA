@@ -76,7 +76,7 @@ namespace MusicOrganisationApp.Lib.Services
             sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.Id), nameof(Repertoire.Id));
             sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.DateStarted), nameof(Repertoire.DateStarted));
             sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.Syllabus), nameof(Repertoire.Syllabus));
-            sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.Status), nameof(Repertoire.Status));
+            sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.IsFinishedLearning), nameof(Repertoire.IsFinishedLearning));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Id), nameof(Repertoire.WorkId));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Repertoire.Title));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Subtitle), nameof(Repertoire.Subtitle));
@@ -100,7 +100,7 @@ namespace MusicOrganisationApp.Lib.Services
                 WorkId = repertoire.WorkId,
                 DateStarted = repertoire.DateStarted,
                 Syllabus = repertoire.Syllabus,
-                Status = repertoire.Status,
+                IsFinishedLearning = repertoire.IsFinishedLearning,
                 Notes = repertoire.Notes
             };
             return repertoireData;

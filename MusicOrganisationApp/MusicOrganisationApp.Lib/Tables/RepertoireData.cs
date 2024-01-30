@@ -1,5 +1,4 @@
 ﻿using MusicOrganisationApp.Lib.Databases;
-using MusicOrganisationApp.Lib.Enums;
 using SQLite;
 
 namespace MusicOrganisationApp.Lib.Tables
@@ -14,7 +13,7 @@ namespace MusicOrganisationApp.Lib.Tables
         private int _workId;
         private DateTime? _dateStarted;
         private string _syllabus = string.Empty;
-        private RepertoireStatus _status;
+        private bool _isFinishedLearning;
         private string _notes = string.Empty;
 
         public static string TableName => _TABLE_NAME;
@@ -54,10 +53,10 @@ namespace MusicOrganisationApp.Lib.Tables
         }
 
         [NotNull]
-        public RepertoireStatus Status
+        public bool IsFinishedLearning
         {
-            get => _status;
-            set => _status = value;
+            get => _isFinishedLearning;
+            set => _isFinishedLearning = value;
         }
 
         [NotNull]
@@ -76,7 +75,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 nameof(WorkId),
                 nameof(DateStarted),
                 nameof(Syllabus),
-                nameof(Status),
+                nameof(IsFinishedLearning),
                 nameof(Notes)
             };
         }
@@ -89,7 +88,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 (nameof(WorkId), _workId),
                 (nameof(DateStarted), _dateStarted),
                 (nameof(Syllabus), _syllabus),
-                (nameof(Status), _status),
+                (nameof(IsFinishedLearning), _isFinishedLearning),
                 (nameof(Notes), _notes)
                 );
             return sqlValues;
@@ -103,7 +102,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 && _workId == other._workId
                 && _dateStarted == other._dateStarted
                 && _syllabus == other._syllabus
-                && _status == other._status
+                && _isFinishedLearning == other._isFinishedLearning
                 && _notes == other._notes;
         }
     }
