@@ -1,9 +1,10 @@
-namespace MusicOrganisationApp.App.Views.ModelViews;
-
-public partial class PupilPage : ContentPage
+namespace MusicOrganisationApp.App.Views.ModelViews
 {
-	public PupilPage()
-	{
-		InitializeComponent();
-	}
+    public partial class PupilPage : ContentPage
+    {
+    	public PupilPage()
+    	{
+    		InitializeComponent();
+    	}
+    }
 }

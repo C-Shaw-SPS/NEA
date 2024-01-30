@@ -1,9 +1,10 @@
-namespace MusicOrganisationApp.App.Views.EditViews;
-
-public partial class EditPupilPage : ContentPage
+namespace MusicOrganisationApp.App.Views.EditViews
 {
-	public EditPupilPage()
-	{
-		InitializeComponent();
-	}
+    public partial class EditPupilPage : ContentPage
+    {
+    	public EditPupilPage()
+    	{
+    		InitializeComponent();
+    	}
+    }
 }
