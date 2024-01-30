@@ -19,65 +19,133 @@
             Command="{Binding DeleteCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <Grid
-        Margin="20"
-        RowSpacing="10"
-        ColumnSpacing="10">
+    <ScrollView>
+        <Grid
+            Margin="20"
+            RowSpacing="10"
+            ColumnSpacing="10">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
 
-        <Label
-            Grid.Row="0"
-            Grid.Column="0"
-            Text="Name:"
-            VerticalOptions="Center"/>
-        <Entry
-            Grid.Row="0"
-            Grid.Column="1"
-            Text="{Binding Name}"
-            VerticalOptions="Center"/>
-        <Label
-            Grid.Row="0"
-            Grid.Column="2"
-            Text="{Binding NameError}"
-            VerticalOptions="Center"/>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Name:"
+                VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="0"
+                Grid.Column="1"
+                Grid.ColumnSpan="4"
+                Text="{Binding Name}"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="0"
+                Grid.Column="5"
+                Text="{Binding NameError}"
+                VerticalOptions="Center"/>
 
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            Text="Level:"
-            VerticalOptions="Center"/>
-        <Entry
-            Grid.Row="1"
-            Grid.Column="1"
-            Text="{Binding Level}"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Level:"
+                VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="4"
+                Text="{Binding Level}"/>
 
-        <Label
-            Grid.Row="2"
-            Grid.Column="0"
-            Text="Lesson duration:"
-            VerticalOptions="Center"/>
-        <TimePicker
-            Grid.Row="2"
-            Grid.Column="1"
-            Time="{Binding LessonDuration}"/>
-        <Label
-            Grid.Row="2"
-            Grid.Column="2"
-            Text="{Binding LessonDurationError}"
-            VerticalOptions="Center"/>
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Needs different times each week:"
+                VerticalOptions="Center"/>
+            <CheckBox
+                Grid.Row="2"
+                Grid.Column="1"
+                IsChecked="{Binding NeedsDifferentTimes}"/>
 
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Text="Lesson duration:"
+                VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="3"
+                Grid.Column="1"
+                Text="{Binding LessonHours}"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="3"
+                Grid.Column="2"
+                Text=":"
+                VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="3"
+                Grid.Column="3"
+                Text="{Binding LessonMinutes}"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="3"
+                Grid.Column="5"
+                Text="{Binding LessonDurationError}"
+                VerticalOptions="Center"/>
 
-    </Grid>
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Text="Email: "
+                VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="4"
+                Grid.Column="1"
+                Grid.ColumnSpan="4"
+                Text="{Binding Email}"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Row="5"
+                Grid.Column="0"
+                Text="Phone number:"
+                VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="5"
+                Grid.Column="1"
+                Grid.ColumnSpan="4"
+                Text="{Binding PhoneNumber}"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Row="6"
+                Grid.Column="0"
+                Text="Notes:"
+                VerticalOptions="Center"/>
+            <Editor
+                Grid.Row="6"
+                Grid.Column="1"
+                Grid.ColumnSpan="5"
+                AutoSize="TextChanges"
+                Text="{Binding Notes}"
+                VerticalOptions="Center"/>
+
+        </Grid>
+    </ScrollView>
 
 </ContentPage>
