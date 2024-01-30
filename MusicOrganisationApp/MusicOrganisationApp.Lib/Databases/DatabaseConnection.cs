@@ -32,9 +32,12 @@ namespace MusicOrganisationApp.Lib.Databases
             return result;
         }
 
-        public async Task ExecuteAsync<T>(ISqlExecutable<T> sqlStatement) where T : class, ITable, new()
+        public async Task ExecuteAsync<T>(ISqlExecutable<T> sqlStatement, bool init = true) where T : class, ITable, new()
         {
-            await CreateTableAsync<T>();
+            if (init)
+            {
+                await CreateTableAsync<T>();
+            }
 
             string sql = sqlStatement.GetSql();
             await _connection.ExecuteAsync(sql);
@@ -58,7 +61,7 @@ namespace MusicOrganisationApp.Lib.Databases
             {
                 insertStatement.AddValue(value);
             }
-            await ExecuteAsync<T>(insertStatement);
+            await ExecuteAsync(insertStatement);
         }
 
         public async Task ClearTableAsync<T>() where T : class, ITable, new()
@@ -126,10 +129,8 @@ namespace MusicOrganisationApp.Lib.Databases
 
         public async Task DropTableIfExistsAsync<T>() where T : class, ITable, new()
         {
-            await CreateTableAsync<T>();
-
             DropTableStatement<T> dropTableStatement = new();
-            await ExecuteAsync(dropTableStatement);
+            await ExecuteAsync(dropTableStatement, init: false);
         }
 
         public async Task<IEnumerable<int>> GetIdsAsync<T>() where T : class, ITable, new()
