@@ -11,6 +11,10 @@
 
     <TabBar>
 
+        <Tab Title="Pupils">
+            <ShellContent ContentTemplate="{DataTemplate collectionViews:AllPupilsPage}"/>
+        </Tab>
+
         <Tab Title="Composers">
             <ShellContent ContentTemplate="{DataTemplate collectionViews:AllComposersPage}"/>
         </Tab>
