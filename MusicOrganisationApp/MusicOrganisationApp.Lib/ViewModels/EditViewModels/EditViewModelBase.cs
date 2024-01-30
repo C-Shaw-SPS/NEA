@@ -111,5 +111,17 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
                 CanDelete = true;
             }
         }
+
+        protected static bool TryGetPositiveInt(string input, out int result)
+        {
+            if (int.TryParse(input, out result) && result >= 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
