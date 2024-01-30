@@ -139,7 +139,7 @@ namespace MusicOrganisationApp.Tests.Databases
         }
 
         [Fact]
-        public async void TestMultipleTables()
+        public async Task TestMultipleTables()
         {
             DatabaseConnection database = new(nameof(TestMultipleTables));
 
@@ -161,7 +161,7 @@ namespace MusicOrganisationApp.Tests.Databases
         }
 
         [Fact]
-        public async void TestClearOneTable()
+        public async Task TestClearOneTable()
         {
             DatabaseConnection database = new(nameof(TestClearOneTable));
 
