@@ -1,5 +1,4 @@
-﻿using MusicOrganisationApp.Lib.Enums;
-using MusicOrganisationApp.Lib.Tables;
+﻿using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.Models;
 
 namespace MusicOrganisationApp.Tests.Databases
