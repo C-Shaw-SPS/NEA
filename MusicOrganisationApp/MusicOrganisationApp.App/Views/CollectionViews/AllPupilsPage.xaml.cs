@@ -9,7 +9,7 @@ namespace MusicOrganisationApp.App.Views.CollectionViews
     		InitializeComponent();
     	}
 
-        protected override async void OnNavigatedFrom(NavigatedFromEventArgs args)
+        protected override async void OnAppearing()
         {
             AllPupilsViewModel viewModel = (AllPupilsViewModel)BindingContext;
             await viewModel.RefreshAsync();
