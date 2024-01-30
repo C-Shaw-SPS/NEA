@@ -21,7 +21,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         private bool _needsDifferentTimes = false;
 
         [ObservableProperty]
-        private TimeSpan _lessonDuration;
+        private string _lessonDuration = string.Empty;
 
         [ObservableProperty]
         private string _email = string.Empty;
@@ -46,7 +46,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             Name = _value.Name;
             Level = _value.Level;
             NeedsDifferentTimes = _value.NeedsDifferentTimes;
-            LessonDuration = _value.LessonDuration;
+            LessonDuration = _value.LessonDuration.ToString();
             Email = _value.Email;
             PhoneNumber = _value.PhoneNumber;
             Notes = _value.Notes;
