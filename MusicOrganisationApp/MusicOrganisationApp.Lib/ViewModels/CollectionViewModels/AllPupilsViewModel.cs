@@ -12,15 +12,22 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
     public class AllPupilsViewModel : CollectionViewModelBase<Pupil>
     {
+        private const string _ROUTE = nameof(AllPupilsViewModel);
+
         private static Dictionary<string, string> _orderings = new()
         {
             ["Name"] = nameof(Pupil.Name)
         };
 
+        private readonly PupilService _service;
+
         public AllPupilsViewModel() : base(PupilViewModel.Route, EditPupilViewModel.Route, _orderings)
         {
+            _service = new(_database);
         }
 
-        protected override IService<Pupil> Service => throw new NotImplementedException();
+        public static string Route => _ROUTE;
+
+        protected override IService<Pupil> Service => _service;
     }
 }
