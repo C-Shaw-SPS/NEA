@@ -9,6 +9,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
     public partial class EditRepertoireViewModel : EditViewModelBase<Repertoire>
     {
         private const string _ROUTE = nameof(EditRepertoireViewModel);
+        private const string _NO_WORK_SELECTED_ERROR = "No work selected";
 
         public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
@@ -45,6 +46,9 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private Work? _selectedWork;
 
+        [ObservableProperty]
+        private string _workError = string.Empty;
+
         public EditRepertoireViewModel(string editPageTitle, string newPageTitle) : base(editPageTitle, newPageTitle)
         {
             _repertoireService = new(_database);
@@ -69,8 +73,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private async Task AddNewWorkAsync()
         {
-            throw new NotImplementedException();
+            Dictionary<string, object> parameters = new()
+            {
+                [IS_NEW_PARAMETER] = true
+            };
+            await GoToAsync(parameters, EditWorkViewModel.Route);
         }
+
         protected override void SetDisplayValues()
         {
             SetDateStarted();
@@ -96,7 +105,48 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         protected override bool TrySetValuesToSave()
         {
-            throw new NotImplementedException();
+            SaveDateStarted();
+            _value.Syllabus = Syllabus;
+            _value.IsFinishedLearning = IsFinishedLearning;
+            _value.Notes = Notes;
+
+            bool canSave = true;
+            canSave &= TrySaveWork();
+
+            return canSave;
+        }
+
+        private void SaveDateStarted()
+        {
+            if (HasDateStarted)
+            {
+                _value.DateStarted = DateStarted;
+            }
+            else
+            {
+                _value.DateStarted = null;
+            }
+        }
+
+        private bool TrySaveWork()
+        {
+            if (SelectedWork is Work work)
+            {
+                _value.WorkId = work.Id;
+                _value.Title = work.Title;
+                WorkError = string.Empty;
+                return true;
+            }
+            else if (_isNew)
+            {
+                WorkError = _NO_WORK_SELECTED_ERROR;
+                return false;
+            }
+            else
+            {
+                WorkError = string.Empty;
+                return true;
+            }
         }
 
         public override void ApplyQueryAttributes(IDictionary<string, object> query)
