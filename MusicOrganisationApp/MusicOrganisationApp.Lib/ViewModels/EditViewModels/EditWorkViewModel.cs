@@ -69,10 +69,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private async Task SearchComposersAsync()
         {
             IEnumerable<ComposerData> searchResult = await _composerService.SearchAsync(ComposerSearchText, nameof(ComposerData.Name));
-            Composers.Clear();
-            foreach (ComposerData composer in searchResult)
+            lock (Composers)
             {
-                Composers.Add(composer);
+                Composers.Clear();
+                foreach (ComposerData composer in searchResult)
+                {
+                    Composers.Add(composer);
+                }
             }
         }
 
