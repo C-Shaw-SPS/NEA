@@ -29,7 +29,96 @@
             Margin="20"
             RowSpacing="10"
             ColumnSpacing="10">
-            
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Date started:"
+                VerticalOptions="Center"/>
+            <CheckBox
+                Grid.Row="0"
+                Grid.Column="1"
+                IsChecked="{Binding HasDateStarted}"/>
+            <DatePicker
+                Grid.Row="0"
+                Grid.Column="2"
+                Date="{Binding DateStarted}"
+                IsEnabled="{Binding HasDateStarted}"/>
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Syllabus:"
+                VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Text="{Binding Syllabus}"
+                VerticalOptions="Center"/>
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Finished learning:"
+                VerticalOptions="Center"/>
+            <CheckBox
+                Grid.Row="2"
+                Grid.Column="1"
+                IsChecked="{Binding IsFinishedLearning}"/>
+
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Text="Notes:"
+                VerticalOptions="Center"/>
+            <Editor
+                Grid.Row="3"
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
+                Text="{Binding Notes}"
+                VerticalOptions="Center"
+                AutoSize="TextChanges"/>
+
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Text="Title:"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="4"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Text="{Binding WorkTitle}"/>
+            <Label
+                Grid.Row="4"
+                Grid.Column="3"
+                Text="{Binding WorkError}"/>
+
+            <SearchBar
+                Grid.Row="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                Text="{Binding SearchText}"
+                SearchCommand="{Binding SearchWorksCommand}"/>
+
+
         </Grid>
         
     </ScrollView>
