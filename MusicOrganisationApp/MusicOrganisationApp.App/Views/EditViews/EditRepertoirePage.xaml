@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels.EditViewModels;assembly=MusicOrganisationApp.Lib"
              x:Class="MusicOrganisationApp.App.Views.EditViews.EditRepertoirePage"
              Title="EditRepertoirePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ContentPage.BindingContext>
+        <viewmodels:EditRepertoireViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+        Text="Save"
+        Command="{Binding TrySaveCommand}"/>
+        <ToolbarItem
+        Text="Delete"
+        IsEnabled="{Binding CanDelete}"
+        Command="{Binding DeleteCommand}"/>
+        <ToolbarItem
+        Text="New composer"
+        Command="{Binding AddNewWorkCommand}"
+        IconImageSource="{FontImage Glyph='+', Color=Black, Size=22}"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+
+        <Grid
+            Margin="20"
+            RowSpacing="10"
+            ColumnSpacing="10">
+            
+        </Grid>
+        
+    </ScrollView>
+
 </ContentPage>
