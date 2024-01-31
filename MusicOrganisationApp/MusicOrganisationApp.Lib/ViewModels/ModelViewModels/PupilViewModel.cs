@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
+using MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
@@ -10,6 +12,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         private const string _ROUTE = nameof(PupilViewModel);
 
         private readonly PupilService _service;
+        private readonly AsyncRelayCommand _goToRepertoireCommand;
 
         [ObservableProperty]
         private string _name = string.Empty;
@@ -35,11 +38,14 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         public PupilViewModel() : base(EditPupilViewModel.Route)
         {
             _service = new(_database);
+            _goToRepertoireCommand = new(GoToRepertoireAsync);
         }
 
         public static string Route => _ROUTE;
 
         protected override IService<Pupil> Service => _service;
+
+        public AsyncRelayCommand GoToRepertoireCommand => _goToRepertoireCommand;
 
         protected override void SetDisplayValues()
         {
@@ -50,6 +56,15 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             Email = _value.Email;
             PhoneNumber = _value.PhoneNumber;
             Notes = _value.Notes;
+        }
+
+        private async Task GoToRepertoireAsync()
+        {
+            Dictionary<string, object> parameters = new()
+            {
+                [AllRepertoireViewModel.PUPIL_ID_PARAMETER] = _value.Id
+            };
+            await GoToAsync(parameters, AllRepertoireViewModel.Route);
         }
     }
 }
