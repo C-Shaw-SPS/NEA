@@ -22,7 +22,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private readonly AsyncRelayCommand _addNewWorkCommand;
 
         [ObservableProperty]
-        private DateTime _dateStarted;
+        private DateTime _dateStarted = DateTime.Today;
 
         [ObservableProperty]
         private bool _hasDateStarted = false;
@@ -31,7 +31,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private string _syllabus = string.Empty;
 
         [ObservableProperty]
-        private bool _isFinishedLearning;
+        private bool _isFinishedLearning = false;
 
         [ObservableProperty]
         private string _notes = string.Empty;
@@ -70,10 +70,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private async Task SearchWorksAsync()
         {
             IEnumerable<Work> works = await _workService.SearchAsync(SearchText, nameof(Work.Title));
-            Works.Clear();
-            foreach (Work work in works)
+            lock (Works)
             {
-                Works.Add(work);
+                Works.Clear();
+                foreach (Work work in works)
+                {
+                    Works.Add(work);
+                }
             }
         }
 
@@ -104,7 +107,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
             else
             {
-                DateStarted = DateTime.Today;
                 HasDateStarted = false;
             }
         }
