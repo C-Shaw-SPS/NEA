@@ -1,9 +1,10 @@
-namespace MusicOrganisationApp.App.Views.ModelViews;
-
-public partial class RepertoirePage : ContentPage
+namespace MusicOrganisationApp.App.Views.ModelViews
 {
-	public RepertoirePage()
-	{
-		InitializeComponent();
-	}
+    public partial class RepertoirePage : ContentPage
+    {
+    	public RepertoirePage()
+    	{
+    		InitializeComponent();
+    	}
+    }
 }
