@@ -44,6 +44,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             SqlQuery sqlQuery = GetSqlQuery();
             sqlQuery.AddWhereLike<WorkData>(nameof(WorkData.Title), search);
+            sqlQuery.AddAndEqual<RepertoireData>(nameof(Repertoire.PupilId), _pupilId);
             sqlQuery.AddOrderBy(ordering);
             IEnumerable<Repertoire> repertoires = await _database.QueryAsync<Repertoire>(sqlQuery);
             return repertoires;
@@ -70,7 +71,7 @@ namespace MusicOrganisationApp.Lib.Services
             await _database.UpdateAsync(repertoireData);
         }
 
-        private SqlQuery<RepertoireData> GetSqlQuery()
+        private static SqlQuery<RepertoireData> GetSqlQuery()
         {
             SqlQuery<RepertoireData> sqlQuery = new(SqlQuery.DEFAULT_LIMIT);
             sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.Id), nameof(Repertoire.Id));
@@ -85,7 +86,6 @@ namespace MusicOrganisationApp.Lib.Services
             sqlQuery.AddColumn<ComposerData>(nameof(ComposerData.Name), nameof(Repertoire.ComposerName));
             sqlQuery.AddJoin<WorkData, RepertoireData>(nameof(WorkData.Id), nameof(RepertoireData.WorkId));
             sqlQuery.AddJoin<ComposerData, WorkData>(nameof(ComposerData.Id), nameof(WorkData.ComposerId));
-            sqlQuery.AddWhereEquals<RepertoireData>(nameof(RepertoireData.PupilId), _pupilId);
 
             return sqlQuery;
         }
