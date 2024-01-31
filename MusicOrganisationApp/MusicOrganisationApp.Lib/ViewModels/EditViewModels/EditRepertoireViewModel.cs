@@ -10,6 +10,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
     {
         private const string _ROUTE = nameof(EditRepertoireViewModel);
         private const string _NO_WORK_SELECTED_ERROR = "No work selected";
+        private const string _EDIT_PAGE_TITLE = "Edit repertoire";
+        private const string _NEW_PAGE_TITLE = "New repertoire";
 
         public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
@@ -49,7 +51,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private string _workError = string.Empty;
 
-        public EditRepertoireViewModel(string editPageTitle, string newPageTitle) : base(editPageTitle, newPageTitle)
+        public EditRepertoireViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE)
         {
             _repertoireService = new(_database);
             _workService = new(_database);
@@ -58,6 +60,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         }
 
         public static string Route => _ROUTE;
+
+        public AsyncRelayCommand SearchWorksCommand => _searchWorksCommand;
+
+        public AsyncRelayCommand AddNewWorkCommand => _addNewWorkCommand;
 
         protected override IService<Repertoire> Service => _repertoireService;
 
