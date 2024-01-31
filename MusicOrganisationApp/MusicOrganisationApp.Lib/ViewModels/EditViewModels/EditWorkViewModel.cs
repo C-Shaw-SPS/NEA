@@ -149,6 +149,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
             else
             {
+                ComposerError = string.Empty;
                 return true;
             }
         }
