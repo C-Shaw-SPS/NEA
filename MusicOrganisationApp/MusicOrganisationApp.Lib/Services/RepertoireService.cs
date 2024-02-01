@@ -78,6 +78,8 @@ namespace MusicOrganisationApp.Lib.Services
             sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.DateStarted), nameof(Repertoire.DateStarted));
             sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.Syllabus), nameof(Repertoire.Syllabus));
             sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.IsFinishedLearning), nameof(Repertoire.IsFinishedLearning));
+            sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.Notes), nameof(Repertoire.Notes));
+            sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.PupilId), nameof(Repertoire.PupilId));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Id), nameof(Repertoire.WorkId));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Repertoire.Title));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Subtitle), nameof(Repertoire.Subtitle));
