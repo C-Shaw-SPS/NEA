@@ -21,6 +21,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private readonly AsyncRelayCommand _searchWorksCommand;
         private readonly AsyncRelayCommand _addNewWorkCommand;
 
+        private int _pupilId;
+
         [ObservableProperty]
         private DateTime _dateStarted = DateTime.Today;
 
@@ -78,6 +80,14 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
         }
 
+        partial void OnSelectedWorkChanged(Work? value)
+        {
+            if (value is not null)
+            {
+                WorkTitle = value.Title;
+            }
+        }
+
         private async Task AddNewWorkAsync()
         {
             Dictionary<string, object> parameters = new()
@@ -115,6 +125,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _value.Syllabus = Syllabus;
             _value.IsFinishedLearning = IsFinishedLearning;
             _value.Notes = Notes;
+            _value.PupilId = _pupilId;
 
             bool canSave = true;
             canSave &= TrySaveWork();
@@ -157,9 +168,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         public override void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.TryGetValue(PUPIL_ID_PARAMETER, out object? value) && value is int id)
+            if (query.TryGetValue(PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
             {
-                _repertoireService.PupilId = id;
+                _pupilId = pupilId;
+                _repertoireService.PupilId = _pupilId;
             }
             base.ApplyQueryAttributes(query);
         }
