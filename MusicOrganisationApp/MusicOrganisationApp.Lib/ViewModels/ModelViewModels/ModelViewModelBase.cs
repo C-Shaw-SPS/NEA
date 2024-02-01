@@ -33,8 +33,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
                 [EditViewModelBase.ID_PARAMETER] = _value.Id,
                 [EditViewModelBase.IS_NEW_PARAMETER] = false
             };
+            AddEditRouteParameters(parameters);
             await GoToAsync(parameters, _editRoute);
         }
+
+        protected virtual void AddEditRouteParameters(Dictionary<string, object> parameters) { }
 
         public async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
