@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditRepertoireViewModel : EditViewModelBase<Repertoire>
+    public partial class EditRepertoireViewModel : EditViewModelBase<Repertoire>, IQueryAttributable
     {
         private const string _ROUTE = nameof(EditRepertoireViewModel);
         private const string _NO_WORK_SELECTED_ERROR = "No work selected";
@@ -40,7 +40,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private string _workTitle = string.Empty;
 
         [ObservableProperty]
-        private string _searchText = string.Empty;
+        private string _workSearchText = string.Empty;
 
         [ObservableProperty]
         private ObservableCollection<Work> _works = [];
@@ -69,14 +69,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private async Task SearchWorksAsync()
         {
-            IEnumerable<Work> works = await _workService.SearchAsync(SearchText, nameof(Work.Title));
-            lock (Works)
+            IEnumerable<Work> works = await _workService.SearchAsync(WorkSearchText, nameof(Work.Title));
+
+            Works.Clear();
+            foreach (Work work in works)
             {
-                Works.Clear();
-                foreach (Work work in works)
-                {
-                    Works.Add(work);
-                }
+                Works.Add(work);
             }
         }
 
