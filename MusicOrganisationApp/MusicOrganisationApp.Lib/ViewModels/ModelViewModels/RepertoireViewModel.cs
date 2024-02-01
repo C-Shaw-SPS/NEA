@@ -8,6 +8,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
     public partial class RepertoireViewModel : ModelViewModelBase<Repertoire>, IQueryAttributable
     {
         private const string _ROUTE = nameof(RepertoireViewModel);
+        private const string _DATE_FORMAT = "dd/mm/yyyy";
 
         private readonly RepertoireService _service;
 
@@ -60,12 +61,17 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         {
             if (possiblyNullDateTime is DateTime dateTime)
             {
-                return dateTime.ToString();
+                return dateTime.ToString(_DATE_FORMAT);
             }
             else
             {
                 return string.Empty;
             }
+        }
+
+        protected override void AddEditRouteParameters(Dictionary<string, object> parameters)
+        {
+            parameters[EditRepertoireViewModel.PUPIL_ID_PARAMETER] = _value.PupilId;
         }
     }
 }
