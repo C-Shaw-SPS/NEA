@@ -160,6 +160,38 @@ namespace MusicOrganisationApp.Tests.Services
         };
 
         public static readonly List<Work> Works = GetWorks();
+
+        public static readonly List<Repertoire> Repertoires = GetRepertoires();
+
+        private static List<Repertoire> GetRepertoires()
+        {
+            List<Repertoire> repertoires = [];
+            foreach (RepertoireData repertoireData in RepertoireData)
+            {
+                WorkData workData = WorkData[repertoireData.WorkId];
+                ComposerData composerData = ComposerData[workData.ComposerId];
+                Assert.Equal(repertoireData.WorkId, workData.Id);
+                Assert.Equal(workData.ComposerId, composerData.Id);
+                Repertoire repertoire = new()
+                {
+                    Id = repertoireData.Id,
+                    DateStarted = repertoireData.DateStarted,
+                    Syllabus = repertoireData.Syllabus,
+                    IsFinishedLearning = repertoireData.IsFinishedLearning,
+                    PupilId = repertoireData.PupilId,
+                    WorkId = repertoireData.WorkId,
+                    Title = workData.Title,
+                    Subtitle = workData.Subtitle,
+                    ComposerId = workData.ComposerId,
+                    Genre = workData.Genre,
+                    ComposerName = composerData.Name,
+                    Notes = repertoireData.Notes
+                };
+                repertoires.Add(repertoire);
+            }
+            return repertoires;
+        }
+
         private static List<Work> GetWorks()
         {
             List<Work> works = new();
