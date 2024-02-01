@@ -1,3 +1,5 @@
+using MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;
+
 namespace MusicOrganisationApp.App.Views.CollectionViews
 {
     public partial class AllRepertoirePage : ContentPage
@@ -6,5 +8,11 @@ namespace MusicOrganisationApp.App.Views.CollectionViews
     	{
     		InitializeComponent();
     	}
+
+        protected override async void OnAppearing()
+        {
+            AllRepertoireViewModel viewModel = (AllRepertoireViewModel)BindingContext;
+            await viewModel.RefreshAsync();
+        }
     }
 }
