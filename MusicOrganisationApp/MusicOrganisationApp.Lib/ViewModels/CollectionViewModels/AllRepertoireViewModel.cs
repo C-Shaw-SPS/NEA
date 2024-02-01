@@ -2,11 +2,6 @@
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
@@ -41,6 +36,22 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             {
                 _service.PupilId = pupilId;
                 await RefreshAsync();
+            }
+        }
+
+        public override async Task RefreshAsync()
+        {
+            if (_service.PupilId is not null)
+            {
+                await base.RefreshAsync();
+            }
+        }
+
+        protected override void AddAddNewParameters(Dictionary<string, object> parameters)
+        {
+            if (_service.PupilId is not null)
+            {
+                parameters[EditRepertoireViewModel.PUPIL_ID_PARAMETER] = _service.PupilId;
             }
         }
     }
