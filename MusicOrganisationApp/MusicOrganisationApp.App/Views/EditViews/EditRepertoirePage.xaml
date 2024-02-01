@@ -18,7 +18,7 @@
         IsEnabled="{Binding CanDelete}"
         Command="{Binding DeleteCommand}"/>
         <ToolbarItem
-        Text="New composer"
+        Text="New work"
         Command="{Binding AddNewWorkCommand}"
         IconImageSource="{FontImage Glyph='+', Color=Black, Size=22}"/>
     </ContentPage.ToolbarItems>
@@ -112,10 +112,10 @@
                 Text="{Binding WorkError}"/>
 
             <SearchBar
-                Grid.Row="5"
+                Grid.Row="6"
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
-                Text="{Binding SearchText}"
+                Text="{Binding WorkSearchText}"
                 SearchCommand="{Binding SearchWorksCommand}"/>
 
             <CollectionView
