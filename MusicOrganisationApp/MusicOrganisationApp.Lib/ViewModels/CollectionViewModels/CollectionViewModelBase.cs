@@ -52,7 +52,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         public AsyncRelayCommand AddNewCommand => _addNewCommand;
 
-        public async Task RefreshAsync()
+        public virtual async Task RefreshAsync()
         {
             await SearchAsync();
         }
@@ -86,7 +86,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             {
                 [EditViewModelBase.IS_NEW_PARAMETER] = true
             };
+            AddAddNewParameters(paramters);
             await GoToAsync(paramters, _editRoute);
         }
+
+        protected virtual void AddAddNewParameters(Dictionary<string, object> parameters) { }
     }
 }
