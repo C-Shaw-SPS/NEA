@@ -133,18 +133,6 @@ namespace MusicOrganisationApp.Lib.Databases
             await ExecuteAsync(dropTableStatement, init: false);
         }
 
-        public async Task<IEnumerable<int>> GetIdsAsync<T>() where T : class, ITable, new()
-        {
-            await CreateTableAsync<T>();
-
-            SqlQuery<T> sqlQuery = new();
-            sqlQuery.AddColumn<T>(nameof(ITable.Id));
-
-            IEnumerable<T> values = await QueryAsync<T>(sqlQuery);
-            IEnumerable<int> ids = values.Select(x => x.Id);
-            return ids;
-        }
-
         public async Task<int> GetNextIdAsync<T>() where T : class, ITable, new()
         {
             await CreateTableAsync<T>();
