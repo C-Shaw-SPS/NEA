@@ -15,120 +15,118 @@
             Command="{Binding EditCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <ScrollView>
+    <Grid
+        Margin="20"
+        RowSpacing="10"
+        ColumnSpacing="10">
 
-        <Grid
-            Margin="20"
-            RowSpacing="10"
-            ColumnSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="Title:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="{Binding Title}"
+            VerticalOptions="Center"/>
 
-            <Label
-                Grid.Row="0"
-                Grid.Column="0"
-                Text="Title:"
-                VerticalOptions="Center"/>
-            <Label
-                Grid.Row="0"
-                Grid.Column="1"
-                Text="{Binding Title}"
-                VerticalOptions="Center"/>
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Subtitle:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding Subtitle}"
+            VerticalOptions="Center"/>
 
-            <Label
-                Grid.Row="1"
-                Grid.Column="0"
-                Text="Subtitle:"
-                VerticalOptions="Center"/>
-            <Label
-                Grid.Row="1"
-                Grid.Column="1"
-                Text="{Binding Subtitle}"
-                VerticalOptions="Center"/>
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="Genre:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="{Binding Genre}"
+            VerticalOptions="Center"/>
 
-            <Label
-                Grid.Row="2"
-                Grid.Column="0"
-                Text="Genre:"
-                VerticalOptions="Center"/>
-            <Label
-                Grid.Row="2"
-                Grid.Column="1"
-                Text="{Binding Genre}"
-                VerticalOptions="Center"/>
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Text="Composer:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="{Binding ComposerName}"
+            VerticalOptions="Center"/>
 
-            <Label
-                Grid.Row="3"
-                Grid.Column="0"
-                Text="Composer:"
-                VerticalOptions="Center"/>
-            <Label
-                Grid.Row="3"
-                Grid.Column="1"
-                Text="{Binding ComposerName}"
-                VerticalOptions="Center"/>
+        <Label
+            Grid.Row="4"
+            Grid.Column="0"
+            Text="Date started:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="4"
+            Grid.Column="1"
+            Text="{Binding DateStarted}"
+            VerticalOptions="Center"/>
 
-            <Label
-                Grid.Row="4"
-                Grid.Column="0"
-                Text="Date started:"
-                VerticalOptions="Center"/>
-            <Label
-                Grid.Row="4"
-                Grid.Column="1"
-                Text="{Binding DateStarted}"
-                VerticalOptions="Center"/>
+        <Label
+            Grid.Row="5"
+            Grid.Column="0"
+            Text="Syllabus:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="5"
+            Grid.Column="1"
+            Text="{Binding Syllabus}"
+            VerticalOptions="Center"/>
 
-            <Label
-                Grid.Row="5"
-                Grid.Column="0"
-                Text="Syllabus:"
-                VerticalOptions="Center"/>
-            <Label
-                Grid.Row="5"
-                Grid.Column="1"
-                Text="{Binding Syllabus}"
-                VerticalOptions="Center"/>
+        <Label
+            Grid.Row="6"
+            Grid.Column="0"
+            Text="Finished learning:"
+            VerticalOptions="Center"/>
+        <CheckBox
+            Grid.Row="6"
+            Grid.Column="1"
+            IsChecked="{Binding IsFinishedLearning}"
+            VerticalOptions="Center"
+            IsEnabled="False"/>
 
+        <Label
+            Grid.Row="7"
+            Grid.Column="0"
+            Text="Notes:"
+            VerticalOptions="Center"/>
+        <ScrollView
+            Grid.Row="7"
+            Grid.Column="1">
             <Label
-                Grid.Row="6"
-                Grid.Column="0"
-                Text="Finished learning:"
-                VerticalOptions="Center"/>
-            <CheckBox
-                Grid.Row="6"
-                Grid.Column="1"
-                IsChecked="{Binding IsFinishedLearning}"
-                VerticalOptions="Center"
-                IsEnabled="False"/>
-
-            <Label
-                Grid.Row="7"
-                Grid.Column="0"
-                Text="Notes:"
-                VerticalOptions="Center"/>
-            <Label
-                Grid.Row="7"
-                Grid.Column="1"
                 Text="{Binding Notes}"
                 VerticalOptions="Center"/>
+        </ScrollView>
 
-        </Grid>
-
-    </ScrollView>
+    </Grid>
     
 </ContentPage>

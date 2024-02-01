@@ -16,73 +16,80 @@
             Command="{Binding EditCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <ScrollView>
+    <Grid
+        Margin="20"
+        RowSpacing="10"
+        ColumnSpacing="10">
 
-        <Grid
-            Margin="20"
-            RowSpacing="10"
-            ColumnSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="Title:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="{Binding Title}"
+            VerticalOptions="Center"/>
 
-            <Label
-                Grid.Row="0"
-                Grid.Column="0"
-                Text="Title:"/>
-            <Label
-                Grid.Row="0"
-                Grid.Column="1"
-                Text="{Binding Title}"/>
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Subtitle:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding Subtitle}"
+            VerticalOptions="Center"/>
 
-            <Label
-                Grid.Row="1"
-                Grid.Column="0"
-                Text="Subtitle:"/>
-            <Label
-                Grid.Row="1"
-                Grid.Column="1"
-                Text="{Binding Subtitle}"/>
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="Genre:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="{Binding Genre}"
+            VerticalOptions="Center"/>
 
-            <Label
-                Grid.Row="2"
-                Grid.Column="0"
-                Text="Genre:"/>
-            <Label
-                Grid.Row="2"
-                Grid.Column="1"
-                Text="{Binding Genre}"/>
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Text="Composer:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="{Binding ComposerName}"
+            VerticalOptions="Center"/>
 
+        <Label
+            Grid.Row="4"
+            Grid.Column="0"
+            Text="Notes:"/>
+        <ScrollView
+            Grid.Row="4"
+            Grid.Column="1">
             <Label
-                Grid.Row="3"
-                Grid.Column="0"
-                Text="Composer:"/>
-            <Label
-                Grid.Row="3"
-                Grid.Column="1"
-                Text="{Binding ComposerName}"/>
+                Text="{Binding Notes}"
+                VerticalOptions="Center"/>
+        </ScrollView>
 
-            <Label
-                Grid.Row="4"
-                Grid.Column="0"
-                Text="Notes:"/>
-            <Label
-                Grid.Row="4"
-                Grid.Column="1"
-                Text="{Binding Notes}"/>
-
-        </Grid>
-    
-    </ScrollView>
-
+    </Grid>
+   
 </ContentPage>
