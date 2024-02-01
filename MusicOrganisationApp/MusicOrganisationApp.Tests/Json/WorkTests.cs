@@ -21,13 +21,7 @@ namespace MusicOrganisationApp.Tests.Json
         public void TestWorkResponse()
         {
             IEnumerable<WorkData> actualWorks = WorkGetter.GetFromFile(RESPONSE_PATH);
-
-            Assert.Equal(ExpectedJson.ResponseWorks.Count, actualWorks.Count());
-
-            foreach (WorkData expectedWork in ExpectedJson.ResponseWorks)
-            {
-                Assert.Contains(expectedWork, actualWorks);
-            }
+            CollectionAssert.Equal(ExpectedJson.ResponseWorks, actualWorks);
         }
     }
 }

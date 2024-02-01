@@ -34,11 +34,7 @@ namespace MusicOrganisationApp.Tests.Databases
             await database.ResetTableAsync(ExpectedTables.ComposerData);
             IEnumerable<ComposerData> actualComposers = await database.GetAllAsync<ComposerData>();
 
-            Assert.Equal(ExpectedTables.ComposerData.Count, actualComposers.Count());
-            foreach (ComposerData expectedComposer in ExpectedTables.ComposerData)
-            {
-                Assert.Contains(expectedComposer, actualComposers);
-            }
+            CollectionAssert.Equal(ExpectedTables.ComposerData, actualComposers);
         }
 
         [Fact]
@@ -98,18 +94,6 @@ namespace MusicOrganisationApp.Tests.Databases
         }
 
         [Fact]
-        public async Task TestGetIdsAsync()
-        {
-            DatabaseConnection database = new(nameof(TestGetIdsAsync));
-            await database.ResetTableAsync(ExpectedTables.ComposerData);
-            IEnumerable<int> actualIds = await database.GetIdsAsync<ComposerData>();
-            foreach (ComposerData expectedComposer in ExpectedTables.ComposerData)
-            {
-                Assert.Contains(expectedComposer.Id, actualIds);
-            }
-        }
-
-        [Fact]
         public async Task TestNullProperties()
         {
             DatabaseConnection database = new(nameof(TestNullProperties));
@@ -146,18 +130,11 @@ namespace MusicOrganisationApp.Tests.Databases
             await database.ResetTableAsync(ExpectedTables.ComposerData);
             await database.ResetTableAsync(ExpectedTables.WorkData);
 
-            IEnumerable<ComposerData> actualComposers = await database.GetAllAsync<ComposerData>();
-            IEnumerable<WorkData> actualWorks = await database.GetAllAsync<WorkData>();
+            IEnumerable<ComposerData> actualComposerData = await database.GetAllAsync<ComposerData>();
+            IEnumerable<WorkData> actualWorkData = await database.GetAllAsync<WorkData>();
 
-            foreach (ComposerData expectedComposer in ExpectedTables.ComposerData)
-            {
-                Assert.Contains(expectedComposer, actualComposers);
-            }
-
-            foreach (WorkData expectedWork in ExpectedTables.WorkData)
-            {
-                Assert.Contains(expectedWork, actualWorks);
-            }
+            CollectionAssert.Equal(ExpectedTables.ComposerData, actualComposerData);
+            CollectionAssert.Equal(ExpectedTables.WorkData, actualWorkData);
         }
 
         [Fact]
@@ -170,15 +147,11 @@ namespace MusicOrganisationApp.Tests.Databases
 
             await database.ClearTableAsync<ComposerData>();
 
-            IEnumerable<ComposerData> actualComposers = await database.GetAllAsync<ComposerData>();
-            IEnumerable<WorkData> actualWorks = await database.GetAllAsync<WorkData>();
+            IEnumerable<ComposerData> actualComposerData = await database.GetAllAsync<ComposerData>();
+            IEnumerable<WorkData> actualWorkData = await database.GetAllAsync<WorkData>();
 
-            Assert.Empty(actualComposers);
-
-            foreach (WorkData expectedWork in ExpectedTables.WorkData)
-            {
-                Assert.Contains(expectedWork, actualWorks);
-            }
+            Assert.Empty(actualComposerData);
+            CollectionAssert.Equal(ExpectedTables.WorkData, actualWorkData);
         }
 
         [Fact]

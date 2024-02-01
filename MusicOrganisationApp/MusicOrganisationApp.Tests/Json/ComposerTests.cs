@@ -22,12 +22,7 @@ namespace MusicOrganisationApp.Tests.Json
         {
             IEnumerable<ComposerData> actualComposers = ComposerGetter.GetFromFile(_RESPONSE_PATH);
 
-            Assert.Equal(ExpectedJson.ResponseComposers.Count, actualComposers.Count());
-
-            foreach (ComposerData expectedComposer in ExpectedJson.ResponseComposers)
-            {
-                Assert.Contains(expectedComposer, actualComposers);
-            }
+            CollectionAssert.Equal(ExpectedJson.ResponseComposers, actualComposers);
         }
     }
 }

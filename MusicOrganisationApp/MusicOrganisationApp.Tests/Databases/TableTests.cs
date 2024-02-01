@@ -60,16 +60,12 @@ namespace MusicOrganisationApp.Tests.Databases
             await TestType(ExpectedTables.Pupils);
         }
 
-        private static async Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, new()
+        private static async Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, IEquatable<T>, new()
         {
             DatabaseConnection database = new(nameof(TableTests));
             await database.ResetTableAsync(expectedItems);
-            IEnumerable<T> actual = await database.GetAllAsync<T>();
-            Assert.Equal(expectedItems.Count(), actual.Count());
-            foreach (T expectedItem in expectedItems)
-            {
-                Assert.Contains(expectedItem, actual);
-            }
+            IEnumerable<T> actualItems = await database.GetAllAsync<T>();
+            CollectionAssert.Equal(expectedItems, actualItems);
         }
     }
 }
