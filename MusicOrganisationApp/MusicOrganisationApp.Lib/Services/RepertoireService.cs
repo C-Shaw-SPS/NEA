@@ -36,7 +36,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task InsertAsync(Repertoire value, bool getNewId)
         {
-            RepertoireData repertoireData = await GetRepertoireData(value, true);
+            RepertoireData repertoireData = await GetRepertoireData(value, getNewId);
             await _database.InsertAsync(repertoireData);
         }
 
