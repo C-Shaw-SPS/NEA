@@ -176,18 +176,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             DeathYear = oldValue ?? string.Empty;
         }
 
-        private static bool IsNumeric(string value)
-        {
-            foreach (char c in value)
-            {
-                if (c < '0' || c > '9')
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
         #endregion
 
         #region Page Setup

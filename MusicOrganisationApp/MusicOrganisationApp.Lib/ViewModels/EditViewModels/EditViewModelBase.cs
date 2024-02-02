@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Layouts;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
 
@@ -9,6 +10,18 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
     {
         public const string ID_PARAMETER = nameof(ID_PARAMETER);
         public const string IS_NEW_PARAMETER = nameof(IS_NEW_PARAMETER);
+
+        protected static bool IsNumeric(string value)
+        {
+            foreach (char c in value)
+            {
+                if (c < '0' || c > '9')
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     public abstract partial class EditViewModelBase<T> : EditViewModelBase, IQueryAttributable where T : class, IIdentifiable, new()
