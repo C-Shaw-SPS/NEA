@@ -120,5 +120,21 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
                 return false;
             }
         }
+
+        partial void OnLessonHoursChanged(string? oldValue, string newValue)
+        {
+            if (!IsNumeric(newValue))
+            {
+                LessonHours = oldValue?? string.Empty;
+            }
+        }
+
+        partial void OnLessonMinutesChanged(string? oldValue, string newValue)
+        {
+            if (!IsNumeric(newValue))
+            {
+                LessonMinutes = oldValue?? string.Empty;
+            }
+        }
     }
 }
