@@ -74,28 +74,21 @@ namespace MusicOrganisationApp.Lib.Services
             sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.PhoneNumber), nameof(Caregiver.PhoneNumber));
             sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.Id), nameof(Caregiver.MapId));
             sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.Description), nameof(Caregiver.Description));
+            sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.PupilId), nameof(Caregiver.PupilId));
             sqlQuery.AddJoin<CaregiverMap, CaregiverData>(nameof(CaregiverMap.CaregiverId), nameof(CaregiverData.Id));
             return sqlQuery;
         }
 
         private async Task<CaregiverMap> GetCaregiverMap(Caregiver caregiver, bool getNewId)
         {
-            if (_pupilId is int pupilId)
+            int id = getNewId ? await _database.GetNextIdAsync<CaregiverMap>() : caregiver.MapId;
+            CaregiverMap caregiverMap = new()
             {
-
-                int id = getNewId ? await _database.GetNextIdAsync<CaregiverMap>() : caregiver.MapId;
-                CaregiverMap caregiverMap = new()
-                {
-                    Id = id,
-                    CaregiverId = caregiver.Id,
-                    PupilId = pupilId
-                };
-                return caregiverMap;
-            }
-            else
-            {
-                throw new Exception($"{nameof(PupilId)} is null");
-            }
+                Id = id,
+                CaregiverId = caregiver.Id,
+                PupilId = caregiver.PupilId
+            };
+            return caregiverMap;
         }
     }
 }
