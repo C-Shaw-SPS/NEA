@@ -5,7 +5,7 @@ using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
-    public partial class CaregiverViewModel : ModelViewModelBase<CaregiverData>
+    public partial class CaregiverViewModel : ModelViewModelBase<CaregiverData>, IQueryAttributable
     {
         private const string _ROUTE = nameof(CaregiverViewModel);
 

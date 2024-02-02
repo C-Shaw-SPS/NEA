@@ -4,7 +4,7 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditCaregiverViewModel : EditViewModelBase<CaregiverData>
+    public partial class EditCaregiverViewModel : EditViewModelBase<CaregiverData>, IQueryAttributable
     {
         private const string _ROUTE = nameof(EditCaregiverViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit caregiver";
