@@ -14,6 +14,12 @@ namespace MusicOrganisationApp.Tests.Databases
             Era = "21st Century",
         };
 
+        public static readonly Pupil SqlInjectionPupil = new()
+        {
+            Id = 0,
+            Name = $"Robert'); DROP Table {Pupil.TableName}"
+        };
+
         public static readonly List<CaregiverData> CaregiverData = new()
         {
             new CaregiverData

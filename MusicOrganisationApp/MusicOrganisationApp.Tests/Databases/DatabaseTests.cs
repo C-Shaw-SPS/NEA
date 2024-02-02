@@ -1,5 +1,6 @@
 ﻿using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.Databases;
+using MusicOrganisationApp.Lib.Models;
 
 namespace MusicOrganisationApp.Tests.Databases
 {
@@ -175,6 +176,17 @@ namespace MusicOrganisationApp.Tests.Databases
             (bool suceeded, ComposerData actualComposer) = await database.TryGetAsync<ComposerData>(id);
             Assert.False(suceeded);
             Assert.Equal(new(), actualComposer);
+        }
+
+        [Fact]
+        public async Task TestSqlInjectionAsync()
+        {
+            DatabaseConnection database = new(nameof(TestSqlInjectionAsync));
+            await database.DropTableIfExistsAsync<Pupil>();
+            await database.InsertAsync(ExpectedTables.SqlInjectionPupil);
+            IEnumerable<Pupil> actualPupils = await database.GetAllAsync<Pupil>();
+            Assert.Single(actualPupils);
+            Assert.Contains(ExpectedTables.SqlInjectionPupil, actualPupils);
         }
     }
 }
