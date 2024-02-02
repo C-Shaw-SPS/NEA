@@ -8,6 +8,7 @@
         private string _phoneNumber = string.Empty; 
         private int _mapId;
         private string _description = string.Empty;
+        private int _pupilId;
 
         public int Id
         {
@@ -45,6 +46,12 @@
             set => _description = value;
         }
 
+        public int PupilId
+        {
+            get => _pupilId;
+            set => _pupilId = value;
+        }
+
         public bool Equals(Caregiver? other)
         {
             return other != null
@@ -53,7 +60,8 @@
                 && _email == other._email
                 && _phoneNumber == other._phoneNumber
                 && _mapId == other._mapId
-                && _description == other._description;
+                && _description == other._description
+                && _pupilId == other._pupilId;
         }
     }
 }
