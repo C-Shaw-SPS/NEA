@@ -69,7 +69,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private async Task SearchComposersAsync()
         {
             IEnumerable<ComposerData> searchResult = await _composerService.SearchAsync(ComposerSearchText, nameof(ComposerData.Name));
-
             Composers.Clear();
             foreach (ComposerData composer in searchResult)
             {
@@ -112,13 +111,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _value.Notes = Notes;
 
             bool canSave = true;
-            canSave &= TrySetTitle();
-            canSave &= TrySetComposer();
+            canSave &= TrySetTitleToSave();
+            canSave &= TrySetComposerToSave();
 
             return canSave;
         }
 
-        private bool TrySetTitle()
+        private bool TrySetTitleToSave()
         {
             if (string.IsNullOrWhiteSpace(Title))
             {
@@ -134,7 +133,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
         }
 
-        private bool TrySetComposer()
+        private bool TrySetComposerToSave()
         {
             if (SelectedComposer is not null)
             {
