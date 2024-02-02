@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Layouts;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
 
@@ -8,6 +7,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
     public abstract class EditViewModelBase : ViewModelBase
     {
+        protected const string _BLANK_NAME_ERROR = "Name cannot be blank";
+
         public const string ID_PARAMETER = nameof(ID_PARAMETER);
         public const string IS_NEW_PARAMETER = nameof(IS_NEW_PARAMETER);
 

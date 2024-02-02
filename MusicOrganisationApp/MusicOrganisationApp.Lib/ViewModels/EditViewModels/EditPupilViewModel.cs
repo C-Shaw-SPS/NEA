@@ -12,7 +12,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private const string _EDIT_PAGE_TITLE = "Edit pupil";
         private const string _NEW_PAGE_TITLE = "New pupil";
 
-        private const string _BLANK_NAME_ERROR = "Name cannot be blank";
         private const string _INVALID_DURATION_ERROR = "Invalid lesson duration";
 
         private readonly PupilService _service;

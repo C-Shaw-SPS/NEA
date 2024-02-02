@@ -10,7 +10,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private const string _EDIT_PAGE_TITLE = "Edit composer";
         private const string _NEW_PAGE_TITLE = "New composer";
 
-        private const string _BLANK_NAME_ERROR = "Name cannot be blank";
         private const string _INVALID_YEAR_FORMAT_ERROR = "Invalid year format";
         private const string _NEGATIVE_YEAR_ERROR = "Year cannot be negative";
         private const string _DEATH_BEFORE_BIRTH_ERROR = "Year of death cannot be before year of birth";
