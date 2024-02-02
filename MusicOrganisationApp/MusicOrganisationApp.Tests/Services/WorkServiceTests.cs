@@ -47,11 +47,11 @@ namespace MusicOrganisationApp.Tests.Services
         {
             (DatabaseConnection database, WorkService service) = await GetDatabaseAndWorkServiceAsync(nameof(TestDeleteWorkAsync), true);
 
-            await database.ResetTableAsync(ExpectedService.RepertoireData);
+            await database.ResetTableAsync(ExpectedService.RepertoireDatas);
 
             Work workToDelete = ExpectedService.Works[0];
-            WorkData workDataToDelete = ExpectedService.WorkData[workToDelete.Id];
-            IEnumerable<RepertoireData> repertoireDataToDelete = ExpectedService.RepertoireData.Where(r => r.WorkId == workDataToDelete.Id);
+            WorkData workDataToDelete = ExpectedService.WorkDatas[workToDelete.Id];
+            IEnumerable<RepertoireData> repertoireDataToDelete = ExpectedService.RepertoireDatas.Where(r => r.WorkId == workDataToDelete.Id);
 
             await service.DeleteAsync(workToDelete);
 
@@ -89,9 +89,9 @@ namespace MusicOrganisationApp.Tests.Services
             Work updatedWork = new()
             {
                 Id = originalWork.Id,
-                ComposerId = ExpectedService.ComposerData[1].Id,
+                ComposerId = ExpectedService.ComposerDatas[1].Id,
                 Title = originalWork.Title[1..],
-                ComposerName = ExpectedService.ComposerData[1].Name,
+                ComposerName = ExpectedService.ComposerDatas[1].Name,
             };
 
             await service.UpdateAsync(updatedWork);
@@ -109,11 +109,11 @@ namespace MusicOrganisationApp.Tests.Services
             await database.DropTableIfExistsAsync<WorkData>();
             await database.DropTableIfExistsAsync<RepertoireData>();
 
-            await database.InsertAllAsync(ExpectedService.ComposerData);
+            await database.InsertAllAsync(ExpectedService.ComposerDatas);
 
             if (insertWorkData)
             {
-                await database.InsertAllAsync(ExpectedService.WorkData);
+                await database.InsertAllAsync(ExpectedService.WorkDatas);
             }
 
             WorkService service = new(database);

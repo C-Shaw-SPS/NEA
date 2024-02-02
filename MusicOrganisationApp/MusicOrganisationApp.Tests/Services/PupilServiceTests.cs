@@ -13,9 +13,9 @@ namespace MusicOrganisationApp.Tests.Services
         {
             DatabaseConnection database = new(nameof(TestDeletePupilAsync));
             await database.ResetTableAsync(ExpectedService.Pupils);
-            await database.ResetTableAsync(ExpectedService.RepertoireData);
+            await database.ResetTableAsync(ExpectedService.RepertoireDatas);
             await database.ResetTableAsync(ExpectedService.CaregiverMaps);
-            await database.ResetTableAsync(ExpectedService.LessonData);
+            await database.ResetTableAsync(ExpectedService.LessonDatas);
             await database.ResetTableAsync(ExpectedService.PupilAvaliabilities);
 
             Pupil pupilToDelete = ExpectedService.Pupils[0];

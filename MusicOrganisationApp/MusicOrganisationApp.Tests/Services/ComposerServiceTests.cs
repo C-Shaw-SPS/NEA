@@ -13,12 +13,12 @@ namespace MusicOrganisationApp.Tests.Services
         {
             (DatabaseConnection database, ComposerService service) = await GetDatabaseAndServiceAsync(nameof(TestInsertComposerAsync));
 
-            await service.InsertAsync(ExpectedService.ComposerData[0], false);
+            await service.InsertAsync(ExpectedService.ComposerDatas[0], false);
 
             IEnumerable<ComposerData> actualComposers = await service.GetAllAsync();
 
             Assert.Single(actualComposers);
-            Assert.Contains(ExpectedService.ComposerData[0], actualComposers);
+            Assert.Contains(ExpectedService.ComposerDatas[0], actualComposers);
         }
 
         [Fact]
@@ -26,13 +26,13 @@ namespace MusicOrganisationApp.Tests.Services
         {
             (DatabaseConnection database, ComposerService service) = await GetDatabaseAndServiceAsync(nameof(TestDeleteComposerAsync));
 
-            await database.InsertAllAsync(ExpectedService.ComposerData);
-            await database.InsertAllAsync(ExpectedService.WorkData);
-            await database.InsertAllAsync(ExpectedService.RepertoireData);
+            await database.InsertAllAsync(ExpectedService.ComposerDatas);
+            await database.InsertAllAsync(ExpectedService.WorkDatas);
+            await database.InsertAllAsync(ExpectedService.RepertoireDatas);
 
-            ComposerData composerToDelete = ExpectedService.ComposerData[0];
-            IEnumerable<WorkData> worksToDelete = ExpectedService.WorkData.Where(work => work.ComposerId == composerToDelete.Id);
-            IEnumerable<RepertoireData> repertoireToDelete = ExpectedService.RepertoireData.Where(repetroire => worksToDelete.Any(work => work.Id == repetroire.WorkId));
+            ComposerData composerToDelete = ExpectedService.ComposerDatas[0];
+            IEnumerable<WorkData> worksToDelete = ExpectedService.WorkDatas.Where(work => work.ComposerId == composerToDelete.Id);
+            IEnumerable<RepertoireData> repertoireToDelete = ExpectedService.RepertoireDatas.Where(repetroire => worksToDelete.Any(work => work.Id == repetroire.WorkId));
 
             await service.DeleteAsync(composerToDelete);
 
@@ -56,7 +56,7 @@ namespace MusicOrganisationApp.Tests.Services
         {
             (DatabaseConnection database, ComposerService service) = await GetDatabaseAndServiceAsync(nameof(TestUpdateComposerAsync));
 
-            ComposerData originalComposer = ExpectedService.ComposerData[0];
+            ComposerData originalComposer = ExpectedService.ComposerDatas[0];
 
             await database.InsertAsync(originalComposer);
 
@@ -78,8 +78,8 @@ namespace MusicOrganisationApp.Tests.Services
         public async Task TestSearchComposerAsync()
         {
             (DatabaseConnection database, ComposerService service) = await GetDatabaseAndServiceAsync(nameof(TestSearchComposerAsync));
-            await database.InsertAllAsync(ExpectedService.ComposerData);
-            ComposerData composerToSearch = ExpectedService.ComposerData[0];
+            await database.InsertAllAsync(ExpectedService.ComposerDatas);
+            ComposerData composerToSearch = ExpectedService.ComposerDatas[0];
             foreach (char c in composerToSearch.Name)
             {
                 IEnumerable<ComposerData> searchResult = await service.SearchAsync(c.ToString(), nameof(ComposerData.Name));
@@ -91,8 +91,8 @@ namespace MusicOrganisationApp.Tests.Services
         public async Task TestGetComposerAsync()
         {
             (DatabaseConnection database, ComposerService service) = await GetDatabaseAndServiceAsync(nameof(TestGetComposerAsync));
-            await database.InsertAllAsync(ExpectedService.ComposerData);
-            ComposerData expectedComposer = ExpectedService.ComposerData[0];
+            await database.InsertAllAsync(ExpectedService.ComposerDatas);
+            ComposerData expectedComposer = ExpectedService.ComposerDatas[0];
             (bool suceeded, ComposerData actualComposer) = await service.TryGetAsync(expectedComposer.Id);
             Assert.True(suceeded);
             Assert.Equal(expectedComposer, actualComposer);
