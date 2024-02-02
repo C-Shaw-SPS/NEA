@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MusicOrganisationApp.Lib.Services
 {
-    public class PupilCaregiverService : IService<Caregiver>
+    public class PupilCaregiverService : IService<PupilCaregiver>
     {
         private readonly DatabaseConnection _database;
         private int? _pupilId;
@@ -25,63 +25,63 @@ namespace MusicOrganisationApp.Lib.Services
             set => _pupilId = value;
         }
 
-        public async Task DeleteAsync(Caregiver value)
+        public async Task DeleteAsync(PupilCaregiver value)
         {
-            await _database.DeleteAsync<CaregiverMap>(value.MapId);
+            await _database.DeleteAsync<CaregiverMap>(value.CaregiverId);
         }
 
-        public async Task<IEnumerable<Caregiver>> GetAllAsync()
+        public async Task<IEnumerable<PupilCaregiver>> GetAllAsync()
         {
-            SqlQuery<CaregiverData> sqlQuery = GetSqlQuery();
-            IEnumerable<Caregiver> caregivers = await _database.QueryAsync<Caregiver>(sqlQuery);
+            SqlQuery<CaregiverMap> sqlQuery = GetSqlQuery();
+            IEnumerable<PupilCaregiver> caregivers = await _database.QueryAsync<PupilCaregiver>(sqlQuery);
             return caregivers;
         }
 
-        public async Task InsertAsync(Caregiver value, bool getNewId)
+        public async Task InsertAsync(PupilCaregiver value, bool getNewId)
         {
             CaregiverMap caregiverMap = await GetCaregiverMap(value, getNewId);
             await _database.InsertAsync(caregiverMap);
         }
 
-        public async Task<IEnumerable<Caregiver>> SearchAsync(string search, string ordering)
+        public async Task<IEnumerable<PupilCaregiver>> SearchAsync(string search, string ordering)
         {
-            SqlQuery<CaregiverData> sqlQuery = GetSqlQuery();
+            SqlQuery<CaregiverMap> sqlQuery = GetSqlQuery();
             sqlQuery.AddWhereEquals<CaregiverMap>(nameof(CaregiverMap.PupilId), _pupilId);
             sqlQuery.AddOrderBy(ordering);
-            IEnumerable<Caregiver> caregivers = await _database.QueryAsync<Caregiver>(sqlQuery);
+            IEnumerable<PupilCaregiver> caregivers = await _database.QueryAsync<PupilCaregiver>(sqlQuery);
             return caregivers;
         }
 
-        public async Task<(bool, Caregiver)> TryGetAsync(int id)
+        public async Task<(bool, PupilCaregiver)> TryGetAsync(int id)
         {
-            SqlQuery<CaregiverData> sqlQuery = GetSqlQuery();
-            IEnumerable<Caregiver> caregivers = await _database.QueryAsync<Caregiver>(sqlQuery);
-            return IService<Caregiver>.TryReturnValue(caregivers);
+            SqlQuery<CaregiverMap> sqlQuery = GetSqlQuery();
+            IEnumerable<PupilCaregiver> caregivers = await _database.QueryAsync<PupilCaregiver>(sqlQuery);
+            return IService<PupilCaregiver>.TryReturnValue(caregivers);
         }
 
-        public async Task UpdateAsync(Caregiver value)
+        public async Task UpdateAsync(PupilCaregiver value)
         {
             CaregiverMap caregiverMap = await GetCaregiverMap(value, false);
             await _database.UpdateAsync(caregiverMap);
         }
 
-        private static SqlQuery<CaregiverData> GetSqlQuery()
+        private static SqlQuery<CaregiverMap> GetSqlQuery()
         {
-            SqlQuery<CaregiverData> sqlQuery = new();
-            sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.Id), nameof(Caregiver.Id));
-            sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.Name), nameof(Caregiver.Name));
-            sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.Email), nameof(Caregiver.Email));
-            sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.PhoneNumber), nameof(Caregiver.PhoneNumber));
-            sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.Id), nameof(Caregiver.MapId));
-            sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.Description), nameof(Caregiver.Description));
-            sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.PupilId), nameof(Caregiver.PupilId));
-            sqlQuery.AddJoin<CaregiverMap, CaregiverData>(nameof(CaregiverMap.CaregiverId), nameof(CaregiverData.Id));
+            SqlQuery<CaregiverMap> sqlQuery = new();
+            sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.Id), nameof(PupilCaregiver.Id));
+            sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.Description), nameof(PupilCaregiver.Description));
+            sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.PupilId), nameof(PupilCaregiver.PupilId));
+            sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.CaregiverId), nameof(PupilCaregiver.CaregiverId));
+            sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.Name), nameof(PupilCaregiver.Name));
+            sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.Email), nameof(PupilCaregiver.Email));
+            sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.PhoneNumber), nameof(PupilCaregiver.PhoneNumber));
+            sqlQuery.AddJoin<CaregiverData, CaregiverMap>(nameof(CaregiverData.Id), nameof(CaregiverMap.CaregiverId));
             return sqlQuery;
         }
 
-        private async Task<CaregiverMap> GetCaregiverMap(Caregiver caregiver, bool getNewId)
+        private async Task<CaregiverMap> GetCaregiverMap(PupilCaregiver caregiver, bool getNewId)
         {
-            int id = getNewId ? await _database.GetNextIdAsync<CaregiverMap>() : caregiver.MapId;
+            int id = getNewId ? await _database.GetNextIdAsync<CaregiverMap>() : caregiver.CaregiverId;
             CaregiverMap caregiverMap = new()
             {
                 Id = id,

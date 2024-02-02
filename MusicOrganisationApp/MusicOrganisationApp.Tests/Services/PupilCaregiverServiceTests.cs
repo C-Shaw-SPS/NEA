@@ -11,9 +11,9 @@ namespace MusicOrganisationApp.Tests.Services
         public async Task TestInsertCaregiverAsync()
         {
             (DatabaseConnection database, PupilCaregiverService service) = await GetDatabaseAndService(nameof(TestInsertCaregiverAsync), false);
-            Caregiver expectedCaregiver = ExpectedService.Caregivers[0];
+            PupilCaregiver expectedCaregiver = ExpectedService.Caregivers[0];
             await service.InsertAsync(expectedCaregiver, false);
-            IEnumerable<Caregiver> actualCaregivers = await service.GetAllAsync();
+            IEnumerable<PupilCaregiver> actualCaregivers = await service.GetAllAsync();
             Assert.Single(actualCaregivers);
             Assert.Contains(expectedCaregiver, actualCaregivers);
         }
@@ -24,8 +24,8 @@ namespace MusicOrganisationApp.Tests.Services
             (DatabaseConnection database, PupilCaregiverService service) = await GetDatabaseAndService(nameof(TestGetPupilCaregiversAsync), true);
             Pupil expectedPupil = ExpectedService.Pupils[0];
             service.PupilId = expectedPupil.Id;
-            IEnumerable<Caregiver> expectedCaregivers = ExpectedService.Caregivers.Where(c => c.PupilId == expectedPupil.Id);
-            IEnumerable<Caregiver> actualCaregivers = await service.SearchAsync(string.Empty, nameof(Caregiver.Id));
+            IEnumerable<PupilCaregiver> expectedCaregivers = ExpectedService.Caregivers.Where(c => c.PupilId == expectedPupil.Id);
+            IEnumerable<PupilCaregiver> actualCaregivers = await service.SearchAsync(string.Empty, nameof(PupilCaregiver.Id));
             CollectionAssert.Equal(expectedCaregivers, actualCaregivers);
         }
 

@@ -133,7 +133,7 @@ namespace MusicOrganisationApp.Tests.Services
 
         public static readonly List<Repertoire> Repertoires = GetRepertoires();
 
-        public static readonly List<Caregiver> Caregivers = GetCaregivers();
+        public static readonly List<PupilCaregiver> Caregivers = GetCaregivers();
 
         private static List<Pupil> GetPupils(int count)
         {
@@ -189,19 +189,19 @@ namespace MusicOrganisationApp.Tests.Services
             return caregiverMaps;
         }
 
-        private static List<Caregiver> GetCaregivers()
+        private static List<PupilCaregiver> GetCaregivers()
         {
-            List<Caregiver> caregivers = [];
+            List<PupilCaregiver> caregivers = [];
             foreach (CaregiverMap caregiverMap in CaregiverMaps)
             {
                 CaregiverData caregiverData = CaregiverDatas[caregiverMap.CaregiverId];
-                Caregiver caregiver = new()
+                PupilCaregiver caregiver = new()
                 {
                     Id = caregiverData.Id,
                     Name = caregiverData.Name,
                     Email = caregiverData.Email,
                     PhoneNumber = caregiverData.PhoneNumber,
-                    MapId = caregiverMap.Id,
+                    CaregiverId = caregiverMap.Id,
                     Description = caregiverMap.Description,
                     PupilId = caregiverMap.PupilId
                 };

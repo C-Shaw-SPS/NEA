@@ -183,9 +183,9 @@ namespace MusicOrganisationApp.Tests.Databases
             }
         };
 
-        public static readonly Caregiver Caregiver = new()
+        public static readonly PupilCaregiver Caregiver = new()
         {
-            MapId = CaregiverMaps[0].Id,
+            CaregiverId = CaregiverMaps[0].Id,
             Id = CaregiverMaps[0].CaregiverId,
             Description = CaregiverMaps[0].Description,
             Name = CaregiverData[0].Name,

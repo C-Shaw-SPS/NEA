@@ -1,19 +1,31 @@
 ﻿namespace MusicOrganisationApp.Lib.Models
 {
-    public class Caregiver : IEquatable<Caregiver>, IIdentifiable
+    public class PupilCaregiver : IEquatable<PupilCaregiver>, IIdentifiable
     {
         private int _id;
+        private string _description = string.Empty;
+        private int _pupilId;
+        private int _caregiverId;
         private string _name = string.Empty;
         private string _email = string.Empty;
         private string _phoneNumber = string.Empty; 
-        private int _mapId;
-        private string _description = string.Empty;
-        private int _pupilId;
 
         public int Id
         {
             get => _id;
             set => _id = value;
+        }
+
+        public string Description
+        {
+            get => _description;
+            set => _description = value;
+        }
+
+        public int PupilId
+        {
+            get => _pupilId;
+            set => _pupilId = value;
         }
 
         public string Name
@@ -34,34 +46,22 @@
             set => _phoneNumber = value;
         }
 
-        public int MapId
+        public int CaregiverId
         {
-            get => _mapId;
-            set => _mapId = value;
+            get => _caregiverId;
+            set => _caregiverId = value;
         }
 
-        public string Description
-        {
-            get => _description;
-            set => _description = value;
-        }
-
-        public int PupilId
-        {
-            get => _pupilId;
-            set => _pupilId = value;
-        }
-
-        public bool Equals(Caregiver? other)
+        public bool Equals(PupilCaregiver? other)
         {
             return other != null
                 && _id == other._id
+                && _description == other._description
+                && _pupilId == other._pupilId
                 && _name == other._name
                 && _email == other._email
                 && _phoneNumber == other._phoneNumber
-                && _mapId == other._mapId
-                && _description == other._description
-                && _pupilId == other._pupilId;
+                && _caregiverId == other._caregiverId;
         }
     }
 }
