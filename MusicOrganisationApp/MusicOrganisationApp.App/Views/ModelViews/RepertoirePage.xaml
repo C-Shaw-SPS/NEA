@@ -13,6 +13,9 @@
         <ToolbarItem
             Text="Edit"
             Command="{Binding EditCommand}"/>
+        <ToolbarItem
+            Text="View work"
+            Command="{Binding GoToWorkCommand}"/>
     </ContentPage.ToolbarItems>
 
     <Grid

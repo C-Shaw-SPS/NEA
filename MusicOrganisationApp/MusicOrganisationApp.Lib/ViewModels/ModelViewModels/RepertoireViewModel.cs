@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
@@ -11,6 +12,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         private const string _DATE_FORMAT = "dd/mm/yyyy";
 
         private readonly RepertoireService _service;
+        private readonly AsyncRelayCommand _goToWorkCommand;
 
         [ObservableProperty]
         private string _title = string.Empty;
@@ -39,11 +41,23 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         public RepertoireViewModel() : base(EditRepertoireViewModel.Route)
         {
             _service = new(_database);
+            _goToWorkCommand = new(GoToWorkAsync);
         }
 
         public static string Route => _ROUTE;
 
+        public AsyncRelayCommand GoToWorkCommand => _goToWorkCommand;
+
         protected override IService<Repertoire> Service => _service;
+
+        private async Task GoToWorkAsync()
+        {
+            Dictionary<string, object> parameters = new()
+            {
+                [ID_PARAMETER] = _value.WorkId
+            };
+            await GoToAsync(parameters, WorkViewModel.Route);
+        }
 
         protected override void SetDisplayValues()
         {
