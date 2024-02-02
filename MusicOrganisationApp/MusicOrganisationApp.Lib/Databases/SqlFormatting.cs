@@ -10,6 +10,7 @@ namespace MusicOrganisationApp.Lib.Databases
         public const string CLOSE_BRACKET = ")";
         public const string NULL = "NULL";
         public const char DOUBLE_QUOTE = '\"';
+        public const string ESCAPED_SINGLE_QUOTE = "''";
         public const char SINGLE_QUOTE = '\'';
 
         public static string FormatAsDatabasePath(this string s)
@@ -80,7 +81,7 @@ namespace MusicOrganisationApp.Lib.Databases
 
         private static string FormatSqlString(this string s)
         {
-            return DOUBLE_QUOTE + s.ReplaceQuotes() + DOUBLE_QUOTE;
+            return SINGLE_QUOTE + s.ReplaceQuotes() + SINGLE_QUOTE;
         }
 
         private static string ReplaceQuotes(this string s)
@@ -88,9 +89,9 @@ namespace MusicOrganisationApp.Lib.Databases
             StringBuilder result = new();
             foreach (char c in s)
             {
-                if (c == DOUBLE_QUOTE)
+                if (c == SINGLE_QUOTE)
                 {
-                    result.Append(SINGLE_QUOTE);
+                    result.Append(ESCAPED_SINGLE_QUOTE);
                 }
                 else
                 {
