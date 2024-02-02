@@ -10,6 +10,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
     public partial class PupilViewModel : ModelViewModelBase<Pupil>, IQueryAttributable
     {
         private const string _ROUTE = nameof(PupilViewModel);
+        private const string _TIMESPAN_FORMAT = "hh\\:mm";
 
         private readonly PupilService _service;
         private readonly AsyncRelayCommand _goToRepertoireCommand;
@@ -52,7 +53,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             Name = _value.Name;
             Level = _value.Level;
             NeedsDifferentTimes = _value.NeedsDifferentTimes;
-            LessonDuration = _value.LessonDuration.ToString();
+            LessonDuration = _value.LessonDuration.ToString(_TIMESPAN_FORMAT);
             Email = _value.Email;
             PhoneNumber = _value.PhoneNumber;
             Notes = _value.Notes;
