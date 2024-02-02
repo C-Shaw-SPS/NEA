@@ -55,14 +55,7 @@ namespace MusicOrganisationApp.Lib.Services
             SqlQuery sqlQuery = GetSqlQuery();
             sqlQuery.AddAndEqual<RepertoireData>(nameof(RepertoireData.Id), id);
             IEnumerable<Repertoire> repertoires = await _database.QueryAsync<Repertoire>(sqlQuery);
-            if (repertoires.Any())
-            {
-                return (true, repertoires.First());
-            }
-            else
-            {
-                return (false, new());
-            }
+            return IService<Repertoire>.TryReturnValue(repertoires);
         }
 
         public async Task UpdateAsync(Repertoire value)
