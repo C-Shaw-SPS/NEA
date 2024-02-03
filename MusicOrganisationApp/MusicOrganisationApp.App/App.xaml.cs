@@ -15,25 +15,25 @@ namespace MusicOrganisationApp.App
 
             MainPage = new AppShell();
 
-            Routing.RegisterRoute(AllComposersViewModel.Route, typeof(AllComposersPage));
-            Routing.RegisterRoute(ComposerViewModel.Route, typeof(ComposerPage));
-            Routing.RegisterRoute(EditComposerViewModel.Route, typeof(EditComposerPage));
+            Routing.RegisterRoute(AllComposersViewModel.ROUTE, typeof(AllComposersPage));
+            Routing.RegisterRoute(ComposerViewModel.ROUTE, typeof(ComposerPage));
+            Routing.RegisterRoute(EditComposerViewModel.ROUTE, typeof(EditComposerPage));
 
-            Routing.RegisterRoute(AllWorksViewModel.Route, typeof(AllWorksPage));
-            Routing.RegisterRoute(WorkViewModel.Route, typeof(WorkPage));
-            Routing.RegisterRoute(EditWorkViewModel.Route, typeof(EditWorkPage));
+            Routing.RegisterRoute(AllWorksViewModel.ROUTE, typeof(AllWorksPage));
+            Routing.RegisterRoute(WorkViewModel.ROUTE, typeof(WorkPage));
+            Routing.RegisterRoute(EditWorkViewModel.ROUTE, typeof(EditWorkPage));
 
-            Routing.RegisterRoute(AllPupilsViewModel.Route, typeof(AllPupilsPage));
-            Routing.RegisterRoute(PupilViewModel.Route, typeof(PupilPage));
-            Routing.RegisterRoute(EditPupilViewModel.Route, typeof(EditPupilPage));
+            Routing.RegisterRoute(AllPupilsViewModel.ROUTE, typeof(AllPupilsPage));
+            Routing.RegisterRoute(PupilViewModel.ROUTE, typeof(PupilPage));
+            Routing.RegisterRoute(EditPupilViewModel.ROUTE, typeof(EditPupilPage));
 
-            Routing.RegisterRoute(AllRepertoireViewModel.Route, typeof(AllRepertoirePage));
-            Routing.RegisterRoute(RepertoireViewModel.Route, typeof(RepertoirePage));
-            Routing.RegisterRoute(EditRepertoireViewModel.Route, typeof(EditRepertoirePage));
+            Routing.RegisterRoute(AllRepertoireViewModel.ROUTE, typeof(AllRepertoirePage));
+            Routing.RegisterRoute(RepertoireViewModel.ROUTE, typeof(RepertoirePage));
+            Routing.RegisterRoute(EditRepertoireViewModel.ROUTE, typeof(EditRepertoirePage));
 
-            Routing.RegisterRoute(AllCaregiversViewModel.Route, typeof(AllCaregiversPage));
-            Routing.RegisterRoute(CaregiverViewModel.Route, typeof(CaregiverPage));
-            Routing.RegisterRoute(EditCaregiverViewModel.Route, typeof(EditCaregiverPage));
+            Routing.RegisterRoute(AllCaregiversViewModel.ROUTE, typeof(AllCaregiversPage));
+            Routing.RegisterRoute(CaregiverViewModel.ROUTE, typeof(CaregiverPage));
+            Routing.RegisterRoute(EditCaregiverViewModel.ROUTE, typeof(EditCaregiverPage));
         }
     }
 }
