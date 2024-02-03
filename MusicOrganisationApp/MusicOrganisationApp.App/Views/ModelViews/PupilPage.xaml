@@ -17,6 +17,9 @@
         <ToolbarItem
             Text="View repertoire"
             Command="{Binding GoToRepertoireCommand}"/>
+        <ToolbarItem
+            Text="View caregivers"
+            Command="{Binding GoToCaregiversCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>
