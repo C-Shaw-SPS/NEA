@@ -1,11 +1,6 @@
 ﻿using MusicOrganisationApp.Lib.Databases;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Tables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicOrganisationApp.Lib.Services
 {
@@ -81,11 +76,11 @@ namespace MusicOrganisationApp.Lib.Services
 
         private async Task<CaregiverMap> GetCaregiverMap(PupilCaregiver caregiver, bool getNewId)
         {
-            int id = getNewId ? await _database.GetNextIdAsync<CaregiverMap>() : caregiver.CaregiverId;
+            int id = getNewId ? await _database.GetNextIdAsync<CaregiverMap>() : caregiver.Id;
             CaregiverMap caregiverMap = new()
             {
                 Id = id,
-                CaregiverId = caregiver.Id,
+                CaregiverId = caregiver.CaregiverId,
                 PupilId = caregiver.PupilId
             };
             return caregiverMap;
