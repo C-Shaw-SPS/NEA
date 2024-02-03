@@ -11,16 +11,16 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
-        Text="Save"
-        Command="{Binding TrySaveCommand}"/>
+            Text="Save"
+            Command="{Binding TrySaveCommand}"/>
         <ToolbarItem
-        Text="Delete"
-        IsEnabled="{Binding CanDelete}"
-        Command="{Binding DeleteCommand}"/>
+            Text="Delete"
+            IsEnabled="{Binding CanDelete}"
+            Command="{Binding DeleteCommand}"/>
         <ToolbarItem
-        Text="New work"
-        Command="{Binding AddNewWorkCommand}"
-        IconImageSource="{FontImage Glyph='+', Color=Black, Size=22}"/>
+            Text="New work"
+            Command="{Binding AddNewWorkCommand}"
+            IconImageSource="{FontImage Glyph='+',Color=Black}"/>
     </ContentPage.ToolbarItems>
 
     <Grid

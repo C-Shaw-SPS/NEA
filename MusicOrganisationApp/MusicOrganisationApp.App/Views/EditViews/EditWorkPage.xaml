@@ -21,7 +21,7 @@
         <ToolbarItem
             Text="New composer"
             Command="{Binding AddNewComposerCommand}"
-            IconImageSource="{FontImage Glyph='+', Color=Black, Size=22}"/>
+            IconImageSource="{FontImage Glyph='+',Color=Black}"/>
     </ContentPage.ToolbarItems>
 
 

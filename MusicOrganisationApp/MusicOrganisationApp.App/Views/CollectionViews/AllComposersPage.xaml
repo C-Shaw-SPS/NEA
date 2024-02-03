@@ -14,7 +14,7 @@
         <ToolbarItem
             Text="New"
             Command="{Binding AddNewCommand}"
-            IconImageSource="{FontImage Glyph='+', Color=Black, Size=22}"/>
+            IconImageSource="{FontImage Glyph='+',Color=Black}"/>
     </ContentPage.ToolbarItems>
 
     <Grid

@@ -12,12 +12,13 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem
-        Text="New"
-        Command="{Binding AddNewCommand}"
-        IconImageSource="{FontImage Glyph='+', Color=Black, Size=22}"/>
+            Text="New"
+            Command="{Binding AddNewCommand}"
+            IconImageSource="{FontImage Glyph='+',Color=Black}"/>
     </ContentPage.ToolbarItems>
 
     <Grid
+        Margin="20"
         RowSpacing="10"
         ColumnSpacing="10">
 
