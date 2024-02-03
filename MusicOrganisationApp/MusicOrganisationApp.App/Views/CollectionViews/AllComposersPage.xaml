@@ -19,7 +19,8 @@
 
     <Grid
         RowSpacing="10"
-        ColumnSpacing="10">
+        ColumnSpacing="10"
+        Margin="20">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
