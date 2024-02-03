@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Intents;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
@@ -91,8 +90,24 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         protected override bool TrySetValuesToSave()
         {
             _value.Description = Description;
-            bool canSave = TrySetCaregiverToSave();
+
+            bool canSave = true;
+            canSave &= TrySetPupilIdToSave();
+            canSave &= TrySetCaregiverToSave();
             return canSave;
+        }
+
+        private bool TrySetPupilIdToSave()
+        {
+            if (_pupilId is int pupilId)
+            {
+                _value.PupilId = pupilId;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private bool TrySetCaregiverToSave()

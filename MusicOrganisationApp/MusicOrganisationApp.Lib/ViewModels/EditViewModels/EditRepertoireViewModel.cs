@@ -21,7 +21,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private readonly AsyncRelayCommand _searchWorksCommand;
         private readonly AsyncRelayCommand _addNewWorkCommand;
 
-        private int _pupilId;
+        private int? _pupilId;
 
         [ObservableProperty]
         private DateTime _dateStarted = DateTime.Today;
@@ -125,10 +125,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _value.Syllabus = Syllabus;
             _value.IsFinishedLearning = IsFinishedLearning;
             _value.Notes = Notes;
-            _value.PupilId = _pupilId;
 
             bool canSave = true;
-            canSave &= TrySaveWork();
+            canSave &= TrySetPupilIdToSave();
+            canSave &= TrySetWorkToSave();
 
             return canSave;
         }
@@ -145,7 +145,20 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
         }
 
-        private bool TrySaveWork()
+        private bool TrySetPupilIdToSave()
+        {
+            if (_pupilId is int pupilId)
+            {
+                _value.PupilId = pupilId;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool TrySetWorkToSave()
         {
             if (SelectedWork is Work work)
             {
