@@ -49,6 +49,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _addNewCaregiverCommand = new(AddNewCaregiverAsync);
         }
 
+        public AsyncRelayCommand AddNewCaregiverCommand => _addNewCaregiverCommand;
+
         public AsyncRelayCommand SearchCaregiversCommand => _searchCaregiversCommand;
 
         protected override IService<PupilCaregiver> Service => _pupilCaregiverService;
