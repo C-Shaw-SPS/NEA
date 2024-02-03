@@ -7,7 +7,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
     public partial class AllWorksViewModel : CollectionViewModelBase<Work>
     {
-        private const string _ROUTE = nameof(AllWorksViewModel);
+        public const string ROUTE = nameof(AllWorksViewModel);
 
         private static readonly Dictionary<string, string> _orderings = new()
         {
@@ -17,12 +17,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private readonly WorkService _service;
 
-        public AllWorksViewModel() : base(WorkViewModel.Route, EditWorkViewModel.Route, _orderings)
+        public AllWorksViewModel() : base(WorkViewModel.ROUTE, EditWorkViewModel.ROUTE, _orderings)
         {
             _service = new(_database);
         }
-
-        public static string Route => _ROUTE;
 
         protected override IService<Work> Service => _service;
     }

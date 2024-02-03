@@ -9,7 +9,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
     public partial class EditWorkViewModel : EditViewModelBase<Work>, IQueryAttributable
     {
-        private const string _ROUTE = nameof(EditWorkViewModel);
+        public const string ROUTE = nameof(EditWorkViewModel);
+
         private const string _EDIT_PAGE_TITLE = "Edit work";
         private const string _NEW_PAGE_TITLE = "New work";
         private const string _BLANK_TITLE_ERROR = "Title cannot be blank";
@@ -64,8 +65,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         public AsyncRelayCommand AddNewComposerCommand => _addNewComposerCommand;
 
-        public static string Route => _ROUTE;
-
         private async Task SearchComposersAsync()
         {
             IEnumerable<ComposerData> searchResult = await _composerService.SearchAsync(ComposerSearchText, nameof(ComposerData.Name));
@@ -82,7 +81,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             {
                 [IS_NEW_PARAMETER] = true
             };
-            await GoToAsync(parameters, EditComposerViewModel.Route);
+            await GoToAsync(parameters, EditComposerViewModel.ROUTE);
         }
 
         protected override void SetDisplayValues()

@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
@@ -8,7 +7,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
     public partial class ComposerViewModel : ModelViewModelBase<ComposerData>, IQueryAttributable
     {
-        private const string _ROUTE = nameof(ComposerViewModel);
+        public const string ROUTE = nameof(ComposerViewModel);
 
         private readonly ComposerService _service;
 
@@ -24,7 +23,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _era;
 
-        public ComposerViewModel() : base(EditComposerViewModel.Route)
+        public ComposerViewModel() : base(EditComposerViewModel.ROUTE)
         {
             _service = new(_database);
 
@@ -33,8 +32,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             _deathYear = string.Empty;
             _era = string.Empty;
         }
-
-        public static string Route => _ROUTE;
 
         protected override IService<ComposerData> Service => _service;
 

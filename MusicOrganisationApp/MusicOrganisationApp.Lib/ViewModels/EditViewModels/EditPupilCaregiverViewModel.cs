@@ -9,12 +9,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
     public partial class EditPupilCaregiverViewModel : EditViewModelBase<PupilCaregiver>
     {
-        private const string _ROUTE = nameof(EditPupilCaregiverViewModel);
+        public const string ROUTE = nameof(EditPupilCaregiverViewModel);
+        public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
+
         private const string _EDIT_PAGE_TITLE = "Edit caregiver";
         private const string _NEW_PAGE_TITLE = "New caregiver";
         private const string _NO_CAREGIVER_SELECTED_ERROR = "No caregiver selected";
 
-        public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
         private readonly PupilCaregiverService _pupilCaregiverService;
         private readonly CaregiverService _caregiverService;
@@ -48,8 +49,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _addNewCaregiverCommand = new(AddNewCaregiverAsync);
         }
 
-        public static string Route => _ROUTE;
-
         public AsyncRelayCommand SearchCaregiversCommand => _searchCaregiversCommand;
 
         protected override IService<PupilCaregiver> Service => _pupilCaregiverService;
@@ -70,7 +69,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             {
                 [IS_NEW_PARAMETER] = true
             };
-            await GoToAsync(parameters, EditCaregiverViewModel.Route);
+            await GoToAsync(parameters, EditCaregiverViewModel.ROUTE);
         }
 
         protected override void SetDisplayValues()

@@ -7,7 +7,7 @@ namespace MusicOrganisationApp.Lib.ViewModels
 {
     public class DeveloperToolsViewModel : ViewModelBase
     {
-        private const string _ROUTE = nameof(DeveloperToolsViewModel);
+        public const string ROUTE = nameof(DeveloperToolsViewModel);
 
         private readonly AsyncRelayCommand _dropTablesCommand;
         private readonly AsyncRelayCommand _resetComposersAndWorksCommand;
@@ -17,8 +17,6 @@ namespace MusicOrganisationApp.Lib.ViewModels
             _dropTablesCommand = new(DropTablesAsync);
             _resetComposersAndWorksCommand = new(ResetComposersAndWorksAsync);
         }
-
-        public static string Route => _ROUTE;
 
         public AsyncRelayCommand DropTablesCommand => _dropTablesCommand;
 

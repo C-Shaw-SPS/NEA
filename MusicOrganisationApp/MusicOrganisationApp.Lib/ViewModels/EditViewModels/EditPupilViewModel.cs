@@ -7,11 +7,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
     public partial class EditPupilViewModel : EditViewModelBase<Pupil>, IQueryAttributable
     {
-        private const string _ROUTE = nameof(EditPupilViewModel);
+        public const string ROUTE = nameof(EditPupilViewModel);
 
         private const string _EDIT_PAGE_TITLE = "Edit pupil";
         private const string _NEW_PAGE_TITLE = "New pupil";
-
         private const string _INVALID_DURATION_ERROR = "Invalid lesson duration";
 
         private readonly PupilService _service;
@@ -50,8 +49,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         {
             _service = new(_database);
         }
-
-        public static string Route => _ROUTE;
 
         protected override IService<Pupil> Service => _service;
 

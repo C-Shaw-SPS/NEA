@@ -9,7 +9,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
     public partial class PupilViewModel : ModelViewModelBase<Pupil>, IQueryAttributable
     {
-        private const string _ROUTE = nameof(PupilViewModel);
+        public const string ROUTE = nameof(PupilViewModel);
+
         private const string _TIMESPAN_FORMAT = "hh\\:mm";
 
         private readonly PupilService _service;
@@ -36,13 +37,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _notes = string.Empty;
 
-        public PupilViewModel() : base(EditPupilViewModel.Route)
+        public PupilViewModel() : base(EditPupilViewModel.ROUTE)
         {
             _service = new(_database);
             _goToRepertoireCommand = new(GoToRepertoireAsync);
         }
-
-        public static string Route => _ROUTE;
 
         protected override IService<Pupil> Service => _service;
 
@@ -65,7 +64,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             {
                 [AllRepertoireViewModel.PUPIL_ID_PARAMETER] = _value.Id
             };
-            await GoToAsync(parameters, AllRepertoireViewModel.Route);
+            await GoToAsync(parameters, AllRepertoireViewModel.ROUTE);
         }
     }
 }

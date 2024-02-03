@@ -7,7 +7,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
     public class AllRepertoireViewModel : CollectionViewModelBase<Repertoire>, IQueryAttributable
     {
-        private const string _ROUTE = nameof(AllRepertoireViewModel);
+        public const string ROUTE = nameof(AllRepertoireViewModel);
 
         public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
@@ -21,12 +21,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private readonly RepertoireService _service;
 
-        public AllRepertoireViewModel() : base(RepertoireViewModel.Route, EditRepertoireViewModel.Route, _orderings)
+        public AllRepertoireViewModel() : base(RepertoireViewModel.ROUTE, EditRepertoireViewModel.ROUTE, _orderings)
         {
             _service = new(_database);
         }
-
-        public static string Route => _ROUTE;
 
         protected override IService<Repertoire> Service => _service;
 

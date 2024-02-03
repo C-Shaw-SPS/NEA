@@ -10,7 +10,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
     public partial class AllComposersViewModel : CollectionViewModelBase<ComposerData>
     {
-        private const string _ROUTE = nameof(AllComposersViewModel);
+        public const string ROUTE = nameof(AllComposersViewModel);
 
         private static readonly Dictionary<string, string> _orderings = new()
         {
@@ -21,12 +21,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private readonly ComposerService _service;
 
-        public AllComposersViewModel() : base(ComposerViewModel.Route, EditComposerViewModel.Route, _orderings)
+        public AllComposersViewModel() : base(ComposerViewModel.ROUTE, EditComposerViewModel.ROUTE, _orderings)
         {
             _service = new(_database);
         }
-
-        public static string Route => _ROUTE;
 
         protected override IService<ComposerData> Service => _service;
     }

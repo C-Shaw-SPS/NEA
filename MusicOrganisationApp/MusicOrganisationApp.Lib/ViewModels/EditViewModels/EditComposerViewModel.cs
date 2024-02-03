@@ -6,7 +6,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
     public partial class EditComposerViewModel : EditViewModelBase<ComposerData>, IQueryAttributable
     {
-        private const string _ROUTE = nameof(EditComposerViewModel);
+        public const string ROUTE = nameof(EditComposerViewModel);
+
         private const string _EDIT_PAGE_TITLE = "Edit composer";
         private const string _NEW_PAGE_TITLE = "New composer";
 
@@ -43,8 +44,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         }
 
         protected override IService<ComposerData> Service => _service;
-
-        public static string Route => _ROUTE;
 
 
         #region Saving

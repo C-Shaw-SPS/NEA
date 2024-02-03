@@ -7,7 +7,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
     public partial class CaregiverViewModel : ModelViewModelBase<CaregiverData>, IQueryAttributable
     {
-        private const string _ROUTE = nameof(CaregiverViewModel);
+        public const string ROUTE = nameof(CaregiverViewModel);
 
         private readonly CaregiverService _service;
 
@@ -20,12 +20,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _phoneNumber = string.Empty;
 
-        public CaregiverViewModel() : base(EditCaregiverViewModel.Route)
+        public CaregiverViewModel() : base(EditCaregiverViewModel.ROUTE)
         {
             _service = new(_database);
         }
-
-        public static string Route => _ROUTE;
 
         protected override IService<CaregiverData> Service => _service;
 

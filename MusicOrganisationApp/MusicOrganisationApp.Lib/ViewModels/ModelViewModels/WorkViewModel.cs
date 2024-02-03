@@ -8,7 +8,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
     public partial class WorkViewModel : ModelViewModelBase<Work>, IQueryAttributable
     {
-        private const string _ROUTE = nameof(WorkViewModel);
+        public const string ROUTE = nameof(WorkViewModel);
 
         private readonly WorkService _service;
         private readonly AsyncRelayCommand _goToComposerCommand;
@@ -28,13 +28,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _notes = string.Empty;
 
-        public WorkViewModel() : base(EditWorkViewModel.Route)
+        public WorkViewModel() : base(EditWorkViewModel.ROUTE)
         {
             _service = new(_database);
             _goToComposerCommand = new(GoToComposerAsync);
         }
-
-        public static string Route => _ROUTE;
 
         public AsyncRelayCommand GoToComposerCommand => _goToComposerCommand;
 
@@ -46,7 +44,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             {
                 [ID_PARAMETER] = _value.ComposerId
             };
-            await GoToAsync(parameters, ComposerViewModel.Route);
+            await GoToAsync(parameters, ComposerViewModel.ROUTE);
         }
 
         protected override void SetDisplayValues()

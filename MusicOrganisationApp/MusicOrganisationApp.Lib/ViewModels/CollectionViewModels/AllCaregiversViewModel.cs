@@ -7,7 +7,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
     public partial class AllCaregiversViewModel : CollectionViewModelBase<CaregiverData>
     {
-        private const string _ROUTE = nameof(AllCaregiversViewModel);
+        public const string ROUTE = nameof(AllCaregiversViewModel);
 
         private static readonly Dictionary<string, string> _orderings = new()
         {
@@ -16,12 +16,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private readonly CaregiverService _service;
 
-        public AllCaregiversViewModel() : base(CaregiverViewModel.Route, EditCaregiverViewModel.Route, _orderings)
+        public AllCaregiversViewModel() : base(CaregiverViewModel.ROUTE, EditCaregiverViewModel.ROUTE, _orderings)
         {
             _service = new(_database);
         }
-
-        public static string Route => _ROUTE;
 
         protected override IService<CaregiverData> Service => _service;
     }

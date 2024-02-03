@@ -8,7 +8,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
     public partial class RepertoireViewModel : ModelViewModelBase<Repertoire>, IQueryAttributable
     {
-        private const string _ROUTE = nameof(RepertoireViewModel);
+        public const string ROUTE = nameof(RepertoireViewModel);
+
         private const string _DATE_FORMAT = "dd/mm/yyyy";
 
         private readonly RepertoireService _service;
@@ -38,13 +39,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _notes = string.Empty;
 
-        public RepertoireViewModel() : base(EditRepertoireViewModel.Route)
+        public RepertoireViewModel() : base(EditRepertoireViewModel.ROUTE)
         {
             _service = new(_database);
             _goToWorkCommand = new(GoToWorkAsync);
         }
-
-        public static string Route => _ROUTE;
 
         public AsyncRelayCommand GoToWorkCommand => _goToWorkCommand;
 
@@ -56,7 +55,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             {
                 [ID_PARAMETER] = _value.WorkId
             };
-            await GoToAsync(parameters, WorkViewModel.Route);
+            await GoToAsync(parameters, WorkViewModel.ROUTE);
         }
 
         protected override void SetDisplayValues()

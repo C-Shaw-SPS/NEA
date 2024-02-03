@@ -12,7 +12,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
     public class AllPupilsViewModel : CollectionViewModelBase<Pupil>
     {
-        private const string _ROUTE = nameof(AllPupilsViewModel);
+        public const string ROUTE = nameof(AllPupilsViewModel);
 
         private static readonly Dictionary<string, string> _orderings = new()
         {
@@ -21,12 +21,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private readonly PupilService _service;
 
-        public AllPupilsViewModel() : base(PupilViewModel.Route, EditPupilViewModel.Route, _orderings)
+        public AllPupilsViewModel() : base(PupilViewModel.ROUTE, EditPupilViewModel.ROUTE, _orderings)
         {
             _service = new(_database);
         }
-
-        public static string Route => _ROUTE;
 
         protected override IService<Pupil> Service => _service;
     }
