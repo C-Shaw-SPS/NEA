@@ -3,7 +3,7 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.Services
 {
-    public class CaregiverService : IService<CaregiverData>
+    public class CaregiverService : ISearchService<CaregiverData>
     {
         private readonly DatabaseConnection _database;
 

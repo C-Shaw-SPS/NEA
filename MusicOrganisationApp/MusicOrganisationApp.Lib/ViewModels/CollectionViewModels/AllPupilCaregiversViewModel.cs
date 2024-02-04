@@ -5,7 +5,7 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public class AllPupilCaregiversViewModel : CollectionViewModelBase<PupilCaregiver>, IQueryAttributable
+    public class AllPupilCaregiversViewModel : SearchableCollectionViewModel<PupilCaregiver>, IQueryAttributable
     {
         public const string ROUTE = nameof(AllPupilCaregiversViewModel);
 
@@ -22,8 +22,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         {
             _service = new(_database);
         }
-
-        protected override IService<PupilCaregiver> Service => _service;
+        protected override ISearchService<PupilCaregiver> SearchService => _service;
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {

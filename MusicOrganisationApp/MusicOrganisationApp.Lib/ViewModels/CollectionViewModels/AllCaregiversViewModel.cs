@@ -5,7 +5,7 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class AllCaregiversViewModel : CollectionViewModelBase<CaregiverData>
+    public partial class AllCaregiversViewModel : SearchableCollectionViewModel<CaregiverData>
     {
         public const string ROUTE = nameof(AllCaregiversViewModel);
 
@@ -21,6 +21,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             _service = new(_database);
         }
 
-        protected override IService<CaregiverData> Service => _service;
+        protected override ISearchService<CaregiverData> SearchService => _service;
     }
 }

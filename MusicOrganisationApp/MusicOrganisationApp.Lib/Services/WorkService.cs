@@ -4,7 +4,7 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.Services
 {
-    public class WorkService : IService<Work>
+    public class WorkService : ISearchService<Work>
     {
         private readonly DatabaseConnection _database;
 

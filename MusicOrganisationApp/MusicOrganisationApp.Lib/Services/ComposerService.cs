@@ -3,7 +3,7 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.Services
 {
-    public class ComposerService : IService<ComposerData>
+    public class ComposerService : ISearchService<ComposerData>
     {
         private readonly DatabaseConnection _database;
 

@@ -17,8 +17,6 @@
 
         public Task UpdateAsync(T value);
 
-        public Task<IEnumerable<T>> SearchAsync(string search, string ordering);
-
         protected static (bool suceeded, T value) TryReturnValue(IEnumerable<T> values)
         {
             if (values.Any())

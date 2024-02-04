@@ -12,16 +12,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
     {
         private readonly string _modelRoute;
         private readonly string _editRoute;
-        private readonly Dictionary<string, string> _orderings;
-        private readonly AsyncRelayCommand _searchCommand;
         private readonly AsyncRelayCommand _selectCommand;
         private readonly AsyncRelayCommand _addNewCommand;
-
-        [ObservableProperty]
-        private string _searchText = string.Empty;
-
-        [ObservableProperty]
-        private string _selectedOrdering;
 
         [ObservableProperty]
         private ObservableCollection<T> _collection = [];
@@ -29,24 +21,18 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         [ObservableProperty]
         private T? _selectedItem;
 
-        public CollectionViewModelBase(string modelRoute, string editRoute, Dictionary<string, string> orderings)
+        public CollectionViewModelBase(string modelRoute, string editRoute)
         {
             _modelRoute = modelRoute;
             _editRoute = editRoute;
-            _orderings = orderings;
 
-            _searchCommand = new(SearchAsync);
             _selectCommand = new(SelectAsync);
             _addNewCommand = new(AddNewAsync);
-
-            _selectedOrdering = Orderings.First();
         }
 
         protected abstract IService<T> Service { get; }
 
-        public List<string> Orderings => _orderings.Keys.ToList();
 
-        public AsyncRelayCommand SearchCommand => _searchCommand;
 
         public AsyncRelayCommand SelectCommand => _selectCommand;
 
@@ -54,17 +40,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         public virtual async Task RefreshAsync()
         {
-            await SearchAsync();
-        }
-
-        private async Task SearchAsync()
-        {
-            string ordering = _orderings[SelectedOrdering];
-            IEnumerable<T> values = await Service.SearchAsync(SearchText, ordering);
+            IEnumerable<T> items = await Service.GetAllAsync();
             Collection.Clear();
-            foreach (T value in values)
+            foreach (T item in items)
             {
-                Collection.Add(value);
+                Collection.Add(item);
             }
         }
 

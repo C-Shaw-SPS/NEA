@@ -1,14 +1,11 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using MusicOrganisationApp.Lib.Services;
+﻿using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
-using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class AllComposersViewModel : CollectionViewModelBase<ComposerData>
+    public partial class AllComposersViewModel : SearchableCollectionViewModel<ComposerData>
     {
         public const string ROUTE = nameof(AllComposersViewModel);
 
@@ -26,6 +23,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             _service = new(_database);
         }
 
-        protected override IService<ComposerData> Service => _service;
+        protected override ISearchService<ComposerData> SearchService => _service;
     }
 }

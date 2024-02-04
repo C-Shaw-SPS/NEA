@@ -2,15 +2,10 @@
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public class AllPupilsViewModel : CollectionViewModelBase<Pupil>
+    public class AllPupilsViewModel : SearchableCollectionViewModel<Pupil>
     {
         public const string ROUTE = nameof(AllPupilsViewModel);
 
@@ -26,6 +21,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             _service = new(_database);
         }
 
-        protected override IService<Pupil> Service => _service;
+        protected override ISearchService<Pupil> SearchService => _service;
     }
 }
