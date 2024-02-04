@@ -38,6 +38,10 @@ namespace MusicOrganisationApp.App
             Routing.RegisterRoute(AllPupilCaregiversViewModel.ROUTE, typeof(AllPupilCaregiversPage));
             Routing.RegisterRoute(PupilCaregiverViewModel.ROUTE, typeof(PupilCaregiverPage));
             Routing.RegisterRoute(EditPupilCaregiverViewModel.ROUTE, typeof(EditPupilCaregiverPage));
+
+            Routing.RegisterRoute(AllLessonSlotsViewModel.ROUTE, typeof(AllLessonSlotsPage));
+            Routing.RegisterRoute(LessonSlotViewModel.ROUTE, typeof(LessonSlotPage));
+            Routing.RegisterRoute(EditLessonSlotViewModel.ROUTE, typeof(EditLessonSlotPage));
         }
     }
 }
