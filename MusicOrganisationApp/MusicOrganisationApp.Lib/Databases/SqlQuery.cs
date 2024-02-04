@@ -9,6 +9,10 @@ namespace MusicOrganisationApp.Lib.Databases
         private const string _OR = "OR";
         private const string _EQUALS = "=";
         private const string _LIKE = "LIKE";
+        private const string _GREATER = ">";
+        private const string _LESS = "<";
+        private const string _GREATER_OR_EQUAL = ">=";
+        private const string _LESS_OR_EQUAL = "<=";
 
         private readonly string _tableName;
         private bool _selectAll;
@@ -59,6 +63,8 @@ namespace MusicOrganisationApp.Lib.Databases
             _joins.Add((TNew.TableName, newColumn, TExisting.TableName, existingColumn));
         }
 
+        #region Conditions
+
         public void AddWhereEquals<TTable>(string column, object? value) where TTable : ITable
         {
             AddCondition<TTable>(_WHERE, column, value, _EQUALS);
@@ -74,15 +80,44 @@ namespace MusicOrganisationApp.Lib.Databases
             AddCondition<TTable>(_AND, column, value, _EQUALS);
         }
 
+        public void AddOrEqual<TTable>(string column, object? value) where TTable: ITable
+        {
+            AddCondition<TTable>(_OR, column, value, _EQUALS);
+        }
+
+        public void AddAndGreaterThan<TTable>(string column, object? value) where TTable : ITable
+        {
+            AddCondition<TTable>(_AND, column, value, _GREATER);
+        }
+
+        public void AddAndGreaterOrEqual<TTable>(string column, object? value) where TTable : ITable
+        {
+            AddCondition<TTable>(_AND, column, value, _GREATER_OR_EQUAL);
+        }
+
+        public void AddAndLessThan<TTable>(string column, object value) where TTable : ITable
+        {
+            AddCondition<TTable>(_AND, column, value, _LESS);
+        }
+
+        public void AddAndLessOrEqual<TTable>(string column, object? value) where TTable : ITable
+        {
+            AddCondition<TTable>(_AND, column, value, _LESS_OR_EQUAL);
+        }
+
         private void AddCondition<TTable>(string keyword, string column, object? value, string condition) where TTable : ITable
         {
             _conditions.Add((keyword, TTable.TableName, column, SqlFormatting.FormatSqlValue(value), condition));
         }
 
+        #endregion
+
         public void AddOrderBy(string column)
         {
             _orderBys.Add(column);
         }
+
+        #region SQL
 
         public string GetSql()
         {
@@ -92,8 +127,8 @@ namespace MusicOrganisationApp.Lib.Databases
             AddConditionsToStringBuilder(stringBuilder);
             AddOrderBys(stringBuilder);
             AddLimit(stringBuilder);
-
-            return stringBuilder.ToString();
+            string sql = stringBuilder.ToString();
+            return sql;
         }
 
         private void AddSelectColumnsToStringbuilder(StringBuilder stringBuilder)
@@ -152,6 +187,8 @@ namespace MusicOrganisationApp.Lib.Databases
                 stringBuilder.AppendLine($"LIMIT {_limit}");
             }
         }
+
+        #endregion
     }
 
     public class SqlQuery<T> : SqlQuery where T : class, ITable, new()
