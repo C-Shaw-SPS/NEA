@@ -28,7 +28,13 @@ namespace MusicOrganisationApp.Lib.Databases
         {
             await CreateTablesAsync(sqlQuery.Tables);
             string sql = sqlQuery.GetSql();
-            IEnumerable<T> result = await _connection.QueryAsync<T>(sql);
+            IEnumerable<T> result = await QueryAsync<T>(sql);
+            return result;
+        }
+
+        public async Task<IEnumerable<T>> QueryAsync<T>(string sqlQuery) where T : class, new()
+        {
+            IEnumerable<T> result = await _connection.QueryAsync<T>(sqlQuery);
             return result;
         }
 
@@ -76,10 +82,7 @@ namespace MusicOrganisationApp.Lib.Databases
         {
             await CreateTableAsync<T>();
 
-            SqlQuery<T> sqlQuery = new()
-            {
-                SelectAll = true
-            };
+            SqlQuery<T> sqlQuery = new() { SelectAll = true };
             sqlQuery.AddWhereEquals<T>(nameof(ITable.Id), id);
             IEnumerable<T> result = await QueryAsync<T>(sqlQuery);
             if (result.Any())
@@ -97,10 +100,7 @@ namespace MusicOrganisationApp.Lib.Databases
         {
             await CreateTableAsync<T>();
 
-            SqlQuery<T> sqlQuery = new()
-            {
-                SelectAll = true
-            };
+            SqlQuery<T> sqlQuery = new() { SelectAll = true };
             IEnumerable<T> result = await QueryAsync<T>(sqlQuery);
             return result;
         }
