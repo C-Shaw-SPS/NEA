@@ -74,10 +74,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task<IEnumerable<ComposerData>> SearchAsync(string search, string ordering)
         {
-            SqlQuery<ComposerData> query = new(IService.DEFAULT_LIMIT)
-            {
-                SelectAll = true
-            };
+            SqlQuery<ComposerData> query = new(IService.DEFAULT_LIMIT) { SelectAll = true };
             query.AddWhereLike<ComposerData>(nameof(ComposerData.Name), search);
             query.AddOrderBy(ordering);
 

@@ -66,7 +66,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         private static SqlQuery<RepertoireData> GetSqlQuery()
         {
-            SqlQuery<RepertoireData> sqlQuery = new(SqlQuery.DEFAULT_LIMIT);
+            SqlQuery<RepertoireData> sqlQuery = new(IService.DEFAULT_LIMIT);
             sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.Id), nameof(Repertoire.Id));
             sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.DateStarted), nameof(Repertoire.DateStarted));
             sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.Syllabus), nameof(Repertoire.Syllabus));

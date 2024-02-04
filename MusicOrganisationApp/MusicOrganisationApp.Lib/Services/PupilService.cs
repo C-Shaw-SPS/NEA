@@ -48,10 +48,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task<IEnumerable<Pupil>> SearchAsync(string search, string ordering)
         {
-            SqlQuery<Pupil> sqlQuery = new(SqlQuery.DEFAULT_LIMIT)
-            {
-                SelectAll = true
-            };
+            SqlQuery<Pupil> sqlQuery = new(IService.DEFAULT_LIMIT) { SelectAll = true };
             sqlQuery.AddWhereLike<Pupil>(nameof(Pupil.Name), search);
             sqlQuery.AddOrderBy(ordering);
             IEnumerable<Pupil> result = await _database.QueryAsync<Pupil>(sqlQuery);

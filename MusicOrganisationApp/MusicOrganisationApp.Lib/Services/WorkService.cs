@@ -74,7 +74,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         private static SqlQuery<WorkData> GetSqlQuery()
         {
-            SqlQuery<WorkData> sqlQuery = new(SqlQuery.DEFAULT_LIMIT);
+            SqlQuery<WorkData> sqlQuery = new(IService.DEFAULT_LIMIT);
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Id), nameof(Work.Id));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.ComposerId), nameof(Work.ComposerId));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Work.Title));

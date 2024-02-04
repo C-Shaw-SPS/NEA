@@ -10,8 +10,6 @@ namespace MusicOrganisationApp.Lib.Databases
         private const string _EQUALS = "=";
         private const string _LIKE = "LIKE";
 
-        public const int DEFAULT_LIMIT = 256;
-
         private readonly string _tableName;
         private bool _selectAll;
         private readonly List<(string table, string column, string alias)> _columns;

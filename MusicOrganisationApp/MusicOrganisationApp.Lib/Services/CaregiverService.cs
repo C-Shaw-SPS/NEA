@@ -37,10 +37,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task<IEnumerable<CaregiverData>> SearchAsync(string search, string ordering)
         {
-            SqlQuery<CaregiverData> sqlQuery = new(SqlQuery.DEFAULT_LIMIT)
-            {
-                SelectAll = true
-            };
+            SqlQuery<CaregiverData> sqlQuery = new(IService.DEFAULT_LIMIT) { SelectAll = true };
             sqlQuery.AddWhereLike<CaregiverData>(nameof(CaregiverData.Name), search);
             sqlQuery.AddOrderBy(ordering);
             IEnumerable<CaregiverData> caregivers = await _database.QueryAsync<CaregiverData>(sqlQuery);
