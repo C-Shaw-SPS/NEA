@@ -42,5 +42,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
                 Collection.Add(value);
             }
         }
+
+        async partial void OnSelectedOrderingChanged(string value)
+        {
+            await SearchAsync();
+        }
     }
 }
