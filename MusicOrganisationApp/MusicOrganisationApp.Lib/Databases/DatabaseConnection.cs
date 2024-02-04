@@ -28,13 +28,7 @@ namespace MusicOrganisationApp.Lib.Databases
         {
             await CreateTablesAsync(sqlQuery.Tables);
             string sql = sqlQuery.GetSql();
-            IEnumerable<T> result = await QueryAsync<T>(sql);
-            return result;
-        }
-
-        public async Task<IEnumerable<T>> QueryAsync<T>(string sqlQuery) where T : class, new()
-        {
-            IEnumerable<T> result = await _connection.QueryAsync<T>(sqlQuery);
+            IEnumerable<T> result = await _connection.QueryAsync<T>(sql);
             return result;
         }
 
