@@ -64,7 +64,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             Notes = _value.Notes;
         }
 
-        protected override bool TrySetValuesToSave()
+        protected override async Task<bool> TrySetValuesToSave()
         {
             _value.Level = Level;
             _value.NeedsDifferentTimes = NeedsDifferentTimes;

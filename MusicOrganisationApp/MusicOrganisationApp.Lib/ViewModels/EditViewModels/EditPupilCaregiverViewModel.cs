@@ -88,7 +88,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
         }
 
-        protected override bool TrySetValuesToSave()
+        protected override async Task<bool> TrySetValuesToSave()
         {
             _value.Description = Description;
 

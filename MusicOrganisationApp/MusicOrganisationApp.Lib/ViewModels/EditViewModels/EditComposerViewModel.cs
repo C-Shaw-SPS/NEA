@@ -48,7 +48,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         #region Saving
 
-        protected override bool TrySetValuesToSave()
+        protected override async Task<bool> TrySetValuesToSave()
         {
             SetComposerEra();
 

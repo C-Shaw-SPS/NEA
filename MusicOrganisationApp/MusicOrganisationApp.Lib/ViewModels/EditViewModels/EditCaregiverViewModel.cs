@@ -39,7 +39,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             PhoneNumber = _value.PhoneNumber;
         }
 
-        protected override bool TrySetValuesToSave()
+        protected override async Task<bool> TrySetValuesToSave()
         {
             _value.Email = Email;
             _value.PhoneNumber = PhoneNumber;
@@ -47,6 +47,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             bool canSave = TrySetNameToSave();
 
             return canSave;
+            
         }
 
         private bool TrySetNameToSave()

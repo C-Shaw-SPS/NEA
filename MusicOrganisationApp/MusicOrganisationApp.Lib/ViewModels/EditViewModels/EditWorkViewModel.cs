@@ -103,7 +103,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         #region Data Validation
 
-        protected override bool TrySetValuesToSave()
+        protected override async Task<bool> TrySetValuesToSave()
         {
             _value.Subtitle = Subtitle;
             _value.Genre = Genre;
