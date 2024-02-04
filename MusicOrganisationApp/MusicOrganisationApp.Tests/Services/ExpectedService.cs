@@ -1,5 +1,6 @@
 ﻿using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Tables;
+using System.Threading.Channels;
 
 namespace MusicOrganisationApp.Tests.Services
 {
@@ -135,6 +136,77 @@ namespace MusicOrganisationApp.Tests.Services
 
         public static readonly List<PupilCaregiver> Caregivers = GetCaregivers();
 
+        public static readonly LessonSlotData NewLessonSlot = new()
+        {
+            DayOfWeek = DayOfWeek.Monday,
+            StartTime = new TimeSpan(01, 00, 00),
+            EndTime = new TimeSpan(02, 00, 00)
+        };
+
+        public static readonly List<LessonSlotData> ClashingLessonSlots = new()
+        {
+            new()
+            {
+                DayOfWeek = DayOfWeek.Monday,
+                StartTime = new TimeSpan(00, 30, 00),
+                EndTime = new TimeSpan(01, 30, 00)
+            },
+            new()
+            {
+                DayOfWeek = DayOfWeek.Monday,
+                StartTime = new TimeSpan(00, 30, 00),
+                EndTime = new TimeSpan(02, 00, 00)
+            },
+            new()
+            {
+                DayOfWeek = DayOfWeek.Monday,
+                StartTime = new TimeSpan(00, 30, 00),
+                EndTime = new TimeSpan(02, 30, 00)
+            },
+            new()
+            {
+                DayOfWeek = DayOfWeek.Monday,
+                StartTime = new TimeSpan(01, 00, 00),
+                EndTime = new TimeSpan(02, 00, 00)
+            },
+            new()
+            {
+                DayOfWeek = DayOfWeek.Monday,
+                StartTime = new TimeSpan(01, 00, 00),
+                EndTime = new TimeSpan(02, 30, 00)
+            },
+            new()
+            {
+                DayOfWeek = DayOfWeek.Monday,
+                StartTime = new TimeSpan(01, 30, 00),
+                EndTime = new TimeSpan(02, 30, 00)
+            }
+        };
+
+        public static readonly List<LessonSlotData> NonClashingLessonSlots = new()
+        {
+            new()
+            {
+                DayOfWeek = DayOfWeek.Monday,
+                StartTime = new TimeSpan(00, 00, 00),
+                EndTime = new TimeSpan(01, 00, 00)
+            },
+            new()
+            {
+                DayOfWeek = DayOfWeek.Monday,
+                StartTime = new TimeSpan(02, 00, 00),
+                EndTime = new TimeSpan(03, 00, 00)
+            },
+            new()
+            {
+                DayOfWeek = DayOfWeek.Tuesday,
+                StartTime = new TimeSpan(01, 00, 00),
+                EndTime = new TimeSpan(02, 00, 00)
+            }
+        };
+
+        public static readonly List<LessonSlotData> LessonSlots = GetLessonSlots();
+
         private static List<Pupil> GetPupils(int count)
         {
             List<Pupil> pupils = [];
@@ -254,6 +326,23 @@ namespace MusicOrganisationApp.Tests.Services
                 repertoires.Add(repertoire);
             }
             return repertoires;
+        }
+
+        private static List<LessonSlotData> GetLessonSlots()
+        {
+            List<LessonSlotData> lessonSlots = [];
+            int id = 0;
+            foreach (LessonSlotData lessonSlot in ClashingLessonSlots)
+            {
+                lessonSlot.Id = id++;
+                lessonSlots.Add(lessonSlot);
+            }
+            foreach (LessonSlotData lessonSlot in NonClashingLessonSlots)
+            {
+                lessonSlot.Id = id++;
+                lessonSlots.Add(lessonSlot);
+            }
+            return lessonSlots;
         }
     }
 }
