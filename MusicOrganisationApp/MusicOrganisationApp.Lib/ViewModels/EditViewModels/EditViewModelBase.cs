@@ -59,7 +59,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private async Task TrySaveAsync()
         {
-            bool canSave = TrySetValuesToSave();
+            bool canSave = await TrySetValuesToSave();
             if (canSave)
             {
                 if (_isNew)
@@ -74,7 +74,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
         }
 
-        protected abstract bool TrySetValuesToSave();
+        protected abstract Task<bool> TrySetValuesToSave();
 
         private async Task DeleteAsync()
         {
