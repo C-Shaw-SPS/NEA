@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MusicOrganisationApp.Lib.Databases;
+using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels
 {
@@ -51,6 +52,15 @@ namespace MusicOrganisationApp.Lib.ViewModels
         private static string GetRoute(IEnumerable<string> routes)
         {
             return string.Join('/', routes);
+        }
+
+        protected static void ResetCollection<T>(ObservableCollection<T> displayedCollection, IEnumerable<T> newCollection)
+        {
+            displayedCollection.Clear();
+            foreach (T item in newCollection)
+            {
+                displayedCollection.Add(item);
+            }
         }
     }
 }
