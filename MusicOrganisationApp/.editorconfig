@@ -22,6 +22,9 @@ csharp_style_expression_bodied_local_functions = false:silent
 # CA1067: Override Object.Equals(object) when implementing IEquatable<T>
 dotnet_diagnostic.CA1067.severity = none
 
+# CA1822: Mark members as static
+dotnet_diagnostic.CA1822.severity = none
+
 [*.{cs,vb}]
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 tab_width = 4
