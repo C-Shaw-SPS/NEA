@@ -8,16 +8,25 @@ namespace MusicOrganisationApp.Lib.Services
         private readonly DatabaseConnection _database;
         private DayOfWeek _dayOfWeek;
 
-        public LessonSlotService(DatabaseConnection database, DayOfWeek dayOfWeek)
+        public LessonSlotService(DatabaseConnection database)
         {
             _database = database;
-            _dayOfWeek = dayOfWeek;
         }
 
         public DayOfWeek DayOfWeek
         {
             get => _dayOfWeek;
             set => _dayOfWeek = value;
+        }
+
+        public static List<DayOfWeek> GetDaysOfWeek()
+        {
+            List<DayOfWeek> daysOfWeek = [];
+            for (DayOfWeek dayOfWeek = DayOfWeek.Sunday; dayOfWeek <= DayOfWeek.Monday; dayOfWeek++)
+            {
+                daysOfWeek.Add(dayOfWeek);
+            }
+            return daysOfWeek;
         }
 
         public async Task DeleteAsync(LessonSlotData value)
@@ -59,22 +68,22 @@ namespace MusicOrganisationApp.Lib.Services
             await _database.UpdateAsync(value);
         }
 
-        public async Task<IEnumerable<LessonSlotData>> GetClashingLessonSlots(LessonSlotData value)
+        public async Task<IEnumerable<LessonSlotData>> GetClashingLessonSlots(DayOfWeek dayOfWeek, TimeSpan startTime, TimeSpan endTime)
         {
-            string sqlQuery = GetClashSqlQuery(value);
-            await _database.CreateTableAsync<LessonSlotData>();
+            SqlQuery<LessonSlotData> sqlQuery = GetClashSqlQuery(dayOfWeek, startTime, endTime);
             IEnumerable<LessonSlotData> clashingLessonSlots = await _database.QueryAsync<LessonSlotData>(sqlQuery);
             return clashingLessonSlots;
         }
 
-        private static string GetClashSqlQuery(LessonSlotData value)
+        private static SqlQuery<LessonSlotData> GetClashSqlQuery(DayOfWeek dayOfWeek, TimeSpan startTime, TimeSpan endTime)
         {
-            string sqlQuery = $"""
-                SELECT * FROM {LessonSlotData.TableName}
-                WHERE {LessonSlotData.TableName}.{nameof(LessonSlotData.DayOfWeek)} = {value.DayOfWeek}
-                AND ({value.StartTime} BETWEEN {LessonSlotData.TableName}.{nameof(LessonSlotData.StartTime)} AND {LessonSlotData.TableName}.{nameof(LessonSlotData.EndTime)} - 1
-                OR {LessonSlotData.TableName}.{nameof(LessonSlotData.StartTime)} BETWEEN {value.StartTime.Ticks} AND {value.EndTime.Ticks - 1})
-                """;
+            SqlQuery<LessonSlotData> sqlQuery = new() { SelectAll = true };
+            sqlQuery.AddWhereEquals<LessonSlotData>(nameof(LessonSlotData.DayOfWeek), dayOfWeek);
+            sqlQuery.AddAndLessOrEqual<LessonSlotData>(nameof(LessonSlotData.StartTime), startTime);
+            sqlQuery.AddAndGreaterThan<LessonSlotData>(nameof(LessonSlotData.EndTime), startTime);
+            sqlQuery.AddOrEqual<LessonSlotData>(nameof(LessonSlotData.DayOfWeek), dayOfWeek);
+            sqlQuery.AddAndGreaterOrEqual<LessonSlotData>(nameof(LessonSlotData.StartTime), startTime);
+            sqlQuery.AddAndLessThan<LessonSlotData>(nameof(LessonSlotData.StartTime), endTime);
             return sqlQuery;
         }
     }
