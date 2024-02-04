@@ -34,10 +34,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         private SqlQuery<LessonSlotData> GetSqlQuery()
         {
-            SqlQuery<LessonSlotData> sqlQuery = new()
-            {
-                SelectAll = true
-            };
+            SqlQuery<LessonSlotData> sqlQuery = new() { SelectAll = true };
             sqlQuery.AddWhereEquals<LessonSlotData>(nameof(LessonSlotData.DayOfWeek), _dayOfWeek);
             return sqlQuery;
         }
@@ -60,6 +57,25 @@ namespace MusicOrganisationApp.Lib.Services
         public async Task UpdateAsync(LessonSlotData value)
         {
             await _database.UpdateAsync(value);
+        }
+
+        public async Task<IEnumerable<LessonSlotData>> GetClashingLessonSlots(LessonSlotData value)
+        {
+            string sqlQuery = GetClashSqlQuery(value);
+            await _database.CreateTableAsync<LessonSlotData>();
+            IEnumerable<LessonSlotData> clashingLessonSlots = await _database.QueryAsync<LessonSlotData>(sqlQuery);
+            return clashingLessonSlots;
+        }
+
+        private static string GetClashSqlQuery(LessonSlotData value)
+        {
+            string sqlQuery = $"""
+                SELECT * FROM {LessonSlotData.TableName}
+                WHERE {LessonSlotData.TableName}.{nameof(LessonSlotData.DayOfWeek)} = {value.DayOfWeek}
+                AND ({value.StartTime} BETWEEN {LessonSlotData.TableName}.{nameof(LessonSlotData.StartTime)} AND {LessonSlotData.TableName}.{nameof(LessonSlotData.EndTime)} - 1
+                OR {LessonSlotData.TableName}.{nameof(LessonSlotData.StartTime)} BETWEEN {value.StartTime.Ticks} AND {value.EndTime.Ticks - 1})
+                """;
+            return sqlQuery;
         }
     }
 }
