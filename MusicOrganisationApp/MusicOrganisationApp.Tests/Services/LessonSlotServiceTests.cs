@@ -15,7 +15,10 @@ namespace MusicOrganisationApp.Tests.Services
         public async Task TestGetClashingLessonSlotsAsync()
         {
             (DatabaseConnection database, LessonSlotService service) = await GetDatabaseAndService(nameof(TestGetClashingLessonSlotsAsync), true);
-            IEnumerable<LessonSlotData> actualClashingLessonSlots = await service.GetClashingLessonSlots(ExpectedService.NewLessonSlot);
+            DayOfWeek dayOfWeek = ExpectedService.NewLessonSlot.DayOfWeek;
+            TimeSpan startTime = ExpectedService.NewLessonSlot.StartTime;
+            TimeSpan endTime = ExpectedService.NewLessonSlot.EndTime;
+            IEnumerable<LessonSlotData> actualClashingLessonSlots = await service.GetClashingLessonSlots(dayOfWeek, startTime, endTime);
             CollectionAssert.Equal(ExpectedService.ClashingLessonSlots, actualClashingLessonSlots);
         }
 
