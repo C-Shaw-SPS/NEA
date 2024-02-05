@@ -48,7 +48,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         #region Saving
 
-        protected override async Task<bool> TrySetValuesToSave()
+        protected override Task<bool> TrySetValuesToSave()
         {
             SetComposerEra();
 
@@ -57,7 +57,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             canSave &= TrySetComposerBirthYear();
             canSave &= TrySetComposerDeathYear();
 
-            return canSave;
+            return Task.FromResult(canSave);
         }
 
         private void SetComposerEra()

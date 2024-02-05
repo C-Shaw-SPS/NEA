@@ -117,7 +117,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
         }
 
-        protected override async Task<bool> TrySetValuesToSave()
+        protected override Task<bool> TrySetValuesToSave()
         {
             SaveDateStarted();
             _value.Syllabus = Syllabus;
@@ -128,7 +128,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             canSave &= TrySetPupilIdToSave();
             canSave &= TrySetWorkToSave();
 
-            return canSave;
+            return Task.FromResult(canSave);
         }
 
         private void SaveDateStarted()

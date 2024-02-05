@@ -88,14 +88,14 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
         }
 
-        protected override async Task<bool> TrySetValuesToSave()
+        protected override Task<bool> TrySetValuesToSave()
         {
             _value.Description = Description;
 
             bool canSave = true;
             canSave &= TrySetPupilIdToSave();
             canSave &= TrySetCaregiverToSave();
-            return canSave;
+            return Task.FromResult(canSave);
         }
 
         private bool TrySetPupilIdToSave()
