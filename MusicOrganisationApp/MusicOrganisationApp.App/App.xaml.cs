@@ -15,33 +15,80 @@ namespace MusicOrganisationApp.App
 
             MainPage = new AppShell();
 
-            Routing.RegisterRoute(AllComposersViewModel.ROUTE, typeof(AllComposersPage));
-            Routing.RegisterRoute(ComposerViewModel.ROUTE, typeof(ComposerPage));
-            Routing.RegisterRoute(EditComposerViewModel.ROUTE, typeof(EditComposerPage));
+            RegisterRoutes();
+        }
 
-            Routing.RegisterRoute(AllWorksViewModel.ROUTE, typeof(AllWorksPage));
-            Routing.RegisterRoute(WorkViewModel.ROUTE, typeof(WorkPage));
-            Routing.RegisterRoute(EditWorkViewModel.ROUTE, typeof(EditWorkPage));
+        private void RegisterRoutes()
+        {
+            RegisterComposerRoutes();
+            RegisterWorkRoutes();
+            RegisterPupilRoutes();
+            RegisterRepertoireRoutes();
+            RegisterCaregiverRoutes();
+            RegisterPupilCaregiverRoutes();
+            RegisterLessonSlotRoutes();
+            RegisterLessonRoues();
+        }
 
-            Routing.RegisterRoute(AllPupilsViewModel.ROUTE, typeof(AllPupilsPage));
-            Routing.RegisterRoute(PupilViewModel.ROUTE, typeof(PupilPage));
-            Routing.RegisterRoute(EditPupilViewModel.ROUTE, typeof(EditPupilPage));
+        private void RegisterComposerRoutes()
+        {
+            RegisterRoute<AllComposersPage>(AllComposersViewModel.ROUTE);
+            RegisterRoute<ComposerPage>(ComposerViewModel.ROUTE);
+            RegisterRoute<EditComposerPage>(EditComposerViewModel.ROUTE);
+        }
 
-            Routing.RegisterRoute(AllRepertoireViewModel.ROUTE, typeof(AllRepertoirePage));
-            Routing.RegisterRoute(RepertoireViewModel.ROUTE, typeof(RepertoirePage));
-            Routing.RegisterRoute(EditRepertoireViewModel.ROUTE, typeof(EditRepertoirePage));
+        private void RegisterWorkRoutes()
+        {
+            RegisterRoute<AllWorksPage>(AllWorksViewModel.ROUTE);
+            RegisterRoute<WorkPage>(WorkViewModel.ROUTE);
+            RegisterRoute<EditWorkPage>(EditWorkViewModel.ROUTE);
+        }
 
-            Routing.RegisterRoute(AllCaregiversViewModel.ROUTE, typeof(AllCaregiversPage));
-            Routing.RegisterRoute(CaregiverViewModel.ROUTE, typeof(CaregiverPage));
-            Routing.RegisterRoute(EditCaregiverViewModel.ROUTE, typeof(EditCaregiverPage));
+        private void RegisterPupilRoutes()
+        {
+            RegisterRoute<AllPupilsPage>(AllPupilsViewModel.ROUTE);
+            RegisterRoute<PupilPage>(PupilViewModel.ROUTE);
+            RegisterRoute<EditPupilPage>(EditPupilViewModel.ROUTE);
+        }
 
-            Routing.RegisterRoute(AllPupilCaregiversViewModel.ROUTE, typeof(AllPupilCaregiversPage));
-            Routing.RegisterRoute(PupilCaregiverViewModel.ROUTE, typeof(PupilCaregiverPage));
-            Routing.RegisterRoute(EditPupilCaregiverViewModel.ROUTE, typeof(EditPupilCaregiverPage));
+        private void RegisterRepertoireRoutes()
+        {
+            RegisterRoute<AllRepertoirePage>(AllRepertoireViewModel.ROUTE);
+            RegisterRoute<RepertoirePage>(RepertoireViewModel.ROUTE);
+            RegisterRoute<EditRepertoirePage>(EditRepertoireViewModel.ROUTE);
+        }
 
-            Routing.RegisterRoute(AllLessonSlotsViewModel.ROUTE, typeof(AllLessonSlotsPage));
-            Routing.RegisterRoute(LessonSlotViewModel.ROUTE, typeof(LessonSlotPage));
-            Routing.RegisterRoute(EditLessonSlotViewModel.ROUTE, typeof(EditLessonSlotPage));
+        private void RegisterCaregiverRoutes()
+        {
+            RegisterRoute<AllCaregiversPage>(AllCaregiversViewModel.ROUTE);
+            RegisterRoute<CaregiverPage>(CaregiverViewModel.ROUTE);
+            RegisterRoute<EditCaregiverPage>(EditCaregiverViewModel.ROUTE);
+        }
+
+        private void RegisterPupilCaregiverRoutes()
+        {
+            RegisterRoute<AllPupilCaregiversPage>(AllPupilCaregiversViewModel.ROUTE);
+            RegisterRoute<PupilCaregiverPage>(PupilCaregiverViewModel.ROUTE);
+            RegisterRoute<EditPupilCaregiverPage>(EditPupilCaregiverViewModel.ROUTE);
+        }
+
+        private void RegisterLessonSlotRoutes()
+        {
+            RegisterRoute<AllLessonSlotsPage>(AllLessonSlotsViewModel.ROUTE);
+            RegisterRoute<LessonSlotPage>(LessonSlotViewModel.ROUTE);
+            RegisterRoute<EditLessonSlotPage>(EditLessonSlotViewModel.ROUTE);
+        }
+
+        private void RegisterLessonRoues()
+        {
+            RegisterRoute<AllLessonsPage>(AllLessonsViewModel.ROUTE);
+            RegisterRoute<LessonPage>(LessonViewModel.ROUTE);
+            RegisterRoute<EditLessonPage>(EditLessonViewModel.ROUTE);
+        }
+
+        private void RegisterRoute<T>(string route) where T : ContentPage
+        {
+            Routing.RegisterRoute(route, typeof(T));
         }
     }
 }
