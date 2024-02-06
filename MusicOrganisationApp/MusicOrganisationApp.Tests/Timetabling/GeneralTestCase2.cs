@@ -1,5 +1,4 @@
 ﻿using MusicOrganisationApp.Lib.Models;
-using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Tests.Timetabling
@@ -128,49 +127,65 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 0,
                 PupilId = _pupils[0].Id,
-                LessonSlotId = _lessonSlots[0].Id
+                StartTime = _lessonSlots[0].StartTime,
+                EndTime = _lessonSlots[0].EndTime,
+                Date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[0].DayOfWeek)
             },
             new LessonData
             {
                 Id = 1,
                 PupilId = _pupils[1].Id,
-                LessonSlotId = _lessonSlots[1].Id
+                StartTime = _lessonSlots[1].StartTime,
+                EndTime = _lessonSlots[1].EndTime,
+                Date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[1].DayOfWeek)
             },
             new LessonData
             {
                 Id = 2,
                 PupilId = _pupils[2].Id,
-                LessonSlotId = _lessonSlots[4].Id
+                StartTime = _lessonSlots[4].StartTime,
+                EndTime = _lessonSlots[4].EndTime,
+                Date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[4].DayOfWeek)
             },
             new LessonData
             {
                 Id = 3,
                 PupilId = _pupils[3].Id,
-                LessonSlotId = _lessonSlots[7].Id
+                StartTime = _lessonSlots[7].StartTime,
+                EndTime = _lessonSlots[7].EndTime,
+                Date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[7].DayOfWeek)
             },
             new LessonData
             {
                 Id = 4,
                 PupilId = _pupils[4].Id,
-                LessonSlotId = _lessonSlots[3].Id
+                StartTime = _lessonSlots[3].StartTime,
+                EndTime = _lessonSlots[3].EndTime,
+                Date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[3].DayOfWeek)
             },
             new LessonData
             {
                 Id = 5,
                 PupilId = _pupils[5].Id,
-                LessonSlotId = _lessonSlots[5].Id
+                StartTime = _lessonSlots[5].StartTime,
+                EndTime = _lessonSlots[5].EndTime,
+                Date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[5].DayOfWeek)
             },
             new LessonData
             {
                 Id = 6,
                 PupilId = _pupils[6].Id,
-                LessonSlotId = _lessonSlots[2].Id
+                StartTime = _lessonSlots[2].StartTime,
+                EndTime = _lessonSlots[2].EndTime,
+                Date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[2].DayOfWeek)
             },
             new LessonData
             {
                 Id = 7,
                 PupilId = _pupils[7].Id,
-                LessonSlotId = _lessonSlots[6].Id
+                StartTime = _lessonSlots[6].StartTime,
+                EndTime = _lessonSlots[6].EndTime,
+                Date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[6].DayOfWeek)
             }
         };
 

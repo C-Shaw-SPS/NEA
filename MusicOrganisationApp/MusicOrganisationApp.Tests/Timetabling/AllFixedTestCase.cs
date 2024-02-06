@@ -1,5 +1,4 @@
 ﻿using MusicOrganisationApp.Lib.Models;
-using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Tests.Timetabling
@@ -70,29 +69,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
             }
         };
 
-        private static readonly List<LessonData> _prevLessons = new()
-        {
-            new LessonData
-            {
-                PupilId = 0,
-                LessonSlotId = 0
-            },
-            new LessonData
-            {
-                PupilId = 1,
-                LessonSlotId = 1
-            },
-            new LessonData
-            {
-                PupilId = 2,
-                LessonSlotId = 2
-            },
-            new LessonData
-            {
-                PupilId = 3,
-                LessonSlotId = 3
-            },
-        };
+        private static readonly List<LessonData> _prevLessons = GetPrevLessons();
 
         private static readonly Dictionary<int, int> _expectedTimetable = new()
         {
@@ -103,6 +80,25 @@ namespace MusicOrganisationApp.Tests.Timetabling
         };
 
         private static readonly List<PupilAvaliability> _pupilLessonSlots = GetPupilLessonSlots();
+
+        private static List<LessonData> GetPrevLessons()
+        {
+            List<LessonData> prevLessons = [];
+            for (int i = 0; i < _pupils.Count; ++i)
+            {
+                LessonData lesson = new()
+                {
+                    Id = i,
+                    PupilId = _pupils[i].Id,
+                    StartTime = _lessonSlots[i].StartTime,
+                    EndTime = _lessonSlots[i].EndTime,
+                    Date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[i].DayOfWeek)
+                };
+                prevLessons.Add(lesson);
+            }
+            return prevLessons;
+        }
+
         private static List<PupilAvaliability> GetPupilLessonSlots()
         {
             List<PupilAvaliability> pupilLessonSlots = [];

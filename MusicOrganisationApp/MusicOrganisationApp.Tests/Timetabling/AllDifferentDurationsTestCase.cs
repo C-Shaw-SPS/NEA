@@ -73,23 +73,31 @@ namespace MusicOrganisationApp.Tests.Timetabling
         {
             new LessonData
             {
-                PupilId = 0,
-                LessonSlotId = 0
+                PupilId = _pupils[0].Id,
+                StartTime = _lessonSlots[0].StartTime,
+                EndTime = _lessonSlots[0].EndTime,
+                Date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[0].DayOfWeek)
             },
             new LessonData
             {
-                PupilId = 1,
-                LessonSlotId = 1
+                PupilId = _pupils[1].Id,
+                StartTime = _lessonSlots[1].StartTime,
+                EndTime = _lessonSlots[1].EndTime,
+                Date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[1].DayOfWeek)
             },
             new LessonData
             {
-                PupilId = 2,
-                LessonSlotId = 2
+                PupilId = _pupils[2].Id,
+                StartTime = _lessonSlots[2].StartTime,
+                EndTime = _lessonSlots[2].EndTime,
+                Date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[2].DayOfWeek)
             },
             new LessonData
             {
-                PupilId = 3,
-                LessonSlotId = 3
+                PupilId = _pupils[3].Id,
+                StartTime = _lessonSlots[3].StartTime,
+                EndTime = _lessonSlots[3].EndTime,
+                Date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[3].DayOfWeek)
             },
         };
 

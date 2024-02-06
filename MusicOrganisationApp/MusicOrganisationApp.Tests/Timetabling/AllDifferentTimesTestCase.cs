@@ -1,5 +1,4 @@
 ﻿using MusicOrganisationApp.Lib.Models;
-using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Tests.Timetabling
@@ -70,29 +69,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
             }
         };
 
-        private static readonly List<LessonData> _prevLessons = new()
-        {
-            new LessonData
-            {
-                PupilId = 0,
-                LessonSlotId = 1
-            },
-            new LessonData
-            {
-                PupilId = 1,
-                LessonSlotId = 2
-            },
-            new LessonData
-            {
-                PupilId = 2,
-                LessonSlotId = 3
-            },
-            new LessonData
-            {
-                PupilId = 3,
-                LessonSlotId = 0
-            },
-        };
+        private static readonly List<LessonData> _prevLessons = GetPrevLessons();
 
         private static readonly Dictionary<int, int> _expectedTimetable = new()
         {
@@ -103,6 +80,28 @@ namespace MusicOrganisationApp.Tests.Timetabling
         };
 
         private static readonly List<PupilAvaliability> _pupilLessonSlots = GetPupilLessonSlots();
+
+        private static List<LessonData> GetPrevLessons()
+        {
+            List<LessonData> lessons = [];
+            for (int i = 0; i < _pupils.Count; i++)
+            {
+                int pupilId = _pupils[i].Id;
+                TimeSpan startTime = _lessonSlots[(i + 1) % _lessonSlots.Count].StartTime;
+                TimeSpan endTime = _lessonSlots[(i + 1) % _lessonSlots.Count].EndTime;
+                DateTime date = ITimetableTestCase.GetDateFromDayOfWeek(_lessonSlots[i].DayOfWeek);
+                LessonData lesson = new()
+                {
+                    Id = i,
+                    PupilId = pupilId,
+                    StartTime = startTime,
+                    EndTime = endTime,
+                    Date = date
+                };
+                lessons.Add(lesson);
+            }
+            return lessons;
+        }
 
         private static List<PupilAvaliability> GetPupilLessonSlots()
         {

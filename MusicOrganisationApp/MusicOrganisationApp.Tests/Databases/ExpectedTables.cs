@@ -90,24 +90,6 @@ namespace MusicOrganisationApp.Tests.Databases
             NullPropertyComposer
         };
 
-        public static readonly List<LessonData> LessonData = new()
-        {
-            new LessonData
-            {
-                Id = 0,
-                PupilId = 0,
-                LessonSlotId = 0,
-                Date = DateTime.Parse("30/10/2023"),
-                Notes = "notes.txt"
-            },
-            new LessonData
-            {
-                Id = 1,
-                PupilId = 1,
-                LessonSlotId = 1,
-                Date = DateTime.Now
-            }
-        };
 
         public static readonly List<LessonSlotData> LessonSlotData = new()
         {
@@ -119,6 +101,28 @@ namespace MusicOrganisationApp.Tests.Databases
                 EndTime = new TimeSpan(14, 00, 00)
             }
         };
+
+        public static readonly List<LessonData> LessonData = new()
+        {
+            new LessonData
+            {
+                Id = 0,
+                PupilId = 0,
+                StartTime = new TimeSpan(09, 00, 00),
+                EndTime = new TimeSpan(10, 00, 00),
+                Date = DateTime.Parse("30/10/2023"),
+                Notes = "notes.txt"
+            },
+            new LessonData
+            {
+                Id = 1,
+                PupilId = 1,
+                StartTime = new TimeSpan(10, 00, 00),
+                EndTime = new TimeSpan(10, 30, 00),
+                Date = DateTime.Now
+            }
+        };
+
 
         public static readonly List<Pupil> Pupils = new()
         {

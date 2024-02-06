@@ -14,7 +14,7 @@ namespace MusicOrganisationApp.Lib.Services
         private readonly Dictionary<int, HashSet<int>> _pupilLessonSlots;
         private readonly List<int> _fixedLessonPupilIds;
         private readonly List<int> _variableLessonPupilIds;
-        private readonly Dictionary<int, int> _prevTimetable;
+        private readonly Dictionary<int, LessonData> _prevTimetable;
         private readonly int _maxLessonSlotId;
 
         public TimetableGenerator(IEnumerable<Pupil> pupils, IEnumerable<PupilAvaliability> pupilLessonSlots, IEnumerable<LessonSlotData> lessonSlots, IEnumerable<LessonData> prevLessons)
@@ -26,7 +26,7 @@ namespace MusicOrganisationApp.Lib.Services
             _pupilLessonSlots = GetPupilLessonSlots(pupilLessonSlots);
             _fixedLessonPupilIds = GetFixedLessonPupilIds(_pupilLessonSlots);
             _variableLessonPupilIds = GetVariableLessonPupilIds(_pupilLessonSlots);
-            _prevTimetable = GetTimetable(prevLessons);
+            _prevTimetable = GetPrevTimetable(prevLessons);
             _maxLessonSlotId = GetMaxId(lessonSlots);
         }
 
@@ -87,12 +87,12 @@ namespace MusicOrganisationApp.Lib.Services
             return variableLessonPupilIds;
         }
 
-        private static Dictionary<int, int> GetTimetable(IEnumerable<LessonData> lessons)
+        private static Dictionary<int, LessonData> GetPrevTimetable(IEnumerable<LessonData> lessons)
         {
-            Dictionary<int, int> timetable = [];
+            Dictionary<int, LessonData> timetable = [];
             foreach (LessonData lesson in lessons)
             {
-                timetable.Add(lesson.LessonSlotId, lesson.PupilId);
+                timetable.Add(lesson.PupilId, lesson);
             }
             return timetable;
         }
@@ -253,9 +253,22 @@ namespace MusicOrganisationApp.Lib.Services
 
         private bool IsDifferentSlotIfNeeded(Pupil pupil, LessonSlotData lessonSlot)
         {
-            return !(pupil.NeedsDifferentTimes
-                && _prevTimetable.TryGetValue(lessonSlot.Id, out int prebPupilId)
-                && prebPupilId == pupil.Id);
+            if (pupil.NeedsDifferentTimes && _prevTimetable.TryGetValue(pupil.Id, out LessonData? prevLesson))
+            {
+                return !IsOverlapping(lessonSlot, prevLesson);
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private bool IsOverlapping(LessonSlotData lessonSlot, LessonData prevLesson)
+        {
+            bool isOverlapping = lessonSlot.DayOfWeek == prevLesson.Date.DayOfWeek
+                && ((lessonSlot.StartTime <= prevLesson.StartTime && prevLesson.StartTime < lessonSlot.EndTime)
+                || prevLesson.StartTime <= lessonSlot.StartTime && lessonSlot.StartTime < prevLesson.EndTime);
+            return isOverlapping;
         }
 
         #endregion
