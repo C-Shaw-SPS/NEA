@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:MusicOrganisationApp.Lib.ViewModels;assembly=MusicOrganisationApp.Lib"
+             x:Class="MusicOrganisationApp.App.Views.DeveloperToolsPage"
+             Title="Developer tools">
+
+    <ContentPage.BindingContext>
+        <viewModels:DeveloperToolsViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid Margin="20"
+          RowSpacing="10">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Column="0"
+                Grid.Row="0"
+                Text="Drop tables"
+                Command="{Binding DropTablesCommand}"/>
+        <Button Grid.Column="0"
+                Grid.Row="1"
+                Text="Reset composers and works"
+                Command="{Binding ResetComposersAndWorksCommand}"/>
+    </Grid>
+    
+</ContentPage>

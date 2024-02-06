@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels.ModelViewModels;assembly=MusicOrganisationApp.Lib"
+    x:Class="MusicOrganisationApp.App.Views.ModelViews.ComposerPage"
+    Title="Composer">
+
+    <ContentPage.BindingContext>
+        <viewmodels:ComposerViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Edit"
+            Command="{Binding EditCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid
+        Margin="20"
+        RowSpacing="10"
+        ColumnSpacing="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="Name:"/>
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="{Binding Name}"/>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Era: "/>
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding Era}"/>
+
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="Born:"/>
+        <Label
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="{Binding BirthYear}"/>
+
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Text="Died:"/>
+        <Label
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="{Binding DeathYear}"/>
+    </Grid>
+
+</ContentPage>

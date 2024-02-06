@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels.ModelViewModels;assembly=MusicOrganisationApp.Lib"
+    x:Class="MusicOrganisationApp.App.Views.ModelViews.WorkPage"
+    Title="Work">
+
+    <ContentPage.BindingContext>
+        <viewmodels:WorkViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Edit"
+            Command="{Binding EditCommand}"/>
+        <ToolbarItem
+            Text="View composer"
+            Command="{Binding GoToComposerCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid
+        Margin="20"
+        RowSpacing="10"
+        ColumnSpacing="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="Title:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="{Binding Title}"
+            VerticalOptions="Center"/>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Subtitle:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding Subtitle}"
+            VerticalOptions="Center"/>
+
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="Genre:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="{Binding Genre}"
+            VerticalOptions="Center"/>
+
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Text="Composer:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="{Binding ComposerName}"
+            VerticalOptions="Center"/>
+
+        <Label
+            Grid.Row="4"
+            Grid.Column="0"
+            Text="Notes:"/>
+        <ScrollView
+            Grid.Row="4"
+            Grid.Column="1">
+            <Label
+                Text="{Binding Notes}"
+                VerticalOptions="Center"/>
+        </ScrollView>
+
+    </Grid>
+   
+</ContentPage>

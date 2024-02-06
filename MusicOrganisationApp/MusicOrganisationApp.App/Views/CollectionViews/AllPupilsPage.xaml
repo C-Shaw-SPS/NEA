@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;assembly=MusicOrganisationApp.Lib"
+    x:Class="MusicOrganisationApp.App.Views.CollectionViews.AllPupilsPage"
+    Title="Pupils">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AllPupilsViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="New"
+            Command="{Binding AddNewCommand}"
+            IconImageSource="{FontImage Glyph='+',Color=Black}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid
+        RowSpacing="10"
+        ColumnSpacing="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <SearchBar
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="{Binding SearchText}"
+            SearchCommand="{Binding SearchCommand}"/>
+
+        <CollectionView
+            Grid.Row="1"
+            Grid.Column="0"
+            ItemsSource="{Binding Collection}"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Always"
+            SelectionMode="Single"
+            SelectedItem="{Binding SelectedItem}"
+            SelectionChangedCommand="{Binding SelectCommand}"
+            Margin="20">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout
+                    Orientation="Vertical"
+                    ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label
+                            Text="{Binding Name}"
+                            FontSize="22"/>
+                        <Label
+                            Text="{Binding Level}"
+                            FontSize="14"
+                            TextColor="Silver"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+    
+</ContentPage>

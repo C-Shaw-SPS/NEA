@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MusicOrganisationApp.App.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MusicOrganisationApp.App"
+    xmlns:views="clr-namespace:MusicOrganisationApp.App.Views"
+    xmlns:collectionViews="clr-namespace:MusicOrganisationApp.App.Views.CollectionViews"
+    Shell.FlyoutBehavior="Disabled"
+    Title="MusicOrganisationApp.App">
+
+    <TabBar>
+
+        <Tab Title="Pupils">
+            <ShellContent ContentTemplate="{DataTemplate collectionViews:AllPupilsPage}"/>
+        </Tab>
+
+        <Tab Title="Composers">
+            <ShellContent ContentTemplate="{DataTemplate collectionViews:AllComposersPage}"/>
+        </Tab>
+
+        <Tab Title="Works">
+            <ShellContent ContentTemplate="{DataTemplate collectionViews:AllWorksPage}"/>
+        </Tab>
+
+        <Tab Title="Caregivers">
+            <ShellContent ContentTemplate="{DataTemplate collectionViews:AllCaregiversPage}"/>
+        </Tab>
+
+        <Tab Title="Lesson slots">
+            <ShellContent ContentTemplate="{DataTemplate collectionViews:AllLessonSlotsPage}"/>
+        </Tab>
+
+        <Tab Title="Developer tools">
+            <ShellContent ContentTemplate="{DataTemplate views:DeveloperToolsPage}"/>
+        </Tab>
+        
+    </TabBar>
+
+</Shell>
