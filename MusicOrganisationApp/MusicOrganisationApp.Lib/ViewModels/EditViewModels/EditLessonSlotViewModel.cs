@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
+using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
@@ -17,6 +19,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private static readonly List<DayOfWeek> _daysOfWeek = LessonSlotService.GetDaysOfWeek();
 
         private readonly LessonSlotService _service;
+        private readonly AsyncRelayCommand _goToClashingLessonSlotCommand;
 
         [ObservableProperty]
         private DayOfWeek _dayOfWeek = DayOfWeek.Monday;
@@ -33,14 +36,32 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private ObservableCollection<LessonSlotData> _clashingLessonSlots = [];
 
+        [ObservableProperty]
+        private LessonSlotData? _selectedClashingLessonSlot;
+
         public EditLessonSlotViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE)
         {
             _service = new(_database);
+            _goToClashingLessonSlotCommand = new(GoToClashingLessonSlot);
         }
 
         public List<DayOfWeek> DaysOfWeek => _daysOfWeek;
 
+        public AsyncRelayCommand GoToClashingLessonSlotCommand => _goToClashingLessonSlotCommand;
+
         protected override IService<LessonSlotData> Service => _service;
+
+        private async Task GoToClashingLessonSlot()
+        {
+            if (SelectedClashingLessonSlot is not null)
+            {
+                Dictionary<string, object> parameters = new()
+                {
+                    [ModelViewModelBase.ID_PARAMETER] = SelectedClashingLessonSlot.Id
+                };
+                await GoToAsync(parameters, LessonSlotViewModel.ROUTE);
+            }
+        }
 
         protected override void SetDisplayValues()
         {
@@ -63,7 +84,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
                 TimeError = _END_BEFORE_START_ERROR;
                 return false;
             }
-            IEnumerable<LessonSlotData> clashingLessonSlots = await _service.GetClashingLessonSlots(DayOfWeek, StartTime, EndTime);
+            int? id = _isNew ? null : _value.Id;
+            IEnumerable<LessonSlotData> clashingLessonSlots = await _service.GetClashingLessonSlots(DayOfWeek, StartTime, EndTime, id);
             if (clashingLessonSlots.Any())
             {
                 TimeError = _CLASH_ERROR;
