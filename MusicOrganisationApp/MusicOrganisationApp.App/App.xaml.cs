@@ -27,7 +27,7 @@ namespace MusicOrganisationApp.App
             RegisterCaregiverRoutes();
             RegisterPupilCaregiverRoutes();
             RegisterLessonSlotRoutes();
-            RegisterLessonRoues();
+            RegisterLessonRoutes();
         }
 
         private void RegisterComposerRoutes()
@@ -79,7 +79,7 @@ namespace MusicOrganisationApp.App
             RegisterRoute<EditLessonSlotPage>(EditLessonSlotViewModel.ROUTE);
         }
 
-        private void RegisterLessonRoues()
+        private void RegisterLessonRoutes()
         {
             RegisterRoute<AllLessonsPage>(AllLessonsViewModel.ROUTE);
             RegisterRoute<LessonPage>(LessonViewModel.ROUTE);
