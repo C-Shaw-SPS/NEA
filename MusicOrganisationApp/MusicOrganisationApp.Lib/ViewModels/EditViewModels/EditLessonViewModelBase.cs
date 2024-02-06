@@ -1,14 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
+using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public abstract partial class EditLessonViewModelBase<T> : EditViewModelBase<T> where T : class, ILesson, ITable, new()
+    public abstract partial class EditLessonViewModelBase<T> : EditViewModelBase<T>, IQueryAttributable where T : class, ILesson, ITable, new()
     {
         private const string _END_BEFORE_START_ERROR = "End time cannot be before start time";
         private const string _CLASH_ERROR = "Lesson clashes";
+
+        private readonly string _modelRoute;
+        private readonly AsyncRelayCommand _goToClashingLessonCommand;
 
         [ObservableProperty]
         private TimeSpan _startTime;
@@ -22,8 +27,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private ObservableCollection<T> _clashingLessons = [];
 
-        protected EditLessonViewModelBase(string editPageTitle, string newPageTitle) : base(editPageTitle, newPageTitle)
+        [ObservableProperty]
+        private T? _selectedClashingLesson;
+
+        protected EditLessonViewModelBase(string modelRoute, string editPageTitle, string newPageTitle) : base(editPageTitle, newPageTitle)
         {
+            _modelRoute = modelRoute;
+            _goToClashingLessonCommand = new(GoToClashingLessonAsync);
         }
 
         protected abstract LessonServiceBase<T> LessonService { get; }
@@ -32,11 +42,28 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         protected override IService<T> Service => LessonService;
 
+        public AsyncRelayCommand GoToClashingLessonCommand => _goToClashingLessonCommand;
+
+        private async Task GoToClashingLessonAsync()
+        {
+            if (SelectedClashingLesson is not null)
+            {
+                Dictionary<string, object> parameters = new()
+                {
+                    [ModelViewModelBase.ID_PARAMETER] = SelectedClashingLesson.Id
+                };
+                await GoToAsync(parameters, _modelRoute);
+            }
+        }
+
         protected override void SetDisplayValues()
         {
             StartTime = _value.StartTime;
             EndTime = _value.EndTime;
+            SetDisplayDateObject();
         }
+
+        protected abstract void SetDisplayDateObject();
 
         protected override async Task<bool> TrySetValuesToSave()
         {
