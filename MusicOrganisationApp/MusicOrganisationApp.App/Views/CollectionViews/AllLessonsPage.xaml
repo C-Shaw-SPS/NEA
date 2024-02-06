@@ -6,7 +6,7 @@
              Title="Lessons">
 
     <ContentPage.BindingContext>
-        <viewmodels:AllLessonSlotsViewModel/>
+        <viewmodels:AllLessonsViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
@@ -29,6 +29,13 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <DatePicker
+            Grid.Row="0"
+            Grid.Column="0"
+            Date="{Binding SelectedDate}"/>
+        
+        
 
     </Grid>
 
