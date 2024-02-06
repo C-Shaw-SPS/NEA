@@ -1,12 +1,9 @@
-﻿using MusicOrganisationApp.Lib.Databases;
-using MusicOrganisationApp.Lib.Tables;
-
-namespace MusicOrganisationApp.Lib.Models
+﻿namespace MusicOrganisationApp.Lib.Models
 {
     public interface ILesson
     {
-        public TimeSpan StartTime { get; }
+        public TimeSpan StartTime { get; set; }
 
-        public TimeSpan EndTime { get; }
+        public TimeSpan EndTime { get; set; }
     }
 }
