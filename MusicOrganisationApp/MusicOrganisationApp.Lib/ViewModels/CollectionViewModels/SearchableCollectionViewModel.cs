@@ -36,11 +36,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         {
             string ordering = _orderings[SelectedOrdering];
             IEnumerable<T> values = await SearchService.SearchAsync(SearchText, ordering);
-            Collection.Clear();
-            foreach (T value in values)
-            {
-                Collection.Add(value);
-            }
+            ResetCollection(Collection, values);
         }
 
         async partial void OnSelectedOrderingChanged(string value)
