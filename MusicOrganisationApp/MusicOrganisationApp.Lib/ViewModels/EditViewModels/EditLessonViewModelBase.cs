@@ -60,19 +60,19 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         {
             StartTime = _value.StartTime;
             EndTime = _value.EndTime;
-            SetDisplayDateObject();
+            SetDisplayNonTimeValues();
         }
 
-        protected abstract void SetDisplayDateObject();
+        protected abstract void SetDisplayNonTimeValues();
 
         protected override async Task<bool> TrySetValuesToSave()
         {
-            SetDateObjectToSave();
+            SetNonTimeValuesToSave();
             bool canSave = await TrySetTimesToSave();
             return canSave;
         }
 
-        protected abstract void SetDateObjectToSave();
+        protected abstract void SetNonTimeValuesToSave();
 
         private async Task<bool> TrySetTimesToSave()
         {
