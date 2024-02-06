@@ -1,12 +1,84 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MusicOrganisationApp.App.Views.CollectionViews.AllLessonSlotsPage"
-             Title="AllLessonSlotsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;assembly=MusicOrganisationApp.Lib"
+    x:Class="MusicOrganisationApp.App.Views.CollectionViews.AllLessonSlotsPage"
+    Title="Lesson slots">
+    
+    <ContentPage.BindingContext>
+        <viewmodels:AllLessonSlotsViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="New"
+            Command="{Binding AddNewCommand}"
+            IconImageSource="{FontImage Glyph='+', Color=Black}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid
+        Margin="20"
+        RowSpacing="10"
+        ColumnSpacing="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Picker
+            Grid.Row="0"
+            Grid.Column="0"
+            ItemsSource="{Binding DaysOfWeek}"
+            SelectedItem="{Binding SelectedDayOfWeek}"/>
+
+        <CollectionView
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            ItemsSource="{Binding Collection}"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Always"
+            SelectionMode="Single"
+            SelectedItem="{Binding SelectedItem}"
+            SelectionChangedCommand="{Binding SelectCommand}"
+            Margin="20">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout
+                    Orientation="Vertical"
+                    ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <HorizontalStackLayout
+                        Spacing="10">
+                        <TimePicker
+                            Time="{Binding StartTime}"
+                            VerticalOptions="Center"
+                            IsEnabled="False"
+                            TextColor="Black"/>
+                        <Label
+                            Text="to"
+                            VerticalOptions="Center"/>
+                        <TimePicker
+                            Time="{Binding EndTime}"
+                            VerticalOptions="Center"
+                            IsEnabled="False"
+                            TextColor="Black"/>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+    
 </ContentPage>
