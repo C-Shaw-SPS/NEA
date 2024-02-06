@@ -41,11 +41,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         public virtual async Task RefreshAsync()
         {
             IEnumerable<T> items = await Service.GetAllAsync();
-            Collection.Clear();
-            foreach (T item in items)
-            {
-                Collection.Add(item);
-            }
+            ResetCollection(Collection, items);
         }
 
         private async Task SelectAsync()
