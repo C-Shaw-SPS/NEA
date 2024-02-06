@@ -18,7 +18,7 @@ namespace MusicOrganisationApp.Tests.Services
             DayOfWeek dayOfWeek = ExpectedService.NewLessonSlot.DayOfWeek;
             TimeSpan startTime = ExpectedService.NewLessonSlot.StartTime;
             TimeSpan endTime = ExpectedService.NewLessonSlot.EndTime;
-            IEnumerable<LessonSlotData> actualClashingLessonSlots = await service.GetClashingLessonSlots(dayOfWeek, startTime, endTime);
+            IEnumerable<LessonSlotData> actualClashingLessonSlots = await service.GetClashingLessonSlots(dayOfWeek, startTime, endTime, null);
             CollectionAssert.Equal(ExpectedService.ClashingLessonSlots, actualClashingLessonSlots);
         }
 
