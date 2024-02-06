@@ -18,10 +18,11 @@ namespace MusicOrganisationApp.Lib.Services
         public static List<DayOfWeek> GetDaysOfWeek()
         {
             List<DayOfWeek> daysOfWeek = [];
-            for (DayOfWeek dayOfWeek = DayOfWeek.Sunday; dayOfWeek <= DayOfWeek.Saturday; dayOfWeek++)
+            for (DayOfWeek dayOfWeek = DayOfWeek.Monday; dayOfWeek <= DayOfWeek.Saturday; dayOfWeek++)
             {
                 daysOfWeek.Add(dayOfWeek);
             }
+            daysOfWeek.Add(DayOfWeek.Sunday);
             return daysOfWeek;
         }
 
