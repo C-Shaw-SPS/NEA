@@ -1,10 +1,11 @@
 ﻿using MusicOrganisationApp.Lib.Databases;
+using MusicOrganisationApp.Lib.Models;
 using SQLite;
 
 namespace MusicOrganisationApp.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class LessonData : ITable, IEquatable<LessonData>, IPupilIdentifiable
+    public class LessonData : ITable, IEquatable<LessonData>, IPupilIdentifiable, ILesson
     {
         private const string _TABLE_NAME = nameof(LessonData);
 
