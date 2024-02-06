@@ -3,7 +3,7 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.Services
 {
-    public class LessonSlotService : LessonServiceBase<LessonSlotData>
+    public class LessonSlotService : LessonServiceBase<LessonSlotData, LessonSlotData>
     {
         private DayOfWeek _dayOfWeek = DayOfWeek.Monday;
 
@@ -38,6 +38,17 @@ namespace MusicOrganisationApp.Lib.Services
         {
             IEnumerable<LessonSlotData> clashingLessonSlots = await GetClashingLessonsAsync(nameof(LessonSlotData.DayOfWeek), dayOfWeek, startTime, endTime, id);
             return clashingLessonSlots;
+        }
+
+        protected override LessonSlotData GetTableValue(LessonSlotData value)
+        {
+            return value;
+        }
+
+        public override async Task<(bool, LessonSlotData)> TryGetAsync(int id)
+        {
+            (bool suceeded, LessonSlotData value) result = await _database.TryGetAsync<LessonSlotData>(id);
+            return result;
         }
     }
 }

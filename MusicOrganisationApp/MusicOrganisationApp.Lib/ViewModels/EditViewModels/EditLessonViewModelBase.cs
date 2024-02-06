@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public abstract partial class EditLessonViewModelBase<T> : EditViewModelBase<T>, IQueryAttributable where T : class, ILesson, ITable, new()
+    public abstract partial class EditLessonViewModelBase<TModel, TTable> : EditViewModelBase<TModel>, IQueryAttributable where TModel : class, ILesson<TTable>, new() where TTable : class, ITable, new()
     {
         private const string _END_BEFORE_START_ERROR = "End time cannot be before start time";
         private const string _CLASH_ERROR = "Lesson clashes";
@@ -25,10 +25,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private string _timeError = string.Empty;
 
         [ObservableProperty]
-        private ObservableCollection<T> _clashingLessons = [];
+        private ObservableCollection<TModel> _clashingLessons = [];
 
         [ObservableProperty]
-        private T? _selectedClashingLesson;
+        private TModel? _selectedClashingLesson;
 
         protected EditLessonViewModelBase(string modelRoute, string editPageTitle, string newPageTitle) : base(editPageTitle, newPageTitle)
         {
@@ -36,11 +36,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _goToClashingLessonCommand = new(GoToClashingLessonAsync);
         }
 
-        protected abstract LessonServiceBase<T> LessonService { get; }
+        protected abstract LessonServiceBase<TModel, TTable> LessonService { get; }
 
         protected abstract object SelectedDateObject { get; }
 
-        protected override IService<T> Service => LessonService;
+        protected override IService<TModel> Service => LessonService;
 
         public AsyncRelayCommand GoToClashingLessonCommand => _goToClashingLessonCommand;
 
@@ -82,7 +82,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
                 return false;
             }
             int? id = _isNew ? null : _value.Id;
-            IEnumerable<T> clashingLessons = await LessonService.GetClashingLessonsAsync(SelectedDateObject, StartTime, EndTime, id);
+            IEnumerable<TModel> clashingLessons = await LessonService.GetClashingLessonsAsync(SelectedDateObject, StartTime, EndTime, id);
             if (clashingLessons.Any())
             {
                 TimeError = _CLASH_ERROR;

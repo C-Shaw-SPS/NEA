@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
@@ -6,7 +7,7 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class AllLessonsViewModel : CollectionViewModelBase<LessonData>
+    public partial class AllLessonsViewModel : CollectionViewModelBase<Lesson>
     {
         public const string ROUTE = nameof(AllLessonsViewModel);
 
@@ -20,7 +21,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             _service = new(_database);
         }
 
-        protected override IService<LessonData> Service => _service;
+        protected override IService<Lesson> Service => _service;
 
         async partial void OnSelectedDateChanged(DateTime value)
         {

@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditLessonSlotViewModel : EditLessonViewModelBase<LessonSlotData>, IQueryAttributable
+    public partial class EditLessonSlotViewModel : EditLessonViewModelBase<LessonSlotData, LessonSlotData>, IQueryAttributable
     {
         public const string ROUTE = nameof(EditLessonSlotViewModel);
 
@@ -28,7 +28,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         public List<DayOfWeek> DaysOfWeek => _daysOfWeek;
 
-        protected override LessonServiceBase<LessonSlotData> LessonService => _service;
+        protected override LessonServiceBase<LessonSlotData, LessonSlotData> LessonService => _service;
 
         protected override object SelectedDateObject => DayOfWeek;
 

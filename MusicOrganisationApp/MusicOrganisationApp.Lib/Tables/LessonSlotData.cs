@@ -5,7 +5,7 @@ using SQLite;
 namespace MusicOrganisationApp.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class LessonSlotData : ITable, IEquatable<LessonSlotData>, ILesson
+    public class LessonSlotData : ITable, IEquatable<LessonSlotData>, ILesson<LessonSlotData>
     {
         private const string _TABLE_NAME = nameof(LessonSlotData);
 
