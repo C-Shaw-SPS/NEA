@@ -1,4 +1,5 @@
 ﻿using MusicOrganisationApp.Lib.Databases;
+using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.Services
@@ -71,23 +72,8 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task<IEnumerable<LessonSlotData>> GetClashingLessonSlots(DayOfWeek dayOfWeek, TimeSpan startTime, TimeSpan endTime, int? id)
         {
-            SqlQuery<LessonSlotData> sqlQuery = GetClashSqlQuery(dayOfWeek, startTime, endTime, id);
-            IEnumerable<LessonSlotData> clashingLessonSlots = await _database.QueryAsync<LessonSlotData>(sqlQuery);
-            return clashingLessonSlots;
-        }
-
-        private static SqlQuery<LessonSlotData> GetClashSqlQuery(DayOfWeek dayOfWeek, TimeSpan startTime, TimeSpan endTime, int? id)
-        {
-            SqlQuery<LessonSlotData> sqlQuery = new() { SelectAll = true };
-            sqlQuery.AddWhereEquals<LessonSlotData>(nameof(LessonSlotData.DayOfWeek), dayOfWeek);
-            sqlQuery.AddAndNotEqual<LessonSlotData>(nameof(LessonSlotData.Id), id);
-            sqlQuery.AddAndLessOrEqual<LessonSlotData>(nameof(LessonSlotData.StartTime), startTime);
-            sqlQuery.AddAndGreaterThan<LessonSlotData>(nameof(LessonSlotData.EndTime), startTime);
-            sqlQuery.AddOrEqual<LessonSlotData>(nameof(LessonSlotData.DayOfWeek), dayOfWeek);
-            sqlQuery.AddAndNotEqual<LessonSlotData>(nameof(LessonSlotData.Id), id);
-            sqlQuery.AddAndGreaterOrEqual<LessonSlotData>(nameof(LessonSlotData.StartTime), startTime);
-            sqlQuery.AddAndLessThan<LessonSlotData>(nameof(LessonSlotData.StartTime), endTime);
-            return sqlQuery;
+            IEnumerable<LessonSlotData> clashingLessonSots = await ILesson.GetClashingLessons<LessonSlotData>(_database, nameof(LessonSlotData.DayOfWeek), dayOfWeek, startTime, endTime, id);
+            return clashingLessonSots;
         }
     }
 }
