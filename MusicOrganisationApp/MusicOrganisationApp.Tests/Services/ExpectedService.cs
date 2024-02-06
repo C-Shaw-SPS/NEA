@@ -178,6 +178,12 @@ namespace MusicOrganisationApp.Tests.Services
             new()
             {
                 DayOfWeek = DayOfWeek.Monday,
+                StartTime = new TimeSpan(01, 15, 00),
+                EndTime = new TimeSpan(01, 45, 00)
+            },
+            new()
+            {
+                DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(01, 30, 00),
                 EndTime = new TimeSpan(02, 30, 00)
             }
