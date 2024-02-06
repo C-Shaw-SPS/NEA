@@ -7,12 +7,14 @@ namespace MusicOrganisationApp.Lib.Databases
         private const string _WHERE = "WHERE";
         private const string _AND = "AND";
         private const string _OR = "OR";
+        private const string _IS_NOT = "IS NOT";
         private const string _EQUALS = "=";
         private const string _LIKE = "LIKE";
         private const string _GREATER = ">";
         private const string _LESS = "<";
         private const string _GREATER_OR_EQUAL = ">=";
         private const string _LESS_OR_EQUAL = "<=";
+        private const string _NOT_EQUAL = "!=";
 
         private readonly string _tableName;
         private bool _selectAll;
@@ -103,6 +105,13 @@ namespace MusicOrganisationApp.Lib.Databases
         public void AddAndLessOrEqual<TTable>(string column, object? value) where TTable : ITable
         {
             AddCondition<TTable>(_AND, column, value, _LESS_OR_EQUAL);
+        }
+
+        public void AddAndNotEqual<TTable>(string column, object? value) where TTable : ITable
+        {
+            string condition = value is null ? _IS_NOT : _NOT_EQUAL;
+            AddCondition<TTable>(_AND, column, value, condition);
+
         }
 
         private void AddCondition<TTable>(string keyword, string column, object? value, string condition) where TTable : ITable
