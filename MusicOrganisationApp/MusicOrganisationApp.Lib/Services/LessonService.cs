@@ -3,15 +3,11 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.Services
 {
-    public class LessonService : IService<LessonData>
+    public class LessonService : LessonServiceBase<LessonData>
     {
-        private readonly DatabaseConnection _database;
         private DateTime _date = DateTime.Today;
 
-        public LessonService(DatabaseConnection database)
-        {
-            _database = database;
-        }
+        public LessonService(DatabaseConnection database) : base(database) { }
 
         public DateTime Date
         {
@@ -19,38 +15,16 @@ namespace MusicOrganisationApp.Lib.Services
             set => _date = value.Date;
         }
 
-        public async Task DeleteAsync(LessonData value)
-        {
-            await _database.DeleteAsync(value);
-        }
-
-        public async Task<IEnumerable<LessonData>> GetAllAsync()
+        protected override SqlQuery<LessonData> GetAllSqlQuery()
         {
             SqlQuery<LessonData> sqlQuery = new() { SelectAll = true };
             sqlQuery.AddWhereEquals<LessonData>(nameof(LessonData.Date), _date);
-            IEnumerable<LessonData> lessons = await _database.QueryAsync<LessonData>(sqlQuery);
-            return lessons;
+            return sqlQuery;
         }
 
-        public async Task InsertAsync(LessonData value, bool getNewId)
+        public override Task<IEnumerable<LessonData>> GetClashingLessonsAsync(object date, TimeSpan startTime, TimeSpan endTime, int? id)
         {
-            if (getNewId)
-            {
-                int id = await _database.GetNextIdAsync<LessonData>();
-                value.Id = id;
-            }
-            await _database.InsertAsync(value);
-        }
-
-        public async Task<(bool, LessonData)> TryGetAsync(int id)
-        {
-            (bool suceeded, LessonData value) result = await _database.TryGetAsync<LessonData>(id);
-            return result;
-        }
-
-        public async Task UpdateAsync(LessonData value)
-        {
-            await _database.UpdateAsync(value);
+            return GetClashingLessonsAsync(nameof(LessonData.Date), date, startTime, endTime, id);
         }
     }
 }

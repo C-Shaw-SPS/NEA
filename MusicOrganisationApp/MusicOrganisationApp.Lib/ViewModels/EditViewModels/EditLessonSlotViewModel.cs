@@ -85,7 +85,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
                 return false;
             }
             int? id = _isNew ? null : _value.Id;
-            IEnumerable<LessonSlotData> clashingLessonSlots = await _service.GetClashingLessonSlots(DayOfWeek, StartTime, EndTime, id);
+            IEnumerable<LessonSlotData> clashingLessonSlots = await _service.GetClashingLessonsAsync(DayOfWeek, StartTime, EndTime, id);
             if (clashingLessonSlots.Any())
             {
                 TimeError = _CLASH_ERROR;
