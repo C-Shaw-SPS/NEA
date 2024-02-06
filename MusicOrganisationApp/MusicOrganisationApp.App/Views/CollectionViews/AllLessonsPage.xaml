@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;assembly=MusicOrganisationApp.Lib"
+             x:Class="MusicOrganisationApp.App.Views.CollectionViews.AllLessonsPage"
+             Title="Lessons">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AllLessonSlotsViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="New"
+            Command="{Binding AddNewCommand}"
+            IconImageSource="{FontImage Glyph='+', Color=Black}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid
+        Margin="20"
+        RowSpacing="10"
+        ColumnSpacing="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+    </Grid>
+
+</ContentPage>
