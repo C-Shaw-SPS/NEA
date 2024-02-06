@@ -6,7 +6,7 @@ namespace MusicOrganisationApp.Lib.Services
     public class LessonSlotService : IService<LessonSlotData>
     {
         private readonly DatabaseConnection _database;
-        private DayOfWeek _dayOfWeek;
+        private DayOfWeek _dayOfWeek = DayOfWeek.Monday;
 
         public LessonSlotService(DatabaseConnection database)
         {
@@ -22,7 +22,7 @@ namespace MusicOrganisationApp.Lib.Services
         public static List<DayOfWeek> GetDaysOfWeek()
         {
             List<DayOfWeek> daysOfWeek = [];
-            for (DayOfWeek dayOfWeek = DayOfWeek.Sunday; dayOfWeek <= DayOfWeek.Monday; dayOfWeek++)
+            for (DayOfWeek dayOfWeek = DayOfWeek.Sunday; dayOfWeek <= DayOfWeek.Saturday; dayOfWeek++)
             {
                 daysOfWeek.Add(dayOfWeek);
             }
@@ -45,6 +45,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             SqlQuery<LessonSlotData> sqlQuery = new() { SelectAll = true };
             sqlQuery.AddWhereEquals<LessonSlotData>(nameof(LessonSlotData.DayOfWeek), _dayOfWeek);
+            sqlQuery.AddOrderBy(nameof(LessonSlotData.StartTime));
             return sqlQuery;
         }
 
@@ -68,20 +69,22 @@ namespace MusicOrganisationApp.Lib.Services
             await _database.UpdateAsync(value);
         }
 
-        public async Task<IEnumerable<LessonSlotData>> GetClashingLessonSlots(DayOfWeek dayOfWeek, TimeSpan startTime, TimeSpan endTime)
+        public async Task<IEnumerable<LessonSlotData>> GetClashingLessonSlots(DayOfWeek dayOfWeek, TimeSpan startTime, TimeSpan endTime, int? id)
         {
-            SqlQuery<LessonSlotData> sqlQuery = GetClashSqlQuery(dayOfWeek, startTime, endTime);
+            SqlQuery<LessonSlotData> sqlQuery = GetClashSqlQuery(dayOfWeek, startTime, endTime, id);
             IEnumerable<LessonSlotData> clashingLessonSlots = await _database.QueryAsync<LessonSlotData>(sqlQuery);
             return clashingLessonSlots;
         }
 
-        private static SqlQuery<LessonSlotData> GetClashSqlQuery(DayOfWeek dayOfWeek, TimeSpan startTime, TimeSpan endTime)
+        private static SqlQuery<LessonSlotData> GetClashSqlQuery(DayOfWeek dayOfWeek, TimeSpan startTime, TimeSpan endTime, int? id)
         {
             SqlQuery<LessonSlotData> sqlQuery = new() { SelectAll = true };
             sqlQuery.AddWhereEquals<LessonSlotData>(nameof(LessonSlotData.DayOfWeek), dayOfWeek);
+            sqlQuery.AddAndNotEqual<LessonSlotData>(nameof(LessonSlotData.Id), id);
             sqlQuery.AddAndLessOrEqual<LessonSlotData>(nameof(LessonSlotData.StartTime), startTime);
             sqlQuery.AddAndGreaterThan<LessonSlotData>(nameof(LessonSlotData.EndTime), startTime);
             sqlQuery.AddOrEqual<LessonSlotData>(nameof(LessonSlotData.DayOfWeek), dayOfWeek);
+            sqlQuery.AddAndNotEqual<LessonSlotData>(nameof(LessonSlotData.Id), id);
             sqlQuery.AddAndGreaterOrEqual<LessonSlotData>(nameof(LessonSlotData.StartTime), startTime);
             sqlQuery.AddAndLessThan<LessonSlotData>(nameof(LessonSlotData.StartTime), endTime);
             return sqlQuery;
