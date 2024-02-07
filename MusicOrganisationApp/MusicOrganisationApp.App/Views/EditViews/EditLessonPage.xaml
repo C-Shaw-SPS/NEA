@@ -1,12 +1,191 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MusicOrganisationApp.App.Views.EditViews.EditLessonPage"
-             Title="EditLessonPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels.EditViewModels;assembly=MusicOrganisationApp.Lib"
+    x:Class="MusicOrganisationApp.App.Views.EditViews.EditLessonPage"
+    Title="{Binding PageTitle}">
+
+    <ContentPage.BindingContext>
+        <viewmodels:EditLessonViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Save"
+            Command="{Binding TrySaveCommand}"/>
+        <ToolbarItem
+            Text="Delete"
+            IsEnabled="{Binding CanDelete}"
+            Command="{Binding DeleteCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid
+        Margin="20"
+        RowSpacing="10"
+        ColumnSpacing="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="Date:"
+            VerticalOptions="Center"/>
+        <DatePicker
+            Grid.Row="0"
+            Grid.Column="1"
+            Date="{Binding Date}"
+            VerticalOptions="Center"/>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Start time:"
+            VerticalOptions="Center"/>
+        <TimePicker
+            Grid.Row="1"
+            Grid.Column="1"
+            Time="{Binding StartTime}"
+            VerticalOptions="Center"/>
+
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="End time:"
+            VerticalOptions="Center"/>
+        <TimePicker
+            Grid.Row="2"
+            Grid.Column="1"
+            Time="{Binding EndTime}"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.Column="2"
+            Text="{Binding TimeError}"
+            VerticalOptions="Center"/>
+        <CollectionView
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            Grid.Column="3"
+            ItemsSource="{Binding ClashingLessons}"
+            SelectedItem="{Binding SelectedClashingLesson}"
+            VerticalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Always"
+            SelectionMode="Single">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout
+                    Orientation="Horizontal"
+                    ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout>
+                        <Label
+                            Text="{Binding PupilName}"
+                            VerticalOptions="End"/>
+                        <TimePicker
+                            Time="{Binding StartTime}"
+                            IsEnabled="False"
+                            TextColor="Black"
+                            VerticalOptions="Center"/>
+                        <TimePicker
+                            Time="{Binding EndTime}"
+                            IsEnabled="False"
+                            TextColor="Black"
+                            VerticalOptions="Center"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            
+        </CollectionView>
+            
+        <Label
+            Grid.Row="3"
+            Grid.Column="0"
+            Text="Notes:"
+            VerticalOptions="Center"/>
+        <ScrollView
+            Grid.Row="3"
+            Grid.Column="1"
+            Grid.ColumnSpan="3">
+
+            <Editor
+                Text="{Binding Notes}"
+                VerticalOptions="Center"
+                AutoSize="TextChanges"/>
+
+        </ScrollView>
+
+        <Label
+            Grid.Row="4"
+            Grid.Column="0"
+            Text="Pupil:"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="4"
+            Grid.Column="1"
+            Text="{Binding PupilName}"
+            VerticalOptions="Center"/>
+        <Label
+            Grid.Row="4"
+            Grid.Column="2"
+            Text="{Binding PupilError}"
+            VerticalOptions="Center"/>
+
+        <SearchBar
+            Grid.Row="5"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
+            Text="{Binding PupilSearchText}"
+            SearchCommand="{Binding SearchPupilsCommand}"
+            VerticalOptions="Center"/>
+
+        <CollectionView
+            Grid.Row="6"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
+            ItemsSource="{Binding Pupils}"
+            SelectedItem="{Binding SelectedPupil}"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Always"
+            SelectionMode="Single">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout
+                    Orientation="Vertical"
+                    ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label
+                        Text="{Binding Name}"
+                        Padding="10"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+
 </ContentPage>

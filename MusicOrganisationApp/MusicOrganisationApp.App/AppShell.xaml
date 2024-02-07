@@ -31,6 +31,10 @@
             <ShellContent ContentTemplate="{DataTemplate collectionViews:AllLessonSlotsPage}"/>
         </Tab>
 
+        <Tab Title="Lessons">
+            <ShellContent ContentTemplate="{DataTemplate collectionViews:AllLessonsPage}"/>
+        </Tab>
+
         <Tab Title="Developer tools">
             <ShellContent ContentTemplate="{DataTemplate views:DeveloperToolsPage}"/>
         </Tab>
