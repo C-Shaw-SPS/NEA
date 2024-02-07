@@ -2,16 +2,16 @@ using MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;
 
 namespace MusicOrganisationApp.App.Views.CollectionViews
 {
-    public partial class AllLessonsPage : ContentPage
+    public partial class AllPupilLessonsPage : ContentPage
     {
-    	public AllLessonsPage()
+    	public AllPupilLessonsPage()
     	{
     		InitializeComponent();
     	}
 
         protected override async void OnAppearing()
         {
-            AllLessonsViewModel viewModel = (AllLessonsViewModel)BindingContext;
+            AllPupilLessonsViewModel viewModel = (AllPupilLessonsViewModel)BindingContext;
             await viewModel.RefreshAsync();
         }
     }

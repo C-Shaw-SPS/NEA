@@ -84,6 +84,7 @@ namespace MusicOrganisationApp.App
             RegisterRoute<AllLessonsPage>(AllLessonsViewModel.ROUTE);
             RegisterRoute<LessonPage>(LessonViewModel.ROUTE);
             RegisterRoute<EditLessonPage>(EditLessonViewModel.ROUTE);
+            RegisterRoute<AllPupilLessonsPage>(AllPupilLessonsViewModel.ROUTE);
         }
 
         private void RegisterRoute<T>(string route) where T : ContentPage

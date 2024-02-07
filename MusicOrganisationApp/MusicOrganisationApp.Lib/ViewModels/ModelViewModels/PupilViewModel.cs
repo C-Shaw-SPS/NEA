@@ -16,6 +16,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         private readonly PupilService _service;
         private readonly AsyncRelayCommand _goToRepertoireCommand;
         private readonly AsyncRelayCommand _goToCaregiversCommand;
+        private readonly AsyncRelayCommand _goToLessonsCommand;
 
         [ObservableProperty]
         private string _name = string.Empty;
@@ -43,6 +44,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             _service = new(_database);
             _goToRepertoireCommand = new(GoToRepertoireAsync);
             _goToCaregiversCommand = new(GoToCaregiversAsync);
+            _goToLessonsCommand = new(GoToLessonsAsync);
         }
 
         protected override IService<Pupil> Service => _service;
@@ -50,6 +52,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         public AsyncRelayCommand GoToRepertoireCommand => _goToRepertoireCommand;
 
         public AsyncRelayCommand GoToCaregiversCommand => _goToCaregiversCommand;
+
+        public AsyncRelayCommand GoToLessonsCommand => _goToLessonsCommand;
 
         protected override void SetDisplayValues()
         {
@@ -78,6 +82,15 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
                 [AllPupilCaregiversViewModel.PUPIL_ID_PARAMETER] = _value.Id
             };
             await GoToAsync(parameters, AllPupilCaregiversViewModel.ROUTE);
+        }
+
+        private async Task GoToLessonsAsync()
+        {
+            Dictionary<string, object> parameters = new()
+            {
+                [AllPupilLessonsViewModel.PUPIL_ID_PARAMETER] = _value.Id
+            };
+            await GoToAsync(parameters, AllPupilLessonsViewModel.ROUTE);
         }
     }
 }
