@@ -58,12 +58,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private async Task AddNewAsync()
         {
-            Dictionary<string, object> paramters = new()
+            Dictionary<string, object> parameters = new()
             {
                 [EditViewModelBase.IS_NEW_PARAMETER] = true
             };
-            AddAddNewParameters(paramters);
-            await GoToAsync(paramters, _editRoute);
+            AddAddNewParameters(parameters);
+            await GoToAsync(parameters, _editRoute);
         }
 
         protected virtual void AddAddNewParameters(Dictionary<string, object> parameters) { }
