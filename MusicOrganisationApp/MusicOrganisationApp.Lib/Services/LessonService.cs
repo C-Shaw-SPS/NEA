@@ -20,7 +20,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             SqlQuery<LessonData> sqlQuery = new();
             sqlQuery.AddColumn<LessonData>(nameof(LessonData.Id), nameof(Lesson.Id));
-            sqlQuery.AddColumn<LessonData>(nameof(LessonData.PupilId), nameof(Lesson.Id));
+            sqlQuery.AddColumn<LessonData>(nameof(LessonData.PupilId), nameof(Lesson.PupilId));
             sqlQuery.AddColumn<LessonData>(nameof(LessonData.Date), nameof(Lesson.Date));
             sqlQuery.AddColumn<LessonData>(nameof(LessonData.StartTime), nameof(Lesson.StartTime));
             sqlQuery.AddColumn<LessonData>(nameof(LessonData.EndTime), nameof(Lesson.EndTime));
