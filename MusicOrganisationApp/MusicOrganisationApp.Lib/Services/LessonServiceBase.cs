@@ -1,4 +1,5 @@
-﻿using MusicOrganisationApp.Lib.Databases;
+﻿using Microsoft.Maui.Graphics.Text;
+using MusicOrganisationApp.Lib.Databases;
 using MusicOrganisationApp.Lib.Models;
 
 namespace MusicOrganisationApp.Lib.Services
@@ -19,9 +20,11 @@ namespace MusicOrganisationApp.Lib.Services
             return clashingLessons;
         }
 
-        private static SqlQuery<TTable> GetClashingLessonsSqlQuery(string dateColumn, object date, TimeSpan startTime, TimeSpan endTime, int? id)
+        protected abstract SqlQuery<TTable> GetSqlQueryWithNoConditions();
+
+        private SqlQuery<TTable> GetClashingLessonsSqlQuery(string dateColumn, object date, TimeSpan startTime, TimeSpan endTime, int? id)
         {
-            SqlQuery<TTable> sqlQuery = new() { SelectAll = true };
+            SqlQuery<TTable> sqlQuery = GetSqlQueryWithNoConditions();
             sqlQuery.AddWhereEquals<TTable>(dateColumn, date);
             sqlQuery.AddAndNotEqual<TTable>(nameof(ITable.Id), id);
             sqlQuery.AddAndLessOrEqual<TTable>(nameof(ILesson<TTable>.StartTime), startTime);

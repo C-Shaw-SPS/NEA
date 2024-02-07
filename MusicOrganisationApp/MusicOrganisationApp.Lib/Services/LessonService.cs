@@ -16,7 +16,7 @@ namespace MusicOrganisationApp.Lib.Services
             set => _date = value.Date;
         }
 
-        private SqlQuery<LessonData> GetSqlQueryWithNoConditions()
+        protected override SqlQuery<LessonData> GetSqlQueryWithNoConditions()
         {
             SqlQuery<LessonData> sqlQuery = new();
             sqlQuery.AddColumn<LessonData>(nameof(LessonData.Id), nameof(Lesson.Id));

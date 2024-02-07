@@ -50,5 +50,11 @@ namespace MusicOrganisationApp.Lib.Services
             (bool suceeded, LessonSlotData value) result = await _database.TryGetAsync<LessonSlotData>(id);
             return result;
         }
+
+        protected override SqlQuery<LessonSlotData> GetSqlQueryWithNoConditions()
+        {
+            SqlQuery<LessonSlotData> sqlQuery = new() { SelectAll = true };
+            return sqlQuery;
+        }
     }
 }
