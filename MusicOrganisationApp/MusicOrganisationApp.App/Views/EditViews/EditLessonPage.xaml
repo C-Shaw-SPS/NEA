@@ -29,6 +29,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -74,20 +75,22 @@
             Grid.Column="1"
             Time="{Binding EndTime}"
             VerticalOptions="Center"/>
+        
         <Label
-            Grid.Row="1"
-            Grid.RowSpan="2"
-            Grid.Column="2"
+            Grid.Row="3"
+            Grid.Column="0"
             Text="{Binding TimeError}"
             VerticalOptions="Center"/>
+
         <CollectionView
-            Grid.Row="1"
-            Grid.RowSpan="2"
-            Grid.Column="3"
+            Grid.Row="3"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
             ItemsSource="{Binding ClashingLessons}"
             SelectedItem="{Binding SelectedClashingLesson}"
             VerticalOptions="FillAndExpand"
-            VerticalScrollBarVisibility="Always"
+            HorizontalOptions="StartAndExpand"
+            HorizontalScrollBarVisibility="Always"
             SelectionMode="Single">
 
             <CollectionView.ItemsLayout>
@@ -101,7 +104,7 @@
                     <VerticalStackLayout>
                         <Label
                             Text="{Binding PupilName}"
-                            VerticalOptions="End"/>
+                            VerticalOptions="Center"/>
                         <TimePicker
                             Time="{Binding StartTime}"
                             IsEnabled="False"
@@ -115,16 +118,17 @@
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-            
+
         </CollectionView>
-            
+
+
         <Label
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.Column="0"
             Text="Notes:"
             VerticalOptions="Center"/>
         <ScrollView
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.Column="1"
             Grid.ColumnSpan="3">
 
@@ -136,23 +140,23 @@
         </ScrollView>
 
         <Label
-            Grid.Row="4"
+            Grid.Row="5"
             Grid.Column="0"
             Text="Pupil:"
             VerticalOptions="Center"/>
         <Label
-            Grid.Row="4"
+            Grid.Row="5"
             Grid.Column="1"
             Text="{Binding PupilName}"
             VerticalOptions="Center"/>
         <Label
-            Grid.Row="4"
+            Grid.Row="5"
             Grid.Column="2"
             Text="{Binding PupilError}"
             VerticalOptions="Center"/>
 
         <SearchBar
-            Grid.Row="5"
+            Grid.Row="6"
             Grid.Column="0"
             Grid.ColumnSpan="4"
             Text="{Binding PupilSearchText}"
@@ -160,7 +164,7 @@
             VerticalOptions="Center"/>
 
         <CollectionView
-            Grid.Row="6"
+            Grid.Row="7"
             Grid.Column="0"
             Grid.ColumnSpan="4"
             ItemsSource="{Binding Pupils}"
