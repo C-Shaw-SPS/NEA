@@ -17,7 +17,7 @@ namespace MusicOrganisationApp.Tests.Databases
         public static readonly Pupil SqlInjectionPupil = new()
         {
             Id = 0,
-            Name = $"Robert'); DROP Table {Pupil.TableName}"
+            Name = $"Robert'); DROP TABLE {Pupil.TableName}"
         };
 
         public static readonly List<CaregiverData> CaregiverData = new()

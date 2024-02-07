@@ -17,7 +17,7 @@ namespace MusicOrganisationApp.Lib.Tables
     [Table(_TABLE_NAME)]
     public class Pupil : ITable, IEquatable<Pupil>
     {
-        private const string _TABLE_NAME = $"{nameof(Pupil)}s";
+        private const string _TABLE_NAME = nameof(Pupil);
 
         private int _id;
         private string _name = string.Empty;
