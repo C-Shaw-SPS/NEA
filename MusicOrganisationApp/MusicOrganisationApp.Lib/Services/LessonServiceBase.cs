@@ -55,7 +55,7 @@ namespace MusicOrganisationApp.Lib.Services
             if (getNewId)
             {
                 int id = await _database.GetNextIdAsync<TTable>();
-                value.Id = id;
+                tableValue.Id = id;
             }
             await _database.InsertAsync(tableValue);
         }
