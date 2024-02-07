@@ -15,10 +15,13 @@
             Text="Edit"
             Command="{Binding EditCommand}"/>
         <ToolbarItem
-            Text="View repertoire"
+            Text="Repertoire"
             Command="{Binding GoToRepertoireCommand}"/>
         <ToolbarItem
-            Text="View caregivers"
+            Text="Lessons"
+            Command="{Binding GoToLessonsCommand}"/>
+        <ToolbarItem
+            Text="Caregivers"
             Command="{Binding GoToCaregiversCommand}"/>
     </ContentPage.ToolbarItems>
 
