@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
-using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
@@ -16,7 +15,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         [ObservableProperty]
         private DateTime _selectedDate = DateTime.Today;
 
-        public AllLessonsViewModel() : base(LessonViewModel.ROUTE, EditLessonSlotViewModel.ROUTE)
+        public AllLessonsViewModel() : base(LessonViewModel.ROUTE, EditLessonViewModel.ROUTE)
         {
             _service = new(_database);
         }
