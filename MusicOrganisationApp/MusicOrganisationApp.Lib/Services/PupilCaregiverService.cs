@@ -42,7 +42,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             SqlQuery<CaregiverMap> sqlQuery = GetSqlQuery();
             sqlQuery.AddWhereEquals<CaregiverMap>(nameof(CaregiverMap.PupilId), _pupilId);
-            sqlQuery.AddOrderBy(ordering);
+            sqlQuery.AddOrderByAscending(ordering);
             IEnumerable<PupilCaregiver> caregivers = await _database.QueryAsync<PupilCaregiver>(sqlQuery);
             return caregivers;
         }

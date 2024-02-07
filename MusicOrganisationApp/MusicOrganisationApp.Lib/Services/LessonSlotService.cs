@@ -30,7 +30,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             SqlQuery<LessonSlotData> sqlQuery = new() { SelectAll = true };
             sqlQuery.AddWhereEquals<LessonSlotData>(nameof(LessonSlotData.DayOfWeek), _dayOfWeek);
-            sqlQuery.AddOrderBy(nameof(LessonSlotData.StartTime));
+            sqlQuery.AddOrderByAscending(nameof(LessonSlotData.StartTime));
             return sqlQuery;
         }
 

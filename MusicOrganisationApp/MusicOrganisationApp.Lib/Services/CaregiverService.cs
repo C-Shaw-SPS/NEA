@@ -39,7 +39,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             SqlQuery<CaregiverData> sqlQuery = new(IService.DEFAULT_LIMIT) { SelectAll = true };
             sqlQuery.AddWhereLike<CaregiverData>(nameof(CaregiverData.Name), search);
-            sqlQuery.AddOrderBy(ordering);
+            sqlQuery.AddOrderByAscending(ordering);
             IEnumerable<CaregiverData> caregivers = await _database.QueryAsync<CaregiverData>(sqlQuery);
             return caregivers;
         }

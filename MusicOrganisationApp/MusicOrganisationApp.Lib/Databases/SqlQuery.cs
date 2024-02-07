@@ -15,13 +15,15 @@ namespace MusicOrganisationApp.Lib.Databases
         private const string _GREATER_OR_EQUAL = ">=";
         private const string _LESS_OR_EQUAL = "<=";
         private const string _NOT_EQUAL = "!=";
+        private const string _ASC = "ASC";
+        private const string _DESC = "DESC";
 
         private readonly string _tableName;
         private bool _selectAll;
         private readonly List<(string table, string column, string alias)> _columns;
         private readonly List<(string newTable, string newColumn, string existingTable, string existingColumn)> _joins;
         private readonly List<(string keyword, string table, string column, string value, string comparison)> _conditions;
-        private readonly List<string> _orderBys;
+        private readonly List<(string column, string order)> _orderBys;
         private readonly int? _limit;
 
         private readonly HashSet<Type> _tables;
@@ -121,9 +123,14 @@ namespace MusicOrganisationApp.Lib.Databases
 
         #endregion
 
-        public void AddOrderBy(string column)
+        public void AddOrderByAscending(string column)
         {
-            _orderBys.Add(column);
+            _orderBys.Add((column, _ASC));
+        }
+
+        public void AddOrderByDescending(string column)
+        {
+            _orderBys.Add((column, _DESC));
         }
 
         #region SQL
@@ -184,9 +191,18 @@ namespace MusicOrganisationApp.Lib.Databases
         {
             if (_orderBys.Count > 0)
             {
+                IEnumerable<string> formattedOrderBys = GetFormattedOrderBys();
                 stringBuilder.AppendLine("ORDER BY");
-                stringBuilder.AppendLine(string.Join(", ", _orderBys));
+                stringBuilder.AppendLine(string.Join(", ", formattedOrderBys));
             }
+        }
+
+        private IEnumerable<string> GetFormattedOrderBys()
+        {
+            IEnumerable<string> formattedOrderBys =
+                from orderBy in _orderBys
+                select $"{orderBy.column} {orderBy.order}";
+            return formattedOrderBys;
         }
 
         private void AddLimit(StringBuilder stringBuilder)

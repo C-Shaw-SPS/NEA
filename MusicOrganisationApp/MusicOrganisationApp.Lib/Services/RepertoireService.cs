@@ -45,7 +45,7 @@ namespace MusicOrganisationApp.Lib.Services
             SqlQuery sqlQuery = GetSqlQuery();
             sqlQuery.AddWhereLike<WorkData>(nameof(WorkData.Title), search);
             sqlQuery.AddAndEqual<RepertoireData>(nameof(Repertoire.PupilId), _pupilId);
-            sqlQuery.AddOrderBy(ordering);
+            sqlQuery.AddOrderByAscending(ordering);
             IEnumerable<Repertoire> repertoires = await _database.QueryAsync<Repertoire>(sqlQuery);
             return repertoires;
         }

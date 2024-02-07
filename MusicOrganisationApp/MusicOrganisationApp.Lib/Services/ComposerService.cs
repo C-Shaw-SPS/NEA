@@ -76,7 +76,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             SqlQuery<ComposerData> query = new(IService.DEFAULT_LIMIT) { SelectAll = true };
             query.AddWhereLike<ComposerData>(nameof(ComposerData.Name), search);
-            query.AddOrderBy(ordering);
+            query.AddOrderByAscending(ordering);
 
             IEnumerable<ComposerData> composers = await _database.QueryAsync<ComposerData>(query);
             return composers;

@@ -60,7 +60,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             SqlQuery<WorkData> sqlQuery = GetSqlQuery();
             sqlQuery.AddWhereLike<WorkData>(nameof(WorkData.Title), search);
-            sqlQuery.AddOrderBy(ordering);
+            sqlQuery.AddOrderByAscending(ordering);
 
             IEnumerable<Work> works = await _database.QueryAsync<Work>(sqlQuery);
             return works;

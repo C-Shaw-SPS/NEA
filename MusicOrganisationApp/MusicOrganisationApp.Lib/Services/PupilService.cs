@@ -49,7 +49,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             SqlQuery<Pupil> sqlQuery = new(IService.DEFAULT_LIMIT) { SelectAll = true };
             sqlQuery.AddWhereLike<Pupil>(nameof(Pupil.Name), search);
-            sqlQuery.AddOrderBy(ordering);
+            sqlQuery.AddOrderByAscending(ordering);
             IEnumerable<Pupil> result = await _database.QueryAsync<Pupil>(sqlQuery);
             return result;
         }
