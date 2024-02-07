@@ -8,19 +8,21 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditLessonViewModel : EditLessonViewModelBase<Lesson, LessonData>
+    public partial class EditLessonViewModel : EditLessonViewModelBase<Lesson, LessonData>, IQueryAttributable
     {
         public const string ROUTE = nameof(EditLessonViewModel);
+        public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
         private const string _EDIT_PAGE_TITLE = "Edit lesson";
         private const string _NEW_PAGE_TITLE = "New lesson";
+        private const string _NO_PUPIL_ERROR = "Must select pupil";
 
         private readonly LessonService _lessonService;
         private readonly PupilService _pupilService;
         private readonly AsyncRelayCommand _searchPupilsCommand;
 
         [ObservableProperty]
-        private DateTime _date;
+        private DateTime _date = DateTime.Today;
 
         [ObservableProperty]
         private string _notes = string.Empty;
@@ -36,6 +38,9 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         [ObservableProperty]
         private Pupil? _selectedPupil;
+
+        [ObservableProperty]
+        private string _pupilError = string.Empty;
 
         public EditLessonViewModel() : base(LessonViewModel.ROUTE, _EDIT_PAGE_TITLE, _NEW_PAGE_TITLE)
         {
@@ -69,10 +74,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             if (SelectedPupil is not null)
             {
                 _value.PupilId = SelectedPupil.Id;
+                PupilError = string.Empty;
                 return true;
             }
             else
             {
+                PupilError = _NO_PUPIL_ERROR;
                 return false;
             }
         }
@@ -90,6 +97,24 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             {
                 PupilName = value.Name;
             }
+        }
+
+        public override async void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            if (query.TryGetValue(PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
+            {
+                (bool suceeded, Pupil pupil) = await _pupilService.TryGetAsync(pupilId);
+                if (suceeded)
+                {
+                    SelectedPupil = pupil;
+                }
+                else
+                {
+                    await GoBackAsync();
+                    return;
+                }
+            }
+            base.ApplyQueryAttributes(query);
         }
     }
 }
