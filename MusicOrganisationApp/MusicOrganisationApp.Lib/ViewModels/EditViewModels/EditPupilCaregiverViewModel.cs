@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditPupilCaregiverViewModel : EditViewModelBase<PupilCaregiver>
+    public partial class EditPupilCaregiverViewModel : EditViewModelBase<PupilCaregiver>, IQueryAttributable
     {
         public const string ROUTE = nameof(EditPupilCaregiverViewModel);
         public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
