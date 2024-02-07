@@ -1,5 +1,4 @@
 ﻿using MusicOrganisationApp.Lib.Databases;
-using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.Services

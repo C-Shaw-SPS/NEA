@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Json;
-using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.ViewModels

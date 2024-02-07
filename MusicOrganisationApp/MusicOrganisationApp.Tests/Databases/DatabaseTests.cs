@@ -1,6 +1,5 @@
 ﻿using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.Databases;
-using MusicOrganisationApp.Lib.Models;
 
 namespace MusicOrganisationApp.Tests.Databases
 {

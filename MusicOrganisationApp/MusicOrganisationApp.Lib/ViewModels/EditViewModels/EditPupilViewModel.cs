@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
+using MusicOrganisationApp.Lib.Tables;
 using SQLitePCL;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels

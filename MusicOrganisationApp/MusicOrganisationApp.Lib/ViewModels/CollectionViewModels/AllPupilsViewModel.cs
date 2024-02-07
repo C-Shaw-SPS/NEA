@@ -1,5 +1,5 @@
-﻿using MusicOrganisationApp.Lib.Models;
-using MusicOrganisationApp.Lib.Services;
+﻿using MusicOrganisationApp.Lib.Services;
+using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 

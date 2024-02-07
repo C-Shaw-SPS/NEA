@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
+using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 

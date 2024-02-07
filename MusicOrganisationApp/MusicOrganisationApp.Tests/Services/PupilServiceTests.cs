@@ -1,6 +1,5 @@
 ﻿using MusicOrganisationApp.Lib;
 using MusicOrganisationApp.Lib.Databases;
-using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 
