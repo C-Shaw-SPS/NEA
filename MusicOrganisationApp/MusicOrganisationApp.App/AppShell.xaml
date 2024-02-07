@@ -6,8 +6,13 @@
     xmlns:local="clr-namespace:MusicOrganisationApp.App"
     xmlns:views="clr-namespace:MusicOrganisationApp.App.Views"
     xmlns:collectionViews="clr-namespace:MusicOrganisationApp.App.Views.CollectionViews"
+    xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels;assembly=MusicOrganisationApp.Lib"
     Shell.FlyoutBehavior="Disabled"
     Title="MusicOrganisationApp.App">
+
+    <Shell.BindingContext>
+        <viewmodels:StartupViewModel/>
+    </Shell.BindingContext>
 
     <TabBar>
 
@@ -38,7 +43,7 @@
         <Tab Title="Developer tools">
             <ShellContent ContentTemplate="{DataTemplate views:DeveloperToolsPage}"/>
         </Tab>
-        
+
     </TabBar>
 
 </Shell>

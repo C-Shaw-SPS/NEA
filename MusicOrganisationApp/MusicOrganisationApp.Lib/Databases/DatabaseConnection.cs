@@ -141,5 +141,20 @@ namespace MusicOrganisationApp.Lib.Databases
             await DropTableIfExistsAsync<T>();
             await InsertAllAsync(values);
         }
+
+        public async Task<int> GetTableCount<T>() where T : class, ITable, new()
+        {
+            await CreateTableAsync<T>();
+            string query = $"SELECT Count(*) AS {nameof(CountProperty.Count)} FROM {T.TableName}";
+            IEnumerable<CountProperty> countProperties = await _connection.QueryAsync<CountProperty>(query);
+            CountProperty countProperty = countProperties.First();
+            return countProperty.Count;
+        }
+
+        public async Task<bool> IsEmptyTable<T>() where T : class, ITable, new()
+        {
+            int tableCount = await GetTableCount<T>();
+            return tableCount == 0;
+        }
     }
 }
