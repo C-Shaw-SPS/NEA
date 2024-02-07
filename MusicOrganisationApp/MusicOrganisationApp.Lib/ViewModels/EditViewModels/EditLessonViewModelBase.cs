@@ -67,12 +67,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         protected override async Task<bool> TrySetValuesToSave()
         {
-            SetNonTimeValuesToSave();
-            bool canSave = await TrySetTimesToSave();
+            bool canSave = true;
+            canSave &= TrySetNonTimeValuesToSave();
+            canSave &= await TrySetTimesToSave();
             return canSave;
         }
 
-        protected abstract void SetNonTimeValuesToSave();
+        protected abstract bool TrySetNonTimeValuesToSave();
 
         private async Task<bool> TrySetTimesToSave()
         {

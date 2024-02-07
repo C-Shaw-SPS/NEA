@@ -37,9 +37,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _service.DayOfWeek = value;
         }
 
-        protected override void SetNonTimeValuesToSave()
+        protected override bool TrySetNonTimeValuesToSave()
         {
             _value.DayOfWeek = DayOfWeek;
+            return true;
         }
 
         protected override void SetDisplayNonTimeValues()
