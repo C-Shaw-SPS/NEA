@@ -32,7 +32,7 @@ namespace MusicOrganisationApp.Lib.Services
         private static DeleteStatement<WorkData> GetDeleteWorksStatement(ComposerData composer)
         {
             DeleteStatement<WorkData> deleteStatement = new();
-            deleteStatement.AddCondition(nameof(WorkData.ComposerId), composer.Id);
+            deleteStatement.AddWhereEqual(nameof(WorkData.ComposerId), composer.Id);
             return deleteStatement;
         }
 
@@ -40,10 +40,15 @@ namespace MusicOrganisationApp.Lib.Services
         {
             IEnumerable<int> workIds = await GetWorkIdsAsync(composer);
             DeleteStatement<RepertoireData> deleteStatement = new();
-            foreach (int workId in workIds)
+            if (workIds.Any())
             {
-                deleteStatement.AddCondition(nameof(RepertoireData.WorkId), workId);
+                deleteStatement.AddWhereEqual(nameof(RepertoireData.WorkId), workIds.First());
+                foreach (int workId in workIds.Skip(1))
+                {
+                    deleteStatement.AddOrEqual(nameof(RepertoireData.WorkId), workId);
+                }
             }
+
             return deleteStatement;
         }
 

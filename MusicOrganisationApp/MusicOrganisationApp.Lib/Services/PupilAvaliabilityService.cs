@@ -52,7 +52,7 @@ namespace MusicOrganisationApp.Lib.Services
         public async Task RemoveAvaliabilityAsync(LessonSlotData lessonSlotData)
         {
             DeleteStatement<PupilAvaliability> deleteStatement = new();
-            deleteStatement.AddCondition(nameof(PupilAvaliability.LessonSlotId), lessonSlotData.Id);
+            deleteStatement.AddWhereEqual(nameof(PupilAvaliability.LessonSlotId), lessonSlotData.Id);
             await _database.ExecuteAsync(deleteStatement);
         }
 

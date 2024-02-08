@@ -23,7 +23,7 @@ namespace MusicOrganisationApp.Lib.Services
         public async Task DeleteAsync(Repertoire value)
         {
             DeleteStatement<RepertoireData> deleteStatement = new();
-            deleteStatement.AddCondition(nameof(RepertoireData.Id), value.Id);
+            deleteStatement.AddWhereEqual(nameof(RepertoireData.Id), value.Id);
             await _database.ExecuteAsync(deleteStatement);
         }
 

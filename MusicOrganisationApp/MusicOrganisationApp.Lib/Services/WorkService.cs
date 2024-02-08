@@ -24,7 +24,7 @@ namespace MusicOrganisationApp.Lib.Services
         private static DeleteStatement<RepertoireData> GetDeleteRepertoireQuery(int workId)
         {
             DeleteStatement<RepertoireData> deleteStatement = new();
-            deleteStatement.AddCondition(nameof(RepertoireData.WorkId), workId);
+            deleteStatement.AddWhereEqual(nameof(RepertoireData.WorkId), workId);
             return deleteStatement;
         }
 

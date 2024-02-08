@@ -109,7 +109,7 @@ namespace MusicOrganisationApp.Lib.Databases
             await CreateTableAsync<T>();
 
             DeleteStatement<T> deleteStatement = new();
-            deleteStatement.AddCondition(nameof(ITable.Id), id);
+            deleteStatement.AddWhereEqual(nameof(ITable.Id), id);
             await ExecuteAsync(deleteStatement);
         }
 

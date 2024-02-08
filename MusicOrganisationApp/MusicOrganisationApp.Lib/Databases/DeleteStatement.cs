@@ -1,11 +1,14 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using System.Text;
+﻿using System.Text;
 
 namespace MusicOrganisationApp.Lib.Databases
 {
     public class DeleteStatement<T> : ISqlExecutable<T> where T : class, ITable, new()
     {
-        private readonly List<(string column, string value)> _conditions;
+        private const string _WHERE = "WHERE";
+        private const string _AND = "AND";
+        private const string _OR = "OR";
+
+        private readonly List<(string condition, string column, string value)> _conditions;
 
         public DeleteStatement()
         {
@@ -14,9 +17,19 @@ namespace MusicOrganisationApp.Lib.Databases
 
         public string TableName => T.TableName;
 
-        public void AddCondition(string column, object? value)
+        public void AddWhereEqual(string column, object? value)
         {
-            _conditions.Add((column, value.FormatSqlValue()));
+            _conditions.Add((_WHERE, column, value.FormatSqlValue()));
+        }
+
+        public void AddAndEqual(string column, object? value)
+        {
+            _conditions.Add((_AND, column, value.FormatSqlValue()));
+        }
+
+        public void AddOrEqual(string column, object? value)
+        {
+            _conditions.Add((_OR, column, value.FormatSqlValue()));
         }
 
         public string GetSql()
@@ -26,10 +39,9 @@ namespace MusicOrganisationApp.Lib.Databases
 
             IEnumerable<string> conditions = GetConditions();
 
-            if (conditions.Any())
+            foreach (string condition in conditions)
             {
-                stringBuilder.AppendLine("WHERE");
-                stringBuilder.AppendLine(string.Join("\nOR ", conditions));
+                stringBuilder.AppendLine(condition);
             }
 
             string sql = stringBuilder.ToString();
@@ -38,13 +50,10 @@ namespace MusicOrganisationApp.Lib.Databases
 
         private IEnumerable<string> GetConditions()
         {
-            IEnumerable<string> conditions = _conditions.Select(condition => FormatCondition(condition.column, condition.value));
+            IEnumerable<string> conditions =
+                from condition in _conditions
+                select $"{condition.condition} {condition.column} = {condition.value}";
             return conditions;
-        }
-
-        private static string FormatCondition(string column, string value)
-        {
-            return $"{column} = {value}";
         }
     }
 }

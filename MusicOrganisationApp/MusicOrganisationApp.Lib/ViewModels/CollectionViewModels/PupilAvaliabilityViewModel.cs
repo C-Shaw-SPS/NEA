@@ -32,6 +32,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             _removeCommand = new(RemoveAsync);
         }
 
+        public AsyncRelayCommand AddNewCommand => _addNewCommand;
+
+        public AsyncRelayCommand RemoveCommand => _removeCommand;
+
         public int? PupilId
         {
             get => _pupilId;

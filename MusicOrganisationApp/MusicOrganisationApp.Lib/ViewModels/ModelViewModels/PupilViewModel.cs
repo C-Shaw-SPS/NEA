@@ -57,6 +57,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 
         public AsyncRelayCommand GoToLessonsCommand => _goToLessonsCommand;
 
+        public AsyncRelayCommand GoToAvaliabilityCommand => _goToAvaliabilityCommand;
+
         protected override void SetDisplayValues()
         {
             Name = _value.Name;
