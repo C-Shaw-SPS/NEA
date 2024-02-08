@@ -30,7 +30,7 @@ namespace MusicOrganisationApp.Lib.Databases
         {
             IEnumerable<string> conditions =
                 from condition in _conditions
-                select $"{condition.keyword} {condition.column} = {condition.value}";
+                select $"{condition.keyword} {condition.column} {condition.comparison} {condition.value}";
             return conditions;
         }
     }
