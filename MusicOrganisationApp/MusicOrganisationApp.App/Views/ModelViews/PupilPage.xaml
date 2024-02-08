@@ -23,6 +23,9 @@
         <ToolbarItem
             Text="Caregivers"
             Command="{Binding GoToCaregiversCommand}"/>
+        <ToolbarItem
+            Text="Avaliability"
+            Command="{Binding GoToAvaliabilityCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>
