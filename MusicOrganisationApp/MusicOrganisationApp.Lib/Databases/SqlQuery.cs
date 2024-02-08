@@ -63,6 +63,8 @@ namespace MusicOrganisationApp.Lib.Databases
             AddColumn<TTable>(column, column);
         }
 
+        #region Joins
+
         public void AddInnerJoin<TNew, TExisting>(string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
         {
             AddJoin<TNew, TExisting>(_INNER_JOIN, newColumn, existingColumn);
@@ -70,8 +72,11 @@ namespace MusicOrganisationApp.Lib.Databases
 
         private void AddJoin<TNew, TExisting>(string joinType, string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
         {
+            _tables.Add(typeof(TNew));
             _joins.Add((joinType, TNew.TableName, newColumn, TExisting.TableName, existingColumn));
         }
+
+        #endregion
 
         #region Conditions
 
