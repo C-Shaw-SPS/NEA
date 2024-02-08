@@ -87,9 +87,16 @@ namespace MusicOrganisationApp.Lib.Services
             return timetable;
         }
 
-        private static int GetMaxId<T>(IEnumerable<T> values) where T : ITable
+        private static int GetMaxId<T>(IEnumerable<T> values) where T : IIdentifiable
         {
-            return values.Max(v => v.Id);
+            if (values.Any())
+            {
+                return values.Max(v => v.Id);
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         private static void Shuffle<T>(List<T> values)
