@@ -54,14 +54,17 @@ namespace MusicOrganisationApp.Lib.Databases
 
         public async Task InsertAllAsync<T>(IEnumerable<T> values) where T : class, ITable, new()
         {
-            await CreateTableAsync<T>();
-
-            InsertStatement<T> insertStatement = new();
-            foreach (T value in values)
+            if (values.Any())
             {
-                insertStatement.AddValue(value);
+                await CreateTableAsync<T>();
+
+                InsertStatement<T> insertStatement = new();
+                foreach (T value in values)
+                {
+                    insertStatement.AddValue(value);
+                }
+                await ExecuteAsync(insertStatement);
             }
-            await ExecuteAsync(insertStatement);
         }
 
         public async Task ClearTableAsync<T>() where T : class, ITable, new()
