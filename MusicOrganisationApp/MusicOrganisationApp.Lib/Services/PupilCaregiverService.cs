@@ -81,7 +81,8 @@ namespace MusicOrganisationApp.Lib.Services
             {
                 Id = id,
                 CaregiverId = caregiver.CaregiverId,
-                PupilId = caregiver.PupilId
+                PupilId = caregiver.PupilId,
+                Description = caregiver.Description
             };
             return caregiverMap;
         }
