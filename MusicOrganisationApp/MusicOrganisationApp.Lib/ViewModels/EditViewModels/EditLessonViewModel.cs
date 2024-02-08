@@ -9,9 +9,7 @@ using System.Collections.ObjectModel;
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
     public partial class EditLessonViewModel : EditLessonViewModelBase<Lesson, LessonData, LessonViewModel>, IQueryAttributable, IViewModel
-    {
-        public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
-        
+    {        
         private const string _ROUTE = nameof(EditLessonViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit lesson";
         private const string _NEW_PAGE_TITLE = "New lesson";
@@ -103,7 +101,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         public override async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.TryGetValue(PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
+            if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
             {
                 (bool suceeded, Pupil pupil) = await _pupilService.TryGetAsync(pupilId);
                 if (suceeded)

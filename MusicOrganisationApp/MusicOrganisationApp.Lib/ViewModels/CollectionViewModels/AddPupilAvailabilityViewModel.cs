@@ -7,16 +7,13 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class AddPupilAvailabilityViewModel : ViewModelBase, IQueryAttributable, IViewModel
+    public partial class AddPupilAvailabilityViewModel : ViewModelBase, IQueryAttributable, IPupilDataViewModel
     {
         private const string _ROUTE = nameof(AddPupilAvailabilityViewModel);
-
-        public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
         private readonly PupilAvaliabilityService _service;
         private readonly AsyncRelayCommand _selectCommand;
         private readonly AsyncRelayCommand _addNewCommand;
-        private int? _pupilId;
 
         [ObservableProperty]
         private ObservableCollection<LessonSlotData> _lessonSlots = [];
@@ -39,12 +36,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         public int? PupilId
         {
-            get => _pupilId;
-            set
-            {
-                _pupilId = value;
-                _service.PupilId = value;
-            }
+            get => _service.PupilId;
+            set => _service.PupilId = value;
         }
 
         public async Task RefreshAsync()
@@ -73,7 +66,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.TryGetValue(PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
+            if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
             {
                 PupilId = pupilId;
             }

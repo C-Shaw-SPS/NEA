@@ -74,38 +74,22 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 
         private async Task GoToRepertoireAsync()
         {
-            Dictionary<string, object> parameters = new()
-            {
-                [AllRepertoireViewModel.PUPIL_ID_PARAMETER] = _value.Id
-            };
-            await GoToAsync<AllRepertoireViewModel>(parameters);
+            await GoToPupilDataAsync<AllRepertoireViewModel>(_value.Id);
         }
 
         private async Task GoToCaregiversAsync()
         {
-            Dictionary<string, object> parameters = new()
-            {
-                [AllPupilCaregiversViewModel.PUPIL_ID_PARAMETER] = _value.Id
-            };
-            await GoToAsync<AllPupilCaregiversViewModel>(parameters);
+            await GoToPupilDataAsync<AllPupilCaregiversViewModel>(_value.Id);
         }
 
         private async Task GoToLessonsAsync()
         {
-            Dictionary<string, object> parameters = new()
-            {
-                [AllPupilLessonsViewModel.PUPIL_ID_PARAMETER] = _value.Id
-            };
-            await GoToAsync<AllPupilLessonsViewModel>(parameters);
+            await GoToPupilDataAsync<AllPupilLessonsViewModel>(_value.Id);
         }
 
         private async Task GoToAvaliabilityAsnyc()
         {
-            Dictionary<string, object> parameters = new()
-            {
-                [AllPupilLessonsViewModel.PUPIL_ID_PARAMETER] = _value.Id
-            };
-            await GoToAsync<PupilAvailabilityViewModel>(parameters);
+            await GoToPupilDataAsync<PupilAvailabilityViewModel>(_value.Id);
         }
     }
 }

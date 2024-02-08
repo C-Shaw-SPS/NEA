@@ -41,9 +41,18 @@ namespace MusicOrganisationApp.Lib.ViewModels
             await GoToAsync(_GO_BACK);
         }
 
+        protected async Task GoToPupilDataAsync<TViewModel>(int pupilId) where TViewModel : IPupilDataViewModel
+        {
+            Dictionary<string, object> parameters = new()
+            {
+                [IPupilDataViewModel.PUPIL_ID_PARAMETER] = pupilId
+            };
+            await GoToAsync<TViewModel>(parameters);
+        }
+
         private async Task GoToAsync(string route)
         {
-            if (_isTesting)
+            if (!_isTesting)
             {
                 await Shell.Current.GoToAsync(route);
             }

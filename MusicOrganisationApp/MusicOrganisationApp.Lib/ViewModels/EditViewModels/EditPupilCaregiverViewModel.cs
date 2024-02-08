@@ -8,9 +8,7 @@ using System.Collections.ObjectModel;
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
     public partial class EditPupilCaregiverViewModel : EditViewModelBase<PupilCaregiver>, IQueryAttributable, IViewModel
-    {
-        public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
-        
+    {        
         private const string _ROUTE = nameof(EditPupilCaregiverViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit caregiver";
         private const string _NEW_PAGE_TITLE = "New caregiver";
@@ -136,7 +134,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         public override void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.TryGetValue(PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
+            if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
             {
                 _pupilId = pupilId;
             }

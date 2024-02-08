@@ -8,8 +8,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
     public partial class EditRepertoireViewModel : EditViewModelBase<Repertoire>, IQueryAttributable, IViewModel
     {
-        public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
-
         private const string _ROUTE = nameof(EditRepertoireViewModel);
         private const string _NO_WORK_SELECTED_ERROR = "No work selected";
         private const string _EDIT_PAGE_TITLE = "Edit repertoire";
@@ -181,7 +179,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         public override void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.TryGetValue(PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
+            if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
             {
                 _pupilId = pupilId;
                 _repertoireService.PupilId = _pupilId;

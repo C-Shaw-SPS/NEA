@@ -46,7 +46,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 
         protected override void AddEditRouteParameters(Dictionary<string, object> parameters)
         {
-            parameters[EditLessonViewModel.PUPIL_ID_PARAMETER] = _value.PupilId;
+            parameters[IPupilDataViewModel.PUPIL_ID_PARAMETER] = _value.PupilId;
         }
     }
 }

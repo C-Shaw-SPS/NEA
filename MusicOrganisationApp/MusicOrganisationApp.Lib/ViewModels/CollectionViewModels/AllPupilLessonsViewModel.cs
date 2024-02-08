@@ -5,13 +5,11 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public class AllPupilLessonsViewModel : CollectionViewModelBase<LessonData, LessonViewModel, EditLessonViewModel>, IQueryAttributable, IViewModel
+    public class AllPupilLessonsViewModel : CollectionViewModelBase<LessonData, LessonViewModel, EditLessonViewModel>, IQueryAttributable, IPupilDataViewModel
     {
         private const string _ROUTE = nameof(AllPupilLessonsViewModel);
-        public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
         private readonly PupilLessonService _service;
-        private int _pupilId;
 
         public AllPupilLessonsViewModel() : base()
         {
@@ -20,20 +18,17 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         public static string Route => _ROUTE;
 
-        private int PupilId
+        public int? PupilId
         {
-            set
-            {
-                _pupilId = value;
-                _service.PupilId = value;
-            }
+            get => _service.PupilId;
+            set => _service.PupilId = value;
         }
 
         protected override IService<LessonData> Service => _service;
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.TryGetValue(PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
+            if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
             {
                 PupilId = pupilId;
             }
@@ -41,7 +36,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         protected override void AddAddNewParameters(Dictionary<string, object> parameters)
         {
-            parameters[EditLessonViewModel.PUPIL_ID_PARAMETER] = _pupilId;
+            if (PupilId is not null)
+            {
+                parameters[IPupilDataViewModel.PUPIL_ID_PARAMETER] = PupilId;
+            }
         }
     }
 }

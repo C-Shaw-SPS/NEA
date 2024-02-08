@@ -5,11 +5,9 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public class AllPupilCaregiversViewModel : SearchableCollectionViewModel<PupilCaregiver, PupilCaregiverViewModel, EditPupilCaregiverViewModel>, IQueryAttributable, IViewModel
+    public class AllPupilCaregiversViewModel : SearchableCollectionViewModel<PupilCaregiver, PupilCaregiverViewModel, EditPupilCaregiverViewModel>, IQueryAttributable, IPupilDataViewModel
     {
-        public const string _ROUTE = nameof(AllPupilCaregiversViewModel);
-
-        public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
+        private const string _ROUTE = nameof(AllPupilCaregiversViewModel);
 
         private static readonly Dictionary<string, string> _orderings = new()
         {
@@ -25,21 +23,27 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         public static string Route => _ROUTE;
 
+        public int? PupilId
+        {
+            get => _service.PupilId;
+            set => _service.PupilId = value;
+        }
+
         protected override ISearchService<PupilCaregiver> SearchService => _service;
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.TryGetValue(PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
+            if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
             {
-                _service.PupilId = pupilId;
+                PupilId = pupilId;
             }
         }
 
         protected override void AddAddNewParameters(Dictionary<string, object> parameters)
         {
-            if (_service.PupilId is not null)
+            if (PupilId is not null)
             {
-                parameters[PUPIL_ID_PARAMETER] = _service.PupilId;
+                parameters[IPupilDataViewModel.PUPIL_ID_PARAMETER] = PupilId;
             }
         }
     }

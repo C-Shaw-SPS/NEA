@@ -5,11 +5,9 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public class AllRepertoireViewModel : SearchableCollectionViewModel<Repertoire, RepertoireViewModel, EditRepertoireViewModel>, IQueryAttributable, IViewModel
+    public class AllRepertoireViewModel : SearchableCollectionViewModel<Repertoire, RepertoireViewModel, EditRepertoireViewModel>, IQueryAttributable, IPupilDataViewModel
     {
         private const string _ROUTE = nameof(AllRepertoireViewModel);
-
-        public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
         private static readonly Dictionary<string, string> _orderings = new()
         {
@@ -30,28 +28,25 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         protected override ISearchService<Repertoire> SearchService => _service;
 
-        public async void ApplyQueryAttributes(IDictionary<string, object> query)
+        public int? PupilId
         {
-            if (query.TryGetValue(PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
-            {
-                _service.PupilId = pupilId;
-                await RefreshAsync();
-            }
+            get => _service.PupilId;
+            set => _service.PupilId = value;
         }
 
-        public override async Task RefreshAsync()
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (_service.PupilId is not null)
+            if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
             {
-                await base.RefreshAsync();
+                PupilId = pupilId;
             }
         }
 
         protected override void AddAddNewParameters(Dictionary<string, object> parameters)
         {
-            if (_service.PupilId is not null)
+            if (PupilId is not null)
             {
-                parameters[EditRepertoireViewModel.PUPIL_ID_PARAMETER] = _service.PupilId;
+                parameters[IPupilDataViewModel.PUPIL_ID_PARAMETER] = PupilId;
             }
         }
     }
