@@ -32,7 +32,7 @@ namespace MusicOrganisationApp.Lib.Services
         private static (DateTime weekBefore, DateTime startOfWeek, DateTime endOfWeek) GetWeekDates(DateTime date)
         {
             DateTime startOfWeek = date;
-            while (startOfWeek.DayOfWeek != DayOfWeek.Monday)
+            while (startOfWeek.DayOfWeek != DayOfWeek.Sunday)
             {
                 startOfWeek -= _DAY;
             }

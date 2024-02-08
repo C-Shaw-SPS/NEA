@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels;assembly=MusicOrganisationApp.Lib"
+             xmlns:sheduler="Syncfusion.Maui.S"
              x:Class="MusicOrganisationApp.App.Views.TimetableGeneratorPage"
              Title="Timetable generator">
 
@@ -25,7 +26,6 @@
         </Grid.ColumnDefinitions>
 
         <DatePicker
-            A
             Grid.Row="0"
             Grid.Column="0"
             Date="{Binding SelectedDate}"

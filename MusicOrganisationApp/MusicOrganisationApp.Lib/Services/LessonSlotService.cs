@@ -5,7 +5,7 @@ namespace MusicOrganisationApp.Lib.Services
 {
     public class LessonSlotService : LessonServiceBase<LessonSlotData, LessonSlotData>
     {
-        private DayOfWeek _dayOfWeek = DayOfWeek.Monday;
+        private DayOfWeek _dayOfWeek = DayOfWeek.Sunday;
 
         public LessonSlotService(DatabaseConnection database) : base(database) { }
 
@@ -18,11 +18,10 @@ namespace MusicOrganisationApp.Lib.Services
         public static List<DayOfWeek> GetDaysOfWeek()
         {
             List<DayOfWeek> daysOfWeek = [];
-            for (DayOfWeek dayOfWeek = DayOfWeek.Monday; dayOfWeek <= DayOfWeek.Saturday; dayOfWeek++)
+            for (DayOfWeek dayOfWeek = DayOfWeek.Sunday; dayOfWeek <= DayOfWeek.Saturday; dayOfWeek++)
             {
                 daysOfWeek.Add(dayOfWeek);
             }
-            daysOfWeek.Add(DayOfWeek.Sunday);
             return daysOfWeek;
         }
 

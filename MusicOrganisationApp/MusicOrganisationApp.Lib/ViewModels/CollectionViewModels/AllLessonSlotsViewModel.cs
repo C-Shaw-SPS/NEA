@@ -15,7 +15,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         private readonly LessonSlotService _service;
 
         [ObservableProperty]
-        private DayOfWeek _selectedDayOfWeek = DayOfWeek.Monday;
+        private DayOfWeek _selectedDayOfWeek = DayOfWeek.Sunday;
 
         public AllLessonSlotsViewModel() : base(LessonSlotViewModel.ROUTE, EditLessonSlotViewModel.ROUTE)
         {
