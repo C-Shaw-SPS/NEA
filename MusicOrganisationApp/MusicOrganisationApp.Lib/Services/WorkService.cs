@@ -81,7 +81,7 @@ namespace MusicOrganisationApp.Lib.Services
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Subtitle), nameof(Work.Subtitle));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Genre), nameof(Work.Genre));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Notes), nameof(Work.Notes));
-            sqlQuery.AddJoin<ComposerData, WorkData>(nameof(ComposerData.Id), nameof(WorkData.ComposerId));
+            sqlQuery.AddInnerJoin<ComposerData, WorkData>(nameof(ComposerData.Id), nameof(WorkData.ComposerId));
             sqlQuery.AddColumn<ComposerData>(nameof(ComposerData.Name), nameof(Work.ComposerName));
 
             return sqlQuery;

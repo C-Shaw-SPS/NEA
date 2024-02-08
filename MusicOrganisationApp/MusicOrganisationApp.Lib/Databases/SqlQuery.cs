@@ -17,11 +17,13 @@ namespace MusicOrganisationApp.Lib.Databases
         private const string _NOT_EQUAL = "!=";
         private const string _ASC = "ASC";
         private const string _DESC = "DESC";
+        private const string _INNER_JOIN = "INNER JOIN";
+        private const string _LEFT_JOIN = "LEFT JOIN";
 
         private readonly string _tableName;
         private bool _selectAll;
         private readonly List<(string table, string column, string alias)> _columns;
-        private readonly List<(string newTable, string newColumn, string existingTable, string existingColumn)> _joins;
+        private readonly List<(string joinType, string newTable, string newColumn, string existingTable, string existingColumn)> _joins;
         private readonly List<(string keyword, string table, string column, string value, string comparison)> _conditions;
         private readonly List<(string column, string order)> _orderBys;
         private readonly int? _limit;
@@ -62,9 +64,19 @@ namespace MusicOrganisationApp.Lib.Databases
             AddColumn<TTable>(column, column);
         }
 
-        public void AddJoin<TNew, TExisting>(string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
+        public void AddInnerJoin<TNew, TExisting>(string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
         {
-            _joins.Add((TNew.TableName, newColumn, TExisting.TableName, existingColumn));
+            AddJoin<TNew, TExisting>(_INNER_JOIN, newColumn, existingColumn);
+        }
+
+        public void AddLeftJoin<TNew, TExisting>(string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
+        {
+            AddJoin<TNew, TExisting>(_LEFT_JOIN, newColumn, existingColumn);
+        }
+
+        private void AddJoin<TNew, TExisting>(string joinType, string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
+        {
+            _joins.Add((joinType, TNew.TableName, newColumn, TExisting.TableName, existingColumn));
         }
 
         #region Conditions
@@ -166,9 +178,9 @@ namespace MusicOrganisationApp.Lib.Databases
 
         private void AddJoinsToStringbuilder(StringBuilder stringBuilder)
         {
-            foreach ((string newTable, string newColumn, string existingTable, string existingColumn) in _joins)
+            foreach ((string joinType, string newTable, string newColumn, string existingTable, string existingColumn) in _joins)
             {
-                stringBuilder.AppendLine($"JOIN {newTable} ON {newTable}.{newColumn} = {existingTable}.{existingColumn}");
+                stringBuilder.AppendLine($"{joinType} {newTable} ON {newTable}.{newColumn} = {existingTable}.{existingColumn}");
             }
         }
 

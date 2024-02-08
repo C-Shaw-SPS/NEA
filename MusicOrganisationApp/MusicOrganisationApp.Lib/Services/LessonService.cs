@@ -26,7 +26,7 @@ namespace MusicOrganisationApp.Lib.Services
             sqlQuery.AddColumn<LessonData>(nameof(LessonData.EndTime), nameof(Lesson.EndTime));
             sqlQuery.AddColumn<LessonData>(nameof(LessonData.Notes), nameof(Lesson.Notes));
             sqlQuery.AddColumn<Pupil>(nameof(Pupil.Name), nameof(Lesson.PupilName));
-            sqlQuery.AddJoin<Pupil, LessonData>(nameof(Pupil.Id), nameof(LessonData.PupilId));
+            sqlQuery.AddInnerJoin<Pupil, LessonData>(nameof(Pupil.Id), nameof(LessonData.PupilId));
             return sqlQuery;
         }
 

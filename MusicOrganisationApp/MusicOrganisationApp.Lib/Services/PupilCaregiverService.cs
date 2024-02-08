@@ -70,7 +70,7 @@ namespace MusicOrganisationApp.Lib.Services
             sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.Name), nameof(PupilCaregiver.Name));
             sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.Email), nameof(PupilCaregiver.Email));
             sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.PhoneNumber), nameof(PupilCaregiver.PhoneNumber));
-            sqlQuery.AddJoin<CaregiverData, CaregiverMap>(nameof(CaregiverData.Id), nameof(CaregiverMap.CaregiverId));
+            sqlQuery.AddInnerJoin<CaregiverData, CaregiverMap>(nameof(CaregiverData.Id), nameof(CaregiverMap.CaregiverId));
             return sqlQuery;
         }
 
