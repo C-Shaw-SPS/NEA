@@ -18,7 +18,6 @@ namespace MusicOrganisationApp.Lib.Databases
         private const string _ASC = "ASC";
         private const string _DESC = "DESC";
         private const string _INNER_JOIN = "INNER JOIN";
-        private const string _LEFT_JOIN = "LEFT JOIN";
 
         private readonly string _tableName;
         private bool _selectAll;
@@ -67,11 +66,6 @@ namespace MusicOrganisationApp.Lib.Databases
         public void AddInnerJoin<TNew, TExisting>(string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
         {
             AddJoin<TNew, TExisting>(_INNER_JOIN, newColumn, existingColumn);
-        }
-
-        public void AddLeftJoin<TNew, TExisting>(string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
-        {
-            AddJoin<TNew, TExisting>(_LEFT_JOIN, newColumn, existingColumn);
         }
 
         private void AddJoin<TNew, TExisting>(string joinType, string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
