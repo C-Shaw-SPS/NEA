@@ -53,6 +53,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             DeleteStatement<PupilAvailability> deleteStatement = new();
             deleteStatement.AddWhereEqual(nameof(PupilAvailability.LessonSlotId), lessonSlotData.Id);
+            deleteStatement.AddAndEqual(nameof(PupilAvailability.PupilId), _pupilId);
             await _database.ExecuteAsync(deleteStatement);
         }
 
