@@ -24,7 +24,7 @@ namespace MusicOrganisationApp.Lib.Services
         private static DeleteStatement<RepertoireData> GetDeleteRepertoireQuery(int workId)
         {
             DeleteStatement<RepertoireData> deleteStatement = new();
-            deleteStatement.AddWhereEqual(nameof(RepertoireData.WorkId), workId);
+            deleteStatement.AddWhereEqual<RepertoireData>(nameof(RepertoireData.WorkId), workId);
             return deleteStatement;
         }
 
@@ -38,7 +38,7 @@ namespace MusicOrganisationApp.Lib.Services
         public async Task<(bool, Work)> TryGetAsync(int id)
         {
             SqlQuery<WorkData> sqlQuery = GetSqlQuery();
-            sqlQuery.AddWhereEquals<WorkData>(nameof(WorkData.Id), id);
+            sqlQuery.AddWhereEqual<WorkData>(nameof(WorkData.Id), id);
             IEnumerable<Work> result = await _database.QueryAsync<Work>(sqlQuery);
             if (result.Any())
             {

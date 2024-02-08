@@ -25,7 +25,7 @@ namespace MusicOrganisationApp.Lib.Services
         private SqlQuery<TTable> GetClashingLessonsSqlQuery(string dateColumn, object date, TimeSpan startTime, TimeSpan endTime, int? id)
         {
             SqlQuery<TTable> sqlQuery = GetSqlQueryWithNoConditions();
-            sqlQuery.AddWhereEquals<TTable>(dateColumn, date);
+            sqlQuery.AddWhereEqual<TTable>(dateColumn, date);
             sqlQuery.AddAndNotEqual<TTable>(nameof(ITable.Id), id);
             sqlQuery.AddAndLessOrEqual<TTable>(nameof(ILesson<TTable>.StartTime), startTime);
             sqlQuery.AddAndGreaterThan<TTable>(nameof(ILesson<TTable>.EndTime), startTime);

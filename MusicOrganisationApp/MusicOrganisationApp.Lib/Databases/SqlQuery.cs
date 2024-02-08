@@ -2,46 +2,24 @@
 
 namespace MusicOrganisationApp.Lib.Databases
 {
-    public abstract class SqlQuery
+    public class SqlQuery<T> : ConditionalExecutable<T>, ISqlQuery where T : class, ITable, new()
     {
-        private const string _WHERE = "WHERE";
-        private const string _AND = "AND";
-        private const string _OR = "OR";
-        private const string _IS_NOT = "IS NOT";
-        private const string _EQUALS = "=";
-        private const string _LIKE = "LIKE";
-        private const string _GREATER = ">";
-        private const string _LESS = "<";
-        private const string _GREATER_OR_EQUAL = ">=";
-        private const string _LESS_OR_EQUAL = "<=";
-        private const string _NOT_EQUAL = "!=";
-        private const string _ASC = "ASC";
-        private const string _DESC = "DESC";
-        private const string _INNER_JOIN = "INNER JOIN";
-
-        private readonly string _tableName;
+        private readonly string _tableName = T.TableName;
         private bool _selectAll;
-        private readonly List<(string table, string column, string alias)> _columns;
-        private readonly List<(string joinType, string newTable, string newColumn, string existingTable, string existingColumn)> _joins;
-        private readonly List<(string keyword, string table, string column, string value, string comparison)> _conditions;
-        private readonly List<(string column, string order)> _orderBys;
+        private readonly List<(string table, string column, string alias)> _columns = [];
+        private readonly List<(string joinType, string newTable, string newColumn, string existingTable, string existingColumn)> _joins = [];
+        private readonly List<(string column, string order)> _orderBys = [];
         private readonly int? _limit;
 
-        private readonly HashSet<Type> _tables;
+        private readonly HashSet<Type> _tables = [typeof(T)];
 
-        public SqlQuery(string tableName, int? limit, Type tableType)
+        public SqlQuery(int? limit)
         {
-            _tableName = tableName;
             _selectAll = false;
-            _columns = [];
-            _joins = [];
-            _conditions = [];
-            _orderBys = [];
             _limit = limit;
-            _tables = [tableType];
         }
 
-        public SqlQuery(string tableName, Type tableType) : this(tableName, null, tableType) { }
+        public SqlQuery() : this(null) { }
 
         public string TableName => _tableName;
 
@@ -67,7 +45,7 @@ namespace MusicOrganisationApp.Lib.Databases
 
         public void AddInnerJoin<TNew, TExisting>(string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
         {
-            AddJoin<TNew, TExisting>(_INNER_JOIN, newColumn, existingColumn);
+            AddJoin<TNew, TExisting>(ISqlExecutable.INNER_JOIN, newColumn, existingColumn);
         }
 
         private void AddJoin<TNew, TExisting>(string joinType, string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
@@ -78,75 +56,19 @@ namespace MusicOrganisationApp.Lib.Databases
 
         #endregion
 
-        #region Conditions
-
-        public void AddWhereEquals<TTable>(string column, object? value) where TTable : ITable
-        {
-            AddCondition<TTable>(_WHERE, column, value, _EQUALS);
-        }
-
-        public void AddWhereLike<TTable>(string column, string value) where TTable : ITable
-        {
-            AddCondition<TTable>(_WHERE, column, $"%{value}%", _LIKE);
-        }
-
-        public void AddAndEqual<TTable>(string column, object? value) where TTable : ITable
-        {
-            AddCondition<TTable>(_AND, column, value, _EQUALS);
-        }
-
-        public void AddOrEqual<TTable>(string column, object? value) where TTable: ITable
-        {
-            AddCondition<TTable>(_OR, column, value, _EQUALS);
-        }
-
-        public void AddAndGreaterThan<TTable>(string column, object? value) where TTable : ITable
-        {
-            AddCondition<TTable>(_AND, column, value, _GREATER);
-        }
-
-        public void AddAndGreaterOrEqual<TTable>(string column, object? value) where TTable : ITable
-        {
-            AddCondition<TTable>(_AND, column, value, _GREATER_OR_EQUAL);
-        }
-
-        public void AddAndLessThan<TTable>(string column, object value) where TTable : ITable
-        {
-            AddCondition<TTable>(_AND, column, value, _LESS);
-        }
-
-        public void AddAndLessOrEqual<TTable>(string column, object? value) where TTable : ITable
-        {
-            AddCondition<TTable>(_AND, column, value, _LESS_OR_EQUAL);
-        }
-
-        public void AddAndNotEqual<TTable>(string column, object? value) where TTable : ITable
-        {
-            string condition = value is null ? _IS_NOT : _NOT_EQUAL;
-            AddCondition<TTable>(_AND, column, value, condition);
-
-        }
-
-        private void AddCondition<TTable>(string keyword, string column, object? value, string condition) where TTable : ITable
-        {
-            _conditions.Add((keyword, TTable.TableName, column, SqlFormatting.FormatSqlValue(value), condition));
-        }
-
-        #endregion
-
         public void AddOrderByAscending(string column)
         {
-            _orderBys.Add((column, _ASC));
+            _orderBys.Add((column, ISqlExecutable.ASC));
         }
 
         public void AddOrderByDescending(string column)
         {
-            _orderBys.Add((column, _DESC));
+            _orderBys.Add((column, ISqlExecutable.DESC));
         }
 
         #region SQL
 
-        public string GetSql()
+        public override string GetSql()
         {
             StringBuilder stringBuilder = new();
             AddSelectColumnsToStringbuilder(stringBuilder);
@@ -225,12 +147,5 @@ namespace MusicOrganisationApp.Lib.Databases
         }
 
         #endregion
-    }
-
-    public class SqlQuery<T> : SqlQuery where T : class, ITable, new()
-    {
-        public SqlQuery(int limit) : base(T.TableName, limit, typeof(T)) { }
-
-        public SqlQuery() : base(T.TableName, typeof(T)) { }
     }
 }

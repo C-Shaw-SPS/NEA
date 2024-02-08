@@ -33,7 +33,7 @@ namespace MusicOrganisationApp.Lib.Services
         protected override SqlQuery<LessonData> GetAllSqlQuery()
         {
             SqlQuery<LessonData> sqlQuery = GetSqlQueryWithNoConditions();
-            sqlQuery.AddWhereEquals<LessonData>(nameof(LessonData.Date), _date);
+            sqlQuery.AddWhereEqual<LessonData>(nameof(LessonData.Date), _date);
             return sqlQuery;
         }
 
@@ -59,7 +59,7 @@ namespace MusicOrganisationApp.Lib.Services
         public override async Task<(bool, Lesson)> TryGetAsync(int id)
         {
             SqlQuery<LessonData> sqlQuery = GetSqlQueryWithNoConditions();
-            sqlQuery.AddWhereEquals<LessonData>(nameof(LessonData.Id), id);
+            sqlQuery.AddWhereEqual<LessonData>(nameof(LessonData.Id), id);
             IEnumerable<Lesson> resuult = await _database.QueryAsync<Lesson>(sqlQuery);
             return IService<Lesson>.TryReturnValue(resuult);
         }

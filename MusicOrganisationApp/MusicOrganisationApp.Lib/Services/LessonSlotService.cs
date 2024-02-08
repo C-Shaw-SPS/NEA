@@ -29,7 +29,7 @@ namespace MusicOrganisationApp.Lib.Services
         protected override SqlQuery<LessonSlotData> GetAllSqlQuery()
         {
             SqlQuery<LessonSlotData> sqlQuery = new() { SelectAll = true };
-            sqlQuery.AddWhereEquals<LessonSlotData>(nameof(LessonSlotData.DayOfWeek), _dayOfWeek);
+            sqlQuery.AddWhereEqual<LessonSlotData>(nameof(LessonSlotData.DayOfWeek), _dayOfWeek);
             sqlQuery.AddOrderByAscending(nameof(LessonSlotData.StartTime));
             return sqlQuery;
         }

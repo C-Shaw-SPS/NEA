@@ -23,13 +23,13 @@ namespace MusicOrganisationApp.Lib.Services
         public async Task DeleteAsync(Repertoire value)
         {
             DeleteStatement<RepertoireData> deleteStatement = new();
-            deleteStatement.AddWhereEqual(nameof(RepertoireData.Id), value.Id);
+            deleteStatement.AddWhereEqual<RepertoireData>(nameof(RepertoireData.Id), value.Id);
             await _database.ExecuteAsync(deleteStatement);
         }
 
         public async Task<IEnumerable<Repertoire>> GetAllAsync()
         {
-            SqlQuery sqlQuery = GetSqlQuery();
+            SqlQuery<RepertoireData> sqlQuery = GetSqlQuery();
             IEnumerable<Repertoire> repertoires = await _database.QueryAsync<Repertoire>(sqlQuery);
             return repertoires;
         }
@@ -42,7 +42,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task<IEnumerable<Repertoire>> SearchAsync(string search, string ordering)
         {
-            SqlQuery sqlQuery = GetSqlQuery();
+            SqlQuery<RepertoireData> sqlQuery = GetSqlQuery();
             sqlQuery.AddWhereLike<WorkData>(nameof(WorkData.Title), search);
             sqlQuery.AddAndEqual<RepertoireData>(nameof(Repertoire.PupilId), _pupilId);
             sqlQuery.AddOrderByAscending(ordering);
@@ -52,7 +52,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task<(bool, Repertoire)> TryGetAsync(int id)
         {
-            SqlQuery sqlQuery = GetSqlQuery();
+            SqlQuery<RepertoireData> sqlQuery = GetSqlQuery();
             sqlQuery.AddAndEqual<RepertoireData>(nameof(RepertoireData.Id), id);
             IEnumerable<Repertoire> repertoires = await _database.QueryAsync<Repertoire>(sqlQuery);
             return IService<Repertoire>.TryReturnValue(repertoires);

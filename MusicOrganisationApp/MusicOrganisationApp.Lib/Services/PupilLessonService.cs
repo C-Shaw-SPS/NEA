@@ -27,7 +27,7 @@ namespace MusicOrganisationApp.Lib.Services
         public async Task<IEnumerable<LessonData>> GetAllAsync()
         {
             SqlQuery<LessonData> sqlQuery = new() { SelectAll = true };
-            sqlQuery.AddWhereEquals<LessonData>(nameof(LessonData.PupilId), _pupilId);
+            sqlQuery.AddWhereEqual<LessonData>(nameof(LessonData.PupilId), _pupilId);
             sqlQuery.AddOrderByDescending(nameof(LessonData.Date));
             IEnumerable<LessonData> lessons = await _database.QueryAsync<LessonData>(sqlQuery);
             return lessons;

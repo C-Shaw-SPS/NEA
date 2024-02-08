@@ -24,7 +24,7 @@ namespace MusicOrganisationApp.Lib.Databases
             await _connection.CreateTablesAsync(CreateFlags.None, typeArray);
         }
 
-        public async Task<IEnumerable<T>> QueryAsync<T>(SqlQuery sqlQuery) where T : class, new()
+        public async Task<IEnumerable<T>> QueryAsync<T>(ISqlQuery sqlQuery) where T : class, new()
         {
             await CreateTablesAsync(sqlQuery.Tables);
             string sql = sqlQuery.GetSql();
@@ -77,7 +77,7 @@ namespace MusicOrganisationApp.Lib.Databases
             await CreateTableAsync<T>();
 
             SqlQuery<T> sqlQuery = new() { SelectAll = true };
-            sqlQuery.AddWhereEquals<T>(nameof(ITable.Id), id);
+            sqlQuery.AddWhereEqual<T>(nameof(ITable.Id), id);
             IEnumerable<T> result = await QueryAsync<T>(sqlQuery);
             if (result.Any())
             {
@@ -109,7 +109,7 @@ namespace MusicOrganisationApp.Lib.Databases
             await CreateTableAsync<T>();
 
             DeleteStatement<T> deleteStatement = new();
-            deleteStatement.AddWhereEqual(nameof(ITable.Id), id);
+            deleteStatement.AddWhereEqual<T>(nameof(ITable.Id), id);
             await ExecuteAsync(deleteStatement);
         }
 

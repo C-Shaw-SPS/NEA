@@ -32,7 +32,7 @@ namespace MusicOrganisationApp.Lib.Services
         private static DeleteStatement<WorkData> GetDeleteWorksStatement(ComposerData composer)
         {
             DeleteStatement<WorkData> deleteStatement = new();
-            deleteStatement.AddWhereEqual(nameof(WorkData.ComposerId), composer.Id);
+            deleteStatement.AddWhereEqual<WorkData>(nameof(WorkData.ComposerId), composer.Id);
             return deleteStatement;
         }
 
@@ -42,10 +42,10 @@ namespace MusicOrganisationApp.Lib.Services
             DeleteStatement<RepertoireData> deleteStatement = new();
             if (workIds.Any())
             {
-                deleteStatement.AddWhereEqual(nameof(RepertoireData.WorkId), workIds.First());
+                deleteStatement.AddWhereEqual<RepertoireData>(nameof(RepertoireData.WorkId), workIds.First());
                 foreach (int workId in workIds.Skip(1))
                 {
-                    deleteStatement.AddOrEqual(nameof(RepertoireData.WorkId), workId);
+                    deleteStatement.AddOrEqual<RepertoireData>(nameof(RepertoireData.WorkId), workId);
                 }
             }
 
@@ -56,7 +56,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             SqlQuery<WorkData> sqlQuery = new();
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Id));
-            sqlQuery.AddWhereEquals<WorkData>(nameof(WorkData.ComposerId), composer.Id);
+            sqlQuery.AddWhereEqual<WorkData>(nameof(WorkData.ComposerId), composer.Id);
             IEnumerable<WorkData> works = await _database.QueryAsync<WorkData>(sqlQuery);
             IEnumerable<int> workIds = works.Select(work => work.Id);
             return workIds;

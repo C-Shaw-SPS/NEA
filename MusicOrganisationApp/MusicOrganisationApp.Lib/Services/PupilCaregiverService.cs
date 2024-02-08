@@ -41,7 +41,7 @@ namespace MusicOrganisationApp.Lib.Services
         public async Task<IEnumerable<PupilCaregiver>> SearchAsync(string search, string ordering)
         {
             SqlQuery<CaregiverMap> sqlQuery = GetSqlQuery();
-            sqlQuery.AddWhereEquals<CaregiverMap>(nameof(CaregiverMap.PupilId), _pupilId);
+            sqlQuery.AddWhereEqual<CaregiverMap>(nameof(CaregiverMap.PupilId), _pupilId);
             sqlQuery.AddOrderByAscending(ordering);
             IEnumerable<PupilCaregiver> caregivers = await _database.QueryAsync<PupilCaregiver>(sqlQuery);
             return caregivers;

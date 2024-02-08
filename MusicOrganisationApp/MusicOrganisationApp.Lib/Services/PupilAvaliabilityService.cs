@@ -65,8 +65,8 @@ namespace MusicOrganisationApp.Lib.Services
         public async Task RemoveAvaliabilityAsync(LessonSlotData lessonSlotData)
         {
             DeleteStatement<PupilAvailability> deleteStatement = new();
-            deleteStatement.AddWhereEqual(nameof(PupilAvailability.LessonSlotId), lessonSlotData.Id);
-            deleteStatement.AddAndEqual(nameof(PupilAvailability.PupilId), _pupilId);
+            deleteStatement.AddWhereEqual<PupilAvailability>(nameof(PupilAvailability.LessonSlotId), lessonSlotData.Id);
+            deleteStatement.AddAndEqual<PupilAvailability>(nameof(PupilAvailability.PupilId), _pupilId);
             await _database.ExecuteAsync(deleteStatement);
         }
 
@@ -78,7 +78,7 @@ namespace MusicOrganisationApp.Lib.Services
             sqlQuery.AddColumn<LessonSlotData>(nameof(LessonSlotData.StartTime));
             sqlQuery.AddColumn<LessonSlotData>(nameof(LessonSlotData.EndTime));
             sqlQuery.AddInnerJoin<PupilAvailability, LessonSlotData>(nameof(PupilAvailability.LessonSlotId), nameof(LessonSlotData.Id));
-            sqlQuery.AddWhereEquals<PupilAvailability>(nameof(PupilAvailability.PupilId), _pupilId);
+            sqlQuery.AddWhereEqual<PupilAvailability>(nameof(PupilAvailability.PupilId), _pupilId);
             sqlQuery.AddOrderByAscending(nameof(LessonSlotData.DayOfWeek));
             sqlQuery.AddOrderByAscending(nameof(LessonSlotData.StartTime));
             return sqlQuery;
