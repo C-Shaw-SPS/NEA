@@ -30,8 +30,21 @@ namespace MusicOrganisationApp.Lib.Services
         {
             IEnumerable<LessonSlotData> currentLessonSlots = await GetPupilAvaliabilityAsync();
             IEnumerable<LessonSlotData> allLessonSlots = await _database.GetAllAsync<LessonSlotData>();
-            IEnumerable<LessonSlotData> unusedLessonSlots = Enumerable.Except(currentLessonSlots, allLessonSlots).Order();
+            IEnumerable<LessonSlotData> unusedLessonSlots = GetDifference(allLessonSlots, currentLessonSlots).Order();
             return unusedLessonSlots;
+        }
+
+        private static List<T> GetDifference<T>(IEnumerable<T> allItems, IEnumerable<T> itemsToRemove)
+        {
+            List<T> difference = [];
+            foreach (T item in allItems)
+            {
+                if (!itemsToRemove.Contains(item))
+                {
+                    difference.Add(item);
+                }
+            }
+            return difference;
         }
 
         public async Task AddAvaliabilityAsync(LessonSlotData lessonSlotData)

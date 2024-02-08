@@ -1,9 +1,18 @@
-namespace MusicOrganisationApp.App.Views.CollectionViews;
+using MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;
 
-public partial class PupilAvailabilityPage : ContentPage
+namespace MusicOrganisationApp.App.Views.CollectionViews
 {
-	public PupilAvailabilityPage()
-	{
-		InitializeComponent();
-	}
+    public partial class PupilAvailabilityPage : ContentPage
+    {
+    	public PupilAvailabilityPage()
+    	{
+    		InitializeComponent();
+    	}
+
+        protected override async void OnAppearing()
+        {
+            PupilAvailabilityViewModel viewModel = (PupilAvailabilityViewModel)BindingContext;
+            await viewModel.RefreshAsync();
+        }
+    }
 }

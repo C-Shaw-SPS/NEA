@@ -70,6 +70,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             {
                 await _service.RemoveAvaliabilityAsync(SelectedLessonSlot);
             }
+            await RefreshAsync();
         }
 
         partial void OnSelectedLessonSlotChanged(LessonSlotData? value)

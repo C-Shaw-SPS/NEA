@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;assembly=MusicOrganisationApp.Lib"
     x:Class="MusicOrganisationApp.App.Views.CollectionViews.PupilAvailabilityPage"
-    Title="PupilAvailabilityPage">
+    Title="Pupil availability">
 
     <ContentPage.BindingContext>
         <viewmodels:PupilAvailabilityViewModel/>
@@ -24,6 +24,51 @@
         Margin="20"
         RowSpacing="10"
         ColumnSpacing="10">
+
+        <CollectionView
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="20"
+            ItemsSource="{Binding LessonSlots}"
+            SelectedItem="{Binding SelectedLessonSlot}"
+            SelectionChangedCommand="{Binding SelectCommand}"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand"
+            VerticalScrollBarVisibility="Always"
+            SelectionMode="Single">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout
+                    Orientation="Vertical"
+                    ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <HorizontalStackLayout
+                        Spacing="10">
+                        <Label
+                            Text="{Binding DayOfWeek}"
+                            VerticalOptions="Center"/>
+                        <TimePicker
+                            Time="{Binding StartTime}"
+                            VerticalOptions="Center"
+                            IsEnabled="False"
+                            TextColor="Black"/>
+                        <Label
+                            Text="to"
+                            VerticalOptions="Center"/>
+                        <TimePicker
+                            Time="{Binding EndTime}"
+                            VerticalOptions="Center"
+                            IsEnabled="False"
+                            TextColor="Black"/>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
     </Grid>
 
 </ContentPage>
