@@ -4,10 +4,9 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditCaregiverViewModel : EditViewModelBase<CaregiverData>, IQueryAttributable
+    public partial class EditCaregiverViewModel : EditViewModelBase<CaregiverData>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(EditCaregiverViewModel);
-
+        private const string _ROUTE = nameof(EditCaregiverViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit caregiver";
         private const string _NEW_PAGE_TITLE = "New caregiver";
 
@@ -29,6 +28,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         {
             _service = new(_database);
         }
+
+        public static string Route => _ROUTE;
 
         protected override IService<CaregiverData> Service => _service;
 

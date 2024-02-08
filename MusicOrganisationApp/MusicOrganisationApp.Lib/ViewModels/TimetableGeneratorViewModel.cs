@@ -4,10 +4,9 @@ using MusicOrganisationApp.Lib.Services;
 
 namespace MusicOrganisationApp.Lib.ViewModels
 {
-    public partial class TimetableGeneratorViewModel : ViewModelBase
+    public partial class TimetableGeneratorViewModel : ViewModelBase, IViewModel
     {
-        public const string ROUTE = nameof(TimetableGeneratorViewModel);
-
+        private const string _ROUTE = nameof(TimetableGeneratorViewModel);
         private const string _LESSON_DELETION_WARNING = "Warning: lessons in specified week will be deleted";
         private const string _SUCESSFUL_TIMETABLE_GENERATION = "Timetable generated sucessfuly.";
         private const string _UNSUCESSFUL_TIMETABLE_GENERATION = "Timbetabling conditions could not be met. Edit conditions or create timetable manually";
@@ -26,6 +25,8 @@ namespace MusicOrganisationApp.Lib.ViewModels
             _service = new(_database);
             _generateTimetableCommand = new(GenerateTimetableAsync);
         }
+
+        public static string Route => _ROUTE;
 
         public AsyncRelayCommand GenerateTimetableCommand => _generateTimetableCommand;
 

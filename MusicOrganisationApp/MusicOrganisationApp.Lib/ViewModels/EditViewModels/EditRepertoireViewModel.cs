@@ -6,11 +6,11 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditRepertoireViewModel : EditViewModelBase<Repertoire>, IQueryAttributable
+    public partial class EditRepertoireViewModel : EditViewModelBase<Repertoire>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(EditRepertoireViewModel);
         public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
+        private const string _ROUTE = nameof(EditRepertoireViewModel);
         private const string _NO_WORK_SELECTED_ERROR = "No work selected";
         private const string _EDIT_PAGE_TITLE = "Edit repertoire";
         private const string _NEW_PAGE_TITLE = "New repertoire";
@@ -61,6 +61,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _addNewWorkCommand = new(AddNewWorkAsync);
         }
 
+        public static string Route => _ROUTE;
+
         public AsyncRelayCommand SearchWorksCommand => _searchWorksCommand;
 
         public AsyncRelayCommand AddNewWorkCommand => _addNewWorkCommand;
@@ -92,7 +94,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             {
                 [IS_NEW_PARAMETER] = true
             };
-            await GoToAsync(parameters, EditWorkViewModel.ROUTE);
+            await GoToAsync<EditWorkViewModel>(parameters);
         }
 
         protected override void SetDisplayValues()

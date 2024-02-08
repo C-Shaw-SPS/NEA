@@ -26,22 +26,14 @@ namespace MusicOrganisationApp.Lib.ViewModels
             _database = new(path);
         }
 
-        protected async Task GoToAsync(Dictionary<string, object> parameters, params string[] routes)
+        protected async Task GoToAsync<TViewModel>(Dictionary<string, object> parameters) where TViewModel : IViewModel
         {
-            if (!_isTesting)
-            {
-                string route = GetRoute(routes);
-                await Shell.Current.GoToAsync(route, parameters);
-            }
+            await GoToAsync(TViewModel.Route, parameters);
         }
 
-        protected  async Task GoToAsync(params string[] routes)
+        protected async Task GoToAsync<TViewModel>() where TViewModel : IViewModel
         {
-            if (!_isTesting)
-            {
-                string route = GetRoute(routes);
-                await Shell.Current.GoToAsync(route);
-            }
+            await GoToAsync(TViewModel.Route);
         }
 
         protected async Task GoBackAsync()
@@ -49,9 +41,20 @@ namespace MusicOrganisationApp.Lib.ViewModels
             await GoToAsync(_GO_BACK);
         }
 
-        private static string GetRoute(IEnumerable<string> routes)
+        private async Task GoToAsync(string route)
         {
-            return string.Join('/', routes);
+            if (_isTesting)
+            {
+                await Shell.Current.GoToAsync(route);
+            }
+        }
+
+        private async Task GoToAsync(string route, Dictionary<string, object> parameters)
+        {
+            if (!_isTesting)
+            {
+                await Shell.Current.GoToAsync(route, parameters);
+            }
         }
 
         protected static void ResetCollection<T>(ObservableCollection<T> displayedCollection, IEnumerable<T> newCollection)

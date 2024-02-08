@@ -7,9 +7,10 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class AddPupilAvailabilityViewModel : ViewModelBase, IQueryAttributable
+    public partial class AddPupilAvailabilityViewModel : ViewModelBase, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(AddPupilAvailabilityViewModel);
+        private const string _ROUTE = nameof(AddPupilAvailabilityViewModel);
+
         public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
         private readonly PupilAvaliabilityService _service;
@@ -29,6 +30,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             _selectCommand = new(SelectAsync);
             _addNewCommand = new(AddNewAsync);
         }
+
+        public static string Route => _ROUTE;
 
         public AsyncRelayCommand SelectCommand => _selectCommand;
 
@@ -65,7 +68,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             {
                 [EditViewModelBase.IS_NEW_PARAMETER] = true
             };
-            await GoToAsync(parameters, EditLessonSlotViewModel.ROUTE);
+            await GoToAsync<EditLessonSlotViewModel>(parameters);
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)

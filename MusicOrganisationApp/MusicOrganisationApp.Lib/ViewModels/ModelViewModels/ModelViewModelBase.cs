@@ -10,19 +10,19 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         public const string ID_PARAMETER = nameof(ID_PARAMETER);
     }
 
-    public abstract class ModelViewModelBase<T> : ModelViewModelBase, IQueryAttributable where T : class, IIdentifiable, new()
+    public abstract class ModelViewModelBase<TModel, TEditViewModel> : ModelViewModelBase, IQueryAttributable
+        where TModel : class, IIdentifiable, new()
+        where TEditViewModel : IViewModel
     {
-        private readonly string _editRoute;
         private readonly AsyncRelayCommand _editCommand;
-        protected T _value = new();
+        protected TModel _value = new();
 
-        public ModelViewModelBase(string editRoute)
+        public ModelViewModelBase()
         {
             _editCommand = new(EditAsync);
-            _editRoute = editRoute;
         }
 
-        protected abstract IService<T> Service { get; } 
+        protected abstract IService<TModel> Service { get; } 
 
         public AsyncRelayCommand EditCommand => _editCommand;
 
@@ -34,7 +34,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
                 [EditViewModelBase.IS_NEW_PARAMETER] = false
             };
             AddEditRouteParameters(parameters);
-            await GoToAsync(parameters, _editRoute);
+            await GoToAsync<TEditViewModel>(parameters);
         }
 
         protected virtual void AddEditRouteParameters(Dictionary<string, object> parameters) { }
@@ -49,7 +49,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 
         private async Task SetValueAsync(int id)
         {
-            (bool suceeded, T value) = await Service.TryGetAsync(id);
+            (bool suceeded, TModel value) = await Service.TryGetAsync(id);
             if (suceeded)
             {
                 _value = value;

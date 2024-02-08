@@ -6,19 +6,21 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class AllLessonsViewModel : CollectionViewModelBase<Lesson>
+    public partial class AllLessonsViewModel : CollectionViewModelBase<Lesson, LessonViewModel, EditLessonViewModel>, IViewModel
     {
-        public const string ROUTE = nameof(AllLessonsViewModel);
+        private const string _ROUTE = nameof(AllLessonsViewModel);
 
         private readonly LessonService _service;
 
         [ObservableProperty]
         private DateTime _selectedDate = DateTime.Today;
 
-        public AllLessonsViewModel() : base(LessonViewModel.ROUTE, EditLessonViewModel.ROUTE)
+        public AllLessonsViewModel() : base()
         {
             _service = new(_database);
         }
+
+        public static string Route => _ROUTE;
 
         protected override IService<Lesson> Service => _service;
 

@@ -36,75 +36,77 @@ namespace MusicOrganisationApp.App
 
         private void RegisterComposerRoutes()
         {
-            RegisterRoute<AllComposersPage>(AllComposersViewModel.ROUTE);
-            RegisterRoute<ComposerPage>(ComposerViewModel.ROUTE);
-            RegisterRoute<EditComposerPage>(EditComposerViewModel.ROUTE);
+            RegisterRoute<AllComposersViewModel, AllComposersPage>();
+            RegisterRoute<ComposerViewModel, ComposerPage>();
+            RegisterRoute<EditComposerViewModel, EditComposerPage>();
         }
 
         private void RegisterWorkRoutes()
         {
-            RegisterRoute<AllWorksPage>(AllWorksViewModel.ROUTE);
-            RegisterRoute<WorkPage>(WorkViewModel.ROUTE);
-            RegisterRoute<EditWorkPage>(EditWorkViewModel.ROUTE);
+            RegisterRoute<AllWorksViewModel, AllWorksPage>();
+            RegisterRoute<WorkViewModel, WorkPage>();
+            RegisterRoute<EditWorkViewModel, EditWorkPage>();
         }
 
         private void RegisterPupilRoutes()
         {
-            RegisterRoute<AllPupilsPage>(AllPupilsViewModel.ROUTE);
-            RegisterRoute<PupilPage>(PupilViewModel.ROUTE);
-            RegisterRoute<EditPupilPage>(EditPupilViewModel.ROUTE);
+            RegisterRoute<AllPupilsViewModel, AllPupilsPage>();
+            RegisterRoute<PupilViewModel, PupilPage>();
+            RegisterRoute<EditPupilViewModel, EditPupilPage>();
         }
 
         private void RegisterRepertoireRoutes()
         {
-            RegisterRoute<AllRepertoirePage>(AllRepertoireViewModel.ROUTE);
-            RegisterRoute<RepertoirePage>(RepertoireViewModel.ROUTE);
-            RegisterRoute<EditRepertoirePage>(EditRepertoireViewModel.ROUTE);
+            RegisterRoute<AllRepertoireViewModel, AllRepertoirePage>();
+            RegisterRoute<RepertoireViewModel, RepertoirePage>();
+            RegisterRoute<EditRepertoireViewModel, EditRepertoirePage>();
         }
 
         private void RegisterCaregiverRoutes()
         {
-            RegisterRoute<AllCaregiversPage>(AllCaregiversViewModel.ROUTE);
-            RegisterRoute<CaregiverPage>(CaregiverViewModel.ROUTE);
-            RegisterRoute<EditCaregiverPage>(EditCaregiverViewModel.ROUTE);
+            RegisterRoute<AllCaregiversViewModel, AllCaregiversPage>();
+            RegisterRoute<CaregiverViewModel, CaregiverPage>();
+            RegisterRoute<EditCaregiverViewModel, EditCaregiverPage>();
         }
 
         private void RegisterPupilCaregiverRoutes()
         {
-            RegisterRoute<AllPupilCaregiversPage>(AllPupilCaregiversViewModel.ROUTE);
-            RegisterRoute<PupilCaregiverPage>(PupilCaregiverViewModel.ROUTE);
-            RegisterRoute<EditPupilCaregiverPage>(EditPupilCaregiverViewModel.ROUTE);
+            RegisterRoute<AllPupilCaregiversViewModel, AllPupilCaregiversPage>();
+            RegisterRoute<PupilCaregiverViewModel, PupilCaregiverPage>();
+            RegisterRoute<EditPupilCaregiverViewModel, EditPupilCaregiverPage>();
         }
 
         private void RegisterLessonSlotRoutes()
         {
-            RegisterRoute<AllLessonSlotsPage>(AllLessonSlotsViewModel.ROUTE);
-            RegisterRoute<LessonSlotPage>(LessonSlotViewModel.ROUTE);
-            RegisterRoute<EditLessonSlotPage>(EditLessonSlotViewModel.ROUTE);
+            RegisterRoute<AllLessonSlotsViewModel, AllLessonSlotsPage>();
+            RegisterRoute<LessonSlotViewModel, LessonSlotPage>();
+            RegisterRoute<EditLessonSlotViewModel, EditLessonSlotPage>();
         }
 
         private void RegisterLessonRoutes()
         {
-            RegisterRoute<AllLessonsPage>(AllLessonsViewModel.ROUTE);
-            RegisterRoute<LessonPage>(LessonViewModel.ROUTE);
-            RegisterRoute<EditLessonPage>(EditLessonViewModel.ROUTE);
-            RegisterRoute<AllPupilLessonsPage>(AllPupilLessonsViewModel.ROUTE);
+            RegisterRoute<AllLessonsViewModel, AllLessonsPage>();
+            RegisterRoute<LessonViewModel, LessonPage>();
+            RegisterRoute<EditLessonViewModel, EditLessonPage>();
+            RegisterRoute<AllPupilLessonsViewModel, AllPupilLessonsPage>();
         }
 
         private void RegisterAvaliabilityRoutes()
         {
-            RegisterRoute<PupilAvailabilityPage>(PupilAvailabilityViewModel.ROUTE);
-            RegisterRoute<AddPupilAvailabilityPage>(AddPupilAvailabilityViewModel.ROUTE);
+            RegisterRoute<PupilAvailabilityViewModel, PupilAvailabilityPage>();
+            RegisterRoute<AddPupilAvailabilityViewModel, AddPupilAvailabilityPage>();
         }
 
         private void RegisterTimetableRoutes()
         {
-            RegisterRoute<TimetableGeneratorPage>(TimetableGeneratorViewModel.ROUTE);
+            RegisterRoute<TimetableGeneratorViewModel, TimetableGeneratorPage>();
         }
 
-        private void RegisterRoute<T>(string route) where T : ContentPage
+        private void RegisterRoute<TViewModel, TContentPage>()
+            where TContentPage : ContentPage
+            where TViewModel : IViewModel
         {
-            Routing.RegisterRoute(route, typeof(T));
+            Routing.RegisterRoute(TViewModel.Route, typeof(TContentPage));
         }
     }
 }

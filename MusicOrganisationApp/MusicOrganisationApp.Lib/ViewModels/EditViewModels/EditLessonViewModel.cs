@@ -8,11 +8,11 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditLessonViewModel : EditLessonViewModelBase<Lesson, LessonData>, IQueryAttributable
+    public partial class EditLessonViewModel : EditLessonViewModelBase<Lesson, LessonData, LessonViewModel>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(EditLessonViewModel);
         public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
-
+        
+        private const string _ROUTE = nameof(EditLessonViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit lesson";
         private const string _NEW_PAGE_TITLE = "New lesson";
         private const string _NO_PUPIL_ERROR = "Must select pupil";
@@ -42,12 +42,14 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private string _pupilError = string.Empty;
 
-        public EditLessonViewModel() : base(LessonViewModel.ROUTE, _EDIT_PAGE_TITLE, _NEW_PAGE_TITLE)
+        public EditLessonViewModel() : base(LessonViewModel.Route, _EDIT_PAGE_TITLE, _NEW_PAGE_TITLE)
         {
             _lessonService = new(_database);
             _pupilService = new(_database);
             _searchPupilsCommand = new(SearchPupilsAsync);
         }
+
+        public static string Route => _ROUTE;
 
         protected override LessonServiceBase<Lesson, LessonData> LessonService => _lessonService;
 

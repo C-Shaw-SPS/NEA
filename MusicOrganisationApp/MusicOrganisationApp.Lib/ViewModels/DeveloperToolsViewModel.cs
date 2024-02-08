@@ -4,9 +4,9 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.ViewModels
 {
-    public class DeveloperToolsViewModel : ViewModelBase
+    public class DeveloperToolsViewModel : ViewModelBase, IViewModel
     {
-        public const string ROUTE = nameof(DeveloperToolsViewModel);
+        private const string _ROUTE = nameof(DeveloperToolsViewModel);
 
         private readonly AsyncRelayCommand _dropTablesCommand;
         private readonly AsyncRelayCommand _resetComposersAndWorksCommand;
@@ -16,6 +16,8 @@ namespace MusicOrganisationApp.Lib.ViewModels
             _dropTablesCommand = new(DropTablesAsync);
             _resetComposersAndWorksCommand = new(ResetComposersAndWorksAsync);
         }
+
+        public static string Route => _ROUTE;
 
         public AsyncRelayCommand DropTablesCommand => _dropTablesCommand;
 

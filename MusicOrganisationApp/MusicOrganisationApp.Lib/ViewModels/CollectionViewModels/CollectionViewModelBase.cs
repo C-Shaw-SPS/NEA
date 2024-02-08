@@ -8,31 +8,27 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public abstract partial class CollectionViewModelBase<T> : ViewModelBase where T : class, IIdentifiable, new()
+    public abstract partial class CollectionViewModelBase<TModel, TModelViewModel, TEditViewModel> : ViewModelBase
+        where TModel : class, IIdentifiable, new()
+        where TModelViewModel : IViewModel
+        where TEditViewModel : IViewModel
     {
-        private readonly string _modelRoute;
-        private readonly string _editRoute;
         private readonly AsyncRelayCommand _selectCommand;
         private readonly AsyncRelayCommand _addNewCommand;
 
         [ObservableProperty]
-        private ObservableCollection<T> _collection = [];
+        private ObservableCollection<TModel> _collection = [];
 
         [ObservableProperty]
-        private T? _selectedItem;
+        private TModel? _selectedItem;
 
-        public CollectionViewModelBase(string modelRoute, string editRoute)
+        public CollectionViewModelBase()
         {
-            _modelRoute = modelRoute;
-            _editRoute = editRoute;
-
             _selectCommand = new(SelectAsync);
             _addNewCommand = new(AddNewAsync);
         }
 
-        protected abstract IService<T> Service { get; }
-
-
+        protected abstract IService<TModel> Service { get; }
 
         public AsyncRelayCommand SelectCommand => _selectCommand;
 
@@ -40,7 +36,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         public virtual async Task RefreshAsync()
         {
-            IEnumerable<T> items = await Service.GetAllAsync();
+            IEnumerable<TModel> items = await Service.GetAllAsync();
             ResetCollection(Collection, items);
         }
 
@@ -52,7 +48,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
                 {
                     [ModelViewModelBase.ID_PARAMETER] = SelectedItem.Id
                 };
-                await GoToAsync(paramters, _modelRoute);
+                await GoToAsync<TModelViewModel>(paramters);
             }
         }
 
@@ -63,7 +59,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
                 [EditViewModelBase.IS_NEW_PARAMETER] = true
             };
             AddAddNewParameters(parameters);
-            await GoToAsync(parameters, _editRoute);
+            await GoToAsync<TEditViewModel>(parameters);
         }
 
         protected virtual void AddAddNewParameters(Dictionary<string, object> parameters) { }

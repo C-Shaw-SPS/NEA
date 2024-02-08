@@ -1,16 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
-using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditLessonSlotViewModel : EditLessonViewModelBase<LessonSlotData, LessonSlotData>, IQueryAttributable
+    public partial class EditLessonSlotViewModel : EditLessonViewModelBase<LessonSlotData, LessonSlotData, LessonSlotViewModel>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(EditLessonSlotViewModel);
-
+        private const string _ROUTE = nameof(EditLessonSlotViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit lesson slot";
         private const string _NEW_PAGE_TITLE = "New lesson slot";
 
@@ -21,10 +18,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private DayOfWeek _dayOfWeek = DayOfWeek.Sunday;
 
-        public EditLessonSlotViewModel() : base(LessonSlotViewModel.ROUTE, _EDIT_PAGE_TITLE, _NEW_PAGE_TITLE)
+        public EditLessonSlotViewModel() : base(LessonSlotViewModel.Route, _EDIT_PAGE_TITLE, _NEW_PAGE_TITLE)
         {
             _service = new(_database);
         }
+
+        public static string Route => _ROUTE;
 
         public List<DayOfWeek> DaysOfWeek => _daysOfWeek;
 

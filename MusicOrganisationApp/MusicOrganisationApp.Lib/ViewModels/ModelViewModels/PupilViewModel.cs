@@ -7,9 +7,9 @@ using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
-    public partial class PupilViewModel : ModelViewModelBase<Pupil>, IQueryAttributable
+    public partial class PupilViewModel : ModelViewModelBase<Pupil, EditPupilViewModel>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(PupilViewModel);
+        private const string _ROUTE = nameof(PupilViewModel);
 
         private const string _TIMESPAN_FORMAT = "hh\\:mm";
 
@@ -40,7 +40,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _notes = string.Empty;
 
-        public PupilViewModel() : base(EditPupilViewModel.ROUTE)
+        public PupilViewModel() : base()
         {
             _service = new(_database);
             _goToRepertoireCommand = new(GoToRepertoireAsync);
@@ -48,6 +48,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             _goToLessonsCommand = new(GoToLessonsAsync);
             _goToAvaliabilityCommand = new(GoToAvaliabilityAsnyc);
         }
+
+        public static string Route => _ROUTE;
 
         protected override IService<Pupil> Service => _service;
 
@@ -76,7 +78,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             {
                 [AllRepertoireViewModel.PUPIL_ID_PARAMETER] = _value.Id
             };
-            await GoToAsync(parameters, AllRepertoireViewModel.ROUTE);
+            await GoToAsync<AllRepertoireViewModel>(parameters);
         }
 
         private async Task GoToCaregiversAsync()
@@ -85,7 +87,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             {
                 [AllPupilCaregiversViewModel.PUPIL_ID_PARAMETER] = _value.Id
             };
-            await GoToAsync(parameters, AllPupilCaregiversViewModel.ROUTE);
+            await GoToAsync<AllPupilCaregiversViewModel>(parameters);
         }
 
         private async Task GoToLessonsAsync()
@@ -94,7 +96,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             {
                 [AllPupilLessonsViewModel.PUPIL_ID_PARAMETER] = _value.Id
             };
-            await GoToAsync(parameters, AllPupilLessonsViewModel.ROUTE);
+            await GoToAsync<AllPupilLessonsViewModel>(parameters);
         }
 
         private async Task GoToAvaliabilityAsnyc()
@@ -103,7 +105,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             {
                 [AllPupilLessonsViewModel.PUPIL_ID_PARAMETER] = _value.Id
             };
-            await GoToAsync(parameters, PupilAvailabilityViewModel.ROUTE);
+            await GoToAsync<PupilAvailabilityViewModel>(parameters);
         }
     }
 }

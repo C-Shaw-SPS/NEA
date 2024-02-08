@@ -7,7 +7,10 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public abstract partial class EditLessonViewModelBase<TModel, TTable> : EditViewModelBase<TModel>, IQueryAttributable where TModel : class, ILesson<TTable>, new() where TTable : class, ITable, new()
+    public abstract partial class EditLessonViewModelBase<TModel, TTable, TModelViewModel> : EditViewModelBase<TModel>, IQueryAttributable
+        where TModel : class, ILesson<TTable>, new()
+        where TTable : class, ITable, new()
+        where TModelViewModel : IViewModel
     {
         private const string _END_BEFORE_START_ERROR = "End time cannot be before start time";
         private const string _CLASH_ERROR = "Lesson clashes";
@@ -52,7 +55,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
                 {
                     [ModelViewModelBase.ID_PARAMETER] = SelectedClashingLesson.Id
                 };
-                await GoToAsync(parameters, _modelRoute);
+                await GoToAsync<TModelViewModel>(parameters);
             }
         }
 

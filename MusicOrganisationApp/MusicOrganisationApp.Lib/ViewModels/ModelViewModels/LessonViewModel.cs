@@ -5,9 +5,9 @@ using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
-    public partial class LessonViewModel : ModelViewModelBase<Lesson>, IQueryAttributable
+    public partial class LessonViewModel : ModelViewModelBase<Lesson, EditLessonViewModel>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(LessonViewModel);
+        private const string _ROUTE = nameof(LessonViewModel);
 
         private readonly LessonService _service;
 
@@ -26,10 +26,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _notes = string.Empty;
 
-        public LessonViewModel() : base(EditLessonViewModel.ROUTE)
+        public LessonViewModel() : base()
         {
             _service = new(_database);
         }
+
+        public static string Route => _ROUTE;
 
         protected override IService<Lesson> Service => _service;
 

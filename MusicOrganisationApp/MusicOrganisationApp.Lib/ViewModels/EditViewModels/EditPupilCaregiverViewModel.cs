@@ -7,11 +7,11 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditPupilCaregiverViewModel : EditViewModelBase<PupilCaregiver>, IQueryAttributable
+    public partial class EditPupilCaregiverViewModel : EditViewModelBase<PupilCaregiver>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(EditPupilCaregiverViewModel);
         public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
-
+        
+        private const string _ROUTE = nameof(EditPupilCaregiverViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit caregiver";
         private const string _NEW_PAGE_TITLE = "New caregiver";
         private const string _NO_CAREGIVER_SELECTED_ERROR = "No caregiver selected";
@@ -49,6 +49,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _addNewCaregiverCommand = new(AddNewCaregiverAsync);
         }
 
+        public static string Route => _ROUTE;
+
         public AsyncRelayCommand AddNewCaregiverCommand => _addNewCaregiverCommand;
 
         public AsyncRelayCommand SearchCaregiversCommand => _searchCaregiversCommand;
@@ -71,7 +73,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             {
                 [IS_NEW_PARAMETER] = true
             };
-            await GoToAsync(parameters, EditCaregiverViewModel.ROUTE);
+            await GoToAsync<EditCaregiverViewModel>(parameters);
         }
 
         protected override void SetDisplayValues()

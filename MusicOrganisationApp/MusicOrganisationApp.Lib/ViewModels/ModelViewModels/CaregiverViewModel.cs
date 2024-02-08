@@ -5,9 +5,9 @@ using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
-    public partial class CaregiverViewModel : ModelViewModelBase<CaregiverData>, IQueryAttributable
+    public partial class CaregiverViewModel : ModelViewModelBase<CaregiverData, EditCaregiverViewModel>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(CaregiverViewModel);
+        private const string _ROUTE = nameof(CaregiverViewModel);
 
         private readonly CaregiverService _service;
 
@@ -20,10 +20,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _phoneNumber = string.Empty;
 
-        public CaregiverViewModel() : base(EditCaregiverViewModel.ROUTE)
+        public CaregiverViewModel() : base()
         {
             _service = new(_database);
         }
+
+        public static string Route => _ROUTE;
 
         protected override IService<CaregiverData> Service => _service;
 

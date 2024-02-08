@@ -6,9 +6,9 @@ using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
-    public partial class PupilCaregiverViewModel : ModelViewModelBase<PupilCaregiver>, IQueryAttributable
+    public partial class PupilCaregiverViewModel : ModelViewModelBase<PupilCaregiver, EditPupilCaregiverViewModel>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(PupilCaregiverViewModel);
+        private const string _ROUTE = nameof(PupilCaregiverViewModel);
 
         private readonly PupilCaregiverService _service;
         private readonly AsyncRelayCommand _goToCaregiverCommand;
@@ -25,11 +25,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _description = string.Empty;
 
-        public PupilCaregiverViewModel() : base(EditPupilCaregiverViewModel.ROUTE)
+        public PupilCaregiverViewModel() : base()
         {
             _service = new(_database);
             _goToCaregiverCommand = new(GoToCaregiverAsync);
         }
+
+        public static string Route => _ROUTE;
 
         protected override IService<PupilCaregiver> Service => _service;
 
@@ -41,7 +43,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             {
                 [ID_PARAMETER] = _value.Id
             };
-            await GoToAsync(parameters, CaregiverViewModel.ROUTE);
+            await GoToAsync<CaregiverViewModel>(parameters);
         }
 
         protected override void SetDisplayValues()

@@ -5,9 +5,9 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public class AllPupilCaregiversViewModel : SearchableCollectionViewModel<PupilCaregiver>, IQueryAttributable
+    public class AllPupilCaregiversViewModel : SearchableCollectionViewModel<PupilCaregiver, PupilCaregiverViewModel, EditPupilCaregiverViewModel>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(AllPupilCaregiversViewModel);
+        public const string _ROUTE = nameof(AllPupilCaregiversViewModel);
 
         public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
@@ -18,10 +18,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private readonly PupilCaregiverService _service;
 
-        public AllPupilCaregiversViewModel() : base(PupilCaregiverViewModel.ROUTE, EditPupilCaregiverViewModel.ROUTE, _orderings)
+        public AllPupilCaregiversViewModel() : base(_orderings)
         {
             _service = new(_database);
         }
+
+        public static string Route => _ROUTE;
+
         protected override ISearchService<PupilCaregiver> SearchService => _service;
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -29,14 +32,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             if (query.TryGetValue(PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
             {
                 _service.PupilId = pupilId;
-            }
-        }
-
-        public override async Task RefreshAsync()
-        {
-            if (_service.PupilId is not null)
-            {
-                await base.RefreshAsync();
             }
         }
 

@@ -6,9 +6,9 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class PupilAvailabilityViewModel : ViewModelBase, IQueryAttributable
+    public partial class PupilAvailabilityViewModel : ViewModelBase, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(PupilAvailabilityViewModel);
+        private const string _ROUTE = nameof(PupilAvailabilityViewModel);
         public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
         private readonly PupilAvaliabilityService _service;
@@ -32,6 +32,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             _removeCommand = new(RemoveAsync);
         }
 
+        public static string Route => _ROUTE;
+
         public AsyncRelayCommand AddNewCommand => _addNewCommand;
 
         public AsyncRelayCommand RemoveCommand => _removeCommand;
@@ -45,7 +47,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
                 _service.PupilId = value;
             }
         }
-
         public async Task RefreshAsync()
         {
             IEnumerable<LessonSlotData> lessonSlots = await _service.GetPupilAvaliabilityAsync();
@@ -60,7 +61,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
                 {
                     [AddPupilAvailabilityViewModel.PUPIL_ID_PARAMETER] = _pupilId
                 };
-                await GoToAsync(parameters, AddPupilAvailabilityViewModel.ROUTE);
+                await GoToAsync<AddPupilAvailabilityViewModel>(parameters);
             }
         }
 

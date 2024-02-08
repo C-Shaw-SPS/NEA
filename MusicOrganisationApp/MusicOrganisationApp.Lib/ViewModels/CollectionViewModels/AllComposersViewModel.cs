@@ -5,9 +5,9 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class AllComposersViewModel : SearchableCollectionViewModel<ComposerData>
+    public partial class AllComposersViewModel : SearchableCollectionViewModel<ComposerData, ComposerViewModel, EditComposerViewModel>, IViewModel
     {
-        public const string ROUTE = nameof(AllComposersViewModel);
+        private const string _ROUTE = nameof(AllComposersViewModel);
 
         private static readonly Dictionary<string, string> _orderings = new()
         {
@@ -18,10 +18,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private readonly ComposerService _service;
 
-        public AllComposersViewModel() : base(ComposerViewModel.ROUTE, EditComposerViewModel.ROUTE, _orderings)
+        public AllComposersViewModel() : base(_orderings)
         {
             _service = new(_database);
         }
+
+        public static string Route => _ROUTE;
 
         protected override ISearchService<ComposerData> SearchService => _service;
     }

@@ -4,13 +4,11 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditComposerViewModel : EditViewModelBase<ComposerData>, IQueryAttributable
+    public partial class EditComposerViewModel : EditViewModelBase<ComposerData>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(EditComposerViewModel);
-
+        private const string _ROUTE = nameof(EditComposerViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit composer";
         private const string _NEW_PAGE_TITLE = "New composer";
-
         private const string _INVALID_YEAR_FORMAT_ERROR = "Invalid year format";
         private const string _NEGATIVE_YEAR_ERROR = "Year cannot be negative";
         private const string _DEATH_BEFORE_BIRTH_ERROR = "Year of death cannot be before year of birth";
@@ -42,6 +40,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         {
             _service = new(_database);
         }
+
+        public static string Route => _ROUTE;
 
         protected override IService<ComposerData> Service => _service;
 

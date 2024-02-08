@@ -5,9 +5,9 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public class AllRepertoireViewModel : SearchableCollectionViewModel<Repertoire>, IQueryAttributable
+    public class AllRepertoireViewModel : SearchableCollectionViewModel<Repertoire, RepertoireViewModel, EditRepertoireViewModel>, IQueryAttributable, IViewModel
     {
-        public const string ROUTE = nameof(AllRepertoireViewModel);
+        private const string _ROUTE = nameof(AllRepertoireViewModel);
 
         public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
@@ -21,10 +21,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private readonly RepertoireService _service;
 
-        public AllRepertoireViewModel() : base(RepertoireViewModel.ROUTE, EditRepertoireViewModel.ROUTE, _orderings)
+        public AllRepertoireViewModel() : base(_orderings)
         {
             _service = new(_database);
         }
+
+        public static string Route => _ROUTE;
 
         protected override ISearchService<Repertoire> SearchService => _service;
 
