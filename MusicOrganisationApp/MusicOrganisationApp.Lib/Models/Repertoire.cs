@@ -24,7 +24,17 @@
         public DateTime? DateStarted
         {
             get => _dateStarted;
-            set => _dateStarted = value;
+            set
+            {
+                if (value is DateTime dateTime)
+                {
+                    _dateStarted = dateTime.Date;
+                }
+                else
+                {
+                    _dateStarted = value;
+                }
+            }
         }
 
         public string Syllabus
