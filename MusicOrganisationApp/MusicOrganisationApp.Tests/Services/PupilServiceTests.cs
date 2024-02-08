@@ -25,7 +25,7 @@ namespace MusicOrganisationApp.Tests.Services
             await AssertDoesNotContainPupilId<RepertoireData>(database, pupilToDelete.Id);
             await AssertDoesNotContainPupilId<CaregiverMap>(database, pupilToDelete.Id);
             await AssertDoesNotContainPupilId<LessonData>(database, pupilToDelete.Id);
-            await AssertDoesNotContainPupilId<PupilAvaliability>(database, pupilToDelete.Id);
+            await AssertDoesNotContainPupilId<PupilAvailability>(database, pupilToDelete.Id);
         }
 
         private static IEnumerable<T> GetDataToDelete<T>(IEnumerable<T> values, int pupilId) where T : IPupilIdentifiable

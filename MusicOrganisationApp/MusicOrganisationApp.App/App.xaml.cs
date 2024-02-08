@@ -90,8 +90,8 @@ namespace MusicOrganisationApp.App
 
         private void RegisterAvaliabilityRoutes()
         {
-            RegisterRoute<PupilAvaliabilityPage>(PupilAvaliabilityViewModel.ROUTE);
-            RegisterRoute<AddPupilAvaliabilityPage>(AddPupilAvaliabilityViewModel.ROUTE);
+            RegisterRoute<PupilAvailabilityPage>(PupilAvailabilityViewModel.ROUTE);
+            RegisterRoute<AddPupilAvailabilityPage>(AddPupilAvailabilityViewModel.ROUTE);
         }
 
         private void RegisterRoute<T>(string route) where T : ContentPage

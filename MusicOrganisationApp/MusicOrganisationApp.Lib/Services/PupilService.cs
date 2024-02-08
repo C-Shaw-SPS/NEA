@@ -18,7 +18,7 @@ namespace MusicOrganisationApp.Lib.Services
             await DeletePupilData<RepertoireData>(value.Id);
             await DeletePupilData<CaregiverMap>(value.Id);
             await DeletePupilData<LessonData>(value.Id);
-            await DeletePupilData<PupilAvaliability>(value.Id);
+            await DeletePupilData<PupilAvailability>(value.Id);
         }
 
 

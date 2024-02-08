@@ -2,18 +2,19 @@
 using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
+using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class PupilAvaliabilityViewModel : ViewModelBase, IQueryAttributable
+    public partial class AddPupilAvailabilityViewModel : ViewModelBase, IQueryAttributable
     {
-        public const string ROUTE = nameof(PupilAvaliabilityViewModel);
+        public const string ROUTE = nameof(AddPupilAvailabilityViewModel);
         public const string PUPIL_ID_PARAMETER = nameof(PUPIL_ID_PARAMETER);
 
         private readonly PupilAvaliabilityService _service;
+        private readonly AsyncRelayCommand _selectCommand;
         private readonly AsyncRelayCommand _addNewCommand;
-        private readonly AsyncRelayCommand _removeCommand;
         private int? _pupilId;
 
         [ObservableProperty]
@@ -22,19 +23,16 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         [ObservableProperty]
         private LessonSlotData? _selectedLessonSlot;
 
-        [ObservableProperty]
-        private bool _canRemove = false;
-
-        public PupilAvaliabilityViewModel()
+        public AddPupilAvailabilityViewModel()
         {
             _service = new(_database);
+            _selectCommand = new(SelectAsync);
             _addNewCommand = new(AddNewAsync);
-            _removeCommand = new(RemoveAsync);
         }
 
-        public AsyncRelayCommand AddNewCommand => _addNewCommand;
+        public AsyncRelayCommand SelectCommand => _selectCommand;
 
-        public AsyncRelayCommand RemoveCommand => _removeCommand;
+        public AsyncRelayCommand AddNewCommand => _addNewCommand;
 
         public int? PupilId
         {
@@ -48,33 +46,26 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         public async Task RefreshAsync()
         {
-            IEnumerable<LessonSlotData> lessonSlots = await _service.GetPupilAvaliabilityAsync();
+            IEnumerable<LessonSlotData> lessonSlots = await _service.GetUnusedLessonSlotsAsync();
             ResetCollection(LessonSlots, lessonSlots);
+        }
+
+        private async Task SelectAsync()
+        {
+            if (SelectedLessonSlot is not null)
+            {
+                await _service.AddAvaliabilityAsync(SelectedLessonSlot);
+                await RefreshAsync();
+            }
         }
 
         private async Task AddNewAsync()
         {
-            if (_pupilId is not null)
+            Dictionary<string, object> parameters = new()
             {
-                Dictionary<string, object> parameters = new()
-                {
-                    [AddPupilAvaliabilityViewModel.PUPIL_ID_PARAMETER] = _pupilId
-                };
-                await GoToAsync(parameters, AddPupilAvaliabilityViewModel.ROUTE);
-            }
-        }
-
-        private async Task RemoveAsync()
-        {
-            if (SelectedLessonSlot is not null)
-            {
-                await _service.RemoveAvaliabilityAsync(SelectedLessonSlot);
-            }
-        }
-
-        partial void OnSelectedLessonSlotChanged(LessonSlotData? value)
-        {
-            CanRemove = true;
+                [EditViewModelBase.IS_NEW_PARAMETER] = true
+            };
+            await GoToAsync(parameters, EditLessonSlotViewModel.ROUTE);
         }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)

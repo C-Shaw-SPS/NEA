@@ -17,7 +17,7 @@ namespace MusicOrganisationApp.Lib.Services
         private readonly Dictionary<int, LessonData> _prevTimetable;
         private readonly int _maxLessonSlotId;
 
-        public TimetableGenerator(IEnumerable<Pupil> pupils, IEnumerable<PupilAvaliability> pupilLessonSlots, IEnumerable<LessonSlotData> lessonSlots, IEnumerable<LessonData> prevLessons)
+        public TimetableGenerator(IEnumerable<Pupil> pupils, IEnumerable<PupilAvailability> pupilLessonSlots, IEnumerable<LessonSlotData> lessonSlots, IEnumerable<LessonData> prevLessons)
         {
             _timetable = [];
             _stack = [];
@@ -42,10 +42,10 @@ namespace MusicOrganisationApp.Lib.Services
             return dict;
         }
 
-        private static Dictionary<int, HashSet<int>> GetPupilLessonSlots(IEnumerable<PupilAvaliability> pupilLessonSlotList)
+        private static Dictionary<int, HashSet<int>> GetPupilLessonSlots(IEnumerable<PupilAvailability> pupilLessonSlotList)
         {
             Dictionary<int, HashSet<int>> pupilLessonSlots = [];
-            foreach (PupilAvaliability pupilLessonSlot in pupilLessonSlotList)
+            foreach (PupilAvailability pupilLessonSlot in pupilLessonSlotList)
             {
                 if (pupilLessonSlots.TryGetValue(pupilLessonSlot.PupilId, out HashSet<int>? lessonSlots))
                 {

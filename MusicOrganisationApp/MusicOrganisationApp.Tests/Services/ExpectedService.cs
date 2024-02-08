@@ -106,24 +106,24 @@ namespace MusicOrganisationApp.Tests.Services
             }
         };
 
-        public static readonly List<PupilAvaliability> PupilAvaliabilities = new()
+        public static readonly List<PupilAvailability> PupilAvaliabilities = new()
         {
-            new PupilAvaliability
+            new PupilAvailability
             {
                 Id = 0,
                 PupilId = Pupils[0].Id
             },
-            new PupilAvaliability
+            new PupilAvailability
             {
                 Id = 1,
                 PupilId = Pupils[0].Id
             },
-            new PupilAvaliability
+            new PupilAvailability
             {
                 Id = 2,
                 PupilId = Pupils[1].Id
             },
-            new PupilAvaliability
+            new PupilAvailability
             {
                 Id = 3,
                 PupilId = Pupils[1].Id

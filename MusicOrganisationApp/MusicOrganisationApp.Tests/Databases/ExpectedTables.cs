@@ -197,7 +197,7 @@ namespace MusicOrganisationApp.Tests.Databases
             PhoneNumber = CaregiverData[0].PhoneNumber
         };
 
-        public static readonly List<PupilAvaliability> PupilAvaliabilities = new()
+        public static readonly List<PupilAvailability> PupilAvaliabilities = new()
         {
             new()
             {

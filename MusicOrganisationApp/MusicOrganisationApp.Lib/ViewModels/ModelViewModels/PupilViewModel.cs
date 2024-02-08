@@ -103,7 +103,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             {
                 [AllPupilLessonsViewModel.PUPIL_ID_PARAMETER] = _value.Id
             };
-            await GoToAsync(parameters, PupilAvaliabilityViewModel.ROUTE);
+            await GoToAsync(parameters, PupilAvailabilityViewModel.ROUTE);
         }
     }
 }

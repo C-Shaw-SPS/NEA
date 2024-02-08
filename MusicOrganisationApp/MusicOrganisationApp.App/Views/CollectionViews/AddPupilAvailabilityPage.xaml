@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;assembly=MusicOrganisationApp.Lib"
-             x:Class="MusicOrganisationApp.App.Views.CollectionViews.AddPupilAvaliabilityPage"
-             Title="Add pupil avaliability">
-    
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;assembly=MusicOrganisationApp.Lib"
+    x:Class="MusicOrganisationApp.App.Views.CollectionViews.AddPupilAvailabilityPage"
+    Title="AddPupilAvailabilityPage">
+
     <ContentPage.BindingContext>
-        <viewmodels:AddPupilAvaliabilityViewModel/>
+        <viewmodels:AddPupilAvailabilityViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>

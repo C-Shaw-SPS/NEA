@@ -8,7 +8,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
 
         public abstract static IEnumerable<Pupil> Pupils { get; }
 
-        public abstract static IEnumerable<PupilAvaliability> PupilLessonSlots { get; }
+        public abstract static IEnumerable<PupilAvailability> PupilLessonSlots { get; }
 
         public abstract static IEnumerable<LessonSlotData> LessonSlots { get; }
 

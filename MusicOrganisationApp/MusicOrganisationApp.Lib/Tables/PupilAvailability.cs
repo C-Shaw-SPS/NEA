@@ -4,9 +4,9 @@ using SQLite;
 namespace MusicOrganisationApp.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class PupilAvaliability : ITable, IEquatable<PupilAvaliability>, IPupilIdentifiable
+    public class PupilAvailability : ITable, IEquatable<PupilAvailability>, IPupilIdentifiable
     {
-        private const string _TABLE_NAME = nameof(PupilAvaliability);
+        private const string _TABLE_NAME = nameof(PupilAvailability);
 
         private int _id;
         private int _pupilId;
@@ -57,7 +57,7 @@ namespace MusicOrganisationApp.Lib.Tables
             return sqlValues;
         }
 
-        public bool Equals(PupilAvaliability? other)
+        public bool Equals(PupilAvailability? other)
         {
             return other is not null
                 && _id == other._id

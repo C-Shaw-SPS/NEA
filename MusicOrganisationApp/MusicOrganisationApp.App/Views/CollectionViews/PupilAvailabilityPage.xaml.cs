@@ -1,8 +1,8 @@
 namespace MusicOrganisationApp.App.Views.CollectionViews;
 
-public partial class PupilAvaliabilityPage : ContentPage
+public partial class PupilAvailabilityPage : ContentPage
 {
-	public PupilAvaliabilityPage()
+	public PupilAvailabilityPage()
 	{
 		InitializeComponent();
 	}
