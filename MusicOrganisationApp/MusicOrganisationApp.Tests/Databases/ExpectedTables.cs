@@ -196,5 +196,21 @@ namespace MusicOrganisationApp.Tests.Databases
             Email = CaregiverData[0].Email,
             PhoneNumber = CaregiverData[0].PhoneNumber
         };
+
+        public static readonly List<PupilAvaliability> PupilAvaliabilities = new()
+        {
+            new()
+            {
+                Id = 0,
+                PupilId = 0,
+                LessonSlotId = 0
+            },
+            new()
+            {
+                Id = 1,
+                PupilId = 1,
+                LessonSlotId = 1
+            }
+        };
     }
 }

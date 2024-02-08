@@ -60,6 +60,12 @@ namespace MusicOrganisationApp.Tests.Databases
             await TestType(ExpectedTables.Pupils);
         }
 
+        [Fact]
+        public async Task TestPupilAvaliabilitySql()
+        {
+            await TestType(ExpectedTables.PupilAvaliabilities);
+        }
+
         private static async Task TestType<T>(IEnumerable<T> expectedItems) where T : class, ITable, IEquatable<T>, new()
         {
             DatabaseConnection database = new(nameof(TableTests));
