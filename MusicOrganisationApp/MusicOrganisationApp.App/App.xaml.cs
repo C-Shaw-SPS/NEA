@@ -28,6 +28,7 @@ namespace MusicOrganisationApp.App
             RegisterPupilCaregiverRoutes();
             RegisterLessonSlotRoutes();
             RegisterLessonRoutes();
+            RegisterAvaliabilityRoutes();
         }
 
         private void RegisterComposerRoutes()
@@ -85,6 +86,12 @@ namespace MusicOrganisationApp.App
             RegisterRoute<LessonPage>(LessonViewModel.ROUTE);
             RegisterRoute<EditLessonPage>(EditLessonViewModel.ROUTE);
             RegisterRoute<AllPupilLessonsPage>(AllPupilLessonsViewModel.ROUTE);
+        }
+
+        private void RegisterAvaliabilityRoutes()
+        {
+            RegisterRoute<PupilAvaliabilityPage>(PupilAvaliabilityViewModel.ROUTE);
+            RegisterRoute<AddPupilAvaliabilityPage>(AddPupilAvaliabilityViewModel.ROUTE);
         }
 
         private void RegisterRoute<T>(string route) where T : ContentPage
