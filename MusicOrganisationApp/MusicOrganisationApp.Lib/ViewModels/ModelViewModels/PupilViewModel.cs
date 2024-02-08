@@ -17,6 +17,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         private readonly AsyncRelayCommand _goToRepertoireCommand;
         private readonly AsyncRelayCommand _goToCaregiversCommand;
         private readonly AsyncRelayCommand _goToLessonsCommand;
+        private readonly AsyncRelayCommand _goToAvaliabilityCommand;
 
         [ObservableProperty]
         private string _name = string.Empty;
@@ -45,6 +46,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             _goToRepertoireCommand = new(GoToRepertoireAsync);
             _goToCaregiversCommand = new(GoToCaregiversAsync);
             _goToLessonsCommand = new(GoToLessonsAsync);
+            _goToAvaliabilityCommand = new(GoToAvaliabilityAsnyc);
         }
 
         protected override IService<Pupil> Service => _service;
@@ -91,6 +93,15 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
                 [AllPupilLessonsViewModel.PUPIL_ID_PARAMETER] = _value.Id
             };
             await GoToAsync(parameters, AllPupilLessonsViewModel.ROUTE);
+        }
+
+        private async Task GoToAvaliabilityAsnyc()
+        {
+            Dictionary<string, object> parameters = new()
+            {
+                [AllPupilLessonsViewModel.PUPIL_ID_PARAMETER] = _value.Id
+            };
+            await GoToAsync(parameters, PupilAvaliabilityViewModel.ROUTE);
         }
     }
 }
