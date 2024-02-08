@@ -40,6 +40,10 @@
             <ShellContent ContentTemplate="{DataTemplate collectionViews:AllLessonsPage}"/>
         </Tab>
 
+        <Tab Title="Timetable generator">
+            <ShellContent ContentTemplate="{DataTemplate views:TimetableGeneratorPage}"/>
+        </Tab>
+
         <Tab Title="Developer tools">
             <ShellContent ContentTemplate="{DataTemplate views:DeveloperToolsPage}"/>
         </Tab>

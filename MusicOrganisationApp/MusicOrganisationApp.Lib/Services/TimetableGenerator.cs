@@ -21,8 +21,8 @@ namespace MusicOrganisationApp.Lib.Services
         {
             _timetable = [];
             _stack = [];
-            _lessonSlots = GetDictionary(lessonSlots);
-            _pupils = GetDictionary(pupils);
+            _lessonSlots = lessonSlots.GetDictionary();
+            _pupils = pupils.GetDictionary();
             _pupilLessonSlots = GetPupilLessonSlots(pupilLessonSlots);
             _fixedLessonPupilIds = GetFixedLessonPupilIds(_pupilLessonSlots);
             _variableLessonPupilIds = GetVariableLessonPupilIds(_pupilLessonSlots);
@@ -31,16 +31,6 @@ namespace MusicOrganisationApp.Lib.Services
         }
 
         #region Setup
-
-        private static Dictionary<int, T> GetDictionary<T>(IEnumerable<T> values) where T : IIdentifiable
-        {
-            Dictionary<int, T> dict = [];
-            foreach (T value in values)
-            {
-                dict.Add(value.Id, value);
-            }
-            return dict;
-        }
 
         private static Dictionary<int, HashSet<int>> GetPupilLessonSlots(IEnumerable<PupilAvailability> pupilLessonSlotList)
         {
@@ -234,10 +224,16 @@ namespace MusicOrganisationApp.Lib.Services
 
         private bool IsValidLessonSlotForPupil(int lessonSlotId, Pupil pupil)
         {
-            LessonSlotData lessonSlot = _lessonSlots[lessonSlotId];
-            return IsPupilAvaliableInSlot(pupil, lessonSlot)
-                && IsLongEnoughLessonSlot(pupil, lessonSlot)
-                && IsDifferentSlotIfNeeded(pupil, lessonSlot);
+            if (_lessonSlots.TryGetValue(lessonSlotId, out LessonSlotData? lessonSlot))
+            {
+                return IsPupilAvaliableInSlot(pupil, lessonSlot)
+                    && IsLongEnoughLessonSlot(pupil, lessonSlot)
+                    && IsDifferentSlotIfNeeded(pupil, lessonSlot);
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private bool IsPupilAvaliableInSlot(Pupil pupil, LessonSlotData lessonSlot)

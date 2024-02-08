@@ -1,6 +1,8 @@
-﻿using MusicOrganisationApp.App.Views.CollectionViews;
+﻿using MusicOrganisationApp.App.Views;
+using MusicOrganisationApp.App.Views.CollectionViews;
 using MusicOrganisationApp.App.Views.EditViews;
 using MusicOrganisationApp.App.Views.ModelViews;
+using MusicOrganisationApp.Lib.ViewModels;
 using MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
@@ -29,6 +31,7 @@ namespace MusicOrganisationApp.App
             RegisterLessonSlotRoutes();
             RegisterLessonRoutes();
             RegisterAvaliabilityRoutes();
+            RegisterTimetableRoutes();
         }
 
         private void RegisterComposerRoutes()
@@ -92,6 +95,11 @@ namespace MusicOrganisationApp.App
         {
             RegisterRoute<PupilAvailabilityPage>(PupilAvailabilityViewModel.ROUTE);
             RegisterRoute<AddPupilAvailabilityPage>(AddPupilAvailabilityViewModel.ROUTE);
+        }
+
+        private void RegisterTimetableRoutes()
+        {
+            RegisterRoute<TimetableGeneratorPage>(TimetableGeneratorViewModel.ROUTE);
         }
 
         private void RegisterRoute<T>(string route) where T : ContentPage
