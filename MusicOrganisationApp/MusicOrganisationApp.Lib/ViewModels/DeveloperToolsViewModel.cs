@@ -23,14 +23,16 @@ namespace MusicOrganisationApp.Lib.ViewModels
 
         private async Task DropTablesAsync()
         {
-            await Task.WhenAll( _database.DropTableIfExistsAsync<Pupil>(),
+            await Task.WhenAll(
                 _database.DropTableIfExistsAsync<CaregiverData>(),
+                _database.DropTableIfExistsAsync<CaregiverMap>(),
                 _database.DropTableIfExistsAsync<ComposerData>(),
                 _database.DropTableIfExistsAsync<LessonData>(),
                 _database.DropTableIfExistsAsync<LessonSlotData>(),
+                _database.DropTableIfExistsAsync<Pupil>(),
+                _database.DropTableIfExistsAsync<PupilAvailability>(),
                 _database.DropTableIfExistsAsync<RepertoireData>(),
-                _database.DropTableIfExistsAsync<WorkData>(),
-                _database.DropTableIfExistsAsync<CaregiverMap>()
+                _database.DropTableIfExistsAsync<WorkData>()
             );
         }
 
