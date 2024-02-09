@@ -1,15 +1,4 @@
 ﻿using SQLite;
-
-/* Unmerged change from project 'MusicOrganisationApp.Lib (net8.0)'
-Before:
-using MusicOrganisationApp.Lib.Databases;
-After:
-using MusicOrganisationApp.Lib.Databases;
-using MusicOrganisationApp;
-using MusicOrganisationApp.Lib;
-using MusicOrganisationApp.Lib.Models;
-using MusicOrganisationApp.Lib.Tables;
-*/
 using MusicOrganisationApp.Lib.Databases;
 
 namespace MusicOrganisationApp.Lib.Tables
