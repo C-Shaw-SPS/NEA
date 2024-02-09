@@ -19,7 +19,7 @@
             Command="{Binding DeleteCommand}"/>
         <ToolbarItem
             Text="New work"
-            Command="{Binding AddNewWorkCommand}"
+            Command="{Binding AddNewSearchItemCommand}"
             IconImageSource="{FontImage Glyph='+',Color=Black}"/>
     </ContentPage.ToolbarItems>
 
@@ -107,25 +107,25 @@
             Grid.Row="4"
             Grid.Column="1"
             Grid.ColumnSpan="2"
-            Text="{Binding WorkTitle}"/>
+            Text="{Binding SelectedItemText}"/>
         <Label
             Grid.Row="4"
             Grid.Column="3"
-            Text="{Binding WorkError}"/>
+            Text="{Binding SearchError}"/>
 
         <SearchBar
             Grid.Row="5"
             Grid.Column="0"
             Grid.ColumnSpan="4"
-            Text="{Binding WorkSearchText}"
-            SearchCommand="{Binding SearchWorksCommand}"/>
+            Text="{Binding SearchText}"
+            SearchCommand="{Binding SearchCommand}"/>
 
         <CollectionView
             Grid.Row="6"
             Grid.Column="0"
             Grid.ColumnSpan="4"
-            ItemsSource="{Binding Works}"
-            SelectedItem="{Binding SelectedWork}"
+            ItemsSource="{Binding SearchResult}"
+            SelectedItem="{Binding SelectedItem}"
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"
             VerticalScrollBarVisibility="Always"

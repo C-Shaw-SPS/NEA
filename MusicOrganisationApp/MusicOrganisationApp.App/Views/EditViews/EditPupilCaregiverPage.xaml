@@ -19,7 +19,7 @@
             Command="{Binding DeleteCommand}"/>
         <ToolbarItem
             Text="New caregiver"
-            Command="{Binding AddNewCaregiverCommand}"
+            Command="{Binding AddNewSearchItemCommand}"
             IconImageSource="{FontImage Glyph='+',Color=Black}"/>
     </ContentPage.ToolbarItems>
 
@@ -60,27 +60,27 @@
         <Label
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Name}"
+            Text="{Binding SelectedItemText}"
             VerticalOptions="Center"/>
         <Label
             Grid.Row="1"
             Grid.Column="2"
-            Text="{Binding CaregiverError}"
+            Text="{Binding SearchError}"
             VerticalOptions="Center"/>
 
         <SearchBar
             Grid.Row="2"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            Text="{Binding CaregiverSearchText}"
-            SearchCommand="{Binding SearchCaregiversCommand}"/>
+            Text="{Binding SearchText}"
+            SearchCommand="{Binding SearchCommand}"/>
 
         <CollectionView
             Grid.Row="3"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            ItemsSource="{Binding Caregivers}"
-            SelectedItem="{Binding SelectedCaregiver}"
+            ItemsSource="{Binding SearchResult}"
+            SelectedItem="{Binding SelectedItem}"
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"
             VerticalScrollBarVisibility="Always"

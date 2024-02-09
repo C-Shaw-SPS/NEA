@@ -1,23 +1,20 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
-using System.Collections.ObjectModel;
+using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditRepertoireViewModel : EditViewModelBase<Repertoire>, IQueryAttributable, IViewModel
+    public partial class EditRepertoireViewModel : SearchableEditViewModel<Repertoire, Work, EditWorkViewModel>, IQueryAttributable, IViewModel
     {
         private const string _ROUTE = nameof(EditRepertoireViewModel);
         private const string _NO_WORK_SELECTED_ERROR = "No work selected";
         private const string _EDIT_PAGE_TITLE = "Edit repertoire";
         private const string _NEW_PAGE_TITLE = "New repertoire";
+        private const string _SEARCH_ORDERING = nameof(WorkData.Title);
 
         private readonly RepertoireService _repertoireService;
         private readonly WorkService _workService;
-
-        private readonly AsyncRelayCommand _searchWorksCommand;
-        private readonly AsyncRelayCommand _addNewWorkCommand;
 
         private int? _pupilId;
 
@@ -36,59 +33,19 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private string _notes = string.Empty;
 
-        [ObservableProperty]
-        private string _workTitle = string.Empty;
-
-        [ObservableProperty]
-        private string _workSearchText = string.Empty;
-
-        [ObservableProperty]
-        private ObservableCollection<Work> _works = [];
-
-        [ObservableProperty]
-        private Work? _selectedWork;
-
-        [ObservableProperty]
-        private string _workError = string.Empty;
-
-        public EditRepertoireViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE)
+        public EditRepertoireViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE, _NO_WORK_SELECTED_ERROR)
         {
             _repertoireService = new(_database);
             _workService = new(_database);
-            _searchWorksCommand = new(SearchWorksAsync);
-            _addNewWorkCommand = new(AddNewWorkAsync);
         }
 
         public static string Route => _ROUTE;
 
-        public AsyncRelayCommand SearchWorksCommand => _searchWorksCommand;
-
-        public AsyncRelayCommand AddNewWorkCommand => _addNewWorkCommand;
-
         protected override IService<Repertoire> Service => _repertoireService;
 
-        private async Task SearchWorksAsync()
-        {
-            IEnumerable<Work> searchResult = await _workService.SearchAsync(WorkSearchText, nameof(Work.Title));
-            IViewModel.ResetCollection(Works, searchResult);
-        }
+        protected override ISearchService<Work> SearchService => _workService;
 
-        partial void OnSelectedWorkChanged(Work? value)
-        {
-            if (value is not null)
-            {
-                WorkTitle = value.Title;
-            }
-        }
-
-        private async Task AddNewWorkAsync()
-        {
-            Dictionary<string, object> parameters = new()
-            {
-                [IS_NEW_PARAMETER] = true
-            };
-            await GoToAsync<EditWorkViewModel>(parameters);
-        }
+        protected override string SearchOrdering => _SEARCH_ORDERING;
 
         protected override void SetDisplayValues()
         {
@@ -96,7 +53,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             Syllabus = _value.Syllabus;
             IsFinishedLearning = _value.IsFinishedLearning;
             Notes = _value.Notes;
-            WorkTitle = _value.Title;
+            SelectedItemText = _value.Title;
         }
 
         private void SetDateStarted()
@@ -112,18 +69,24 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
         }
 
-        protected override Task<bool> TrySetValuesToSave()
+        public override void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
+            {
+                _pupilId = pupilId;
+                _repertoireService.PupilId = _pupilId;
+            }
+            base.ApplyQueryAttributes(query);
+        }
+
+        protected override bool TrySetNonSearchValuesToSave()
         {
             SaveDateStarted();
             _value.Syllabus = Syllabus;
             _value.IsFinishedLearning = IsFinishedLearning;
             _value.Notes = Notes;
-
-            bool canSave = true;
-            canSave &= TrySetPupilIdToSave();
-            canSave &= TrySetWorkToSave();
-
-            return Task.FromResult(canSave);
+            bool canSave = TrySetPupilIdToSave();
+            return canSave;
         }
 
         private void SaveDateStarted()
@@ -151,35 +114,14 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
         }
 
-        private bool TrySetWorkToSave()
+        protected override void UpdateSelectedItemText(Work value)
         {
-            if (SelectedWork is Work work)
-            {
-                _value.WorkId = work.Id;
-                _value.Title = work.Title;
-                WorkError = string.Empty;
-                return true;
-            }
-            else if (_isNew)
-            {
-                WorkError = _NO_WORK_SELECTED_ERROR;
-                return false;
-            }
-            else
-            {
-                WorkError = string.Empty;
-                return true;
-            }
+            SelectedItemText = value.Title;
         }
 
-        public override void ApplyQueryAttributes(IDictionary<string, object> query)
+        protected override void SetSearchValuesToSave(Work selectedItem)
         {
-            if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
-            {
-                _pupilId = pupilId;
-                _repertoireService.PupilId = _pupilId;
-            }
-            base.ApplyQueryAttributes(query);
+            _value.WorkId = selectedItem.Id;
         }
     }
 }

@@ -20,7 +20,7 @@
             Command="{Binding DeleteCommand}"/>
         <ToolbarItem
             Text="New composer"
-            Command="{Binding AddNewComposerCommand}"
+            Command="{Binding AddNewSearchItemCommand}"
             IconImageSource="{FontImage Glyph='+',Color=Black}"/>
     </ContentPage.ToolbarItems>
 
@@ -108,27 +108,27 @@
         <Label
             Grid.Row="4"
             Grid.Column="1"
-            Text="{Binding ComposerName}"
+            Text="{Binding SelectedItemText}"
             VerticalOptions="Center"/>
         <Label
             Grid.Row="4"
             Grid.Column="2"
-            Text="{Binding ComposerError}"
+            Text="{Binding SearchError}"
             VerticalOptions="Center"/>
 
         <SearchBar
             Grid.Row="5"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            Text="{Binding ComposerSearchText}"
-            SearchCommand="{Binding SearchComposersCommand}"/>
+            Text="{Binding SearchText}"
+            SearchCommand="{Binding SearchCommand}"/>
 
         <CollectionView
             Grid.Row="6"
             Grid.Column="0"
             Grid.ColumnSpan="4"
-            ItemsSource="{Binding Composers}"
-            SelectedItem="{Binding SelectedComposer}"
+            ItemsSource="{Binding SearchResult}"
+            SelectedItem="{Binding SelectedItem}"
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand"
             VerticalScrollBarVisibility="Always"

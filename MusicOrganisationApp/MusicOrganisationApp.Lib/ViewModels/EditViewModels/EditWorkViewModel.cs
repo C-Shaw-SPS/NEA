@@ -1,24 +1,21 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
-using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditWorkViewModel : EditViewModelBase<Work>, IQueryAttributable, IViewModel
+    public partial class EditWorkViewModel : SearchableEditViewModel<Work, ComposerData, EditComposerViewModel>, IQueryAttributable, IViewModel
     {
         private const string _ROUTE = nameof(EditWorkViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit work";
         private const string _NEW_PAGE_TITLE = "New work";
         private const string _BLANK_TITLE_ERROR = "Title cannot be blank";
         private const string _NO_COMPOSER_SELECTED_ERROR = "Work must have a composer";
+        private const string _SEARCH_ORDERING = nameof(ComposerData.Name);
 
         private readonly WorkService _workService;
         private readonly ComposerService _composerService;
-        private readonly AsyncRelayCommand _searchComposersCommand;
-        private readonly AsyncRelayCommand _addNewComposerCommand;
 
         [ObservableProperty]
         private string _title = string.Empty;
@@ -33,53 +30,21 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private string _notes = string.Empty;
 
         [ObservableProperty]
-        private string _composerName = string.Empty;
-
-        [ObservableProperty]
-        private string _composerSearchText = string.Empty;
-
-        [ObservableProperty]
-        private ObservableCollection<ComposerData> _composers = [];
-
-        [ObservableProperty]
-        private ComposerData? _selectedComposer;
-
-        [ObservableProperty]
         private string _titleError = string.Empty;
 
-        [ObservableProperty]
-        private string _composerError = string.Empty;
-
-        public EditWorkViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE)
+        public EditWorkViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE, _NO_COMPOSER_SELECTED_ERROR)
         {
             _workService = new(_database);
             _composerService = new(_database);
-            _searchComposersCommand = new(SearchComposersAsync);
-            _addNewComposerCommand = new(AddNewComposerAsync);
         }
 
         public static string Route => _ROUTE;
 
         protected override IService<Work> Service => _workService;
 
-        public AsyncRelayCommand SearchComposersCommand => _searchComposersCommand;
+        protected override ISearchService<ComposerData> SearchService => _composerService;
 
-        public AsyncRelayCommand AddNewComposerCommand => _addNewComposerCommand;
-
-        private async Task SearchComposersAsync()
-        {
-            IEnumerable<ComposerData> searchResult = await _composerService.SearchAsync(ComposerSearchText, nameof(ComposerData.Name));
-            IViewModel.ResetCollection(Composers, searchResult);
-        }
-
-        private async Task AddNewComposerAsync()
-        {
-            Dictionary<string, object> parameters = new()
-            {
-                [IS_NEW_PARAMETER] = true
-            };
-            await GoToAsync<EditComposerViewModel>(parameters);
-        }
+        protected override string SearchOrdering => _SEARCH_ORDERING;
 
         protected override void SetDisplayValues()
         {
@@ -87,30 +52,29 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             Subtitle = _value.Subtitle;
             Genre = _value.Genre;
             Notes = _value.Notes;
-            ComposerName = _value.ComposerName;
-        }
-
-        partial void OnSelectedComposerChanged(ComposerData? value)
-        {
-            if (value is not null)
-            {
-                ComposerName = value.Name;
-            }
+            SelectedItemText = _value.ComposerName;
         }
 
         #region Data Validation
 
-        protected override Task<bool> TrySetValuesToSave()
+        protected override void UpdateSelectedItemText(ComposerData value)
         {
+            SelectedItemText = value.Name;
+        }
+
+        protected override void SetSearchValuesToSave(ComposerData selectedItem)
+        {
+            _value.ComposerId = selectedItem.Id;
+        }
+
+        protected override bool TrySetNonSearchValuesToSave()
+        {
+            _value.Title = Title;
             _value.Subtitle = Subtitle;
             _value.Genre = Genre;
             _value.Notes = Notes;
-
-            bool canSave = true;
-            canSave &= TrySetTitleToSave();
-            canSave &= TrySetComposerToSave();
-
-            return Task.FromResult(canSave);
+            bool canSave = TrySetTitleToSave();
+            return canSave;
         }
 
         private bool TrySetTitleToSave()
@@ -125,27 +89,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             {
                 TitleError = string.Empty;
                 _value.Title = Title;
-                return true;
-            }
-        }
-
-        private bool TrySetComposerToSave()
-        {
-            if (SelectedComposer is not null)
-            {
-                _value.ComposerId = SelectedComposer.Id;
-                _value.ComposerName = SelectedComposer.Name;
-                ComposerError = string.Empty;
-                return true;
-            }
-            else if (_isNew)
-            {
-                ComposerError = _NO_COMPOSER_SELECTED_ERROR;
-                return false;
-            }
-            else
-            {
-                ComposerError = string.Empty;
                 return true;
             }
         }
