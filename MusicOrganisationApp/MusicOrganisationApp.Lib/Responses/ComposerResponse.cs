@@ -3,12 +3,12 @@ using System.Text.Json.Serialization;
 
 namespace MusicOrganisationApp.Lib.Responses
 {
-    internal class ComposerResponse : IResponse<ComposerData>
+    internal class ComposerResponse : IResponse<Composer>
     {
-        private IEnumerable<ComposerData> _values = new List<ComposerData>();
+        private IEnumerable<Composer> _values = new List<Composer>();
 
         [JsonPropertyName("composers")]
-        public IEnumerable<ComposerData> Values
+        public IEnumerable<Composer> Values
         {
             get
             {

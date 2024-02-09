@@ -5,15 +5,15 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class AllComposersViewModel : SearchableCollectionViewModel<ComposerData, ComposerViewModel, EditComposerViewModel>, IViewModel
+    public partial class AllComposersViewModel : SearchableCollectionViewModel<Composer, ComposerViewModel, EditComposerViewModel>, IViewModel
     {
         private const string _ROUTE = nameof(AllComposersViewModel);
 
         private static readonly Dictionary<string, string> _orderings = new()
         {
-            ["Name"] = nameof(ComposerData.Name),
-            ["Year of birth"] = nameof(ComposerData.BirthYear),
-            ["Year of death"] = nameof(ComposerData.DeathYear)
+            ["Name"] = nameof(Composer.Name),
+            ["Year of birth"] = nameof(Composer.BirthYear),
+            ["Year of death"] = nameof(Composer.DeathYear)
         };
 
         private readonly ComposerService _service;
@@ -25,6 +25,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         public static string Route => _ROUTE;
 
-        protected override ISearchService<ComposerData> SearchService => _service;
+        protected override ISearchService<Composer> SearchService => _service;
     }
 }

@@ -4,7 +4,7 @@ namespace MusicOrganisationApp.Tests.Json
 {
     internal static class ExpectedJson
     {
-        public static readonly ComposerData Composer = new()
+        public static readonly Composer Composer = new()
         {
             Id = 87,
             Name = "Johann Sebastian Bach",
@@ -22,9 +22,9 @@ namespace MusicOrganisationApp.Tests.Json
             Genre = "Orchestral"
         };
 
-        public static readonly List<ComposerData> ResponseComposers = new()
+        public static readonly List<Composer> ResponseComposers = new()
         {
-            new ComposerData
+            new Composer
             {
                 Id = 36,
                 Name = "Ralph Vaughan Williams",
@@ -32,7 +32,7 @@ namespace MusicOrganisationApp.Tests.Json
                 DeathYear = 1958,
                 Era = "Late Romantic"
             },
-            new ComposerData
+            new Composer
             {
                 Id = 87,
                 Name = "Johann Sebastian Bach",
@@ -40,7 +40,7 @@ namespace MusicOrganisationApp.Tests.Json
                 DeathYear = 1750,
                 Era = "Baroque"
             },
-            new ComposerData
+            new Composer
             {
                 Id = 176,
                 Name = "Steve Reich",
@@ -48,7 +48,7 @@ namespace MusicOrganisationApp.Tests.Json
                 DeathYear = null,
                 Era = "Post-War"
             },
-            new ComposerData
+            new Composer
             {
                 Id = 196,
                 Name = "Wolfgang Amadeus Mozart",
@@ -56,7 +56,7 @@ namespace MusicOrganisationApp.Tests.Json
                 DeathYear = 1791,
                 Era = "Classical"
             },
-            new ComposerData()
+            new Composer()
             {
                 Id = 91,
                 Name = "Kenji Bunch",

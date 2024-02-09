@@ -4,7 +4,7 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditComposerViewModel : EditViewModelBase<ComposerData>, IQueryAttributable, IViewModel
+    public partial class EditComposerViewModel : EditViewModelBase<Composer>, IQueryAttributable, IViewModel
     {
         private const string _ROUTE = nameof(EditComposerViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit composer";
@@ -43,7 +43,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         public static string Route => _ROUTE;
 
-        protected override IService<ComposerData> Service => _service;
+        protected override IService<Composer> Service => _service;
 
 
         #region Saving

@@ -3,7 +3,7 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.Services
 {
-    public class ComposerService : ISearchService<ComposerData>
+    public class ComposerService : ISearchService<Composer>
     {
         private readonly DatabaseConnection _database;
 
@@ -12,13 +12,13 @@ namespace MusicOrganisationApp.Lib.Services
             _database = database;
         }
 
-        public async Task<IEnumerable<ComposerData>> GetAllAsync()
+        public async Task<IEnumerable<Composer>> GetAllAsync()
         {
-            IEnumerable<ComposerData> composers = await _database.GetAllAsync<ComposerData>();
+            IEnumerable<Composer> composers = await _database.GetAllAsync<Composer>();
             return composers;
         }
 
-        public async Task DeleteAsync(ComposerData composer)
+        public async Task DeleteAsync(Composer composer)
         {
             DeleteStatement<WorkData> deleteWorksStatement = GetDeleteWorksStatement(composer);
             DeleteStatement<RepertoireData> deleteRepertoireStatement = await GetDeleteRepertoireStatement(composer);
@@ -29,14 +29,14 @@ namespace MusicOrganisationApp.Lib.Services
 
         }
 
-        private static DeleteStatement<WorkData> GetDeleteWorksStatement(ComposerData composer)
+        private static DeleteStatement<WorkData> GetDeleteWorksStatement(Composer composer)
         {
             DeleteStatement<WorkData> deleteStatement = new();
             deleteStatement.AddWhereEqual<WorkData>(nameof(WorkData.ComposerId), composer.Id);
             return deleteStatement;
         }
 
-        private async Task<DeleteStatement<RepertoireData>> GetDeleteRepertoireStatement(ComposerData composer)
+        private async Task<DeleteStatement<RepertoireData>> GetDeleteRepertoireStatement(Composer composer)
         {
             IEnumerable<int> workIds = await GetWorkIdsAsync(composer);
             DeleteStatement<RepertoireData> deleteStatement = new();
@@ -52,7 +52,7 @@ namespace MusicOrganisationApp.Lib.Services
             return deleteStatement;
         }
 
-        private async Task<IEnumerable<int>> GetWorkIdsAsync(ComposerData composer)
+        private async Task<IEnumerable<int>> GetWorkIdsAsync(Composer composer)
         {
             SqlQuery<WorkData> sqlQuery = new();
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Id));
@@ -62,34 +62,34 @@ namespace MusicOrganisationApp.Lib.Services
             return workIds;
         }
 
-        public async Task UpdateAsync(ComposerData value)
+        public async Task UpdateAsync(Composer value)
         {
             await _database.UpdateAsync(value);
         }
 
-        public async Task InsertAsync(ComposerData value, bool getNewId)
+        public async Task InsertAsync(Composer value, bool getNewId)
         {
             if (getNewId)
             {
-                int id = await _database.GetNextIdAsync<ComposerData>();
+                int id = await _database.GetNextIdAsync<Composer>();
                 value.Id = id;
             }
             await _database.InsertAsync(value);
         }
 
-        public async Task<IEnumerable<ComposerData>> SearchAsync(string search, string ordering)
+        public async Task<IEnumerable<Composer>> SearchAsync(string search, string ordering)
         {
-            SqlQuery<ComposerData> query = new(IService.DEFAULT_LIMIT) { SelectAll = true };
-            query.AddWhereLike<ComposerData>(nameof(ComposerData.Name), search);
+            SqlQuery<Composer> query = new(IService.DEFAULT_LIMIT) { SelectAll = true };
+            query.AddWhereLike<Composer>(nameof(Composer.Name), search);
             query.AddOrderByAscending(ordering);
 
-            IEnumerable<ComposerData> composers = await _database.QueryAsync<ComposerData>(query);
+            IEnumerable<Composer> composers = await _database.QueryAsync<Composer>(query);
             return composers;
         }
 
-        public async Task<(bool, ComposerData)> TryGetAsync(int id)
+        public async Task<(bool, Composer)> TryGetAsync(int id)
         {
-            (bool suceeded, ComposerData compser) value = await _database.TryGetAsync<ComposerData>(id);
+            (bool suceeded, Composer compser) value = await _database.TryGetAsync<Composer>(id);
             return value;
         }
     }

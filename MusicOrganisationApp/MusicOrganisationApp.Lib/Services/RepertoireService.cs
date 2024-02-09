@@ -77,10 +77,10 @@ namespace MusicOrganisationApp.Lib.Services
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Repertoire.Title));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Subtitle), nameof(Repertoire.Subtitle));
             sqlQuery.AddColumn<WorkData>(nameof(WorkData.Genre), nameof(Repertoire.Genre));
-            sqlQuery.AddColumn<ComposerData>(nameof(ComposerData.Id), nameof(Repertoire.ComposerId));
-            sqlQuery.AddColumn<ComposerData>(nameof(ComposerData.Name), nameof(Repertoire.ComposerName));
+            sqlQuery.AddColumn<Composer>(nameof(Composer.Id), nameof(Repertoire.ComposerId));
+            sqlQuery.AddColumn<Composer>(nameof(Composer.Name), nameof(Repertoire.ComposerName));
             sqlQuery.AddInnerJoin<WorkData, RepertoireData>(nameof(WorkData.Id), nameof(RepertoireData.WorkId));
-            sqlQuery.AddInnerJoin<ComposerData, WorkData>(nameof(ComposerData.Id), nameof(WorkData.ComposerId));
+            sqlQuery.AddInnerJoin<Composer, WorkData>(nameof(Composer.Id), nameof(WorkData.ComposerId));
 
             return sqlQuery;
         }

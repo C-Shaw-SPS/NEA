@@ -5,14 +5,14 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditWorkViewModel : SearchableEditViewModel<Work, ComposerData, EditComposerViewModel>, IQueryAttributable, IViewModel
+    public partial class EditWorkViewModel : SearchableEditViewModel<Work, Composer, EditComposerViewModel>, IQueryAttributable, IViewModel
     {
         private const string _ROUTE = nameof(EditWorkViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit work";
         private const string _NEW_PAGE_TITLE = "New work";
         private const string _BLANK_TITLE_ERROR = "Title cannot be blank";
         private const string _NO_COMPOSER_SELECTED_ERROR = "Work must have a composer";
-        private const string _SEARCH_ORDERING = nameof(ComposerData.Name);
+        private const string _SEARCH_ORDERING = nameof(Composer.Name);
 
         private readonly WorkService _workService;
         private readonly ComposerService _composerService;
@@ -42,7 +42,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         protected override IService<Work> Service => _workService;
 
-        protected override ISearchService<ComposerData> SearchService => _composerService;
+        protected override ISearchService<Composer> SearchService => _composerService;
 
         protected override string SearchOrdering => _SEARCH_ORDERING;
 
@@ -57,12 +57,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         #region Data Validation
 
-        protected override void UpdateSelectedItemText(ComposerData value)
+        protected override void UpdateSelectedItemText(Composer value)
         {
             SelectedItemText = value.Name;
         }
 
-        protected override void SetSearchValuesToSave(ComposerData selectedItem)
+        protected override void SetSearchValuesToSave(Composer selectedItem)
         {
             _value.ComposerId = selectedItem.Id;
         }

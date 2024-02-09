@@ -5,7 +5,7 @@ using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
-    public partial class ComposerViewModel : ModelViewModelBase<ComposerData, EditComposerViewModel>, IQueryAttributable, IViewModel
+    public partial class ComposerViewModel : ModelViewModelBase<Composer, EditComposerViewModel>, IQueryAttributable, IViewModel
     {
         private const string _ROUTE = nameof(ComposerViewModel);
 
@@ -35,7 +35,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 
         public static string Route => _ROUTE;
 
-        protected override IService<ComposerData> Service => _service;
+        protected override IService<Composer> Service => _service;
 
         protected override void SetDisplayValues()
         {

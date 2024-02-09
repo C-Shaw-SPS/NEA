@@ -6,14 +6,14 @@ namespace MusicOrganisationApp.Tests.Services
 {
     internal static class ExpectedService
     {
-        public static readonly List<ComposerData> ComposerDatas = new()
+        public static readonly List<Composer> Composers = new()
         {
-            new ComposerData
+            new Composer
             {
                 Id = 0,
                 Name = "Bach"
             },
-            new ComposerData
+            new Composer
             {
                 Id = 1,
                 Name = "Mozart"
@@ -25,25 +25,25 @@ namespace MusicOrganisationApp.Tests.Services
             new WorkData
             {
                 Id = 0,
-                ComposerId = ComposerDatas[0].Id,
+                ComposerId = Composers[0].Id,
                 Title = "Violin Concerto in A minor"
             },
             new WorkData
             {
                 Id = 1,
-                ComposerId = ComposerDatas[0].Id,
+                ComposerId = Composers[0].Id,
                 Title = "Toccata & Fugue in D minor"
             },
             new WorkData
             {
                 Id = 2,
-                ComposerId = ComposerDatas[1].Id,
+                ComposerId = Composers[1].Id,
                 Title = "Violin Concerto in G major"
             },
             new WorkData
             {
                 Id = 3,
-                ComposerId = ComposerDatas[1].Id,
+                ComposerId = Composers[1].Id,
                 Title = "Eine Kleine Nachtmusik"
             }
         };
@@ -298,7 +298,7 @@ namespace MusicOrganisationApp.Tests.Services
                     Id = WorkDatas[i].Id,
                     ComposerId = WorkDatas[i].ComposerId,
                     Title = WorkDatas[i].Title,
-                    ComposerName = ComposerDatas[WorkDatas[i].ComposerId].Name
+                    ComposerName = Composers[WorkDatas[i].ComposerId].Name
                 };
                 works.Add(work);
             }
@@ -311,9 +311,9 @@ namespace MusicOrganisationApp.Tests.Services
             foreach (RepertoireData repertoireData in RepertoireDatas)
             {
                 WorkData workData = WorkDatas[repertoireData.WorkId];
-                ComposerData composerData = ComposerDatas[workData.ComposerId];
+                Composer composer = Composers[workData.ComposerId];
                 Assert.Equal(repertoireData.WorkId, workData.Id);
-                Assert.Equal(workData.ComposerId, composerData.Id);
+                Assert.Equal(workData.ComposerId, composer.Id);
                 Repertoire repertoire = new()
                 {
                     Id = repertoireData.Id,
@@ -326,7 +326,7 @@ namespace MusicOrganisationApp.Tests.Services
                     Subtitle = workData.Subtitle,
                     ComposerId = workData.ComposerId,
                     Genre = workData.Genre,
-                    ComposerName = composerData.Name,
+                    ComposerName = composer.Name,
                     Notes = repertoireData.Notes
                 };
                 repertoires.Add(repertoire);

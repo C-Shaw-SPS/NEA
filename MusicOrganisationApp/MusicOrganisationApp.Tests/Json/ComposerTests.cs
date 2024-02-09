@@ -12,7 +12,7 @@ namespace MusicOrganisationApp.Tests.Json
         [Fact]
         public void TestJsonDeserialiseComposer()
         {
-            ComposerData? actualComposer = JsonGetter.GetFromFile<ComposerData>(_COMPOSER_PATH);
+            Composer? actualComposer = JsonGetter.GetFromFile<Composer>(_COMPOSER_PATH);
             Assert.NotNull(actualComposer);
             Assert.Equal(ExpectedJson.Composer, actualComposer);
         }
@@ -20,7 +20,7 @@ namespace MusicOrganisationApp.Tests.Json
         [Fact]
         public void TestComposerGetter()
         {
-            IEnumerable<ComposerData> actualComposers = ComposerGetter.GetFromFile(_RESPONSE_PATH);
+            IEnumerable<Composer> actualComposers = ComposerGetter.GetFromFile(_RESPONSE_PATH);
 
             CollectionAssert.Equal(ExpectedJson.ResponseComposers, actualComposers);
         }

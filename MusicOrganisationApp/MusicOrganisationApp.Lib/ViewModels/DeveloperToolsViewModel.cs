@@ -33,7 +33,7 @@ namespace MusicOrganisationApp.Lib.ViewModels
             await Task.WhenAll(
                 _database.DropTableIfExistsAsync<CaregiverData>(),
                 _database.DropTableIfExistsAsync<CaregiverMap>(),
-                _database.DropTableIfExistsAsync<ComposerData>(),
+                _database.DropTableIfExistsAsync<Composer>(),
                 _database.DropTableIfExistsAsync<LessonData>(),
                 _database.DropTableIfExistsAsync<LessonSlotData>(),
                 _database.DropTableIfExistsAsync<Pupil>(),
@@ -45,7 +45,7 @@ namespace MusicOrganisationApp.Lib.ViewModels
 
         private async Task ResetComposersAndWorksAsync()
         {
-            IEnumerable<ComposerData> composers = await ComposerGetter.GetFromOpenOpus();
+            IEnumerable<Composer> composers = await ComposerGetter.GetFromOpenOpus();
             IEnumerable<WorkData> workData = await WorkGetter.GetFromOpenOpus();
 
             await _database.ResetTableAsync(composers);

@@ -26,14 +26,14 @@ namespace MusicOrganisationApp.Lib.Services
         private async Task<bool> IsEmptyComposerAndWorkTables()
         {
             bool isEmpty = true;
-            isEmpty &= await _database.IsEmptyTable<ComposerData>();
+            isEmpty &= await _database.IsEmptyTable<Composer>();
             isEmpty &= await _database.IsEmptyTable<WorkData>();
             return isEmpty;
         }
 
         private async Task InitialiseComposers()
         {
-            IEnumerable<ComposerData> composers = await ComposerGetter.GetFromOpenOpus();
+            IEnumerable<Composer> composers = await ComposerGetter.GetFromOpenOpus();
             await _database.InsertAllAsync(composers);
         }
 

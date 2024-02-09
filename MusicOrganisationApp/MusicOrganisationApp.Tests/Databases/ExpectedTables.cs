@@ -5,7 +5,7 @@ namespace MusicOrganisationApp.Tests.Databases
 {
     internal static class ExpectedTables
     {
-        public static readonly ComposerData NullPropertyComposer = new()
+        public static readonly Composer NullPropertyComposer = new()
         {
             Id = 91,
             Name = "Kenji Bunch",
@@ -53,9 +53,9 @@ namespace MusicOrganisationApp.Tests.Databases
             }
         };
 
-        public static readonly List<ComposerData> ComposerData = new()
+        public static readonly List<Composer> Composers = new()
         {
-            new ComposerData
+            new Composer
             {
                 Id = 36,
                 Name = "Ralph Vaughan Williams",
@@ -63,7 +63,7 @@ namespace MusicOrganisationApp.Tests.Databases
                 DeathYear = 1958,
                 Era = "Late Romantic"
             },
-            new ComposerData
+            new Composer
             {
                 Id = 87,
                 Name = "Johann Sebastian Bach",
@@ -71,7 +71,7 @@ namespace MusicOrganisationApp.Tests.Databases
                 DeathYear = 1750,
                 Era = "Baroque"
             },
-            new ComposerData
+            new Composer
             {
                 Id = 176,
                 Name = "Steve Reich",
@@ -79,7 +79,7 @@ namespace MusicOrganisationApp.Tests.Databases
                 DeathYear = null,
                 Era = "Post-War"
             },
-            new ComposerData
+            new Composer
             {
                 Id = 196,
                 Name = "Wolfgang Amadeus Mozart",

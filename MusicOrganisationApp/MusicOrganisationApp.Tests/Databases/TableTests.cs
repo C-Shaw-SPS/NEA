@@ -1,12 +1,5 @@
 ﻿using MusicOrganisationApp.Lib;
 using MusicOrganisationApp.Lib.Databases;
-using MusicOrganisationApp.Lib.Models;
-using MusicOrganisationApp.Lib.Tables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MusicOrganisationApp.Tests.Databases
 {
@@ -27,7 +20,7 @@ namespace MusicOrganisationApp.Tests.Databases
         [Fact]
         public async Task TestComposerSql()
         {
-            await TestType(ExpectedTables.ComposerData);
+            await TestType(ExpectedTables.Composers);
         }
 
         [Fact]

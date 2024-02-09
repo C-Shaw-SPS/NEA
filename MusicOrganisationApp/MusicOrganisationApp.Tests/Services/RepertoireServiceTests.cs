@@ -48,7 +48,7 @@ namespace MusicOrganisationApp.Tests.Services
         {
             DatabaseConnection database = new(path);
             RepertoireService service = new(database);
-            await database.ResetTableAsync(ExpectedService.ComposerDatas);
+            await database.ResetTableAsync(ExpectedService.Composers);
             await database.ResetTableAsync(ExpectedService.WorkDatas);
             await database.DropTableIfExistsAsync<RepertoireData>();
 

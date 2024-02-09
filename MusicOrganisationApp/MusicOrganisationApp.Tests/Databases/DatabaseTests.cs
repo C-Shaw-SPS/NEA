@@ -9,11 +9,11 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestInsertAsync()
         {
             DatabaseConnection database = new(nameof(TestInsertAsync));
-            await database.DropTableIfExistsAsync<ComposerData>();
-            await database.InsertAsync(ExpectedTables.ComposerData[0]);
-            IEnumerable<ComposerData> actualComposers = await database.GetAllAsync<ComposerData>();
+            await database.DropTableIfExistsAsync<Composer>();
+            await database.InsertAsync(ExpectedTables.Composers[0]);
+            IEnumerable<Composer> actualComposers = await database.GetAllAsync<Composer>();
             Assert.Single(actualComposers);
-            Assert.Contains(ExpectedTables.ComposerData[0], actualComposers);
+            Assert.Contains(ExpectedTables.Composers[0], actualComposers);
         }
 
         [Fact]
@@ -31,10 +31,10 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestInsertAllAsyncAndGetAllAsync()
         {
             DatabaseConnection database = new(nameof(TestInsertAllAsyncAndGetAllAsync));
-            await database.ResetTableAsync(ExpectedTables.ComposerData);
-            IEnumerable<ComposerData> actualComposers = await database.GetAllAsync<ComposerData>();
+            await database.ResetTableAsync(ExpectedTables.Composers);
+            IEnumerable<Composer> actualComposers = await database.GetAllAsync<Composer>();
 
-            CollectionAssert.Equal(ExpectedTables.ComposerData, actualComposers);
+            CollectionAssert.Equal(ExpectedTables.Composers, actualComposers);
         }
 
         [Fact]
@@ -60,14 +60,14 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestDeleteAsync()
         {
             DatabaseConnection database = new(nameof(TestDeleteAsync));
-            await database.ResetTableAsync(ExpectedTables.ComposerData);
-            await database.DeleteAsync(ExpectedTables.ComposerData[0]);
+            await database.ResetTableAsync(ExpectedTables.Composers);
+            await database.DeleteAsync(ExpectedTables.Composers[0]);
 
-            IEnumerable<ComposerData> actualComposers = await database.GetAllAsync<ComposerData>();
-            Assert.DoesNotContain(ExpectedTables.ComposerData[0], actualComposers);
-            for (int i = 1; i < ExpectedTables.ComposerData.Count; ++i)
+            IEnumerable<Composer> actualComposers = await database.GetAllAsync<Composer>();
+            Assert.DoesNotContain(ExpectedTables.Composers[0], actualComposers);
+            for (int i = 1; i < ExpectedTables.Composers.Count; ++i)
             {
-                Assert.Contains(ExpectedTables.ComposerData[i], actualComposers);
+                Assert.Contains(ExpectedTables.Composers[i], actualComposers);
             }
         }
 
@@ -97,9 +97,9 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestNullProperties()
         {
             DatabaseConnection database = new(nameof(TestNullProperties));
-            await database.DropTableIfExistsAsync<ComposerData>();
+            await database.DropTableIfExistsAsync<Composer>();
             await database.InsertAsync(ExpectedTables.NullPropertyComposer);
-            IEnumerable<ComposerData> actualComposers = await database.GetAllAsync<ComposerData>();
+            IEnumerable<Composer> actualComposers = await database.GetAllAsync<Composer>();
             Assert.Single(actualComposers);
             Assert.Contains(ExpectedTables.NullPropertyComposer, actualComposers);
         }
@@ -117,8 +117,8 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestGetNextIdFromEmptyAsync()
         {
             DatabaseConnection database = new(nameof(TestGetNextIdFromEmptyAsync));
-            await database.DropTableIfExistsAsync<ComposerData>();
-            int nextId = await database.GetNextIdAsync<ComposerData>();
+            await database.DropTableIfExistsAsync<Composer>();
+            int nextId = await database.GetNextIdAsync<Composer>();
             Assert.Equal(1, nextId);
         }
 
@@ -127,13 +127,13 @@ namespace MusicOrganisationApp.Tests.Databases
         {
             DatabaseConnection database = new(nameof(TestMultipleTables));
 
-            await database.ResetTableAsync(ExpectedTables.ComposerData);
+            await database.ResetTableAsync(ExpectedTables.Composers);
             await database.ResetTableAsync(ExpectedTables.WorkData);
 
-            IEnumerable<ComposerData> actualComposerData = await database.GetAllAsync<ComposerData>();
+            IEnumerable<Composer> actualComposers = await database.GetAllAsync<Composer>();
             IEnumerable<WorkData> actualWorkData = await database.GetAllAsync<WorkData>();
 
-            CollectionAssert.Equal(ExpectedTables.ComposerData, actualComposerData);
+            CollectionAssert.Equal(ExpectedTables.Composers, actualComposers);
             CollectionAssert.Equal(ExpectedTables.WorkData, actualWorkData);
         }
 
@@ -142,15 +142,15 @@ namespace MusicOrganisationApp.Tests.Databases
         {
             DatabaseConnection database = new(nameof(TestClearOneTable));
 
-            await database.ResetTableAsync(ExpectedTables.ComposerData);
+            await database.ResetTableAsync(ExpectedTables.Composers);
             await database.ResetTableAsync(ExpectedTables.WorkData);
 
-            await database.ClearTableAsync<ComposerData>();
+            await database.ClearTableAsync<Composer>();
 
-            IEnumerable<ComposerData> actualComposerData = await database.GetAllAsync<ComposerData>();
+            IEnumerable<Composer> actualComposers = await database.GetAllAsync<Composer>();
             IEnumerable<WorkData> actualWorkData = await database.GetAllAsync<WorkData>();
 
-            Assert.Empty(actualComposerData);
+            Assert.Empty(actualComposers);
             CollectionAssert.Equal(ExpectedTables.WorkData, actualWorkData);
         }
 
@@ -158,8 +158,8 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestQueryWithoutCreateTableAsync()
         {
             DatabaseConnection database = new(nameof(TestQueryWithoutCreateTableAsync));
-            SqlQuery<ComposerData> sqlQuery = new() { SelectAll = true };
-            IEnumerable<ComposerData> composers = await database.QueryAsync<ComposerData>(sqlQuery);
+            SqlQuery<Composer> sqlQuery = new() { SelectAll = true };
+            IEnumerable<Composer> composers = await database.QueryAsync<Composer>(sqlQuery);
             Assert.Empty(composers);
         }
 
@@ -167,9 +167,9 @@ namespace MusicOrganisationApp.Tests.Databases
         public async Task TestUnsucessfulGetAsnyc()
         {
             DatabaseConnection database = new(nameof(TestUnsucessfulGetAsnyc));
-            await database.ResetTableAsync(ExpectedTables.ComposerData);
-            int id = ExpectedTables.ComposerData.Max(composer => composer.Id) + 1;
-            (bool suceeded, ComposerData actualComposer) = await database.TryGetAsync<ComposerData>(id);
+            await database.ResetTableAsync(ExpectedTables.Composers);
+            int id = ExpectedTables.Composers.Max(composer => composer.Id) + 1;
+            (bool suceeded, Composer actualComposer) = await database.TryGetAsync<Composer>(id);
             Assert.False(suceeded);
             Assert.Equal(new(), actualComposer);
         }

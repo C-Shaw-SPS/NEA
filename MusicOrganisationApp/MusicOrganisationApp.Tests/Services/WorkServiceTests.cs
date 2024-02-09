@@ -89,9 +89,9 @@ namespace MusicOrganisationApp.Tests.Services
             Work updatedWork = new()
             {
                 Id = originalWork.Id,
-                ComposerId = ExpectedService.ComposerDatas[1].Id,
+                ComposerId = ExpectedService.Composers[1].Id,
                 Title = originalWork.Title[1..],
-                ComposerName = ExpectedService.ComposerDatas[1].Name,
+                ComposerName = ExpectedService.Composers[1].Name,
             };
 
             await service.UpdateAsync(updatedWork);
@@ -105,11 +105,11 @@ namespace MusicOrganisationApp.Tests.Services
         private static async Task<(DatabaseConnection database, WorkService service)> GetDatabaseAndWorkServiceAsync(string path, bool insertWorkData)
         {
             DatabaseConnection database = new(path);
-            await database.DropTableIfExistsAsync<ComposerData>();
+            await database.DropTableIfExistsAsync<Composer>();
             await database.DropTableIfExistsAsync<WorkData>();
             await database.DropTableIfExistsAsync<RepertoireData>();
 
-            await database.InsertAllAsync(ExpectedService.ComposerDatas);
+            await database.InsertAllAsync(ExpectedService.Composers);
 
             if (insertWorkData)
             {
