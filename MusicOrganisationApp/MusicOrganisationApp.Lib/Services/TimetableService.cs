@@ -99,6 +99,7 @@ namespace MusicOrganisationApp.Lib.Services
             do
             {
                 daysInWeek.Add(dayInWeek.DayOfWeek, dayInWeek);
+                dayInWeek += _DAY;
             } while (dayInWeek.DayOfWeek != startOfWeek.DayOfWeek);
             return daysInWeek;
         }
