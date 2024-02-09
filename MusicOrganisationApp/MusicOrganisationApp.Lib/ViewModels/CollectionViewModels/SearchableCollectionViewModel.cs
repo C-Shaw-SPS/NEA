@@ -39,7 +39,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         {
             string ordering = _orderings[SelectedOrdering];
             IEnumerable<TModel> values = await SearchService.SearchAsync(SearchText, ordering);
-            ResetCollection(Collection, values);
+            IViewModel.ResetCollection(Collection, values);
         }
 
         async partial void OnSelectedOrderingChanged(string value)

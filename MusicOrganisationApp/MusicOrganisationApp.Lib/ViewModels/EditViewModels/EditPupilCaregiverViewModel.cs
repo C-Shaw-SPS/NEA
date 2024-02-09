@@ -58,11 +58,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private async Task SearchCaregiversAsync()
         {
             IEnumerable<CaregiverData> searchResult = await _caregiverService.SearchAsync(CaregiverSearchText, nameof(CaregiverData.Name));
-            Caregivers.Clear();
-            foreach (CaregiverData caregiver in searchResult)
-            {
-                Caregivers.Add(caregiver);
-            }
+            IViewModel.ResetCollection(Caregivers, searchResult);
         }
 
         private async Task AddNewCaregiverAsync()

@@ -69,13 +69,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private async Task SearchWorksAsync()
         {
-            IEnumerable<Work> works = await _workService.SearchAsync(WorkSearchText, nameof(Work.Title));
-
-            Works.Clear();
-            foreach (Work work in works)
-            {
-                Works.Add(work);
-            }
+            IEnumerable<Work> searchResult = await _workService.SearchAsync(WorkSearchText, nameof(Work.Title));
+            IViewModel.ResetCollection(Works, searchResult);
         }
 
         partial void OnSelectedWorkChanged(Work? value)

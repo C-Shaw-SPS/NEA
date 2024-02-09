@@ -67,15 +67,6 @@ namespace MusicOrganisationApp.Lib.ViewModels
             }
         }
 
-        protected static void ResetCollection<T>(ObservableCollection<T> displayedCollection, IEnumerable<T> newCollection)
-        {
-            displayedCollection.Clear();
-            foreach (T item in newCollection)
-            {
-                displayedCollection.Add(item);
-            }
-        }
-
         public virtual void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (this is IPupilDataViewModel pupilDataViewModel)

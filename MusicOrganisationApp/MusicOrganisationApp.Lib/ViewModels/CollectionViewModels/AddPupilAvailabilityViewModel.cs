@@ -43,7 +43,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         public async Task RefreshAsync()
         {
             IEnumerable<LessonSlotData> lessonSlots = await _service.GetUnusedLessonSlotsAsync();
-            ResetCollection(LessonSlots, lessonSlots);
+            IViewModel.ResetCollection(LessonSlots, lessonSlots);
         }
 
         private async Task SelectAsync()

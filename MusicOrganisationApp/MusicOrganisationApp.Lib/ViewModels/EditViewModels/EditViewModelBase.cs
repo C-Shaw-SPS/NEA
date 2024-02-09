@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
-using System.Runtime.CompilerServices;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {

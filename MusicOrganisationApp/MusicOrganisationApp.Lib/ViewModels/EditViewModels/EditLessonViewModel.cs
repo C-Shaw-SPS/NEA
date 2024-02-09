@@ -58,7 +58,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private async Task SearchPupilsAsync()
         {
             IEnumerable<Pupil> pupils = await _pupilService.SearchAsync(PupilSearchText, nameof(Pupil.Name));
-            ResetCollection(Pupils, pupils);
+            IViewModel.ResetCollection(Pupils, pupils);
         }
 
         protected override bool TrySetNonTimeValuesToSave()
