@@ -35,6 +35,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         public AsyncRelayCommand SearchCommand => _searchCommand;
 
+        public override async Task RefreshAsync()
+        {
+            await SearchAsync();
+        }
+
         private async Task SearchAsync()
         {
             string ordering = _orderings[SelectedOrdering];
