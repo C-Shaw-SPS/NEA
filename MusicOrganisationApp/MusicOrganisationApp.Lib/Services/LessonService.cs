@@ -27,6 +27,7 @@ namespace MusicOrganisationApp.Lib.Services
             sqlQuery.AddColumn<LessonData>(nameof(LessonData.Notes), nameof(Lesson.Notes));
             sqlQuery.AddColumn<Pupil>(nameof(Pupil.Name), nameof(Lesson.PupilName));
             sqlQuery.AddInnerJoin<Pupil, LessonData>(nameof(Pupil.Id), nameof(LessonData.PupilId));
+            sqlQuery.AddOrderByAscending(nameof(Lesson.StartTime));
             return sqlQuery;
         }
 
