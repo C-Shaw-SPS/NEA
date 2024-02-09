@@ -46,7 +46,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _value.PhoneNumber = PhoneNumber;
 
             bool canSave = TrySetNameToSave();
-            return Task.FromResult(canSave);            
+            return Task.FromResult(canSave);
         }
 
         private bool TrySetNameToSave()

@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MusicOrganisationApp.Lib.Databases;
-using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels
 {

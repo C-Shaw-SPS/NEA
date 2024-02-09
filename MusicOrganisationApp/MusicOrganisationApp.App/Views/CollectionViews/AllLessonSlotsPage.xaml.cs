@@ -1,14 +1,13 @@
 using MusicOrganisationApp.Lib.ViewModels.CollectionViewModels;
-using System.Net.WebSockets;
 
 namespace MusicOrganisationApp.App.Views.CollectionViews
 {
     public partial class AllLessonSlotsPage : ContentPage
     {
-    	public AllLessonSlotsPage()
-    	{
-    		InitializeComponent();
-    	}
+        public AllLessonSlotsPage()
+        {
+            InitializeComponent();
+        }
 
         protected override async void OnAppearing()
         {

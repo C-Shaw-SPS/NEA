@@ -4,10 +4,10 @@ namespace MusicOrganisationApp.App.Views.CollectionViews
 {
     public partial class AllPupilCaregiversPage : ContentPage
     {
-    	public AllPupilCaregiversPage()
-    	{
-    		InitializeComponent();
-    	}
+        public AllPupilCaregiversPage()
+        {
+            InitializeComponent();
+        }
 
         protected override async void OnAppearing()
         {

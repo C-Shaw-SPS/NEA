@@ -11,7 +11,7 @@ namespace MusicOrganisationApp.Tests.Services
         public async Task TestInsertWorkAsync()
         {
             (DatabaseConnection database, WorkService service) = await GetDatabaseAndWorkServiceAsync(nameof(TestInsertWorkAsync), false);
-            
+
             Work expectedWork = ExpectedService.Works[0];
             await service.InsertAsync(expectedWork, false);
             IEnumerable<Work> actualWorks = await service.GetAllAsync();

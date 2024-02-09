@@ -22,7 +22,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             _editCommand = new(EditAsync);
         }
 
-        protected abstract IService<TModel> Service { get; } 
+        protected abstract IService<TModel> Service { get; }
 
         public AsyncRelayCommand EditCommand => _editCommand;
 

@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
-using SQLitePCL;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
@@ -122,7 +121,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         {
             if (!IsNumeric(newValue))
             {
-                LessonHours = oldValue?? string.Empty;
+                LessonHours = oldValue ?? string.Empty;
             }
         }
 
@@ -130,7 +129,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         {
             if (!IsNumeric(newValue))
             {
-                LessonMinutes = oldValue?? string.Empty;
+                LessonMinutes = oldValue ?? string.Empty;
             }
         }
     }

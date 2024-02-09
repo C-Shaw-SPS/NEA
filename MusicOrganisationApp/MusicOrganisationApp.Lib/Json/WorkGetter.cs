@@ -1,5 +1,5 @@
-﻿using MusicOrganisationApp.Lib.Tables;
-using MusicOrganisationApp.Lib.Responses;
+﻿using MusicOrganisationApp.Lib.Responses;
+using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.Json
 {

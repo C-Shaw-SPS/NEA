@@ -8,7 +8,7 @@
         private int _caregiverId;
         private string _name = string.Empty;
         private string _email = string.Empty;
-        private string _phoneNumber = string.Empty; 
+        private string _phoneNumber = string.Empty;
 
         public int Id
         {

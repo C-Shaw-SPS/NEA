@@ -1,6 +1,5 @@
 ﻿using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Tables;
-using System.Threading.Channels;
 
 namespace MusicOrganisationApp.Tests.Services
 {

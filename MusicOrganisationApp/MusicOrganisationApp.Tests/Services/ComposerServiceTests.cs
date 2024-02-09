@@ -1,8 +1,6 @@
-﻿using Microsoft.VisualStudio.TestPlatform.PlatformAbstractions;
-using MusicOrganisationApp.Lib.Databases;
+﻿using MusicOrganisationApp.Lib.Databases;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
-using Xunit.Sdk;
 
 namespace MusicOrganisationApp.Tests.Services
 {

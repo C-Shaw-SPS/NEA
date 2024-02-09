@@ -1,5 +1,5 @@
-﻿using SQLite;
-using MusicOrganisationApp.Lib.Databases;
+﻿using MusicOrganisationApp.Lib.Databases;
+using SQLite;
 
 namespace MusicOrganisationApp.Lib.Tables
 {

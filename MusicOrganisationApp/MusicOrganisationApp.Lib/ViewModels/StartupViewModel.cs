@@ -10,7 +10,7 @@ namespace MusicOrganisationApp.Lib.ViewModels
 
         public StartupViewModel()
         {
-            _startupService = new(_database);  
+            _startupService = new(_database);
         }
 
         public static string Route => _ROUTE;

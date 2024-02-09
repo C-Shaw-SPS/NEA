@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
     public partial class EditLessonViewModel : EditLessonViewModelBase<Lesson, LessonData, LessonViewModel>, IQueryAttributable, IViewModel
-    {        
+    {
         private const string _ROUTE = nameof(EditLessonViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit lesson";
         private const string _NEW_PAGE_TITLE = "New lesson";

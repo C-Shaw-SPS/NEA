@@ -1,6 +1,6 @@
 ﻿using MusicOrganisationApp.Lib.Converters;
-using System.Text.Json.Serialization;
 using MusicOrganisationApp.Lib.Tables;
+using System.Text.Json.Serialization;
 
 namespace MusicOrganisationApp.Lib.Responses
 {
