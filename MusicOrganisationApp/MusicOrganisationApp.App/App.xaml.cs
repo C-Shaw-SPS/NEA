@@ -30,7 +30,7 @@ namespace MusicOrganisationApp.App
             RegisterPupilCaregiverRoutes();
             RegisterLessonSlotRoutes();
             RegisterLessonRoutes();
-            RegisterAvaliabilityRoutes();
+            RegisterAvailabilityRoutes();
             RegisterTimetableRoutes();
         }
 
@@ -91,7 +91,7 @@ namespace MusicOrganisationApp.App
             RegisterRoute<AllPupilLessonsViewModel, AllPupilLessonsPage>();
         }
 
-        private void RegisterAvaliabilityRoutes()
+        private void RegisterAvailabilityRoutes()
         {
             RegisterRoute<PupilAvailabilityViewModel, PupilAvailabilityPage>();
             RegisterRoute<AddPupilAvailabilityViewModel, AddPupilAvailabilityPage>();

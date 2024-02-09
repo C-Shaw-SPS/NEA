@@ -61,7 +61,7 @@ namespace MusicOrganisationApp.Tests.Databases
         }
 
         [Fact]
-        public async Task TestPupilAvaliabilitySql()
+        public async Task TestPupilAvailabilitySql()
         {
             await TestType(ExpectedTables.PupilAvaliabilities);
         }

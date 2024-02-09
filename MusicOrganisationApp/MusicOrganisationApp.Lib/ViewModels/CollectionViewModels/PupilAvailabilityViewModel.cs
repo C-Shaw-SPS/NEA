@@ -10,7 +10,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
     {
         private const string _ROUTE = nameof(PupilAvailabilityViewModel);
 
-        private readonly PupilAvaliabilityService _service;
+        private readonly PupilAvailabilityService _service;
         private readonly AsyncRelayCommand _addNewCommand;
         private readonly AsyncRelayCommand _removeCommand;
 
@@ -43,7 +43,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         }
         public async Task RefreshAsync()
         {
-            IEnumerable<LessonSlotData> lessonSlots = await _service.GetPupilAvaliabilityAsync();
+            IEnumerable<LessonSlotData> lessonSlots = await _service.GetPupilAvailabilityAsync();
             ResetCollection(LessonSlots, lessonSlots);
         }
 
@@ -59,7 +59,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         {
             if (SelectedLessonSlot is not null)
             {
-                await _service.RemoveAvaliabilityAsync(SelectedLessonSlot);
+                await _service.RemoveAvailabilityAsync(SelectedLessonSlot);
             }
             await RefreshAsync();
         }

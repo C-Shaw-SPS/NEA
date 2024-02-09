@@ -11,7 +11,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
     {
         private const string _ROUTE = nameof(AddPupilAvailabilityViewModel);
 
-        private readonly PupilAvaliabilityService _service;
+        private readonly PupilAvailabilityService _service;
         private readonly AsyncRelayCommand _selectCommand;
         private readonly AsyncRelayCommand _addNewCommand;
 
@@ -50,7 +50,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         {
             if (SelectedLessonSlot is not null)
             {
-                await _service.AddAvaliabilityAsync(SelectedLessonSlot);
+                await _service.AddAvailabilityAsync(SelectedLessonSlot);
                 await RefreshAsync();
             }
         }

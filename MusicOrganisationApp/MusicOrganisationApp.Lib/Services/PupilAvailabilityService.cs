@@ -3,12 +3,12 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.Services
 {
-    public class PupilAvaliabilityService
+    public class PupilAvailabilityService
     {
         private readonly DatabaseConnection _database;
         private int? _pupilId;
 
-        public PupilAvaliabilityService(DatabaseConnection database)
+        public PupilAvailabilityService(DatabaseConnection database)
         {
             _database = database;
         }
@@ -19,16 +19,16 @@ namespace MusicOrganisationApp.Lib.Services
             set => _pupilId = value;
         }
 
-        public async Task<IEnumerable<LessonSlotData>> GetPupilAvaliabilityAsync()
+        public async Task<IEnumerable<LessonSlotData>> GetPupilAvailabilityAsync()
         {
             SqlQuery<LessonSlotData> sqlQuery = GetSqlQueryWithNoConditions();
-            IEnumerable<LessonSlotData> pupilAvaliability = await _database.QueryAsync<LessonSlotData>(sqlQuery);
-            return pupilAvaliability;
+            IEnumerable<LessonSlotData> pupilAvailability = await _database.QueryAsync<LessonSlotData>(sqlQuery);
+            return pupilAvailability;
         }
 
         public async Task<IEnumerable<LessonSlotData>> GetUnusedLessonSlotsAsync()
         {
-            IEnumerable<LessonSlotData> currentLessonSlots = await GetPupilAvaliabilityAsync();
+            IEnumerable<LessonSlotData> currentLessonSlots = await GetPupilAvailabilityAsync();
             IEnumerable<LessonSlotData> allLessonSlots = await _database.GetAllAsync<LessonSlotData>();
             IEnumerable<LessonSlotData> unusedLessonSlots = GetDifference(allLessonSlots, currentLessonSlots).Order();
             return unusedLessonSlots;
@@ -47,22 +47,22 @@ namespace MusicOrganisationApp.Lib.Services
             return difference;
         }
 
-        public async Task AddAvaliabilityAsync(LessonSlotData lessonSlotData)
+        public async Task AddAvailabilityAsync(LessonSlotData lessonSlotData)
         {
             if (_pupilId is int pupilId)
             {
                 int id = await _database.GetNextIdAsync<PupilAvailability>();
-                PupilAvailability pupilAvaliability = new()
+                PupilAvailability pupilAvailability = new()
                 {
                     Id = id,
                     PupilId = pupilId,
                     LessonSlotId = lessonSlotData.Id
                 };
-                await _database.InsertAsync(pupilAvaliability);
+                await _database.InsertAsync(pupilAvailability);
             }
         }
 
-        public async Task RemoveAvaliabilityAsync(LessonSlotData lessonSlotData)
+        public async Task RemoveAvailabilityAsync(LessonSlotData lessonSlotData)
         {
             DeleteStatement<PupilAvailability> deleteStatement = new();
             deleteStatement.AddWhereEqual<PupilAvailability>(nameof(PupilAvailability.LessonSlotId), lessonSlotData.Id);
