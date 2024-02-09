@@ -11,50 +11,50 @@ namespace MusicOrganisationApp.Lib.Services
         private Stack<(int lessonSlotId, int pupilId)> _stack;
         private readonly Dictionary<int, LessonSlotData> _lessonSlots;
         private readonly Dictionary<int, Pupil> _pupils;
-        private readonly Dictionary<int, HashSet<int>> _pupilLessonSlots;
+        private readonly Dictionary<int, HashSet<int>> _pupilAvailabilities;
         private readonly List<int> _fixedLessonPupilIds;
         private readonly List<int> _variableLessonPupilIds;
         private readonly Dictionary<int, LessonData> _prevTimetable;
         private readonly int _maxLessonSlotId;
 
-        public TimetableGenerator(IEnumerable<Pupil> pupils, IEnumerable<PupilAvailability> pupilLessonSlots, IEnumerable<LessonSlotData> lessonSlots, IEnumerable<LessonData> prevLessons)
+        public TimetableGenerator(IEnumerable<Pupil> pupils, IEnumerable<PupilAvailability> pupilAvailabilities, IEnumerable<LessonSlotData> lessonSlots, IEnumerable<LessonData> prevLessons)
         {
             _timetable = [];
             _stack = [];
             _lessonSlots = lessonSlots.GetDictionary();
             _pupils = pupils.GetDictionary();
-            _pupilLessonSlots = GetPupilLessonSlots(pupilLessonSlots);
-            _fixedLessonPupilIds = GetFixedLessonPupilIds(_pupilLessonSlots);
-            _variableLessonPupilIds = GetVariableLessonPupilIds(_pupilLessonSlots);
+            _pupilAvailabilities = GetPupilAvailabilities(pupilAvailabilities);
+            _fixedLessonPupilIds = GetFixedLessonPupilIds(_pupilAvailabilities);
+            _variableLessonPupilIds = GetVariableLessonPupilIds(_pupilAvailabilities);
             _prevTimetable = GetPrevTimetable(prevLessons);
             _maxLessonSlotId = GetMaxId(lessonSlots);
         }
 
         #region Setup
 
-        private static Dictionary<int, HashSet<int>> GetPupilLessonSlots(IEnumerable<PupilAvailability> pupilLessonSlotList)
+        private static Dictionary<int, HashSet<int>> GetPupilAvailabilities(IEnumerable<PupilAvailability> pupilAvailabilityEnumerable)
         {
-            Dictionary<int, HashSet<int>> pupilLessonSlots = [];
-            foreach (PupilAvailability pupilLessonSlot in pupilLessonSlotList)
+            Dictionary<int, HashSet<int>> pupilAvailabilities = [];
+            foreach (PupilAvailability pupilAvailability in pupilAvailabilityEnumerable)
             {
-                if (pupilLessonSlots.TryGetValue(pupilLessonSlot.PupilId, out HashSet<int>? lessonSlots))
+                if (pupilAvailabilities.TryGetValue(pupilAvailability.PupilId, out HashSet<int>? lessonSlots))
                 {
-                    lessonSlots.Add(pupilLessonSlot.LessonSlotId);
+                    lessonSlots.Add(pupilAvailability.LessonSlotId);
                 }
                 else
                 {
-                    pupilLessonSlots[pupilLessonSlot.PupilId] = [pupilLessonSlot.LessonSlotId];
+                    pupilAvailabilities[pupilAvailability.PupilId] = [pupilAvailability.LessonSlotId];
                 }
             }
-            return pupilLessonSlots;
+            return pupilAvailabilities;
         }
 
-        private static List<int> GetFixedLessonPupilIds(Dictionary<int, HashSet<int>> pupilLessonSlots)
+        private static List<int> GetFixedLessonPupilIds(Dictionary<int, HashSet<int>> pupilAvailabilities)
         {
             List<int> fixedLessonPupilIds = [];
-            foreach (int pupilId in pupilLessonSlots.Keys)
+            foreach (int pupilId in pupilAvailabilities.Keys)
             {
-                if (pupilLessonSlots[pupilId].Count == 1)
+                if (pupilAvailabilities[pupilId].Count == 1)
                 {
                     fixedLessonPupilIds.Add(pupilId);
                 }
@@ -63,12 +63,12 @@ namespace MusicOrganisationApp.Lib.Services
             return fixedLessonPupilIds;
         }
 
-        private static List<int> GetVariableLessonPupilIds(Dictionary<int, HashSet<int>> pupilLessonSlots)
+        private static List<int> GetVariableLessonPupilIds(Dictionary<int, HashSet<int>> pupilAvailabilities)
         {
             List<int> variableLessonPupilIds = [];
-            foreach (int pupilId in pupilLessonSlots.Keys)
+            foreach (int pupilId in pupilAvailabilities.Keys)
             {
-                if (pupilLessonSlots[pupilId].Count > 1)
+                if (pupilAvailabilities[pupilId].Count > 1)
                 {
                     variableLessonPupilIds.Add(pupilId);
                 }
@@ -245,7 +245,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         private bool IsPupilAvaliableInSlot(Pupil pupil, LessonSlotData lessonSlot)
         {
-            HashSet<int> avaliableLessonSlots = _pupilLessonSlots[pupil.Id];
+            HashSet<int> avaliableLessonSlots = _pupilAvailabilities[pupil.Id];
             return avaliableLessonSlots.Contains(lessonSlot.Id);
         }
 

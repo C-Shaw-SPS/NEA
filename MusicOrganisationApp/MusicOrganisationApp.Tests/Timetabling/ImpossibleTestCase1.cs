@@ -100,7 +100,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
             { 2, 2 }
         };
 
-        private static readonly List<PupilAvailability> _pupilLessonSlots = new()
+        private static readonly List<PupilAvailability> _pupilAvailabilities = new()
         {
             new PupilAvailability
             {
@@ -158,6 +158,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
 
         public static Dictionary<int, int>? ExpectedTimetable => _expectedTimeTable;
 
-        public static IEnumerable<PupilAvailability> PupilLessonSlots => _pupilLessonSlots;
+        public static IEnumerable<PupilAvailability> PupilAvailabilities => _pupilAvailabilities;
     }
 }

@@ -42,29 +42,29 @@ namespace MusicOrganisationApp.Tests.Timetabling
             {
                 Id = 4,
                 DayOfWeek = DayOfWeek.Monday,
-                StartTime = new TimeSpan(12, 00, 00),
-                EndTime = new TimeSpan(13, 00, 00)
-            },
-            new LessonSlotData
-            {
-                Id = 5,
-                DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(13, 00, 00),
                 EndTime = new TimeSpan(14, 00, 00)
             },
             new LessonSlotData
             {
-                Id = 6,
+                Id = 5,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(14, 00, 00),
                 EndTime = new TimeSpan(15, 00, 00)
             },
             new LessonSlotData
             {
-                Id = 7,
+                Id = 6,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(15, 00, 00),
                 EndTime = new TimeSpan(16, 00, 00)
+            },
+            new LessonSlotData
+            {
+                Id = 7,
+                DayOfWeek = DayOfWeek.Monday,
+                StartTime = new TimeSpan(16, 00, 00),
+                EndTime = new TimeSpan(17, 00, 00)
             }
         };
 
@@ -180,7 +180,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
             },
         };
 
-        private static readonly List<PupilAvailability> _pupilLessonSlots = new()
+        private static readonly List<PupilAvailability> _pupilAvailabilities = new()
         {
             new PupilAvailability
             {
@@ -316,6 +316,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
 
         public static Dictionary<int, int>? ExpectedTimetable => _expectedTimetable;
 
-        public static IEnumerable<PupilAvailability> PupilLessonSlots => _pupilLessonSlots;
+        public static IEnumerable<PupilAvailability> PupilAvailabilities => _pupilAvailabilities;
     }
 }
