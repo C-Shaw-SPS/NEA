@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Json;
 using MusicOrganisationApp.Lib.Tables;
+using MusicOrganisationApp.Lib.TestData;
 
 namespace MusicOrganisationApp.Lib.ViewModels
 {
@@ -10,11 +11,13 @@ namespace MusicOrganisationApp.Lib.ViewModels
 
         private readonly AsyncRelayCommand _dropTablesCommand;
         private readonly AsyncRelayCommand _resetComposersAndWorksCommand;
+        private readonly AsyncRelayCommand _insertTestDataCommand;
 
         public DeveloperToolsViewModel()
         {
             _dropTablesCommand = new(DropTablesAsync);
             _resetComposersAndWorksCommand = new(ResetComposersAndWorksAsync);
+            _insertTestDataCommand = new(InsertTestDataAsync);
         }
 
         public static string Route => _ROUTE;
@@ -22,6 +25,8 @@ namespace MusicOrganisationApp.Lib.ViewModels
         public AsyncRelayCommand DropTablesCommand => _dropTablesCommand;
 
         public AsyncRelayCommand ResetComposersAndWorksCommand => _resetComposersAndWorksCommand;
+
+        public AsyncRelayCommand InsertTestDataCommand => _insertTestDataCommand;
 
         private async Task DropTablesAsync()
         {
@@ -45,6 +50,15 @@ namespace MusicOrganisationApp.Lib.ViewModels
 
             await _database.ResetTableAsync(composers);
             await _database.ResetTableAsync(workData);
+        }
+
+        private async Task InsertTestDataAsync()
+        {
+            await DropTablesAsync();
+            await _database.InsertAllAsync(TestData1.Pupils);
+            await _database.InsertAllAsync(TestData1.Lessons);
+            await _database.InsertAllAsync(TestData1.LessonSlots);
+            await _database.InsertAllAsync(TestData1.PupilAvailabilities);
         }
     }
 }
