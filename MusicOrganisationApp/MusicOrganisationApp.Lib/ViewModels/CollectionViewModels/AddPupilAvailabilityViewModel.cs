@@ -63,13 +63,5 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             };
             await GoToAsync<EditLessonSlotViewModel>(parameters);
         }
-
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
-        {
-            if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
-            {
-                PupilId = pupilId;
-            }
-        }
     }
 }

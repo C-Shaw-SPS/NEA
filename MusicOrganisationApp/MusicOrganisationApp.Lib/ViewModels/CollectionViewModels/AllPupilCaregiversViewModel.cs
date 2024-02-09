@@ -31,14 +31,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         protected override ISearchService<PupilCaregiver> SearchService => _service;
 
-        public void ApplyQueryAttributes(IDictionary<string, object> query)
-        {
-            if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
-            {
-                PupilId = pupilId;
-            }
-        }
-
         protected override void AddAddNewParameters(Dictionary<string, object> parameters)
         {
             if (PupilId is not null)

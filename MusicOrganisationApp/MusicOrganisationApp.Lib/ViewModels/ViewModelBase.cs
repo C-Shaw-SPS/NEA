@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels
 {
-    public abstract class ViewModelBase : ObservableObject
+    public abstract class ViewModelBase : ObservableObject, IQueryAttributable
     {
         protected const string _GO_BACK = "..";
 
@@ -72,6 +72,14 @@ namespace MusicOrganisationApp.Lib.ViewModels
             foreach (T item in newCollection)
             {
                 displayedCollection.Add(item);
+            }
+        }
+
+        public virtual void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            if (this is IPupilDataViewModel pupilDataViewModel)
+            {
+                pupilDataViewModel.ApplyPupilAttribute(query);
             }
         }
     }

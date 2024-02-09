@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Models;
 using MusicOrganisationApp.Lib.Services;
+using System.Runtime.CompilerServices;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
@@ -82,7 +83,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             await GoBackAsync();
         }
 
-        public async virtual void ApplyQueryAttributes(IDictionary<string, object> query)
+        public override async void ApplyQueryAttributes(IDictionary<string, object> query)
         {
             if (query.TryGetValue(ID_PARAMETER, out object? value) && value is int id)
             {
@@ -92,6 +93,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             {
                 SetIsNew(isNew);
             }
+            base.ApplyQueryAttributes(query);
         }
 
         private async Task SetValue(int id)
