@@ -33,13 +33,5 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             get => _service.PupilId;
             set => _service.PupilId = value;
         }
-
-        protected override void AddAddNewParameters(Dictionary<string, object> parameters)
-        {
-            if (PupilId is not null)
-            {
-                parameters[IPupilDataViewModel.PUPIL_ID_PARAMETER] = PupilId;
-            }
-        }
     }
 }

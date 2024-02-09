@@ -58,10 +58,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             {
                 [EditViewModelBase.IS_NEW_PARAMETER] = true
             };
-            AddAddNewParameters(parameters);
             await GoToAsync<TEditViewModel>(parameters);
         }
-
-        protected virtual void AddAddNewParameters(Dictionary<string, object> parameters) { }
     }
 }

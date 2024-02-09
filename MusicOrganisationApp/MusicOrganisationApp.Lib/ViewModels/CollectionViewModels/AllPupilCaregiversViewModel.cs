@@ -30,13 +30,5 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         }
 
         protected override ISearchService<PupilCaregiver> SearchService => _service;
-
-        protected override void AddAddNewParameters(Dictionary<string, object> parameters)
-        {
-            if (PupilId is not null)
-            {
-                parameters[IPupilDataViewModel.PUPIL_ID_PARAMETER] = PupilId;
-            }
-        }
     }
 }

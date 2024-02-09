@@ -13,5 +13,13 @@
                 PupilId = pupilId;
             }
         }
+
+        public void AddPupilIdParameter(IDictionary<string, object> parameters)
+        {
+            if (PupilId is not null)
+            {
+                parameters[PUPIL_ID_PARAMETER] = PupilId;
+            }
+        }
     }
 }
