@@ -1,64 +1,41 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.VisualBasic;
 using MusicOrganisationApp.Lib.Models;
-using MusicOrganisationApp.Lib.Services;
-using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
-using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public abstract partial class CollectionViewModelBase<TModel, TModelViewModel, TEditViewModel> : ViewModelBase
-        where TModel : class, IIdentifiable, new()
-        where TModelViewModel : IViewModel
-        where TEditViewModel : IViewModel
+    public abstract partial class CollectionViewModelBase<T> : ViewModelBase where T : class, IIdentifiable, new()
     {
-        private readonly AsyncRelayCommand _selectCommand;
         private readonly AsyncRelayCommand _addNewCommand;
 
         [ObservableProperty]
-        private ObservableCollection<TModel> _collection = [];
+        private ObservableCollection<T> _collection = [];
 
         [ObservableProperty]
-        private TModel? _selectedItem;
+        private T? _selectedItem;
 
         public CollectionViewModelBase()
         {
-            _selectCommand = new(SelectAsync);
             _addNewCommand = new(AddNewAsync);
         }
 
-        protected abstract IService<TModel> Service { get; }
-
-        public AsyncRelayCommand SelectCommand => _selectCommand;
-
         public AsyncRelayCommand AddNewCommand => _addNewCommand;
 
-        public virtual async Task RefreshAsync()
-        {
-            IEnumerable<TModel> items = await Service.GetAllAsync();
-            IViewModel.ResetCollection(Collection, items);
-        }
+        protected abstract Task AddNewAsync();
 
-        private async Task SelectAsync()
-        {
-            if (SelectedItem is not null)
-            {
-                Dictionary<string, object> paramters = new()
-                {
-                    [ModelViewModelBase.ID_PARAMETER] = SelectedItem.Id
-                };
-                await GoToAsync<TModelViewModel>(paramters);
-            }
-        }
+        protected abstract Task<IEnumerable<T>> GetAllAsync();
 
-        private async Task AddNewAsync()
+        public async Task RefreshAsync()
         {
-            Dictionary<string, object> parameters = new()
-            {
-                [EditViewModelBase.IS_NEW_PARAMETER] = true
-            };
-            await GoToAsync<TEditViewModel>(parameters);
+            IEnumerable<T> values = await GetAllAsync();
+            IViewModel.ResetCollection(Collection, values);
         }
     }
 }

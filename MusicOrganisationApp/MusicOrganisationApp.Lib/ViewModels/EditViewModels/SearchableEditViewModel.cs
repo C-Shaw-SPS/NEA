@@ -48,7 +48,16 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private async Task SearchAsync()
         {
             IEnumerable<TSearch> searchResult = await SearchService.SearchAsync(SearchText, SearchOrdering);
-            IViewModel.ResetCollection(SearchResult, searchResult);
+            ResetCollection(searchResult);
+        }
+
+        private void ResetCollection(IEnumerable<TSearch> values)
+        {
+            SearchResult.Clear();
+            foreach (TSearch value in values)
+            {
+                SearchResult.Add(value);
+            }
         }
 
         private async Task AddNewSearchItemAsync()

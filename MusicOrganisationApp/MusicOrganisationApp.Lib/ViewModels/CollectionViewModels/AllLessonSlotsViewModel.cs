@@ -6,7 +6,7 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class AllLessonSlotsViewModel : CollectionViewModelBase<LessonSlotData, LessonSlotViewModel, EditLessonSlotViewModel>, IViewModel
+    public partial class AllLessonSlotsViewModel : SelectableCollectionViewModel<LessonSlotData, LessonSlotViewModel, EditLessonSlotViewModel>, IViewModel
     {
         private const string _ROUTE = nameof(AllLessonSlotsViewModel);
 

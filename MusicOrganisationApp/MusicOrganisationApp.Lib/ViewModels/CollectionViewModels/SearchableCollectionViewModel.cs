@@ -5,7 +5,7 @@ using MusicOrganisationApp.Lib.Services;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public abstract partial class SearchableCollectionViewModel<TModel, TModelViewModel, TEditViewModel> : CollectionViewModelBase<TModel, TModelViewModel, TEditViewModel>
+    public abstract partial class SearchableCollectionViewModel<TModel, TModelViewModel, TEditViewModel> : SelectableCollectionViewModel<TModel, TModelViewModel, TEditViewModel>
         where TModel : class, IIdentifiable, new()
         where TModelViewModel : IViewModel
         where TEditViewModel : IViewModel
@@ -24,7 +24,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         {
             _orderings = orderings;
             _selectedOrdering = Orderings.First();
-            _searchCommand = new(SearchAsync);
+            _searchCommand = new(RefreshAsync);
         }
 
         protected abstract ISearchService<TModel> SearchService { get; }
@@ -35,21 +35,16 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         public AsyncRelayCommand SearchCommand => _searchCommand;
 
-        public override async Task RefreshAsync()
-        {
-            await SearchAsync();
-        }
-
-        private async Task SearchAsync()
+        protected override async Task<IEnumerable<TModel>> GetAllAsync()
         {
             string ordering = _orderings[SelectedOrdering];
-            IEnumerable<TModel> values = await SearchService.SearchAsync(SearchText, ordering);
-            IViewModel.ResetCollection(Collection, values);
+            IEnumerable<TModel> searchResult = await SearchService.SearchAsync(SearchText, ordering);
+            return searchResult;
         }
 
         async partial void OnSelectedOrderingChanged(string value)
         {
-            await SearchAsync();
+            await RefreshAsync();
         }
     }
 }

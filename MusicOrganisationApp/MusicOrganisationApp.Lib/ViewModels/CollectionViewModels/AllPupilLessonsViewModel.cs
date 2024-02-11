@@ -5,7 +5,7 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public class AllPupilLessonsViewModel : CollectionViewModelBase<LessonData, LessonViewModel, EditLessonViewModel>, IQueryAttributable, IPupilDataViewModel
+    public class AllPupilLessonsViewModel : SelectableCollectionViewModel<LessonData, LessonViewModel, EditLessonViewModel>, IQueryAttributable, IPupilDataViewModel
     {
         private const string _ROUTE = nameof(AllPupilLessonsViewModel);
 

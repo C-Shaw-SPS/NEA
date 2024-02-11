@@ -6,12 +6,12 @@ namespace MusicOrganisationApp.Lib.ViewModels
     {
         public abstract static string Route { get; }
 
-        public static void ResetCollection<T>(ObservableCollection<T> displayedCollection, IEnumerable<T> newCollection)
+        public static void ResetCollection<T>(ObservableCollection<T> observableCollection, IEnumerable<T> values)
         {
-            displayedCollection.Clear();
-            foreach (T item in newCollection)
+            observableCollection.Clear();
+            foreach (T item in values)
             {
-                displayedCollection.Add(item);
+                observableCollection.Add(item);
             }
         }
     }

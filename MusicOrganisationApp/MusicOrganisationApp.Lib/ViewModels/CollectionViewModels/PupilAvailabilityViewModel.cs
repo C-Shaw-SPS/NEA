@@ -6,12 +6,11 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class PupilAvailabilityViewModel : ViewModelBase, IQueryAttributable, IPupilDataViewModel
+    public partial class PupilAvailabilityViewModel : CollectionViewModelBase<LessonSlotData>, IQueryAttributable, IPupilDataViewModel
     {
         private const string _ROUTE = nameof(PupilAvailabilityViewModel);
 
         private readonly PupilAvailabilityService _service;
-        private readonly AsyncRelayCommand _addNewCommand;
         private readonly AsyncRelayCommand _removeCommand;
 
         [ObservableProperty]
@@ -26,13 +25,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         public PupilAvailabilityViewModel()
         {
             _service = new(_database);
-            _addNewCommand = new(AddNewAsync);
             _removeCommand = new(RemoveAsync);
         }
 
         public static string Route => _ROUTE;
-
-        public AsyncRelayCommand AddNewCommand => _addNewCommand;
 
         public AsyncRelayCommand RemoveCommand => _removeCommand;
 
@@ -41,13 +37,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             get => _service.PupilId;
             set => _service.PupilId = value;
         }
-        public async Task RefreshAsync()
-        {
-            IEnumerable<LessonSlotData> lessonSlots = await _service.GetPupilAvailabilityAsync();
-            IViewModel.ResetCollection(LessonSlots, lessonSlots);
-        }
 
-        private async Task AddNewAsync()
+        protected override async Task AddNewAsync()
         {
             if (PupilId is int pupilId)
             {
@@ -67,6 +58,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         partial void OnSelectedLessonSlotChanged(LessonSlotData? value)
         {
             CanRemove = true;
+        }
+
+        protected override async Task<IEnumerable<LessonSlotData>> GetAllAsync()
+        {
+            IEnumerable<LessonSlotData> lessonSlots = await _service.GetUnusedLessonSlotsAsync();
+            return lessonSlots;
         }
     }
 }

@@ -7,13 +7,12 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class AddPupilAvailabilityViewModel : ViewModelBase, IQueryAttributable, IPupilDataViewModel
+    public partial class AddPupilAvailabilityViewModel : CollectionViewModelBase<LessonSlotData>, IQueryAttributable, IPupilDataViewModel
     {
         private const string _ROUTE = nameof(AddPupilAvailabilityViewModel);
 
         private readonly PupilAvailabilityService _service;
         private readonly AsyncRelayCommand _selectCommand;
-        private readonly AsyncRelayCommand _addNewCommand;
 
         [ObservableProperty]
         private ObservableCollection<LessonSlotData> _lessonSlots = [];
@@ -25,25 +24,16 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         {
             _service = new(_database);
             _selectCommand = new(SelectAsync);
-            _addNewCommand = new(AddNewAsync);
         }
 
         public static string Route => _ROUTE;
 
         public AsyncRelayCommand SelectCommand => _selectCommand;
 
-        public AsyncRelayCommand AddNewCommand => _addNewCommand;
-
         public int? PupilId
         {
             get => _service.PupilId;
             set => _service.PupilId = value;
-        }
-
-        public async Task RefreshAsync()
-        {
-            IEnumerable<LessonSlotData> lessonSlots = await _service.GetUnusedLessonSlotsAsync();
-            IViewModel.ResetCollection(LessonSlots, lessonSlots);
         }
 
         private async Task SelectAsync()
@@ -55,13 +45,19 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             }
         }
 
-        private async Task AddNewAsync()
+        protected override async Task AddNewAsync()
         {
             Dictionary<string, object> parameters = new()
             {
                 [EditViewModelBase.IS_NEW_PARAMETER] = true
             };
             await GoToAsync<EditLessonSlotViewModel>(parameters);
+        }
+
+        protected override async Task<IEnumerable<LessonSlotData>> GetAllAsync()
+        {
+            IEnumerable<LessonSlotData> lessonSlots = await _service.GetUnusedLessonSlotsAsync();
+            return lessonSlots;
         }
     }
 }
