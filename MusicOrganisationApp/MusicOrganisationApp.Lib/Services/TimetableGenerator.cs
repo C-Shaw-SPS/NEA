@@ -51,30 +51,38 @@ namespace MusicOrganisationApp.Lib.Services
 
         private static List<int> GetFixedLessonPupilIds(Dictionary<int, HashSet<int>> pupilAvailabilities)
         {
-            List<int> fixedLessonPupilIds = [];
-            foreach (int pupilId in pupilAvailabilities.Keys)
-            {
-                if (pupilAvailabilities[pupilId].Count == 1)
-                {
-                    fixedLessonPupilIds.Add(pupilId);
-                }
-            }
-            Shuffle(fixedLessonPupilIds);
+            List<int> fixedLessonPupilIds = GetPupilIdsFromCount(pupilAvailabilities, HasExactlyOneLesson);
             return fixedLessonPupilIds;
+        }
+
+        private static bool HasExactlyOneLesson(HashSet<int> lessonSlotIds)
+        {
+            return lessonSlotIds.Count == 1;
         }
 
         private static List<int> GetVariableLessonPupilIds(Dictionary<int, HashSet<int>> pupilAvailabilities)
         {
-            List<int> variableLessonPupilIds = [];
+            List<int> variableLessonPupilIds = GetPupilIdsFromCount(pupilAvailabilities, HasMoreThanOneLesson);
+            return variableLessonPupilIds;
+        }
+
+        private static bool HasMoreThanOneLesson(HashSet<int> lessonSlotIds)
+        {
+            return lessonSlotIds.Count > 1;
+        }
+
+        private static List<int> GetPupilIdsFromCount(Dictionary<int, HashSet<int>> pupilAvailabilities, Func<HashSet<int>, bool> countFunc)
+        {
+            List<int> pupilIds = [];
             foreach (int pupilId in pupilAvailabilities.Keys)
             {
-                if (pupilAvailabilities[pupilId].Count > 1)
+                if (countFunc(pupilAvailabilities[pupilId]))
                 {
-                    variableLessonPupilIds.Add(pupilId);
+                    pupilIds.Add(pupilId);
                 }
             }
-            Shuffle(variableLessonPupilIds);
-            return variableLessonPupilIds;
+            Shuffle(pupilIds);
+            return pupilIds;
         }
 
         private static Dictionary<int, LessonData> GetPrevTimetable(IEnumerable<LessonData> lessons)
