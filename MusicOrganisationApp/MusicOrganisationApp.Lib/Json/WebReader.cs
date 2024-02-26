@@ -2,16 +2,22 @@
 {
     internal static class WebReader
     {
-        public async static Task<string> DownloadText(string url)
+        public async static Task<(bool suceeded, string text)> DownloadText(string url)
         {
-            string text;
             using (HttpClient client = new())
             {
                 HttpRequestMessage message = new(HttpMethod.Get, url);
-                HttpResponseMessage response = await client.SendAsync(message);
-                text = GetDataFromResponse(response);
+                try
+                {
+                    HttpResponseMessage response = await client.SendAsync(message);
+                    string text = GetDataFromResponse(response);
+                    return (true, text);
+                }
+                catch (HttpRequestException)
+                {
+                    return (false, string.Empty);
+                }
             }
-            return text;
         }
 
         private static string GetDataFromResponse(HttpResponseMessage response)
