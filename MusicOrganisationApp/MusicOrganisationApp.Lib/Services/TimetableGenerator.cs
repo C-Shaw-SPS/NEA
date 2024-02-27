@@ -13,8 +13,6 @@ namespace MusicOrganisationApp.Lib.Services
         private readonly Dictionary<int, Pupil> _pupils;
         private readonly Dictionary<int, HashSet<int>> _pupilAvailabilities;
         private readonly List<int> _shuffledPupilIds;
-        private readonly List<int> _fixedLessonPupilIds;
-        private readonly List<int> _variableLessonPupilIds;
         private readonly Dictionary<int, LessonData> _prevTimetable;
         private readonly int _maxLessonSlotId;
 
@@ -26,8 +24,6 @@ namespace MusicOrganisationApp.Lib.Services
             _pupils = pupils.GetDictionary();
             _pupilAvailabilities = GetPupilAvailabilities(pupilAvailabilities);
             _shuffledPupilIds = GetShuffledIds(pupils);
-            _fixedLessonPupilIds = GetFixedLessonPupilIds(_pupilAvailabilities);
-            _variableLessonPupilIds = GetVariableLessonPupilIds(_pupilAvailabilities);
             _prevTimetable = GetPrevTimetable(prevLessons);
             _maxLessonSlotId = GetMaxId(lessonSlots);
         }
@@ -60,42 +56,6 @@ namespace MusicOrganisationApp.Lib.Services
             }
             Shuffle(ids);
             return ids;
-        }
-
-        private static List<int> GetFixedLessonPupilIds(Dictionary<int, HashSet<int>> pupilAvailabilities)
-        {
-            List<int> fixedLessonPupilIds = GetPupilIdsFromCount(pupilAvailabilities, HasExactlyOneLesson);
-            return fixedLessonPupilIds;
-        }
-
-        private static bool HasExactlyOneLesson(HashSet<int> lessonSlotIds)
-        {
-            return lessonSlotIds.Count == 1;
-        }
-
-        private static List<int> GetVariableLessonPupilIds(Dictionary<int, HashSet<int>> pupilAvailabilities)
-        {
-            List<int> variableLessonPupilIds = GetPupilIdsFromCount(pupilAvailabilities, HasMoreThanOneLesson);
-            return variableLessonPupilIds;
-        }
-
-        private static bool HasMoreThanOneLesson(HashSet<int> lessonSlotIds)
-        {
-            return lessonSlotIds.Count > 1;
-        }
-
-        private static List<int> GetPupilIdsFromCount(Dictionary<int, HashSet<int>> pupilAvailabilities, Func<HashSet<int>, bool> countFunc)
-        {
-            List<int> pupilIds = [];
-            foreach (int pupilId in pupilAvailabilities.Keys)
-            {
-                if (countFunc(pupilAvailabilities[pupilId]))
-                {
-                    pupilIds.Add(pupilId);
-                }
-            }
-            Shuffle(pupilIds);
-            return pupilIds;
         }
 
         private static Dictionary<int, LessonData> GetPrevTimetable(IEnumerable<LessonData> lessons)
