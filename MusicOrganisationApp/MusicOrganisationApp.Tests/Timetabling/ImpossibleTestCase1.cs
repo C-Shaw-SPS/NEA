@@ -93,13 +93,6 @@ namespace MusicOrganisationApp.Tests.Timetabling
             },
         };
 
-        private static readonly Dictionary<int, int> _expectedTimeTable = new()
-        {
-            { 0, 0 },
-            { 1, 1 },
-            { 2, 2 }
-        };
-
         private static readonly List<PupilAvailability> _pupilAvailabilities = new()
         {
             new PupilAvailability
@@ -156,7 +149,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
 
         public static IEnumerable<LessonData> PrevLessons => _prevLessons;
 
-        public static Dictionary<int, int>? ExpectedTimetable => _expectedTimeTable;
+        public static Dictionary<int, int> ExpectedTimetable => [];
 
         public static IEnumerable<PupilAvailability> PupilAvailabilities => _pupilAvailabilities;
     }

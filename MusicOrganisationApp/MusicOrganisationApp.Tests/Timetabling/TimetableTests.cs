@@ -46,13 +46,10 @@ namespace MusicOrganisationApp.Tests.Timetabling
             bool suceeded = timetableGenerator.TryGenerateTimetable(out Dictionary<int, int> actualTimetable);
             Assert.Equal(T.IsPossible, suceeded);
 
-            if (T.ExpectedTimetable is not null)
+            foreach (int lessonSlotId in T.ExpectedTimetable.Keys)
             {
-                foreach (int lessonSlotId in T.ExpectedTimetable.Keys)
-                {
-                    Assert.True(actualTimetable.TryGetValue(lessonSlotId, out int pupilId));
-                    Assert.Equal(T.ExpectedTimetable[lessonSlotId], pupilId);
-                }
+                Assert.True(actualTimetable.TryGetValue(lessonSlotId, out int pupilId));
+                Assert.Equal(T.ExpectedTimetable[lessonSlotId], pupilId);
             }
         }
     }

@@ -352,7 +352,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
 
         public static IEnumerable<LessonData> PrevLessons => _prevLessons;
 
-        public static Dictionary<int, int>? ExpectedTimetable => _expectedTimetable;
+        public static Dictionary<int, int> ExpectedTimetable => _expectedTimetable;
 
         public static IEnumerable<PupilAvailability> PupilAvailabilities => _pupilAvailabilities;
     }
