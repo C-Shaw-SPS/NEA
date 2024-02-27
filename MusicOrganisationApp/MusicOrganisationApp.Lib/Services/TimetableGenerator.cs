@@ -12,6 +12,7 @@ namespace MusicOrganisationApp.Lib.Services
         private readonly Dictionary<int, LessonSlot> _lessonSlots;
         private readonly Dictionary<int, Pupil> _pupils;
         private readonly Dictionary<int, HashSet<int>> _pupilAvailabilities;
+        private readonly List<int> _shuffledPupilIds;
         private readonly List<int> _fixedLessonPupilIds;
         private readonly List<int> _variableLessonPupilIds;
         private readonly Dictionary<int, LessonData> _prevTimetable;
@@ -24,6 +25,7 @@ namespace MusicOrganisationApp.Lib.Services
             _lessonSlots = lessonSlots.GetDictionary();
             _pupils = pupils.GetDictionary();
             _pupilAvailabilities = GetPupilAvailabilities(pupilAvailabilities);
+            _shuffledPupilIds = GetShuffledIds(pupils);
             _fixedLessonPupilIds = GetFixedLessonPupilIds(_pupilAvailabilities);
             _variableLessonPupilIds = GetVariableLessonPupilIds(_pupilAvailabilities);
             _prevTimetable = GetPrevTimetable(prevLessons);
@@ -47,6 +49,17 @@ namespace MusicOrganisationApp.Lib.Services
                 }
             }
             return pupilAvailabilities;
+        }
+
+        private static List<int> GetShuffledIds(IEnumerable<IIdentifiable> values)
+        {
+            List<int> ids = [];
+            foreach (IIdentifiable value in values)
+            {
+                ids.Add(value.Id);
+            }
+            Shuffle(ids);
+            return ids;
         }
 
         private static List<int> GetFixedLessonPupilIds(Dictionary<int, HashSet<int>> pupilAvailabilities)
@@ -123,53 +136,44 @@ namespace MusicOrganisationApp.Lib.Services
         public bool TryGenerateTimetable(out Dictionary<int, int> timetable)
         {
             bool suceeded = true;
-            suceeded &= TryInsertFixedLessonPupils();
-            suceeded &= TryInsertVariableLessonPupils();
+            suceeded &= TryInsertPupils();
             timetable = _timetable;
             return suceeded;
         }
 
-        private bool TryInsertFixedLessonPupils()
-        {
-            bool succeeded = true;
-            foreach (int pupilId in _fixedLessonPupilIds)
-            {
-                succeeded &= TryInsertFixedLessonPupil(pupilId);
-            }
-            return succeeded;
-        }
-
-        private bool TryInsertFixedLessonPupil(int pupilId)
-        {
-            bool suceeded = TryGetValidLessonSlot(pupilId, 0, out int lessonSlotId);
-            if (suceeded)
-            {
-                _timetable.Add(lessonSlotId, pupilId);
-            }
-            return suceeded;
-        }
-
-        private bool TryInsertVariableLessonPupils()
+        private bool TryInsertPupils()
         {
             bool suceeded = true;
-            foreach (int pupilId in _variableLessonPupilIds)
+            foreach (int pupilId in _shuffledPupilIds)
             {
-                suceeded &= TryInsertVariableLessonPupil(pupilId);
+                suceeded &= TryInsertNewPupil(pupilId);
             }
             return suceeded;
         }
 
-        private bool TryInsertVariableLessonPupil(int pupilId)
+        private bool TryInsertNewPupil(int pupilId)
         {
-            Dictionary<int, int> currentTimetable = new(_timetable);
-            Stack<(int lessonSlotId, int pupilId)> currentStack = new(_stack);
-            bool suceeded = TryInsertPupil(pupilId, 0);
-            if (!suceeded)
+            if (HasAnyAvailability(pupilId))
             {
-                _timetable = currentTimetable;
-                _stack = currentStack;
+                Dictionary<int, int> currentTimetable = new(_timetable);
+                Stack<(int lessonSlotId, int pupilId)> currentStack = new(_stack);
+                bool suceeded = TryInsertPupil(pupilId, 0);
+                if (!suceeded)
+                {
+                    _timetable = currentTimetable;
+                    _stack = currentStack;
+                }
+                return suceeded;
             }
-            return suceeded;
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool HasAnyAvailability(int pupilId)
+        {
+            return _pupilAvailabilities[pupilId].Count > 0;
         }
 
         private bool TryInsertPupil(int pupilId, int minLessonSlotId)
