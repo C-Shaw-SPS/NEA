@@ -19,18 +19,18 @@ namespace MusicOrganisationApp.Lib.Services
             set => _pupilId = value;
         }
 
-        public async Task<IEnumerable<LessonSlotData>> GetPupilAvailabilityAsync()
+        public async Task<IEnumerable<LessonSlot>> GetPupilAvailabilityAsync()
         {
-            SqlQuery<LessonSlotData> sqlQuery = GetSqlQueryWithNoConditions();
-            IEnumerable<LessonSlotData> pupilAvailability = await _database.QueryAsync<LessonSlotData>(sqlQuery);
+            SqlQuery<LessonSlot> sqlQuery = GetSqlQueryWithNoConditions();
+            IEnumerable<LessonSlot> pupilAvailability = await _database.QueryAsync<LessonSlot>(sqlQuery);
             return pupilAvailability;
         }
 
-        public async Task<IEnumerable<LessonSlotData>> GetUnusedLessonSlotsAsync()
+        public async Task<IEnumerable<LessonSlot>> GetUnusedLessonSlotsAsync()
         {
-            IEnumerable<LessonSlotData> currentLessonSlots = await GetPupilAvailabilityAsync();
-            IEnumerable<LessonSlotData> allLessonSlots = await _database.GetAllAsync<LessonSlotData>();
-            IEnumerable<LessonSlotData> unusedLessonSlots = GetDifference(allLessonSlots, currentLessonSlots).Order();
+            IEnumerable<LessonSlot> currentLessonSlots = await GetPupilAvailabilityAsync();
+            IEnumerable<LessonSlot> allLessonSlots = await _database.GetAllAsync<LessonSlot>();
+            IEnumerable<LessonSlot> unusedLessonSlots = GetDifference(allLessonSlots, currentLessonSlots).Order();
             return unusedLessonSlots;
         }
 
@@ -47,7 +47,7 @@ namespace MusicOrganisationApp.Lib.Services
             return difference;
         }
 
-        public async Task AddAvailabilityAsync(LessonSlotData lessonSlotData)
+        public async Task AddAvailabilityAsync(LessonSlot lessonSlotData)
         {
             if (_pupilId is int pupilId)
             {
@@ -62,7 +62,7 @@ namespace MusicOrganisationApp.Lib.Services
             }
         }
 
-        public async Task RemoveAvailabilityAsync(LessonSlotData lessonSlotData)
+        public async Task RemoveAvailabilityAsync(LessonSlot lessonSlotData)
         {
             DeleteStatement<PupilAvailability> deleteStatement = new();
             deleteStatement.AddWhereEqual<PupilAvailability>(nameof(PupilAvailability.LessonSlotId), lessonSlotData.Id);
@@ -70,17 +70,17 @@ namespace MusicOrganisationApp.Lib.Services
             await _database.ExecuteAsync(deleteStatement);
         }
 
-        private SqlQuery<LessonSlotData> GetSqlQueryWithNoConditions()
+        private SqlQuery<LessonSlot> GetSqlQueryWithNoConditions()
         {
-            SqlQuery<LessonSlotData> sqlQuery = new();
-            sqlQuery.AddColumn<LessonSlotData>(nameof(LessonSlotData.Id));
-            sqlQuery.AddColumn<LessonSlotData>(nameof(LessonSlotData.DayOfWeek));
-            sqlQuery.AddColumn<LessonSlotData>(nameof(LessonSlotData.StartTime));
-            sqlQuery.AddColumn<LessonSlotData>(nameof(LessonSlotData.EndTime));
-            sqlQuery.AddInnerJoin<PupilAvailability, LessonSlotData>(nameof(PupilAvailability.LessonSlotId), nameof(LessonSlotData.Id));
+            SqlQuery<LessonSlot> sqlQuery = new();
+            sqlQuery.AddColumn<LessonSlot>(nameof(LessonSlot.Id));
+            sqlQuery.AddColumn<LessonSlot>(nameof(LessonSlot.DayOfWeek));
+            sqlQuery.AddColumn<LessonSlot>(nameof(LessonSlot.StartTime));
+            sqlQuery.AddColumn<LessonSlot>(nameof(LessonSlot.EndTime));
+            sqlQuery.AddInnerJoin<PupilAvailability, LessonSlot>(nameof(PupilAvailability.LessonSlotId), nameof(LessonSlot.Id));
             sqlQuery.AddWhereEqual<PupilAvailability>(nameof(PupilAvailability.PupilId), _pupilId);
-            sqlQuery.AddOrderByAscending(nameof(LessonSlotData.DayOfWeek));
-            sqlQuery.AddOrderByAscending(nameof(LessonSlotData.StartTime));
+            sqlQuery.AddOrderByAscending(nameof(LessonSlot.DayOfWeek));
+            sqlQuery.AddOrderByAscending(nameof(LessonSlot.StartTime));
             return sqlQuery;
         }
     }

@@ -135,14 +135,14 @@ namespace MusicOrganisationApp.Tests.Services
 
         public static readonly List<PupilCaregiver> Caregivers = GetCaregivers();
 
-        public static readonly LessonSlotData NewLessonSlot = new()
+        public static readonly LessonSlot NewLessonSlot = new()
         {
             DayOfWeek = DayOfWeek.Monday,
             StartTime = new TimeSpan(01, 00, 00),
             EndTime = new TimeSpan(02, 00, 00)
         };
 
-        public static readonly List<LessonSlotData> ClashingLessonSlots = new()
+        public static readonly List<LessonSlot> ClashingLessonSlots = new()
         {
             new()
             {
@@ -188,7 +188,7 @@ namespace MusicOrganisationApp.Tests.Services
             }
         };
 
-        public static readonly List<LessonSlotData> NonClashingLessonSlots = new()
+        public static readonly List<LessonSlot> NonClashingLessonSlots = new()
         {
             new()
             {
@@ -210,7 +210,7 @@ namespace MusicOrganisationApp.Tests.Services
             }
         };
 
-        public static readonly List<LessonSlotData> LessonSlots = GetLessonSlots();
+        public static readonly List<LessonSlot> LessonSlots = GetLessonSlots();
 
         private static List<Pupil> GetPupils(int count)
         {
@@ -333,16 +333,16 @@ namespace MusicOrganisationApp.Tests.Services
             return repertoires;
         }
 
-        private static List<LessonSlotData> GetLessonSlots()
+        private static List<LessonSlot> GetLessonSlots()
         {
-            List<LessonSlotData> lessonSlots = [];
+            List<LessonSlot> lessonSlots = [];
             int id = 0;
-            foreach (LessonSlotData lessonSlot in ClashingLessonSlots)
+            foreach (LessonSlot lessonSlot in ClashingLessonSlots)
             {
                 lessonSlot.Id = id++;
                 lessonSlots.Add(lessonSlot);
             }
-            foreach (LessonSlotData lessonSlot in NonClashingLessonSlots)
+            foreach (LessonSlot lessonSlot in NonClashingLessonSlots)
             {
                 lessonSlot.Id = id++;
                 lessonSlots.Add(lessonSlot);

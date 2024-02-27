@@ -13,14 +13,14 @@ namespace MusicOrganisationApp.Tests.Services
             DayOfWeek dayOfWeek = ExpectedService.NewLessonSlot.DayOfWeek;
             TimeSpan startTime = ExpectedService.NewLessonSlot.StartTime;
             TimeSpan endTime = ExpectedService.NewLessonSlot.EndTime;
-            IEnumerable<LessonSlotData> actualClashingLessonSlots = await service.GetClashingLessonsAsync(dayOfWeek, startTime, endTime, null);
+            IEnumerable<LessonSlot> actualClashingLessonSlots = await service.GetClashingLessonsAsync(dayOfWeek, startTime, endTime, null);
             CollectionAssert.Equal(ExpectedService.ClashingLessonSlots, actualClashingLessonSlots);
         }
 
         private static async Task<(DatabaseConnection database, LessonSlotService service)> GetDatabaseAndService(string path, bool addLessonSlots)
         {
             DatabaseConnection database = new(path);
-            await database.DropTableIfExistsAsync<LessonSlotData>();
+            await database.DropTableIfExistsAsync<LessonSlot>();
             if (addLessonSlots)
             {
                 await database.InsertAllAsync(ExpectedService.LessonSlots);

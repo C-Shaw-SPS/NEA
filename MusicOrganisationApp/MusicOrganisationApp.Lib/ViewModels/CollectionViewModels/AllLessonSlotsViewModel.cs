@@ -6,7 +6,7 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class AllLessonSlotsViewModel : SelectableCollectionViewModel<LessonSlotData, LessonSlotViewModel, EditLessonSlotViewModel>, IViewModel
+    public partial class AllLessonSlotsViewModel : SelectableCollectionViewModel<LessonSlot, LessonSlotViewModel, EditLessonSlotViewModel>, IViewModel
     {
         private const string _ROUTE = nameof(AllLessonSlotsViewModel);
 
@@ -26,7 +26,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         public List<DayOfWeek> DaysOfWeek => _daysOfWeek;
 
-        protected override IService<LessonSlotData> Service => _service;
+        protected override IService<LessonSlot> Service => _service;
 
         async partial void OnSelectedDayOfWeekChanged(DayOfWeek value)
         {

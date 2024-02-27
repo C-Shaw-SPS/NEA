@@ -5,9 +5,9 @@ using SQLite;
 namespace MusicOrganisationApp.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class LessonSlotData : ITable, IEquatable<LessonSlotData>, ILesson<LessonSlotData>, IComparable<LessonSlotData>
+    public class LessonSlot : ITable, IEquatable<LessonSlot>, ILesson<LessonSlot>, IComparable<LessonSlot>
     {
-        private const string _TABLE_NAME = nameof(LessonSlotData);
+        private const string _TABLE_NAME = nameof(LessonSlot);
 
         private int _id;
         private DayOfWeek _dayOfWeek;
@@ -69,7 +69,7 @@ namespace MusicOrganisationApp.Lib.Tables
             return sqlValues;
         }
 
-        public bool Equals(LessonSlotData? other)
+        public bool Equals(LessonSlot? other)
         {
             return other != null
                 && _id == other._id
@@ -78,7 +78,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 && _endTime == other._endTime;
         }
 
-        public int CompareTo(LessonSlotData? other)
+        public int CompareTo(LessonSlot? other)
         {
             int dayComparison;
             if (other is null)

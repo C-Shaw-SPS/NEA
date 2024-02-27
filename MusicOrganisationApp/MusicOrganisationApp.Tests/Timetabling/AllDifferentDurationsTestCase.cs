@@ -8,30 +8,30 @@ namespace MusicOrganisationApp.Tests.Timetabling
 
         #region Data
 
-        private static readonly List<LessonSlotData> _lessonSlots = new()
+        private static readonly List<LessonSlot> _lessonSlots = new()
         {
-            new LessonSlotData
+            new LessonSlot
             {
                 Id = 0,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(09, 00, 00),
                 EndTime = new TimeSpan(09, 15, 00)
             },
-            new LessonSlotData
+            new LessonSlot
             {
                 Id = 1,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(10, 00, 00),
                 EndTime = new TimeSpan(10, 30, 00)
             },
-            new LessonSlotData
+            new LessonSlot
             {
                 Id = 2,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(11, 00, 00),
                 EndTime = new TimeSpan(11, 45, 00)
             },
-            new LessonSlotData
+            new LessonSlot
             {
                 Id = 3,
                 DayOfWeek = DayOfWeek.Monday,
@@ -116,7 +116,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
             int id = 0;
             foreach (Pupil pupil in _pupils)
             {
-                foreach (LessonSlotData lessonSlot in _lessonSlots)
+                foreach (LessonSlot lessonSlot in _lessonSlots)
                 {
                     PupilAvailability pupilAvailability = new()
                     {
@@ -137,7 +137,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
 
         public static IEnumerable<Pupil> Pupils => _pupils;
 
-        public static IEnumerable<LessonSlotData> LessonSlots => _lessonSlots;
+        public static IEnumerable<LessonSlot> LessonSlots => _lessonSlots;
 
         public static IEnumerable<LessonData> PrevLessons => _prevLessons;
 

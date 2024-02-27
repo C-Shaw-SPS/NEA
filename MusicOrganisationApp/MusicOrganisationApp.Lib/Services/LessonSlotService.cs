@@ -3,7 +3,7 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.Services
 {
-    public class LessonSlotService : LessonServiceBase<LessonSlotData, LessonSlotData>
+    public class LessonSlotService : LessonServiceBase<LessonSlot, LessonSlot>
     {
         private DayOfWeek _dayOfWeek = DayOfWeek.Sunday;
 
@@ -25,34 +25,34 @@ namespace MusicOrganisationApp.Lib.Services
             return daysOfWeek;
         }
 
-        protected override SqlQuery<LessonSlotData> GetAllSqlQuery()
+        protected override SqlQuery<LessonSlot> GetAllSqlQuery()
         {
-            SqlQuery<LessonSlotData> sqlQuery = new() { SelectAll = true };
-            sqlQuery.AddWhereEqual<LessonSlotData>(nameof(LessonSlotData.DayOfWeek), _dayOfWeek);
-            sqlQuery.AddOrderByAscending(nameof(LessonSlotData.StartTime));
+            SqlQuery<LessonSlot> sqlQuery = new() { SelectAll = true };
+            sqlQuery.AddWhereEqual<LessonSlot>(nameof(LessonSlot.DayOfWeek), _dayOfWeek);
+            sqlQuery.AddOrderByAscending(nameof(LessonSlot.StartTime));
             return sqlQuery;
         }
 
-        public override async Task<IEnumerable<LessonSlotData>> GetClashingLessonsAsync(object dayOfWeek, TimeSpan startTime, TimeSpan endTime, int? id)
+        public override async Task<IEnumerable<LessonSlot>> GetClashingLessonsAsync(object dayOfWeek, TimeSpan startTime, TimeSpan endTime, int? id)
         {
-            IEnumerable<LessonSlotData> clashingLessonSlots = await GetClashingLessonsAsync(nameof(LessonSlotData.DayOfWeek), dayOfWeek, startTime, endTime, id);
+            IEnumerable<LessonSlot> clashingLessonSlots = await GetClashingLessonsAsync(nameof(LessonSlot.DayOfWeek), dayOfWeek, startTime, endTime, id);
             return clashingLessonSlots;
         }
 
-        protected override LessonSlotData GetTableValue(LessonSlotData value)
+        protected override LessonSlot GetTableValue(LessonSlot value)
         {
             return value;
         }
 
-        public override async Task<(bool, LessonSlotData)> TryGetAsync(int id)
+        public override async Task<(bool, LessonSlot)> TryGetAsync(int id)
         {
-            (bool suceeded, LessonSlotData value) result = await _database.TryGetAsync<LessonSlotData>(id);
+            (bool suceeded, LessonSlot value) result = await _database.TryGetAsync<LessonSlot>(id);
             return result;
         }
 
-        protected override SqlQuery<LessonSlotData> GetSqlQueryWithNoConditions()
+        protected override SqlQuery<LessonSlot> GetSqlQueryWithNoConditions()
         {
-            SqlQuery<LessonSlotData> sqlQuery = new() { SelectAll = true };
+            SqlQuery<LessonSlot> sqlQuery = new() { SelectAll = true };
             return sqlQuery;
         }
     }

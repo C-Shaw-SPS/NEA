@@ -21,7 +21,7 @@ namespace MusicOrganisationApp.Lib.Services
             await DeleteLessonsInRangeAsync(startOfWeek, endOfWeek);
             IEnumerable<Pupil> pupils = await _database.GetAllAsync<Pupil>();
             IEnumerable<PupilAvailability> pupilAvailability = await _database.GetAllAsync<PupilAvailability>();
-            IEnumerable<LessonSlotData> lessonSlots = await _database.GetAllAsync<LessonSlotData>();
+            IEnumerable<LessonSlot> lessonSlots = await _database.GetAllAsync<LessonSlot>();
             IEnumerable<LessonData> prevLessons = await GetLessonsInRangeAsync(weekBefore, startOfWeek);
             TimetableGenerator timetableGenerator = new(pupils, pupilAvailability, lessonSlots, prevLessons);
             bool suceeded = timetableGenerator.TryGenerateTimetable(out Dictionary<int, int> timetable);
@@ -70,9 +70,9 @@ namespace MusicOrganisationApp.Lib.Services
             return sqlQuery;
         }
 
-        private async Task InsertTimetableAsync(DateTime startOfWeek, Dictionary<int, int> timetable, IEnumerable<LessonSlotData> lessonSlotsEnumerable)
+        private async Task InsertTimetableAsync(DateTime startOfWeek, Dictionary<int, int> timetable, IEnumerable<LessonSlot> lessonSlotsEnumerable)
         {
-            Dictionary<int, LessonSlotData> lessonSlots = lessonSlotsEnumerable.GetDictionary();
+            Dictionary<int, LessonSlot> lessonSlots = lessonSlotsEnumerable.GetDictionary();
             Dictionary<DayOfWeek, DateTime> daysInWeek = GetDaysInWeek(startOfWeek);
             List<LessonData> lessons = [];
             int id = await _database.GetNextIdAsync<LessonData>();

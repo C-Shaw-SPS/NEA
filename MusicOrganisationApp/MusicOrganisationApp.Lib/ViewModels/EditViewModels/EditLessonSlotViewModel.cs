@@ -5,7 +5,7 @@ using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditLessonSlotViewModel : EditLessonViewModelBase<LessonSlotData, LessonSlotData, LessonSlotViewModel>, IQueryAttributable, IViewModel
+    public partial class EditLessonSlotViewModel : EditLessonViewModelBase<LessonSlot, LessonSlot, LessonSlotViewModel>, IQueryAttributable, IViewModel
     {
         private const string _ROUTE = nameof(EditLessonSlotViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit lesson slot";
@@ -27,7 +27,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         public List<DayOfWeek> DaysOfWeek => _daysOfWeek;
 
-        protected override LessonServiceBase<LessonSlotData, LessonSlotData> LessonService => _service;
+        protected override LessonServiceBase<LessonSlot, LessonSlot> LessonService => _service;
 
         protected override object SelectedDateObject => DayOfWeek;
 

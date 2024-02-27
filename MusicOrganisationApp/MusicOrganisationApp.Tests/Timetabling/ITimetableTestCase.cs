@@ -10,7 +10,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
 
         public abstract static IEnumerable<PupilAvailability> PupilAvailabilities { get; }
 
-        public abstract static IEnumerable<LessonSlotData> LessonSlots { get; }
+        public abstract static IEnumerable<LessonSlot> LessonSlots { get; }
 
         public abstract static IEnumerable<LessonData> PrevLessons { get; }
 

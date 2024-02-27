@@ -5,7 +5,7 @@ using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 
 namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 {
-    public partial class LessonSlotViewModel : ModelViewModelBase<LessonSlotData, EditLessonSlotViewModel>, IQueryAttributable, IViewModel
+    public partial class LessonSlotViewModel : ModelViewModelBase<LessonSlot, EditLessonSlotViewModel>, IQueryAttributable, IViewModel
     {
         private const string _ROUTE = nameof(LessonSlotViewModel);
 
@@ -27,7 +27,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 
         public static string Route => _ROUTE;
 
-        protected override IService<LessonSlotData> Service => _service;
+        protected override IService<LessonSlot> Service => _service;
 
         protected override void SetDisplayValues()
         {

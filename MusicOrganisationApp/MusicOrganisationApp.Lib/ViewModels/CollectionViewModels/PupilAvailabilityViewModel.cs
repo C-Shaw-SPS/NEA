@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
-    public partial class PupilAvailabilityViewModel : CollectionViewModelBase<LessonSlotData>, IQueryAttributable, IPupilDataViewModel
+    public partial class PupilAvailabilityViewModel : CollectionViewModelBase<LessonSlot>, IQueryAttributable, IPupilDataViewModel
     {
         private const string _ROUTE = nameof(PupilAvailabilityViewModel);
 
@@ -14,10 +14,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         private readonly AsyncRelayCommand _removeCommand;
 
         [ObservableProperty]
-        private ObservableCollection<LessonSlotData> _lessonSlots = [];
+        private ObservableCollection<LessonSlot> _lessonSlots = [];
 
         [ObservableProperty]
-        private LessonSlotData? _selectedLessonSlot;
+        private LessonSlot? _selectedLessonSlot;
 
         [ObservableProperty]
         private bool _canRemove = false;
@@ -55,14 +55,14 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             await RefreshAsync();
         }
 
-        partial void OnSelectedLessonSlotChanged(LessonSlotData? value)
+        partial void OnSelectedLessonSlotChanged(LessonSlot? value)
         {
             CanRemove = true;
         }
 
-        protected override async Task<IEnumerable<LessonSlotData>> GetAllAsync()
+        protected override async Task<IEnumerable<LessonSlot>> GetAllAsync()
         {
-            IEnumerable<LessonSlotData> lessonSlots = await _service.GetUnusedLessonSlotsAsync();
+            IEnumerable<LessonSlot> lessonSlots = await _service.GetUnusedLessonSlotsAsync();
             return lessonSlots;
         }
     }

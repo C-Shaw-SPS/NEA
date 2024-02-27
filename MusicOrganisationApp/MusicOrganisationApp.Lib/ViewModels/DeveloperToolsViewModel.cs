@@ -35,7 +35,7 @@ namespace MusicOrganisationApp.Lib.ViewModels
                 _database.DropTableIfExistsAsync<CaregiverMap>(),
                 _database.DropTableIfExistsAsync<Composer>(),
                 _database.DropTableIfExistsAsync<LessonData>(),
-                _database.DropTableIfExistsAsync<LessonSlotData>(),
+                _database.DropTableIfExistsAsync<LessonSlot>(),
                 _database.DropTableIfExistsAsync<Pupil>(),
                 _database.DropTableIfExistsAsync<PupilAvailability>(),
                 _database.DropTableIfExistsAsync<RepertoireData>(),

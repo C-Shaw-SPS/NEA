@@ -7,58 +7,58 @@ namespace MusicOrganisationApp.Lib.TestData
     {
         #region Data
 
-        private static readonly List<LessonSlotData> _lessonSlots = new()
+        private static readonly List<LessonSlot> _lessonSlots = new()
         {
-            new LessonSlotData
+            new LessonSlot
             {
                 Id = 0,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(09, 00, 00),
                 EndTime = new TimeSpan(10, 00, 00)
             },
-            new LessonSlotData
+            new LessonSlot
             {
                 Id = 1,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(10, 00, 00),
                 EndTime = new TimeSpan(11, 00, 00)
             },
-            new LessonSlotData
+            new LessonSlot
             {
                 Id = 2,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(11, 00, 00),
                 EndTime = new TimeSpan(12, 00, 00)
             },
-            new LessonSlotData
+            new LessonSlot
             {
                 Id = 3,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(12, 00, 00),
                 EndTime = new TimeSpan(13, 00, 00)
             },
-            new LessonSlotData
+            new LessonSlot
             {
                 Id = 4,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(13, 00, 00),
                 EndTime = new TimeSpan(14, 00, 00)
             },
-            new LessonSlotData
+            new LessonSlot
             {
                 Id = 5,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(14, 00, 00),
                 EndTime = new TimeSpan(15, 00, 00)
             },
-            new LessonSlotData
+            new LessonSlot
             {
                 Id = 6,
                 DayOfWeek = DayOfWeek.Monday,
                 StartTime = new TimeSpan(15, 00, 00),
                 EndTime = new TimeSpan(16, 00, 00)
             },
-            new LessonSlotData
+            new LessonSlot
             {
                 Id = 7,
                 DayOfWeek = DayOfWeek.Monday,
@@ -306,7 +306,7 @@ namespace MusicOrganisationApp.Lib.TestData
 
         public static List<LessonData> Lessons => _lessons;
 
-        public static List<LessonSlotData> LessonSlots => _lessonSlots;
+        public static List<LessonSlot> LessonSlots => _lessonSlots;
 
         public static List<Pupil> Pupils => _pupils;
 

@@ -91,9 +91,9 @@ namespace MusicOrganisationApp.Tests.Databases
         };
 
 
-        public static readonly List<LessonSlotData> LessonSlotData = new()
+        public static readonly List<LessonSlot> LessonSlotData = new()
         {
-            new LessonSlotData
+            new LessonSlot
             {
                 Id = 0,
                 DayOfWeek = DayOfWeek.Monday,

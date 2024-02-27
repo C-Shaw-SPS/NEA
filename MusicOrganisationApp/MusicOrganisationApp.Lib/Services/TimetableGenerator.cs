@@ -9,7 +9,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         private Dictionary<int, int> _timetable;
         private Stack<(int lessonSlotId, int pupilId)> _stack;
-        private readonly Dictionary<int, LessonSlotData> _lessonSlots;
+        private readonly Dictionary<int, LessonSlot> _lessonSlots;
         private readonly Dictionary<int, Pupil> _pupils;
         private readonly Dictionary<int, HashSet<int>> _pupilAvailabilities;
         private readonly List<int> _fixedLessonPupilIds;
@@ -17,7 +17,7 @@ namespace MusicOrganisationApp.Lib.Services
         private readonly Dictionary<int, LessonData> _prevTimetable;
         private readonly int _maxLessonSlotId;
 
-        public TimetableGenerator(IEnumerable<Pupil> pupils, IEnumerable<PupilAvailability> pupilAvailabilities, IEnumerable<LessonSlotData> lessonSlots, IEnumerable<LessonData> prevLessons)
+        public TimetableGenerator(IEnumerable<Pupil> pupils, IEnumerable<PupilAvailability> pupilAvailabilities, IEnumerable<LessonSlot> lessonSlots, IEnumerable<LessonData> prevLessons)
         {
             _timetable = [];
             _stack = [];
@@ -239,7 +239,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         private bool IsValidLessonSlotForPupil(int lessonSlotId, Pupil pupil)
         {
-            if (_lessonSlots.TryGetValue(lessonSlotId, out LessonSlotData? lessonSlot))
+            if (_lessonSlots.TryGetValue(lessonSlotId, out LessonSlot? lessonSlot))
             {
                 return IsPupilAvaliableInSlot(pupil, lessonSlot)
                     && IsLongEnoughLessonSlot(pupil, lessonSlot)
@@ -251,18 +251,18 @@ namespace MusicOrganisationApp.Lib.Services
             }
         }
 
-        private bool IsPupilAvaliableInSlot(Pupil pupil, LessonSlotData lessonSlot)
+        private bool IsPupilAvaliableInSlot(Pupil pupil, LessonSlot lessonSlot)
         {
             HashSet<int> avaliableLessonSlots = _pupilAvailabilities[pupil.Id];
             return avaliableLessonSlots.Contains(lessonSlot.Id);
         }
 
-        private static bool IsLongEnoughLessonSlot(Pupil pupil, LessonSlotData lessonSlot)
+        private static bool IsLongEnoughLessonSlot(Pupil pupil, LessonSlot lessonSlot)
         {
             return pupil.LessonDuration <= lessonSlot.Duration;
         }
 
-        private bool IsDifferentSlotIfNeeded(Pupil pupil, LessonSlotData lessonSlot)
+        private bool IsDifferentSlotIfNeeded(Pupil pupil, LessonSlot lessonSlot)
         {
             if (pupil.NeedsDifferentTimes && _prevTimetable.TryGetValue(pupil.Id, out LessonData? prevLesson))
             {
@@ -274,7 +274,7 @@ namespace MusicOrganisationApp.Lib.Services
             }
         }
 
-        private bool IsOverlapping(LessonSlotData lessonSlot, LessonData prevLesson)
+        private bool IsOverlapping(LessonSlot lessonSlot, LessonData prevLesson)
         {
             bool isOverlapping = lessonSlot.DayOfWeek == prevLesson.Date.DayOfWeek
                 && ((lessonSlot.StartTime <= prevLesson.StartTime && prevLesson.StartTime < lessonSlot.EndTime)
