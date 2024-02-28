@@ -9,20 +9,24 @@ namespace MusicOrganisationApp.Lib.ViewModels
 
         private readonly string _path;
         private readonly bool _isTesting;
+        private bool _isCurrentViewModel = true;
         protected readonly DatabaseConnection _database;
 
-        public ViewModelBase()
-        {
-            _path = Path.Combine(FileSystem.AppDataDirectory, DatabaseProperties.NAME);
-            _isTesting = false;
-            _database = new(_path);
-        }
+        public ViewModelBase() : this(GetDefaultPath(), false) { }
 
         public ViewModelBase(string path, bool isTesting)
         {
             _path = SqlFormatting.FormatAsDatabasePath(path);
             _isTesting = isTesting;
-            _database = new(path);
+            _database = new(_path);
+        }
+
+        public bool IsCurrentViewModel => _isCurrentViewModel;
+
+        private static string GetDefaultPath()
+        {
+            string path = Path.Combine(FileSystem.AppDataDirectory, DatabaseProperties.NAME);
+            return path;
         }
 
         protected async Task GoToAsync<TViewModel>(Dictionary<string, object> parameters) where TViewModel : IViewModel
@@ -56,6 +60,7 @@ namespace MusicOrganisationApp.Lib.ViewModels
             {
                 await Shell.Current.GoToAsync(route);
             }
+            _isCurrentViewModel = false;
         }
 
         private async Task GoToAsync(string route, Dictionary<string, object> parameters)
@@ -64,14 +69,21 @@ namespace MusicOrganisationApp.Lib.ViewModels
             {
                 await Shell.Current.GoToAsync(route, parameters);
             }
+            _isCurrentViewModel = false;
         }
 
-        public virtual void ApplyQueryAttributes(IDictionary<string, object> query)
+        public virtual Task ApplyQueryAttributesAsync(IDictionary<string, object> query)
         {
             if (this is IPupilDataViewModel pupilDataViewModel)
             {
                 pupilDataViewModel.ApplyPupilAttribute(query);
             }
+            return Task.CompletedTask;
+        }
+
+        public async void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            await ApplyQueryAttributesAsync(query);
         }
 
         private void AddParameters(IDictionary<string, object> parameters)

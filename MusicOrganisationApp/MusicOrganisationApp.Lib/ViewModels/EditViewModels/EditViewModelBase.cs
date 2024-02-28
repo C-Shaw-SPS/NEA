@@ -12,6 +12,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         public const string ID_PARAMETER = nameof(ID_PARAMETER);
         public const string IS_NEW_PARAMETER = nameof(IS_NEW_PARAMETER);
 
+        public EditViewModelBase() { }
+
+        public EditViewModelBase(string path, bool isTesting) : base(path, isTesting) { }
+
         protected static bool IsNumeric(string value)
         {
             foreach (char c in value)
@@ -51,6 +55,15 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _deleteCommand = new(DeleteAsync);
         }
 
+        public EditViewModelBase(string editPageTitle, string newPageTitle, string path, bool isTesting) : base(path, isTesting)
+        {
+            _editPageTitle = editPageTitle;
+            _newPageTitle = newPageTitle;
+
+            _trySaveCommand = new(TrySaveAsync);
+            _deleteCommand = new(DeleteAsync);
+        }
+
         public AsyncRelayCommand TrySaveCommand => _trySaveCommand;
 
         public AsyncRelayCommand DeleteCommand => _deleteCommand;
@@ -82,7 +95,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             await GoBackAsync();
         }
 
-        public override async void ApplyQueryAttributes(IDictionary<string, object> query)
+        public override async Task ApplyQueryAttributesAsync(IDictionary<string, object> query)
         {
             if (query.TryGetValue(ID_PARAMETER, out object? value) && value is int id)
             {
@@ -92,7 +105,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             {
                 SetIsNew(isNew);
             }
-            base.ApplyQueryAttributes(query);
+            await base.ApplyQueryAttributesAsync(query);
         }
 
         private async Task SetValue(int id)
