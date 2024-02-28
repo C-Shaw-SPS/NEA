@@ -33,7 +33,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private TModel? _selectedClashingLesson;
 
-        protected EditLessonViewModelBase(string modelRoute, string editPageTitle, string newPageTitle) : base(editPageTitle, newPageTitle)
+        public EditLessonViewModelBase(string modelRoute, string editPageTitle, string newPageTitle) : base(editPageTitle, newPageTitle)
         {
             _modelRoute = modelRoute;
             _goToClashingLessonCommand = new(GoToClashingLessonAsync);

@@ -39,13 +39,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 
         protected virtual void AddEditRouteParameters(Dictionary<string, object> parameters) { }
 
-        public override async void ApplyQueryAttributes(IDictionary<string, object> query)
+        public override async Task ApplyQueryAttributesAsync(IDictionary<string, object> query)
         {
             if (query.TryGetValue(ID_PARAMETER, out object? value) && value is int id)
             {
                 await SetValueAsync(id);
             }
-            base.ApplyQueryAttributes(query);
+            await base.ApplyQueryAttributesAsync(query);
         }
 
         private async Task SetValueAsync(int id)

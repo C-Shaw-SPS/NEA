@@ -43,13 +43,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             Name = _value.Name;
         }
 
-        public override void ApplyQueryAttributes(IDictionary<string, object> query)
+        public override async Task ApplyQueryAttributesAsync(IDictionary<string, object> query)
         {
             if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
             {
                 _pupilId = pupilId;
             }
-            base.ApplyQueryAttributes(query);
+            await base.ApplyQueryAttributesAsync(query);
         }
 
         protected override void UpdateSelectedItemText(CaregiverData value)

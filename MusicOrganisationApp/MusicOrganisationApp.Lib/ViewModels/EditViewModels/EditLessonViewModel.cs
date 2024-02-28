@@ -99,7 +99,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
         }
 
-        public override async void ApplyQueryAttributes(IDictionary<string, object> query)
+        public override async Task ApplyQueryAttributesAsync(IDictionary<string, object> query)
         {
             if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
             {
@@ -114,7 +114,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
                     return;
                 }
             }
-            base.ApplyQueryAttributes(query);
+            await base.ApplyQueryAttributesAsync(query);
         }
     }
 }
