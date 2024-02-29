@@ -26,7 +26,7 @@ namespace MusicOrganisationApp.Tests.Services
             service.PupilId = expectedPupil.Id;
             IEnumerable<PupilCaregiver> expectedCaregivers = ExpectedService.Caregivers.Where(c => c.PupilId == expectedPupil.Id);
             IEnumerable<PupilCaregiver> actualCaregivers = await service.SearchAsync(string.Empty, nameof(PupilCaregiver.Id));
-            CollectionAssert.Equal(expectedCaregivers, actualCaregivers);
+            CollectionAssert.EqualContents(expectedCaregivers, actualCaregivers);
         }
 
         private static async Task<(DatabaseConnection database, PupilCaregiverService service)> GetDatabaseAndService(string path, bool insertCaregiverMaps)

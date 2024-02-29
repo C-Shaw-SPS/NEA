@@ -64,7 +64,7 @@ namespace MusicOrganisationApp.Tests.Databases
             DatabaseConnection database = new(nameof(TableTests));
             await database.ResetTableAsync(expectedItems);
             IEnumerable<T> actualItems = await database.GetAllAsync<T>();
-            CollectionAssert.Equal(expectedItems, actualItems);
+            CollectionAssert.EqualContents(expectedItems, actualItems);
         }
     }
 }

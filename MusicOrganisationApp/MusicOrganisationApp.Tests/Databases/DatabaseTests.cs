@@ -34,7 +34,7 @@ namespace MusicOrganisationApp.Tests.Databases
             await database.ResetTableAsync(ExpectedTables.Composers);
             IEnumerable<Composer> actualComposers = await database.GetAllAsync<Composer>();
 
-            CollectionAssert.Equal(ExpectedTables.Composers, actualComposers);
+            CollectionAssert.EqualContents(ExpectedTables.Composers, actualComposers);
         }
 
         [Fact]
@@ -133,8 +133,8 @@ namespace MusicOrganisationApp.Tests.Databases
             IEnumerable<Composer> actualComposers = await database.GetAllAsync<Composer>();
             IEnumerable<WorkData> actualWorkData = await database.GetAllAsync<WorkData>();
 
-            CollectionAssert.Equal(ExpectedTables.Composers, actualComposers);
-            CollectionAssert.Equal(ExpectedTables.WorkData, actualWorkData);
+            CollectionAssert.EqualContents(ExpectedTables.Composers, actualComposers);
+            CollectionAssert.EqualContents(ExpectedTables.WorkData, actualWorkData);
         }
 
         [Fact]
@@ -151,7 +151,7 @@ namespace MusicOrganisationApp.Tests.Databases
             IEnumerable<WorkData> actualWorkData = await database.GetAllAsync<WorkData>();
 
             Assert.Empty(actualComposers);
-            CollectionAssert.Equal(ExpectedTables.WorkData, actualWorkData);
+            CollectionAssert.EqualContents(ExpectedTables.WorkData, actualWorkData);
         }
 
         [Fact]

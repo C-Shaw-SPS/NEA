@@ -27,7 +27,7 @@ namespace MusicOrganisationApp.Tests.Services
 
             IEnumerable<Work> actualWorks = await service.GetAllAsync();
 
-            CollectionAssert.Equal(ExpectedService.Works, actualWorks);
+            CollectionAssert.EqualContents(ExpectedService.Works, actualWorks);
         }
 
         [Fact]

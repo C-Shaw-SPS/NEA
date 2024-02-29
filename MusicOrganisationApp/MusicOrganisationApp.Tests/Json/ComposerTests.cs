@@ -21,7 +21,7 @@ namespace MusicOrganisationApp.Tests.Json
         {
             IEnumerable<Composer> actualComposers = ComposerGetter.GetFromFile(_RESPONSE_PATH);
 
-            CollectionAssert.Equal(ExpectedJson.ResponseComposers, actualComposers);
+            CollectionAssert.EqualContents(ExpectedJson.ResponseComposers, actualComposers);
         }
     }
 }

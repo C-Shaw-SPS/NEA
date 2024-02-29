@@ -25,7 +25,7 @@ namespace MusicOrganisationApp.Tests.Services
         {
             (DatabaseConnection dataase, RepertoireService service) = await GetDatabaseAndService(nameof(TestGetAllRepertoiresAsync), true);
             IEnumerable<Repertoire> actualRepertoires = await service.GetAllAsync();
-            CollectionAssert.Equal(ExpectedService.Repertoires, actualRepertoires);
+            CollectionAssert.EqualContents(ExpectedService.Repertoires, actualRepertoires);
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace MusicOrganisationApp.Tests.Services
             service.PupilId = pupilId;
             IEnumerable<Repertoire> expectedRepertoires = ExpectedService.Repertoires.Where(r => r.PupilId == pupilId);
             IEnumerable<Repertoire> actualRepertoires = await service.SearchAsync(string.Empty, nameof(Repertoire.Title));
-            CollectionAssert.Equal(expectedRepertoires, actualRepertoires);
+            CollectionAssert.EqualContents(expectedRepertoires, actualRepertoires);
         }
 
         private static async Task<(DatabaseConnection database, RepertoireService service)> GetDatabaseAndService(string path, bool insertRepertoireData)

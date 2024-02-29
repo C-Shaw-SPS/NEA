@@ -20,7 +20,7 @@ namespace MusicOrganisationApp.Tests.Json
         public void TestWorkResponse()
         {
             IEnumerable<WorkData> actualWorks = WorkGetter.GetFromFile(RESPONSE_PATH);
-            CollectionAssert.Equal(ExpectedJson.ResponseWorks, actualWorks);
+            CollectionAssert.EqualContents(ExpectedJson.ResponseWorks, actualWorks);
         }
     }
 }

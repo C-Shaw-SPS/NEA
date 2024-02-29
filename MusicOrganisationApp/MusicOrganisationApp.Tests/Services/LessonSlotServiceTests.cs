@@ -14,7 +14,7 @@ namespace MusicOrganisationApp.Tests.Services
             TimeSpan startTime = ExpectedService.NewLessonSlot.StartTime;
             TimeSpan endTime = ExpectedService.NewLessonSlot.EndTime;
             IEnumerable<LessonSlot> actualClashingLessonSlots = await service.GetClashingLessonsAsync(dayOfWeek, startTime, endTime, null);
-            CollectionAssert.Equal(ExpectedService.ClashingLessonSlots, actualClashingLessonSlots);
+            CollectionAssert.EqualContents(ExpectedService.ClashingLessonSlots, actualClashingLessonSlots);
         }
 
         private static async Task<(DatabaseConnection database, LessonSlotService service)> GetDatabaseAndService(string path, bool addLessonSlots)
