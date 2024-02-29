@@ -26,6 +26,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             _addNewCommand = new(AddNewAsync);
         }
 
+        public CollectionViewModelBase(string path, bool isTesting) : base(path, isTesting)
+        {
+            _addNewCommand = new(AddNewAsync);
+        }
+
         public AsyncRelayCommand AddNewCommand => _addNewCommand;
 
         protected abstract Task AddNewAsync();

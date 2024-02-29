@@ -20,7 +20,14 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         [ObservableProperty]
         private string _selectedOrdering;
 
-        protected SearchableCollectionViewModel(Dictionary<string, string> orderings) : base()
+        public SearchableCollectionViewModel(Dictionary<string, string> orderings) : base()
+        {
+            _orderings = orderings;
+            _selectedOrdering = Orderings.First();
+            _searchCommand = new(RefreshAsync);
+        }
+
+        public SearchableCollectionViewModel(Dictionary<string, string> orderings, string path, bool isTesting) : base(path, isTesting)
         {
             _orderings = orderings;
             _selectedOrdering = Orderings.First();

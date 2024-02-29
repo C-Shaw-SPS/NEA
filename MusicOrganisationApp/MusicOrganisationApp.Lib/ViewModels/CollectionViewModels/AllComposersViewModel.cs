@@ -23,6 +23,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             _service = new(_database);
         }
 
+        public AllComposersViewModel(string path, bool isTesting) : base(_orderings, path, isTesting)
+        {
+            _service = new(_database);
+        }
+
         public static string Route => _ROUTE;
 
         protected override ISearchService<Composer> SearchService => _service;

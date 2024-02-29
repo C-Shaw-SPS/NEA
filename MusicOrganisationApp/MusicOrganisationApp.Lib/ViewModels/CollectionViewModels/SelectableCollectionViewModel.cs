@@ -23,6 +23,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             _selectCommand = new(SelectAsync);
         }
 
+        public SelectableCollectionViewModel(string path, bool isTesting) : base(path, isTesting)
+        {
+            _selectCommand = new(SelectAsync);
+        }
+
         protected abstract IService<TModel> Service { get; }
 
         public AsyncRelayCommand SelectCommand => _selectCommand;
