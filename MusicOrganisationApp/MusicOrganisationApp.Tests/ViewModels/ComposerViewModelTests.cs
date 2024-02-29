@@ -6,27 +6,24 @@ namespace MusicOrganisationApp.Tests.ViewModels
 {
     public class ComposerViewModelTests
     {
-        [Theory]
-        [InlineData(0)]
-        [InlineData(1)]
-        [InlineData(2)]
-        [InlineData(3)]
-        [InlineData(4)]
-        public async Task TestComposerViewModelAsync(int i)
+        [Fact]
+        public async Task TestComposerViewModelAsync()
         {
             DatabaseConnection database = new(nameof(TestComposerViewModelAsync));
             await database.ResetTableAsync(ExpectedViewModels.Composers);
             ComposerViewModel viewModel = new(nameof(TestComposerViewModelAsync), true);
-            Composer expectedComposer = ExpectedViewModels.Composers[i];
-            Dictionary<string, object> query = new()
+            foreach (Composer expectedComposer in ExpectedViewModels.Composers)
             {
-                [ModelViewModelBase.ID_PARAMETER] = expectedComposer.Id
-            };
-            await viewModel.ApplyQueryAttributesAsync(query);
-            Assert.Equal(expectedComposer.Name, viewModel.Name);
-            Assert.Equal(expectedComposer.BirthYear.ToString(), viewModel.BirthYear);
-            Assert.Equal(expectedComposer.DeathYear.ToString(), viewModel.DeathYear);
-            Assert.Equal(expectedComposer.Era, viewModel.Era);
+                Dictionary<string, object> query = new()
+                {
+                    [ModelViewModelBase.ID_PARAMETER] = expectedComposer.Id
+                };
+                await viewModel.ApplyQueryAttributesAsync(query);
+                Assert.Equal(expectedComposer.Name, viewModel.Name);
+                Assert.Equal(expectedComposer.BirthYear.ToString(), viewModel.BirthYear);
+                Assert.Equal(expectedComposer.DeathYear.ToString(), viewModel.DeathYear);
+                Assert.Equal(expectedComposer.Era, viewModel.Era);
+            }
         }
     }
 }
