@@ -26,7 +26,7 @@ namespace MusicOrganisationApp.Tests.Databases
             {
                 Id = 0,
                 Name = "Caregiver 0",
-                Email = "caregiver0@email.com",
+                EmailAddress = "caregiver0@email.com",
                 PhoneNumber = "0123456789"
             },
             new CaregiverData
@@ -134,7 +134,7 @@ namespace MusicOrganisationApp.Tests.Databases
                 NeedsDifferentTimes = true,
                 LessonDuration = TimeSpan.FromHours(1),
                 PhoneNumber = "0123456789",
-                Email = "pupil0@email.com"
+                EmailAddress = "pupil0@email.com"
             },
             new Pupil
             {
@@ -193,7 +193,7 @@ namespace MusicOrganisationApp.Tests.Databases
             Id = CaregiverMaps[0].CaregiverId,
             Description = CaregiverMaps[0].Description,
             Name = CaregiverData[0].Name,
-            Email = CaregiverData[0].Email,
+            EmailAddress = CaregiverData[0].EmailAddress,
             PhoneNumber = CaregiverData[0].PhoneNumber
         };
 

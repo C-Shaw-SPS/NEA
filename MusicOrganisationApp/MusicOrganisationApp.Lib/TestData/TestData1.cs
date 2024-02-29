@@ -319,7 +319,7 @@ namespace MusicOrganisationApp.Lib.TestData
                 int id = pupil.Id;
                 pupil.Name = $"Pupil {id}";
                 pupil.Level = $"Grade {id}";
-                pupil.Email = $"pupil{id}@email.com";
+                pupil.EmailAddress = $"pupil{id}@email.com";
                 pupil.PhoneNumber = $"000{id}";
                 pupil.Notes = $"Notes {id}";
             }

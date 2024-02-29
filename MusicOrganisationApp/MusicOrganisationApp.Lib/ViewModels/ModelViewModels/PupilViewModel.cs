@@ -32,7 +32,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         private string _lessonDuration = string.Empty;
 
         [ObservableProperty]
-        private string _email = string.Empty;
+        private string _emailAddress = string.Empty;
 
         [ObservableProperty]
         private string _phoneNumber = string.Empty;
@@ -67,7 +67,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             Level = _value.Level;
             NeedsDifferentTimes = _value.NeedsDifferentTimes;
             LessonDuration = _value.LessonDuration.ToString(_TIMESPAN_FORMAT);
-            Email = _value.Email;
+            EmailAddress = _value.EmailAddress;
             PhoneNumber = _value.PhoneNumber;
             Notes = _value.Notes;
         }

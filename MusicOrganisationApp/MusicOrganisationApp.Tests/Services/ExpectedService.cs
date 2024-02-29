@@ -221,11 +221,11 @@ namespace MusicOrganisationApp.Tests.Services
                 {
                     Id = i,
                     Name = $"Pupil {i}",
-                    Level = $"Level {i}",
+                    Level = $"Grade {i}",
                     NeedsDifferentTimes = Convert.ToBoolean(i % 2),
                     LessonDuration = new TimeSpan(i, 0, 0),
-                    Email = $"Email {i}",
-                    PhoneNumber = $"Phone number {i}",
+                    EmailAddress = $"pupil{i}@email.com",
+                    PhoneNumber = $"000{i}",
                     Notes = $"Notes {i}"
                 };
                 pupils.Add(pupil);
@@ -242,8 +242,8 @@ namespace MusicOrganisationApp.Tests.Services
                 {
                     Id = i,
                     Name = $"Caregiver {i}",
-                    PhoneNumber = $"Phone number {i}",
-                    Email = $"Email {i}"
+                    PhoneNumber = $"000{i}",
+                    EmailAddress = $"caregiver{i}@email.com"
                 };
                 caregiverData.Add(caregiver);
             }
@@ -276,7 +276,7 @@ namespace MusicOrganisationApp.Tests.Services
                 {
                     Id = caregiverData.Id,
                     Name = caregiverData.Name,
-                    Email = caregiverData.Email,
+                    EmailAddress = caregiverData.EmailAddress,
                     PhoneNumber = caregiverData.PhoneNumber,
                     CaregiverId = caregiverMap.Id,
                     Description = caregiverMap.Description,

@@ -96,12 +96,12 @@
             <Label
                 Grid.Row="4"
                 Grid.Column="0"
-                Text="Email:"
+                Text="Email address:"
                 VerticalOptions="Center"/>
             <Label
                 Grid.Row="4"
                 Grid.Column="1"
-                Text="{Binding Email}"
+                Text="{Binding EmailAddress}"
                 VerticalOptions="Center"/>
 
             <Label

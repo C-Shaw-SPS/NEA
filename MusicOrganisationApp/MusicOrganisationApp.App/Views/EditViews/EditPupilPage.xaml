@@ -111,13 +111,18 @@
             <Label
                 Grid.Row="4"
                 Grid.Column="0"
-                Text="Email: "
+                Text="Email address:"
                 VerticalOptions="Center"/>
             <Entry
                 Grid.Row="4"
                 Grid.Column="1"
                 Grid.ColumnSpan="4"
-                Text="{Binding Email}"
+                Text="{Binding EmailAddress}"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="4"
+                Grid.Column="5"
+                Text="{Binding EmailAddressError}"
                 VerticalOptions="Center"/>
 
             <Label
@@ -130,6 +135,11 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="4"
                 Text="{Binding PhoneNumber}"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="5"
+                Grid.Column="5"
+                Text="{Binding PhoneNumberError}"
                 VerticalOptions="Center"/>
 
             <Label

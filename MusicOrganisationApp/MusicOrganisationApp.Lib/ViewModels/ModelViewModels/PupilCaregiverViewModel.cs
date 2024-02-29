@@ -17,7 +17,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         private string _name = string.Empty;
 
         [ObservableProperty]
-        private string _email = string.Empty;
+        private string _emailAddress = string.Empty;
 
         [ObservableProperty]
         private string _phoneNumber = string.Empty;
@@ -49,7 +49,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         protected override void SetDisplayValues()
         {
             Name = _value.Name;
-            Email = _value.Email;
+            EmailAddress = _value.EmailAddress;
             PhoneNumber = _value.PhoneNumber;
             Description = _value.Description;
         }

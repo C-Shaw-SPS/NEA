@@ -62,7 +62,7 @@
                             Text="{Binding Name}"
                             FontSize="22"/>
                         <Label
-                            Text="{Binding Email}"
+                            Text="{Binding EmailAddress}"
                             FontSize="14"
                             TextColor="Silver"/>
                         <Label
