@@ -36,6 +36,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             _service = new(_database);
         }
 
+        public EditPupilViewModel(string path, bool isTesting) : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE, path, isTesting)
+        {
+            _service = new(_database);    
+        }
+
         public static string Route => _ROUTE;
 
         protected override IService<Pupil> Service => _service;

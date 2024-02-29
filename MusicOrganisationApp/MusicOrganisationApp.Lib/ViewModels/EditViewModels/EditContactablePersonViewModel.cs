@@ -28,6 +28,12 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         public EditContactablePersonViewModel(string editPageTitle, string newPageTitle) : base(editPageTitle, newPageTitle)
         {
+
+        }
+
+        public EditContactablePersonViewModel(string editPageTitle, string newPageTitle, string path, bool isTesting) : base(editPageTitle, newPageTitle, path, isTesting)
+        {
+
         }
 
         protected override void SetNonNameDisplayValues()
