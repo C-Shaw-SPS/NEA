@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public abstract partial class EditContactablePersonViewModel<T> : EditViewModelBase<T> where T : class, IContactablePerson, new()
+    public abstract partial class EditContactablePersonViewModel<T> : EditPersonViewModel<T> where T : class, IContactablePerson, new()
     {
         private const string _EMAIL_REGEX = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$";
         private const string _PHONE_NUMBER_REGEX = "^\\+?[0-9]+(\\x20[0-9]+)*$";
@@ -15,16 +15,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private static Regex _phoneNumberRegex = GeneratePhoneNumberRegex();
 
         [ObservableProperty]
-        private string _name = string.Empty;
-
-        [ObservableProperty]
         private string _emailAddress = string.Empty;
 
         [ObservableProperty]
         private string _phoneNumber = string.Empty;
-
-        [ObservableProperty]
-        private string _nameError = string.Empty;
 
         [ObservableProperty]
         private string _emailAddressError = string.Empty;
@@ -36,9 +30,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         {
         }
 
-        protected override void SetDisplayValues()
+        protected override void SetNonNameDisplayValues()
         {
-            Name = _value.Name;
             EmailAddress = _value.EmailAddress;
             PhoneNumber = _value.PhoneNumber;
             SetNonContactInfoDisplayValues();
@@ -46,31 +39,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         protected abstract void SetNonContactInfoDisplayValues();
 
-        protected override Task<bool> TrySetValuesToSave()
+        protected override bool TrySetNonNameValuesToSave()
         {
             bool canSave = true;
-
-            canSave &= TrySetNameToSave();
             canSave &= TrySetEmailAddressToSave();
             canSave &= TrySetPhoneNumberToSave();
             canSave &= TrySetNonContactInfoToSave();
-
-            return Task.FromResult(canSave);
-        }
-
-        private bool TrySetNameToSave()
-        {
-            if (string.IsNullOrWhiteSpace(Name))
-            {
-                NameError = _BLANK_NAME_ERROR;
-                return false;
-            }
-            else
-            {
-                _value.Name = Name;
-                NameError = string.Empty;
-                return true;
-            }
+            return canSave;
         }
 
         private bool TrySetEmailAddressToSave()

@@ -4,7 +4,7 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditComposerViewModel : EditViewModelBase<Composer>, IQueryAttributable, IViewModel
+    public partial class EditComposerViewModel : EditPersonViewModel<Composer>, IQueryAttributable, IViewModel
     {
         private const string _ROUTE = nameof(EditComposerViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit composer";
@@ -16,9 +16,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private readonly ComposerService _service;
 
         [ObservableProperty]
-        private string _name = string.Empty;
-
-        [ObservableProperty]
         private string _era = string.Empty;
 
         [ObservableProperty]
@@ -26,9 +23,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         [ObservableProperty]
         private string _deathYear = string.Empty;
-
-        [ObservableProperty]
-        private string _nameError = string.Empty;
 
         [ObservableProperty]
         private string _birthYearError = string.Empty;
@@ -53,36 +47,15 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         #region Saving
 
-        protected override Task<bool> TrySetValuesToSave()
+        protected override bool TrySetNonNameValuesToSave()
         {
-            SetComposerEra();
+            _value.Era = Era;
 
             bool canSave = true;
-            canSave &= TrySetComposerName();
             canSave &= TrySetComposerBirthYear();
             canSave &= TrySetComposerDeathYear();
 
-            return Task.FromResult(canSave);
-        }
-
-        private void SetComposerEra()
-        {
-            _value.Era = Era;
-        }
-
-        private bool TrySetComposerName()
-        {
-            NameError = string.Empty;
-            if (string.IsNullOrWhiteSpace(Name))
-            {
-                NameError = _BLANK_NAME_ERROR;
-                return false;
-            }
-            else
-            {
-                _value.Name = Name;
-                return true;
-            }
+            return canSave;
         }
 
         private bool TrySetComposerBirthYear()
@@ -183,9 +156,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         #region Page Setup
 
-        protected override void SetDisplayValues()
+        protected override void SetNonNameDisplayValues()
         {
-            Name = _value.Name;
             Era = _value.Era;
             BirthYear = _value.BirthYear.ToString() ?? string.Empty;
             DeathYear = _value.DeathYear.ToString() ?? string.Empty;

@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace MusicOrganisationApp.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class Composer : IEquatable<Composer>, ITable
+    public class Composer : IEquatable<Composer>, ITable, IPerson
     {
         private const string _TABLE_NAME = nameof(Composer);
 
