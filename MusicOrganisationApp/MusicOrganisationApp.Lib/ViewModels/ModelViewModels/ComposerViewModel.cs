@@ -12,25 +12,25 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         private readonly ComposerService _service;
 
         [ObservableProperty]
-        private string _name;
+        private string _name = string.Empty;
 
         [ObservableProperty]
-        private string _birthYear;
+        private string _birthYear = string.Empty;
 
         [ObservableProperty]
-        private string _deathYear;
+        private string _deathYear = string.Empty;
 
         [ObservableProperty]
-        private string _era;
+        private string _era = string.Empty;
 
         public ComposerViewModel() : base()
         {
             _service = new(_database);
+        }
 
-            _name = string.Empty;
-            _birthYear = string.Empty;
-            _deathYear = string.Empty;
-            _era = string.Empty;
+        public ComposerViewModel(string path, bool isTesting) : base(path, isTesting)
+        {
+            _service = new(_database);
         }
 
         public static string Route => _ROUTE;
