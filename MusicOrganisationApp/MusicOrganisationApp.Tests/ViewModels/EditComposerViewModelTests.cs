@@ -60,12 +60,17 @@ namespace MusicOrganisationApp.Tests.ViewModels
             Assert.Equal(validBirthYear, viewModel.BirthYear);
         }
 
-        [Fact]
-        public async Task TestEditExistingComposerAsync()
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(4)]
+        public async Task TestEditExistingComposerAsync(int i)
         {
             DatabaseConnection database = new(nameof(TestEditExistingComposerAsync));
             await database.ResetTableAsync(ExpectedViewModels.Composers);
-            Composer expectedComposer = ExpectedViewModels.Composers[0];
+            Composer expectedComposer = ExpectedViewModels.Composers[i];
             EditComposerViewModel viewModel = new(nameof(TestEditExistingComposerAsync), true);
             Dictionary<string, object> query = new()
             {
