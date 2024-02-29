@@ -187,14 +187,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         {
             Name = _value.Name;
             Era = _value.Era;
-            if (_value.BirthYear is int birthYear)
-            {
-                BirthYear = birthYear.ToString();
-            }
-            if (_value.DeathYear is int deathYear)
-            {
-                DeathYear = deathYear.ToString();
-            }
+            BirthYear = _value.BirthYear.ToString() ?? string.Empty;
+            DeathYear = _value.DeathYear.ToString() ?? string.Empty;
         }
 
         #endregion
