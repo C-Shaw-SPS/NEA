@@ -4,13 +4,13 @@ using SQLite;
 namespace MusicOrganisationApp.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class CaregiverData : ITable, IEquatable<CaregiverData>
+    public class CaregiverData : ITable, IEquatable<CaregiverData>, IContactablePerson
     {
         private const string _TABLE_NAME = nameof(CaregiverData);
 
         private int _id;
         private string _name = string.Empty;
-        private string _email = string.Empty;
+        private string _emailAddress = string.Empty;
         private string _phoneNumber = string.Empty;
 
         public static string TableName => _TABLE_NAME;
@@ -30,10 +30,10 @@ namespace MusicOrganisationApp.Lib.Tables
         }
 
         [NotNull]
-        public string Email
+        public string EmailAddress
         {
-            get => _email;
-            set => _email = value;
+            get => _emailAddress;
+            set => _emailAddress = value;
         }
 
         [NotNull]
@@ -49,7 +49,7 @@ namespace MusicOrganisationApp.Lib.Tables
             {
                 nameof(Id),
                 nameof(Name),
-                nameof(Email),
+                nameof(EmailAddress),
                 nameof(PhoneNumber)
             };
         }
@@ -59,7 +59,7 @@ namespace MusicOrganisationApp.Lib.Tables
             IDictionary<string, string> sqlValues = SqlFormatting.FormatValues(
                 (nameof(Id), _id),
                 (nameof(Name), _name),
-                (nameof(Email), _email),
+                (nameof(EmailAddress), _emailAddress),
                 (nameof(PhoneNumber), _phoneNumber)
                 );
             return sqlValues;
@@ -70,7 +70,7 @@ namespace MusicOrganisationApp.Lib.Tables
             return other != null
                 && _id == other._id
                 && _name == other._name
-                && _email == other._email
+                && _emailAddress == other._emailAddress
                 && _phoneNumber == other._phoneNumber;
         }
     }

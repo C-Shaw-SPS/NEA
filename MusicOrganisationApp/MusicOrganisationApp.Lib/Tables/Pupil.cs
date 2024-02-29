@@ -4,7 +4,7 @@ using SQLite;
 namespace MusicOrganisationApp.Lib.Tables
 {
     [Table(_TABLE_NAME)]
-    public class Pupil : ITable, IEquatable<Pupil>
+    public class Pupil : ITable, IEquatable<Pupil>, IContactablePerson
     {
         private const string _TABLE_NAME = nameof(Pupil);
 
@@ -13,7 +13,7 @@ namespace MusicOrganisationApp.Lib.Tables
         private string _level = string.Empty;
         private bool _needsDifferentTimes = false;
         private TimeSpan _lessonDuration;
-        private string _email = string.Empty;
+        private string _emailAddress = string.Empty;
         private string _phoneNumber = string.Empty;
         private string _notes = string.Empty;
 
@@ -53,10 +53,10 @@ namespace MusicOrganisationApp.Lib.Tables
         }
 
         [NotNull]
-        public string Email
+        public string EmailAddress
         {
-            get => _email;
-            set => _email = value;
+            get => _emailAddress;
+            set => _emailAddress = value;
         }
 
         [NotNull]
@@ -93,7 +93,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 && _level == other._level
                 && _needsDifferentTimes == other._needsDifferentTimes
                 && _lessonDuration == other._lessonDuration
-                && _email == other._email
+                && _emailAddress == other._emailAddress
                 && _phoneNumber == other._phoneNumber
                 && _notes == other._notes;
         }
@@ -107,7 +107,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 nameof(Level),
                 nameof(NeedsDifferentTimes),
                 nameof(LessonDuration),
-                nameof(Email),
+                nameof(EmailAddress),
                 nameof(PhoneNumber),
                 nameof(Notes)
             };
@@ -121,7 +121,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 (nameof(Level), _level),
                 (nameof(NeedsDifferentTimes), _needsDifferentTimes),
                 (nameof(LessonDuration), _lessonDuration),
-                (nameof(Email), _email),
+                (nameof(EmailAddress), _emailAddress),
                 (nameof(PhoneNumber), _phoneNumber),
                 (nameof(Notes), _notes)
                 );

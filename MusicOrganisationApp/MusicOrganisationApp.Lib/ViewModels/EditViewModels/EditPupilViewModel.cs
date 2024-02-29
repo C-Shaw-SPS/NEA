@@ -4,7 +4,7 @@ using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public partial class EditPupilViewModel : EditViewModelBase<Pupil>, IQueryAttributable, IViewModel
+    public partial class EditPupilViewModel : EditContactablePersonViewModel<Pupil>, IQueryAttributable, IViewModel
     {
         private const string _ROUTE = nameof(EditPupilViewModel);
         private const string _EDIT_PAGE_TITLE = "Edit pupil";
@@ -12,9 +12,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private const string _INVALID_DURATION_ERROR = "Invalid lesson duration";
 
         private readonly PupilService _service;
-
-        [ObservableProperty]
-        private string _name = string.Empty;
 
         [ObservableProperty]
         private string _level = string.Empty;
@@ -29,16 +26,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         private string _lessonMinutes = string.Empty;
 
         [ObservableProperty]
-        private string _email = string.Empty;
-
-        [ObservableProperty]
-        private string _phoneNumber = string.Empty;
-
-        [ObservableProperty]
         private string _notes = string.Empty;
-
-        [ObservableProperty]
-        private string _nameError = string.Empty;
 
         [ObservableProperty]
         private string _lessonDurationError = string.Empty;
@@ -52,49 +40,25 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         protected override IService<Pupil> Service => _service;
 
-        protected override void SetDisplayValues()
+        protected override void SetNonContactInfoDisplayValues()
         {
-            Name = _value.Name;
             Level = _value.Level;
             NeedsDifferentTimes = _value.NeedsDifferentTimes;
             LessonHours = _value.LessonDuration.Hours.ToString();
             LessonMinutes = _value.LessonDuration.Minutes.ToString();
-            Email = _value.Email;
-            PhoneNumber = _value.PhoneNumber;
             Notes = _value.Notes;
         }
 
-        protected override Task<bool> TrySetValuesToSave()
+        protected override bool TrySetNonContactInfoToSave()
         {
             _value.Level = Level;
             _value.NeedsDifferentTimes = NeedsDifferentTimes;
-            _value.Email = Email;
-            _value.PhoneNumber = PhoneNumber;
             _value.Notes = Notes;
-
-            bool canSave = true;
-            canSave &= TrySetName();
-            canSave &= TrySetLessonDuration();
-
-            return Task.FromResult(canSave);
+            bool canSave = TrySetLessonDurationToSave();
+            return canSave;
         }
 
-        private bool TrySetName()
-        {
-            if (string.IsNullOrWhiteSpace(Name))
-            {
-                NameError = _BLANK_NAME_ERROR;
-                return false;
-            }
-            else
-            {
-                _value.Name = Name;
-                NameError = string.Empty;
-                return true;
-            }
-        }
-
-        private bool TrySetLessonDuration()
+        private bool TrySetLessonDurationToSave()
         {
             bool validHours = TryGetPositiveInt(LessonHours, out int hours);
             bool validMinutes = TryGetPositiveInt(LessonMinutes, out int minutes);
