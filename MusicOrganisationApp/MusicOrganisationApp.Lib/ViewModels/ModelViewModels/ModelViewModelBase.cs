@@ -8,6 +8,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
     public abstract class ModelViewModelBase : ViewModelBase
     {
         public const string ID_PARAMETER = nameof(ID_PARAMETER);
+
+        public ModelViewModelBase() { }
+
+        public ModelViewModelBase(string path, bool isNew) : base(path, isNew) { }
     }
 
     public abstract class ModelViewModelBase<TModel, TEditViewModel> : ModelViewModelBase, IQueryAttributable
@@ -18,6 +22,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         protected TModel _value = new();
 
         public ModelViewModelBase()
+        {
+            _editCommand = new(EditAsync);
+        }
+
+        public ModelViewModelBase(string path, bool isNew) : base(path, isNew)
         {
             _editCommand = new(EditAsync);
         }
