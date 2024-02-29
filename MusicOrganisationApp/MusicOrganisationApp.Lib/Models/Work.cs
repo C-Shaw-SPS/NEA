@@ -1,4 +1,6 @@
-﻿namespace MusicOrganisationApp.Lib.Models
+﻿using MusicOrganisationApp.Lib.Databases;
+
+namespace MusicOrganisationApp.Lib.Models
 {
     public class Work : IEquatable<Work>, IIdentifiable
     {

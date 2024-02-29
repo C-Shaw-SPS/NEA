@@ -1,4 +1,6 @@
-﻿namespace MusicOrganisationApp.Lib.Models
+﻿using MusicOrganisationApp.Lib.Databases;
+
+namespace MusicOrganisationApp.Lib.Models
 {
     public interface ILesson<T> : IIdentifiable where T : class, ITable, new()
     {

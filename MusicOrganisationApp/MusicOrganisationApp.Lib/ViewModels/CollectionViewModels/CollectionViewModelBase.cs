@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.VisualBasic;
-using MusicOrganisationApp.Lib.Models;
+using MusicOrganisationApp.Lib.Databases;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

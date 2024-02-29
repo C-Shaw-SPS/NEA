@@ -1,11 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MusicOrganisationApp.Lib.Models;
+using MusicOrganisationApp.Lib.Databases;
 using MusicOrganisationApp.Lib.Services;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
-    public abstract class EditViewModelBase : ViewModelBase
+    public abstract partial class EditViewModelBase : ViewModelBase
     {
         protected const string _BLANK_NAME_ERROR = "Name cannot be blank";
 

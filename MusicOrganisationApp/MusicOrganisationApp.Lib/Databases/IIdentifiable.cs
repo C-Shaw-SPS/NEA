@@ -1,4 +1,4 @@
-﻿namespace MusicOrganisationApp.Lib.Models
+﻿namespace MusicOrganisationApp.Lib.Databases
 {
     public interface IIdentifiable
     {
