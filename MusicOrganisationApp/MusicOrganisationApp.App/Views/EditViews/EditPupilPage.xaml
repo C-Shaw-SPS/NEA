@@ -20,10 +20,7 @@
     </ContentPage.ToolbarItems>
 
     <ScrollView>
-        <Grid
-            Margin="20"
-            RowSpacing="10"
-            ColumnSpacing="10">
+        <Grid Style="{StaticResource gridStyle}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

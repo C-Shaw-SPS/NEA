@@ -23,10 +23,7 @@
             IconImageSource="{FontImage Glyph='+',Color=Black}"/>
     </ContentPage.ToolbarItems>
 
-    <Grid
-        Margin="20"
-        RowSpacing="10"
-        ColumnSpacing="10">
+    <Grid Style="{StaticResource gridStyle}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -76,15 +73,12 @@
             SearchCommand="{Binding SearchCommand}"/>
 
         <CollectionView
+            Style="{StaticResource collectionViewStyle}"
             Grid.Row="3"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             ItemsSource="{Binding SearchResult}"
-            SelectedItem="{Binding SelectedItem}"
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="FillAndExpand"
-            VerticalScrollBarVisibility="Always"
-            SelectionMode="Single">
+            SelectedItem="{Binding SelectedItem}">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout

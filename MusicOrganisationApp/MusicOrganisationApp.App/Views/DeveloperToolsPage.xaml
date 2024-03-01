@@ -9,8 +9,7 @@
         <viewModels:DeveloperToolsViewModel/>
     </ContentPage.BindingContext>
 
-    <Grid Margin="20"
-          RowSpacing="10">
+    <Grid Style="{StaticResource gridStyle}">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>

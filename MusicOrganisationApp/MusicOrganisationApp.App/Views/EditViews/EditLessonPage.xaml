@@ -20,10 +20,7 @@
             Command="{Binding DeleteCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <Grid
-        Margin="20"
-        RowSpacing="10"
-        ColumnSpacing="10">
+    <Grid Style="{StaticResource gridStyle}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -83,16 +80,14 @@
             VerticalOptions="Center"/>
 
         <CollectionView
+            Style="{StaticResource collectionViewStyle}"
             Grid.Row="3"
             Grid.Column="1"
             Grid.ColumnSpan="3"
             ItemsSource="{Binding ClashingLessons}"
             SelectedItem="{Binding SelectedClashingLesson}"
             SelectionChangedCommand="{Binding GoToClashingLessonCommand}"
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="StartAndExpand"
-            HorizontalScrollBarVisibility="Always"
-            SelectionMode="Single">
+            HorizontalScrollBarVisibility="Always">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout

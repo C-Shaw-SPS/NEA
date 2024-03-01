@@ -20,22 +20,14 @@
         IsEnabled="{Binding CanRemove}"/>
     </ContentPage.ToolbarItems>
 
-    <Grid
-        Margin="20"
-        RowSpacing="10"
-        ColumnSpacing="10">
+    <Grid Style="{StaticResource gridStyle}">
 
         <CollectionView
+            Style="{StaticResource collectionViewStyle}"
             Grid.Row="0"
             Grid.Column="0"
-            Margin="20"
             ItemsSource="{Binding LessonSlots}"
-            SelectedItem="{Binding SelectedLessonSlot}"
-            SelectionChangedCommand="{Binding SelectCommand}"
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="FillAndExpand"
-            VerticalScrollBarVisibility="Always"
-            SelectionMode="Single">
+            SelectedItem="{Binding SelectedLessonSlot}">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout

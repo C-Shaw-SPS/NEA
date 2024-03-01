@@ -16,10 +16,7 @@
             Command="{Binding AddNewCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <Grid
-        Margin="20"
-        RowSpacing="10"
-        ColumnSpacing="10">
+    <Grid Style="{StaticResource gridStyle}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -30,16 +27,12 @@
         </Grid.ColumnDefinitions>
 
         <CollectionView
+            Style="{StaticResource collectionViewStyle}"
             Grid.Row="0"
             Grid.Column="0"
-            Margin="20"
             ItemsSource="{Binding LessonSlots}"
             SelectedItem="{Binding SelectedLessonSlot}"
-            SelectionChangedCommand="{Binding SelectCommand}"
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="FillAndExpand"
-            VerticalScrollBarVisibility="Always"
-            SelectionMode="Single">
+            SelectionChangedCommand="{Binding SelectCommand}">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout
