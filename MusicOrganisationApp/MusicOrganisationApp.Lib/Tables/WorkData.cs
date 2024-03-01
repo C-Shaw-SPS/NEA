@@ -88,7 +88,7 @@ namespace MusicOrganisationApp.Lib.Tables
 
         public bool Equals(WorkData? other)
         {
-            return other != null
+            return other is not null
                 && _id == other._id
                 && _composerId == other._composerId
                 && _title == other._title

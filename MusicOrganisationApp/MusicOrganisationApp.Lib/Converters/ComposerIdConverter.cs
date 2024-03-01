@@ -44,7 +44,7 @@ namespace MusicOrganisationApp.Lib.Converters
 
         private static int GetIfNotNull(int? value)
         {
-            if (value != null)
+            if (value is not null)
             {
                 return (int)value;
             }
@@ -58,7 +58,7 @@ namespace MusicOrganisationApp.Lib.Converters
         {
             reader.Read();
             string? idString = reader.GetString();
-            if (idString != null)
+            if (idString is not null)
             {
                 return int.Parse(idString);
             }

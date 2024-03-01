@@ -8,7 +8,7 @@ namespace MusicOrganisationApp.Lib.Json
         public static IEnumerable<T> GetValuesFromResponse<T, TResponse>(string json) where TResponse : IResponse<T>
         {
             TResponse? response = JsonSerializer.Deserialize<TResponse>(json);
-            if (response != null)
+            if (response is not null)
             {
                 return response.Values;
             }

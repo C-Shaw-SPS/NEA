@@ -20,7 +20,7 @@ namespace MusicOrganisationApp.Lib.Converters
         private static int GetInt(Utf8JsonReader reader)
         {
             string? s = reader.GetString();
-            if (s != null)
+            if (s is not null)
             {
                 return int.Parse(s);
             }

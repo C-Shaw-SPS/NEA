@@ -66,7 +66,7 @@ namespace MusicOrganisationApp.Lib.Tables
         }
         public bool Equals(CaregiverMap? other)
         {
-            return other != null
+            return other is not null
                 && _id == other._id
                 && _pupilId == other._pupilId
                 && _caregiverId == other._caregiverId

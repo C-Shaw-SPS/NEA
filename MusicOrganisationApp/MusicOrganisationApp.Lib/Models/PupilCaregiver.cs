@@ -56,7 +56,7 @@ namespace MusicOrganisationApp.Lib.Models
 
         public bool Equals(PupilCaregiver? other)
         {
-            return other != null
+            return other is not null
                 && _id == other._id
                 && _description == other._description
                 && _pupilId == other._pupilId

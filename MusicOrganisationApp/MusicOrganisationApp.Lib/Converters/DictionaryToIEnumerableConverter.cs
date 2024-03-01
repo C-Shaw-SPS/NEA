@@ -30,7 +30,7 @@ namespace MusicOrganisationApp.Lib.Converters
                 {
                     TValue? value = document.Deserialize<TValue>();
 
-                    if (value != null)
+                    if (value is not null)
                     {
                         values.Add(value);
                     }
