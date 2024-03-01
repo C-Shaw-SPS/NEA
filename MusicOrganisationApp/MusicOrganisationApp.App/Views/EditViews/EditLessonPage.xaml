@@ -43,8 +43,7 @@
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            Text="Date:"
-            VerticalOptions="Center"/>
+            Text="Date:"/>
         <DatePicker
             Grid.Row="0"
             Grid.Column="1"
@@ -54,8 +53,7 @@
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            Text="Start time:"
-            VerticalOptions="Center"/>
+            Text="Start time:"/>
         <TimePicker
             Grid.Row="1"
             Grid.Column="1"
@@ -65,8 +63,7 @@
         <Label
             Grid.Row="2"
             Grid.Column="0"
-            Text="End time:"
-            VerticalOptions="Center"/>
+            Text="End time:"/>
         <TimePicker
             Grid.Row="2"
             Grid.Column="1"
@@ -76,8 +73,7 @@
         <Label
             Grid.Row="3"
             Grid.Column="0"
-            Text="{Binding TimeError}"
-            VerticalOptions="Center"/>
+            Text="{Binding TimeError}"/>
 
         <CollectionView
             Style="{StaticResource collectionViewStyle}"
@@ -99,8 +95,7 @@
                 <DataTemplate>
                     <VerticalStackLayout>
                         <Label
-                            Text="{Binding PupilName}"
-                            VerticalOptions="Center"/>
+                            Text="{Binding PupilName}"/>
                         <TimePicker
                             Time="{Binding StartTime}"
                             IsEnabled="False"
@@ -121,35 +116,29 @@
         <Label
             Grid.Row="4"
             Grid.Column="0"
-            Text="Notes:"
-            VerticalOptions="Center"/>
+            Text="Notes:"/>
         <ScrollView
             Grid.Row="4"
             Grid.Column="1"
             Grid.ColumnSpan="3">
 
             <Editor
-                Text="{Binding Notes}"
-                VerticalOptions="Center"
-                AutoSize="TextChanges"/>
+                Text="{Binding Notes}"/>
 
         </ScrollView>
 
         <Label
             Grid.Row="5"
             Grid.Column="0"
-            Text="Pupil:"
-            VerticalOptions="Center"/>
+            Text="Pupil:"/>
         <Label
             Grid.Row="5"
             Grid.Column="1"
-            Text="{Binding PupilName}"
-            VerticalOptions="Center"/>
+            Text="{Binding PupilName}"/>
         <Label
             Grid.Row="5"
             Grid.Column="2"
-            Text="{Binding PupilError}"
-            VerticalOptions="Center"/>
+            Text="{Binding PupilError}"/>
 
         <SearchBar
             Grid.Row="6"

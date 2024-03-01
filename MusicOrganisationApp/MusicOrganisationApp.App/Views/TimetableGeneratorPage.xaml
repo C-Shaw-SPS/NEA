@@ -38,8 +38,7 @@
         <Label
             Grid.Row="2"
             Grid.Column="0"
-            Text="{Binding Message}"
-            VerticalOptions="Center"/>
+            Text="{Binding Message}"/>
 
     </Grid>
     

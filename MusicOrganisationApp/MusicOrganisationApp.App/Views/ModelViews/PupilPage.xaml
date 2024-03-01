@@ -49,30 +49,25 @@
             <Label
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="Name:"
-                VerticalOptions="Center"/>
+                Text="Name:"/>
             <Label
                 Grid.Row="0"
                 Grid.Column="1"
-                Text="{Binding Name}"
-                VerticalOptions="Center"/>
+                Text="{Binding Name}"/>
 
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
-                Text="Level:"
-                VerticalOptions="Center"/>
+                Text="Level:"/>
             <Label
                 Grid.Row="1"
                 Grid.Column="1"
-                Text="{Binding Level}"
-                VerticalOptions="Center"/>
+                Text="{Binding Level}"/>
 
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
-                Text="Different times each week:"
-                VerticalOptions="Center"/>
+                Text="Different times each week:"/>
             <CheckBox
                 Grid.Row="2"
                 Grid.Column="1"
@@ -82,46 +77,38 @@
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
-                Text="Lesson duration:"
-                VerticalOptions="Center"/>
+                Text="Lesson duration:"/>
             <Label
                 Grid.Row="3"
                 Grid.Column="1"
-                Text="{Binding LessonDuration}"
-                VerticalOptions="Center"/>
+                Text="{Binding LessonDuration}"/>
 
             <Label
                 Grid.Row="4"
                 Grid.Column="0"
-                Text="Email address:"
-                VerticalOptions="Center"/>
+                Text="Email address:"/>
             <Label
                 Grid.Row="4"
                 Grid.Column="1"
-                Text="{Binding EmailAddress}"
-                VerticalOptions="Center"/>
+                Text="{Binding EmailAddress}"/>
 
             <Label
                 Grid.Row="5"
                 Grid.Column="0"
-                Text="Phone number:"
-                VerticalOptions="Center"/>
+                Text="Phone number:"/>
             <Label
                 Grid.Row="5"
                 Grid.Column="1"
-                Text="{Binding PhoneNumber}"
-                VerticalOptions="Center"/>
+                Text="{Binding PhoneNumber}"/>
 
             <Label
                 Grid.Row="6"
                 Grid.Column="0"
-                Text="Notes:"
-                VerticalOptions="Start"/>
+                Text="Notes:"/>
             <Label
                 Grid.Row="6"
                 Grid.Column="1"
-                Text="{Binding Notes}"
-                VerticalOptions="Center"/>
+                Text="{Binding Notes}"/>
 
         </Grid>
     </ScrollView>

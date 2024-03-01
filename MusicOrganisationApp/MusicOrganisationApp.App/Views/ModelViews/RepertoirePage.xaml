@@ -39,74 +39,61 @@
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            Text="Title:"
-            VerticalOptions="Center"/>
+            Text="Title:"/>
         <Label
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Title}"
-            VerticalOptions="Center"/>
+            Text="{Binding Title}"/>
 
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            Text="Subtitle:"
-            VerticalOptions="Center"/>
+            Text="Subtitle:"/>
         <Label
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Subtitle}"
-            VerticalOptions="Center"/>
+            Text="{Binding Subtitle}"/>
 
         <Label
             Grid.Row="2"
             Grid.Column="0"
-            Text="Genre:"
-            VerticalOptions="Center"/>
+            Text="Genre:"/>
         <Label
             Grid.Row="2"
             Grid.Column="1"
-            Text="{Binding Genre}"
-            VerticalOptions="Center"/>
+            Text="{Binding Genre}"/>
 
         <Label
             Grid.Row="3"
             Grid.Column="0"
-            Text="Composer:"
-            VerticalOptions="Center"/>
+            Text="Composer:"/>
         <Label
             Grid.Row="3"
             Grid.Column="1"
-            Text="{Binding ComposerName}"
-            VerticalOptions="Center"/>
+            Text="{Binding ComposerName}"/>
 
         <Label
             Grid.Row="4"
             Grid.Column="0"
-            Text="Date started:"
-            VerticalOptions="Center"/>
+            Text="Date started:"/>
         <Label
             Grid.Row="4"
             Grid.Column="1"
-            Text="{Binding DateStarted}"
-            VerticalOptions="Center"/>
+            Text="{Binding DateStarted}"/>
 
         <Label
             Grid.Row="5"
             Grid.Column="0"
-            Text="Syllabus:"
-            VerticalOptions="Center"/>
+            Text="Syllabus:"/>
         <Label
             Grid.Row="5"
             Grid.Column="1"
-            Text="{Binding Syllabus}"
-            VerticalOptions="Center"/>
+            Text="{Binding Syllabus}"/>
 
         <Label
             Grid.Row="6"
             Grid.Column="0"
-            Text="Finished learning:"
-            VerticalOptions="Center"/>
+            Text="Finished learning:"/>
         <CheckBox
             Grid.Row="6"
             Grid.Column="1"
@@ -117,8 +104,7 @@
         <Label
             Grid.Row="7"
             Grid.Column="0"
-            Text="Notes:"
-            VerticalOptions="Center"/>
+            Text="Notes:"/>
         <ScrollView
             Grid.Row="7"
             Grid.Column="1">

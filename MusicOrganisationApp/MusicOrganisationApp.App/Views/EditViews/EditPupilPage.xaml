@@ -44,25 +44,21 @@
             <Label
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="Name:"
-                VerticalOptions="Center"/>
+                Text="Name:"/>
             <Entry
                 Grid.Row="0"
                 Grid.Column="1"
                 Grid.ColumnSpan="4"
-                Text="{Binding Name}"
-                VerticalOptions="Center"/>
+                Text="{Binding Name}"/>
             <Label
                 Grid.Row="0"
                 Grid.Column="5"
-                Text="{Binding NameError}"
-                VerticalOptions="Center"/>
+                Text="{Binding NameError}"/>
 
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
-                Text="Level:"
-                VerticalOptions="Center"/>
+                Text="Level:"/>
             <Entry
                 Grid.Row="1"
                 Grid.Column="1"
@@ -72,8 +68,7 @@
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
-                Text="Different times each week:"
-                VerticalOptions="Center"/>
+                Text="Different times each week:"/>
             <CheckBox
                 Grid.Row="2"
                 Grid.Column="1"
@@ -82,75 +77,61 @@
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
-                Text="Lesson duration:"
-                VerticalOptions="Center"/>
+                Text="Lesson duration:"/>
             <Entry
                 Grid.Row="3"
                 Grid.Column="1"
-                Text="{Binding LessonHours}"
-                VerticalOptions="Center"/>
+                Text="{Binding LessonHours}"/>
             <Label
                 Grid.Row="3"
                 Grid.Column="2"
-                Text=":"
-                VerticalOptions="Center"/>
+                Text=":"/>
             <Entry
                 Grid.Row="3"
                 Grid.Column="3"
-                Text="{Binding LessonMinutes}"
-                VerticalOptions="Center"/>
+                Text="{Binding LessonMinutes}"/>
             <Label
                 Grid.Row="3"
                 Grid.Column="5"
-                Text="{Binding LessonDurationError}"
-                VerticalOptions="Center"/>
+                Text="{Binding LessonDurationError}"/>
 
             <Label
                 Grid.Row="4"
                 Grid.Column="0"
-                Text="Email address:"
-                VerticalOptions="Center"/>
+                Text="Email address:"/>
             <Entry
                 Grid.Row="4"
                 Grid.Column="1"
                 Grid.ColumnSpan="4"
-                Text="{Binding EmailAddress}"
-                VerticalOptions="Center"/>
+                Text="{Binding EmailAddress}"/>
             <Label
                 Grid.Row="4"
                 Grid.Column="5"
-                Text="{Binding EmailAddressError}"
-                VerticalOptions="Center"/>
+                Text="{Binding EmailAddressError}"/>
 
             <Label
                 Grid.Row="5"
                 Grid.Column="0"
-                Text="Phone number:"
-                VerticalOptions="Center"/>
+                Text="Phone number:"/>
             <Entry
                 Grid.Row="5"
                 Grid.Column="1"
                 Grid.ColumnSpan="4"
-                Text="{Binding PhoneNumber}"
-                VerticalOptions="Center"/>
+                Text="{Binding PhoneNumber}"/>
             <Label
                 Grid.Row="5"
                 Grid.Column="5"
-                Text="{Binding PhoneNumberError}"
-                VerticalOptions="Center"/>
+                Text="{Binding PhoneNumberError}"/>
 
             <Label
                 Grid.Row="6"
                 Grid.Column="0"
-                Text="Notes:"
-                VerticalOptions="Center"/>
+                Text="Notes:"/>
             <Editor
                 Grid.Row="6"
                 Grid.Column="1"
                 Grid.ColumnSpan="5"
-                AutoSize="TextChanges"
-                Text="{Binding Notes}"
-                VerticalOptions="Center"/>
+                Text="{Binding Notes}"/>
 
         </Grid>
     </ScrollView>

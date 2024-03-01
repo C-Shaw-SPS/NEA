@@ -59,8 +59,7 @@
                             IsEnabled="False"
                             TextColor="Black"/>
                         <Label
-                            Text="to"
-                            VerticalOptions="Center"/>
+                            Text="to"/>
                         <TimePicker
                             Time="{Binding EndTime}"
                             VerticalOptions="Center"

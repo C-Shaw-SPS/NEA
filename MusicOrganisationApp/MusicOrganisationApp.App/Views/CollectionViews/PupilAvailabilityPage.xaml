@@ -40,16 +40,14 @@
                     <HorizontalStackLayout
                         Spacing="10">
                         <Label
-                            Text="{Binding DayOfWeek}"
-                            VerticalOptions="Center"/>
+                            Text="{Binding DayOfWeek}"/>
                         <TimePicker
                             Time="{Binding StartTime}"
                             VerticalOptions="Center"
                             IsEnabled="False"
                             TextColor="Black"/>
                         <Label
-                            Text="to"
-                            VerticalOptions="Center"/>
+                            Text="to"/>
                         <TimePicker
                             Time="{Binding EndTime}"
                             VerticalOptions="Center"

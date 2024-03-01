@@ -38,8 +38,7 @@
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            Text="Name:"
-            VerticalOptions="Center"/>
+            Text="Name:"/>
         <Entry
             Grid.Row="0"
             Grid.Column="1"
@@ -47,14 +46,12 @@
         <Label
             Grid.Row="0"
             Grid.Column="3"
-            Text="{Binding NameError}"
-            VerticalOptions="Center"/>
+            Text="{Binding NameError}"/>
 
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            Text="Era:"
-            VerticalOptions="Center"/>
+            Text="Era:"/>
         <Entry
             Grid.Row="1"
             Grid.Column="1"
@@ -63,8 +60,7 @@
         <Label
             Grid.Row="2"
             Grid.Column="0"
-            Text="Born:"
-            VerticalOptions="Center"/>
+            Text="Born:"/>
         <Entry
             Grid.Row="2"
             Grid.Column="1"
@@ -72,14 +68,12 @@
         <Label
             Grid.Row="2"
             Grid.Column="3"
-            Text="{Binding BirthYearError}"
-            VerticalOptions="Center"/>
+            Text="{Binding BirthYearError}"/>
 
         <Label
             Grid.Row="3"
             Grid.Column="0"
-            Text="Died:"
-            VerticalOptions="Center"/>
+            Text="Died:"/>
         <Entry
             Grid.Row="3"
             Grid.Column="1"
@@ -87,8 +81,7 @@
         <Label
             Grid.Row="3"
             Grid.Column="3"
-            Text="{Binding DeathYearError}"
-            VerticalOptions="Center"/>
+            Text="{Binding DeathYearError}"/>
 
     </Grid>
 

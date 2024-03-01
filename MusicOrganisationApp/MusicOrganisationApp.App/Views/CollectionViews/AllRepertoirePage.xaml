@@ -40,7 +40,6 @@
             Grid.Row="0"
             Grid.Column="1"
             Text="Sort by:"
-            VerticalTextAlignment="Center"
             HorizontalTextAlignment="End"/>
 
         <Picker

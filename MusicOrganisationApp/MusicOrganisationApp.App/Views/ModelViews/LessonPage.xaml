@@ -34,8 +34,7 @@
             <Label
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="Pupil:"
-                VerticalOptions="Center"/>
+                Text="Pupil:"/>
             <Label
                 Grid.Row="0"
                 Grid.Column="1"
@@ -44,8 +43,7 @@
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
-                Text="Date:"
-                VerticalOptions="Center"/>
+                Text="Date:"/>
             <DatePicker
                 Grid.Row="1"
                 Grid.Column="1"
@@ -57,8 +55,7 @@
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
-                Text="Start time:"
-                VerticalOptions="Center"/>
+                Text="Start time:"/>
             <TimePicker
                 Grid.Row="2"
                 Grid.Column="1"
@@ -70,8 +67,7 @@
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
-                Text="End time:"
-                VerticalOptions="Center"/>
+                Text="End time:"/>
             <TimePicker
                 Grid.Row="3"
                 Grid.Column="1"
@@ -83,13 +79,11 @@
             <Label
                 Grid.Row="4"
                 Grid.Column="0"
-                Text="Notes:"
-                VerticalOptions="Center"/>
+                Text="Notes:"/>
             <Label
                 Grid.Row="4"
                 Grid.Column="1"
-                Text="{Binding Notes}"
-                VerticalOptions="Center"/>
+                Text="{Binding Notes}"/>
 
         </Grid>
     </ScrollView>

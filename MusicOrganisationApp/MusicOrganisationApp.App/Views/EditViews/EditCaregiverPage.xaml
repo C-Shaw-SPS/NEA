@@ -39,61 +39,50 @@
             <Label
                 Grid.Row="0"
                 Grid.Column="0"
-                Text="Name:"
-                VerticalOptions="Center"/>
+                Text="Name:"/>
             <Entry
                 Grid.Row="0"
                 Grid.Column="1"
-                Text="{Binding Name}"
-                VerticalOptions="Center"/>
+                Text="{Binding Name}"/>
             <Label
                 Grid.Row="0"
                 Grid.Column="2"
-                Text="{Binding NameError}"
-                VerticalOptions="Center"/>
+                Text="{Binding NameError}"/>
 
             <Label
                 Grid.Row="1"
                 Grid.Column="0"
-                Text="Email address:"
-                VerticalOptions="Center"/>
+                Text="Email address:"/>
             <Entry
                 Grid.Row="1"
                 Grid.Column="1"
-                Text="{Binding EmailAddress}"
-                VerticalOptions="Center"/>
+                Text="{Binding EmailAddress}"/>
             <Label
                 Grid.Row="1"
                 Grid.Column="2"
-                Text="{Binding EmailAddressError}"
-                VerticalOptions="Center"/>
+                Text="{Binding EmailAddressError}"/>
 
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
-                Text="Phone number:"
-                VerticalOptions="Center"/>
+                Text="Phone number:"/>
             <Entry
                 Grid.Row="2"
                 Grid.Column="1"
-                Text="{Binding PhoneNumber}"
-                VerticalOptions="Center"/>
+                Text="{Binding PhoneNumber}"/>
             <Label
                 Grid.Row="2"
                 Grid.Column="2"
-                Text="{Binding PhoneNumberError}"
-                VerticalOptions="Center"/>
+                Text="{Binding PhoneNumberError}"/>
 
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
-                Text="Notes:"
-                VerticalOptions="Center"/>
+                Text="Notes:"/>
             <Editor
                 Grid.Row="3"
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
-                AutoSize="TextChanges"
                 Text="{Binding Notes}"/>
 
         </Grid>

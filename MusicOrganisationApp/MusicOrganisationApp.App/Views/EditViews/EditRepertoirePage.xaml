@@ -45,8 +45,7 @@
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            Text="Date started:"
-            VerticalOptions="Center"/>
+            Text="Date started:"/>
         <CheckBox
             Grid.Row="0"
             Grid.Column="1"
@@ -60,20 +59,17 @@
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            Text="Syllabus:"
-            VerticalOptions="Center"/>
+            Text="Syllabus:"/>
         <Entry
             Grid.Row="1"
             Grid.Column="1"
             Grid.ColumnSpan="2"
-            Text="{Binding Syllabus}"
-            VerticalOptions="Center"/>
+            Text="{Binding Syllabus}"/>
 
         <Label
             Grid.Row="2"
             Grid.Column="0"
-            Text="Finished learning:"
-            VerticalOptions="Center"/>
+            Text="Finished learning:"/>
         <CheckBox
             Grid.Row="2"
             Grid.Column="1"
@@ -82,24 +78,20 @@
         <Label
             Grid.Row="3"
             Grid.Column="0"
-            Text="Notes:"
-            VerticalOptions="Center"/>
+            Text="Notes:"/>
 
         <ScrollView
             Grid.Row="3"
             Grid.Column="1"
             Grid.ColumnSpan="3">
             <Editor
-                Text="{Binding Notes}"
-                VerticalOptions="Center"
-                AutoSize="TextChanges"/>
+                Text="{Binding Notes}"/>
         </ScrollView>
 
         <Label
             Grid.Row="4"
             Grid.Column="0"
-            Text="Title:"
-            VerticalOptions="Center"/>
+            Text="Title:"/>
         <Label
             Grid.Row="4"
             Grid.Column="1"

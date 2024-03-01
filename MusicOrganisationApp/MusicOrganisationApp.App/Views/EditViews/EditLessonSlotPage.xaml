@@ -39,8 +39,7 @@
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            Text="Day of week:"
-            VerticalOptions="Center"/>
+            Text="Day of week:"/>
         <Picker
             Grid.Row="0"
             Grid.Column="1"
@@ -51,8 +50,7 @@
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            Text="Start time:"
-            VerticalOptions="Center"/>
+            Text="Start time:"/>
         <TimePicker
             Grid.Row="1"
             Grid.Column="1"
@@ -62,8 +60,7 @@
         <Label
             Grid.Row="2"
             Grid.Column="0"
-            Text="End time:"
-            VerticalOptions="Center"/>
+            Text="End time:"/>
         <TimePicker
             Grid.Row="2"
             Grid.Column="1"
@@ -77,8 +74,7 @@
         <Label
             Grid.Row="3"
             Grid.Column="0"
-            Text="Clashing lesson slots:"
-            VerticalOptions="Center"/>
+            Text="Clashing lesson slots:"/>
 
         <CollectionView
             Style="{StaticResource collectionViewStyle}"
@@ -105,8 +101,7 @@
                             IsEnabled="False"
                             TextColor="Black"/>
                         <Label
-                            Text="to"
-                            VerticalOptions="Center"/>
+                            Text="to"/>
                         <TimePicker
                             Time="{Binding EndTime}"
                             VerticalOptions="Center"

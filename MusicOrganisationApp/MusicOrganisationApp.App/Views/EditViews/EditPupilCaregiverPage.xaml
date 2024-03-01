@@ -41,29 +41,24 @@
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            Text="Description:"
-            VerticalOptions="Center"/>
+            Text="Description:"/>
         <Entry
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Description}"
-            VerticalOptions="Center"/>
+            Text="{Binding Description}"/>
 
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            Text="Name:"
-            VerticalOptions="Center"/>
+            Text="Name:"/>
         <Label
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding SelectedItemText}"
-            VerticalOptions="Center"/>
+            Text="{Binding SelectedItemText}"/>
         <Label
             Grid.Row="1"
             Grid.Column="2"
-            Text="{Binding SearchError}"
-            VerticalOptions="Center"/>
+            Text="{Binding SearchError}"/>
 
         <SearchBar
             Grid.Row="2"

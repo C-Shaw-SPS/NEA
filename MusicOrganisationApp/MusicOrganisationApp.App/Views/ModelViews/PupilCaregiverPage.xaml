@@ -32,46 +32,38 @@
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            Text="Name:"
-            VerticalOptions="Center"/>
+            Text="Name:"/>
         <Label
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Name}"
-            VerticalOptions="Center"/>
+            Text="{Binding Name}"/>
 
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            Text="Description:"
-            VerticalOptions="Center"/>
+            Text="Description:"/>
         <Label
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Description}"
-            VerticalOptions="Center"/>
+            Text="{Binding Description}"/>
 
         <Label
             Grid.Row="2"
             Grid.Column="0"
-            Text="Email address:"
-            VerticalOptions="Center"/>
+            Text="Email address:"/>
         <Label
             Grid.Row="2"
             Grid.Column="1"
-            Text="{Binding EmailAddress}"
-            VerticalOptions="Center"/>
+            Text="{Binding EmailAddress}"/>
 
         <Label
             Grid.Row="3"
             Grid.Column="0"
-            Text="Phone number:"
-            VerticalOptions="Center"/>
+            Text="Phone number:"/>
         <Label
             Grid.Row="3"
             Grid.Column="1"
-            Text="{Binding PhoneNumber}"
-            VerticalOptions="Center"/>
+            Text="{Binding PhoneNumber}"/>
 
     </Grid>
     

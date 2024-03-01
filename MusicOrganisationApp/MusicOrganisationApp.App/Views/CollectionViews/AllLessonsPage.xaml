@@ -58,16 +58,14 @@
                             IsEnabled="False"
                             TextColor="Black"/>
                         <Label
-                            Text="to"
-                            VerticalOptions="Center"/>
+                            Text="to"/>
                         <TimePicker
                             Time="{Binding EndTime}"
                             VerticalOptions="Center"
                             IsEnabled="False"
                             TextColor="Black"/>
                         <Label
-                            Text="{Binding PupilName}"
-                            VerticalOptions="Center"/>
+                            Text="{Binding PupilName}"/>
                     </HorizontalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
