@@ -12,6 +12,7 @@ namespace MusicOrganisationApp.Lib.Tables
         private string _name = string.Empty;
         private string _emailAddress = string.Empty;
         private string _phoneNumber = string.Empty;
+        private string _notes = string.Empty;
 
         public static string TableName => _TABLE_NAME;
 
@@ -43,6 +44,13 @@ namespace MusicOrganisationApp.Lib.Tables
             set => _phoneNumber = value;
         }
 
+        [NotNull]
+        public string Notes
+        {
+            get => _notes;
+            set => _notes = value;
+        }
+
         public static IEnumerable<string> GetColumnNames()
         {
             return new List<string>()
@@ -50,7 +58,8 @@ namespace MusicOrganisationApp.Lib.Tables
                 nameof(Id),
                 nameof(Name),
                 nameof(EmailAddress),
-                nameof(PhoneNumber)
+                nameof(PhoneNumber),
+                nameof(Notes)
             };
         }
 
@@ -60,18 +69,20 @@ namespace MusicOrganisationApp.Lib.Tables
                 (nameof(Id), _id),
                 (nameof(Name), _name),
                 (nameof(EmailAddress), _emailAddress),
-                (nameof(PhoneNumber), _phoneNumber)
+                (nameof(PhoneNumber), _phoneNumber),
+                (nameof(Notes), _notes)
                 );
             return sqlValues;
         }
 
         public bool Equals(CaregiverData? other)
         {
-            return other != null
+            return other is not null
                 && _id == other._id
                 && _name == other._name
                 && _emailAddress == other._emailAddress
-                && _phoneNumber == other._phoneNumber;
+                && _phoneNumber == other._phoneNumber
+                && _notes == other._notes;
         }
     }
 }

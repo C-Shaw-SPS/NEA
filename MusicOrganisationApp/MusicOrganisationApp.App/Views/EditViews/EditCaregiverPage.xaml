@@ -20,66 +20,86 @@
             Command="{Binding DeleteCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <Grid
-        Margin="20"
-        RowSpacing="10"
-        ColumnSpacing="10">
+    <ScrollView>
+        <Grid
+            Margin="20"
+            RowSpacing="10"
+            ColumnSpacing="10">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <Label
-            Grid.Row="0"
-            Grid.Column="0"
-            Text="Name:"
-            VerticalOptions="Center"/>
-        <Entry
-            Grid.Row="0"
-            Grid.Column="1"
-            Text="{Binding Name}"
-            VerticalOptions="Center"/>
-        <Label
-            Grid.Row="0"
-            Grid.Column="2"
-            Text="{Binding NameError}"
-            VerticalOptions="Center"/>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Name:"
+                VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="0"
+                Grid.Column="1"
+                Text="{Binding Name}"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="0"
+                Grid.Column="2"
+                Text="{Binding NameError}"
+                VerticalOptions="Center"/>
 
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            Text="Email address:"
-            VerticalOptions="Center"/>
-        <Entry
-            Grid.Row="1"
-            Grid.Column="1"
-            Text="{Binding EmailAddress}"
-            VerticalOptions="Center"/>
-        <Label
-            Grid.Row="1"
-            Grid.Column="2"
-            Text="{Binding EmailAddressError}"
-            VerticalOptions="Center"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="Email address:"
+                VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding EmailAddress}"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="1"
+                Grid.Column="2"
+                Text="{Binding EmailAddressError}"
+                VerticalOptions="Center"/>
 
-        <Label
-            Grid.Row="2"
-            Grid.Column="0"
-            Text="Phone number:"
-            VerticalOptions="Center"/>
-        <Entry
-            Grid.Row="2"
-            Grid.Column="1"
-            Text="{Binding PhoneNumber}"
-            VerticalOptions="Center"/>
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Phone number:"
+                VerticalOptions="Center"/>
+            <Entry
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="{Binding PhoneNumber}"
+                VerticalOptions="Center"/>
+            <Label
+                Grid.Row="2"
+                Grid.Column="2"
+                Text="{Binding PhoneNumberError}"
+                VerticalOptions="Center"/>
 
-    </Grid>
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                Text="Notes:"
+                VerticalOptions="Center"/>
+            <Editor
+                Grid.Row="3"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                AutoSize="TextChanges"
+                Text="{Binding Notes}"/>
+
+        </Grid>
+    </ScrollView>
 
 </ContentPage>

@@ -1,4 +1,5 @@
-﻿using MusicOrganisationApp.Lib.Services;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 
 namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
@@ -11,6 +12,9 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private readonly CaregiverService _service;
 
+        [ObservableProperty]
+        private string _notes = string.Empty;
+
         public EditCaregiverViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE)
         {
             _service = new(_database);
@@ -20,8 +24,15 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         protected override IService<CaregiverData> Service => _service;
 
-        protected override void SetNonContactInfoDisplayValues() { }
+        protected override void SetNonContactInfoDisplayValues()
+        {
+            Notes = _value.Notes;
+        }
 
-        protected override bool TrySetNonContactInfoToSave() => true;
+        protected override bool TrySetNonContactInfoToSave()
+        {
+            _value.Notes = Notes;
+            return true;
+        }
     }
 }

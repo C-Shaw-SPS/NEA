@@ -20,6 +20,9 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _phoneNumber = string.Empty;
 
+        [ObservableProperty]
+        private string _notes = string.Empty;
+
         public CaregiverViewModel() : base()
         {
             _service = new(_database);
@@ -34,6 +37,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
             Name = _value.Name;
             EmailAddress = _value.EmailAddress;
             PhoneNumber = _value.PhoneNumber;
+            Notes = _value.Notes;
         }
     }
 }

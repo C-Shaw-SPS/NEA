@@ -6,13 +6,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 {
     public abstract partial class EditContactablePersonViewModel<T> : EditPersonViewModel<T> where T : class, IContactablePerson, new()
     {
-        private const string _EMAIL_REGEX = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$";
-        private const string _PHONE_NUMBER_REGEX = "^\\+?[0-9]+(\\x20[0-9]+)*$";
+        private const string _EMAIL_REGEX = "^([^@\\s]+@[^@\\s]+\\.[^@\\s]+)?$";
+        private const string _PHONE_NUMBER_REGEX = "^(\\+?[0-9]+(\\x20[0-9]+)*)?$";
         private const string _INVALID_EMAIL_ERROR = "Invalid email format";
         private const string _INVALID_PHONE_NUMBER_ERROR = "Invalid phone number format";
 
-        private static Regex _emailRegex = GenerateEmailRegex();
-        private static Regex _phoneNumberRegex = GeneratePhoneNumberRegex();
+        private static readonly Regex _emailRegex = GenerateEmailRegex();
+        private static readonly Regex _phoneNumberRegex = GeneratePhoneNumberRegex();
 
         [ObservableProperty]
         private string _emailAddress = string.Empty;
@@ -56,7 +56,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private bool TrySetEmailAddressToSave()
         {
-            if (EmailAddress == string.Empty || IsValidEmailAddress(EmailAddress))
+            if (IsValidEmailAddress(EmailAddress))
             {
                 _value.EmailAddress = EmailAddress;
                 EmailAddressError = string.Empty;
@@ -76,7 +76,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private bool TrySetPhoneNumberToSave()
         {
-            if (PhoneNumber == string.Empty || IsValidPhoneNumber(PhoneNumber))
+            if (IsValidPhoneNumber(PhoneNumber))
             {
                 _value.PhoneNumber = PhoneNumber;
                 PhoneNumberError = string.Empty;
