@@ -5,8 +5,8 @@ namespace MusicOrganisationApp.Tests.Json
 {
     public class WorkTests
     {
-        const string WORK_PATH = "Json/work.json";
-        const string RESPONSE_PATH = "Json/workResponse.json";
+        private const string WORK_PATH = "Json/work.json";
+        private const string RESPONSE_PATH = "Json/workResponse.json";
 
         [Fact]
         public void TestJsonDeserialiseWork()

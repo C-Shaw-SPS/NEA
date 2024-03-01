@@ -68,7 +68,7 @@ namespace MusicOrganisationApp.Tests.ViewModels
             EditComposerViewModel viewModel = new(nameof(TestEditExistingComposerAsync), true);
             foreach (Composer expectedComposer in ExpectedViewModels.Composers)
             {
-                Dictionary<string, object>query = new()
+                Dictionary<string, object> query = new()
                 {
                     [EditViewModelBase.ID_PARAMETER] = expectedComposer.Id
                 };

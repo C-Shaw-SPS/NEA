@@ -4,7 +4,6 @@ using MusicOrganisationApp.Lib.Databases;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
 using MusicOrganisationApp.Lib.ViewModels.ModelViewModels;
-using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {

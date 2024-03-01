@@ -38,7 +38,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         public EditPupilViewModel(string path, bool isTesting) : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE, path, isTesting)
         {
-            _service = new(_database);    
+            _service = new(_database);
         }
 
         public static string Route => _ROUTE;
