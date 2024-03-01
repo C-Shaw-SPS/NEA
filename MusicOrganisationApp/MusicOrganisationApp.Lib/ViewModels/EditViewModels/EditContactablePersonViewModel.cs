@@ -8,11 +8,13 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
     {
         private const string _EMAIL_REGEX = "^([^@\\s]+@[^@\\s]+\\.[^@\\s]+)?$";
         private const string _PHONE_NUMBER_REGEX = "^(\\+?[0-9]+(\\x20[0-9]+)*)?$";
+        private const string _PARTIAL_PHONE_NUMBER_REGEX = "^\\+?([0-9]+\\x20)*[0-9]*$";
         private const string _INVALID_EMAIL_ERROR = "Invalid email format";
         private const string _INVALID_PHONE_NUMBER_ERROR = "Invalid phone number format";
 
         private static readonly Regex _emailRegex = GenerateEmailRegex();
         private static readonly Regex _phoneNumberRegex = GeneratePhoneNumberRegex();
+        private static readonly Regex _partialPhoneNumberRegex = GeneratePartialPhoneNumberRegex();
 
         [ObservableProperty]
         private string _emailAddress = string.Empty;
@@ -34,6 +36,14 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         public EditContactablePersonViewModel(string editPageTitle, string newPageTitle, string path, bool isTesting) : base(editPageTitle, newPageTitle, path, isTesting)
         {
 
+        }
+
+        partial void OnPhoneNumberChanged(string? oldValue, string newValue)
+        {
+            if (!_partialPhoneNumberRegex.IsMatch(newValue))
+            {
+                PhoneNumber = oldValue ?? string.Empty;
+            }
         }
 
         protected override void SetNonNameDisplayValues()
@@ -76,6 +86,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private bool TrySetPhoneNumberToSave()
         {
+            PhoneNumber = PhoneNumber.Trim();
             if (IsValidPhoneNumber(PhoneNumber))
             {
                 _value.PhoneNumber = PhoneNumber;
@@ -101,5 +112,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         [GeneratedRegex(_PHONE_NUMBER_REGEX)]
         private static partial Regex GeneratePhoneNumberRegex();
+
+        [GeneratedRegex(_PARTIAL_PHONE_NUMBER_REGEX)]
+        private static partial Regex GeneratePartialPhoneNumberRegex();
     }
 }
