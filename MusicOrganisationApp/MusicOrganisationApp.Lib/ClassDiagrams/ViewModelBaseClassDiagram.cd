@@ -1,52 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="MusicOrganisationApp.Lib.ViewModels.ViewModelBase">
-    <Position X="12.25" Y="2" Width="1.5" />
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.ViewModelBase" Collapsed="true">
+    <Position X="11.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAACACIAQAAAIAAAEEACAAAAQAAAAABAiAAAA=</HashCode>
       <FileName>ViewModels\ViewModelBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditViewModelBase">
-    <Position X="5.25" Y="7" Width="1.5" />
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditViewModelBase" Collapsed="true">
+    <Position X="10.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAIAAAAAAEAAAAAAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>ViewModels\EditViewModels\EditViewModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.CollectionViewModelBase&lt;T&gt;">
-    <Position X="7.5" Y="7" Width="2" />
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.CollectionViewModelBase&lt;T&gt;" Collapsed="true">
+    <Position X="10" Y="5.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAEAAABAAAAAAEAAAAIAAAAAAQAAAAAAAABAAAAAAAQ=</HashCode>
       <FileName>ViewModels\CollectionViewModels\CollectionViewModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MusicOrganisationApp.Lib.ViewModels.ModelViewModels.ModelViewModelBase">
-    <Position X="10.25" Y="7" Width="1.75" />
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.ModelViewModels.ModelViewModelBase" Collapsed="true">
+    <Position X="10.25" Y="3.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\ModelViewModels\ModelViewModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MusicOrganisationApp.Lib.ViewModels.DeveloperToolsViewModel">
-    <Position X="12.75" Y="7" Width="2.25" />
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.DeveloperToolsViewModel" Collapsed="true">
+    <Position X="13" Y="3.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAQABIABIAAAAAEEgAgAAAAAAAAAAAAABAAAAgAAA=</HashCode>
       <FileName>ViewModels\DeveloperToolsViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="MusicOrganisationApp.Lib.ViewModels.StartupViewModel">
-    <Position X="15.75" Y="7" Width="1.75" />
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.StartupViewModel" Collapsed="true">
+    <Position X="13" Y="5.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAAAEAAAAAAAAAAAAAAAAACCAAAAAA=</HashCode>
       <FileName>ViewModels\StartupViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="MusicOrganisationApp.Lib.ViewModels.TimetableGeneratorViewModel">
-    <Position X="18.25" Y="7" Width="2.5" />
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.TimetableGeneratorViewModel" Collapsed="true">
+    <Position X="13" Y="6.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AQAAQAAAAAAAAEAQCGAAAAIBAAAAAAAAEAAAAAAAIAA=</HashCode>
       <FileName>ViewModels\TimetableGeneratorViewModel.cs</FileName>

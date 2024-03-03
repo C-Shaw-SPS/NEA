@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditCaregiverViewModel" Collapsed="true">
+    <Position X="13.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAQwAAAAQAAAAAQAEAAAAAAAAAAQAAAAAAAAAEAAAA=</HashCode>
+      <FileName>ViewModels\EditViewModels\EditCaregiverViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditComposerViewModel" Collapsed="true">
+    <Position X="11.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAQAEAAAAAAAAQCEBCAAEAAAAAQAAAAKAAECUACoA=</HashCode>
+      <FileName>ViewModels\EditViewModels\EditComposerViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditContactablePersonViewModel&lt;T&gt;" Collapsed="true">
+    <Position X="15" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAABgAAAAQYoAAEAQCgDAAEAAAAAAAAAEAAgAABsACI=</HashCode>
+      <FileName>ViewModels\EditViewModels\EditContactablePersonViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditLessonSlotViewModel" Collapsed="true">
+    <Position X="10.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAQAAAAAQAAAAQAEBAAAASAAAAAgAAAAAAAAEAIAA=</HashCode>
+      <FileName>ViewModels\EditViewModels\EditLessonSlotViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditLessonViewModel" Collapsed="true">
+    <Position X="8.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAAQRAAAAAQAAAABBEAQCAECAQAAAgAAQAAAAAEAJFA=</HashCode>
+      <FileName>ViewModels\EditViewModels\EditLessonViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditLessonViewModelBase&lt;TModel, TTable, TModelViewModel&gt;" Collapsed="true">
+    <Position X="9.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgEAQAAAIEAgAAAAAAAAACACAAABQggABQAgAAjAIAA=</HashCode>
+      <FileName>ViewModels\EditViewModels\EditLessonViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditPersonViewModel&lt;T&gt;" Collapsed="true">
+    <Position X="14" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAIAAAAAAAAAAACAACAAkACAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\EditViewModels\EditPersonViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditPupilCaregiverViewModel" Collapsed="true">
+    <Position X="11.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAYggQAEAAAAAEAEAAAIEAAAgAQACABAAAAQGIAAg=</HashCode>
+      <FileName>ViewModels\EditViewModels\EditPupilCaregiverViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditPupilViewModel" Collapsed="true">
+    <Position X="16.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAQwAAAAQQIQAAQAEAAAQAAAAAQQAAAACAAgAEAAAA=</HashCode>
+      <FileName>ViewModels\EditViewModels\EditPupilViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditRepertoireViewModel" Collapsed="true">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAQQAAQAEoAIgAAAlAAAIEAAAgAUACABAAAAQGAAAg=</HashCode>
+      <FileName>ViewModels\EditViewModels\EditRepertoireViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditViewModelBase" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAEAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>ViewModels\EditViewModels\EditViewModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditViewModelBase&lt;T&gt;" Collapsed="true">
+    <Position X="10.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhQAAAAAAAAAAgGIAIABACEAAAAAwQAABAAEACAAAIA=</HashCode>
+      <FileName>ViewModels\EditViewModels\EditViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditWorkViewModel" Collapsed="true">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAQQAAQAMAgAACAAFAAAJAIAAAAQAAQBAgAAQGABAg=</HashCode>
+      <FileName>ViewModels\EditViewModels\EditWorkViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.SearchableEditViewModel&lt;TModel, TSearch, TEditSearchViewModel&gt;" Collapsed="true">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgEAAAAQAAAAhAgAgAAAAIALAQAAAEQAAAAAAQqAAAg=</HashCode>
+      <FileName>ViewModels\EditViewModels\SearchableEditViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
