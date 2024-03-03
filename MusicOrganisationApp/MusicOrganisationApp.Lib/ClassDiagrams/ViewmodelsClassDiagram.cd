@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditCaregiverViewModel">
-    <Position X="38.75" Y="25" Width="3" />
+    <Position X="39.5" Y="25" Width="3" />
     <TypeIdentifier>
       <HashCode>BAAQwAAAAQAAAAAQAEAAAAAAAAAAQAAAAAAAAAEAAAA=</HashCode>
       <FileName>ViewModels\EditViewModels\EditCaregiverViewModel.cs</FileName>
@@ -9,7 +9,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditComposerViewModel">
-    <Position X="35" Y="18.25" Width="3" />
+    <Position X="35.75" Y="18.25" Width="3" />
     <TypeIdentifier>
       <HashCode>BAAAQAEAAAAAAAAQCEBCAAEAAAAAQAAAAKAAECUACoA=</HashCode>
       <FileName>ViewModels\EditViewModels\EditComposerViewModel.cs</FileName>
@@ -17,14 +17,14 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditContactablePersonViewModel&lt;T&gt;">
-    <Position X="40.25" Y="18.25" Width="3.5" />
+    <Position X="41" Y="18.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>CAABgAAAAQYoAAEAQCgDAAEAAAAAAAAAEAAgAABsACI=</HashCode>
       <FileName>ViewModels\EditViewModels\EditContactablePersonViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditLessonSlotViewModel">
-    <Position X="10.75" Y="20.75" Width="4.25" />
+    <Position X="11.5" Y="20.75" Width="4.25" />
     <TypeIdentifier>
       <HashCode>BAAAQAAAAAQAAAAQAEBAAAASAAAAAgAAAAAAAAEAIAA=</HashCode>
       <FileName>ViewModels\EditViewModels\EditLessonSlotViewModel.cs</FileName>
@@ -32,7 +32,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditLessonViewModel">
-    <Position X="15.75" Y="20.75" Width="3.75" />
+    <Position X="16.5" Y="20.75" Width="3.75" />
     <TypeIdentifier>
       <HashCode>JAAQRAAAAAQAAAABBEAQCAECAQAAAgAAQAAAAAEAJFA=</HashCode>
       <FileName>ViewModels\EditViewModels\EditLessonViewModel.cs</FileName>
@@ -40,7 +40,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditLessonViewModelBase&lt;TModel, TTable, TModelViewModel&gt;">
-    <Position X="13.25" Y="14.5" Width="4" />
+    <Position X="13.75" Y="14.5" Width="4" />
     <TypeIdentifier>
       <HashCode>AgEAQAAAIEAgAAAAAAAAACACAAABQggABQAgAAjAIAA=</HashCode>
       <FileName>ViewModels\EditViewModels\EditLessonViewModelBase.cs</FileName>
@@ -48,7 +48,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditPupilCaregiverViewModel">
-    <Position X="29.5" Y="20.75" Width="4.75" />
+    <Position X="30.25" Y="20.75" Width="4.75" />
     <TypeIdentifier>
       <HashCode>BAAAYggQAEAAAAAEAEAAAIEAAAgAQACABAAAAQGIAAg=</HashCode>
       <FileName>ViewModels\EditViewModels\EditPupilCaregiverViewModel.cs</FileName>
@@ -56,7 +56,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditPupilViewModel">
-    <Position X="42.5" Y="25" Width="2.5" />
+    <Position X="43.25" Y="25" Width="3" />
     <TypeIdentifier>
       <HashCode>BAAQwAAAAQQIQAAQAEAAAQAAAAAQQAAAACAAgAEAAAA=</HashCode>
       <FileName>ViewModels\EditViewModels\EditPupilViewModel.cs</FileName>
@@ -64,7 +64,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditRepertoireViewModel">
-    <Position X="20.25" Y="20.75" Width="3.75" />
+    <Position X="21" Y="20.75" Width="3.75" />
     <TypeIdentifier>
       <HashCode>BAAQQAAQAEoAIgAAAlAAAIEAAAgAUACABAAAAQGAAAg=</HashCode>
       <FileName>ViewModels\EditViewModels\EditRepertoireViewModel.cs</FileName>
@@ -72,14 +72,14 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditViewModelBase">
-    <Position X="26.75" Y="5.5" Width="2.5" />
+    <Position X="27.5" Y="5.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAIAAAAAAEAAAAAAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>ViewModels\EditViewModels\EditViewModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditViewModelBase&lt;T&gt;">
-    <Position X="26.75" Y="8.25" Width="2.5" />
+    <Position X="27.25" Y="8.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AhQAAAAAAAAAAgGIAIABACEAAAAAwQAABAAEACAAAIA=</HashCode>
       <FileName>ViewModels\EditViewModels\EditViewModelBase.cs</FileName>
@@ -87,7 +87,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditWorkViewModel">
-    <Position X="24.75" Y="20.75" Width="4" />
+    <Position X="25.5" Y="20.75" Width="4" />
     <TypeIdentifier>
       <HashCode>BAAQQAAQAMAgAACAAFAAAJAIAAAAQAAQBAgAAQGABAg=</HashCode>
       <FileName>ViewModels\EditViewModels\EditWorkViewModel.cs</FileName>
@@ -95,21 +95,21 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.SearchableEditViewModel&lt;TModel, TSearch, TEditSearchViewModel&gt;">
-    <Position X="25.25" Y="14.5" Width="4.25" />
+    <Position X="25.75" Y="14.5" Width="4.25" />
     <TypeIdentifier>
       <HashCode>AgEAAAAQAAAAhAgAgAAAAIALAQAAAEQAAAAAAQqAAAg=</HashCode>
       <FileName>ViewModels\EditViewModels\SearchableEditViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditPersonViewModel&lt;T&gt;">
-    <Position X="38.75" Y="14.5" Width="2.75" />
+    <Position X="39.5" Y="14.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AgAAIAAAAAAAAAAACAACAAkACAAAAAAABAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\EditViewModels\EditPersonViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.AddPupilAvailabilityViewModel">
-    <Position X="45.75" Y="9.25" Width="2.5" />
+    <Position X="47" Y="9.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAEAQAAAQACQAAAYAEIARAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\AddPupilAvailabilityViewModel.cs</FileName>
@@ -117,7 +117,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.AllCaregiversViewModel">
-    <Position X="68.5" Y="17.5" Width="5.25" />
+    <Position X="71.75" Y="17.5" Width="5.25" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAQAEAAAAAAAAAAAAAAAACAAACAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\AllCaregiversViewModel.cs</FileName>
@@ -125,7 +125,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.AllComposersViewModel">
-    <Position X="80.5" Y="17.5" Width="5.25" />
+    <Position X="83.75" Y="17.5" Width="5.25" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAQAEAAAAAAAAAAAAAAAACAAACAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\AllComposersViewModel.cs</FileName>
@@ -133,7 +133,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.AllLessonSlotsViewModel">
-    <Position X="52.25" Y="13.25" Width="5.25" />
+    <Position X="55.5" Y="13.25" Width="5.25" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAQAAAAQAEABAAAQAAAAQAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\AllLessonSlotsViewModel.cs</FileName>
@@ -141,7 +141,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.AllLessonsViewModel">
-    <Position X="58.25" Y="13.25" Width="4.5" />
+    <Position X="61.5" Y="13.25" Width="4.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAEAQAEAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\AllLessonsViewModel.cs</FileName>
@@ -149,7 +149,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.AllPupilCaregiversViewModel">
-    <Position X="91.75" Y="17.5" Width="5.75" />
+    <Position X="95" Y="17.5" Width="5.75" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAQAAAQAEAAAAAAAAAAAAAAAACAAACAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\AllPupilCaregiversViewModel.cs</FileName>
@@ -157,7 +157,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.AllPupilLessonsViewModel">
-    <Position X="98.25" Y="13.25" Width="4.75" />
+    <Position X="101.5" Y="13.25" Width="4.75" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAQAAAQAEAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\AllPupilLessonsViewModel.cs</FileName>
@@ -165,7 +165,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.AllPupilsViewModel">
-    <Position X="63.5" Y="17.5" Width="4.25" />
+    <Position X="66.75" Y="17.5" Width="4.25" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAQAEAAAAAAAAAAAAAAAACAAACAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\AllPupilsViewModel.cs</FileName>
@@ -173,7 +173,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.AllRepertoireViewModel">
-    <Position X="74.5" Y="17.5" Width="5.25" />
+    <Position X="77.75" Y="17.5" Width="5.25" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAQAAAQAEAAAAAAAAAAAAAAAACAAACAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\AllRepertoireViewModel.cs</FileName>
@@ -181,7 +181,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.AllWorksViewModel">
-    <Position X="86.5" Y="17.5" Width="4.5" />
+    <Position X="89.75" Y="17.5" Width="4.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAQAEAAAAAAAAAAAAAAAACAAACAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\AllWorksViewModel.cs</FileName>
@@ -189,14 +189,14 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.CollectionViewModelBase&lt;T&gt;">
-    <Position X="73" Y="5.5" Width="3" />
+    <Position X="75" Y="5.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AAEAAABAAAAAAEAAAAIAAAAAAQAAAAAAAABAAAAAAAQ=</HashCode>
       <FileName>ViewModels\CollectionViewModels\CollectionViewModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.PupilAvailabilityViewModel">
-    <Position X="49" Y="9.25" Width="2.5" />
+    <Position X="51.25" Y="9.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>CAEAQAAAQACQBAAQAEoAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\PupilAvailabilityViewModel.cs</FileName>
@@ -204,21 +204,21 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.SearchableCollectionViewModel&lt;TModel, TModelViewModel, TEditViewModel&gt;">
-    <Position X="78.25" Y="13.25" Width="4.75" />
+    <Position X="81.25" Y="13.25" Width="4.75" />
     <TypeIdentifier>
       <HashCode>AAkAAAAAAAAAgAAAAAAACAAAAAAAQEAAAACAAAKAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\SearchableCollectionViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.SelectableCollectionViewModel&lt;TModel, TModelViewModel, TEditViewModel&gt;">
-    <Position X="75.25" Y="9.25" Width="4.75" />
+    <Position X="78.5" Y="9.25" Width="4.75" />
     <TypeIdentifier>
       <HashCode>AAEAAAAAAAAAAAAIAAIARAAAAQAAQAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\SelectableCollectionViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.ModelViewModels.CaregiverViewModel">
-    <Position X="107.25" Y="12.25" Width="3.75" />
+    <Position X="111.75" Y="12.25" Width="3.75" />
     <TypeIdentifier>
       <HashCode>CAARYAAAAAAAAAAQAEAAAAAAAAAAQAAABAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\ModelViewModels\CaregiverViewModel.cs</FileName>
@@ -226,7 +226,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.ModelViewModels.ComposerViewModel">
-    <Position X="115.5" Y="12.25" Width="3.5" />
+    <Position X="120.5" Y="12.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAYAEAAAAAAAAQAEAAAAAAAAAAQAAABIAAACAAAAA=</HashCode>
       <FileName>ViewModels\ModelViewModels\ComposerViewModel.cs</FileName>
@@ -234,7 +234,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.ModelViewModels.LessonSlotViewModel">
-    <Position X="124" Y="12.25" Width="3.5" />
+    <Position X="129" Y="12.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAEAQAAAIAAAAAAQAEBAAAAAAAAAQAAABAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\ModelViewModels\LessonSlotViewModel.cs</FileName>
@@ -242,7 +242,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.ModelViewModels.LessonViewModel">
-    <Position X="132" Y="12.25" Width="3.25" />
+    <Position X="137.5" Y="12.25" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAEQQAAAIAAAAAAQBEAAAAAAAAAAQAABBAAAAAAABAA=</HashCode>
       <FileName>ViewModels\ModelViewModels\LessonViewModel.cs</FileName>
@@ -250,14 +250,14 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.ModelViewModels.ModelViewModelBase">
-    <Position X="122.25" Y="5.5" Width="2.75" />
+    <Position X="127.25" Y="5.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\ModelViewModels\ModelViewModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.ModelViewModels.ModelViewModelBase&lt;TModel, TEditViewModel&gt;">
-    <Position X="122" Y="8" Width="3.25" />
+    <Position X="127" Y="8" Width="3.25" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAAAAAQAAAAAAAAAEAAAAAQAkBBAAAAAAEAAA=</HashCode>
       <FileName>ViewModels\ModelViewModels\ModelViewModelBase.cs</FileName>
@@ -265,7 +265,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.ModelViewModels.PupilCaregiverViewModel">
-    <Position X="136" Y="12.25" Width="4" />
+    <Position X="141.5" Y="12.25" Width="4" />
     <TypeIdentifier>
       <HashCode>CAABYAAAAAAAAIAUAEAAAAAAAABAQAABRAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\ModelViewModels\PupilCaregiverViewModel.cs</FileName>
@@ -273,7 +273,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.ModelViewModels.PupilViewModel">
-    <Position X="111.75" Y="12.25" Width="3" />
+    <Position X="116.25" Y="12.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>iAARYAAAAAgACAAQEEAAIwAQAAAQQEAABAAQABBCAgA=</HashCode>
       <FileName>ViewModels\ModelViewModels\PupilViewModel.cs</FileName>
@@ -281,7 +281,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.ModelViewModels.RepertoireViewModel">
-    <Position X="119.75" Y="12.25" Width="3.5" />
+    <Position X="124.75" Y="12.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAIQRAAAgIAAAAAQAkAABBEAAIAAQAABBAAAAAAABAA=</HashCode>
       <FileName>ViewModels\ModelViewModels\RepertoireViewModel.cs</FileName>
@@ -289,7 +289,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.ModelViewModels.WorkViewModel">
-    <Position X="128.25" Y="12.25" Width="3" />
+    <Position X="133.25" Y="12.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAIQQAAAAIAAAAAQAEAAABAgAAAAQQAABAAAAAAABAA=</HashCode>
       <FileName>ViewModels\ModelViewModels\WorkViewModel.cs</FileName>
@@ -297,7 +297,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.DeveloperToolsViewModel">
-    <Position X="103.75" Y="5.5" Width="2.75" />
+    <Position X="107" Y="5.5" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAQABIABIAAAAAEEgAgAAAAAAAAAAAAABAAAAgAAA=</HashCode>
       <FileName>ViewModels\DeveloperToolsViewModel.cs</FileName>
@@ -305,7 +305,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.StartupViewModel">
-    <Position X="140.75" Y="5.5" Width="1.75" />
+    <Position X="146.25" Y="5.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAAAEAAAAAAAAAAAAAAAAACCAAAAAA=</HashCode>
       <FileName>ViewModels\StartupViewModel.cs</FileName>
@@ -313,7 +313,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.TimetableGeneratorViewModel">
-    <Position X="7" Y="5.5" Width="3" />
+    <Position X="7" Y="5.5" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AQAAQAAAAAAAAEAQCGAAAAIBAAAAAAAAEAAAAAAAIAA=</HashCode>
       <FileName>ViewModels\TimetableGeneratorViewModel.cs</FileName>
@@ -321,9 +321,9 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.ViewModelBase">
-    <Position X="73.25" Y="0.5" Width="3" />
+    <Position X="76" Y="0.5" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAACACIAQAAAIAAAEEACAAAAQAAAAABAiAAAA=</HashCode>
+      <HashCode>AAABAAAAACACIAQAACIAAAEEACAAAAQAAAAAAAiAAAA=</HashCode>
       <FileName>ViewModels\ViewModelBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
