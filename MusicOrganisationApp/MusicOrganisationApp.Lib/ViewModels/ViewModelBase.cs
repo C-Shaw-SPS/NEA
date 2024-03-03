@@ -31,7 +31,7 @@ namespace MusicOrganisationApp.Lib.ViewModels
 
         protected async Task GoToAsync<TViewModel>(Dictionary<string, object> parameters) where TViewModel : IViewModel
         {
-            AddParameters(parameters);
+            AddPupilIdParameter(parameters);
             await GoToAsync(TViewModel.Route, parameters);
         }
 
@@ -86,7 +86,7 @@ namespace MusicOrganisationApp.Lib.ViewModels
             await ApplyQueryAttributesAsync(query);
         }
 
-        private void AddParameters(IDictionary<string, object> parameters)
+        private void AddPupilIdParameter(IDictionary<string, object> parameters)
         {
             if (this is IPupilDataViewModel pupilDataViewModel)
             {
