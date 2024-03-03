@@ -11,7 +11,7 @@ namespace MusicOrganisationApp.Tests.ViewModels
         private const string _INVALID_EMAIL_ADDRESS = "pupilAtEmail.com";
 
         private const string _VALID_PHONE_NUMBER = "+44 0123 456789";
-        private const string _INVALID_PHONE_NUMBER = "123abc";
+        private const string _INVALID_PHONE_NUMBER = "+";
 
         [Fact]
         public void TestLessonDurationInputValidation()
