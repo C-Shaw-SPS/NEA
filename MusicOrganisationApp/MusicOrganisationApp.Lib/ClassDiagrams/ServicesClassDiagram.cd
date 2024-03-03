@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MusicOrganisationApp.Lib.Services.CaregiverService" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAACAAABAAAAAAAIAAAAAAAAAwAAAAAAAAAAIA=</HashCode>
+      <FileName>Services\CaregiverService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.ComposerService" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAgAAACAAABAAAAAAAIAACAAAAAAwAAAAAAIAAAIA=</HashCode>
+      <FileName>Services\ComposerService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.DateGetter">
+    <Position X="16.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\DateGetter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.DictionaryGetter">
+    <Position X="18" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\DictionaryGetter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.LessonService">
+    <Position X="2.25" Y="5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAABBgAAIAAAAABAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Services\LessonService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.LessonServiceBase&lt;TModel, TTable&gt;">
+    <Position X="3.75" Y="0.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAFAAAAICAAAAAABAgAAIAAAAABAAAwAAAAAAAAAAIA=</HashCode>
+      <FileName>Services\LessonServiceBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.LessonSlotService">
+    <Position X="5.5" Y="5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAABAgBAIAEAAABAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Services\LessonSlotService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.PupilAvailabilityService">
+    <Position X="12.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAQAEAAAAQAAgAAAAgAgAQAAAgAAAAAAAA=</HashCode>
+      <FileName>Services\PupilAvailabilityService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.PupilCaregiverService" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAACAAQBAAACAAAIAAAAAgAAAwAAAAAAAACAIA=</HashCode>
+      <FileName>Services\PupilCaregiverService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.PupilLessonService" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAACAAQAAAAAAAAIAAAAAgAAAwAAAAAAAAAAIA=</HashCode>
+      <FileName>Services\PupilLessonService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.PupilService" BaseTypeListCollapsed="true">
+    <Position X="18" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAACAAABAAAAAAAIAAAAAAAAAwAgAAAAAAAAIA=</HashCode>
+      <FileName>Services\PupilService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.RepertoireService" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAACAAQBAAACAAAIAAABAgAAAwAAAAAAAAAAIA=</HashCode>
+      <FileName>Services\RepertoireService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.StartupService">
+    <Position X="14.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAQAAABgAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\StartupService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.TimetableGenerator">
+    <Position X="16.25" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>MgAAgQAgAACEQBAAACABAAAgAAAAQAgAAAEEIKEAEFE=</HashCode>
+      <FileName>Services\TimetableGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.TimetableService">
+    <Position X="18" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAAiAAAAAAAAAAAAAAAAAIAAQAQAEAAAgQAAEAA=</HashCode>
+      <FileName>Services\TimetableService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Services.WorkService" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAACAAABAAACAIAIBAAAAAAAAwAAAAAAAAAAIA=</HashCode>
+      <FileName>Services\WorkService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="MusicOrganisationApp.Lib.Services.ISearchService&lt;T&gt;">
+    <Position X="10" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\ISearchService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MusicOrganisationApp.Lib.Services.IService">
+    <Position X="10" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Services\IService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MusicOrganisationApp.Lib.Services.IService&lt;T&gt;">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAACAAAAAAAAACAIAAAAAAAAAgAAAAAAAAAAIA=</HashCode>
+      <FileName>Services\IService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
