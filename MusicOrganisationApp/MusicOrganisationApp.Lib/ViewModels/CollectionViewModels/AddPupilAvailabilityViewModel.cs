@@ -15,9 +15,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         private readonly AsyncRelayCommand _selectCommand;
 
         [ObservableProperty]
-        private ObservableCollection<LessonSlot> _lessonSlots = [];
-
-        [ObservableProperty]
         private LessonSlot? _selectedLessonSlot;
 
         public AddPupilAvailabilityViewModel()

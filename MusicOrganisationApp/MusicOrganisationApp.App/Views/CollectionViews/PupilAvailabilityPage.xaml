@@ -26,7 +26,7 @@
             Style="{StaticResource collectionViewStyle}"
             Grid.Row="0"
             Grid.Column="0"
-            ItemsSource="{Binding LessonSlots}"
+            ItemsSource="{Binding Collection}"
             SelectedItem="{Binding SelectedLessonSlot}">
 
             <CollectionView.ItemsLayout>

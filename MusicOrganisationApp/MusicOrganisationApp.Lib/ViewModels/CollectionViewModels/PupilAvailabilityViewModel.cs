@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
-using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
@@ -12,9 +11,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private readonly PupilAvailabilityService _service;
         private readonly AsyncRelayCommand _removeCommand;
-
-        [ObservableProperty]
-        private ObservableCollection<LessonSlot> _lessonSlots = [];
 
         [ObservableProperty]
         private LessonSlot? _selectedLessonSlot;
@@ -62,7 +58,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         protected override async Task<IEnumerable<LessonSlot>> GetAllAsync()
         {
-            IEnumerable<LessonSlot> lessonSlots = await _service.GetUnusedLessonSlotsAsync();
+            IEnumerable<LessonSlot> lessonSlots = await _service.GetPupilAvailabilityAsync();
             return lessonSlots;
         }
     }
