@@ -45,8 +45,8 @@ namespace MusicOrganisationApp.Lib.ViewModels
 
         private async Task ResetComposersAndWorksAsync()
         {
-            IEnumerable<Composer> composers = await ComposerGetter.GetFromOpenOpus();
-            IEnumerable<WorkData> workData = await WorkGetter.GetFromOpenOpus();
+            IEnumerable<Composer> composers = await ComposerGetter.GetFromOpenOpusAsync();
+            IEnumerable<WorkData> workData = await WorkGetter.GetFromOpenOpusAsync();
 
             await _database.ResetTableAsync(composers);
             await _database.ResetTableAsync(workData);
