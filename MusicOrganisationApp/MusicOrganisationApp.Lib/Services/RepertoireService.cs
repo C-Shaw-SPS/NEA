@@ -36,8 +36,8 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task InsertAsync(Repertoire value, bool getNewId)
         {
-            RepertoireData repertoireData = await GetRepertoireData(value, getNewId);
-            await _database.InsertAsync(repertoireData);
+            RepertoireData repertoireData = GetRepertoireData(value);
+            await _database.InsertAsync(repertoireData, getNewId);
         }
 
         public async Task<IEnumerable<Repertoire>> SearchAsync(string search, string ordering)
@@ -60,7 +60,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task UpdateAsync(Repertoire value)
         {
-            RepertoireData repertoireData = await GetRepertoireData(value, false);
+            RepertoireData repertoireData = GetRepertoireData(value);
             await _database.UpdateAsync(repertoireData);
         }
 
@@ -85,12 +85,11 @@ namespace MusicOrganisationApp.Lib.Services
             return sqlQuery;
         }
 
-        private async Task<RepertoireData> GetRepertoireData(Repertoire repertoire, bool getNewId)
+        private RepertoireData GetRepertoireData(Repertoire repertoire)
         {
-            int id = getNewId ? await _database.GetNextIdAsync<RepertoireData>() : repertoire.Id;
             RepertoireData repertoireData = new()
             {
-                Id = id,
+                Id = repertoire.Id,
                 PupilId = repertoire.PupilId,
                 WorkId = repertoire.WorkId,
                 DateStarted = repertoire.DateStarted,

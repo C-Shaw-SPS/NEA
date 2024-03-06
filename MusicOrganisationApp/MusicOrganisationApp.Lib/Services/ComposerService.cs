@@ -69,12 +69,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task InsertAsync(Composer value, bool getNewId)
         {
-            if (getNewId)
-            {
-                int id = await _database.GetNextIdAsync<Composer>();
-                value.Id = id;
-            }
-            await _database.InsertAsync(value);
+            await _database.InsertAsync(value, getNewId);
         }
 
         public async Task<IEnumerable<Composer>> SearchAsync(string search, string ordering)

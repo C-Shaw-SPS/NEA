@@ -35,12 +35,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task InsertAsync(LessonData value, bool getNewId)
         {
-            if (getNewId)
-            {
-                int id = await _database.GetNextIdAsync<LessonData>();
-                value.Id = id;
-            }
-            await _database.InsertAsync(value);
+            await _database.InsertAsync(value, getNewId);
         }
 
         public async Task<(bool, LessonData)> TryGetAsync(int id)

@@ -52,8 +52,8 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task InsertAsync(Work value, bool getNewId)
         {
-            WorkData workData = await GetWorkData(value, getNewId);
-            await _database.InsertAsync(workData);
+            WorkData workData = GetWorkData(value);
+            await _database.InsertAsync(workData, getNewId);
         }
 
         public async Task<IEnumerable<Work>> SearchAsync(string search, string ordering)
@@ -68,7 +68,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task UpdateAsync(Work value)
         {
-            WorkData workData = await GetWorkData(value, false);
+            WorkData workData = GetWorkData(value);
             await _database.UpdateAsync(workData);
         }
 
@@ -87,12 +87,11 @@ namespace MusicOrganisationApp.Lib.Services
             return sqlQuery;
         }
 
-        private async Task<WorkData> GetWorkData(Work work, bool getNewId)
+        private WorkData GetWorkData(Work work)
         {
-            int id = getNewId ? await _database.GetNextIdAsync<WorkData>() : work.Id;
             WorkData workData = new()
             {
-                Id = id,
+                Id = work.Id,
                 ComposerId = work.ComposerId,
                 Title = work.Title,
                 Subtitle = work.Subtitle,

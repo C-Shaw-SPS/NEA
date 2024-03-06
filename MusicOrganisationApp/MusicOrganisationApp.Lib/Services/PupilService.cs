@@ -37,12 +37,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task InsertAsync(Pupil value, bool getNewId)
         {
-            if (getNewId)
-            {
-                int newId = await _database.GetNextIdAsync<Pupil>();
-                value.Id = newId;
-            }
-            await _database.InsertAsync(value);
+            await _database.InsertAsync(value, getNewId);
         }
 
         public async Task<IEnumerable<Pupil>> SearchAsync(string search, string ordering)

@@ -54,12 +54,7 @@ namespace MusicOrganisationApp.Lib.Services
         public async Task InsertAsync(TModel value, bool getNewId)
         {
             TTable tableValue = GetTableValue(value);
-            if (getNewId)
-            {
-                int id = await _database.GetNextIdAsync<TTable>();
-                tableValue.Id = id;
-            }
-            await _database.InsertAsync(tableValue);
+            await _database.InsertAsync(tableValue, getNewId);
         }
 
         protected abstract TTable GetTableValue(TModel value);

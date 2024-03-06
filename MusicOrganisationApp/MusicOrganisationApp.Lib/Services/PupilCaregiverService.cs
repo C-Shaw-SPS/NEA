@@ -34,8 +34,8 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task InsertAsync(PupilCaregiver value, bool getNewId)
         {
-            CaregiverMap caregiverMap = await GetCaregiverMap(value, getNewId);
-            await _database.InsertAsync(caregiverMap);
+            CaregiverMap caregiverMap = GetCaregiverMap(value);
+            await _database.InsertAsync(caregiverMap, getNewId);
         }
 
         public async Task<IEnumerable<PupilCaregiver>> SearchAsync(string search, string ordering)
@@ -56,7 +56,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task UpdateAsync(PupilCaregiver value)
         {
-            CaregiverMap caregiverMap = await GetCaregiverMap(value, false);
+            CaregiverMap caregiverMap = GetCaregiverMap(value);
             await _database.UpdateAsync(caregiverMap);
         }
 
@@ -74,15 +74,14 @@ namespace MusicOrganisationApp.Lib.Services
             return sqlQuery;
         }
 
-        private async Task<CaregiverMap> GetCaregiverMap(PupilCaregiver caregiver, bool getNewId)
+        private CaregiverMap GetCaregiverMap(PupilCaregiver pupilCaregiver)
         {
-            int id = getNewId ? await _database.GetNextIdAsync<CaregiverMap>() : caregiver.Id;
             CaregiverMap caregiverMap = new()
             {
-                Id = id,
-                CaregiverId = caregiver.CaregiverId,
-                PupilId = caregiver.PupilId,
-                Description = caregiver.Description
+                Id = pupilCaregiver.Id,
+                CaregiverId = pupilCaregiver.CaregiverId,
+                PupilId = pupilCaregiver.PupilId,
+                Description = pupilCaregiver.Description
             };
             return caregiverMap;
         }

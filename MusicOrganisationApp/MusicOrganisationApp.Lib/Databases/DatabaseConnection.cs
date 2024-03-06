@@ -49,9 +49,14 @@ namespace MusicOrganisationApp.Lib.Databases
             await _connection.ExecuteAsync(sql);
         }
 
-        public async Task InsertAsync<T>(T value) where T : class, ITable, new()
+        public async Task InsertAsync<T>(T value, bool getNewId = false) where T : class, ITable, new()
         {
             await CreateTableAsync<T>();
+
+            if (getNewId)
+            {
+                value.Id = await GetNextIdAsync<T>();
+            }
 
             InsertStatement<T> insertStatement = new();
             insertStatement.AddValue(value);

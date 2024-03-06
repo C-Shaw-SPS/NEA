@@ -28,11 +28,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task InsertAsync(CaregiverData value, bool getNewId)
         {
-            if (getNewId)
-            {
-                value.Id = await _database.GetNextIdAsync<CaregiverData>();
-            }
-            await _database.InsertAsync(value);
+            await _database.InsertAsync(value, getNewId);
         }
 
         public async Task<IEnumerable<CaregiverData>> SearchAsync(string search, string ordering)
