@@ -9,7 +9,7 @@ namespace MusicOrganisationApp.Lib.Json
 
         public static async Task<IEnumerable<WorkData>> GetFromOpenOpus()
         {
-            return await JsonGetter.GetFromUrl<WorkData, WorkResponse>(_URL);
+            return await JsonGetter.GetFromUrlAsync<WorkData, WorkResponse>(_URL);
         }
 
         public static IEnumerable<WorkData> GetFromFile(string filePath)
