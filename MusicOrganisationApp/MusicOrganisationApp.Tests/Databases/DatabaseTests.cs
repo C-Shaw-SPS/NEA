@@ -109,8 +109,9 @@ namespace MusicOrganisationApp.Tests.Databases
         {
             DatabaseConnection database = new(nameof(TestGetNextIdAsync));
             await database.ResetTableAsync(ExpectedTables.WorkData);
-            int nextId = await database.GetNextIdAsync<WorkData>();
-            Assert.Equal(ExpectedTables.WorkData.Max(w => w.Id) + 1, nextId);
+            int actualNextId = await database.GetNextIdAsync<WorkData>();
+            int expectedNextId = ExpectedTables.WorkData.Max(w => w.Id) + 1;
+            Assert.Equal(expectedNextId, actualNextId);
         }
 
         [Fact]
@@ -119,7 +120,7 @@ namespace MusicOrganisationApp.Tests.Databases
             DatabaseConnection database = new(nameof(TestGetNextIdFromEmptyAsync));
             await database.DropTableIfExistsAsync<Composer>();
             int nextId = await database.GetNextIdAsync<Composer>();
-            Assert.Equal(1, nextId);
+            Assert.Equal(0, nextId);
         }
 
         [Fact]

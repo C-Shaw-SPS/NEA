@@ -144,9 +144,9 @@ namespace MusicOrganisationApp.Lib.Databases
         public async Task<int> GetNextIdAsync<T>() where T : class, ITable, new()
         {
             await CreateTableAsync<T>();
-            string query = $"SELECT MAX({nameof(ITable.Id)}) AS {nameof(ITable.Id)} FROM {T.TableName}";
+            string query = $"SELECT MAX({nameof(ITable.Id)}) + 1 AS {nameof(ITable.Id)} FROM {T.TableName}";
             IEnumerable<T> result = await _connection.QueryAsync<T>(query);
-            int nextId = result.First().Id + 1;
+            int nextId = result.First().Id;
             return nextId;
         }
 
