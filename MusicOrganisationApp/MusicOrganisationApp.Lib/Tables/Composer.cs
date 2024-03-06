@@ -30,14 +30,14 @@ namespace MusicOrganisationApp.Lib.Tables
             set => _name = value;
         }
 
-        [JsonPropertyName("birth"), JsonConverter(typeof(YearConverter))]
+        [JsonPropertyName("birth"), JsonConverter(typeof(DateToYearConverter))]
         public int? BirthYear
         {
             get => _birthYear;
             set => _birthYear = value;
         }
 
-        [JsonPropertyName("death"), JsonConverter(typeof(YearConverter))]
+        [JsonPropertyName("death"), JsonConverter(typeof(DateToYearConverter))]
         public int? DeathYear
         {
             get => _deathYear;
