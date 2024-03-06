@@ -8,7 +8,7 @@ namespace MusicOrganisationApp.Lib.Json
         private const string _URL = "https://api.openopus.org/composer/list/search/.json";
         public static async Task<IEnumerable<Composer>> GetFromOpenOpus()
         {
-            return await JsonGetter.GetFromUrl<Composer, ComposerResponse>(_URL);
+            return await JsonGetter.GetFromUrlAsync<Composer, ComposerResponse>(_URL);
         }
 
         public static IEnumerable<Composer> GetFromFile(string filePath)
