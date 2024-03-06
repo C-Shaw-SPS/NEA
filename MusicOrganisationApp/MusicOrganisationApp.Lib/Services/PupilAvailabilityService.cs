@@ -5,6 +5,9 @@ namespace MusicOrganisationApp.Lib.Services
 {
     public class PupilAvailabilityService
     {
+        private const string _ALL_LESSON_SLOTS = nameof(_ALL_LESSON_SLOTS);
+        private const string _USED_LESSON_SLOTS = nameof(_USED_LESSON_SLOTS);
+
         private readonly DatabaseConnection _database;
         private int? _pupilId;
 
@@ -28,23 +31,26 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task<IEnumerable<LessonSlot>> GetUnusedLessonSlotsAsync()
         {
-            IEnumerable<LessonSlot> currentLessonSlots = await GetPupilAvailabilityAsync();
-            IEnumerable<LessonSlot> allLessonSlots = await _database.GetAllAsync<LessonSlot>();
-            IEnumerable<LessonSlot> unusedLessonSlots = GetDifference(allLessonSlots, currentLessonSlots).Order();
+            string sqlQuery = GetUnusedLessonSlotSqlQuery();
+            await _database.CreateTableAsync<LessonSlot>();
+            await _database.CreateTableAsync<PupilAvailability>();
+            IEnumerable<LessonSlot> unusedLessonSlots = await _database.QueryAsync<LessonSlot>(sqlQuery);
             return unusedLessonSlots;
         }
 
-        private static List<T> GetDifference<T>(IEnumerable<T> allItems, IEnumerable<T> itemsToRemove)
+        private string GetUnusedLessonSlotSqlQuery()
         {
-            List<T> difference = [];
-            foreach (T item in allItems)
-            {
-                if (!itemsToRemove.Contains(item))
-                {
-                    difference.Add(item);
-                }
-            }
-            return difference;
+            string sqlQuery = $"""
+                SELECT * FROM {LessonSlot.TableName} {_ALL_LESSON_SLOTS}
+                WHERE {_ALL_LESSON_SLOTS}.{nameof(LessonSlot.Id)} NOT IN
+                (
+                    SELECT {_USED_LESSON_SLOTS}.{nameof(LessonSlot.Id)} FROM {LessonSlot.TableName} {_USED_LESSON_SLOTS}
+                    JOIN {PupilAvailability.TableName} ON {PupilAvailability.TableName}.{nameof(PupilAvailability.LessonSlotId)} = {_USED_LESSON_SLOTS}.{nameof(LessonSlot.Id)}
+                    WHERE {PupilAvailability.TableName}.{nameof(PupilAvailability.PupilId)} = {_pupilId}
+                )
+                ORDER BY {_ALL_LESSON_SLOTS}.{nameof(LessonSlot.DayOfWeek)} ASC, {_ALL_LESSON_SLOTS}.{nameof(LessonSlot.StartTime)} ASC
+                """;
+            return sqlQuery;
         }
 
         public async Task AddAvailabilityAsync(LessonSlot lessonSlotData)
