@@ -24,9 +24,9 @@ namespace MusicOrganisationApp.Lib.Json
             return GetValuesFromResponse<T, TResponse>(json);
         }
 
-        public async static Task<IEnumerable<T>> GetFromUrl<T, TResponse>(string url) where TResponse : IResponse<T>
+        public async static Task<IEnumerable<T>> GetFromUrlAsync<T, TResponse>(string url) where TResponse : IResponse<T>
         {
-            (bool suceeded, string json) = await WebReader.DownloadText(url);
+            (bool suceeded, string json) = await WebReader.TryDownloadTextAsync(url);
             if (suceeded)
             {
                 IEnumerable<T> values = GetValuesFromResponse<T, TResponse>(json);
