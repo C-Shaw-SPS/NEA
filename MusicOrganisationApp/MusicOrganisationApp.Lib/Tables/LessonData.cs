@@ -59,7 +59,7 @@ namespace MusicOrganisationApp.Lib.Tables
             set => _notes = value;
         }
 
-        public static IEnumerable<string> GetColumnNames()
+        public static IEnumerable<string> GetFieldNames()
         {
             return new List<string>
             {

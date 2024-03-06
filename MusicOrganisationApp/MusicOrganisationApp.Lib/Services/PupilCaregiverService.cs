@@ -63,13 +63,13 @@ namespace MusicOrganisationApp.Lib.Services
         private static SqlQuery<CaregiverMap> GetSqlQuery()
         {
             SqlQuery<CaregiverMap> sqlQuery = new();
-            sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.Id), nameof(PupilCaregiver.Id));
-            sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.Description), nameof(PupilCaregiver.Description));
-            sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.PupilId), nameof(PupilCaregiver.PupilId));
-            sqlQuery.AddColumn<CaregiverMap>(nameof(CaregiverMap.CaregiverId), nameof(PupilCaregiver.CaregiverId));
-            sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.Name), nameof(PupilCaregiver.Name));
-            sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.EmailAddress), nameof(PupilCaregiver.EmailAddress));
-            sqlQuery.AddColumn<CaregiverData>(nameof(CaregiverData.PhoneNumber), nameof(PupilCaregiver.PhoneNumber));
+            sqlQuery.AddField<CaregiverMap>(nameof(CaregiverMap.Id), nameof(PupilCaregiver.Id));
+            sqlQuery.AddField<CaregiverMap>(nameof(CaregiverMap.Description), nameof(PupilCaregiver.Description));
+            sqlQuery.AddField<CaregiverMap>(nameof(CaregiverMap.PupilId), nameof(PupilCaregiver.PupilId));
+            sqlQuery.AddField<CaregiverMap>(nameof(CaregiverMap.CaregiverId), nameof(PupilCaregiver.CaregiverId));
+            sqlQuery.AddField<CaregiverData>(nameof(CaregiverData.Name), nameof(PupilCaregiver.Name));
+            sqlQuery.AddField<CaregiverData>(nameof(CaregiverData.EmailAddress), nameof(PupilCaregiver.EmailAddress));
+            sqlQuery.AddField<CaregiverData>(nameof(CaregiverData.PhoneNumber), nameof(PupilCaregiver.PhoneNumber));
             sqlQuery.AddInnerJoin<CaregiverData, CaregiverMap>(nameof(CaregiverData.Id), nameof(CaregiverMap.CaregiverId));
             return sqlQuery;
         }

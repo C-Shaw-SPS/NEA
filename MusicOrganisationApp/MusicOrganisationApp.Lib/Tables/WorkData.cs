@@ -73,7 +73,7 @@ namespace MusicOrganisationApp.Lib.Tables
             return sqlValues;
         }
 
-        public static IEnumerable<string> GetColumnNames()
+        public static IEnumerable<string> GetFieldNames()
         {
             return new List<string>
             {

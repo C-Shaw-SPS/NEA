@@ -75,14 +75,14 @@ namespace MusicOrganisationApp.Lib.Services
         private static SqlQuery<WorkData> GetSqlQuery()
         {
             SqlQuery<WorkData> sqlQuery = new(IService.DEFAULT_LIMIT);
-            sqlQuery.AddColumn<WorkData>(nameof(WorkData.Id), nameof(Work.Id));
-            sqlQuery.AddColumn<WorkData>(nameof(WorkData.ComposerId), nameof(Work.ComposerId));
-            sqlQuery.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Work.Title));
-            sqlQuery.AddColumn<WorkData>(nameof(WorkData.Subtitle), nameof(Work.Subtitle));
-            sqlQuery.AddColumn<WorkData>(nameof(WorkData.Genre), nameof(Work.Genre));
-            sqlQuery.AddColumn<WorkData>(nameof(WorkData.Notes), nameof(Work.Notes));
+            sqlQuery.AddField<WorkData>(nameof(WorkData.Id), nameof(Work.Id));
+            sqlQuery.AddField<WorkData>(nameof(WorkData.ComposerId), nameof(Work.ComposerId));
+            sqlQuery.AddField<WorkData>(nameof(WorkData.Title), nameof(Work.Title));
+            sqlQuery.AddField<WorkData>(nameof(WorkData.Subtitle), nameof(Work.Subtitle));
+            sqlQuery.AddField<WorkData>(nameof(WorkData.Genre), nameof(Work.Genre));
+            sqlQuery.AddField<WorkData>(nameof(WorkData.Notes), nameof(Work.Notes));
             sqlQuery.AddInnerJoin<Composer, WorkData>(nameof(Composer.Id), nameof(WorkData.ComposerId));
-            sqlQuery.AddColumn<Composer>(nameof(Composer.Name), nameof(Work.ComposerName));
+            sqlQuery.AddField<Composer>(nameof(Composer.Name), nameof(Work.ComposerName));
 
             return sqlQuery;
         }

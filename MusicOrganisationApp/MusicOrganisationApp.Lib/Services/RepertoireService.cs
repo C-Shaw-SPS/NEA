@@ -67,18 +67,18 @@ namespace MusicOrganisationApp.Lib.Services
         private static SqlQuery<RepertoireData> GetSqlQuery()
         {
             SqlQuery<RepertoireData> sqlQuery = new(IService.DEFAULT_LIMIT);
-            sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.Id), nameof(Repertoire.Id));
-            sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.DateStarted), nameof(Repertoire.DateStarted));
-            sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.Syllabus), nameof(Repertoire.Syllabus));
-            sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.IsFinishedLearning), nameof(Repertoire.IsFinishedLearning));
-            sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.Notes), nameof(Repertoire.Notes));
-            sqlQuery.AddColumn<RepertoireData>(nameof(RepertoireData.PupilId), nameof(Repertoire.PupilId));
-            sqlQuery.AddColumn<WorkData>(nameof(WorkData.Id), nameof(Repertoire.WorkId));
-            sqlQuery.AddColumn<WorkData>(nameof(WorkData.Title), nameof(Repertoire.Title));
-            sqlQuery.AddColumn<WorkData>(nameof(WorkData.Subtitle), nameof(Repertoire.Subtitle));
-            sqlQuery.AddColumn<WorkData>(nameof(WorkData.Genre), nameof(Repertoire.Genre));
-            sqlQuery.AddColumn<Composer>(nameof(Composer.Id), nameof(Repertoire.ComposerId));
-            sqlQuery.AddColumn<Composer>(nameof(Composer.Name), nameof(Repertoire.ComposerName));
+            sqlQuery.AddField<RepertoireData>(nameof(RepertoireData.Id), nameof(Repertoire.Id));
+            sqlQuery.AddField<RepertoireData>(nameof(RepertoireData.DateStarted), nameof(Repertoire.DateStarted));
+            sqlQuery.AddField<RepertoireData>(nameof(RepertoireData.Syllabus), nameof(Repertoire.Syllabus));
+            sqlQuery.AddField<RepertoireData>(nameof(RepertoireData.IsFinishedLearning), nameof(Repertoire.IsFinishedLearning));
+            sqlQuery.AddField<RepertoireData>(nameof(RepertoireData.Notes), nameof(Repertoire.Notes));
+            sqlQuery.AddField<RepertoireData>(nameof(RepertoireData.PupilId), nameof(Repertoire.PupilId));
+            sqlQuery.AddField<WorkData>(nameof(WorkData.Id), nameof(Repertoire.WorkId));
+            sqlQuery.AddField<WorkData>(nameof(WorkData.Title), nameof(Repertoire.Title));
+            sqlQuery.AddField<WorkData>(nameof(WorkData.Subtitle), nameof(Repertoire.Subtitle));
+            sqlQuery.AddField<WorkData>(nameof(WorkData.Genre), nameof(Repertoire.Genre));
+            sqlQuery.AddField<Composer>(nameof(Composer.Id), nameof(Repertoire.ComposerId));
+            sqlQuery.AddField<Composer>(nameof(Composer.Name), nameof(Repertoire.ComposerName));
             sqlQuery.AddInnerJoin<WorkData, RepertoireData>(nameof(WorkData.Id), nameof(RepertoireData.WorkId));
             sqlQuery.AddInnerJoin<Composer, WorkData>(nameof(Composer.Id), nameof(WorkData.ComposerId));
 

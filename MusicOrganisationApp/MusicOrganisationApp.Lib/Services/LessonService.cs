@@ -19,13 +19,13 @@ namespace MusicOrganisationApp.Lib.Services
         protected override SqlQuery<LessonData> GetSqlQueryWithNoConditions()
         {
             SqlQuery<LessonData> sqlQuery = new();
-            sqlQuery.AddColumn<LessonData>(nameof(LessonData.Id), nameof(Lesson.Id));
-            sqlQuery.AddColumn<LessonData>(nameof(LessonData.PupilId), nameof(Lesson.PupilId));
-            sqlQuery.AddColumn<LessonData>(nameof(LessonData.Date), nameof(Lesson.Date));
-            sqlQuery.AddColumn<LessonData>(nameof(LessonData.StartTime), nameof(Lesson.StartTime));
-            sqlQuery.AddColumn<LessonData>(nameof(LessonData.EndTime), nameof(Lesson.EndTime));
-            sqlQuery.AddColumn<LessonData>(nameof(LessonData.Notes), nameof(Lesson.Notes));
-            sqlQuery.AddColumn<Pupil>(nameof(Pupil.Name), nameof(Lesson.PupilName));
+            sqlQuery.AddField<LessonData>(nameof(LessonData.Id), nameof(Lesson.Id));
+            sqlQuery.AddField<LessonData>(nameof(LessonData.PupilId), nameof(Lesson.PupilId));
+            sqlQuery.AddField<LessonData>(nameof(LessonData.Date), nameof(Lesson.Date));
+            sqlQuery.AddField<LessonData>(nameof(LessonData.StartTime), nameof(Lesson.StartTime));
+            sqlQuery.AddField<LessonData>(nameof(LessonData.EndTime), nameof(Lesson.EndTime));
+            sqlQuery.AddField<LessonData>(nameof(LessonData.Notes), nameof(Lesson.Notes));
+            sqlQuery.AddField<Pupil>(nameof(Pupil.Name), nameof(Lesson.PupilName));
             sqlQuery.AddInnerJoin<Pupil, LessonData>(nameof(Pupil.Id), nameof(LessonData.PupilId));
             sqlQuery.AddOrderByAscending(nameof(Lesson.StartTime));
             return sqlQuery;

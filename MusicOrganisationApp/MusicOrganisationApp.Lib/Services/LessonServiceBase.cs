@@ -12,23 +12,23 @@ namespace MusicOrganisationApp.Lib.Services
             _database = database;
         }
 
-        protected async Task<IEnumerable<TModel>> GetClashingLessonsAsync(string dateColumn, object date, TimeSpan startTime, TimeSpan endTime, int? id)
+        protected async Task<IEnumerable<TModel>> GetClashingLessonsAsync(string dateField, object date, TimeSpan startTime, TimeSpan endTime, int? id)
         {
-            SqlQuery<TTable> sqlQuery = GetClashingLessonsSqlQuery(dateColumn, date, startTime, endTime, id);
+            SqlQuery<TTable> sqlQuery = GetClashingLessonsSqlQuery(dateField, date, startTime, endTime, id);
             IEnumerable<TModel> clashingLessons = await _database.QueryAsync<TModel>(sqlQuery);
             return clashingLessons;
         }
 
         protected abstract SqlQuery<TTable> GetSqlQueryWithNoConditions();
 
-        private SqlQuery<TTable> GetClashingLessonsSqlQuery(string dateColumn, object date, TimeSpan startTime, TimeSpan endTime, int? id)
+        private SqlQuery<TTable> GetClashingLessonsSqlQuery(string dateField, object date, TimeSpan startTime, TimeSpan endTime, int? id)
         {
             SqlQuery<TTable> sqlQuery = GetSqlQueryWithNoConditions();
-            sqlQuery.AddWhereEqual<TTable>(dateColumn, date);
+            sqlQuery.AddWhereEqual<TTable>(dateField, date);
             sqlQuery.AddAndNotEqual<TTable>(nameof(ITable.Id), id);
             sqlQuery.AddAndLessOrEqual<TTable>(nameof(ILesson<TTable>.StartTime), startTime);
             sqlQuery.AddAndGreaterThan<TTable>(nameof(ILesson<TTable>.EndTime), startTime);
-            sqlQuery.AddOrEqual<TTable>(dateColumn, date);
+            sqlQuery.AddOrEqual<TTable>(dateField, date);
             sqlQuery.AddAndNotEqual<TTable>(nameof(ITable.Id), id);
             sqlQuery.AddAndGreaterOrEqual<TTable>(nameof(ILesson<TTable>.StartTime), startTime);
             sqlQuery.AddAndLessThan<TTable>(nameof(ILesson<TTable>.StartTime), endTime);

@@ -79,10 +79,10 @@ namespace MusicOrganisationApp.Lib.Services
         private SqlQuery<LessonSlot> GetSqlQueryWithNoConditions()
         {
             SqlQuery<LessonSlot> sqlQuery = new();
-            sqlQuery.AddColumn<LessonSlot>(nameof(LessonSlot.Id));
-            sqlQuery.AddColumn<LessonSlot>(nameof(LessonSlot.DayOfWeek));
-            sqlQuery.AddColumn<LessonSlot>(nameof(LessonSlot.StartTime));
-            sqlQuery.AddColumn<LessonSlot>(nameof(LessonSlot.EndTime));
+            sqlQuery.AddField<LessonSlot>(nameof(LessonSlot.Id));
+            sqlQuery.AddField<LessonSlot>(nameof(LessonSlot.DayOfWeek));
+            sqlQuery.AddField<LessonSlot>(nameof(LessonSlot.StartTime));
+            sqlQuery.AddField<LessonSlot>(nameof(LessonSlot.EndTime));
             sqlQuery.AddInnerJoin<PupilAvailability, LessonSlot>(nameof(PupilAvailability.LessonSlotId), nameof(LessonSlot.Id));
             sqlQuery.AddWhereEqual<PupilAvailability>(nameof(PupilAvailability.PupilId), _pupilId);
             sqlQuery.AddOrderByAscending(nameof(LessonSlot.DayOfWeek));

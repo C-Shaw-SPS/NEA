@@ -36,15 +36,15 @@ namespace MusicOrganisationApp.Lib.Tables
             set => _lessonSlotId = value;
         }
 
-        public static IEnumerable<string> GetColumnNames()
+        public static IEnumerable<string> GetFieldNames()
         {
-            List<string> columnNames = new()
+            List<string> fieldNames = new()
             {
                 nameof(Id),
                 nameof(PupilId),
                 nameof(LessonSlotId)
             };
-            return columnNames;
+            return fieldNames;
         }
 
         public IDictionary<string, string> GetSqlValues()

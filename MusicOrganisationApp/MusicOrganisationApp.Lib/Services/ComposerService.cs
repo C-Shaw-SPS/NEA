@@ -55,7 +55,7 @@ namespace MusicOrganisationApp.Lib.Services
         private async Task<IEnumerable<int>> GetWorkIdsAsync(Composer composer)
         {
             SqlQuery<WorkData> sqlQuery = new();
-            sqlQuery.AddColumn<WorkData>(nameof(WorkData.Id));
+            sqlQuery.AddField<WorkData>(nameof(WorkData.Id));
             sqlQuery.AddWhereEqual<WorkData>(nameof(WorkData.ComposerId), composer.Id);
             IEnumerable<WorkData> works = await _database.QueryAsync<WorkData>(sqlQuery);
             IEnumerable<int> workIds = works.Select(work => work.Id);

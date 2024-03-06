@@ -7,22 +7,22 @@ namespace MusicOrganisationApp.Lib.Databases
         private readonly string _tableName;
         private readonly int _id;
         private readonly IDictionary<string, string> _sqlValues;
-        private readonly IList<string> _columnsToUpdate;
+        private readonly IList<string> _fieldsToUpdate;
 
         public UpdateStatement(int id)
         {
             _tableName = T.TableName;
             _id = id;
             _sqlValues = new Dictionary<string, string>();
-            _columnsToUpdate = [];
+            _fieldsToUpdate = [];
         }
 
         public string TableName => _tableName;
 
-        public void AddColumnToUpdate(string columnName, object? value)
+        public void AddFieldsToUpdate(string fieldName, object? value)
         {
             string sqlValue = SqlFormatting.FormatSqlValue(value);
-            _sqlValues[columnName] = sqlValue;
+            _sqlValues[fieldName] = sqlValue;
         }
 
         public string GetSql()
@@ -31,10 +31,10 @@ namespace MusicOrganisationApp.Lib.Databases
             stringBuilder.AppendLine($"UPDATE {_tableName}");
             stringBuilder.AppendLine("SET");
             List<string> setValues = [];
-            foreach (string column in _sqlValues.Keys)
+            foreach (string field in _sqlValues.Keys)
             {
-                string value = _sqlValues[column];
-                string setValue = $"{column} = {value}";
+                string value = _sqlValues[field];
+                string setValue = $"{field} = {value}";
                 setValues.Add(setValue);
             }
             stringBuilder.AppendLine(string.Join(",\n", setValues));
@@ -43,13 +43,13 @@ namespace MusicOrganisationApp.Lib.Databases
             return statement;
         }
 
-        public static UpdateStatement<T> GetUpdateAllColumns(T value)
+        public static UpdateStatement<T> GetUpdateAllFields(T value)
         {
             UpdateStatement<T> updateStatement = new(value.Id);
             IDictionary<string, string> sqlValues = value.GetSqlValues();
-            foreach (string column in sqlValues.Keys)
+            foreach (string field in sqlValues.Keys)
             {
-                updateStatement._sqlValues[column] = sqlValues[column];
+                updateStatement._sqlValues[field] = sqlValues[field];
             }
             return updateStatement;
         }

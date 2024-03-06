@@ -47,7 +47,7 @@ namespace MusicOrganisationApp.Lib.Tables
         [Ignore]
         public TimeSpan Duration => _endTime - _startTime;
 
-        public static IEnumerable<string> GetColumnNames()
+        public static IEnumerable<string> GetFieldNames()
         {
             return new List<string>
             {

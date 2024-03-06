@@ -5,13 +5,13 @@ namespace MusicOrganisationApp.Lib.Databases
     internal class InsertStatement<T> : ISqlExecutable<T> where T : class, ITable, new()
     {
         private readonly StringBuilder _stringBuilder;
-        private readonly IEnumerable<string> _columns;
+        private readonly IEnumerable<string> _fields;
         private bool _containsValues;
 
         public InsertStatement()
         {
             _stringBuilder = new();
-            _columns = T.GetColumnNames();
+            _fields = T.GetFieldNames();
             _containsValues = false;
         }
 
@@ -32,16 +32,16 @@ namespace MusicOrganisationApp.Lib.Databases
 
         private void AddInsertLine()
         {
-            _stringBuilder.AppendLine($"INSERT INTO {T.TableName} {_columns.CommaJoin().AddBrackets()} VALUES");
+            _stringBuilder.AppendLine($"INSERT INTO {T.TableName} {_fields.CommaJoin().AddBrackets()} VALUES");
         }
 
         private List<string> GetSqlValues(T value)
         {
             IDictionary<string, string> sqlValues = value.GetSqlValues();
             List<string> sqlStrings = [];
-            foreach (string column in _columns)
+            foreach (string field in _fields)
             {
-                sqlStrings.Add(sqlValues[column]);
+                sqlStrings.Add(sqlValues[field]);
             }
             return sqlStrings;
         }

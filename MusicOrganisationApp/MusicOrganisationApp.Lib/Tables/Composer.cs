@@ -53,7 +53,7 @@ namespace MusicOrganisationApp.Lib.Tables
 
         public static string TableName => _TABLE_NAME;
 
-        public static IEnumerable<string> GetColumnNames()
+        public static IEnumerable<string> GetFieldNames()
         {
             return new List<string>
             {

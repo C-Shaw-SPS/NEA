@@ -4,11 +4,13 @@ namespace MusicOrganisationApp.Lib.Databases
 {
     public class SqlQuery<T> : ConditionalExecutable<T>, ISqlQuery where T : class, ITable, new()
     {
+        private const string _JOIN = "JOIN";
+
         private readonly string _tableName = T.TableName;
         private bool _selectAll;
-        private readonly List<(string table, string column, string alias)> _columns = [];
-        private readonly List<(string joinType, string newTable, string newColumn, string existingTable, string existingColumn)> _joins = [];
-        private readonly List<(string column, string order)> _orderBys = [];
+        private readonly List<(string table, string field, string alias)> _fields = [];
+        private readonly List<(string newTable, string newField, string existingTable, string existingField)> _joins = [];
+        private readonly List<(string field, string order)> _orderBys = [];
         private readonly int? _limit;
 
         private readonly HashSet<Type> _tables = [typeof(T)];
@@ -31,39 +33,34 @@ namespace MusicOrganisationApp.Lib.Databases
 
         public IEnumerable<Type> Tables => _tables;
 
-        public void AddColumn<TTable>(string column, string alias) where TTable : ITable
+        public void AddField<TTable>(string field, string alias) where TTable : ITable
         {
-            _columns.Add((TTable.TableName, column, alias));
+            _fields.Add((TTable.TableName, field, alias));
         }
 
-        public void AddColumn<TTable>(string column) where TTable : ITable
+        public void AddField<TTable>(string field) where TTable : ITable
         {
-            AddColumn<TTable>(column, column);
+            AddField<TTable>(field, field);
         }
 
         #region Joins
 
-        public void AddInnerJoin<TNew, TExisting>(string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
-        {
-            AddJoin<TNew, TExisting>(ISqlExecutable.INNER_JOIN, newColumn, existingColumn);
-        }
-
-        private void AddJoin<TNew, TExisting>(string joinType, string newColumn, string existingColumn) where TNew : ITable where TExisting : ITable
+        public void AddInnerJoin<TNew, TExisting>(string newField, string existingField) where TNew : ITable where TExisting : ITable
         {
             _tables.Add(typeof(TNew));
-            _joins.Add((joinType, TNew.TableName, newColumn, TExisting.TableName, existingColumn));
+            _joins.Add((TNew.TableName, newField, TExisting.TableName, existingField));
         }
 
         #endregion
 
-        public void AddOrderByAscending(string column)
+        public void AddOrderByAscending(string field)
         {
-            _orderBys.Add((column, ISqlExecutable.ASC));
+            _orderBys.Add((field, ISqlExecutable.ASC));
         }
 
-        public void AddOrderByDescending(string column)
+        public void AddOrderByDescending(string field)
         {
-            _orderBys.Add((column, ISqlExecutable.DESC));
+            _orderBys.Add((field, ISqlExecutable.DESC));
         }
 
         #region SQL
@@ -71,7 +68,7 @@ namespace MusicOrganisationApp.Lib.Databases
         public override string GetSql()
         {
             StringBuilder stringBuilder = new();
-            AddSelectColumnsToStringbuilder(stringBuilder);
+            AddSelectFieldsToStringbuilder(stringBuilder);
             AddJoinsToStringbuilder(stringBuilder);
             AddConditionsToStringBuilder(stringBuilder);
             AddOrderBys(stringBuilder);
@@ -80,7 +77,7 @@ namespace MusicOrganisationApp.Lib.Databases
             return sql;
         }
 
-        private void AddSelectColumnsToStringbuilder(StringBuilder stringBuilder)
+        private void AddSelectFieldsToStringbuilder(StringBuilder stringBuilder)
         {
             if (_selectAll)
             {
@@ -90,8 +87,8 @@ namespace MusicOrganisationApp.Lib.Databases
             {
                 stringBuilder.AppendLine("SELECT");
 
-                IEnumerable<string> formattedColumns = _columns.Select(c => $"{c.table}.{c.column} AS {c.alias}");
-                stringBuilder.AppendLine(string.Join(",\n", formattedColumns));
+                IEnumerable<string> formattedFields = _fields.Select(c => $"{c.table}.{c.field} AS {c.alias}");
+                stringBuilder.AppendLine(string.Join(",\n", formattedFields));
 
                 stringBuilder.AppendLine($"FROM {_tableName}");
             }
@@ -99,9 +96,9 @@ namespace MusicOrganisationApp.Lib.Databases
 
         private void AddJoinsToStringbuilder(StringBuilder stringBuilder)
         {
-            foreach ((string joinType, string newTable, string newColumn, string existingTable, string existingColumn) in _joins)
+            foreach ((string newTable, string newField, string existingTable, string existingField) in _joins)
             {
-                stringBuilder.AppendLine($"{joinType} {newTable} ON {newTable}.{newColumn} = {existingTable}.{existingColumn}");
+                stringBuilder.AppendLine($"{_JOIN} {newTable} ON {newTable}.{newField} = {existingTable}.{existingField}");
             }
         }
 
@@ -116,8 +113,8 @@ namespace MusicOrganisationApp.Lib.Databases
 
         private string FormatCondition(int conditionIndex)
         {
-            (string keyword, string table, string column, string value, string comparison) = _conditions[conditionIndex];
-            return $"{keyword} {table}.{column} {comparison} {value}";
+            (string keyword, string table, string field, string value, string comparison) = _conditions[conditionIndex];
+            return $"{keyword} {table}.{field} {comparison} {value}";
         }
 
         private void AddOrderBys(StringBuilder stringBuilder)
@@ -134,7 +131,7 @@ namespace MusicOrganisationApp.Lib.Databases
         {
             IEnumerable<string> formattedOrderBys =
                 from orderBy in _orderBys
-                select $"{orderBy.column} {orderBy.order}";
+                select $"{orderBy.field} {orderBy.order}";
             return formattedOrderBys;
         }
 

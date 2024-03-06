@@ -6,7 +6,7 @@ namespace MusicOrganisationApp.Lib
     {
         public abstract static string TableName { get; }
 
-        public static abstract IEnumerable<string> GetColumnNames();
+        public static abstract IEnumerable<string> GetFieldNames();
 
         public abstract IDictionary<string, string> GetSqlValues();
     }

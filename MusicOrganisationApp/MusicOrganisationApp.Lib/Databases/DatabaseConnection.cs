@@ -126,7 +126,7 @@ namespace MusicOrganisationApp.Lib.Databases
         {
             await CreateTableAsync<T>();
 
-            UpdateStatement<T> updateStatement = UpdateStatement<T>.GetUpdateAllColumns(value);
+            UpdateStatement<T> updateStatement = UpdateStatement<T>.GetUpdateAllFields(value);
             await ExecuteAsync(updateStatement);
         }
 

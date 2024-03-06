@@ -16,7 +16,6 @@
         public const string NOT_EQUAL = "!=";
         public const string ASC = "ASC";
         public const string DESC = "DESC";
-        public const string INNER_JOIN = "INNER JOIN";
 
         public string GetSql();
     }

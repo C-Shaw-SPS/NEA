@@ -98,7 +98,7 @@ namespace MusicOrganisationApp.Lib.Tables
                 && _notes == other._notes;
         }
 
-        public static IEnumerable<string> GetColumnNames()
+        public static IEnumerable<string> GetFieldNames()
         {
             return new List<string>
             {
