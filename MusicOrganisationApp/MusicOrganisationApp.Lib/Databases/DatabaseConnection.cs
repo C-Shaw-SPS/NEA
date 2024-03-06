@@ -159,7 +159,7 @@ namespace MusicOrganisationApp.Lib.Databases
         public async Task<int> GetTableCount<T>() where T : class, ITable, new()
         {
             await CreateTableAsync<T>();
-            string query = $"SELECT Count(*) AS {nameof(CountProperty.Count)} FROM {T.TableName}";
+            string query = $"SELECT COUNT(*) AS {nameof(CountProperty.Count)} FROM {T.TableName}";
             IEnumerable<CountProperty> countProperties = await _connection.QueryAsync<CountProperty>(query);
             CountProperty countProperty = countProperties.First();
             return countProperty.Count;
