@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace MusicOrganisationApp.Lib.Converters
 {
-    internal class YearConverter : JsonConverter<int?>
+    internal class DateToYearConverter : JsonConverter<int?>
     {
         public override int? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
