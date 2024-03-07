@@ -8,7 +8,7 @@ namespace MusicOrganisationApp.Lib.Services
         private static readonly Random _random = new();
 
         private Dictionary<int, int> _timetable;
-        private Stack<(int lessonSlotId, int pupilId)> _stack;
+        private Stack<int> _stack;
         private readonly Dictionary<int, LessonSlot> _lessonSlots;
         private readonly Dictionary<int, Pupil> _pupils;
         private readonly Dictionary<int, HashSet<int>> _pupilAvailabilities;
@@ -116,7 +116,7 @@ namespace MusicOrganisationApp.Lib.Services
             if (HasAnyAvailability(pupilId))
             {
                 Dictionary<int, int> currentTimetable = new(_timetable);
-                Stack<(int lessonSlotId, int pupilId)> currentStack = new(_stack);
+                Stack<int> currentStack = new(_stack);
                 bool suceeded = TryInsertPupil(pupilId, 0);
                 if (!suceeded)
                 {
@@ -142,21 +142,38 @@ namespace MusicOrganisationApp.Lib.Services
             if (canInsert)
             {
                 _timetable.Add(lessonSlotId, pupilId);
-                _stack.Push((lessonSlotId, pupilId));
+                _stack.Push(lessonSlotId);
+                return true;
+            }
+
+            bool suceeded = TryInsertLesson(pupilId, minLessonSlotId);
+            if (suceeded)
+            {
                 return true;
             }
 
             while (TryMoveState())
             {
-                canInsert = TryGetValidLessonSlot(pupilId, 0, out lessonSlotId);
-                if (canInsert)
+                suceeded = TryInsertLesson(pupilId, 0);
+                if (suceeded)
                 {
-                    _timetable.Add(lessonSlotId, pupilId);
-                    _stack.Push((lessonSlotId, pupilId));
                     return true;
                 }
             }
             return false;
+        }
+
+        private bool TryInsertLesson(int pupilId, int minLessonSlotId)
+        {
+            bool canInsert = TryGetValidLessonSlot(pupilId, minLessonSlotId, out int lessonSlotId);
+
+            if (canInsert)
+            {
+                _timetable.Add(lessonSlotId, pupilId);
+                _stack.Push(lessonSlotId);
+            }
+
+            return canInsert;
         }
 
         private bool TryMoveState()
@@ -166,7 +183,8 @@ namespace MusicOrganisationApp.Lib.Services
                 return false;
             }
 
-            (int lessonSlotId, int pupilId) = _stack.Pop();
+            int lessonSlotId = _stack.Pop();
+            int pupilId = _timetable[lessonSlotId];
             _timetable.Remove(lessonSlotId);
             bool succeeded = TryInsertPupil(pupilId, lessonSlotId + 1);
             return succeeded;
