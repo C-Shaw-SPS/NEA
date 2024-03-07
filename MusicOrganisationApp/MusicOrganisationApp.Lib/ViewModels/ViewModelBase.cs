@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MusicOrganisationApp.Lib.Databases;
+using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels
 {
@@ -27,6 +28,15 @@ namespace MusicOrganisationApp.Lib.ViewModels
         {
             string path = Path.Combine(FileSystem.AppDataDirectory, DatabaseProperties.NAME);
             return path;
+        }
+
+        protected static void ResetCollection<T>(ObservableCollection<T> observableCollection, IEnumerable<T> values)
+        {
+            observableCollection.Clear();
+            foreach (T item in values)
+            {
+                observableCollection.Add(item);
+            }
         }
 
         protected async Task GoToAsync<TViewModel>(Dictionary<string, object> parameters) where TViewModel : IViewModel

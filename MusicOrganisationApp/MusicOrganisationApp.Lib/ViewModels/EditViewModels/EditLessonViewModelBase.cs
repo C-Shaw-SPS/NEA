@@ -90,7 +90,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             if (clashingLessons.Any())
             {
                 TimeError = _CLASH_ERROR;
-                IViewModel.ResetCollection(ClashingLessons, clashingLessons);
+                ResetCollection(ClashingLessons, clashingLessons);
                 return false;
             }
             else

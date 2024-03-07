@@ -34,7 +34,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         public async Task RefreshAsync()
         {
             IEnumerable<T> values = await GetAllAsync();
-            IViewModel.ResetCollection(Collection, values);
+            ResetCollection(Collection, values);
         }
     }
 }
