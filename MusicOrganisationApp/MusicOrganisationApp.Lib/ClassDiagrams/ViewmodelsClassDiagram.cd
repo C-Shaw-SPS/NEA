@@ -111,7 +111,7 @@
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.AddPupilAvailabilityViewModel">
     <Position X="47" Y="9.25" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAEAQAAAQACQAAAYAEIARAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAEAQAAAQAAQAAAYAEIARAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\AddPupilAvailabilityViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -198,7 +198,7 @@
   <Class Name="MusicOrganisationApp.Lib.ViewModels.CollectionViewModels.PupilAvailabilityViewModel">
     <Position X="51.25" Y="9.25" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>CAEAQAAAQACQBAAQAEoAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>CAEAQAAAQAAQBAAQAEoAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\CollectionViewModels\PupilAvailabilityViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -323,10 +323,17 @@
   <Class Name="MusicOrganisationApp.Lib.ViewModels.ViewModelBase">
     <Position X="76" Y="0.5" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAACACIAQAACIAAAEEACAAAAQAAAAAAAiAAAA=</HashCode>
+      <HashCode>AAABAAAAACACIAQAACIAAAEMACAAAAQAAAAAAAiAAAA=</HashCode>
       <FileName>ViewModels\ViewModelBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Interface Name="MusicOrganisationApp.Lib.ViewModels.IViewModel">
+    <Position X="149.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\IViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
