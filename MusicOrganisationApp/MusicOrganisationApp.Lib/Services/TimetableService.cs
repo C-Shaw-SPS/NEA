@@ -6,7 +6,7 @@ namespace MusicOrganisationApp.Lib.Services
     public class TimetableService
     {
         private static readonly TimeSpan _DAY = TimeSpan.FromDays(1);
-        private static readonly TimeSpan _WEEK = TimeSpan.FromDays(7);
+        private static readonly TimeSpan _WEEK = 7 * _DAY;
 
         private readonly DatabaseConnection _database;
 
