@@ -1,9 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using MusicOrganisationApp.Lib.Services;
 using MusicOrganisationApp.Lib.Tables;
 using MusicOrganisationApp.Lib.ViewModels.EditViewModels;
-using System.Collections.ObjectModel;
 
 namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 {
@@ -12,7 +10,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         private const string _ROUTE = nameof(AddPupilAvailabilityViewModel);
 
         private readonly PupilAvailabilityService _service;
-        private readonly AsyncRelayCommand _selectCommand;
 
         [ObservableProperty]
         private LessonSlot? _selectedLessonSlot;
@@ -20,12 +17,10 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         public AddPupilAvailabilityViewModel()
         {
             _service = new(_database);
-            _selectCommand = new(SelectAsync);
         }
 
         public static string Route => _ROUTE;
 
-        public AsyncRelayCommand SelectCommand => _selectCommand;
 
         public int? PupilId
         {
@@ -33,11 +28,11 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
             set => _service.PupilId = value;
         }
 
-        private async Task SelectAsync()
+        async partial void OnSelectedLessonSlotChanged(LessonSlot? value)
         {
-            if (SelectedLessonSlot is not null)
+            if (value is not null)
             {
-                await _service.AddAvailabilityAsync(SelectedLessonSlot);
+                await _service.AddAvailabilityAsync(value);
                 await RefreshAsync();
             }
         }

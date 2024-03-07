@@ -31,8 +31,7 @@
             Grid.Row="0"
             Grid.Column="0"
             ItemsSource="{Binding Collection}"
-            SelectedItem="{Binding SelectedLessonSlot}"
-            SelectionChangedCommand="{Binding SelectCommand}">
+            SelectedItem="{Binding SelectedLessonSlot}">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout
