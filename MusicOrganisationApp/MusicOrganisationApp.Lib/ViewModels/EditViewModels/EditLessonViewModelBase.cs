@@ -68,7 +68,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         protected abstract void SetDisplayNonTimeValues();
 
-        protected override async Task<bool> TrySetValuesToSave()
+        protected override async Task<bool> TrySetValuesToSaveAsync()
         {
             bool canSave = true;
             canSave &= TrySetNonTimeValuesToSave();

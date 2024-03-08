@@ -25,6 +25,18 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
             return true;
         }
+
+        protected static bool TryGetPositiveInt(string input, out int result)
+        {
+            if (int.TryParse(input, out result) && result >= 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
     public abstract partial class EditViewModelBase<T> : EditViewModelBase, IQueryAttributable where T : class, IIdentifiable, new()
@@ -70,7 +82,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private async Task TrySaveAsync()
         {
-            bool canSave = await TrySetValuesToSave();
+            bool canSave = await TrySetValuesToSaveAsync();
             if (canSave)
             {
                 if (_isNew)
@@ -85,7 +97,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
             }
         }
 
-        protected abstract Task<bool> TrySetValuesToSave();
+        protected abstract Task<bool> TrySetValuesToSaveAsync();
 
         private async Task DeleteAsync()
         {
@@ -135,18 +147,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
                 _isNew = false;
                 PageTitle = _editPageTitle;
                 CanDelete = true;
-            }
-        }
-
-        protected static bool TryGetPositiveInt(string input, out int result)
-        {
-            if (int.TryParse(input, out result) && result >= 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
     }

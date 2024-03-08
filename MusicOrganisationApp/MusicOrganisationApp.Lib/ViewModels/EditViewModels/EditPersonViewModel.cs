@@ -27,7 +27,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         protected abstract void SetNonNameDisplayValues();
 
-        protected override Task<bool> TrySetValuesToSave()
+        protected override Task<bool> TrySetValuesToSaveAsync()
         {
             bool canSave = true;
             canSave &= TrySetNameToSave();

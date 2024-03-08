@@ -79,7 +79,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         protected abstract void UpdateSelectedItemText(TSearch value);
 
-        protected override Task<bool> TrySetValuesToSave()
+        protected override Task<bool> TrySetValuesToSaveAsync()
         {
             bool canSave = true;
             canSave &= TrySetSearchValueToSave();
