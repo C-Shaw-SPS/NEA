@@ -49,9 +49,14 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         {
             Level = _value.Level;
             NeedsDifferentTimes = _value.NeedsDifferentTimes;
-            LessonHours = _value.LessonDuration.Hours.ToString();
-            LessonMinutes = _value.LessonDuration.Minutes.ToString();
+            LessonHours = FormatTime(_value.LessonDuration.Hours);
+            LessonMinutes = FormatTime(_value.LessonDuration.Minutes);
             Notes = _value.Notes;
+        }
+
+        private static string FormatTime(int value)
+        {
+            return value.ToString().PadLeft(2, '0');
         }
 
         protected override bool TrySetNonContactInfoToSave()
