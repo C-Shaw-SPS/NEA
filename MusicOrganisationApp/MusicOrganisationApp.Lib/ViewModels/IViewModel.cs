@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace MusicOrganisationApp.Lib.ViewModels
+﻿namespace MusicOrganisationApp.Lib.ViewModels
 {
     public interface IViewModel
     {
