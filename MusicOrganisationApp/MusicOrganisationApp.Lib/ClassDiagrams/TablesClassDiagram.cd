@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MusicOrganisationApp.Lib.Tables.CaregiverData" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAzJAAAAAEAAAAAgABAQAQAAAAAAAAAAAAACwAAAAA=</HashCode>
+      <FileName>Tables\CaregiverData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Tables.CaregiverMap" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACBAAAAAEwAAAEgABAAAAAAAgAAACEAAAACQAAAAA=</HashCode>
+      <FileName>Tables\CaregiverMap.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Tables.Composer" BaseTypeListCollapsed="true">
+    <Position X="10" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACJAGAAAEIAAAAgABAAAQAAAAAAAgAAIAACSAAAAA=</HashCode>
+      <FileName>Tables\Composer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Tables.LessonData" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEyBAAAIAEQAAAAhABAAAAAIAggAAABAAAACQAAAAA=</HashCode>
+      <FileName>Tables\LessonData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Tables.LessonSlot" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECBAAAIAECAAQAgABAAAAAIAAgAAAAAAAECQAAAAA=</HashCode>
+      <FileName>Tables\LessonSlot.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Tables.Pupil" BaseTypeListCollapsed="true">
+    <Position X="10" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CAAzJBAAAAEAAAAAgABAQQQQAAAQAAEBAAAICwAAAAA=</HashCode>
+      <FileName>Tables\Pupil.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Tables.PupilAvailability" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACJAAAAAEQAAAAgABAAAAAAggAAAAAAAAACQAAAAA=</HashCode>
+      <FileName>Tables\PupilAvailability.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Tables.RepertoireData" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAyTAAAAAEQAAAEggBAAAAAAAgAQAAAAAEACQAKAAA=</HashCode>
+      <FileName>Tables\RepertoireData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Tables.WorkData" BaseTypeListCollapsed="true">
+    <Position X="10" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAyBAAAAIEAAEAAwAJAABAAAAAAAAAAAABACQEABAA=</HashCode>
+      <FileName>Tables\WorkData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="MusicOrganisationApp.Lib.Tables.IContactablePerson">
+    <Position X="1.75" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Tables\IContactablePerson.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MusicOrganisationApp.Lib.Tables.IPerson">
+    <Position X="1.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tables\IPerson.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MusicOrganisationApp.Lib.Tables.IPupilIdentifiable">
+    <Position X="6.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tables\IPupilIdentifiable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MusicOrganisationApp.Lib.ITable">
+    <Position X="4" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAA=</HashCode>
+      <FileName>Databases\ITable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MusicOrganisationApp.Lib.Databases.IIdentifiable">
+    <Position X="3" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Databases\IIdentifiable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MusicOrganisationApp.Lib.Models.ILesson&lt;T&gt;">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ILesson.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
