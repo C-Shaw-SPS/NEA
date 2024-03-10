@@ -11,7 +11,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private readonly PupilLessonService _service;
 
-        public AllPupilLessonsViewModel() : base()
+        public AllPupilLessonsViewModel() : base(GetDefaultPath(), false)
         {
             _service = new(_database);
         }

@@ -28,11 +28,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private string _phoneNumberError = string.Empty;
 
-        public EditContactablePersonViewModel(string editPageTitle, string newPageTitle) : base(editPageTitle, newPageTitle)
-        {
-
-        }
-
         public EditContactablePersonViewModel(string editPageTitle, string newPageTitle, string path, bool isTesting) : base(editPageTitle, newPageTitle, path, isTesting)
         {
 

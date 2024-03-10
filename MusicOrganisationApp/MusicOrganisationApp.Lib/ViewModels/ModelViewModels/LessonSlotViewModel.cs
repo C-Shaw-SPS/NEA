@@ -20,7 +20,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private TimeSpan _endTime;
 
-        public LessonSlotViewModel() : base()
+        public LessonSlotViewModel() : base(GetDefaultPath(), false)
         {
             _service = new(_database);
         }

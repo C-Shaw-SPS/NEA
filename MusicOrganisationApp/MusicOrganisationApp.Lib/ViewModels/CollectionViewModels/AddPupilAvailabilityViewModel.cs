@@ -14,7 +14,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         [ObservableProperty]
         private LessonSlot? _selectedLessonSlot;
 
-        public AddPupilAvailabilityViewModel()
+        public AddPupilAvailabilityViewModel() : base(GetDefaultPath(), false)
         {
             _service = new(_database);
         }

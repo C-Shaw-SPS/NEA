@@ -23,7 +23,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _notes = string.Empty;
 
-        public CaregiverViewModel() : base()
+        public CaregiverViewModel() : base(GetDefaultPath(), false)
         {
             _service = new(_database);
         }

@@ -33,7 +33,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private string _notes = string.Empty;
 
-        public EditRepertoireViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE, _NO_WORK_SELECTED_ERROR)
+        public EditRepertoireViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE, _NO_WORK_SELECTED_ERROR, GetDefaultPath(), false)
         {
             _repertoireService = new(_database);
             _workService = new(_database);

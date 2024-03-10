@@ -20,7 +20,7 @@ namespace MusicOrganisationApp.Lib.ViewModels
         [ObservableProperty]
         private string _message = _LESSON_DELETION_WARNING;
 
-        public TimetableGeneratorViewModel()
+        public TimetableGeneratorViewModel() : base(GetDefaultPath(), false)
         {
             _service = new(_database);
             _generateTimetableCommand = new(GenerateTimetableAsync);

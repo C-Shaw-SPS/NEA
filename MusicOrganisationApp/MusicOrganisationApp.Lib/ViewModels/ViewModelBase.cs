@@ -11,20 +11,18 @@ namespace MusicOrganisationApp.Lib.ViewModels
         private readonly string _path;
         private readonly bool _isTesting;
         private bool _isCurrentViewModel = true;
-        protected readonly DatabaseConnection _database;
-
-        public ViewModelBase() : this(GetDefaultPath(), false) { }
+        protected readonly IDatabaseConnection _database;
 
         public ViewModelBase(string path, bool isTesting)
         {
             _path = SqlFormatting.FormatAsDatabasePath(path);
             _isTesting = isTesting;
-            _database = new(_path);
+            _database = new DatabaseConnection(_path);
         }
 
         public bool IsCurrentViewModel => _isCurrentViewModel;
 
-        private static string GetDefaultPath()
+        protected static string GetDefaultPath()
         {
             string path = Path.Combine(FileSystem.AppDataDirectory, DatabaseProperties.NAME);
             return path;

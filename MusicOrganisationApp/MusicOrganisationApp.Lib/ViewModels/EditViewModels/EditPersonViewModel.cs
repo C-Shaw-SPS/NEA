@@ -13,10 +13,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private string _nameError = string.Empty;
 
-        public EditPersonViewModel(string editPageTitle, string newPageTitle) : base(editPageTitle, newPageTitle)
-        {
-        }
-
         public EditPersonViewModel(string editPageTitle, string newPageTitle, string path, bool isTesting) : base(editPageTitle, newPageTitle, path, isTesting) { }
 
         protected override void SetDisplayValues()

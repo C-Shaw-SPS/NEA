@@ -32,7 +32,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private string _titleError = string.Empty;
 
-        public EditWorkViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE, _NO_COMPOSER_SELECTED_ERROR)
+        public EditWorkViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE, _NO_COMPOSER_SELECTED_ERROR, GetDefaultPath(), false)
         {
             _workService = new(_database);
             _composerService = new(_database);

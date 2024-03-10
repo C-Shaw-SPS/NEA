@@ -10,8 +10,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         public const string ID_PARAMETER = nameof(ID_PARAMETER);
         public const string IS_NEW_PARAMETER = nameof(IS_NEW_PARAMETER);
 
-        public EditViewModelBase() { }
-
         public EditViewModelBase(string path, bool isTesting) : base(path, isTesting) { }
 
         protected static bool IsNumeric(string value)
@@ -55,15 +53,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         [ObservableProperty]
         private bool _canDelete = true;
-
-        public EditViewModelBase(string editPageTitle, string newPageTitle)
-        {
-            _editPageTitle = editPageTitle;
-            _newPageTitle = newPageTitle;
-
-            _trySaveCommand = new(TrySaveAsync);
-            _deleteCommand = new(DeleteAsync);
-        }
 
         public EditViewModelBase(string editPageTitle, string newPageTitle, string path, bool isTesting) : base(path, isTesting)
         {

@@ -38,7 +38,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _notes = string.Empty;
 
-        public RepertoireViewModel() : base()
+        public RepertoireViewModel() : base(GetDefaultPath(), false)
         {
             _service = new(_database);
             _goToWorkCommand = new(GoToWorkAsync);

@@ -17,7 +17,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         [ObservableProperty]
         private DayOfWeek _selectedDayOfWeek = DayOfWeek.Sunday;
 
-        public AllLessonSlotsViewModel() : base()
+        public AllLessonSlotsViewModel() : base(GetDefaultPath(), false)
         {
             _service = new(_database);
         }

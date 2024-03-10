@@ -18,7 +18,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         [ObservableProperty]
         private bool _canRemove = false;
 
-        public PupilAvailabilityViewModel()
+        public PupilAvailabilityViewModel() : base(GetDefaultPath(), false)
         {
             _service = new(_database);
             _removeCommand = new(RemoveAsync);

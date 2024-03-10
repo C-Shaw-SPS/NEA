@@ -23,7 +23,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private string _name = string.Empty;
 
-        public EditPupilCaregiverViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE, _NO_CAREGIVER_SELECTED_ERROR)
+        public EditPupilCaregiverViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE, _NO_CAREGIVER_SELECTED_ERROR, GetDefaultPath(), false)
         {
             _pupilCaregiverService = new(_database);
             _caregiverService = new(_database);

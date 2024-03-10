@@ -26,7 +26,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _notes = string.Empty;
 
-        public LessonViewModel() : base()
+        public LessonViewModel() : base(GetDefaultPath(), false)
         {
             _service = new(_database);
         }

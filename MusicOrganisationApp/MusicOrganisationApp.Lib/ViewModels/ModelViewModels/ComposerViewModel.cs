@@ -23,10 +23,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _era = string.Empty;
 
-        public ComposerViewModel() : base()
-        {
-            _service = new(_database);
-        }
+        public ComposerViewModel() : this(GetDefaultPath(), false) { }
 
         public ComposerViewModel(string path, bool isTesting) : base(path, isTesting)
         {

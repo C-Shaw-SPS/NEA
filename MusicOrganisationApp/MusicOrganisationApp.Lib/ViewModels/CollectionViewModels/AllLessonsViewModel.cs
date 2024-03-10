@@ -15,7 +15,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         [ObservableProperty]
         private DateTime _selectedDate = DateTime.Today;
 
-        public AllLessonsViewModel() : base()
+        public AllLessonsViewModel() : base(GetDefaultPath(), false)
         {
             _service = new(_database);
         }

@@ -9,8 +9,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
     {
         public const string ID_PARAMETER = nameof(ID_PARAMETER);
 
-        public ModelViewModelBase() { }
-
         public ModelViewModelBase(string path, bool isNew) : base(path, isNew) { }
     }
 
@@ -20,11 +18,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
     {
         private readonly AsyncRelayCommand _editCommand;
         protected TModel _value = new();
-
-        public ModelViewModelBase()
-        {
-            _editCommand = new(EditAsync);
-        }
 
         public ModelViewModelBase(string path, bool isNew) : base(path, isNew)
         {

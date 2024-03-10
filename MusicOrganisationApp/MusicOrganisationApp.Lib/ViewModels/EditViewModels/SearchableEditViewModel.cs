@@ -30,7 +30,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private string _searchError = string.Empty;
 
-        public SearchableEditViewModel(string editPageTitle, string newPageTitle, string noItemSelectedError) : base(editPageTitle, newPageTitle)
+        public SearchableEditViewModel(string editPageTitle, string newPageTitle, string noItemSelectedError, string path, bool isTesting) : base(editPageTitle, newPageTitle, path, isTesting)
         {
             _searchCommand = new(SearchAsync);
             _addNewSearchItemCommand = new(AddNewSearchItemAsync);

@@ -13,7 +13,7 @@ namespace MusicOrganisationApp.Lib.ViewModels
         private readonly AsyncRelayCommand _resetComposersAndWorksCommand;
         private readonly AsyncRelayCommand _insertTestDataCommand;
 
-        public DeveloperToolsViewModel()
+        public DeveloperToolsViewModel() : base(GetDefaultPath(), false)
         {
             _dropTablesCommand = new(DropTablesAsync);
             _resetComposersAndWorksCommand = new(ResetComposersAndWorksAsync);

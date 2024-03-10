@@ -17,7 +17,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private readonly WorkService _service;
 
-        public AllWorksViewModel() : base(_orderings)
+        public AllWorksViewModel() : base(_orderings, GetDefaultPath(), false)
         {
             _service = new(_database);
         }

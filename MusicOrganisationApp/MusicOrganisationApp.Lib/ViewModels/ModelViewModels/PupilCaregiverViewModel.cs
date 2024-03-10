@@ -25,7 +25,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _description = string.Empty;
 
-        public PupilCaregiverViewModel() : base()
+        public PupilCaregiverViewModel() : base(GetDefaultPath(), false)
         {
             _service = new(_database);
             _goToCaregiverCommand = new(GoToCaregiverAsync);

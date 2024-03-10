@@ -30,10 +30,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private string _deathYearError = string.Empty;
 
-        public EditComposerViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE)
-        {
-            _service = new(_database);
-        }
+        public EditComposerViewModel() : this(GetDefaultPath(), false) { }
 
         public EditComposerViewModel(string path, bool isTesting) : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE, path, isTesting)
         {

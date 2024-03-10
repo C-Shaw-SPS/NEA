@@ -19,7 +19,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private readonly RepertoireService _service;
 
-        public AllRepertoireViewModel() : base(_orderings)
+        public AllRepertoireViewModel() : base(_orderings, GetDefaultPath(), false)
         {
             _service = new(_database);
         }

@@ -40,7 +40,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
         [ObservableProperty]
         private string _notes = string.Empty;
 
-        public PupilViewModel() : base()
+        public PupilViewModel() : base(GetDefaultPath(), false)
         {
             _service = new(_database);
             _goToRepertoireCommand = new(GoToRepertoireAsync);

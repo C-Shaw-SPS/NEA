@@ -15,7 +15,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         [ObservableProperty]
         private string _notes = string.Empty;
 
-        public EditCaregiverViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE)
+        public EditCaregiverViewModel() : base(_EDIT_PAGE_TITLE, _NEW_PAGE_TITLE, GetDefaultPath(), false)
         {
             _service = new(_database);
         }

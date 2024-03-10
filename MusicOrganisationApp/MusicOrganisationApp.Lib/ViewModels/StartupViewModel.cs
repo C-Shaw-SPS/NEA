@@ -8,7 +8,7 @@ namespace MusicOrganisationApp.Lib.ViewModels
 
         private readonly StartupService _startupService;
 
-        public StartupViewModel()
+        public StartupViewModel() : base(GetDefaultPath(), false)
         {
             _startupService = new(_database);
         }

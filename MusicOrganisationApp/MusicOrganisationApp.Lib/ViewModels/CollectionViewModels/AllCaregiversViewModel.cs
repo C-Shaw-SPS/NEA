@@ -16,7 +16,7 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
 
         private readonly CaregiverService _service;
 
-        public AllCaregiversViewModel() : base(_orderings)
+        public AllCaregiversViewModel() : base(_orderings, GetDefaultPath(), false)
         {
             _service = new(_database);
         }
