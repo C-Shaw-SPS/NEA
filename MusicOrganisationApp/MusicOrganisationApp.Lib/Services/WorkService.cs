@@ -6,9 +6,9 @@ namespace MusicOrganisationApp.Lib.Services
 {
     public class WorkService : ISearchService<Work>
     {
-        private readonly DatabaseConnection _database;
+        private readonly IDatabaseConnection _database;
 
-        public WorkService(DatabaseConnection database)
+        public WorkService(IDatabaseConnection database)
         {
             _database = database;
         }

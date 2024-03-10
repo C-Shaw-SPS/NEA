@@ -6,10 +6,10 @@ namespace MusicOrganisationApp.Lib.Services
 {
     public class RepertoireService : ISearchService<Repertoire>
     {
-        private readonly DatabaseConnection _database;
+        private readonly IDatabaseConnection _database;
         private int? _pupilId;
 
-        public RepertoireService(DatabaseConnection database)
+        public RepertoireService(IDatabaseConnection database)
         {
             _database = database;
         }

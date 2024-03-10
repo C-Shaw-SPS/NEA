@@ -5,10 +5,10 @@ namespace MusicOrganisationApp.Lib.Services
 {
     public class PupilLessonService : IService<LessonData>
     {
-        private readonly DatabaseConnection _database;
+        private readonly IDatabaseConnection _database;
         private int? _pupilId;
 
-        public PupilLessonService(DatabaseConnection database)
+        public PupilLessonService(IDatabaseConnection database)
         {
             _database = database;
         }

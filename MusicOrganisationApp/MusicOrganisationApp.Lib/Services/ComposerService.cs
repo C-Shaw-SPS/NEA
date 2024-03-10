@@ -5,9 +5,9 @@ namespace MusicOrganisationApp.Lib.Services
 {
     public class ComposerService : ISearchService<Composer>
     {
-        private readonly DatabaseConnection _database;
+        private readonly IDatabaseConnection _database;
 
-        public ComposerService(DatabaseConnection database)
+        public ComposerService(IDatabaseConnection database)
         {
             _database = database;
         }

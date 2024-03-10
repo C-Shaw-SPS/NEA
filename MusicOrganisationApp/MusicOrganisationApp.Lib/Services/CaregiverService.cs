@@ -5,9 +5,9 @@ namespace MusicOrganisationApp.Lib.Services
 {
     public class CaregiverService : ISearchService<CaregiverData>
     {
-        private readonly DatabaseConnection _database;
+        private readonly IDatabaseConnection _database;
 
-        public CaregiverService(DatabaseConnection database)
+        public CaregiverService(IDatabaseConnection database)
         {
             _database = database;
         }

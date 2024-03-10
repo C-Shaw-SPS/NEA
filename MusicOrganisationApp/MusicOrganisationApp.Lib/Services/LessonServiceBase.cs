@@ -5,9 +5,9 @@ namespace MusicOrganisationApp.Lib.Services
 {
     public abstract class LessonServiceBase<TModel, TTable> : IService<TModel> where TModel : class, ILesson<TTable>, new() where TTable : class, ITable, new()
     {
-        protected readonly DatabaseConnection _database;
+        protected readonly IDatabaseConnection _database;
 
-        public LessonServiceBase(DatabaseConnection database)
+        public LessonServiceBase(IDatabaseConnection database)
         {
             _database = database;
         }

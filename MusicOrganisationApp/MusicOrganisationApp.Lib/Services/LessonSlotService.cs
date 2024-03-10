@@ -7,7 +7,7 @@ namespace MusicOrganisationApp.Lib.Services
     {
         private DayOfWeek _dayOfWeek = DayOfWeek.Sunday;
 
-        public LessonSlotService(DatabaseConnection database) : base(database) { }
+        public LessonSlotService(IDatabaseConnection database) : base(database) { }
 
         public DayOfWeek DayOfWeek
         {

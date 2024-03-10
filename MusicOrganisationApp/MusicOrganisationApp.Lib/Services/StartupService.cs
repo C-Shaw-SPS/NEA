@@ -6,9 +6,9 @@ namespace MusicOrganisationApp.Lib.Services
 {
     public class StartupService
     {
-        private readonly DatabaseConnection _database;
+        private readonly IDatabaseConnection _database;
 
-        public StartupService(DatabaseConnection database)
+        public StartupService(IDatabaseConnection database)
         {
             _database = database;
         }

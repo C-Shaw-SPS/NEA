@@ -8,7 +8,7 @@ namespace MusicOrganisationApp.Lib.Services
     {
         private DateTime _date = DateTime.Today;
 
-        public LessonService(DatabaseConnection database) : base(database) { }
+        public LessonService(IDatabaseConnection database) : base(database) { }
 
         public DateTime Date
         {

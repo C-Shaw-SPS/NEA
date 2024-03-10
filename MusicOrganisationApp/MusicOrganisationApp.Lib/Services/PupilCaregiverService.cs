@@ -6,10 +6,10 @@ namespace MusicOrganisationApp.Lib.Services
 {
     public class PupilCaregiverService : ISearchService<PupilCaregiver>
     {
-        private readonly DatabaseConnection _database;
+        private readonly IDatabaseConnection _database;
         private int? _pupilId;
 
-        public PupilCaregiverService(DatabaseConnection database)
+        public PupilCaregiverService(IDatabaseConnection database)
         {
             _database = database;
         }

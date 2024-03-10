@@ -8,10 +8,10 @@ namespace MusicOrganisationApp.Lib.Services
         private const string _ALL_LESSON_SLOTS = nameof(_ALL_LESSON_SLOTS);
         private const string _USED_LESSON_SLOTS = nameof(_USED_LESSON_SLOTS);
 
-        private readonly DatabaseConnection _database;
+        private readonly IDatabaseConnection _database;
         private int? _pupilId;
 
-        public PupilAvailabilityService(DatabaseConnection database)
+        public PupilAvailabilityService(IDatabaseConnection database)
         {
             _database = database;
         }

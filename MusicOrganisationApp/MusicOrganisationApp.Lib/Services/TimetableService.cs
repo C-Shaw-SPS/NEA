@@ -8,9 +8,9 @@ namespace MusicOrganisationApp.Lib.Services
         private static readonly TimeSpan _DAY = TimeSpan.FromDays(1);
         private static readonly TimeSpan _WEEK = 7 * _DAY;
 
-        private readonly DatabaseConnection _database;
+        private readonly IDatabaseConnection _database;
 
-        public TimetableService(DatabaseConnection database)
+        public TimetableService(IDatabaseConnection database)
         {
             _database = database;
         }
