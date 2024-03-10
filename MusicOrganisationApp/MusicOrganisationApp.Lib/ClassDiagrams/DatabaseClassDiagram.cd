@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="MusicOrganisationApp.Lib.Databases.ConditionalExecutable&lt;T&gt;" Collapsed="true">
-    <Position X="2.5" Y="3.5" Width="1.5" />
+  <Class Name="MusicOrganisationApp.Lib.Databases.ConditionalExecutable&lt;T&gt;">
+    <Position X="2.5" Y="3.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>QIAACAEAAAAAQAAQABBAAAAAAAIAAAAEABgAAAAIAAA=</HashCode>
       <FileName>Databases\ConditionalExecutable.cs</FileName>
@@ -15,8 +15,8 @@
       <FileName>Databases\CountProperty.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MusicOrganisationApp.Lib.Databases.DatabaseConnection" Collapsed="true">
-    <Position X="10.5" Y="0.5" Width="1.5" />
+  <Class Name="MusicOrganisationApp.Lib.Databases.DatabaseConnection">
+    <Position X="7.25" Y="2.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAEAAAAECCACAAAAAAEAKAEAAABAABkAAAAAAAAABMA=</HashCode>
       <FileName>Databases\DatabaseConnection.cs</FileName>
@@ -60,8 +60,8 @@
       <FileName>Databases\SqlFormatting.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MusicOrganisationApp.Lib.Databases.SqlQuery&lt;T&gt;" Collapsed="true">
-    <Position X="3.5" Y="4.75" Width="1.5" />
+  <Class Name="MusicOrganisationApp.Lib.Databases.SqlQuery&lt;T&gt;">
+    <Position X="3.5" Y="4.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAgEACAAAEgBAASAQQAgJAAAIAIEAACAAQgBAIQ=</HashCode>
       <FileName>Databases\SqlQuery.cs</FileName>
@@ -83,18 +83,18 @@
       <FileName>Databases\IIdentifiable.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="MusicOrganisationApp.Lib.Databases.ISqlExecutable" Collapsed="true">
+  <Interface Name="MusicOrganisationApp.Lib.Databases.ISqlStatement" Collapsed="true">
     <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAFEQCAAAAAAAAAAAkMAAAGAAAAAAAABAQ=</HashCode>
-      <FileName>Databases\ISqlExecutable.cs</FileName>
+      <FileName>Databases\ISqlStatement.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="MusicOrganisationApp.Lib.Databases.ISqlExecutable&lt;T&gt;" Collapsed="true">
+  <Interface Name="MusicOrganisationApp.Lib.Databases.ISqlStatement&lt;T&gt;" Collapsed="true">
     <Position X="1.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Databases\ISqlExecutable.cs</FileName>
+      <FileName>Databases\ISqlStatement.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="MusicOrganisationApp.Lib.Databases.ISqlQuery" Collapsed="true">
