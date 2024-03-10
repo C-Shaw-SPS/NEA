@@ -2,7 +2,7 @@
 
 namespace MusicOrganisationApp.Lib.Databases
 {
-    internal class InsertStatement<T> : ISqlExecutable<T> where T : class, ITable, new()
+    internal class InsertStatement<T> : ISqlStatement<T> where T : class, ITable, new()
     {
         private readonly StringBuilder _stringBuilder;
         private readonly IEnumerable<string> _fields;

@@ -1,6 +1,6 @@
 ﻿namespace MusicOrganisationApp.Lib.Databases
 {
-    public interface ISqlExecutable
+    public interface ISqlStatement
     {
         public const string WHERE = "WHERE";
         public const string AND = "AND";
@@ -21,7 +21,5 @@
     }
 
 
-    public interface ISqlExecutable<T> : ISqlExecutable where T : class, ITable, new()
-    {
-    }
+    public interface ISqlStatement<T> : ISqlStatement where T : class, ITable, new() { }
 }

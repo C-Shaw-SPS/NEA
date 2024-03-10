@@ -38,7 +38,7 @@ namespace MusicOrganisationApp.Lib.Databases
             return result;
         }
 
-        public async Task ExecuteAsync<T>(ISqlExecutable<T> sqlStatement, bool init = true) where T : class, ITable, new()
+        public async Task ExecuteAsync<T>(ISqlStatement<T> sqlStatement, bool init = true) where T : class, ITable, new()
         {
             if (init)
             {

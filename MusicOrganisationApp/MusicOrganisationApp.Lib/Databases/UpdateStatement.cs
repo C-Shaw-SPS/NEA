@@ -2,7 +2,7 @@
 
 namespace MusicOrganisationApp.Lib.Databases
 {
-    public class UpdateStatement<T> : ISqlExecutable<T> where T : class, ITable, new()
+    public class UpdateStatement<T> : ISqlStatement<T> where T : class, ITable, new()
     {
         private readonly T _value;
         private readonly IDictionary<string, string> _sqlValues;

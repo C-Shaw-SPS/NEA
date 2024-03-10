@@ -9,7 +9,7 @@ namespace MusicOrganisationApp.Lib.Databases
         Task DeleteAsync<T>(int id) where T : class, ITable, new();
         Task DeleteAsync<T>(T value) where T : class, ITable, new();
         Task DropTableIfExistsAsync<T>() where T : class, ITable, new();
-        Task ExecuteAsync<T>(ISqlExecutable<T> sqlStatement, bool init = true) where T : class, ITable, new();
+        Task ExecuteAsync<T>(ISqlStatement<T> sqlStatement, bool init = true) where T : class, ITable, new();
         Task<IEnumerable<T>> GetAllAsync<T>() where T : class, ITable, new();
         Task<int> GetNextIdAsync<T>() where T : class, ITable, new();
         Task<int> GetTableCount<T>() where T : class, ITable, new();

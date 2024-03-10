@@ -55,12 +55,12 @@ namespace MusicOrganisationApp.Lib.Databases
 
         public void AddOrderByAscending(string field)
         {
-            _orderBys.Add((field, ISqlExecutable.ASC));
+            _orderBys.Add((field, ISqlStatement.ASC));
         }
 
         public void AddOrderByDescending(string field)
         {
-            _orderBys.Add((field, ISqlExecutable.DESC));
+            _orderBys.Add((field, ISqlStatement.DESC));
         }
 
         #region SQL
