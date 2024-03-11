@@ -6,7 +6,6 @@ namespace MusicOrganisationApp.Lib.Databases
     {
         private const string _JOIN = "JOIN";
 
-        private readonly string _tableName = T.TableName;
         private bool _selectAll;
         private readonly List<(string table, string field, string alias)> _fields = [];
         private readonly List<(string newTable, string newField, string existingTable, string existingField)> _joins = [];
@@ -22,8 +21,6 @@ namespace MusicOrganisationApp.Lib.Databases
         }
 
         public SqlQuery() : this(null) { }
-
-        public string TableName => _tableName;
 
         public bool SelectAll
         {
@@ -81,7 +78,7 @@ namespace MusicOrganisationApp.Lib.Databases
         {
             if (_selectAll)
             {
-                stringBuilder.AppendLine($"SELECT * FROM {_tableName}");
+                stringBuilder.AppendLine($"SELECT * FROM {T.TableName}");
             }
             else
             {
@@ -90,7 +87,7 @@ namespace MusicOrganisationApp.Lib.Databases
                 IEnumerable<string> formattedFields = _fields.Select(c => $"{c.table}.{c.field} AS {c.alias}");
                 stringBuilder.AppendLine(string.Join(",\n", formattedFields));
 
-                stringBuilder.AppendLine($"FROM {_tableName}");
+                stringBuilder.AppendLine($"FROM {T.TableName}");
             }
         }
 

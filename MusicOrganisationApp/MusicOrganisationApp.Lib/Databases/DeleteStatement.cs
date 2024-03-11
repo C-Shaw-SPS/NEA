@@ -6,9 +6,8 @@ namespace MusicOrganisationApp.Lib.Databases
     {
         public DeleteStatement()
         {
-        }
 
-        public string TableName => T.TableName;
+        }
 
         public override string GetSql()
         {
