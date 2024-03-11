@@ -3,7 +3,7 @@
   <Class Name="MusicOrganisationApp.Lib.ViewModels.ViewModelBase" Collapsed="true">
     <Position X="11.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAACACIAQAAAIAAAEEACAAAAQAAAAABAiAAAA=</HashCode>
+      <HashCode>AAABAAAAACACIAQAACIAAAEMACAAAAQAAAAAAAiAAAA=</HashCode>
       <FileName>ViewModels\ViewModelBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -11,7 +11,7 @@
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditViewModelBase" Collapsed="true">
     <Position X="10.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAIAAAAAAEAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAEAAAAAAgAAAAAAAAAAAAAg=</HashCode>
       <FileName>ViewModels\EditViewModels\EditViewModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -29,8 +29,8 @@
       <FileName>ViewModels\ModelViewModels\ModelViewModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MusicOrganisationApp.Lib.ViewModels.DeveloperToolsViewModel" Collapsed="true">
-    <Position X="13" Y="3.75" Width="2.25" />
+  <Class Name="MusicOrganisationApp.Lib.ViewModels.DeveloperToolsViewModel">
+    <Position X="13" Y="3.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAQABIABIAAAAAEEgAgAAAAAAAAAAAAABAAAAgAAA=</HashCode>
       <FileName>ViewModels\DeveloperToolsViewModel.cs</FileName>

@@ -42,7 +42,7 @@
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditLessonViewModelBase&lt;TModel, TTable, TModelViewModel&gt;" Collapsed="true">
     <Position X="9.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgEAQAAAIEAgAAAAAAAAACACAAABQggABQAgAAjAIAA=</HashCode>
+      <HashCode>AAEAQAAAYEAgAAAAAAAAACACAAABQggABQAgAAjAIAA=</HashCode>
       <FileName>ViewModels\EditViewModels\EditLessonViewModelBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -50,7 +50,7 @@
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditPersonViewModel&lt;T&gt;" Collapsed="true">
     <Position X="14" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAIAAAAAAAAAAACAACAAkACAAAAAAABAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAQAAAAAAACAACAAkACAAAAAAABAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\EditViewModels\EditPersonViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -65,7 +65,7 @@
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditPupilViewModel" Collapsed="true">
     <Position X="16.25" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAQwAAAAQQIQAAQAEAAAQAAAAAQQAAAACAAgAEAAAA=</HashCode>
+      <HashCode>BAAQwAAAAQQIQAAQAEAAAQACAAAQQAAAACAAgAEAAAA=</HashCode>
       <FileName>ViewModels\EditViewModels\EditPupilViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -81,14 +81,14 @@
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditViewModelBase" Collapsed="true">
     <Position X="10.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAIAAAAAAEAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAEAAAAAAgAAAAAAAAAAAAAg=</HashCode>
       <FileName>ViewModels\EditViewModels\EditViewModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.EditViewModelBase&lt;T&gt;" Collapsed="true">
     <Position X="10.5" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AhQAAAAAAAAAAgGIAIABACEAAAAAwQAABAAEACAAAIA=</HashCode>
+      <HashCode>ABQAAAAAQAAAAgGIAIABACEAAAAAQQAABAAEACAAAIA=</HashCode>
       <FileName>ViewModels\EditViewModels\EditViewModelBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -104,8 +104,15 @@
   <Class Name="MusicOrganisationApp.Lib.ViewModels.EditViewModels.SearchableEditViewModel&lt;TModel, TSearch, TEditSearchViewModel&gt;" Collapsed="true">
     <Position X="9.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgEAAAAQAAAAhAgAgAAAAIALAQAAAEQAAAAAAQqAAAg=</HashCode>
+      <HashCode>AAEAAAAQQAAAhAgAgAAAAIALAQAAAEQAAAAAAQqAAAg=</HashCode>
       <FileName>ViewModels\EditViewModels\SearchableEditViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicOrganisationApp.Lib.Databases.SqlFormatting" Collapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAgAAAgAAATAAAAQBAAKAAAQ0AAAAIAAAAEEAAAASAU=</HashCode>
+      <FileName>Databases\SqlFormatting.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

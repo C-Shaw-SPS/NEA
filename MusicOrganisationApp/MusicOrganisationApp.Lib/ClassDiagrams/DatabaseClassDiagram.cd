@@ -15,8 +15,8 @@
       <FileName>Databases\CountProperty.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MusicOrganisationApp.Lib.Databases.DatabaseConnection">
-    <Position X="7.25" Y="2.75" Width="2.5" />
+  <Class Name="MusicOrganisationApp.Lib.Databases.DatabaseConnection" Collapsed="true">
+    <Position X="5.5" Y="3.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAEAAAAECCACAAAAAAEAKAEAAABAABkAAAAAAAAABMA=</HashCode>
       <FileName>Databases\DatabaseConnection.cs</FileName>
@@ -33,7 +33,7 @@
   <Class Name="MusicOrganisationApp.Lib.Databases.DeleteStatement&lt;T&gt;" Collapsed="true">
     <Position X="1.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAEAAAAAQAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAEAAAAAAAAAAA=</HashCode>
       <FileName>Databases\DeleteStatement.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -46,15 +46,15 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.Databases.InsertStatement&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="10.5" Y="1.5" Width="1.5" />
+    <Position X="10.5" Y="1.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAQAAAAAAAAQCEAAAAAAAgAAAEAAAACAAAAAA=</HashCode>
       <FileName>Databases\InsertStatement.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="MusicOrganisationApp.Lib.Databases.SqlFormatting" Collapsed="true">
-    <Position X="12.25" Y="1.5" Width="1.5" />
+  <Class Name="MusicOrganisationApp.Lib.Databases.SqlFormatting">
+    <Position X="14.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAgAAAgAAATAAAAQBAAKAAAQ0AAAAIAAAAEEAAAASAU=</HashCode>
       <FileName>Databases\SqlFormatting.cs</FileName>
@@ -63,13 +63,13 @@
   <Class Name="MusicOrganisationApp.Lib.Databases.SqlQuery&lt;T&gt;">
     <Position X="3.5" Y="4.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAgEACAAAEgBAASAQQAgJAAAIAIEAACAAQgBAIQ=</HashCode>
+      <HashCode>AAAAEAgEACAAAEgBAASAQQAgJAAAIAIEAACAAAgBAAQ=</HashCode>
       <FileName>Databases\SqlQuery.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MusicOrganisationApp.Lib.Databases.UpdateStatement&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="8.75" Y="2.5" Width="1.5" />
+    <Position X="8.75" Y="2.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>ABAAAAAABAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
       <FileName>Databases\UpdateStatement.cs</FileName>
