@@ -60,9 +60,8 @@
                     </HorizontalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-            
-        </CollectionView>
 
+        </CollectionView>
 
     </Grid>
 
