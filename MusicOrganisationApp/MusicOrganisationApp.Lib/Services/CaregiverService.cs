@@ -17,7 +17,7 @@ namespace MusicOrganisationApp.Lib.Services
             await _database.DeleteAsync(value);
             DeleteStatement<CaregiverMap> deleteCaregiverMapStatement = new();
             deleteCaregiverMapStatement.AddWhereEqual<CaregiverMap>(nameof(CaregiverMap.CaregiverId), value.Id);
-            await _database.ExecuteAsync(deleteCaregiverMapStatement);
+            await _database.ExecuteAsync(deleteCaregiverMapStatement, true);
         }
 
         public async Task<IEnumerable<CaregiverData>> GetAllAsync()

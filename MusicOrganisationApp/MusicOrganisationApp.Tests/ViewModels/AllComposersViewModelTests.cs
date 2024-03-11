@@ -10,7 +10,7 @@ namespace MusicOrganisationApp.Tests.ViewModels
         public async Task TestEmptySearchAsync()
         {
             DatabaseConnection database = new(nameof(TestEmptySearchAsync));
-            await database.ResetTableAsync(ExpectedViewModels.Composers);
+            await database.ResetTableAsync(ExpectedViewModels.Composers, false);
             AllComposersViewModel viewModel = new(nameof(TestEmptySearchAsync), true)
             {
                 SearchText = string.Empty
@@ -23,7 +23,7 @@ namespace MusicOrganisationApp.Tests.ViewModels
         public async Task TestSearchAsync()
         {
             DatabaseConnection database = new(nameof(TestSearchAsync));
-            await database.ResetTableAsync(ExpectedViewModels.Composers);
+            await database.ResetTableAsync(ExpectedViewModels.Composers, false);
             AllComposersViewModel viewModel = new(nameof(TestSearchAsync), true);
             foreach (Composer expectedComposer in ExpectedViewModels.Composers)
             {

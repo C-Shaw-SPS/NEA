@@ -33,12 +33,12 @@ namespace MusicOrganisationApp.Tests.Services
         {
             DatabaseConnection database = new(path);
             PupilCaregiverService service = new(database);
-            await database.ResetTableAsync(ExpectedService.CaregiverDatas);
-            await database.ResetTableAsync(ExpectedService.Pupils);
+            await database.ResetTableAsync(ExpectedService.CaregiverDatas, false);
+            await database.ResetTableAsync(ExpectedService.Pupils, false);
             await database.DropTableIfExistsAsync<CaregiverMap>();
             if (insertCaregiverMaps)
             {
-                await database.InsertAllAsync(ExpectedService.CaregiverMaps);
+                await database.InsertAllAsync(ExpectedService.CaregiverMaps, false);
             }
             return (database, service);
         }

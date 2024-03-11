@@ -57,14 +57,12 @@ namespace MusicOrganisationApp.Lib.Services
         {
             if (_pupilId is int pupilId)
             {
-                int id = await _database.GetNextIdAsync<PupilAvailability>();
                 PupilAvailability pupilAvailability = new()
                 {
-                    Id = id,
                     PupilId = pupilId,
                     LessonSlotId = lessonSlotData.Id
                 };
-                await _database.InsertAsync(pupilAvailability);
+                await _database.InsertAsync(pupilAvailability, true);
             }
         }
 
@@ -73,7 +71,7 @@ namespace MusicOrganisationApp.Lib.Services
             DeleteStatement<PupilAvailability> deleteStatement = new();
             deleteStatement.AddWhereEqual<PupilAvailability>(nameof(PupilAvailability.LessonSlotId), lessonSlotData.Id);
             deleteStatement.AddAndEqual<PupilAvailability>(nameof(PupilAvailability.PupilId), _pupilId);
-            await _database.ExecuteAsync(deleteStatement);
+            await _database.ExecuteAsync(deleteStatement, true);
         }
 
         private SqlQuery<LessonSlot> GetSqlQueryWithNoConditions()

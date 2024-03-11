@@ -26,7 +26,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             DeleteStatement<T> deleteStatement = new();
             deleteStatement.AddWhereEqual<T>(nameof(IPupilIdentifiable.PupilId), pupilId);
-            await _database.ExecuteAsync(deleteStatement);
+            await _database.ExecuteAsync(deleteStatement, true);
         }
 
         public async Task<IEnumerable<Pupil>> GetAllAsync()

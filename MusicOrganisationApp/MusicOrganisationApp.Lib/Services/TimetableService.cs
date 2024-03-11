@@ -44,7 +44,7 @@ namespace MusicOrganisationApp.Lib.Services
         private async Task DeleteLessonsInRangeAsync(DateTime start, DateTime end)
         {
             DeleteStatement<LessonData> deleteStatement = GetDeleteLessonsStatement(start, end);
-            await _database.ExecuteAsync(deleteStatement);
+            await _database.ExecuteAsync(deleteStatement, true);
         }
 
         private static DeleteStatement<LessonData> GetDeleteLessonsStatement(DateTime start, DateTime end)
@@ -75,21 +75,18 @@ namespace MusicOrganisationApp.Lib.Services
             Dictionary<int, LessonSlot> lessonSlots = lessonSlotsEnumerable.GetDictionary();
             Dictionary<DayOfWeek, DateTime> daysInWeek = GetDaysInWeek(startOfWeek);
             List<LessonData> lessons = [];
-            int id = await _database.GetNextIdAsync<LessonData>();
             foreach (int lessonSlotId in timetable.Keys)
             {
                 LessonData lesson = new()
                 {
-                    Id = id,
                     PupilId = timetable[lessonSlotId],
                     Date = daysInWeek[lessonSlots[lessonSlotId].DayOfWeek],
                     StartTime = lessonSlots[lessonSlotId].StartTime,
                     EndTime = lessonSlots[lessonSlotId].EndTime
                 };
                 lessons.Add(lesson);
-                ++id;
             }
-            await _database.InsertAllAsync(lessons);
+            await _database.InsertAllAsync(lessons, true);
         }
 
         private static Dictionary<DayOfWeek, DateTime> GetDaysInWeek(DateTime startOfWeek)

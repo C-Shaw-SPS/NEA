@@ -24,9 +24,9 @@ namespace MusicOrganisationApp.Tests.Services
         {
             (DatabaseConnection database, ComposerService service) = await GetDatabaseAndServiceAsync(nameof(TestDeleteComposerAsync));
 
-            await database.InsertAllAsync(ExpectedService.Composers);
-            await database.InsertAllAsync(ExpectedService.WorkDatas);
-            await database.InsertAllAsync(ExpectedService.RepertoireDatas);
+            await database.InsertAllAsync(ExpectedService.Composers, false);
+            await database.InsertAllAsync(ExpectedService.WorkDatas, false);
+            await database.InsertAllAsync(ExpectedService.RepertoireDatas, false);
 
             Composer composerToDelete = ExpectedService.Composers[0];
             IEnumerable<WorkData> worksToDelete = ExpectedService.WorkDatas.Where(work => work.ComposerId == composerToDelete.Id);
@@ -56,7 +56,7 @@ namespace MusicOrganisationApp.Tests.Services
 
             Composer originalComposer = ExpectedService.Composers[0];
 
-            await database.InsertAsync(originalComposer);
+            await database.InsertAsync(originalComposer, false);
 
             Composer updatedComposer = new()
             {
@@ -76,7 +76,7 @@ namespace MusicOrganisationApp.Tests.Services
         public async Task TestSearchComposerAsync()
         {
             (DatabaseConnection database, ComposerService service) = await GetDatabaseAndServiceAsync(nameof(TestSearchComposerAsync));
-            await database.InsertAllAsync(ExpectedService.Composers);
+            await database.InsertAllAsync(ExpectedService.Composers, false);
             Composer composerToSearch = ExpectedService.Composers[0];
             foreach (char c in composerToSearch.Name)
             {
@@ -89,7 +89,7 @@ namespace MusicOrganisationApp.Tests.Services
         public async Task TestGetComposerAsync()
         {
             (DatabaseConnection database, ComposerService service) = await GetDatabaseAndServiceAsync(nameof(TestGetComposerAsync));
-            await database.InsertAllAsync(ExpectedService.Composers);
+            await database.InsertAllAsync(ExpectedService.Composers, false);
             Composer expectedComposer = ExpectedService.Composers[0];
             (bool suceeded, Composer actualComposer) = await service.TryGetAsync(expectedComposer.Id);
             Assert.True(suceeded);

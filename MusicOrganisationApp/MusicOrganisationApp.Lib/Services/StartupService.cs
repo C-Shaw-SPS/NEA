@@ -34,13 +34,13 @@ namespace MusicOrganisationApp.Lib.Services
         private async Task InitialiseComposers()
         {
             IEnumerable<Composer> composers = await ComposerGetter.GetFromOpenOpusAsync();
-            await _database.InsertAllAsync(composers);
+            await _database.InsertAllAsync(composers, false);
         }
 
         private async Task InitialiseWorks()
         {
             IEnumerable<WorkData> works = await WorkGetter.GetFromOpenOpusAsync();
-            await _database.InsertAllAsync(works);
+            await _database.InsertAllAsync(works, false);
         }
     }
 }

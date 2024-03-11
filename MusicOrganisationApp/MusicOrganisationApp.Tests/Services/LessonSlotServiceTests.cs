@@ -23,7 +23,7 @@ namespace MusicOrganisationApp.Tests.Services
             await database.DropTableIfExistsAsync<LessonSlot>();
             if (addLessonSlots)
             {
-                await database.InsertAllAsync(ExpectedService.LessonSlots);
+                await database.InsertAllAsync(ExpectedService.LessonSlots, false);
             }
             LessonSlotService service = new(database);
             return (database, service);

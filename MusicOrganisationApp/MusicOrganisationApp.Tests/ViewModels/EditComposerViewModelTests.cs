@@ -64,7 +64,7 @@ namespace MusicOrganisationApp.Tests.ViewModels
         public async Task TestEditExistingComposerAsync()
         {
             DatabaseConnection database = new(nameof(TestEditExistingComposerAsync));
-            await database.ResetTableAsync(ExpectedViewModels.Composers);
+            await database.ResetTableAsync(ExpectedViewModels.Composers, false);
             EditComposerViewModel viewModel = new(nameof(TestEditExistingComposerAsync), true);
             foreach (Composer expectedComposer in ExpectedViewModels.Composers)
             {

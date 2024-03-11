@@ -43,13 +43,13 @@ namespace MusicOrganisationApp.Tests.Services
         {
             DatabaseConnection database = new(path);
             RepertoireService service = new(database);
-            await database.ResetTableAsync(ExpectedService.Composers);
-            await database.ResetTableAsync(ExpectedService.WorkDatas);
+            await database.ResetTableAsync(ExpectedService.Composers, false);
+            await database.ResetTableAsync(ExpectedService.WorkDatas, false);
             await database.DropTableIfExistsAsync<RepertoireData>();
 
             if (insertRepertoireData)
             {
-                await database.InsertAllAsync(ExpectedService.RepertoireDatas);
+                await database.InsertAllAsync(ExpectedService.RepertoireDatas, false);
             }
 
             return (database, service);

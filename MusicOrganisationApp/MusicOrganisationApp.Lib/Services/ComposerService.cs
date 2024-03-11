@@ -24,8 +24,8 @@ namespace MusicOrganisationApp.Lib.Services
             DeleteStatement<RepertoireData> deleteRepertoireStatement = await GetDeleteRepertoireStatement(composer);
 
             await _database.DeleteAsync(composer);
-            await _database.ExecuteAsync(deleteWorksStatement);
-            await _database.ExecuteAsync(deleteRepertoireStatement);
+            await _database.ExecuteAsync(deleteWorksStatement, true);
+            await _database.ExecuteAsync(deleteRepertoireStatement, true);
 
         }
 

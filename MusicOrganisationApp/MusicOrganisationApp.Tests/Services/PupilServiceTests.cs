@@ -11,11 +11,11 @@ namespace MusicOrganisationApp.Tests.Services
         public async Task TestDeletePupilAsync()
         {
             DatabaseConnection database = new(nameof(TestDeletePupilAsync));
-            await database.ResetTableAsync(ExpectedService.Pupils);
-            await database.ResetTableAsync(ExpectedService.RepertoireDatas);
-            await database.ResetTableAsync(ExpectedService.CaregiverMaps);
-            await database.ResetTableAsync(ExpectedService.LessonDatas);
-            await database.ResetTableAsync(ExpectedService.PupilAvaliabilities);
+            await database.ResetTableAsync(ExpectedService.Pupils, false);
+            await database.ResetTableAsync(ExpectedService.RepertoireDatas, false);
+            await database.ResetTableAsync(ExpectedService.CaregiverMaps, false);
+            await database.ResetTableAsync(ExpectedService.LessonDatas, false);
+            await database.ResetTableAsync(ExpectedService.PupilAvaliabilities, false);
 
             Pupil pupilToDelete = ExpectedService.Pupils[0];
 
@@ -26,13 +26,6 @@ namespace MusicOrganisationApp.Tests.Services
             await AssertDoesNotContainPupilId<CaregiverMap>(database, pupilToDelete.Id);
             await AssertDoesNotContainPupilId<LessonData>(database, pupilToDelete.Id);
             await AssertDoesNotContainPupilId<PupilAvailability>(database, pupilToDelete.Id);
-        }
-
-        private static IEnumerable<T> GetDataToDelete<T>(IEnumerable<T> values, int pupilId) where T : IPupilIdentifiable
-        {
-            return from value in values
-                   where value.PupilId == pupilId
-                   select value;
         }
 
         private static async Task AssertDoesNotContainPupilId<T>(DatabaseConnection database, int pupilId) where T : class, ITable, IPupilIdentifiable, new()

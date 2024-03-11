@@ -24,7 +24,7 @@ namespace MusicOrganisationApp.Lib.Services
         {
             DeleteStatement<RepertoireData> deleteStatement = new();
             deleteStatement.AddWhereEqual<RepertoireData>(nameof(RepertoireData.Id), value.Id);
-            await _database.ExecuteAsync(deleteStatement);
+            await _database.ExecuteAsync(deleteStatement, true);
         }
 
         public async Task<IEnumerable<Repertoire>> GetAllAsync()

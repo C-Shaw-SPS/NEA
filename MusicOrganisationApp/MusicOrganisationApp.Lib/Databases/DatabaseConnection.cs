@@ -38,7 +38,7 @@ namespace MusicOrganisationApp.Lib.Databases
             return result;
         }
 
-        public async Task ExecuteAsync<T>(ISqlStatement<T> sqlStatement, bool init = true) where T : class, ITable, new()
+        public async Task ExecuteAsync<T>(ISqlStatement<T> sqlStatement, bool init) where T : class, ITable, new()
         {
             if (init)
             {
@@ -49,7 +49,7 @@ namespace MusicOrganisationApp.Lib.Databases
             await _connection.ExecuteAsync(sql);
         }
 
-        public async Task InsertAsync<T>(T value, bool getNewId = false) where T : class, ITable, new()
+        public async Task InsertAsync<T>(T value, bool getNewId) where T : class, ITable, new()
         {
             await CreateTableAsync<T>();
 
@@ -60,30 +60,32 @@ namespace MusicOrganisationApp.Lib.Databases
 
             InsertStatement<T> insertStatement = new();
             insertStatement.AddValue(value);
-            await ExecuteAsync(insertStatement);
+            await ExecuteAsync(insertStatement, true);
         }
 
-        public async Task InsertAllAsync<T>(IEnumerable<T> values) where T : class, ITable, new()
+        public async Task InsertAllAsync<T>(IEnumerable<T> values, bool getNewIds) where T : class, ITable, new()
         {
             if (values.Any())
             {
-                await CreateTableAsync<T>();
-
                 InsertStatement<T> insertStatement = new();
+                int id = getNewIds ? await GetNextIdAsync<T>() : 0;
                 foreach (T value in values)
                 {
+                    if (getNewIds)
+                    {
+                        value.Id = id;
+                        ++id;
+                    }
                     insertStatement.AddValue(value);
                 }
-                await ExecuteAsync(insertStatement);
+                await ExecuteAsync(insertStatement, true);
             }
         }
 
         public async Task ClearTableAsync<T>() where T : class, ITable, new()
         {
-            await CreateTableAsync<T>();
-
             DeleteStatement<T> deleteStatement = new();
-            await ExecuteAsync(deleteStatement);
+            await ExecuteAsync(deleteStatement, true);
         }
 
         public async Task<(bool found, T value)> TryGetAsync<T>(int id) where T : class, ITable, new()
@@ -120,19 +122,15 @@ namespace MusicOrganisationApp.Lib.Databases
 
         public async Task DeleteAsync<T>(int id) where T : class, ITable, new()
         {
-            await CreateTableAsync<T>();
-
             DeleteStatement<T> deleteStatement = new();
             deleteStatement.AddWhereEqual<T>(nameof(ITable.Id), id);
-            await ExecuteAsync(deleteStatement);
+            await ExecuteAsync(deleteStatement, true);
         }
 
         public async Task UpdateAsync<T>(T value) where T : class, ITable, new()
         {
-            await CreateTableAsync<T>();
-
             UpdateStatement<T> updateStatement = new(value);
-            await ExecuteAsync(updateStatement);
+            await ExecuteAsync(updateStatement, true);
         }
 
         public async Task DropTableIfExistsAsync<T>() where T : class, ITable, new()
@@ -141,7 +139,7 @@ namespace MusicOrganisationApp.Lib.Databases
             await ExecuteAsync(dropTableStatement, init: false);
         }
 
-        public async Task<int> GetNextIdAsync<T>() where T : class, ITable, new()
+        private async Task<int> GetNextIdAsync<T>() where T : class, ITable, new()
         {
             await CreateTableAsync<T>();
             string query = $"SELECT MAX({nameof(ITable.Id)}) + 1 AS {nameof(ITable.Id)} FROM {T.TableName}";
@@ -150,10 +148,10 @@ namespace MusicOrganisationApp.Lib.Databases
             return nextId;
         }
 
-        public async Task ResetTableAsync<T>(IEnumerable<T> values) where T : class, ITable, new()
+        public async Task ResetTableAsync<T>(IEnumerable<T> values, bool getNewIds) where T : class, ITable, new()
         {
             await DropTableIfExistsAsync<T>();
-            await InsertAllAsync(values);
+            await InsertAllAsync(values, getNewIds);
         }
 
         public async Task<int> GetTableCount<T>() where T : class, ITable, new()

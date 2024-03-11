@@ -48,17 +48,17 @@ namespace MusicOrganisationApp.Lib.ViewModels
             IEnumerable<Composer> composers = await ComposerGetter.GetFromOpenOpusAsync();
             IEnumerable<WorkData> workData = await WorkGetter.GetFromOpenOpusAsync();
 
-            await _database.ResetTableAsync(composers);
-            await _database.ResetTableAsync(workData);
+            await _database.ResetTableAsync(composers, false);
+            await _database.ResetTableAsync(workData, false);
         }
 
         private async Task InsertTestDataAsync()
         {
             await DropTablesAsync();
-            await _database.InsertAllAsync(TestData1.Pupils);
-            await _database.InsertAllAsync(TestData1.Lessons);
-            await _database.InsertAllAsync(TestData1.LessonSlots);
-            await _database.InsertAllAsync(TestData1.PupilAvailabilities);
+            await _database.InsertAllAsync(TestData1.Pupils, false);
+            await _database.InsertAllAsync(TestData1.Lessons, false);
+            await _database.InsertAllAsync(TestData1.LessonSlots, false);
+            await _database.InsertAllAsync(TestData1.PupilAvailabilities, false);
         }
     }
 }

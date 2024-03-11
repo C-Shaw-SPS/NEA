@@ -47,7 +47,7 @@ namespace MusicOrganisationApp.Tests.Services
         {
             (DatabaseConnection database, WorkService service) = await GetDatabaseAndWorkServiceAsync(nameof(TestDeleteWorkAsync), true);
 
-            await database.ResetTableAsync(ExpectedService.RepertoireDatas);
+            await database.ResetTableAsync(ExpectedService.RepertoireDatas, false);
 
             Work workToDelete = ExpectedService.Works[0];
             WorkData workDataToDelete = ExpectedService.WorkDatas[workToDelete.Id];
@@ -109,11 +109,11 @@ namespace MusicOrganisationApp.Tests.Services
             await database.DropTableIfExistsAsync<WorkData>();
             await database.DropTableIfExistsAsync<RepertoireData>();
 
-            await database.InsertAllAsync(ExpectedService.Composers);
+            await database.InsertAllAsync(ExpectedService.Composers, false);
 
             if (insertWorkData)
             {
-                await database.InsertAllAsync(ExpectedService.WorkDatas);
+                await database.InsertAllAsync(ExpectedService.WorkDatas, false);
             }
 
             WorkService service = new(database);
