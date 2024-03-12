@@ -24,9 +24,9 @@ namespace MusicOrganisationApp.Lib.Services
             IEnumerable<LessonSlot> lessonSlots = await _database.GetAllAsync<LessonSlot>();
             IEnumerable<LessonData> prevLessons = await GetLessonsInRangeAsync(weekBefore, startOfWeek);
             TimetableGenerator timetableGenerator = new(pupils, pupilAvailability, lessonSlots, prevLessons);
-            bool suceeded = timetableGenerator.TryGenerateTimetable(out Dictionary<int, int> timetable);
+            bool succeeded = timetableGenerator.TryGenerateTimetable(out Dictionary<int, int> timetable);
             await InsertTimetableAsync(startOfWeek, timetable, lessonSlots);
-            return suceeded;
+            return succeeded;
         }
 
         private static (DateTime weekBefore, DateTime startOfWeek, DateTime endOfWeek) GetWeekDates(DateTime date)

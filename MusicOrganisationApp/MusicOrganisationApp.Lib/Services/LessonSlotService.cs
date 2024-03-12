@@ -46,7 +46,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public override async Task<(bool, LessonSlot)> TryGetAsync(int id)
         {
-            (bool suceeded, LessonSlot value) result = await _database.TryGetAsync<LessonSlot>(id);
+            (bool succeeded, LessonSlot value) result = await _database.TryGetAsync<LessonSlot>(id);
             return result;
         }
 

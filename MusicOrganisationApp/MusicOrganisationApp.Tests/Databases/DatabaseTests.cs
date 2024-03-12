@@ -152,8 +152,8 @@ namespace MusicOrganisationApp.Tests.Databases
             DatabaseConnection database = new(nameof(TestUnsucessfulGetAsnyc));
             await database.ResetTableAsync(ExpectedTables.Composers, false);
             int id = ExpectedTables.Composers.Max(composer => composer.Id) + 1;
-            (bool suceeded, Composer actualComposer) = await database.TryGetAsync<Composer>(id);
-            Assert.False(suceeded);
+            (bool succeeded, Composer actualComposer) = await database.TryGetAsync<Composer>(id);
+            Assert.False(succeeded);
             Assert.Equal(new(), actualComposer);
         }
 

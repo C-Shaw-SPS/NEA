@@ -43,8 +43,8 @@ namespace MusicOrganisationApp.Tests.Timetabling
         private static void TestCase<T>() where T : ITimetableTestCase
         {
             TimetableGenerator timetableGenerator = new(T.Pupils, T.PupilAvailabilities, T.LessonSlots, T.PrevLessons);
-            bool suceeded = timetableGenerator.TryGenerateTimetable(out Dictionary<int, int> actualTimetable);
-            Assert.Equal(T.IsPossible, suceeded);
+            bool succeeded = timetableGenerator.TryGenerateTimetable(out Dictionary<int, int> actualTimetable);
+            Assert.Equal(T.IsPossible, succeeded);
 
             foreach (int lessonSlotId in T.ExpectedTimetable.Keys)
             {

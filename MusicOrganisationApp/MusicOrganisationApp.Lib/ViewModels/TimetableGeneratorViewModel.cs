@@ -32,8 +32,8 @@ namespace MusicOrganisationApp.Lib.ViewModels
 
         private async Task GenerateTimetableAsync()
         {
-            bool suceeded = await _service.TryGenerateTimetable(SelectedDate);
-            if (suceeded)
+            bool succeeded = await _service.TryGenerateTimetable(SelectedDate);
+            if (succeeded)
             {
                 Message = _SUCESSFUL_TIMETABLE_GENERATION;
             }

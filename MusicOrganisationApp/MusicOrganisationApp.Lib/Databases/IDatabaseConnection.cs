@@ -1,5 +1,4 @@
-﻿
-namespace MusicOrganisationApp.Lib.Databases
+﻿namespace MusicOrganisationApp.Lib.Databases
 {
     public interface IDatabaseConnection
     {
@@ -11,7 +10,6 @@ namespace MusicOrganisationApp.Lib.Databases
         Task DropTableIfExistsAsync<T>() where T : class, ITable, new();
         Task ExecuteAsync<T>(ISqlStatement<T> sqlStatement, bool init) where T : class, ITable, new();
         Task<IEnumerable<T>> GetAllAsync<T>() where T : class, ITable, new();
-        //Task<int> GetNextIdAsync<T>() where T : class, ITable, new();
         Task<int> GetTableCount<T>() where T : class, ITable, new();
         Task InsertAllAsync<T>(IEnumerable<T> values, bool getNewIds) where T : class, ITable, new();
         Task InsertAsync<T>(T value, bool getNewId) where T : class, ITable, new();

@@ -84,7 +84,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task<(bool, Composer)> TryGetAsync(int id)
         {
-            (bool suceeded, Composer compser) value = await _database.TryGetAsync<Composer>(id);
+            (bool succeeded, Composer compser) value = await _database.TryGetAsync<Composer>(id);
             return value;
         }
     }

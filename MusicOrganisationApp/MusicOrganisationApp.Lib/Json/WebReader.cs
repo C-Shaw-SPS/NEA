@@ -2,7 +2,7 @@
 {
     internal static class WebReader
     {
-        public async static Task<(bool suceeded, string text)> TryDownloadTextAsync(string url)
+        public async static Task<(bool succeeded, string text)> TryDownloadTextAsync(string url)
         {
             using (HttpClient client = new())
             {

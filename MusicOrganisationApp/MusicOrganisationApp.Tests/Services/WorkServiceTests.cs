@@ -36,9 +36,9 @@ namespace MusicOrganisationApp.Tests.Services
             (DatabaseConnection database, WorkService service) = await GetDatabaseAndWorkServiceAsync(nameof(TestGetWorkAsync), true);
 
             Work expectedWork = ExpectedService.Works[0];
-            (bool suceeded, Work actualWork) = await service.TryGetAsync(expectedWork.Id);
+            (bool succeeded, Work actualWork) = await service.TryGetAsync(expectedWork.Id);
 
-            Assert.True(suceeded);
+            Assert.True(succeeded);
             Assert.Equal(expectedWork, actualWork);
         }
 

@@ -95,20 +95,20 @@ namespace MusicOrganisationApp.Lib.Services
 
         public bool TryGenerateTimetable(out Dictionary<int, int> timetable)
         {
-            bool suceeded = true;
-            suceeded &= TryInsertPupils();
-            timetable = _timetable;
-            return suceeded;
+            bool succeeded = true;
+            succeeded &= TryInsertPupils();
+            timetable = new(_timetable);
+            return succeeded;
         }
 
         private bool TryInsertPupils()
         {
-            bool suceeded = true;
+            bool succeeded = true;
             foreach (int pupilId in _shuffledPupilIds)
             {
-                suceeded &= TryInsertNewPupil(pupilId);
+                succeeded &= TryInsertNewPupil(pupilId);
             }
-            return suceeded;
+            return succeeded;
         }
 
         private bool TryInsertNewPupil(int pupilId)
@@ -117,13 +117,13 @@ namespace MusicOrganisationApp.Lib.Services
             {
                 Dictionary<int, int> currentTimetable = new(_timetable);
                 Stack<int> currentStack = new(_stack);
-                bool suceeded = TryInsertPupil(pupilId, 0);
-                if (!suceeded)
+                bool succeeded = TryInsertPupil(pupilId, 0);
+                if (!succeeded)
                 {
                     _timetable = currentTimetable;
                     _stack = currentStack;
                 }
-                return suceeded;
+                return succeeded;
             }
             else
             {
@@ -146,16 +146,16 @@ namespace MusicOrganisationApp.Lib.Services
                 return true;
             }
 
-            bool suceeded = TryInsertLesson(pupilId, minLessonSlotId);
-            if (suceeded)
+            bool succeeded = TryInsertLesson(pupilId, minLessonSlotId);
+            if (succeeded)
             {
                 return true;
             }
 
             while (TryMoveState())
             {
-                suceeded = TryInsertLesson(pupilId, 0);
-                if (suceeded)
+                succeeded = TryInsertLesson(pupilId, 0);
+                if (succeeded)
                 {
                     return true;
                 }

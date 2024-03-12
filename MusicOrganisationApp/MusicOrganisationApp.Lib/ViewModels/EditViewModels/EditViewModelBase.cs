@@ -109,8 +109,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         private async Task SetValue(int id)
         {
-            (bool suceeded, T value) = await Service.TryGetAsync(id);
-            if (suceeded)
+            (bool succeeded, T value) = await Service.TryGetAsync(id);
+            if (succeeded)
             {
                 _value = value;
                 SetDisplayValues();

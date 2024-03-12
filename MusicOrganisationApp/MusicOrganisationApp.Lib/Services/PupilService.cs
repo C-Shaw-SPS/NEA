@@ -51,7 +51,7 @@ namespace MusicOrganisationApp.Lib.Services
 
         public async Task<(bool, Pupil)> TryGetAsync(int id)
         {
-            (bool suceeded, Pupil pupil) result = await _database.TryGetAsync<Pupil>(id);
+            (bool succeeded, Pupil pupil) result = await _database.TryGetAsync<Pupil>(id);
             return result;
         }
 

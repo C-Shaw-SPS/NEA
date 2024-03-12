@@ -17,7 +17,7 @@
 
         public Task UpdateAsync(T value);
 
-        protected static (bool suceeded, T value) TryReturnValue(IEnumerable<T> values)
+        protected static (bool succeeded, T value) TryReturnValue(IEnumerable<T> values)
         {
             if (values.Any())
             {

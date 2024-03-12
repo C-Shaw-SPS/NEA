@@ -103,8 +103,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
         {
             if (query.TryGetValue(IPupilDataViewModel.PUPIL_ID_PARAMETER, out object? value) && value is int pupilId)
             {
-                (bool suceeded, Pupil pupil) = await _pupilService.TryGetAsync(pupilId);
-                if (suceeded)
+                (bool succeeded, Pupil pupil) = await _pupilService.TryGetAsync(pupilId);
+                if (succeeded)
                 {
                     SelectedPupil = pupil;
                 }

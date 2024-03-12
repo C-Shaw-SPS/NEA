@@ -52,8 +52,8 @@ namespace MusicOrganisationApp.Lib.ViewModels.ModelViewModels
 
         private async Task SetValueAsync(int id)
         {
-            (bool suceeded, TModel value) = await Service.TryGetAsync(id);
-            if (suceeded)
+            (bool succeeded, TModel value) = await Service.TryGetAsync(id);
+            if (succeeded)
             {
                 _value = value;
                 SetDisplayValues();
