@@ -138,14 +138,6 @@ namespace MusicOrganisationApp.Lib.Services
 
         private bool TryInsertPupil(int pupilId, int minLessonSlotId)
         {
-            bool canInsert = TryGetValidLessonSlot(pupilId, minLessonSlotId, out int lessonSlotId);
-            if (canInsert)
-            {
-                _timetable.Add(lessonSlotId, pupilId);
-                _stack.Push(lessonSlotId);
-                return true;
-            }
-
             bool succeeded = TryInsertLesson(pupilId, minLessonSlotId);
             if (succeeded)
             {
