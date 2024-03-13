@@ -205,24 +205,21 @@ namespace MusicOrganisationApp.Lib.Services
             {
                 return false;
             }
-            else
+            else if (_lessonSlots.TryGetValue(lessonSlotId, out LessonSlot? lessonSlot))
             {
-                return IsValidLessonSlotForPupil(lessonSlotId, pupil);
-            }
-        }
-
-        private bool IsValidLessonSlotForPupil(int lessonSlotId, Pupil pupil)
-        {
-            if (_lessonSlots.TryGetValue(lessonSlotId, out LessonSlot? lessonSlot))
-            {
-                return IsPupilAvaliableInSlot(pupil, lessonSlot)
-                    && IsLongEnoughLessonSlot(pupil, lessonSlot)
-                    && IsDifferentSlotIfNeeded(pupil, lessonSlot);
+                return IsValidLessonSlotForPupil(lessonSlot, pupil);
             }
             else
             {
                 return false;
             }
+        }
+
+        private bool IsValidLessonSlotForPupil(LessonSlot lessonSlot, Pupil pupil)
+        {
+            return IsPupilAvaliableInSlot(pupil, lessonSlot)
+                && IsLongEnoughLessonSlot(pupil, lessonSlot)
+                && IsDifferentSlotIfNeeded(pupil, lessonSlot);
         }
 
         private bool IsPupilAvaliableInSlot(Pupil pupil, LessonSlot lessonSlot)
