@@ -12,9 +12,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         [ObservableProperty]
         private ObservableCollection<T> _collection = [];
 
-        [ObservableProperty]
-        private T? _selectedItem;
-
         public CollectionViewModelBase(string path, bool isTesting) : base(path, isTesting)
         {
             _addNewCommand = new(AddNewAsync);

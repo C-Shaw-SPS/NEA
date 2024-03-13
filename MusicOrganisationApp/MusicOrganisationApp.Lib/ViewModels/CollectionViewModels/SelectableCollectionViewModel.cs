@@ -12,21 +12,17 @@ namespace MusicOrganisationApp.Lib.ViewModels.CollectionViewModels
         where TModelViewModel : IViewModel
         where TEditViewModel : IViewModel
     {
-        private readonly AsyncRelayCommand _selectCommand;
 
         [ObservableProperty]
         private TModel? _selectedItem;
 
         public SelectableCollectionViewModel(string path, bool isTesting) : base(path, isTesting)
         {
-            _selectCommand = new(SelectAsync);
         }
 
         protected abstract IService<TModel> Service { get; }
 
-        public AsyncRelayCommand SelectCommand => _selectCommand;
-
-        private async Task SelectAsync()
+        async partial void OnSelectedItemChanged(TModel? value)
         {
             if (SelectedItem is not null)
             {
