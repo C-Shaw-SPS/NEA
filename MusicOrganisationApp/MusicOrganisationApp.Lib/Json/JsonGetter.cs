@@ -14,7 +14,7 @@ namespace MusicOrganisationApp.Lib.Json
             }
             else
             {
-                throw new Exception("null response");
+                return [];
             }
         }
 
