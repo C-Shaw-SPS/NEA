@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace MusicOrganisationApp.Lib.Converters
@@ -9,8 +10,17 @@ namespace MusicOrganisationApp.Lib.Converters
 
         public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
+            AssertCorrectType(typeToConvert);
             CheckStartObject(ref reader);
             return GetComposerId(ref reader);
+        }
+
+        private static void AssertCorrectType(Type typeToConvert)
+        {
+            if (typeToConvert != typeof(int))
+            {
+                throw new JsonException("Invalid type");
+            }
         }
 
         private static void CheckStartObject(ref Utf8JsonReader reader)
