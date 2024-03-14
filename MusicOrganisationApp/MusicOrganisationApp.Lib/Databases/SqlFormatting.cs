@@ -9,7 +9,6 @@ namespace MusicOrganisationApp.Lib.Databases
         public const string OPEN_BRACKET = "(";
         public const string CLOSE_BRACKET = ")";
         public const string NULL = "NULL";
-        public const char DOUBLE_QUOTE = '\"';
         public const string ESCAPED_SINGLE_QUOTE = "''";
         public const char SINGLE_QUOTE = '\'';
 
@@ -68,9 +67,13 @@ namespace MusicOrganisationApp.Lib.Databases
             {
                 return day.FormatSqlDayOfWeek();
             }
+            else if (value is int n)
+            {
+                return n.ToString();
+            }
             else
             {
-                return value.ToStringOrNull();
+                throw new ArgumentException($"Invalid type: {value.GetType().Name}");
             }
         }
 
@@ -81,7 +84,7 @@ namespace MusicOrganisationApp.Lib.Databases
 
         private static string FormatSqlString(this string s)
         {
-            return SINGLE_QUOTE + s.ReplaceQuotes() + SINGLE_QUOTE;
+            return string.Join(string.Empty, SINGLE_QUOTE, s.ReplaceQuotes(), SINGLE_QUOTE);
         }
 
         private static string ReplaceQuotes(this string s)
