@@ -133,20 +133,18 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         partial void OnBirthYearChanged(string? oldValue, string newValue)
         {
-            if (IsNumeric(newValue))
+            if (!IsNumeric(newValue))
             {
-                return;
+                BirthYear = oldValue ?? string.Empty;
             }
-            BirthYear = oldValue ?? string.Empty;
         }
 
         partial void OnDeathYearChanged(string? oldValue, string newValue)
         {
             if (IsNumeric(newValue))
             {
-                return;
+                DeathYear = oldValue ?? string.Empty;
             }
-            DeathYear = oldValue ?? string.Empty;
         }
 
         #endregion
