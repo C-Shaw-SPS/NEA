@@ -73,7 +73,7 @@ namespace MusicOrganisationApp.Lib.Databases
             }
             else
             {
-                throw new ArgumentException($"Invalid type: {value.GetType().Name}");
+                throw new Exception($"Invalid type: {value.GetType().Name}");
             }
         }
 

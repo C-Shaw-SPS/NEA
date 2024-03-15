@@ -7,15 +7,16 @@ namespace MusicOrganisationApp.Lib.Json
     {
         public static IEnumerable<T> GetValuesFromResponse<T, TResponse>(string json) where TResponse : IResponse<T>
         {
-            TResponse? response = JsonSerializer.Deserialize<TResponse>(json);
-            if (response is not null)
+            try
             {
-                return response.Values;
+                TResponse? response = JsonSerializer.Deserialize<TResponse>(json);
+                if (response is not null)
+                {
+                    return response.Values;
+                }
             }
-            else
-            {
-                return [];
-            }
+            catch (JsonException) { }
+            return [];
         }
 
         public static IEnumerable<T> GetFromFile<T, TResponse>(string filePath) where TResponse : IResponse<T>

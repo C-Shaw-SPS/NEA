@@ -13,7 +13,7 @@ namespace MusicOrganisationApp.Lib.Converters
             }
             else
             {
-                throw new NotSupportedException();
+                throw new JsonException();
             }
         }
 
