@@ -9,7 +9,7 @@ namespace MusicOrganisationApp.Lib.Databases
         public const string OPEN_BRACKET = "(";
         public const string CLOSE_BRACKET = ")";
         public const string NULL = "NULL";
-        public const string ESCAPED_SINGLE_QUOTE = "''";
+        public const string ENCODED_SINGLE_QUOTE = "''";
         public const char SINGLE_QUOTE = '\'';
 
         public static string FormatAsDatabasePath(this string s)
@@ -94,7 +94,7 @@ namespace MusicOrganisationApp.Lib.Databases
             {
                 if (c == SINGLE_QUOTE)
                 {
-                    result.Append(ESCAPED_SINGLE_QUOTE);
+                    result.Append(ENCODED_SINGLE_QUOTE);
                 }
                 else
                 {
