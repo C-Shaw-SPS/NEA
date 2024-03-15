@@ -68,9 +68,9 @@ namespace MusicOrganisationApp.Lib.Converters
         {
             reader.Read();
             string? idString = reader.GetString();
-            if (idString is not null)
+            if (idString is not null && int.TryParse(idString, out int id))
             {
-                return int.Parse(idString);
+                return id;
             }
             else
             {

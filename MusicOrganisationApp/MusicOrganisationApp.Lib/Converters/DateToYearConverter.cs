@@ -20,9 +20,9 @@ namespace MusicOrganisationApp.Lib.Converters
         private static int? GetDateTime(ref Utf8JsonReader reader)
         {
             string? s = reader.GetString();
-            if (s is not null)
+            if (s is not null && DateTime.TryParse(s, out DateTime dateTime))
             {
-                return DateTime.Parse(s).Year;
+                return dateTime.Year;
             }
             else
             {
