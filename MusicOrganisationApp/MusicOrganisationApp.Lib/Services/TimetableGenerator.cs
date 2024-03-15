@@ -22,7 +22,7 @@ namespace MusicOrganisationApp.Lib.Services
             _stack = [];
             _lessonSlots = lessonSlots.GetDictionary();
             _pupils = pupils.GetDictionary();
-            _pupilAvailabilities = GetPupilAvailabilities(pupilAvailabilities);
+            _pupilAvailabilities = GetPupilAvailabilities(pupils, pupilAvailabilities);
             _shuffledPupilIds = GetShuffledIds(pupils);
             _prevTimetable = GetPrevTimetable(prevLessons);
             _maxLessonSlotId = GetMaxId(lessonSlots);
@@ -30,19 +30,17 @@ namespace MusicOrganisationApp.Lib.Services
 
         #region Setup
 
-        private static Dictionary<int, HashSet<int>> GetPupilAvailabilities(IEnumerable<PupilAvailability> pupilAvailabilityEnumerable)
+        private static Dictionary<int, HashSet<int>> GetPupilAvailabilities(IEnumerable<Pupil> pupils, IEnumerable<PupilAvailability> pupilAvailabilityEnumerable)
         {
             Dictionary<int, HashSet<int>> pupilAvailabilities = [];
+            foreach (Pupil pupil in pupils)
+            {
+                pupilAvailabilities.Add(pupil.Id, []);
+            }
             foreach (PupilAvailability pupilAvailability in pupilAvailabilityEnumerable)
             {
-                if (pupilAvailabilities.TryGetValue(pupilAvailability.PupilId, out HashSet<int>? lessonSlots))
-                {
-                    lessonSlots.Add(pupilAvailability.LessonSlotId);
-                }
-                else
-                {
-                    pupilAvailabilities[pupilAvailability.PupilId] = [pupilAvailability.LessonSlotId];
-                }
+                HashSet<int> lessonSlots = pupilAvailabilities[pupilAvailability.PupilId];
+                lessonSlots.Add(pupilAvailability.LessonSlotId);
             }
             return pupilAvailabilities;
         }
