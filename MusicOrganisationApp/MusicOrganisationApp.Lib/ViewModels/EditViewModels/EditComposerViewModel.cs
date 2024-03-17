@@ -123,12 +123,6 @@ namespace MusicOrganisationApp.Lib.ViewModels.EditViewModels
 
         #endregion
 
-        private async Task DeleteAsync()
-        {
-            await _service.DeleteAsync(_value);
-            await GoBackAsync();
-        }
-
         #region Data Validation
 
         partial void OnBirthYearChanged(string? oldValue, string newValue)
