@@ -37,7 +37,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
         [Fact]
         public void TestImpossibleCase()
         {
-            TestCase<ImpossibleTestCase1>();
+            TestCase<ImpossibleTestCase>();
         }
 
         [Fact]

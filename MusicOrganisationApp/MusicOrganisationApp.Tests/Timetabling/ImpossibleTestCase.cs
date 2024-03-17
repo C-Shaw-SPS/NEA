@@ -2,7 +2,7 @@
 
 namespace MusicOrganisationApp.Tests.Timetabling
 {
-    internal class ImpossibleTestCase1 : ITimetableTestCase
+    internal class ImpossibleTestCase : ITimetableTestCase
     {
         private const bool _IS_POSSIBLE = false;
 
@@ -139,6 +139,11 @@ namespace MusicOrganisationApp.Tests.Timetabling
             }
         };
 
+        private static readonly Dictionary<int, int> _expectedTimetable = new()
+        {
+            { 2, 2 }
+        };
+
         #endregion
 
         public static bool IsPossible => _IS_POSSIBLE;
@@ -149,7 +154,7 @@ namespace MusicOrganisationApp.Tests.Timetabling
 
         public static IEnumerable<LessonData> PrevLessons => _prevLessons;
 
-        public static Dictionary<int, int> ExpectedTimetable => [];
+        public static Dictionary<int, int> ExpectedTimetable => _expectedTimetable;
 
         public static IEnumerable<PupilAvailability> PupilAvailabilities => _pupilAvailabilities;
     }
