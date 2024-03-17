@@ -35,9 +35,15 @@ namespace MusicOrganisationApp.Tests.Timetabling
         }
 
         [Fact]
-        public void TestImpossibleCase1()
+        public void TestImpossibleCase()
         {
             TestCase<ImpossibleTestCase1>();
+        }
+
+        [Fact]
+        public void TestLargeCase()
+        {
+            TestCase<LargeTestCase>();
         }
 
         private static void TestCase<T>() where T : ITimetableTestCase
