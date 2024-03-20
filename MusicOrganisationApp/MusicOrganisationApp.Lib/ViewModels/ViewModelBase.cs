@@ -6,7 +6,7 @@ namespace MusicOrganisationApp.Lib.ViewModels
 {
     public abstract class ViewModelBase : ObservableObject, IQueryAttributable
     {
-        protected const string _GO_BACK = "..";
+        private const string _GO_BACK = "..";
 
         private readonly string _path;
         private readonly bool _isTesting;
